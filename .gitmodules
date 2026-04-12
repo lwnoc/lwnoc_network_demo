@@ -1,0 +1,7 @@
+[submodule "lwnoc_topo"]
+	path = lwnoc_topo
+	url = git@github.com:fliibs/lwnoc_topo.git
+	branch = main
+[submodule "subs/lwnoc_interrupt_noc"]
+	path = subs/lwnoc_interrupt_noc
+	url = git@github.com:lwnoc/lwnoc_interrupt_noc.git

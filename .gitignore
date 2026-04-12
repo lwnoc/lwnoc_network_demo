@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# UHDL build logs
+UHDL.log
+
+# VCS simulation artifacts
+*/sim/build/
+csrc/
+simv
+simv.daidir/
+ucli.key
+vc_hdrs.h
+DVEfiles/
+
+# Verdi
+verdiLog/
+novas.*
+*.fsdb
+*.vpd
+
+# OS
+.DS_Store
+Thumbs.db
