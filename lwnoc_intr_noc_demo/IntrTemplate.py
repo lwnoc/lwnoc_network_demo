@@ -23,7 +23,7 @@ from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
 os.environ["INTR_NOC_DIR"]      = str(INTR_NOC_ROOT)
 os.environ["INTR_NOC_DEMO_DIR"] = str(THIS_DIR)
 
-FILELIST_DIR = THIS_DIR / "filelists"
+FILELIST_DIR = THIS_DIR / "filelist"
 
 
 def _new_cfg(name: str, prefix: str, filelist_name: str, env_var: str) -> TemplateIPConfig:

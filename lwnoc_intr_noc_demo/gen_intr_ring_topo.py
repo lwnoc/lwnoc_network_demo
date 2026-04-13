@@ -7,7 +7,8 @@ Usage:
 
 Outputs:
     intr_ring_logic_topology.json   — serialised topology
-    build_logic/                    — generated Verilog + filelist
+    build_logic/                    — generated Verilog
+    filelist/filelist.f             — top-level compile filelist
 """
 import os
 import sys
@@ -47,9 +48,14 @@ def main():
     comp.generate_filelist()
 
     _patch_ring_station_params(build_dir / "intr_ring_noc_4i2t")
+    _publish_top_filelist(
+        build_dir / "intr_ring_noc_4i2t" / "filelist.f",
+        THIS_DIR / "filelist" / "filelist.f",
+    )
 
     print(f"Topology JSON written to {topology_json}")
     print(f"Generated RTL written to  {build_dir}")
+    print(f"Top filelist written to   {THIS_DIR / 'filelist' / 'filelist.f'}")
 
 
 # -----------------------------------------------------------------------------
@@ -99,6 +105,26 @@ def _patch_ring_station_params(ring_dir: Path) -> None:
             print(f"  [patch] {fname}: ring station parameterized (NODE_ID={list(_RING_NODE_PARAMS.keys()).index(fname)})")
         else:
             print(f"  [patch] {fname}: already patched or pattern not found, skip")
+
+
+def _publish_top_filelist(src_path: Path, dst_path: Path) -> None:
+    """Move the generated umbrella filelist under filelist/ with stable paths."""
+    if not src_path.exists():
+        print(f"  [filelist] WARNING: {src_path} not found, skipping")
+        return
+
+    dst_path.parent.mkdir(parents=True, exist_ok=True)
+
+    out_lines = []
+    for line in src_path.read_text().splitlines():
+        if line.startswith("intr_ring_noc_4i2t/"):
+            out_lines.append(f"$INTR_NOC_DEMO_DIR/build_logic/{line}")
+        else:
+            out_lines.append(line)
+
+    dst_path.write_text("\n".join(out_lines) + "\n")
+    src_path.unlink()
+    print(f"  [filelist] published top filelist to {dst_path}")
 
 
 if __name__ == "__main__":

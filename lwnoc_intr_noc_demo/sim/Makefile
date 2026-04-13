@@ -13,8 +13,9 @@ VERDI           ?= verdi
 VERDI_PLI_TAB   ?= $(dir $(shell which verdi 2>/dev/null))../share/PLI/VCS/linux64/novas.tab
 VERDI_PLI_LIB   ?= $(dir $(shell which verdi 2>/dev/null))../share/PLI/VCS/linux64/pli.a
 
-# Build-temp subdirectory env vars (read by DUT filelist.f via $VAR expansion)
+# Env vars read by DUT filelist.f via $VAR expansion
 export INTR_NOC_DIR
+export INTR_NOC_DEMO_DIR := $(DEMO_DIR)
 export INTR_RING_LNK_OUT_DIR := $(DEMO_DIR)/build/temp/intr_ring_lnk
 export INTR_RING_STA_OUT_DIR := $(DEMO_DIR)/build/temp/intr_ring_sta
 export INTR_TNIU_SYS_OUT_DIR := $(DEMO_DIR)/build/temp/intr_tniu_sys
@@ -44,8 +45,8 @@ VCS_FLAGS := -full64 \
              +define+intr_iniu_sys_LWNOC_LP_STRUCT_PACKAGE_SV \
              -P $(VERDI_PLI_TAB) $(VERDI_PLI_LIB)
 
-# Top-level DUT filelist (paths inside are relative to build_logic/ dir)
-DUT_FILELIST    := $(DEMO_DIR)/build_logic/intr_ring_noc_4i2t/filelist.f
+# Top-level DUT filelist published under filelist/
+DUT_FILELIST    := $(DEMO_DIR)/filelist/filelist.f
 DW02_STUB       := $(INTR_NOC_DIR)/ai_testbench/dw02_tree_stub.sv
 SPRAM_STUBS     := $(DEMO_DIR)/sim/spram_stubs.sv
 TB_SV           := $(DEMO_DIR)/sim/tb_intr_ring_noc_4i2t.sv
@@ -57,8 +58,8 @@ all: compile sim
 compile:
 	mkdir -p $(BUILD_DIR)
 	@echo "[TB] Compiling DUT + testbench ..."
-	cd $(DEMO_DIR)/build_logic && $(VCS) $(VCS_FLAGS) \
-	    -f intr_ring_noc_4i2t/filelist.f \
+	cd $(SIM_DIR) && $(VCS) $(VCS_FLAGS) \
+	    -f $(DUT_FILELIST) \
 	    $(DW02_STUB) \
 	    $(SPRAM_STUBS) \
 	    $(TB_SV) \
@@ -85,7 +86,7 @@ sim_wave: $(SIMV)
 	@echo "[TB] Waveform written to $(FSDB)"
 
 wave:
-	$(VERDI) -sv \
+	cd $(SIM_DIR) && $(VERDI) -sv \
 	    -f $(DUT_FILELIST) \
 	    -ssf $(FSDB) \
 	    -dbdir $(BUILD_DIR)/simv.daidir &
