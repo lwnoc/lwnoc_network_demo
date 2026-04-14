@@ -22,9 +22,6 @@ novas.*
 *.fsdb
 *.vpd
 
-# Generated AST JSON too large for GitHub push
-intr_demo1/intr_iniu_sys_interrupt_iniu_aync_sys_side.interrupt_iniu_aync_sys_side.ast.json
-
 # OS
 .DS_Store
 Thumbs.db
