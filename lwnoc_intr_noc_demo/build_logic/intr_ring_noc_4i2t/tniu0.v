@@ -82,7 +82,9 @@ module tniu0 (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	intr_tniu_top_interrupt_tniu_aync_top_side tniu_top (
+	intr_tniu_top_interrupt_tniu_aync_top_side #(
+		.ASYNC_FIFO_DEPTH(32'd10))
+	tniu_top (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.wptr_async(tniu_top_TO_tniu_sys_SIG_wptr_async),
@@ -104,7 +106,9 @@ module tniu0 (
 		.req_qos(ring_wrap_TO_tniu_top_SIG_req_qos),
 		.req_last(ring_wrap_TO_tniu_top_SIG_req_last),
 		.req_threshold());
-	intr_tniu_sys_interrupt_tniu_aync_sys_side tniu_sys (
+	intr_tniu_sys_interrupt_tniu_aync_sys_side #(
+		.ASYNC_FIFO_DEPTH(32'd10))
+	tniu_sys (
 		.clk(clk_sys_clk),
 		.rst_n(rst_sys_n_rst_n),
 		.tniu_tgt_id(tniu0_sys_tniu_tgt_id_porting_tniu_tgt_id),

@@ -1,0 +1,1 @@
+/home/lgzhu/dev/noc_work/aichip_memnoc/lwnoc_intr_noc_demo/build/temp/intr_ring_lnk/intr_ring_lnk_interrupt_req_ring_link.sv

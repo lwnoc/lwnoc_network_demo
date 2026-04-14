@@ -20,9 +20,9 @@ class DtiSwitchNode(UhdlComponentNode):
 
         self.add_interface("clk", r"^clk$")
         self.add_interface("rst_n", r"^rst_n$")
-        self.add_interface("tniu_req", r"^tniu_req_")
-        self.add_interface("tniu_rsp", r"^tniu_rsp_")
+        self.add_interface("tniu_req", r"^tniu_req_.*")
+        self.add_interface("tniu_rsp", r"^tniu_rsp_.*")
 
         for idx in range(input_count):
-            self.add_interface(f"iniu{idx}_req", rf"^iniu{idx}_req_")
-            self.add_interface(f"iniu{idx}_rsp", rf"^iniu{idx}_rsp_")
+            self.add_interface(f"iniu{idx}_req", rf"^iniu{idx}_req_.*")
+            self.add_interface(f"iniu{idx}_rsp", rf"^iniu{idx}_rsp_.*")

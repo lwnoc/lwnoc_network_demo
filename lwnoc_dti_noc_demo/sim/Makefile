@@ -27,6 +27,7 @@ BUILD_DIR    := $(SIM_DIR)/build
 SIMV         := $(BUILD_DIR)/simv
 COMPILE_LOG  := $(BUILD_DIR)/compile.log
 TB_SV        := $(SIM_DIR)/tb_dti_logic_topo_tree.sv
+CHECK_COMPILE_LOG := $(SIM_DIR)/check_compile_log.py
 # Top-level DUT filelist published under filelists/
 DUT_FILELIST := $(DEMO_DIR)/filelists/filelist.f
 
@@ -55,6 +56,7 @@ compile:
 	    -Mdir=$(BUILD_DIR)/csrc \
 	    -o $(SIMV) \
 	    -l $(COMPILE_LOG)
+	python3 $(CHECK_COMPILE_LOG) $(COMPILE_LOG)
 
 run_test: $(SIMV)
 	@if [ -z "$(TESTCASE)" ]; then echo "TESTCASE is required"; exit 1; fi

@@ -28,6 +28,8 @@ BUILD_DIR    := $(SIM_DIR)/build
 SIMV         := $(BUILD_DIR)/simv
 COMPILE_LOG  := $(BUILD_DIR)/compile.log
 TB_SV        := $(SIM_DIR)/tb_sts_logic_topo_1i4t.sv
+COMMON_DEPS_F := $(DEMO_DIR)/filelists/sts_common_dep.f
+CHECK_COMPILE_LOG := $(SIM_DIR)/check_compile_log.py
 # Top-level DUT filelist published under filelists/
 DUT_FILELIST := $(DEMO_DIR)/filelists/filelist.f
 
@@ -59,12 +61,14 @@ compile:
 	    -f $(FCIP_DIR)/vc/sync_fifo.f \
 	    -f $(FCIP_DIR)/vc/handshake.f \
 	    $(FCIP_DIR)/bak/fifo/bak/cmn_vrp_reg_fifo.sv \
+	    -f $(COMMON_DEPS_F) \
 	    -f $(DUT_FILELIST) \
 	    $(TB_SV) \
 	    -top tb_sts_logic_topo_1i4t \
 	    -Mdir=$(BUILD_DIR)/csrc \
 	    -o $(SIMV) \
 	    -l $(COMPILE_LOG)
+	python3 $(CHECK_COMPILE_LOG) $(COMPILE_LOG)
 
 run_test: $(SIMV)
 	@if [ -z "$(TESTCASE)" ]; then echo "TESTCASE is required"; exit 1; fi

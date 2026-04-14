@@ -38,16 +38,11 @@ VCS_FLAGS := -full64 \
              +notimingcheck \
              +lint=TFIPC-L \
              +define+ASIC_SIM \
-             +define+intr_tniu_top_LWNOC_LP_DEFINE_PACKAGE_SV \
-             +define+intr_tniu_top_LWNOC_LP_STRUCT_PACKAGE_SV \
-             +define+intr_iniu_top_LWNOC_LP_DEFINE_PACKAGE_SV \
-             +define+intr_iniu_top_LWNOC_LP_STRUCT_PACKAGE_SV \
-             +define+intr_iniu_sys_LWNOC_LP_DEFINE_PACKAGE_SV \
-             +define+intr_iniu_sys_LWNOC_LP_STRUCT_PACKAGE_SV \
              -P $(VERDI_PLI_TAB) $(VERDI_PLI_LIB)
 
 # Top-level DUT filelist published under filelist/
 DUT_FILELIST    := $(DEMO_DIR)/filelist/filelist.f
+COMMON_DEPS_F   := $(DEMO_DIR)/filelist/intr_common_dep.f
 DW02_STUB       := $(INTR_NOC_DIR)/ai_testbench/dw02_tree_stub.sv
 SPRAM_STUBS     := $(DEMO_DIR)/sim/spram_stubs.sv
 TB_SV           := $(DEMO_DIR)/sim/tb_intr_ring_noc_4i2t.sv
@@ -60,6 +55,7 @@ compile:
 	mkdir -p $(BUILD_DIR)
 	@echo "[TB] Compiling DUT + testbench ..."
 	cd $(SIM_DIR) && $(VCS) $(VCS_FLAGS) \
+	    -f $(COMMON_DEPS_F) \
 	    -f $(DUT_FILELIST) \
 	    $(DW02_STUB) \
 	    $(SPRAM_STUBS) \
@@ -68,6 +64,7 @@ compile:
 	    -Mdir=$(BUILD_DIR)/csrc \
 	    -o $(SIMV) \
 	    -l $(COMPILE_LOG)
+	python3 $(SIM_DIR)/check_compile_log.py $(COMPILE_LOG)
 	@echo "[TB] Compile done. Log: $(COMPILE_LOG)"
 
 sim: $(SIMV)
@@ -88,6 +85,7 @@ sim_wave: $(SIMV)
 
 wave:
 	cd $(SIM_DIR) && $(VERDI) -sv \
+	    -f $(COMMON_DEPS_F) \
 	    -f $(DUT_FILELIST) \
 	    -ssf $(FSDB) \
 	    -dbdir $(BUILD_DIR)/simv.daidir &

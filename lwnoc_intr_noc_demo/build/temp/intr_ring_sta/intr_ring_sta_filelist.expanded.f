@@ -1,1 +1,1 @@
-/home/lgzhu/dev/noc_work/aichip_memnoc/lwnoc_intr_noc_demo/build/temp/intr_ring_sta/intr_ring_sta_interrupt_req_ring_station.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_ring_sta/intr_ring_sta_interrupt_req_ring_station.sv

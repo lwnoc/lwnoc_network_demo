@@ -78,7 +78,9 @@ module iniu1 (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	intr_iniu_sys_interrupt_iniu_aync_sys_side iniu_sys (
+	intr_iniu_sys_interrupt_iniu_aync_sys_side #(
+		.ASYNC_FIFO_DEPTH(32'd16))
+	iniu_sys (
 		.clk(clk_sys_clk),
 		.rst_n(rst_sys_n_rst_n),
 		.v_interrupt(iniu1_sys_v_interrupt_porting_v_interrupt),
@@ -100,7 +102,9 @@ module iniu1 (
 		.s_async_master_hub_tx_req(iniu_sys_TO_iniu_top_SIG_s_async_master_hub_tx_req),
 		.lp_hub_rx_req(iniu1_sys_lp_hub_porting_lp_hub_rx_req),
 		.lp_hub_tx_req(iniu1_sys_lp_hub_porting_lp_hub_tx_req));
-	intr_iniu_top_interrupt_iniu_aync_top_side iniu_top (
+	intr_iniu_top_interrupt_iniu_aync_top_side #(
+		.ASYNC_FIFO_DEPTH(32'd16))
+	iniu_top (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.wptr_async(iniu_sys_TO_iniu_top_SIG_wptr_async),

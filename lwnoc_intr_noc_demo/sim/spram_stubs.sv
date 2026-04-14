@@ -1,225 +1,177 @@
-// spram stubs for intr_ring_noc_4i2t testbench
-// Provides behavioral SPRAM models for intr_iniu_sys_ and intr_tniu_sys_ prefixed wrappers
-// All variants have the same interface; only address width differs.
+module intr_iniu_sys_spram_model_stub #(
+	parameter integer unsigned ADDR_WIDTH = 12,
+	parameter integer unsigned DATA_WIDTH = 20
+) (
+	input  logic                   clk,
+	input  logic                   en,
+	input  logic [ADDR_WIDTH-1:0]  addr,
+	output logic [DATA_WIDTH-1:0]  rd_data,
+	input  logic [DATA_WIDTH-1:0]  wr_data,
+	input  logic                   wr_bit_en,
+	input  logic                   wr_en
+);
 
-`timescale 1ns/1ps
+	fcip_spram_model #(
+		.ADDR_WIDTH(ADDR_WIDTH),
+		.DATA_WIDTH(DATA_WIDTH)
+	) u_fcip_spram_model (
+		.clk      (clk),
+		.en       (en),
+		.addr     (addr),
+		.rd_data  (rd_data),
+		.wr_data  (wr_data),
+		.wr_bit_en({DATA_WIDTH{wr_bit_en}}),
+		.wr_en    (wr_en)
+	);
 
-// ------ INIU variants ------
+endmodule
 
 module intr_iniu_sys_spram_4096x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [11:0] addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
+	input  logic        clk,
+	input  logic        en,
+	input  logic [11:0] addr,
+	output logic [19:0] rd_data,
+	input  logic [19:0] wr_data,
+	input  logic        wr_bit_en,
+	input  logic        wr_en
 );
-    logic [19:0] mem [0:4095];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
+
+	intr_iniu_sys_spram_model_stub #(
+		.ADDR_WIDTH(12),
+		.DATA_WIDTH(20)
+	) u_model (
+		.clk      (clk),
+		.en       (en),
+		.addr     (addr),
+		.rd_data  (rd_data),
+		.wr_data  (wr_data),
+		.wr_bit_en(wr_bit_en),
+		.wr_en    (wr_en)
+	);
+
 endmodule
 
 module intr_iniu_sys_spram_2048x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [10:0] addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
+	input  logic        clk,
+	input  logic        en,
+	input  logic [10:0] addr,
+	output logic [19:0] rd_data,
+	input  logic [19:0] wr_data,
+	input  logic        wr_bit_en,
+	input  logic        wr_en
 );
-    logic [19:0] mem [0:2047];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
+
+	intr_iniu_sys_spram_model_stub #(
+		.ADDR_WIDTH(11),
+		.DATA_WIDTH(20)
+	) u_model (
+		.clk      (clk),
+		.en       (en),
+		.addr     (addr),
+		.rd_data  (rd_data),
+		.wr_data  (wr_data),
+		.wr_bit_en(wr_bit_en),
+		.wr_en    (wr_en)
+	);
+
 endmodule
 
 module intr_iniu_sys_spram_1024x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [9:0]  addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
+	input  logic       clk,
+	input  logic       en,
+	input  logic [9:0] addr,
+	output logic [19:0] rd_data,
+	input  logic [19:0] wr_data,
+	input  logic       wr_bit_en,
+	input  logic       wr_en
 );
-    logic [19:0] mem [0:1023];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
+
+	intr_iniu_sys_spram_model_stub #(
+		.ADDR_WIDTH(10),
+		.DATA_WIDTH(20)
+	) u_model (
+		.clk      (clk),
+		.en       (en),
+		.addr     (addr),
+		.rd_data  (rd_data),
+		.wr_data  (wr_data),
+		.wr_bit_en(wr_bit_en),
+		.wr_en    (wr_en)
+	);
+
 endmodule
 
 module intr_iniu_sys_spram_512x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [8:0]  addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
+	input  logic       clk,
+	input  logic       en,
+	input  logic [8:0] addr,
+	output logic [19:0] rd_data,
+	input  logic [19:0] wr_data,
+	input  logic       wr_bit_en,
+	input  logic       wr_en
 );
-    logic [19:0] mem [0:511];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
+
+	intr_iniu_sys_spram_model_stub #(
+		.ADDR_WIDTH(9),
+		.DATA_WIDTH(20)
+	) u_model (
+		.clk      (clk),
+		.en       (en),
+		.addr     (addr),
+		.rd_data  (rd_data),
+		.wr_data  (wr_data),
+		.wr_bit_en(wr_bit_en),
+		.wr_en    (wr_en)
+	);
+
 endmodule
 
 module intr_iniu_sys_spram_256x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [7:0]  addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
+	input  logic       clk,
+	input  logic       en,
+	input  logic [7:0] addr,
+	output logic [19:0] rd_data,
+	input  logic [19:0] wr_data,
+	input  logic       wr_bit_en,
+	input  logic       wr_en
 );
-    logic [19:0] mem [0:255];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
+
+	intr_iniu_sys_spram_model_stub #(
+		.ADDR_WIDTH(8),
+		.DATA_WIDTH(20)
+	) u_model (
+		.clk      (clk),
+		.en       (en),
+		.addr     (addr),
+		.rd_data  (rd_data),
+		.wr_data  (wr_data),
+		.wr_bit_en(wr_bit_en),
+		.wr_en    (wr_en)
+	);
+
 endmodule
 
 module intr_iniu_sys_spram_128x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [6:0]  addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
+	input  logic       clk,
+	input  logic       en,
+	input  logic [6:0] addr,
+	output logic [19:0] rd_data,
+	input  logic [19:0] wr_data,
+	input  logic       wr_bit_en,
+	input  logic       wr_en
 );
-    logic [19:0] mem [0:127];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
-endmodule
 
-// ------ TNIU variants ------
+	intr_iniu_sys_spram_model_stub #(
+		.ADDR_WIDTH(7),
+		.DATA_WIDTH(20)
+	) u_model (
+		.clk      (clk),
+		.en       (en),
+		.addr     (addr),
+		.rd_data  (rd_data),
+		.wr_data  (wr_data),
+		.wr_bit_en(wr_bit_en),
+		.wr_en    (wr_en)
+	);
 
-module intr_tniu_sys_spram_4096x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [11:0] addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
-);
-    logic [19:0] mem [0:4095];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
-endmodule
-
-module intr_tniu_sys_spram_2048x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [10:0] addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
-);
-    logic [19:0] mem [0:2047];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
-endmodule
-
-module intr_tniu_sys_spram_1024x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [9:0]  addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
-);
-    logic [19:0] mem [0:1023];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
-endmodule
-
-module intr_tniu_sys_spram_512x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [8:0]  addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
-);
-    logic [19:0] mem [0:511];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
-endmodule
-
-module intr_tniu_sys_spram_256x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [7:0]  addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
-);
-    logic [19:0] mem [0:255];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
-endmodule
-
-module intr_tniu_sys_spram_128x20 (
-    input  logic        clk,
-    input  logic        en,
-    input  logic [6:0]  addr,
-    output logic [19:0] rd_data,
-    input  logic [19:0] wr_data,
-    input  logic        wr_bit_en,
-    input  logic        wr_en
-);
-    logic [19:0] mem [0:127];
-    always_ff @(posedge clk) begin
-        if (en) begin
-            if (wr_en) mem[addr] <= wr_data;
-            rd_data <= mem[addr];
-        end
-    end
 endmodule

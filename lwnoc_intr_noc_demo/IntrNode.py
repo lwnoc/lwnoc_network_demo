@@ -71,13 +71,13 @@ class IntrIniuSysNode(UhdlComponentNode):
         self.add_interface("rst_n",        "rst_n")
         self.add_interface("v_interrupt",  "v_interrupt")
         self.add_interface("iniu_src_id",  "iniu_src_id")
-        self.add_interface("apb",          r"^p_")
+        self.add_interface("apb",          r"^p_.*")
         self.add_interface("async_fifo",   r".*wptr_async|.*rptr_async|.*rptr_sync|.*pld_sync")
         self.add_interface("timeout_val",  "timeout_val")
         # s_async_master_hub_rx_req + s_async_master_hub_tx_req (cross-domain LP)
         self.add_interface("lp_async",     r"s_async_master_hub")
         # lp_hub_rx_req + lp_hub_tx_req (hub-level LP, exposed externally)
-        self.add_interface("lp_hub",       r"^lp_hub")
+        self.add_interface("lp_hub",       r"^lp_hub.*")
 
 
 class IntrIniuTopNode(UhdlComponentNode):
@@ -94,7 +94,7 @@ class IntrIniuTopNode(UhdlComponentNode):
         # m_async_master_hub_rx_req + m_async_master_hub_tx_req (cross-domain LP)
         self.add_interface("lp_async",   r"m_async_master_hub")
         # req_valid/ready/payload/srcid/tgtid/qos/last/threshold → ring output
-        self.add_interface("ring_req",   r"req_")
+        self.add_interface("ring_req",   r"req_.*")
 
 
 class IntrTniuSysNode(UhdlComponentNode):
@@ -112,13 +112,13 @@ class IntrTniuSysNode(UhdlComponentNode):
         self.add_interface("tniu_tgt_id",       "tniu_tgt_id")
         self.add_interface("v_interrupt",       "v_interrupt")
         self.add_interface("v_merge_interrupt", "v_merge_interrupt")
-        self.add_interface("apb",               r"^p_")
+        self.add_interface("apb",               r"^p_.*")
         self.add_interface("async_fifo",        r".*wptr_async|.*rptr_async|.*rptr_sync|.*pld_sync")
         self.add_interface("timeout_val",       "timeout_val")
         # m_async_master_hub_rx_req + m_async_master_hub_tx_req (cross-domain LP)
         self.add_interface("lp_async",          r"m_async_master_hub")
         # m_niu_lp_hub_rx_req + m_niu_lp_hub_tx_req (NIU LP hub, paired with top)
-        self.add_interface("lp_niu_hub",        r"m_niu_lp_hub")
+        self.add_interface("lp_niu_hub",        r"m_niu_lp_hub.*")
 
 
 class IntrTniuTopNode(UhdlComponentNode):
@@ -134,13 +134,13 @@ class IntrTniuTopNode(UhdlComponentNode):
         self.add_interface("async_fifo", r".*wptr_async|.*rptr_async|.*rptr_sync|.*pld_sync")
         self.add_interface("timeout_val","timeout_val")
         # lp_hub_rx_req + lp_hub_tx_req (external hub LP for NOC domain)
-        self.add_interface("lp_hub",     r"^lp_hub")
+        self.add_interface("lp_hub",     r"^lp_hub.*")
         # s_niu_lp_hub_rx_req + s_niu_lp_hub_tx_req (paired with tniu_sys.lp_niu_hub)
         self.add_interface("lp_niu_hub", r"s_niu_lp_hub")
         # s_async_master_hub_rx_req + s_async_master_hub_tx_req (cross-domain LP)
         self.add_interface("lp_async",   r"s_async_master_hub")
         # ring request input: req_valid/ready/payload/srcid/tgtid/qos/last/threshold
-        self.add_interface("ring_req",   r"req_")
+        self.add_interface("ring_req",   r"req_.*")
 
 
 class IntrRingStationNode(UhdlComponentNode):
@@ -151,12 +151,12 @@ class IntrRingStationNode(UhdlComponentNode):
         comp = TemplateComponent(config=intr_ring_sta_config, top="interrupt_req_ring_station")
         super().__init__(id=id, impl=comp)
 
-        self.add_interface("local_tx", r"^local_tx")
-        self.add_interface("local_rx", r"^local_rx")
-        self.add_interface("cw_in",    r"^cw_in")
-        self.add_interface("cw_out",   r"^cw_out")
-        self.add_interface("ccw_in",   r"^ccw_in")
-        self.add_interface("ccw_out",  r"^ccw_out")
+        self.add_interface("local_tx", r"^local_tx.*")
+        self.add_interface("local_rx", r"^local_rx.*")
+        self.add_interface("cw_in",    r"^cw_in.*")
+        self.add_interface("cw_out",   r"^cw_out.*")
+        self.add_interface("ccw_in",   r"^ccw_in.*")
+        self.add_interface("ccw_out",  r"^ccw_out.*")
 
 
 class IntrRingLinkNode(UhdlComponentNode):
@@ -168,8 +168,8 @@ class IntrRingLinkNode(UhdlComponentNode):
 
         self.add_interface("clk",   "clk")
         self.add_interface("rst_n", "rst_n")
-        self.add_interface("s_req", r"^s_")
-        self.add_interface("m_req", r"^m_")
+        self.add_interface("s_req", r"^s_.*")
+        self.add_interface("m_req", r"^m_.*")
 
 
 # ─────────────────────────────────────────────────────────────────────────────

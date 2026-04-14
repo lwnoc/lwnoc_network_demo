@@ -1,165 +1,216 @@
-//[UHDL]Content Start [md5:b577f1cd3e48f71d11984b1037d6b02f]
+//[UHDL]Content Start [md5:ba5fc755d8a6e3ca9b7b52730557035a]
 module sts_logic_topo_1i4t (
-	input          clk_src                          ,
-	input          clk_dst                          ,
-	input          clk_dbg_timer                    ,
-	input          rstn_src                         ,
-	input          rstn_dst                         ,
-	input          rstn_dbg_timer                   ,
-	input  [7:0]   iniu0_node_id_porting_node_id    ,
-	input  [31:0]  iniu0_axi_porting_s_araddr       ,
-	input  [1:0]   iniu0_axi_porting_s_arburst      ,
-	input  [3:0]   iniu0_axi_porting_s_arcache      ,
-	input  [7:0]   iniu0_axi_porting_s_arid         ,
-	input  [7:0]   iniu0_axi_porting_s_arlen        ,
-	input          iniu0_axi_porting_s_arlock       ,
-	input  [2:0]   iniu0_axi_porting_s_arprot       ,
-	input  [3:0]   iniu0_axi_porting_s_arqos        ,
-	output         iniu0_axi_porting_s_arready      ,
-	input  [2:0]   iniu0_axi_porting_s_arsize       ,
-	input  [7:0]   iniu0_axi_porting_s_aruser       ,
-	input          iniu0_axi_porting_s_arvalid      ,
-	input  [31:0]  iniu0_axi_porting_s_awaddr       ,
-	input  [1:0]   iniu0_axi_porting_s_awburst      ,
-	input  [3:0]   iniu0_axi_porting_s_awcache      ,
-	input  [7:0]   iniu0_axi_porting_s_awid         ,
-	input  [7:0]   iniu0_axi_porting_s_awlen        ,
-	input          iniu0_axi_porting_s_awlock       ,
-	input  [2:0]   iniu0_axi_porting_s_awprot       ,
-	input  [3:0]   iniu0_axi_porting_s_awqos        ,
-	output         iniu0_axi_porting_s_awready      ,
-	input  [2:0]   iniu0_axi_porting_s_awsize       ,
-	input  [7:0]   iniu0_axi_porting_s_awuser       ,
-	input          iniu0_axi_porting_s_awvalid      ,
-	output [7:0]   iniu0_axi_porting_s_bid          ,
-	input          iniu0_axi_porting_s_bready       ,
-	output [1:0]   iniu0_axi_porting_s_bresp        ,
-	output         iniu0_axi_porting_s_bvalid       ,
-	output [31:0]  iniu0_axi_porting_s_rdata        ,
-	output [7:0]   iniu0_axi_porting_s_rid          ,
-	output         iniu0_axi_porting_s_rlast        ,
-	input          iniu0_axi_porting_s_rready       ,
-	output [1:0]   iniu0_axi_porting_s_rresp        ,
-	output         iniu0_axi_porting_s_rvalid       ,
-	input  [31:0]  iniu0_axi_porting_s_wdata        ,
-	input          iniu0_axi_porting_s_wlast        ,
-	output         iniu0_axi_porting_s_wready       ,
-	input  [3:0]   iniu0_axi_porting_s_wstrb        ,
-	input          iniu0_axi_porting_s_wvalid       ,
-	output [31:0]  tniu0_pmc_apb_porting_pmc_paddr  ,
-	output         tniu0_pmc_apb_porting_pmc_penable,
-	output [2:0]   tniu0_pmc_apb_porting_pmc_pprot  ,
-	input  [31:0]  tniu0_pmc_apb_porting_pmc_prdata ,
-	input          tniu0_pmc_apb_porting_pmc_pready ,
-	output         tniu0_pmc_apb_porting_pmc_psel   ,
-	input          tniu0_pmc_apb_porting_pmc_pslverr,
-	output [3:0]   tniu0_pmc_apb_porting_pmc_pstrb  ,
-	output [31:0]  tniu0_pmc_apb_porting_pmc_pwdata ,
-	output         tniu0_pmc_apb_porting_pmc_pwrite ,
-	output [31:0]  tniu0_sys_apb_porting_m_paddr    ,
-	output         tniu0_sys_apb_porting_m_penable  ,
-	output [2:0]   tniu0_sys_apb_porting_m_pprot    ,
-	input  [319:0] tniu0_sys_apb_porting_m_prdata   ,
-	input  [9:0]   tniu0_sys_apb_porting_m_pready   ,
-	output [9:0]   tniu0_sys_apb_porting_m_psel     ,
-	input  [9:0]   tniu0_sys_apb_porting_m_pslverr  ,
-	output [3:0]   tniu0_sys_apb_porting_m_pstrb    ,
-	output [31:0]  tniu0_sys_apb_porting_m_pwdata   ,
-	output         tniu0_sys_apb_porting_m_pwrite   ,
-	output [31:0]  tniu1_pmc_apb_porting_pmc_paddr  ,
-	output         tniu1_pmc_apb_porting_pmc_penable,
-	output [2:0]   tniu1_pmc_apb_porting_pmc_pprot  ,
-	input  [31:0]  tniu1_pmc_apb_porting_pmc_prdata ,
-	input          tniu1_pmc_apb_porting_pmc_pready ,
-	output         tniu1_pmc_apb_porting_pmc_psel   ,
-	input          tniu1_pmc_apb_porting_pmc_pslverr,
-	output [3:0]   tniu1_pmc_apb_porting_pmc_pstrb  ,
-	output [31:0]  tniu1_pmc_apb_porting_pmc_pwdata ,
-	output         tniu1_pmc_apb_porting_pmc_pwrite ,
-	output [31:0]  tniu1_sys_apb_porting_m_paddr    ,
-	output         tniu1_sys_apb_porting_m_penable  ,
-	output [2:0]   tniu1_sys_apb_porting_m_pprot    ,
-	input  [319:0] tniu1_sys_apb_porting_m_prdata   ,
-	input  [9:0]   tniu1_sys_apb_porting_m_pready   ,
-	output [9:0]   tniu1_sys_apb_porting_m_psel     ,
-	input  [9:0]   tniu1_sys_apb_porting_m_pslverr  ,
-	output [3:0]   tniu1_sys_apb_porting_m_pstrb    ,
-	output [31:0]  tniu1_sys_apb_porting_m_pwdata   ,
-	output         tniu1_sys_apb_porting_m_pwrite   ,
-	output [31:0]  tniu2_pmc_apb_porting_pmc_paddr  ,
-	output         tniu2_pmc_apb_porting_pmc_penable,
-	output [2:0]   tniu2_pmc_apb_porting_pmc_pprot  ,
-	input  [31:0]  tniu2_pmc_apb_porting_pmc_prdata ,
-	input          tniu2_pmc_apb_porting_pmc_pready ,
-	output         tniu2_pmc_apb_porting_pmc_psel   ,
-	input          tniu2_pmc_apb_porting_pmc_pslverr,
-	output [3:0]   tniu2_pmc_apb_porting_pmc_pstrb  ,
-	output [31:0]  tniu2_pmc_apb_porting_pmc_pwdata ,
-	output         tniu2_pmc_apb_porting_pmc_pwrite ,
-	output [31:0]  tniu2_sys_apb_porting_m_paddr    ,
-	output         tniu2_sys_apb_porting_m_penable  ,
-	output [2:0]   tniu2_sys_apb_porting_m_pprot    ,
-	input  [319:0] tniu2_sys_apb_porting_m_prdata   ,
-	input  [9:0]   tniu2_sys_apb_porting_m_pready   ,
-	output [9:0]   tniu2_sys_apb_porting_m_psel     ,
-	input  [9:0]   tniu2_sys_apb_porting_m_pslverr  ,
-	output [3:0]   tniu2_sys_apb_porting_m_pstrb    ,
-	output [31:0]  tniu2_sys_apb_porting_m_pwdata   ,
-	output         tniu2_sys_apb_porting_m_pwrite   ,
-	output [31:0]  tniu3_pmc_apb_porting_pmc_paddr  ,
-	output         tniu3_pmc_apb_porting_pmc_penable,
-	output [2:0]   tniu3_pmc_apb_porting_pmc_pprot  ,
-	input  [31:0]  tniu3_pmc_apb_porting_pmc_prdata ,
-	input          tniu3_pmc_apb_porting_pmc_pready ,
-	output         tniu3_pmc_apb_porting_pmc_psel   ,
-	input          tniu3_pmc_apb_porting_pmc_pslverr,
-	output [3:0]   tniu3_pmc_apb_porting_pmc_pstrb  ,
-	output [31:0]  tniu3_pmc_apb_porting_pmc_pwdata ,
-	output         tniu3_pmc_apb_porting_pmc_pwrite ,
-	output [31:0]  tniu3_sys_apb_porting_m_paddr    ,
-	output         tniu3_sys_apb_porting_m_penable  ,
-	output [2:0]   tniu3_sys_apb_porting_m_pprot    ,
-	input  [319:0] tniu3_sys_apb_porting_m_prdata   ,
-	input  [9:0]   tniu3_sys_apb_porting_m_pready   ,
-	output [9:0]   tniu3_sys_apb_porting_m_psel     ,
-	input  [9:0]   tniu3_sys_apb_porting_m_pslverr  ,
-	output [3:0]   tniu3_sys_apb_porting_m_pstrb    ,
-	output [31:0]  tniu3_sys_apb_porting_m_pwdata   ,
-	output         tniu3_sys_apb_porting_m_pwrite   );
+	input          clk_src                                          ,
+	input          clk_dst                                          ,
+	input          clk_dbg_timer                                    ,
+	input          rstn_src                                         ,
+	input          rstn_dst                                         ,
+	input          rstn_dbg_timer                                   ,
+	input  [7:0]   iniu0_node_id_porting_node_id                    ,
+	input  [31:0]  iniu0_axi_porting_s_araddr                       ,
+	input  [1:0]   iniu0_axi_porting_s_arburst                      ,
+	input  [3:0]   iniu0_axi_porting_s_arcache                      ,
+	input  [7:0]   iniu0_axi_porting_s_arid                         ,
+	input  [7:0]   iniu0_axi_porting_s_arlen                        ,
+	input          iniu0_axi_porting_s_arlock                       ,
+	input  [2:0]   iniu0_axi_porting_s_arprot                       ,
+	input  [3:0]   iniu0_axi_porting_s_arqos                        ,
+	output         iniu0_axi_porting_s_arready                      ,
+	input  [2:0]   iniu0_axi_porting_s_arsize                       ,
+	input  [7:0]   iniu0_axi_porting_s_aruser                       ,
+	input          iniu0_axi_porting_s_arvalid                      ,
+	input  [31:0]  iniu0_axi_porting_s_awaddr                       ,
+	input  [1:0]   iniu0_axi_porting_s_awburst                      ,
+	input  [3:0]   iniu0_axi_porting_s_awcache                      ,
+	input  [7:0]   iniu0_axi_porting_s_awid                         ,
+	input  [7:0]   iniu0_axi_porting_s_awlen                        ,
+	input          iniu0_axi_porting_s_awlock                       ,
+	input  [2:0]   iniu0_axi_porting_s_awprot                       ,
+	input  [3:0]   iniu0_axi_porting_s_awqos                        ,
+	output         iniu0_axi_porting_s_awready                      ,
+	input  [2:0]   iniu0_axi_porting_s_awsize                       ,
+	input  [7:0]   iniu0_axi_porting_s_awuser                       ,
+	input          iniu0_axi_porting_s_awvalid                      ,
+	output [7:0]   iniu0_axi_porting_s_bid                          ,
+	input          iniu0_axi_porting_s_bready                       ,
+	output [1:0]   iniu0_axi_porting_s_bresp                        ,
+	output         iniu0_axi_porting_s_bvalid                       ,
+	output [31:0]  iniu0_axi_porting_s_rdata                        ,
+	output [7:0]   iniu0_axi_porting_s_rid                          ,
+	output         iniu0_axi_porting_s_rlast                        ,
+	input          iniu0_axi_porting_s_rready                       ,
+	output [1:0]   iniu0_axi_porting_s_rresp                        ,
+	output         iniu0_axi_porting_s_rvalid                       ,
+	input  [31:0]  iniu0_axi_porting_s_wdata                        ,
+	input          iniu0_axi_porting_s_wlast                        ,
+	output         iniu0_axi_porting_s_wready                       ,
+	input  [3:0]   iniu0_axi_porting_s_wstrb                        ,
+	input          iniu0_axi_porting_s_wvalid                       ,
+	output [31:0]  tniu0_pmc_apb_porting_pmc_paddr                  ,
+	output         tniu0_pmc_apb_porting_pmc_penable                ,
+	output [2:0]   tniu0_pmc_apb_porting_pmc_pprot                  ,
+	input  [31:0]  tniu0_pmc_apb_porting_pmc_prdata                 ,
+	input          tniu0_pmc_apb_porting_pmc_pready                 ,
+	output         tniu0_pmc_apb_porting_pmc_psel                   ,
+	input          tniu0_pmc_apb_porting_pmc_pslverr                ,
+	output [3:0]   tniu0_pmc_apb_porting_pmc_pstrb                  ,
+	output [31:0]  tniu0_pmc_apb_porting_pmc_pwdata                 ,
+	output         tniu0_pmc_apb_porting_pmc_pwrite                 ,
+	output [31:0]  tniu0_sys_apb_porting_m_paddr                    ,
+	output         tniu0_sys_apb_porting_m_penable                  ,
+	output [2:0]   tniu0_sys_apb_porting_m_pprot                    ,
+	input  [319:0] tniu0_sys_apb_porting_m_prdata                   ,
+	input  [9:0]   tniu0_sys_apb_porting_m_pready                   ,
+	output [9:0]   tniu0_sys_apb_porting_m_psel                     ,
+	input  [9:0]   tniu0_sys_apb_porting_m_pslverr                  ,
+	output [3:0]   tniu0_sys_apb_porting_m_pstrb                    ,
+	output [31:0]  tniu0_sys_apb_porting_m_pwdata                   ,
+	output         tniu0_sys_apb_porting_m_pwrite                   ,
+	input  [31:0]  tniu0_dbg_data_porting_dbg_data_in               ,
+	output [31:0]  tniu0_dbg_data_porting_dbg_data_out              ,
+	input  [63:0]  tniu0_dbg_timestamp_porting_dbg_timestamp_in     ,
+	output [63:0]  tniu0_dbg_timestamp_porting_dbg_timestamp_out    ,
+	input  [7:0]   tniu0_sys_cti_event_porting_sys_cti_event_in     ,
+	output [7:0]   tniu0_sys_cti_event_porting_sys_cti_event_out    ,
+	input  [7:0]   tniu0_noc_cti_event_porting_noc_cti_event_in     ,
+	output [7:0]   tniu0_noc_cti_event_porting_noc_cti_event_out    ,
+	input  [7:0]   tniu0_sys_cti_channel_porting_sys_cti_channel_in ,
+	output [7:0]   tniu0_sys_cti_channel_porting_sys_cti_channel_out,
+	input  [7:0]   tniu0_noc_cti_channel_porting_noc_cti_channel_in ,
+	output [7:0]   tniu0_noc_cti_channel_porting_noc_cti_channel_out,
+	output [31:0]  tniu1_pmc_apb_porting_pmc_paddr                  ,
+	output         tniu1_pmc_apb_porting_pmc_penable                ,
+	output [2:0]   tniu1_pmc_apb_porting_pmc_pprot                  ,
+	input  [31:0]  tniu1_pmc_apb_porting_pmc_prdata                 ,
+	input          tniu1_pmc_apb_porting_pmc_pready                 ,
+	output         tniu1_pmc_apb_porting_pmc_psel                   ,
+	input          tniu1_pmc_apb_porting_pmc_pslverr                ,
+	output [3:0]   tniu1_pmc_apb_porting_pmc_pstrb                  ,
+	output [31:0]  tniu1_pmc_apb_porting_pmc_pwdata                 ,
+	output         tniu1_pmc_apb_porting_pmc_pwrite                 ,
+	output [31:0]  tniu1_sys_apb_porting_m_paddr                    ,
+	output         tniu1_sys_apb_porting_m_penable                  ,
+	output [2:0]   tniu1_sys_apb_porting_m_pprot                    ,
+	input  [319:0] tniu1_sys_apb_porting_m_prdata                   ,
+	input  [9:0]   tniu1_sys_apb_porting_m_pready                   ,
+	output [9:0]   tniu1_sys_apb_porting_m_psel                     ,
+	input  [9:0]   tniu1_sys_apb_porting_m_pslverr                  ,
+	output [3:0]   tniu1_sys_apb_porting_m_pstrb                    ,
+	output [31:0]  tniu1_sys_apb_porting_m_pwdata                   ,
+	output         tniu1_sys_apb_porting_m_pwrite                   ,
+	input  [31:0]  tniu1_dbg_data_porting_dbg_data_in               ,
+	output [31:0]  tniu1_dbg_data_porting_dbg_data_out              ,
+	input  [63:0]  tniu1_dbg_timestamp_porting_dbg_timestamp_in     ,
+	output [63:0]  tniu1_dbg_timestamp_porting_dbg_timestamp_out    ,
+	input  [7:0]   tniu1_sys_cti_event_porting_sys_cti_event_in     ,
+	output [7:0]   tniu1_sys_cti_event_porting_sys_cti_event_out    ,
+	input  [7:0]   tniu1_noc_cti_event_porting_noc_cti_event_in     ,
+	output [7:0]   tniu1_noc_cti_event_porting_noc_cti_event_out    ,
+	input  [7:0]   tniu1_sys_cti_channel_porting_sys_cti_channel_in ,
+	output [7:0]   tniu1_sys_cti_channel_porting_sys_cti_channel_out,
+	input  [7:0]   tniu1_noc_cti_channel_porting_noc_cti_channel_in ,
+	output [7:0]   tniu1_noc_cti_channel_porting_noc_cti_channel_out,
+	output [31:0]  tniu2_pmc_apb_porting_pmc_paddr                  ,
+	output         tniu2_pmc_apb_porting_pmc_penable                ,
+	output [2:0]   tniu2_pmc_apb_porting_pmc_pprot                  ,
+	input  [31:0]  tniu2_pmc_apb_porting_pmc_prdata                 ,
+	input          tniu2_pmc_apb_porting_pmc_pready                 ,
+	output         tniu2_pmc_apb_porting_pmc_psel                   ,
+	input          tniu2_pmc_apb_porting_pmc_pslverr                ,
+	output [3:0]   tniu2_pmc_apb_porting_pmc_pstrb                  ,
+	output [31:0]  tniu2_pmc_apb_porting_pmc_pwdata                 ,
+	output         tniu2_pmc_apb_porting_pmc_pwrite                 ,
+	output [31:0]  tniu2_sys_apb_porting_m_paddr                    ,
+	output         tniu2_sys_apb_porting_m_penable                  ,
+	output [2:0]   tniu2_sys_apb_porting_m_pprot                    ,
+	input  [319:0] tniu2_sys_apb_porting_m_prdata                   ,
+	input  [9:0]   tniu2_sys_apb_porting_m_pready                   ,
+	output [9:0]   tniu2_sys_apb_porting_m_psel                     ,
+	input  [9:0]   tniu2_sys_apb_porting_m_pslverr                  ,
+	output [3:0]   tniu2_sys_apb_porting_m_pstrb                    ,
+	output [31:0]  tniu2_sys_apb_porting_m_pwdata                   ,
+	output         tniu2_sys_apb_porting_m_pwrite                   ,
+	input  [31:0]  tniu2_dbg_data_porting_dbg_data_in               ,
+	output [31:0]  tniu2_dbg_data_porting_dbg_data_out              ,
+	input  [63:0]  tniu2_dbg_timestamp_porting_dbg_timestamp_in     ,
+	output [63:0]  tniu2_dbg_timestamp_porting_dbg_timestamp_out    ,
+	input  [7:0]   tniu2_sys_cti_event_porting_sys_cti_event_in     ,
+	output [7:0]   tniu2_sys_cti_event_porting_sys_cti_event_out    ,
+	input  [7:0]   tniu2_noc_cti_event_porting_noc_cti_event_in     ,
+	output [7:0]   tniu2_noc_cti_event_porting_noc_cti_event_out    ,
+	input  [7:0]   tniu2_sys_cti_channel_porting_sys_cti_channel_in ,
+	output [7:0]   tniu2_sys_cti_channel_porting_sys_cti_channel_out,
+	input  [7:0]   tniu2_noc_cti_channel_porting_noc_cti_channel_in ,
+	output [7:0]   tniu2_noc_cti_channel_porting_noc_cti_channel_out,
+	output [31:0]  tniu3_pmc_apb_porting_pmc_paddr                  ,
+	output         tniu3_pmc_apb_porting_pmc_penable                ,
+	output [2:0]   tniu3_pmc_apb_porting_pmc_pprot                  ,
+	input  [31:0]  tniu3_pmc_apb_porting_pmc_prdata                 ,
+	input          tniu3_pmc_apb_porting_pmc_pready                 ,
+	output         tniu3_pmc_apb_porting_pmc_psel                   ,
+	input          tniu3_pmc_apb_porting_pmc_pslverr                ,
+	output [3:0]   tniu3_pmc_apb_porting_pmc_pstrb                  ,
+	output [31:0]  tniu3_pmc_apb_porting_pmc_pwdata                 ,
+	output         tniu3_pmc_apb_porting_pmc_pwrite                 ,
+	output [31:0]  tniu3_sys_apb_porting_m_paddr                    ,
+	output         tniu3_sys_apb_porting_m_penable                  ,
+	output [2:0]   tniu3_sys_apb_porting_m_pprot                    ,
+	input  [319:0] tniu3_sys_apb_porting_m_prdata                   ,
+	input  [9:0]   tniu3_sys_apb_porting_m_pready                   ,
+	output [9:0]   tniu3_sys_apb_porting_m_psel                     ,
+	input  [9:0]   tniu3_sys_apb_porting_m_pslverr                  ,
+	output [3:0]   tniu3_sys_apb_porting_m_pstrb                    ,
+	output [31:0]  tniu3_sys_apb_porting_m_pwdata                   ,
+	output         tniu3_sys_apb_porting_m_pwrite                   ,
+	input  [31:0]  tniu3_dbg_data_porting_dbg_data_in               ,
+	output [31:0]  tniu3_dbg_data_porting_dbg_data_out              ,
+	input  [63:0]  tniu3_dbg_timestamp_porting_dbg_timestamp_in     ,
+	output [63:0]  tniu3_dbg_timestamp_porting_dbg_timestamp_out    ,
+	input  [7:0]   tniu3_sys_cti_event_porting_sys_cti_event_in     ,
+	output [7:0]   tniu3_sys_cti_event_porting_sys_cti_event_out    ,
+	input  [7:0]   tniu3_noc_cti_event_porting_noc_cti_event_in     ,
+	output [7:0]   tniu3_noc_cti_event_porting_noc_cti_event_out    ,
+	input  [7:0]   tniu3_sys_cti_channel_porting_sys_cti_channel_in ,
+	output [7:0]   tniu3_sys_cti_channel_porting_sys_cti_channel_out,
+	input  [7:0]   tniu3_noc_cti_channel_porting_noc_cti_channel_in ,
+	output [7:0]   tniu3_noc_cti_channel_porting_noc_cti_channel_out);
+
+	localparam integer unsigned STS_REQ_PLD_WIDTH = 119;
+	localparam integer unsigned STS_RSP_PLD_WIDTH = 65;
 
 	//Wire define for this module.
 
 	//Wire define for sub module.
-	wire         noc_dec_TO_iniu0_SIG_mst_req_rdy ;
-	wire         noc_dec_TO_iniu0_SIG_mst_rsp_vld ;
-	wire [64:0]  noc_dec_TO_iniu0_SIG_mst_rsp_pld ;
-	wire         iniu0_TO_noc_dec_SIG_out_req_vld ;
-	wire [118:0] iniu0_TO_noc_dec_SIG_out_req_pld ;
-	wire         iniu0_TO_noc_dec_SIG_in_rsp_rdy  ;
-	wire         tniu0_TO_noc_dec_SIG_in_req_rdy  ;
-	wire         tniu0_TO_noc_dec_SIG_out_rsp_vld ;
-	wire [64:0]  tniu0_TO_noc_dec_SIG_out_rsp_pld ;
-	wire         tniu1_TO_noc_dec_SIG_in_req_rdy  ;
-	wire         tniu1_TO_noc_dec_SIG_out_rsp_vld ;
-	wire [64:0]  tniu1_TO_noc_dec_SIG_out_rsp_pld ;
-	wire         tniu2_TO_noc_dec_SIG_in_req_rdy  ;
-	wire         tniu2_TO_noc_dec_SIG_out_rsp_vld ;
-	wire [64:0]  tniu2_TO_noc_dec_SIG_out_rsp_pld ;
-	wire         tniu3_TO_noc_dec_SIG_in_req_rdy  ;
-	wire         tniu3_TO_noc_dec_SIG_out_rsp_vld ;
-	wire [64:0]  tniu3_TO_noc_dec_SIG_out_rsp_pld ;
-	wire         noc_dec_TO_tniu0_SIG_slv0_req_vld;
-	wire [118:0] noc_dec_TO_tniu0_SIG_slv0_req_pld;
-	wire         noc_dec_TO_tniu0_SIG_slv0_rsp_rdy;
-	wire         noc_dec_TO_tniu1_SIG_slv1_req_vld;
-	wire [118:0] noc_dec_TO_tniu1_SIG_slv1_req_pld;
-	wire         noc_dec_TO_tniu1_SIG_slv1_rsp_rdy;
-	wire         noc_dec_TO_tniu2_SIG_slv2_req_vld;
-	wire [118:0] noc_dec_TO_tniu2_SIG_slv2_req_pld;
-	wire         noc_dec_TO_tniu2_SIG_slv2_rsp_rdy;
-	wire         noc_dec_TO_tniu3_SIG_slv3_req_vld;
-	wire [118:0] noc_dec_TO_tniu3_SIG_slv3_req_pld;
-	wire         noc_dec_TO_tniu3_SIG_slv3_rsp_rdy;
+	wire  noc_dec_TO_iniu0_SIG_mst_req_rdy ;
+	wire  noc_dec_TO_iniu0_SIG_mst_rsp_vld ;
+	wire  [STS_RSP_PLD_WIDTH-1:0] noc_dec_TO_iniu0_SIG_mst_rsp_pld ;
+	wire  iniu0_TO_noc_dec_SIG_out_req_vld ;
+	wire  [STS_REQ_PLD_WIDTH-1:0] iniu0_TO_noc_dec_SIG_out_req_pld ;
+	wire  iniu0_TO_noc_dec_SIG_in_rsp_rdy  ;
+	wire  tniu0_TO_noc_dec_SIG_in_req_rdy  ;
+	wire  tniu0_TO_noc_dec_SIG_out_rsp_vld ;
+	wire  [STS_RSP_PLD_WIDTH-1:0] tniu0_TO_noc_dec_SIG_out_rsp_pld ;
+	wire  tniu1_TO_noc_dec_SIG_in_req_rdy  ;
+	wire  tniu1_TO_noc_dec_SIG_out_rsp_vld ;
+	wire  [STS_RSP_PLD_WIDTH-1:0] tniu1_TO_noc_dec_SIG_out_rsp_pld ;
+	wire  tniu2_TO_noc_dec_SIG_in_req_rdy  ;
+	wire  tniu2_TO_noc_dec_SIG_out_rsp_vld ;
+	wire  [STS_RSP_PLD_WIDTH-1:0] tniu2_TO_noc_dec_SIG_out_rsp_pld ;
+	wire  tniu3_TO_noc_dec_SIG_in_req_rdy  ;
+	wire  tniu3_TO_noc_dec_SIG_out_rsp_vld ;
+	wire  [STS_RSP_PLD_WIDTH-1:0] tniu3_TO_noc_dec_SIG_out_rsp_pld ;
+	wire  noc_dec_TO_tniu0_SIG_slv0_req_vld;
+	wire  [STS_REQ_PLD_WIDTH-1:0] noc_dec_TO_tniu0_SIG_slv0_req_pld;
+	wire  noc_dec_TO_tniu0_SIG_slv0_rsp_rdy;
+	wire  noc_dec_TO_tniu1_SIG_slv1_req_vld;
+	wire  [STS_REQ_PLD_WIDTH-1:0] noc_dec_TO_tniu1_SIG_slv1_req_pld;
+	wire  noc_dec_TO_tniu1_SIG_slv1_rsp_rdy;
+	wire  noc_dec_TO_tniu2_SIG_slv2_req_vld;
+	wire  [STS_REQ_PLD_WIDTH-1:0] noc_dec_TO_tniu2_SIG_slv2_req_pld;
+	wire  noc_dec_TO_tniu2_SIG_slv2_rsp_rdy;
+	wire  noc_dec_TO_tniu3_SIG_slv3_req_vld;
+	wire  [STS_REQ_PLD_WIDTH-1:0] noc_dec_TO_tniu3_SIG_slv3_req_pld;
+	wire  noc_dec_TO_tniu3_SIG_slv3_rsp_rdy;
 
 	//Wire define for Inout.
 
@@ -284,7 +335,19 @@ module sts_logic_topo_1i4t (
 		.m_penable(tniu0_sys_apb_porting_m_penable),
 		.m_pwrite(tniu0_sys_apb_porting_m_pwrite),
 		.m_pwdata(tniu0_sys_apb_porting_m_pwdata),
-		.m_pstrb(tniu0_sys_apb_porting_m_pstrb));
+		.m_pstrb(tniu0_sys_apb_porting_m_pstrb),
+		.dbg_data_in(tniu0_dbg_data_porting_dbg_data_in),
+		.dbg_data_out(tniu0_dbg_data_porting_dbg_data_out),
+		.dbg_timestamp_in(tniu0_dbg_timestamp_porting_dbg_timestamp_in),
+		.dbg_timestamp_out(tniu0_dbg_timestamp_porting_dbg_timestamp_out),
+		.sys_cti_event_in(tniu0_sys_cti_event_porting_sys_cti_event_in),
+		.sys_cti_event_out(tniu0_sys_cti_event_porting_sys_cti_event_out),
+		.noc_cti_event_out(tniu0_noc_cti_event_porting_noc_cti_event_out),
+		.noc_cti_event_in(tniu0_noc_cti_event_porting_noc_cti_event_in),
+		.sys_cti_channel_in(tniu0_sys_cti_channel_porting_sys_cti_channel_in),
+		.sys_cti_channel_out(tniu0_sys_cti_channel_porting_sys_cti_channel_out),
+		.noc_cti_channel_out(tniu0_noc_cti_channel_porting_noc_cti_channel_out),
+		.noc_cti_channel_in(tniu0_noc_cti_channel_porting_noc_cti_channel_in));
 	sts_demo_tniu1_sts_demo_tniu1_wrap tniu1 (
 		.clk_src(clk_src),
 		.clk_dst(clk_dst),
@@ -317,7 +380,19 @@ module sts_logic_topo_1i4t (
 		.m_penable(tniu1_sys_apb_porting_m_penable),
 		.m_pwrite(tniu1_sys_apb_porting_m_pwrite),
 		.m_pwdata(tniu1_sys_apb_porting_m_pwdata),
-		.m_pstrb(tniu1_sys_apb_porting_m_pstrb));
+		.m_pstrb(tniu1_sys_apb_porting_m_pstrb),
+		.dbg_data_in(tniu1_dbg_data_porting_dbg_data_in),
+		.dbg_data_out(tniu1_dbg_data_porting_dbg_data_out),
+		.dbg_timestamp_in(tniu1_dbg_timestamp_porting_dbg_timestamp_in),
+		.dbg_timestamp_out(tniu1_dbg_timestamp_porting_dbg_timestamp_out),
+		.sys_cti_event_in(tniu1_sys_cti_event_porting_sys_cti_event_in),
+		.sys_cti_event_out(tniu1_sys_cti_event_porting_sys_cti_event_out),
+		.noc_cti_event_out(tniu1_noc_cti_event_porting_noc_cti_event_out),
+		.noc_cti_event_in(tniu1_noc_cti_event_porting_noc_cti_event_in),
+		.sys_cti_channel_in(tniu1_sys_cti_channel_porting_sys_cti_channel_in),
+		.sys_cti_channel_out(tniu1_sys_cti_channel_porting_sys_cti_channel_out),
+		.noc_cti_channel_out(tniu1_noc_cti_channel_porting_noc_cti_channel_out),
+		.noc_cti_channel_in(tniu1_noc_cti_channel_porting_noc_cti_channel_in));
 	sts_demo_tniu2_sts_demo_tniu2_wrap tniu2 (
 		.clk_src(clk_src),
 		.clk_dst(clk_dst),
@@ -350,7 +425,19 @@ module sts_logic_topo_1i4t (
 		.m_penable(tniu2_sys_apb_porting_m_penable),
 		.m_pwrite(tniu2_sys_apb_porting_m_pwrite),
 		.m_pwdata(tniu2_sys_apb_porting_m_pwdata),
-		.m_pstrb(tniu2_sys_apb_porting_m_pstrb));
+		.m_pstrb(tniu2_sys_apb_porting_m_pstrb),
+		.dbg_data_in(tniu2_dbg_data_porting_dbg_data_in),
+		.dbg_data_out(tniu2_dbg_data_porting_dbg_data_out),
+		.dbg_timestamp_in(tniu2_dbg_timestamp_porting_dbg_timestamp_in),
+		.dbg_timestamp_out(tniu2_dbg_timestamp_porting_dbg_timestamp_out),
+		.sys_cti_event_in(tniu2_sys_cti_event_porting_sys_cti_event_in),
+		.sys_cti_event_out(tniu2_sys_cti_event_porting_sys_cti_event_out),
+		.noc_cti_event_out(tniu2_noc_cti_event_porting_noc_cti_event_out),
+		.noc_cti_event_in(tniu2_noc_cti_event_porting_noc_cti_event_in),
+		.sys_cti_channel_in(tniu2_sys_cti_channel_porting_sys_cti_channel_in),
+		.sys_cti_channel_out(tniu2_sys_cti_channel_porting_sys_cti_channel_out),
+		.noc_cti_channel_out(tniu2_noc_cti_channel_porting_noc_cti_channel_out),
+		.noc_cti_channel_in(tniu2_noc_cti_channel_porting_noc_cti_channel_in));
 	sts_demo_tniu3_sts_demo_tniu3_wrap tniu3 (
 		.clk_src(clk_src),
 		.clk_dst(clk_dst),
@@ -383,8 +470,20 @@ module sts_logic_topo_1i4t (
 		.m_penable(tniu3_sys_apb_porting_m_penable),
 		.m_pwrite(tniu3_sys_apb_porting_m_pwrite),
 		.m_pwdata(tniu3_sys_apb_porting_m_pwdata),
-		.m_pstrb(tniu3_sys_apb_porting_m_pstrb));
+		.m_pstrb(tniu3_sys_apb_porting_m_pstrb),
+		.dbg_data_in(tniu3_dbg_data_porting_dbg_data_in),
+		.dbg_data_out(tniu3_dbg_data_porting_dbg_data_out),
+		.dbg_timestamp_in(tniu3_dbg_timestamp_porting_dbg_timestamp_in),
+		.dbg_timestamp_out(tniu3_dbg_timestamp_porting_dbg_timestamp_out),
+		.sys_cti_event_in(tniu3_sys_cti_event_porting_sys_cti_event_in),
+		.sys_cti_event_out(tniu3_sys_cti_event_porting_sys_cti_event_out),
+		.noc_cti_event_out(tniu3_noc_cti_event_porting_noc_cti_event_out),
+		.noc_cti_event_in(tniu3_noc_cti_event_porting_noc_cti_event_in),
+		.sys_cti_channel_in(tniu3_sys_cti_channel_porting_sys_cti_channel_in),
+		.sys_cti_channel_out(tniu3_sys_cti_channel_porting_sys_cti_channel_out),
+		.noc_cti_channel_out(tniu3_noc_cti_channel_porting_noc_cti_channel_out),
+		.noc_cti_channel_in(tniu3_noc_cti_channel_porting_noc_cti_channel_in));
 
 endmodule
-//[UHDL]Content End [md5:b577f1cd3e48f71d11984b1037d6b02f]
+//[UHDL]Content End [md5:ba5fc755d8a6e3ca9b7b52730557035a]
 
