@@ -16,12 +16,13 @@ VERDI_PLI_LIB   ?= $(dir $(shell which verdi 2>/dev/null))../share/PLI/VCS/linux
 # Env vars read by DUT filelist.f via $VAR expansion
 export INTR_NOC_DIR
 export INTR_NOC_DEMO_DIR := $(DEMO_DIR)
-export INTR_RING_LNK_OUT_DIR := $(DEMO_DIR)/build/temp/intr_ring_lnk
-export INTR_RING_STA_OUT_DIR := $(DEMO_DIR)/build/temp/intr_ring_sta
-export INTR_TNIU_SYS_OUT_DIR := $(DEMO_DIR)/build/temp/intr_tniu_sys
-export INTR_TNIU_TOP_OUT_DIR := $(DEMO_DIR)/build/temp/intr_tniu_top
-export INTR_INIU_SYS_OUT_DIR := $(DEMO_DIR)/build/temp/intr_iniu_sys
-export INTR_INIU_TOP_OUT_DIR := $(DEMO_DIR)/build/temp/intr_iniu_top
+# Compile from the published build_logic tree for all generated sub-blocks.
+export INTR_RING_LNK_OUT_DIR := $(DEMO_DIR)/build_logic/intr_ring_lnk
+export INTR_RING_STA_OUT_DIR := $(DEMO_DIR)/build_logic/intr_ring_sta
+export INTR_TNIU_SYS_OUT_DIR := $(DEMO_DIR)/build_logic/intr_tniu_sys
+export INTR_TNIU_TOP_OUT_DIR := $(DEMO_DIR)/build_logic/intr_tniu_top
+export INTR_INIU_SYS_OUT_DIR := $(DEMO_DIR)/build_logic/intr_iniu_sys
+export INTR_INIU_TOP_OUT_DIR := $(DEMO_DIR)/build_logic/intr_iniu_top
 
 BUILD_DIR       := $(DEMO_DIR)/sim/build
 SIMV            := $(BUILD_DIR)/simv

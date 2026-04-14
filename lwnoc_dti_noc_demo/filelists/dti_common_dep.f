@@ -1,0 +1,4 @@
+-f $FCIP_DIR/vc/basic.f
+-f $FCIP_DIR/vc/async_fifo.f
+-f $FCIP_DIR/vc/arbiter.f
+-f $LWNOC_LOWPOWER_COMPONENT/src/vc/lwnoc_lp_all.f

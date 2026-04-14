@@ -1,0 +1,22 @@
+debug_en
+{'OffsetAddress': '0x0', 'RegType': 'Normal', 'Field': {'debug_en': {'Position': '[31:0]', 'offset': '0', 'bit': 32, 'FieldType': 'Internal', 'SoftwareAccess': 'ReadWrite', 'HardwareAccess': 'ReadOnly', 'initValue': '0b0'}}}
+timing_bus1
+{'OffsetAddress': '0x4', 'RegType': 'Normal', 'Field': {'timing_bus1': {'Position': '[31:0]', 'offset': '0', 'bit': 32, 'FieldType': 'Internal', 'SoftwareAccess': 'ReadWrite', 'HardwareAccess': 'ReadOnly', 'initValue': '0b0'}}}
+timing_bus2
+{'OffsetAddress': '0x8', 'RegType': 'Normal', 'Field': {'timing_bus2': {'Position': '[31:0]', 'offset': '0', 'bit': 32, 'FieldType': 'Internal', 'SoftwareAccess': 'ReadWrite', 'HardwareAccess': 'ReadOnly', 'initValue': '0b0'}}}
+timing_bus3
+{'OffsetAddress': '0xC', 'RegType': 'Normal', 'Field': {'timing_bus3': {'Position': '[31:0]', 'offset': '0', 'bit': 32, 'FieldType': 'Internal', 'SoftwareAccess': 'ReadWrite', 'HardwareAccess': 'ReadOnly', 'initValue': '0b0'}}}
+debug_data_gate
+{'OffsetAddress': '0x10', 'RegType': 'Normal', 'Field': {'debug_data_gate': {'Position': '[31:0]', 'offset': '0', 'bit': 32, 'FieldType': 'Internal', 'SoftwareAccess': 'ReadWrite', 'HardwareAccess': 'ReadOnly', 'initValue': '0b0'}}}
+name
+reg_bank_table
+size
+8
+interface
+apb
+width
+16
+check
+true
+description
+sts tniu regbank

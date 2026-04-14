@@ -1,0 +1,2 @@
+-f $FCIP_DIR/vc/stdcell_wrap.f 
+-f $LWNOC_LOWPOWER_COMPONENT/src/vc/lwnoc_lp_core.f

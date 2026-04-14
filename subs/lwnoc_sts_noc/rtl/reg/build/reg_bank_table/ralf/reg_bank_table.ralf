@@ -1,0 +1,49 @@
+block reg_bank_table {
+    bytes 1024;
+    register debug_en @32'h0 {
+        bytes 4;
+        field debug_en (debug_en_debug_en) @0 {
+            bits 32;
+            access rw;
+            reset 0;
+        }
+        
+    }
+    register timing_bus1 @'h4 {
+        bytes 4;
+        field timing_bus1 (timing_bus1_timing_bus1) @0 {
+            bits 32;
+            access rw;
+            reset 0;
+        }
+        
+    }
+    register timing_bus2 @'h8 {
+        bytes 4;
+        field timing_bus2 (timing_bus2_timing_bus2) @0 {
+            bits 32;
+            access rw;
+            reset 0;
+        }
+        
+    }
+    register timing_bus3 @'hc {
+        bytes 4;
+        field timing_bus3 (timing_bus3_timing_bus3) @0 {
+            bits 32;
+            access rw;
+            reset 0;
+        }
+        
+    }
+    register debug_data_gate @'h10 {
+        bytes 4;
+        field debug_data_gate (debug_data_gate_debug_data_gate) @0 {
+            bits 32;
+            access rw;
+            reset 0;
+        }
+        
+    }
+    
+}

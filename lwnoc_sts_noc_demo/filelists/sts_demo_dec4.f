@@ -1,0 +1,14 @@
+$STS_NOC_DIR/rtl/common/lwnoc_sts_pack.sv
+$STS_NOC_DIR/rtl/common/sts_iniu_addr_map.sv
+$STS_NOC_DIR/rtl/common/apb2apb_async_bridge_qual.sv
+$STS_NOC_DIR/rtl/common/cti_handle.sv
+$STS_NOC_DIR/rtl/common/pulse_async_bridge_receiver_qactive.sv
+$STS_NOC_DIR/rtl/common/pulse_async_bridge_transmitter_qactive.sv
+$STS_NOC_DIR/rtl/common/ts_bin2gray.sv
+$STS_NOC_DIR/rtl/common/ts_gray2bin.sv
+$STS_NOC_DIR/rtl/common/lwring_id_remap_entry.sv
+$STS_NOC_DIR/rtl/common/lwring_id_remap.sv
+$STS_NOC_DIR/rtl/common/sts_ctm.sv
+$STS_NOC_DIR/rtl/common/sts_noc_dec_node.sv
+$STS_NOC_DIR/rtl/common/sts_tniu_apb_dec.sv
+$STS_NOC_DEMO_DIR/rtl/sts_demo_dec4_wrap.sv

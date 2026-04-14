@@ -1,0 +1,3 @@
+[submodule "src/rtl/fcip"]
+	path = src/rtl/fcip
+	url = https://github.com/fliibs/fcip.git

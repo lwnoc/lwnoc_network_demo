@@ -1,0 +1,122 @@
+// Translate vld/rdy protocol to APB
+
+module sts_tniu_apb
+import lwnoc_sts_pack::*;
+(
+    input   logic                       clk      ,
+    input   logic                       rst_n    ,
+    input   logic                       s_req_vld,
+    input   sts_req_typ                 s_req_pld,
+    output  logic                       s_req_rdy,
+    output  logic                       s_rsp_vld,
+    output  sts_rsp_typ                 s_rsp_pld,
+    input   logic                       s_rsp_rdy,
+
+    output  logic                       m_psel   ,
+    output  logic                       m_penable,
+    output  logic [APB_ADDR_WIDTH-1:0]  m_paddr  ,
+    output  logic                       m_pwrite ,
+    output  logic [31:0]                m_pwdata ,
+    input   logic [31:0]                m_prdata ,
+    input   logic                       m_pready ,
+    output  logic [3:0]                 m_pstrb  ,
+    output  logic [2:0]                 m_pprot  ,
+    input   logic                       m_pslverr,
+
+    output  logic                       apb_err_int
+);
+
+logic [1:0] state_c;
+logic [1:0] state_n;
+
+// localparam IDLE     = 2'b00;
+// localparam SETUP    = 2'b01;
+// localparam ACCESS   = 2'b10;
+// localparam RESERVED = 2'b11;
+
+// always_comb begin
+//     case (state_c)
+//         IDLE : begin
+//             if(!m_psel)   state_n = IDLE;
+//             else        state_n = SETUP;
+//         end 
+//         SETUP: begin
+//             state_n = ACCESS;
+//         end 
+//         ACCESS: begin
+//             if(m_psel && m_pready) state_n = SETUP;
+//             else if(m_pready)      state_n = IDLE;
+//             else if(!m_pready)     state_n = ACCESS;
+//         end
+//         default: state_n = IDLE;
+//     endcase
+// end
+
+assign m_psel = s_req_vld || req_vld_tmp;
+
+always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        req_vld_tmp <= 1'b0;
+    end else begin
+        if (s_req_vld && s_req_rdy) begin
+            req_vld_tmp <= 1'b0;
+        end else if (s_req_vld) begin
+            req_vld_tmp <= s_req_vld;
+        end
+    end
+end
+
+assign apb_trans_done = m_psel && m_penable && m_pready;
+
+always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        m_penable <= 1'b0;
+    end else if (apb_trans_done) begin
+        m_penable <= 1'b0;
+    end else if(m_psel && !m_penable) begin
+        m_penable <= 1'b1;
+    end
+end
+
+assign s_req_rdy = apb_trans_done;
+
+assign m_paddr  = m_psel ? s_req_pld.req.addr : '0;
+
+//TODO:data width!!
+always_comb begin
+    m_pwrite = 1'b0;
+    m_pwdata = '0;
+    if (m_psel) begin
+        if(s_req_pld.cmn.opcode == cfgOpcode_WrReq) begin
+            m_pwrite = 1'b1;
+            m_pwdata = s_req_pld.req.data;
+        end else if(s_req_pld.cmn.opcode == cfgOpcode_RdReq) begin
+            m_pwrite = 1'b0;
+        end
+    end
+end
+
+assign m_pstrb = m_psel ? s_req_pld.req.strb '0;
+assign m_pprot = '0;
+
+always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        s_rsp_vld <= 1'b0;
+    end else begin
+        if (s_rsp_vld && s_rsp_rdy) s_rsp_vld <= 1'b0;
+        else if (apb_trans_done)    s_rsp_vld <= 1'b1;
+    end
+end
+
+always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        last_req <= 1'b0;
+    end else begin
+        if(apb_trans_done) last_req <= 1'b0;
+        else if(s_req_vld && s_req_pld.cmn.last) last_req <= 1'b1; 
+    end 
+end
+
+assign s_rsp_pld
+    
+endmodule

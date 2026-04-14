@@ -1,0 +1,1249 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "serialization_time": null,
+    "root_wrapper": "dti_logic_topo"
+  },
+  "topology": {
+    "id": "dti_logic_topo",
+    "type": "wrapper",
+    "children": [
+      {
+        "id": "sw_left3",
+        "type": "atomic"
+      },
+      {
+        "id": "sw_left_dsp1",
+        "type": "atomic"
+      },
+      {
+        "id": "sw_left_dsp0",
+        "type": "atomic"
+      },
+      {
+        "id": "sw_left_noc1",
+        "type": "atomic"
+      },
+      {
+        "id": "sw_right4",
+        "type": "atomic"
+      },
+      {
+        "id": "sw_right_noc0",
+        "type": "atomic"
+      },
+      {
+        "id": "sw_root",
+        "type": "atomic"
+      }
+    ]
+  },
+  "nodes": {
+    "dti_logic_topo": {
+      "type": "wrapper",
+      "node_name": "dti_logic_topo",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "pcie_eth_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pcie_eth_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "vpu_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "vpu_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dsp2_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dsp2_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dsp1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dsp1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dsp0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dsp0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_tbu1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_tbu1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "usb_ufs_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "usb_ufs_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "mipi0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "mipi0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "mipi1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "mipi1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "camera_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "camera_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_tbu0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_tbu0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "top_tcu_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "top_tcu_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__"
+      ],
+      "sub_nodes": [
+        "dti_logic_topo.sw_left3",
+        "dti_logic_topo.sw_left_dsp1",
+        "dti_logic_topo.sw_left_dsp0",
+        "dti_logic_topo.sw_left_noc1",
+        "dti_logic_topo.sw_right4",
+        "dti_logic_topo.sw_right_noc0",
+        "dti_logic_topo.sw_root"
+      ]
+    },
+    "dti_logic_topo.sw_root": {
+      "type": "atomic",
+      "node_name": "sw_root",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "dti_logic_topo",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "dti_logic_topo.sw_left_dsp0": {
+      "type": "atomic",
+      "node_name": "sw_left_dsp0",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "dti_logic_topo",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "dti_logic_topo.sw_left_dsp1": {
+      "type": "atomic",
+      "node_name": "sw_left_dsp1",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "dti_logic_topo",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "dti_logic_topo.sw_right4": {
+      "type": "atomic",
+      "node_name": "sw_right4",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu2_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu2_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu3_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu3_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "dti_logic_topo",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "dti_logic_topo.sw_right_noc0": {
+      "type": "atomic",
+      "node_name": "sw_right_noc0",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "dti_logic_topo",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "dti_logic_topo.sw_left_noc1": {
+      "type": "atomic",
+      "node_name": "sw_left_noc1",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "dti_logic_topo",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "dti_logic_topo.sw_left3": {
+      "type": "atomic",
+      "node_name": "sw_left3",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu2_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu2_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "dti_logic_topo",
+        "__global_virtual_wrapper__"
+      ]
+    }
+  },
+  "connections": [
+    {
+      "id": "sw_left3_dti_logic_topo_clk_clk_1@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left3",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left_dsp1",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint4": {
+            "node_id": "dti_logic_topo.sw_right_noc0",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint5": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint6": {
+            "node_id": "dti_logic_topo.sw_left_dsp0",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint7": {
+            "node_id": "dti_logic_topo.sw_root",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint8": {
+            "node_id": "dti_logic_topo.sw_left_noc1",
+            "interface_id": "clk"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_left3_dti_logic_topo_rst_n_rst_n_2@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_right_noc0",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left3",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "dti_logic_topo.sw_left_dsp1",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint4": {
+            "node_id": "dti_logic_topo.sw_root",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint5": {
+            "node_id": "dti_logic_topo.sw_left_dsp0",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint6": {
+            "node_id": "dti_logic_topo.sw_left_noc1",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint7": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint8": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "rst_n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left3_pcie_eth_req_iniu0_req_3@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "pcie_eth_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left3",
+            "interface_id": "iniu0_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left3_pcie_eth_rsp_iniu0_rsp_4@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left3",
+            "interface_id": "iniu0_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "pcie_eth_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left3_vpu_req_iniu1_req_5@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "vpu_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left3",
+            "interface_id": "iniu1_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left3_vpu_rsp_iniu1_rsp_6@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left3",
+            "interface_id": "iniu1_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "vpu_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left3_dsp2_req_iniu2_req_7@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left3",
+            "interface_id": "iniu2_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "dsp2_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left3_dsp2_rsp_iniu2_rsp_8@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left3",
+            "interface_id": "iniu2_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "dsp2_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_left3_sw_left_dsp1_tniu_req_iniu0_req_9@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left_dsp1",
+            "interface_id": "iniu0_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left3",
+            "interface_id": "tniu_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_left3_sw_left_dsp1_tniu_rsp_iniu0_rsp_10@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left_dsp1",
+            "interface_id": "iniu0_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left3",
+            "interface_id": "tniu_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left_dsp1_dsp1_req_iniu1_req_11@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "dsp1_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left_dsp1",
+            "interface_id": "iniu1_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left_dsp1_dsp1_rsp_iniu1_rsp_12@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "dsp1_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left_dsp1",
+            "interface_id": "iniu1_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_left_dsp1_sw_left_dsp0_tniu_req_iniu0_req_13@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left_dsp1",
+            "interface_id": "tniu_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left_dsp0",
+            "interface_id": "iniu0_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_left_dsp1_sw_left_dsp0_tniu_rsp_iniu0_rsp_14@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left_dsp1",
+            "interface_id": "tniu_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left_dsp0",
+            "interface_id": "iniu0_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left_dsp0_dsp0_req_iniu1_req_15@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left_dsp0",
+            "interface_id": "iniu1_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "dsp0_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left_dsp0_dsp0_rsp_iniu1_rsp_16@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "dsp0_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left_dsp0",
+            "interface_id": "iniu1_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_left_dsp0_sw_left_noc1_tniu_req_iniu0_req_17@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left_dsp0",
+            "interface_id": "tniu_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left_noc1",
+            "interface_id": "iniu0_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_left_dsp0_sw_left_noc1_tniu_rsp_iniu0_rsp_18@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left_noc1",
+            "interface_id": "iniu0_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left_dsp0",
+            "interface_id": "tniu_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left_noc1_noc_tbu1_req_iniu1_req_19@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left_noc1",
+            "interface_id": "iniu1_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "noc_tbu1_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_left_noc1_noc_tbu1_rsp_iniu1_rsp_20@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_left_noc1",
+            "interface_id": "iniu1_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "noc_tbu1_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_right4_usb_ufs_req_iniu0_req_21@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "usb_ufs_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "iniu0_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_right4_usb_ufs_rsp_iniu0_rsp_22@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "usb_ufs_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "iniu0_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_right4_mipi0_req_iniu1_req_23@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "mipi0_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "iniu1_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_right4_mipi0_rsp_iniu1_rsp_24@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "iniu1_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "mipi0_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_right4_mipi1_req_iniu2_req_25@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "iniu2_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "mipi1_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_right4_mipi1_rsp_iniu2_rsp_26@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "iniu2_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "mipi1_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_right4_camera_req_iniu3_req_27@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "camera_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "iniu3_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_right4_camera_rsp_iniu3_rsp_28@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "camera_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "iniu3_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_right4_sw_right_noc0_tniu_req_iniu0_req_29@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_right_noc0",
+            "interface_id": "iniu0_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "tniu_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_right4_sw_right_noc0_tniu_rsp_iniu0_rsp_30@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_right4",
+            "interface_id": "tniu_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_right_noc0",
+            "interface_id": "iniu0_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_right_noc0_noc_tbu0_req_iniu1_req_31@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_right_noc0",
+            "interface_id": "iniu1_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "noc_tbu0_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_right_noc0_noc_tbu0_rsp_iniu1_rsp_32@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_right_noc0",
+            "interface_id": "iniu1_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "noc_tbu0_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_left_noc1_sw_root_tniu_req_iniu0_req_33@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_root",
+            "interface_id": "iniu0_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left_noc1",
+            "interface_id": "tniu_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_left_noc1_sw_root_tniu_rsp_iniu0_rsp_34@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_root",
+            "interface_id": "iniu0_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_left_noc1",
+            "interface_id": "tniu_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_right_noc0_sw_root_tniu_req_iniu1_req_35@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_root",
+            "interface_id": "iniu1_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_right_noc0",
+            "interface_id": "tniu_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw_right_noc0_sw_root_tniu_rsp_iniu1_rsp_36@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_right_noc0",
+            "interface_id": "tniu_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo.sw_root",
+            "interface_id": "iniu1_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_root_top_tcu_req_tniu_req_37@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_root",
+            "interface_id": "tniu_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "top_tcu_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dti_logic_topo_sw_root_top_tcu_rsp_tniu_rsp_38@dti_logic_topo",
+      "scope": "dti_logic_topo",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "dti_logic_topo.sw_root",
+            "interface_id": "tniu_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "dti_logic_topo",
+            "interface_id": "top_tcu_rsp"
+          }
+        }
+      ]
+    }
+  ]
+}
