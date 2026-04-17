@@ -1,0 +1,5 @@
+$INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_interrupt_tniu_define.sv
+$INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_interrupt_tniu_pkg.sv
+$INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_lwnoc_lp_define_package.sv
+$INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_lwnoc_lp_struct_package.sv
+$INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_interrupt_tniu_async_top_side.sv

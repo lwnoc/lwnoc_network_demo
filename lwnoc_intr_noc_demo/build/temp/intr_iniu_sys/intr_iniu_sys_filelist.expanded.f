@@ -1,8 +1,0 @@
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_sys/intr_iniu_sys_interrupt_iniu_define.sv
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_sys/intr_iniu_sys_interrupt_iniu_pkg.sv
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_sys/intr_iniu_sys_interrupt_iniu_event_recorder.sv
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_sys/intr_iniu_sys_interrupt_iniu_lut.sv
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_sys/intr_iniu_sys_interrupt_iniu_reg_bank.sv
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_sys/intr_iniu_sys_interrupt_iniu_arb.sv
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_sys/intr_iniu_sys_interrupt_iniu.sv
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_sys/intr_iniu_sys_interrupt_iniu_async_sys_side.sv

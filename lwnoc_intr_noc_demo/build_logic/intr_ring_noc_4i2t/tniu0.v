@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:3f372aae8c2eadf26bb9c2fdbb6cf158]
+//[UHDL]Content Start [md5:0b48f80a231d81eb8a2633ea2dbdfb2e]
 module tniu0 (
 	input           clk_sys_clk                                          ,
 	input           rst_sys_n_rst_n                                      ,
@@ -33,8 +33,8 @@ module tniu0 (
 	output [7:0]    nring_out_if_nring_out_if_m_tgtid                    ,
 	output          nring_out_if_nring_out_if_m_valid                    ,
 	input  [9:0]    tniu0_top_timeout_val_porting_timeout_val            ,
-	input  [8:0]           tniu0_top_lp_hub_porting_lp_hub_rx_req               ,
-	output [8:0]          tniu0_top_lp_hub_porting_lp_hub_tx_req               ,
+	input  [12:0]   tniu0_top_lp_hub_porting_lp_hub_rx_req               ,
+	output [12:0]   tniu0_top_lp_hub_porting_lp_hub_tx_req               ,
 	input  [7:0]    tniu0_sys_tniu_tgt_id_porting_tniu_tgt_id            ,
 	output [4095:0] tniu0_sys_v_interrupt_porting_v_interrupt            ,
 	output [127:0]  tniu0_sys_v_merge_interrupt_porting_v_merge_interrupt,
@@ -46,34 +46,34 @@ module tniu0 (
 	output          tniu0_sys_apb_porting_p_slverr                       ,
 	input  [31:0]   tniu0_sys_apb_porting_p_wdata                        ,
 	input           tniu0_sys_apb_porting_p_write                        ,
-	input  [9:0]    tniu0_sys_timeout_val_porting_timeout_val            ,
-	input           tniu0_ring_local_tx_porting_local_tx_local_tx_last   ,
-	input  [39:0]   tniu0_ring_local_tx_porting_local_tx_local_tx_payload,
-	input  [3:0]    tniu0_ring_local_tx_porting_local_tx_local_tx_qos    ,
-	output          tniu0_ring_local_tx_porting_local_tx_local_tx_ready  ,
-	input  [7:0]    tniu0_ring_local_tx_porting_local_tx_local_tx_srcid  ,
-	input  [7:0]    tniu0_ring_local_tx_porting_local_tx_local_tx_tgtid  ,
-	input           tniu0_ring_local_tx_porting_local_tx_local_tx_valid  );
+	input  [9:0]    tniu0_sys_timeout_val_porting_timeout_val            );
 
 	//Wire define for this module.
 
 	//Wire define for sub module.
-	wire [9:0]  tniu_sys_TO_tniu_top_SIG_rptr_async               ;
-	wire [9:0]  tniu_sys_TO_tniu_top_SIG_rptr_sync                ;
-	wire [8:0] tniu_sys_TO_tniu_top_SIG_m_niu_lp_hub_rx_req  ;
-	wire [8:0] tniu_sys_TO_tniu_top_SIG_m_async_master_hub_rx_req  ;
-	wire [9:0]  tniu_top_TO_tniu_sys_SIG_wptr_async               ;
-	wire [61:0] tniu_top_TO_tniu_sys_SIG_pld_sync                 ;
-	wire [8:0] tniu_top_TO_tniu_sys_SIG_s_async_master_hub_tx_req  ;
-	wire [8:0] tniu_top_TO_tniu_sys_SIG_s_niu_lp_hub_tx_req  ;
+	wire [9:0]  tniu_sys_TO_tniu_top_SIG_rptr_async                 ;
+	wire [9:0]  tniu_sys_TO_tniu_top_SIG_rptr_sync                  ;
+	wire        ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_valid   ;
+	wire [39:0] ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_payload ;
+	wire [7:0]  ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_srcid   ;
+	wire [7:0]  ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_tgtid   ;
+	wire [3:0]  ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_qos     ;
+	wire        ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_last    ;
+	wire [9:0]  tniu_top_TO_tniu_sys_SIG_wptr_async                 ;
+	wire [61:0] tniu_top_TO_tniu_sys_SIG_pld_sync                   ;
+	wire        ring_source_TO_ring_wrap_SIG_local_tx_last          ;
+	wire [39:0] ring_source_TO_ring_wrap_SIG_local_tx_payload       ;
+	wire [3:0]  ring_source_TO_ring_wrap_SIG_local_tx_qos           ;
+	wire [7:0]  ring_source_TO_ring_wrap_SIG_local_tx_srcid         ;
+	wire [7:0]  ring_source_TO_ring_wrap_SIG_local_tx_tgtid         ;
+	wire        ring_source_TO_ring_wrap_SIG_local_tx_valid         ;
+	wire        tniu_top_TO_ring_wrap_SIG_req_ready                 ;
+	wire        ring_wrap_TO_ring_source_SIG_local_tx_local_tx_ready;
 
-	wire        ring_wrap_TO_tniu_top_SIG_req_valid     ;
-	wire [39:0] ring_wrap_TO_tniu_top_SIG_req_payload   ;
-	wire [7:0]  ring_wrap_TO_tniu_top_SIG_req_srcid     ;
-	wire [7:0]  ring_wrap_TO_tniu_top_SIG_req_tgtid     ;
-	wire [3:0]  ring_wrap_TO_tniu_top_SIG_req_qos       ;
-	wire        ring_wrap_TO_tniu_top_SIG_req_last      ;
-	wire        tniu_top_TO_ring_wrap_SIG_req_ready     ;
+	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t tniu_sys_TO_tniu_top_SIG_m_async_master_hub_rx_req;
+	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t tniu_top_TO_tniu_sys_SIG_s_async_master_hub_tx_req;
+	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t tniu_sys_TO_tniu_top_SIG_m_niu_lp_hub_rx_req;
+	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t tniu_top_TO_tniu_sys_SIG_s_niu_lp_hub_tx_req;
 
 	//Wire define for Inout.
 
@@ -83,7 +83,8 @@ module tniu0 (
 
 	//module inst.
 	intr_tniu_top_interrupt_tniu_aync_top_side #(
-		.ASYNC_FIFO_DEPTH(32'd10))
+		.ASYNC_FIFO_DEPTH(32'd10),
+		.TIME_OUT_WIDTH(32'd10))
 	tniu_top (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
@@ -98,15 +99,17 @@ module tniu0 (
 		.s_niu_lp_hub_tx_req(tniu_top_TO_tniu_sys_SIG_s_niu_lp_hub_tx_req),
 		.s_async_master_hub_rx_req(tniu_sys_TO_tniu_top_SIG_m_async_master_hub_rx_req),
 		.s_async_master_hub_tx_req(tniu_top_TO_tniu_sys_SIG_s_async_master_hub_tx_req),
-		.req_valid(ring_wrap_TO_tniu_top_SIG_req_valid),
+		.req_valid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_valid),
 		.req_ready(tniu_top_TO_ring_wrap_SIG_req_ready),
-		.req_payload(ring_wrap_TO_tniu_top_SIG_req_payload),
-		.req_srcid(ring_wrap_TO_tniu_top_SIG_req_srcid),
-		.req_tgtid(ring_wrap_TO_tniu_top_SIG_req_tgtid),
-		.req_qos(ring_wrap_TO_tniu_top_SIG_req_qos),
-		.req_last(ring_wrap_TO_tniu_top_SIG_req_last),
+		.req_payload(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_payload),
+		.req_srcid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_srcid),
+		.req_tgtid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_tgtid),
+		.req_qos(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_qos),
+		.req_last(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_last),
 		.req_threshold());
-	intr_tniu_sys_interrupt_tniu_aync_sys_side #(
+	tniu0_sys_interrupt_tniu_aync_sys_side #(
+		.INTERRUPT_NUM(32'd4096),
+		.TIME_OUT_WIDTH(32'd10),
 		.ASYNC_FIFO_DEPTH(32'd10))
 	tniu_sys (
 		.clk(clk_sys_clk),
@@ -162,21 +165,29 @@ module tniu0 (
 		.nring_out_if_m_srcid(nring_out_if_nring_out_if_m_srcid),
 		.nring_out_if_m_tgtid(nring_out_if_nring_out_if_m_tgtid),
 		.nring_out_if_m_valid(nring_out_if_nring_out_if_m_valid),
-		.local_tx_local_tx_last(tniu0_ring_local_tx_porting_local_tx_local_tx_last),
-		.local_tx_local_tx_payload(tniu0_ring_local_tx_porting_local_tx_local_tx_payload),
-		.local_tx_local_tx_qos(tniu0_ring_local_tx_porting_local_tx_local_tx_qos),
-		.local_tx_local_tx_ready(tniu0_ring_local_tx_porting_local_tx_local_tx_ready),
-		.local_tx_local_tx_srcid(tniu0_ring_local_tx_porting_local_tx_local_tx_srcid),
-		.local_tx_local_tx_tgtid(tniu0_ring_local_tx_porting_local_tx_local_tx_tgtid),
-		.local_tx_local_tx_valid(tniu0_ring_local_tx_porting_local_tx_local_tx_valid),
-		.local_rx_local_rx_last(ring_wrap_TO_tniu_top_SIG_req_last),
-		.local_rx_local_rx_payload(ring_wrap_TO_tniu_top_SIG_req_payload),
-		.local_rx_local_rx_qos(ring_wrap_TO_tniu_top_SIG_req_qos),
+		.local_tx_local_tx_last(ring_source_TO_ring_wrap_SIG_local_tx_last),
+		.local_tx_local_tx_payload(ring_source_TO_ring_wrap_SIG_local_tx_payload),
+		.local_tx_local_tx_qos(ring_source_TO_ring_wrap_SIG_local_tx_qos),
+		.local_tx_local_tx_ready(ring_wrap_TO_ring_source_SIG_local_tx_local_tx_ready),
+		.local_tx_local_tx_srcid(ring_source_TO_ring_wrap_SIG_local_tx_srcid),
+		.local_tx_local_tx_tgtid(ring_source_TO_ring_wrap_SIG_local_tx_tgtid),
+		.local_tx_local_tx_valid(ring_source_TO_ring_wrap_SIG_local_tx_valid),
+		.local_rx_local_rx_last(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_last),
+		.local_rx_local_rx_payload(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_payload),
+		.local_rx_local_rx_qos(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_qos),
 		.local_rx_local_rx_ready(tniu_top_TO_ring_wrap_SIG_req_ready),
-		.local_rx_local_rx_srcid(ring_wrap_TO_tniu_top_SIG_req_srcid),
-		.local_rx_local_rx_tgtid(ring_wrap_TO_tniu_top_SIG_req_tgtid),
-		.local_rx_local_rx_valid(ring_wrap_TO_tniu_top_SIG_req_valid));
+		.local_rx_local_rx_srcid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_srcid),
+		.local_rx_local_rx_tgtid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_tgtid),
+		.local_rx_local_rx_valid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_valid));
+	intr_ring_req_zero_source_intr_ring_req_zero_source ring_source (
+		.local_tx_valid(ring_source_TO_ring_wrap_SIG_local_tx_valid),
+		.local_tx_ready(ring_wrap_TO_ring_source_SIG_local_tx_local_tx_ready),
+		.local_tx_payload(ring_source_TO_ring_wrap_SIG_local_tx_payload),
+		.local_tx_srcid(ring_source_TO_ring_wrap_SIG_local_tx_srcid),
+		.local_tx_tgtid(ring_source_TO_ring_wrap_SIG_local_tx_tgtid),
+		.local_tx_qos(ring_source_TO_ring_wrap_SIG_local_tx_qos),
+		.local_tx_last(ring_source_TO_ring_wrap_SIG_local_tx_last));
 
 endmodule
-//[UHDL]Content End [md5:3f372aae8c2eadf26bb9c2fdbb6cf158]
+//[UHDL]Content End [md5:0b48f80a231d81eb8a2633ea2dbdfb2e]
 

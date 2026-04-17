@@ -164,17 +164,10 @@ set_output_delay -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports iniu*_ring_loca
 set_output_delay -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports iniu*_ring_local_rx_porting*local_rx_local_rx_qos]
 set_output_delay -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports iniu*_ring_local_rx_porting*local_rx_local_rx_last]
 
-# --- noc_clk side: TNIU top LP hub + exposed TNIU ring local_tx inputs ---
+# --- noc_clk side: TNIU top LP hub ---
 set_input_delay  -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports tniu*_top_lp_hub_porting*lp_hub_rx_req]
-set_input_delay  -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports tniu*_ring_local_tx_porting*local_tx_local_tx_valid]
-set_input_delay  -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports tniu*_ring_local_tx_porting*local_tx_local_tx_payload]
-set_input_delay  -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports tniu*_ring_local_tx_porting*local_tx_local_tx_srcid]
-set_input_delay  -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports tniu*_ring_local_tx_porting*local_tx_local_tx_tgtid]
-set_input_delay  -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports tniu*_ring_local_tx_porting*local_tx_local_tx_qos]
-set_input_delay  -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports tniu*_ring_local_tx_porting*local_tx_local_tx_last]
 
 set_output_delay -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports tniu*_top_lp_hub_porting*lp_hub_tx_req]
-set_output_delay -max $NOC_IO_DELAY_NS -clock noc_clk [get_ports tniu*_ring_local_tx_porting*local_tx_local_tx_ready]
 
 # --- static configuration ---
 set_false_path -from [get_ports {*timeout_val*}]

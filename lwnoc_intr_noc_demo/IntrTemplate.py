@@ -20,8 +20,9 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
 
 # ── env vars referenced in .f filelists ──────────────────────────────────────
-os.environ["INTR_NOC_DIR"]      = str(INTR_NOC_ROOT)
-os.environ["INTR_NOC_DEMO_DIR"] = str(THIS_DIR)
+os.environ["INTR_NOC_DIR"]               = str(INTR_NOC_ROOT)
+os.environ["INTR_NOC_DEMO_DIR"]          = str(THIS_DIR)
+os.environ["LWNOC_LOWPOWER_COMPONENT"]   = str(INTR_NOC_ROOT / "lwnoc_lowpower_component")
 
 FILELIST_DIR = THIS_DIR / "filelist"
 
@@ -36,29 +37,62 @@ def _new_cfg(name: str, prefix: str, filelist_name: str, env_var: str) -> Templa
 
 
 # ── per-IP configs ────────────────────────────────────────────────────────────
-intr_iniu_sys_config = _new_cfg(
-    name="intr_iniu_sys",
-    prefix="intr_iniu_sys_",
+# INIU sys-side: one directory per consumer instance (P1 — consumer-oriented
+# partitioning). Top-side changes never force sys-side regeneration.
+iniu0_sys_config = _new_cfg(
+    name="iniu0_sys",
+    prefix="iniu0_sys_",
     filelist_name="intr_iniu_sys.f",
-    env_var="INTR_INIU_SYS_OUT_DIR",
+    env_var="INTR_INIU0_SYS_OUT_DIR",
 )
 
+iniu1_sys_config = _new_cfg(
+    name="iniu1_sys",
+    prefix="iniu1_sys_",
+    filelist_name="intr_iniu_sys.f",
+    env_var="INTR_INIU1_SYS_OUT_DIR",
+)
+
+iniu2_sys_config = _new_cfg(
+    name="iniu2_sys",
+    prefix="iniu2_sys_",
+    filelist_name="intr_iniu_sys.f",
+    env_var="INTR_INIU2_SYS_OUT_DIR",
+)
+
+iniu3_sys_config = _new_cfg(
+    name="iniu3_sys",
+    prefix="iniu3_sys_",
+    filelist_name="intr_iniu_sys.f",
+    env_var="INTR_INIU3_SYS_OUT_DIR",
+)
+
+# INIU top-side: shared across all INIU instances (P1 — top-side only changes here)
 intr_iniu_top_config = _new_cfg(
-    name="intr_iniu_top",
+    name="intr_iniu_top_side",
     prefix="intr_iniu_top_",
     filelist_name="intr_iniu_top.f",
     env_var="INTR_INIU_TOP_OUT_DIR",
 )
 
-intr_tniu_sys_config = _new_cfg(
-    name="intr_tniu_sys",
-    prefix="intr_tniu_sys_",
+# TNIU sys-side: one directory per consumer instance
+tniu0_sys_config = _new_cfg(
+    name="tniu0_sys",
+    prefix="tniu0_sys_",
     filelist_name="intr_tniu_sys.f",
-    env_var="INTR_TNIU_SYS_OUT_DIR",
+    env_var="INTR_TNIU0_SYS_OUT_DIR",
 )
 
+tniu1_sys_config = _new_cfg(
+    name="tniu1_sys",
+    prefix="tniu1_sys_",
+    filelist_name="intr_tniu_sys.f",
+    env_var="INTR_TNIU1_SYS_OUT_DIR",
+)
+
+# TNIU top-side: shared across all TNIU instances
 intr_tniu_top_config = _new_cfg(
-    name="intr_tniu_top",
+    name="intr_tniu_top_side",
     prefix="intr_tniu_top_",
     filelist_name="intr_tniu_top.f",
     env_var="INTR_TNIU_TOP_OUT_DIR",
@@ -76,4 +110,18 @@ intr_ring_lnk_config = _new_cfg(
     prefix="intr_ring_lnk_",
     filelist_name="intr_ring_link.f",
     env_var="INTR_RING_LNK_OUT_DIR",
+)
+
+intr_ring_req_sink_config = _new_cfg(
+    name="intr_ring_req_sink",
+    prefix="intr_ring_req_sink_",
+    filelist_name="intr_ring_req_sink.f",
+    env_var="INTR_RING_REQ_SINK_OUT_DIR",
+)
+
+intr_ring_req_zero_source_config = _new_cfg(
+    name="intr_ring_req_zero_source",
+    prefix="intr_ring_req_zero_source_",
+    filelist_name="intr_ring_req_zero_source.f",
+    env_var="INTR_RING_REQ_ZERO_SOURCE_OUT_DIR",
 )

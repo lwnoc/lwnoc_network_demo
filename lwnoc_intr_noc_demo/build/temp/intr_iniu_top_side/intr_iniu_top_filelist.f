@@ -1,0 +1,5 @@
+$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_interrupt_iniu_define.sv
+$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_interrupt_iniu_pkg.sv
+$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_lwnoc_lp_define_package.sv
+$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_lwnoc_lp_struct_package.sv
+$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_interrupt_iniu_async_top_side.sv

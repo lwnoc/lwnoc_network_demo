@@ -1,0 +1,337 @@
+rm -rf /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build
+[TB] Build directory cleaned.
+mkdir -p /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build
+[TB] Compiling DUT + testbench ...
+cd /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/ && vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed -sverilog -timescale=1ns/1ps +v2k +notimingcheck +lint=TFIPC-L +define+ASIC_SIM -P /home/lgzhu/software/verdi2016/bin/../share/PLI/VCS/linux64/novas.tab /home/lgzhu/software/verdi2016/bin/../share/PLI/VCS/linux64/pli.a \
+    -f /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/filelist/intr_common_dep.f \
+    -f /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/filelist/filelist.f \
+    /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/ai_testbench/dw02_tree_stub.sv \
+    /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/tb_intr_ring_noc_4i2t.sv \
+    -top tb_intr_ring_noc_4i2t \
+    -Mdir=/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/csrc \
+    -o /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/simv \
+    -l /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/compile.log
+
+Warning-[LINX_KRNL] Unsupported Linux kernel
+  Linux kernel '5.15.133.1-microsoft-standard-WSL2' is not supported.
+  Supported versions are 2.4* or 2.6*.
+
+*** Using c compiler gcc-4.8 instead of cc ...
+/home/lgzhu/software/vcs2016/bin/vcs: line 2402: dc: command not found
+                         Chronologic VCS (TM)
+         Version L-2016.06_Full64 -- Thu Apr 16 22:03:25 2026
+               Copyright (c) 1991-2016 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_bin2onehot.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_booth_wallace_mul.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_lead_one.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_lead_one_msb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_lead_one_rev.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_lfsr4.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_list_lead_one.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_list_lead_one_rev.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_onehot2bin.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_real_mux_onehot.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_rob_id_dec.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_rob_prealloc.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_onehot_demux.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_onehot_mux_pld.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_apb_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo_doub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo_mst_doub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_arb_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_arb_vrp.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_fix_arb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_grant_gen_fp.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_grant_gen_rr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_mtx_gen_age.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_mtx_gen_plru_tree.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_tree_plru_comb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_arb_vr_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_age_matrix_list.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_age_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_arb_vrp_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/regslice/fcip_reg_slice.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/regslice/fcip_reg_slice_full_set.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_rob.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_ptr_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sync_fifo_spram.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/handshake/fcip_hs_fanout.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/memory/mem_fake_2p_sram/fcip_mem_fake_find_new_bit.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/memory/mem_fake_2p_sram/fcip_mem_fake_write_buffer.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/memory/mem_fake_2p_sram/fcip_mem_fake_2p_mem.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/memory/fcip_mem_ctrl_wrap/fcip_mem_ctrl_wrap.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/mem_model/fcip_dpram_model.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/mem_model/fcip_spram_model.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_marker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_clk_marker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_data_pipe.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_sync_arst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_sync_aset.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_sync_cell.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lwnoc_lp_define_package.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lwnoc_lp_struct_package.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_endpoint.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_nest.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_device_adapter.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_slv_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lp_fsm/lwnoc_lp_stg2_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lp_fsm/lwnoc_lp_stg1_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lp_fsm/lwnoc_lp_niu_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_subhub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_3terminal.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_tiny_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_small_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_large_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_async_bridge.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_func_tniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_func_iniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_dummy_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_stall_logic.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_iniu/lwnoc_lp_pchn_niu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_iniu/lwnoc_lp_iniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/intr_ring_req_zero_source_intr_ring_req_zero_source.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/intr_ring_lnk_interrupt_req_ring_link.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/intr_ring_sta_interrupt_req_ring_station.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/tniu1_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu_pkg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu_mem_reg_bank.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_Regbank_regbank_tniu_internal_intr.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu_generate_reg_bank.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu_event_conflict_check.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu_context.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu_context_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu_event_repeater.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu_event_merge.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu_xbar_internal.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_spram_4096x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_spram_2048x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_spram_1024x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_spram_512x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_spram_256x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_spram_128x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu1_sys/tniu1_sys_interrupt_tniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/intr_tniu_top_interrupt_tniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/intr_tniu_top_interrupt_tniu_pkg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/intr_tniu_top_interrupt_tniu_async_top_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/tniu1.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/tniu0_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu_pkg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu_mem_reg_bank.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_Regbank_regbank_tniu_internal_intr.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu_generate_reg_bank.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu_event_conflict_check.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu_context.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu_context_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu_event_repeater.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu_event_merge.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu_xbar_internal.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_spram_4096x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_spram_2048x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_spram_1024x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_spram_512x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_spram_256x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_spram_128x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/tniu0_sys/tniu0_sys_interrupt_tniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/tniu0.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/intr_ring_req_sink_intr_ring_req_sink.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/iniu3_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/intr_iniu_top_interrupt_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/intr_iniu_top_interrupt_iniu_pkg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/intr_iniu_top_interrupt_iniu_async_top_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_interrupt_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_interrupt_iniu_pkg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_interrupt_iniu_event_recorder.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_interrupt_iniu_lut.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_interrupt_iniu_reg_bank.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_interrupt_iniu_arb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_interrupt_iniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_spram_4096x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_spram_2048x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_spram_1024x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_spram_512x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_spram_256x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_spram_128x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu3_sys/iniu3_sys_interrupt_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/iniu3.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/iniu2_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_interrupt_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_interrupt_iniu_pkg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_interrupt_iniu_event_recorder.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_interrupt_iniu_lut.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_interrupt_iniu_reg_bank.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_interrupt_iniu_arb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_interrupt_iniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_spram_4096x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_spram_2048x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_spram_1024x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_spram_512x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_spram_256x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_spram_128x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu2_sys/iniu2_sys_interrupt_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/iniu2.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/iniu1_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_interrupt_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_interrupt_iniu_pkg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_interrupt_iniu_event_recorder.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_interrupt_iniu_lut.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_interrupt_iniu_reg_bank.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_interrupt_iniu_arb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_interrupt_iniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_spram_4096x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_spram_2048x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_spram_1024x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_spram_512x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_spram_256x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_spram_128x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu1_sys/iniu1_sys_interrupt_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/iniu1.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/iniu0_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_interrupt_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_interrupt_iniu_pkg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_interrupt_iniu_event_recorder.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_interrupt_iniu_lut.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_interrupt_iniu_reg_bank.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_interrupt_iniu_arb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_interrupt_iniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_spram_4096x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_spram_2048x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_spram_1024x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_spram_512x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_spram_256x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_spram_128x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/iniu0_sys/iniu0_sys_interrupt_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/iniu0.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build_logic/intr_ring_noc_4i2t/intr_ring_noc_4i2t.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/ai_testbench/dw02_tree_stub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/tb_intr_ring_noc_4i2t.sv'
+Top Level Modules:
+       tb_intr_ring_noc_4i2t
+TimeScale is 1 ns / 1 ps
+Starting vcs inline pass...
+82 unique modules to generate
+82 modules and 0 UDP read. 
+recompiling package std
+recompiling module fcip_bin2onehot
+recompiling module fcip_lead_one
+recompiling module fcip_onehot2bin
+recompiling module fcip_afifo_mst
+recompiling module fcip_afifo_slv
+recompiling module fcip_arb_vrp
+recompiling module fcip_grant_gen_rr
+recompiling module fcip_reg_slice
+recompiling module fcip_mem_fake_2p_mem
+recompiling module fcip_marker
+recompiling module fcip_clk_marker
+recompiling module fcip_sync_arst
+recompiling module fcip_sync_cell
+recompiling package lwnoc_lp_define_package
+recompiling package lwnoc_lp_struct_package
+recompiling module lwnoc_lp_nest
+recompiling module lwnoc_lp_slv_wrapper
+recompiling module lwnoc_lp_niu_fsm
+recompiling module lwnoc_lp_subhub
+recompiling module lwnoc_lp_hub_3terminal
+recompiling module lwnoc_lp_hub_tiny_wrapper
+recompiling module lwnoc_lp_hub_small_wrapper
+recompiling module lwnoc_lp_hub_wrapper
+recompiling module lwnoc_lp_tniu_async_bridge
+recompiling module lwnoc_lp_tniu_func_tniu
+recompiling module lwnoc_lp_tniu_func_iniu
+recompiling module lwnoc_lp_iniu
+recompiling module intr_ring_req_zero_source_intr_ring_req_zero_source
+recompiling module intr_ring_lnk_interrupt_req_ring_link
+recompiling module tniu1_ring
+recompiling package tniu1_sys_interrupt_tniu_pkg
+recompiling module tniu1_sys_interrupt_tniu_mem_reg_bank
+recompiling module tniu1_sys_Regbank_regbank_tniu_internal_intr
+recompiling module tniu1_sys_interrupt_tniu_generate_reg_bank
+recompiling module tniu1_sys_interrupt_tniu_event_conflict_check
+recompiling module tniu1_sys_interrupt_tniu_context
+recompiling module tniu1_sys_interrupt_tniu_context_entry
+recompiling module tniu1_sys_interrupt_tniu_event_repeater
+recompiling module tniu1_sys_interrupt_tniu_event_merge
+recompiling module tniu1_sys_interrupt_tniu_xbar_internal
+recompiling module tniu1_sys_spram_4096x20
+recompiling package intr_tniu_top_interrupt_tniu_pkg
+recompiling module intr_tniu_top_interrupt_tniu_aync_top_side
+recompiling module tniu1
+recompiling package tniu0_sys_interrupt_tniu_pkg
+recompiling module tniu0_sys_interrupt_tniu_mem_reg_bank
+recompiling module tniu0_sys_interrupt_tniu_generate_reg_bank
+recompiling module tniu0_sys_interrupt_tniu_event_conflict_check
+recompiling module tniu0_sys_interrupt_tniu_context
+50 of 82 modules done
+recompiling module tniu0_sys_interrupt_tniu_context_entry
+recompiling module tniu0_sys_interrupt_tniu_event_repeater
+recompiling module tniu0_sys_interrupt_tniu_event_merge
+recompiling module tniu0_sys_interrupt_tniu_xbar_internal
+recompiling module tniu0
+recompiling module intr_ring_req_sink_intr_ring_req_sink
+recompiling package intr_iniu_top_interrupt_iniu_pkg
+recompiling module intr_iniu_top_interrupt_iniu_aync_top_side
+recompiling package iniu3_sys_interrupt_iniu_pkg
+recompiling module iniu3_sys_interrupt_iniu_event_recorder
+recompiling module iniu3_sys_interrupt_iniu_lut
+recompiling module iniu3_sys_interrupt_iniu_reg_bank
+recompiling module iniu3_sys_interrupt_iniu_arb
+recompiling module iniu3
+recompiling package iniu2_sys_interrupt_iniu_pkg
+recompiling module iniu2_sys_interrupt_iniu_event_recorder
+recompiling module iniu2_sys_interrupt_iniu_lut
+recompiling module iniu2_sys_interrupt_iniu_reg_bank
+recompiling module iniu2_sys_interrupt_iniu_arb
+recompiling module iniu2
+recompiling package iniu1_sys_interrupt_iniu_pkg
+recompiling module iniu1_sys_interrupt_iniu_event_recorder
+recompiling module iniu1_sys_interrupt_iniu_lut
+recompiling module iniu1_sys_interrupt_iniu_reg_bank
+recompiling module iniu1_sys_interrupt_iniu_arb
+recompiling module iniu1
+recompiling package iniu0_sys_interrupt_iniu_pkg
+recompiling module iniu0_sys_interrupt_iniu_event_recorder
+recompiling module iniu0_sys_interrupt_iniu_lut
+recompiling module iniu0_sys_interrupt_iniu_reg_bank
+recompiling module iniu0_sys_interrupt_iniu_arb
+recompiling module tb_intr_ring_noc_4i2t
+All of 82 modules done
+/home/lgzhu/software/vcs2016/bin/vcs: line 2402: dc: command not found
+/home/lgzhu/software/vcs2016/bin/vcs: line 2402: dc: command not found
+make[1]: Entering directory '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/csrc'
+make[1]: Leaving directory '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/csrc'
+/home/lgzhu/software/vcs2016/bin/vcs: line 2402: dc: command not found
+/home/lgzhu/software/vcs2016/bin/vcs: line 2402: dc: command not found
+/home/lgzhu/software/vcs2016/bin/vcs: line 2402: dc: command not found
+make[1]: Entering directory '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/csrc'
+rm -f _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+if [ -x /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/simv ]; then chmod -x /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/simv; fi
+g++-4.8  -o /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/simv   -Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ -Wl,-rpath=./simv.daidir/ -Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir  -L/usr/lib/x86_64-linux-gnu -L/lib/x86_64-linux-gnu -Wl,--no-as-needed -Wl,--no-as-needed -rdynamic   amcQwB.o objs/amcQw_d.o  _97457_archive_1.so  SIM_l.o       rmapats_mop.o rmapats.o rmar.o  rmar_llvm_0_1.o rmar_llvm_0_0.o          /home/lgzhu/software/vcs2016/linux64/lib/libzerosoft_rt_stubs.so /home/lgzhu/software/vcs2016/linux64/lib/libvirsim.so /home/lgzhu/software/vcs2016/linux64/lib/liberrorinf.so /home/lgzhu/software/vcs2016/linux64/lib/libsnpsmalloc.so /home/lgzhu/software/verdi2016/bin/../share/PLI/VCS/linux64/pli.a    /home/lgzhu/software/vcs2016/linux64/lib/libvcsnew.so /home/lgzhu/software/vcs2016/linux64/lib/libsimprofile.so /home/lgzhu/software/vcs2016/linux64/lib/libuclinative.so   -Wl,-whole-archive /home/lgzhu/software/vcs2016/linux64/lib/libvcsucli.so -Wl,-no-whole-archive       _vcs_pli_stub_.o   /home/lgzhu/software/vcs2016/linux64/lib/vcs_save_restore_new.o -ldl -lm  -lc -lpthread -ldl 
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/simv up to date
+make[1]: Leaving directory '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/csrc'
+python3 /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim//check_compile_log.py /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/compile.log
+[TB] Compile done. Log: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/sim/build/compile.log

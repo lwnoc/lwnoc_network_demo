@@ -1,0 +1,1 @@
+$INTR_RING_NOC_DIR/intr_ring_req_zero_source_intr_ring_req_zero_source.sv

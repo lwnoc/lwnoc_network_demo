@@ -1,75 +1,75 @@
-//[UHDL]Content Start [md5:1760e9baef3a313a30ccf0d65c8f2abd]
+//[UHDL]Content Start [md5:20988159a6a329336264b5cd08014418]
 module iniu2 (
-	input           clk_sys_clk                                          ,
-	input           rst_sys_n_rst_n                                      ,
-	input           clk_noc                                              ,
-	input           rst_noc_n                                            ,
-	input           pring_in_if_pring_in_if_cw_in_last                   ,
-	input  [39:0]   pring_in_if_pring_in_if_cw_in_payload                ,
-	input  [3:0]    pring_in_if_pring_in_if_cw_in_qos                    ,
-	output          pring_in_if_pring_in_if_cw_in_ready                  ,
-	input  [7:0]    pring_in_if_pring_in_if_cw_in_srcid                  ,
-	input  [7:0]    pring_in_if_pring_in_if_cw_in_tgtid                  ,
-	input           pring_in_if_pring_in_if_cw_in_valid                  ,
-	output          pring_out_if_pring_out_if_m_last                     ,
-	output [39:0]   pring_out_if_pring_out_if_m_payload                  ,
-	output [3:0]    pring_out_if_pring_out_if_m_qos                      ,
-	input           pring_out_if_pring_out_if_m_ready                    ,
-	output [7:0]    pring_out_if_pring_out_if_m_srcid                    ,
-	output [7:0]    pring_out_if_pring_out_if_m_tgtid                    ,
-	output          pring_out_if_pring_out_if_m_valid                    ,
-	input           nring_in_if_nring_in_if_ccw_in_last                  ,
-	input  [39:0]   nring_in_if_nring_in_if_ccw_in_payload               ,
-	input  [3:0]    nring_in_if_nring_in_if_ccw_in_qos                   ,
-	output          nring_in_if_nring_in_if_ccw_in_ready                 ,
-	input  [7:0]    nring_in_if_nring_in_if_ccw_in_srcid                 ,
-	input  [7:0]    nring_in_if_nring_in_if_ccw_in_tgtid                 ,
-	input           nring_in_if_nring_in_if_ccw_in_valid                 ,
-	output          nring_out_if_nring_out_if_m_last                     ,
-	output [39:0]   nring_out_if_nring_out_if_m_payload                  ,
-	output [3:0]    nring_out_if_nring_out_if_m_qos                      ,
-	input           nring_out_if_nring_out_if_m_ready                    ,
-	output [7:0]    nring_out_if_nring_out_if_m_srcid                    ,
-	output [7:0]    nring_out_if_nring_out_if_m_tgtid                    ,
-	output          nring_out_if_nring_out_if_m_valid                    ,
-	input  [4095:0] iniu2_sys_v_interrupt_porting_v_interrupt            ,
-	input  [7:0]    iniu2_sys_iniu_src_id_porting_iniu_src_id            ,
-	input  [31:0]   iniu2_sys_apb_porting_p_addr                         ,
-	input           iniu2_sys_apb_porting_p_enable                       ,
-	output [31:0]   iniu2_sys_apb_porting_p_rdata                        ,
-	output          iniu2_sys_apb_porting_p_ready                        ,
-	input           iniu2_sys_apb_porting_p_sel                          ,
-	output          iniu2_sys_apb_porting_p_slverr                       ,
-	input  [31:0]   iniu2_sys_apb_porting_p_wdata                        ,
-	input           iniu2_sys_apb_porting_p_write                        ,
-	input  [9:0]    iniu2_sys_timeout_val_porting_timeout_val            ,
-	input  [8:0]           iniu2_sys_lp_hub_porting_lp_hub_rx_req               ,
-	output [8:0]          iniu2_sys_lp_hub_porting_lp_hub_tx_req               ,
-	output          iniu2_ring_local_rx_porting_local_rx_local_rx_last   ,
-	output [39:0]   iniu2_ring_local_rx_porting_local_rx_local_rx_payload,
-	output [3:0]    iniu2_ring_local_rx_porting_local_rx_local_rx_qos    ,
-	input           iniu2_ring_local_rx_porting_local_rx_local_rx_ready  ,
-	output [7:0]    iniu2_ring_local_rx_porting_local_rx_local_rx_srcid  ,
-	output [7:0]    iniu2_ring_local_rx_porting_local_rx_local_rx_tgtid  ,
-	output          iniu2_ring_local_rx_porting_local_rx_local_rx_valid  );
+	input           clk_sys_clk                              ,
+	input           rst_sys_n_rst_n                          ,
+	input           clk_noc                                  ,
+	input           rst_noc_n                                ,
+	input           pring_in_if_pring_in_if_cw_in_last       ,
+	input  [39:0]   pring_in_if_pring_in_if_cw_in_payload    ,
+	input  [3:0]    pring_in_if_pring_in_if_cw_in_qos        ,
+	output          pring_in_if_pring_in_if_cw_in_ready      ,
+	input  [7:0]    pring_in_if_pring_in_if_cw_in_srcid      ,
+	input  [7:0]    pring_in_if_pring_in_if_cw_in_tgtid      ,
+	input           pring_in_if_pring_in_if_cw_in_valid      ,
+	output          pring_out_if_pring_out_if_m_last         ,
+	output [39:0]   pring_out_if_pring_out_if_m_payload      ,
+	output [3:0]    pring_out_if_pring_out_if_m_qos          ,
+	input           pring_out_if_pring_out_if_m_ready        ,
+	output [7:0]    pring_out_if_pring_out_if_m_srcid        ,
+	output [7:0]    pring_out_if_pring_out_if_m_tgtid        ,
+	output          pring_out_if_pring_out_if_m_valid        ,
+	input           nring_in_if_nring_in_if_ccw_in_last      ,
+	input  [39:0]   nring_in_if_nring_in_if_ccw_in_payload   ,
+	input  [3:0]    nring_in_if_nring_in_if_ccw_in_qos       ,
+	output          nring_in_if_nring_in_if_ccw_in_ready     ,
+	input  [7:0]    nring_in_if_nring_in_if_ccw_in_srcid     ,
+	input  [7:0]    nring_in_if_nring_in_if_ccw_in_tgtid     ,
+	input           nring_in_if_nring_in_if_ccw_in_valid     ,
+	output          nring_out_if_nring_out_if_m_last         ,
+	output [39:0]   nring_out_if_nring_out_if_m_payload      ,
+	output [3:0]    nring_out_if_nring_out_if_m_qos          ,
+	input           nring_out_if_nring_out_if_m_ready        ,
+	output [7:0]    nring_out_if_nring_out_if_m_srcid        ,
+	output [7:0]    nring_out_if_nring_out_if_m_tgtid        ,
+	output          nring_out_if_nring_out_if_m_valid        ,
+	input  [4095:0] iniu2_sys_v_interrupt_porting_v_interrupt,
+	input  [7:0]    iniu2_sys_iniu_src_id_porting_iniu_src_id,
+	input  [31:0]   iniu2_sys_apb_porting_p_addr             ,
+	input           iniu2_sys_apb_porting_p_enable           ,
+	output [31:0]   iniu2_sys_apb_porting_p_rdata            ,
+	output          iniu2_sys_apb_porting_p_ready            ,
+	input           iniu2_sys_apb_porting_p_sel              ,
+	output          iniu2_sys_apb_porting_p_slverr           ,
+	input  [31:0]   iniu2_sys_apb_porting_p_wdata            ,
+	input           iniu2_sys_apb_porting_p_write            ,
+	input  [9:0]    iniu2_sys_timeout_val_porting_timeout_val,
+	input  [12:0]   iniu2_sys_lp_hub_porting_lp_hub_rx_req   ,
+	output [12:0]   iniu2_sys_lp_hub_porting_lp_hub_tx_req   );
 
 	//Wire define for this module.
 
 	//Wire define for sub module.
-	wire [15:0] iniu_top_TO_iniu_sys_SIG_rptr_async               ;
-	wire [15:0] iniu_top_TO_iniu_sys_SIG_rptr_sync                ;
-	wire [8:0] iniu_top_TO_iniu_sys_SIG_m_async_master_hub_rx_req  ;
-	wire [15:0] iniu_sys_TO_iniu_top_SIG_wptr_async               ;
-	wire [61:0] iniu_sys_TO_iniu_top_SIG_pld_sync                 ;
-	wire [8:0] iniu_sys_TO_iniu_top_SIG_s_async_master_hub_tx_req  ;
+	wire [15:0] iniu_top_TO_iniu_sys_SIG_rptr_async                 ;
+	wire [15:0] iniu_top_TO_iniu_sys_SIG_rptr_sync                  ;
+	wire [15:0] iniu_sys_TO_iniu_top_SIG_wptr_async                 ;
+	wire [61:0] iniu_sys_TO_iniu_top_SIG_pld_sync                   ;
+	wire        ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready   ;
+	wire        iniu_top_TO_ring_wrap_SIG_req_last                  ;
+	wire [39:0] iniu_top_TO_ring_wrap_SIG_req_payload               ;
+	wire [3:0]  iniu_top_TO_ring_wrap_SIG_req_qos                   ;
+	wire [7:0]  iniu_top_TO_ring_wrap_SIG_req_srcid                 ;
+	wire [7:0]  iniu_top_TO_ring_wrap_SIG_req_tgtid                 ;
+	wire        iniu_top_TO_ring_wrap_SIG_req_valid                 ;
+	wire        ring_sink_TO_ring_wrap_SIG_local_rx_ready           ;
+	wire        ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_valid  ;
+	wire [39:0] ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_payload;
+	wire [7:0]  ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_srcid  ;
+	wire [7:0]  ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_tgtid  ;
+	wire [3:0]  ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_qos    ;
+	wire        ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_last   ;
 
-	wire        iniu_top_TO_ring_wrap_SIG_req_valid     ;
-	wire [39:0] iniu_top_TO_ring_wrap_SIG_req_payload   ;
-	wire [7:0]  iniu_top_TO_ring_wrap_SIG_req_srcid     ;
-	wire [7:0]  iniu_top_TO_ring_wrap_SIG_req_tgtid     ;
-	wire [3:0]  iniu_top_TO_ring_wrap_SIG_req_qos       ;
-	wire        iniu_top_TO_ring_wrap_SIG_req_last      ;
-	wire        ring_wrap_TO_iniu_top_SIG_req_ready     ;
+	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t iniu_top_TO_iniu_sys_SIG_m_async_master_hub_rx_req;
+	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t iniu_sys_TO_iniu_top_SIG_s_async_master_hub_tx_req;
 
 	//Wire define for Inout.
 
@@ -78,7 +78,9 @@ module iniu2 (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	intr_iniu_sys_interrupt_iniu_aync_sys_side #(
+	iniu2_sys_interrupt_iniu_aync_sys_side #(
+		.INTERRUPT_NUM(32'd4096),
+		.TIME_OUT_WIDTH(32'd10),
 		.ASYNC_FIFO_DEPTH(32'd16))
 	iniu_sys (
 		.clk(clk_sys_clk),
@@ -114,7 +116,7 @@ module iniu2 (
 		.m_async_master_hub_rx_req(iniu_top_TO_iniu_sys_SIG_m_async_master_hub_rx_req),
 		.m_async_master_hub_tx_req(iniu_sys_TO_iniu_top_SIG_s_async_master_hub_tx_req),
 		.req_valid(iniu_top_TO_ring_wrap_SIG_req_valid),
-		.req_ready(ring_wrap_TO_iniu_top_SIG_req_ready),
+		.req_ready(ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),
 		.req_payload(iniu_top_TO_ring_wrap_SIG_req_payload),
 		.req_srcid(iniu_top_TO_ring_wrap_SIG_req_srcid),
 		.req_tgtid(iniu_top_TO_ring_wrap_SIG_req_tgtid),
@@ -155,18 +157,26 @@ module iniu2 (
 		.local_tx_local_tx_last(iniu_top_TO_ring_wrap_SIG_req_last),
 		.local_tx_local_tx_payload(iniu_top_TO_ring_wrap_SIG_req_payload),
 		.local_tx_local_tx_qos(iniu_top_TO_ring_wrap_SIG_req_qos),
-		.local_tx_local_tx_ready(ring_wrap_TO_iniu_top_SIG_req_ready),
+		.local_tx_local_tx_ready(ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),
 		.local_tx_local_tx_srcid(iniu_top_TO_ring_wrap_SIG_req_srcid),
 		.local_tx_local_tx_tgtid(iniu_top_TO_ring_wrap_SIG_req_tgtid),
 		.local_tx_local_tx_valid(iniu_top_TO_ring_wrap_SIG_req_valid),
-		.local_rx_local_rx_last(iniu2_ring_local_rx_porting_local_rx_local_rx_last),
-		.local_rx_local_rx_payload(iniu2_ring_local_rx_porting_local_rx_local_rx_payload),
-		.local_rx_local_rx_qos(iniu2_ring_local_rx_porting_local_rx_local_rx_qos),
-		.local_rx_local_rx_ready(iniu2_ring_local_rx_porting_local_rx_local_rx_ready),
-		.local_rx_local_rx_srcid(iniu2_ring_local_rx_porting_local_rx_local_rx_srcid),
-		.local_rx_local_rx_tgtid(iniu2_ring_local_rx_porting_local_rx_local_rx_tgtid),
-		.local_rx_local_rx_valid(iniu2_ring_local_rx_porting_local_rx_local_rx_valid));
+		.local_rx_local_rx_last(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_last),
+		.local_rx_local_rx_payload(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_payload),
+		.local_rx_local_rx_qos(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_qos),
+		.local_rx_local_rx_ready(ring_sink_TO_ring_wrap_SIG_local_rx_ready),
+		.local_rx_local_rx_srcid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_srcid),
+		.local_rx_local_rx_tgtid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_tgtid),
+		.local_rx_local_rx_valid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_valid));
+	intr_ring_req_sink_intr_ring_req_sink ring_sink (
+		.local_rx_valid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_valid),
+		.local_rx_ready(ring_sink_TO_ring_wrap_SIG_local_rx_ready),
+		.local_rx_payload(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_payload),
+		.local_rx_srcid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_srcid),
+		.local_rx_tgtid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_tgtid),
+		.local_rx_qos(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_qos),
+		.local_rx_last(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_last));
 
 endmodule
-//[UHDL]Content End [md5:1760e9baef3a313a30ccf0d65c8f2abd]
+//[UHDL]Content End [md5:20988159a6a329336264b5cd08014418]
 

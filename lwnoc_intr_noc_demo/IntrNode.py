@@ -44,12 +44,12 @@ from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
 from topo_core.utils.networkHierOpt import connect
 
 from IntrTemplate import (
-    intr_iniu_sys_config,
     intr_iniu_top_config,
-    intr_tniu_sys_config,
     intr_tniu_top_config,
     intr_ring_sta_config,
     intr_ring_lnk_config,
+    intr_ring_req_sink_config,
+    intr_ring_req_zero_source_config,
 )
 
 
@@ -62,7 +62,7 @@ class IntrIniuSysNode(UhdlComponentNode):
 
     INIU_ASYNC_FIFO_DEPTH = 16  # align to interrupt_noc_top_wrap.sv INIU_FIFO_DEPTH
 
-    def __init__(self, id: str, cfg=intr_iniu_sys_config):
+    def __init__(self, id: str, cfg):
         comp = TemplateComponent(config=cfg, top="interrupt_iniu_aync_sys_side",
                                 ASYNC_FIFO_DEPTH=IntrIniuSysNode.INIU_ASYNC_FIFO_DEPTH)
         super().__init__(id=id, impl=comp)
@@ -93,8 +93,8 @@ class IntrIniuTopNode(UhdlComponentNode):
         self.add_interface("async_fifo", r".*wptr_async|.*rptr_async|.*rptr_sync|.*pld_sync")
         # m_async_master_hub_rx_req + m_async_master_hub_tx_req (cross-domain LP)
         self.add_interface("lp_async",   r"m_async_master_hub")
-        # req_valid/ready/payload/srcid/tgtid/qos/last/threshold → ring output
-        self.add_interface("ring_req",   r"req_.*")
+        # Ring station payload excludes the unused req_threshold sideband.
+        self.add_interface("ring_req",   r"^req_(valid|ready|payload|srcid|tgtid|qos|last)$")
 
 
 class IntrTniuSysNode(UhdlComponentNode):
@@ -102,7 +102,7 @@ class IntrTniuSysNode(UhdlComponentNode):
 
     TNIU_ASYNC_FIFO_DEPTH = 10  # align to interrupt_noc_top_wrap.sv TNIU_FIFO_DEPTH
 
-    def __init__(self, id: str, cfg=intr_tniu_sys_config):
+    def __init__(self, id: str, cfg):
         comp = TemplateComponent(config=cfg, top="interrupt_tniu_aync_sys_side",
                                 ASYNC_FIFO_DEPTH=IntrTniuSysNode.TNIU_ASYNC_FIFO_DEPTH)
         super().__init__(id=id, impl=comp)
@@ -139,8 +139,8 @@ class IntrTniuTopNode(UhdlComponentNode):
         self.add_interface("lp_niu_hub", r"s_niu_lp_hub")
         # s_async_master_hub_rx_req + s_async_master_hub_tx_req (cross-domain LP)
         self.add_interface("lp_async",   r"s_async_master_hub")
-        # ring request input: req_valid/ready/payload/srcid/tgtid/qos/last/threshold
-        self.add_interface("ring_req",   r"req_.*")
+        # Ring station payload excludes the unused req_threshold sideband.
+        self.add_interface("ring_req",   r"^req_(valid|ready|payload|srcid|tgtid|qos|last)$")
 
 
 class IntrRingStationNode(UhdlComponentNode):
@@ -170,6 +170,29 @@ class IntrRingLinkNode(UhdlComponentNode):
         self.add_interface("rst_n", "rst_n")
         self.add_interface("s_req", r"^s_.*")
         self.add_interface("m_req", r"^m_.*")
+
+
+class IntrRingReqSinkNode(UhdlComponentNode):
+    """Consumes an unused local_rx ring ejection path inside an INIU wrapper."""
+
+    def __init__(self, id: str):
+        comp = TemplateComponent(config=intr_ring_req_sink_config, top="intr_ring_req_sink")
+        super().__init__(id=id, impl=comp)
+
+        self.add_interface("local_rx", r"^local_rx.*")
+
+
+class IntrRingReqZeroSourceNode(UhdlComponentNode):
+    """Drives a constant-idle local_tx ring injection path inside a TNIU wrapper."""
+
+    def __init__(self, id: str):
+        comp = TemplateComponent(
+            config=intr_ring_req_zero_source_config,
+            top="intr_ring_req_zero_source",
+        )
+        super().__init__(id=id, impl=comp)
+
+        self.add_interface("local_tx", r"^local_tx.*")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -243,7 +266,7 @@ class IntrIniuNode(UhdlWrapperNode):
       v_interrupt / iniu_src_id / apb / timeout_val / lp_hub   — sys-side user ports
     """
 
-    def __init__(self, id: str, sys_cfg=intr_iniu_sys_config):
+    def __init__(self, id: str, sys_cfg):
         super().__init__(id=id)
 
         # Explicit external interfaces
@@ -260,6 +283,7 @@ class IntrIniuNode(UhdlWrapperNode):
         self.iniu_sys  = IntrIniuSysNode(id=f"{id}_sys", cfg=sys_cfg)
         self.iniu_top  = IntrIniuTopNode(id=f"{id}_top")
         self.ring_wrap = IntrRingNodeWrap(id=f"{id}_ring")
+        self.ring_sink = IntrRingReqSinkNode(id=f"{id}_ring_sink")
 
         # Clock / reset mapping
         connect(self.iniu_sys.clk,   self.clk_sys)
@@ -275,6 +299,9 @@ class IntrIniuNode(UhdlWrapperNode):
 
         # INIU top → ring inject
         connect(self.iniu_top.ring_req, self.ring_wrap.local_tx)
+
+        # INIU never consumes the ring eject path; terminate it internally.
+        connect(self.ring_wrap.local_rx, self.ring_sink.local_rx)
 
         # Ring interface passthrough to parent
         connect(self.ring_wrap.pring_in_if,  self.pring_in_if)
@@ -298,7 +325,7 @@ class IntrTniuNode(UhdlWrapperNode):
       lp_hub   — NOC-domain hub LP (from tniu_top)
     """
 
-    def __init__(self, id: str, sys_cfg=intr_tniu_sys_config):
+    def __init__(self, id: str, sys_cfg):
         super().__init__(id=id)
 
         # Explicit external interfaces
@@ -315,6 +342,7 @@ class IntrTniuNode(UhdlWrapperNode):
         self.tniu_top  = IntrTniuTopNode(id=f"{id}_top")
         self.tniu_sys  = IntrTniuSysNode(id=f"{id}_sys", cfg=sys_cfg)
         self.ring_wrap = IntrRingNodeWrap(id=f"{id}_ring")
+        self.ring_source = IntrRingReqZeroSourceNode(id=f"{id}_ring_source")
 
         # Clock / reset mapping
         connect(self.tniu_sys.clk,   self.clk_sys)
@@ -331,6 +359,9 @@ class IntrTniuNode(UhdlWrapperNode):
 
         # Ring eject → TNIU top
         connect(self.ring_wrap.local_rx, self.tniu_top.ring_req)
+
+        # TNIU never injects into the ring; drive the path idle internally.
+        connect(self.ring_source.local_tx, self.ring_wrap.local_tx)
 
         # Ring interface passthrough to parent
         connect(self.ring_wrap.pring_in_if,  self.pring_in_if)

@@ -19,29 +19,33 @@ from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
 from topo_core.utils.networkHierOpt import connect
 
 from IntrNode import IntrIniuNode, IntrTniuNode
-from IntrTemplate import intr_iniu_sys_config, intr_tniu_sys_config
+from IntrTemplate import (
+    iniu0_sys_config, iniu1_sys_config, iniu2_sys_config, iniu3_sys_config,
+    tniu0_sys_config, tniu1_sys_config,
+)
 
 
 class IntrRingLogicTopo(UhdlWrapperNode):
     """
     4-INIU + 2-TNIU interrupt ring NoC topology.
 
-    All INIU and TNIU nodes share the same sys-side config (identical RTL).
+    Each INIU and TNIU has its own sys-side config (separate build_logic dir).
+    Top-side configs are shared — top-side changes do not trigger sys regeneration.
     Ring order: iniu0, iniu1, iniu2, iniu3, tniu0, tniu1.
     """
 
     def __init__(self):
         super().__init__(id="intr_ring_noc_4i2t")
 
-        # ── Create 4 INIU nodes ──────────────────────────────────────────────
-        self.iniu0 = IntrIniuNode(id="iniu0", sys_cfg=intr_iniu_sys_config)
-        self.iniu1 = IntrIniuNode(id="iniu1", sys_cfg=intr_iniu_sys_config)
-        self.iniu2 = IntrIniuNode(id="iniu2", sys_cfg=intr_iniu_sys_config)
-        self.iniu3 = IntrIniuNode(id="iniu3", sys_cfg=intr_iniu_sys_config)
+        # ── Create 4 INIU nodes (each with its own sys-side config) ─────────
+        self.iniu0 = IntrIniuNode(id="iniu0", sys_cfg=iniu0_sys_config)
+        self.iniu1 = IntrIniuNode(id="iniu1", sys_cfg=iniu1_sys_config)
+        self.iniu2 = IntrIniuNode(id="iniu2", sys_cfg=iniu2_sys_config)
+        self.iniu3 = IntrIniuNode(id="iniu3", sys_cfg=iniu3_sys_config)
 
-        # ── Create 2 TNIU nodes ──────────────────────────────────────────────
-        self.tniu0 = IntrTniuNode(id="tniu0", sys_cfg=intr_tniu_sys_config)
-        self.tniu1 = IntrTniuNode(id="tniu1", sys_cfg=intr_tniu_sys_config)
+        # ── Create 2 TNIU nodes (each with its own sys-side config) ─────────
+        self.tniu0 = IntrTniuNode(id="tniu0", sys_cfg=tniu0_sys_config)
+        self.tniu1 = IntrTniuNode(id="tniu1", sys_cfg=tniu1_sys_config)
 
         # Ring order list (CW sequence)
         nodes = [self.iniu0, self.iniu1, self.iniu2, self.iniu3,

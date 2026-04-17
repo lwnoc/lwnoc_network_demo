@@ -70,6 +70,7 @@ module tb_intr_ring_noc_4i2t;
     // -------------------------------------------------------------------------
     integer fail_count = 0;
     integer pass_count = 0;
+    string testcase;
 
     // =========================================================================
     // INIU driver signals (one per node)
@@ -84,8 +85,7 @@ module tb_intr_ring_noc_4i2t;
     logic          iniu0_iniu0_sys_apb_porting_iniu0_sys_apb_porting_p_write   = 1'b0;
     logic          iniu0_iniu0_sys_apb_porting_iniu0_sys_apb_porting_p_sel     = 1'b0;
     logic [9:0]    iniu0_iniu0_sys_timeout_val_porting_iniu0_sys_timeout_val_porting_timeout_val = 10'd16;
-    logic  [8:0]   iniu0_iniu0_sys_lp_hub_porting_iniu0_sys_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_iniu0
-    logic          iniu0_iniu0_ring_local_rx_porting_iniu0_ring_local_rx_porting_local_rx_local_rx_ready = 1'b1;
+    logic  [12:0]  iniu0_iniu0_sys_lp_hub_porting_iniu0_sys_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_iniu0
 
     // --- INIU1 ---
     logic [4095:0] iniu1_iniu1_sys_v_interrupt_porting_iniu1_sys_v_interrupt_porting_v_interrupt = '0;
@@ -96,8 +96,7 @@ module tb_intr_ring_noc_4i2t;
     logic          iniu1_iniu1_sys_apb_porting_iniu1_sys_apb_porting_p_write   = 1'b0;
     logic          iniu1_iniu1_sys_apb_porting_iniu1_sys_apb_porting_p_sel     = 1'b0;
     logic [9:0]    iniu1_iniu1_sys_timeout_val_porting_iniu1_sys_timeout_val_porting_timeout_val = 10'd16;
-    logic  [8:0]   iniu1_iniu1_sys_lp_hub_porting_iniu1_sys_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_iniu1
-    logic          iniu1_iniu1_ring_local_rx_porting_iniu1_ring_local_rx_porting_local_rx_local_rx_ready = 1'b1;
+    logic  [12:0]  iniu1_iniu1_sys_lp_hub_porting_iniu1_sys_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_iniu1
 
     // --- INIU2 ---
     logic [4095:0] iniu2_iniu2_sys_v_interrupt_porting_iniu2_sys_v_interrupt_porting_v_interrupt = '0;
@@ -108,8 +107,7 @@ module tb_intr_ring_noc_4i2t;
     logic          iniu2_iniu2_sys_apb_porting_iniu2_sys_apb_porting_p_write   = 1'b0;
     logic          iniu2_iniu2_sys_apb_porting_iniu2_sys_apb_porting_p_sel     = 1'b0;
     logic [9:0]    iniu2_iniu2_sys_timeout_val_porting_iniu2_sys_timeout_val_porting_timeout_val = 10'd16;
-    logic  [8:0]   iniu2_iniu2_sys_lp_hub_porting_iniu2_sys_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_iniu2
-    logic          iniu2_iniu2_ring_local_rx_porting_iniu2_ring_local_rx_porting_local_rx_local_rx_ready = 1'b1;
+    logic  [12:0]  iniu2_iniu2_sys_lp_hub_porting_iniu2_sys_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_iniu2
 
     // --- INIU3 ---
     logic [4095:0] iniu3_iniu3_sys_v_interrupt_porting_iniu3_sys_v_interrupt_porting_v_interrupt = '0;
@@ -120,8 +118,7 @@ module tb_intr_ring_noc_4i2t;
     logic          iniu3_iniu3_sys_apb_porting_iniu3_sys_apb_porting_p_write   = 1'b0;
     logic          iniu3_iniu3_sys_apb_porting_iniu3_sys_apb_porting_p_sel     = 1'b0;
     logic [9:0]    iniu3_iniu3_sys_timeout_val_porting_iniu3_sys_timeout_val_porting_timeout_val = 10'd16;
-    logic  [8:0]   iniu3_iniu3_sys_lp_hub_porting_iniu3_sys_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_iniu3
-    logic          iniu3_iniu3_ring_local_rx_porting_iniu3_ring_local_rx_porting_local_rx_local_rx_ready = 1'b1;
+    logic  [12:0]  iniu3_iniu3_sys_lp_hub_porting_iniu3_sys_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_iniu3
 
     // =========================================================================
     // TNIU driver signals (one per node)
@@ -129,7 +126,7 @@ module tb_intr_ring_noc_4i2t;
 
     // --- TNIU0 ---
     logic [9:0]  tniu0_tniu0_top_timeout_val_porting_tniu0_top_timeout_val_porting_timeout_val = 10'd16;
-    logic [8:0]  tniu0_tniu0_top_lp_hub_porting_tniu0_top_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_tniu0
+    logic [12:0] tniu0_tniu0_top_lp_hub_porting_tniu0_top_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_tniu0
     logic [7:0]  tniu0_tniu0_sys_tniu_tgt_id_porting_tniu0_sys_tniu_tgt_id_porting_tniu_tgt_id = TNIU0_SYS_ID;
     logic [31:0] tniu0_tniu0_sys_apb_porting_tniu0_sys_apb_porting_p_addr   = '0;
     logic        tniu0_tniu0_sys_apb_porting_tniu0_sys_apb_porting_p_enable  = 1'b0;
@@ -137,17 +134,10 @@ module tb_intr_ring_noc_4i2t;
     logic        tniu0_tniu0_sys_apb_porting_tniu0_sys_apb_porting_p_write   = 1'b0;
     logic        tniu0_tniu0_sys_apb_porting_tniu0_sys_apb_porting_p_sel     = 1'b0;
     logic [9:0]  tniu0_tniu0_sys_timeout_val_porting_tniu0_sys_timeout_val_porting_timeout_val = 10'd16;
-    // TNIU0 ring local_tx: drive 0 (TNIU only receives from ring, never injects)
-    logic        tniu0_tniu0_ring_local_tx_porting_tniu0_ring_local_tx_porting_local_tx_local_tx_valid   = 1'b0;
-    logic [39:0] tniu0_tniu0_ring_local_tx_porting_tniu0_ring_local_tx_porting_local_tx_local_tx_payload = '0;
-    logic [7:0]  tniu0_tniu0_ring_local_tx_porting_tniu0_ring_local_tx_porting_local_tx_local_tx_srcid   = '0;
-    logic [7:0]  tniu0_tniu0_ring_local_tx_porting_tniu0_ring_local_tx_porting_local_tx_local_tx_tgtid   = '0;
-    logic [3:0]  tniu0_tniu0_ring_local_tx_porting_tniu0_ring_local_tx_porting_local_tx_local_tx_qos     = '0;
-    logic        tniu0_tniu0_ring_local_tx_porting_tniu0_ring_local_tx_porting_local_tx_local_tx_last    = 1'b0;
 
     // --- TNIU1 ---
     logic [9:0]  tniu1_tniu1_top_timeout_val_porting_tniu1_top_timeout_val_porting_timeout_val = 10'd16;
-    logic [8:0]  tniu1_tniu1_top_lp_hub_porting_tniu1_top_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_tniu1
+    logic [12:0] tniu1_tniu1_top_lp_hub_porting_tniu1_top_lp_hub_porting_lp_hub_rx_req; // driven by u_lp_ctrl_tniu1
     logic [7:0]  tniu1_tniu1_sys_tniu_tgt_id_porting_tniu1_sys_tniu_tgt_id_porting_tniu_tgt_id = TNIU1_SYS_ID;
     logic [31:0] tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_addr   = '0;
     logic        tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_enable  = 1'b0;
@@ -155,12 +145,6 @@ module tb_intr_ring_noc_4i2t;
     logic        tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_write   = 1'b0;
     logic        tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_sel     = 1'b0;
     logic [9:0]  tniu1_tniu1_sys_timeout_val_porting_tniu1_sys_timeout_val_porting_timeout_val = 10'd16;
-    logic        tniu1_tniu1_ring_local_tx_porting_tniu1_ring_local_tx_porting_local_tx_local_tx_valid   = 1'b0;
-    logic [39:0] tniu1_tniu1_ring_local_tx_porting_tniu1_ring_local_tx_porting_local_tx_local_tx_payload = '0;
-    logic [7:0]  tniu1_tniu1_ring_local_tx_porting_tniu1_ring_local_tx_porting_local_tx_local_tx_srcid   = '0;
-    logic [7:0]  tniu1_tniu1_ring_local_tx_porting_tniu1_ring_local_tx_porting_local_tx_local_tx_tgtid   = '0;
-    logic [3:0]  tniu1_tniu1_ring_local_tx_porting_tniu1_ring_local_tx_porting_local_tx_local_tx_qos     = '0;
-    logic        tniu1_tniu1_ring_local_tx_porting_tniu1_ring_local_tx_porting_local_tx_local_tx_last    = 1'b0;
 
     // =========================================================================
     // DUT output signals (declared so .* works; TB reads / monitors these)
@@ -170,49 +154,25 @@ module tb_intr_ring_noc_4i2t;
     logic [31:0] iniu0_iniu0_sys_apb_porting_iniu0_sys_apb_porting_p_rdata;
     logic        iniu0_iniu0_sys_apb_porting_iniu0_sys_apb_porting_p_ready;
     logic        iniu0_iniu0_sys_apb_porting_iniu0_sys_apb_porting_p_slverr;
-    logic [8:0]  iniu0_iniu0_sys_lp_hub_porting_iniu0_sys_lp_hub_porting_lp_hub_tx_req;
-    logic        iniu0_iniu0_ring_local_rx_porting_iniu0_ring_local_rx_porting_local_rx_local_rx_valid;
-    logic [39:0] iniu0_iniu0_ring_local_rx_porting_iniu0_ring_local_rx_porting_local_rx_local_rx_payload;
-    logic [7:0]  iniu0_iniu0_ring_local_rx_porting_iniu0_ring_local_rx_porting_local_rx_local_rx_srcid;
-    logic [7:0]  iniu0_iniu0_ring_local_rx_porting_iniu0_ring_local_rx_porting_local_rx_local_rx_tgtid;
-    logic [3:0]  iniu0_iniu0_ring_local_rx_porting_iniu0_ring_local_rx_porting_local_rx_local_rx_qos;
-    logic        iniu0_iniu0_ring_local_rx_porting_iniu0_ring_local_rx_porting_local_rx_local_rx_last;
+    logic [12:0] iniu0_iniu0_sys_lp_hub_porting_iniu0_sys_lp_hub_porting_lp_hub_tx_req;
 
     // INIU1 APB outputs
     logic [31:0] iniu1_iniu1_sys_apb_porting_iniu1_sys_apb_porting_p_rdata;
     logic        iniu1_iniu1_sys_apb_porting_iniu1_sys_apb_porting_p_ready;
     logic        iniu1_iniu1_sys_apb_porting_iniu1_sys_apb_porting_p_slverr;
-    logic [8:0]  iniu1_iniu1_sys_lp_hub_porting_iniu1_sys_lp_hub_porting_lp_hub_tx_req;
-    logic        iniu1_iniu1_ring_local_rx_porting_iniu1_ring_local_rx_porting_local_rx_local_rx_valid;
-    logic [39:0] iniu1_iniu1_ring_local_rx_porting_iniu1_ring_local_rx_porting_local_rx_local_rx_payload;
-    logic [7:0]  iniu1_iniu1_ring_local_rx_porting_iniu1_ring_local_rx_porting_local_rx_local_rx_srcid;
-    logic [7:0]  iniu1_iniu1_ring_local_rx_porting_iniu1_ring_local_rx_porting_local_rx_local_rx_tgtid;
-    logic [3:0]  iniu1_iniu1_ring_local_rx_porting_iniu1_ring_local_rx_porting_local_rx_local_rx_qos;
-    logic        iniu1_iniu1_ring_local_rx_porting_iniu1_ring_local_rx_porting_local_rx_local_rx_last;
+    logic [12:0] iniu1_iniu1_sys_lp_hub_porting_iniu1_sys_lp_hub_porting_lp_hub_tx_req;
 
     // INIU2 APB outputs
     logic [31:0] iniu2_iniu2_sys_apb_porting_iniu2_sys_apb_porting_p_rdata;
     logic        iniu2_iniu2_sys_apb_porting_iniu2_sys_apb_porting_p_ready;
     logic        iniu2_iniu2_sys_apb_porting_iniu2_sys_apb_porting_p_slverr;
-    logic [8:0]  iniu2_iniu2_sys_lp_hub_porting_iniu2_sys_lp_hub_porting_lp_hub_tx_req;
-    logic        iniu2_iniu2_ring_local_rx_porting_iniu2_ring_local_rx_porting_local_rx_local_rx_valid;
-    logic [39:0] iniu2_iniu2_ring_local_rx_porting_iniu2_ring_local_rx_porting_local_rx_local_rx_payload;
-    logic [7:0]  iniu2_iniu2_ring_local_rx_porting_iniu2_ring_local_rx_porting_local_rx_local_rx_srcid;
-    logic [7:0]  iniu2_iniu2_ring_local_rx_porting_iniu2_ring_local_rx_porting_local_rx_local_rx_tgtid;
-    logic [3:0]  iniu2_iniu2_ring_local_rx_porting_iniu2_ring_local_rx_porting_local_rx_local_rx_qos;
-    logic        iniu2_iniu2_ring_local_rx_porting_iniu2_ring_local_rx_porting_local_rx_local_rx_last;
+    logic [12:0] iniu2_iniu2_sys_lp_hub_porting_iniu2_sys_lp_hub_porting_lp_hub_tx_req;
 
     // INIU3 APB outputs
     logic [31:0] iniu3_iniu3_sys_apb_porting_iniu3_sys_apb_porting_p_rdata;
     logic        iniu3_iniu3_sys_apb_porting_iniu3_sys_apb_porting_p_ready;
     logic        iniu3_iniu3_sys_apb_porting_iniu3_sys_apb_porting_p_slverr;
-    logic [8:0]  iniu3_iniu3_sys_lp_hub_porting_iniu3_sys_lp_hub_porting_lp_hub_tx_req;
-    logic        iniu3_iniu3_ring_local_rx_porting_iniu3_ring_local_rx_porting_local_rx_local_rx_valid;
-    logic [39:0] iniu3_iniu3_ring_local_rx_porting_iniu3_ring_local_rx_porting_local_rx_local_rx_payload;
-    logic [7:0]  iniu3_iniu3_ring_local_rx_porting_iniu3_ring_local_rx_porting_local_rx_local_rx_srcid;
-    logic [7:0]  iniu3_iniu3_ring_local_rx_porting_iniu3_ring_local_rx_porting_local_rx_local_rx_tgtid;
-    logic [3:0]  iniu3_iniu3_ring_local_rx_porting_iniu3_ring_local_rx_porting_local_rx_local_rx_qos;
-    logic        iniu3_iniu3_ring_local_rx_porting_iniu3_ring_local_rx_porting_local_rx_local_rx_last;
+    logic [12:0] iniu3_iniu3_sys_lp_hub_porting_iniu3_sys_lp_hub_porting_lp_hub_tx_req;
 
     // TNIU0 monitored outputs
     logic [4095:0] tniu0_tniu0_sys_v_interrupt_porting_tniu0_sys_v_interrupt_porting_v_interrupt;
@@ -220,8 +180,7 @@ module tb_intr_ring_noc_4i2t;
     logic [31:0]   tniu0_tniu0_sys_apb_porting_tniu0_sys_apb_porting_p_rdata;
     logic          tniu0_tniu0_sys_apb_porting_tniu0_sys_apb_porting_p_ready;
     logic          tniu0_tniu0_sys_apb_porting_tniu0_sys_apb_porting_p_slverr;
-    logic [8:0]    tniu0_tniu0_top_lp_hub_porting_tniu0_top_lp_hub_porting_lp_hub_tx_req;
-    logic          tniu0_tniu0_ring_local_tx_porting_tniu0_ring_local_tx_porting_local_tx_local_tx_ready;
+    logic [12:0]   tniu0_tniu0_top_lp_hub_porting_tniu0_top_lp_hub_porting_lp_hub_tx_req;
 
     // TNIU1 monitored outputs
     logic [4095:0] tniu1_tniu1_sys_v_interrupt_porting_tniu1_sys_v_interrupt_porting_v_interrupt;
@@ -229,8 +188,7 @@ module tb_intr_ring_noc_4i2t;
     logic [31:0]   tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_rdata;
     logic          tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_ready;
     logic          tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_slverr;
-    logic [8:0]    tniu1_tniu1_top_lp_hub_porting_tniu1_top_lp_hub_porting_lp_hub_tx_req;
-    logic          tniu1_tniu1_ring_local_tx_porting_tniu1_ring_local_tx_porting_local_tx_local_tx_ready;
+    logic [12:0]   tniu1_tniu1_top_lp_hub_porting_tniu1_top_lp_hub_porting_lp_hub_tx_req;
 
     // =========================================================================
     // DUT instantiation (all ports connected via wildcard .*)
@@ -403,6 +361,39 @@ module tb_intr_ring_noc_4i2t;
         // just wait for resets to deassert + LP handshake to stabilise
         wait (rstn_sys === 1'b1 && rstn_noc === 1'b1);
         wait_sys(100);  // allow LP stall_ptr to clear via lwnoc_lp_iniu handshake
+    endtask
+
+    task automatic check_no_x_after_reset(input string tag);
+        begin
+            if ($isunknown({
+                iniu0_iniu0_sys_apb_porting_iniu0_sys_apb_porting_p_ready,
+                iniu0_iniu0_sys_apb_porting_iniu0_sys_apb_porting_p_slverr,
+                iniu1_iniu1_sys_apb_porting_iniu1_sys_apb_porting_p_ready,
+                iniu1_iniu1_sys_apb_porting_iniu1_sys_apb_porting_p_slverr,
+                iniu2_iniu2_sys_apb_porting_iniu2_sys_apb_porting_p_ready,
+                iniu2_iniu2_sys_apb_porting_iniu2_sys_apb_porting_p_slverr,
+                iniu3_iniu3_sys_apb_porting_iniu3_sys_apb_porting_p_ready,
+                iniu3_iniu3_sys_apb_porting_iniu3_sys_apb_porting_p_slverr,
+                tniu0_tniu0_sys_apb_porting_tniu0_sys_apb_porting_p_ready,
+                tniu0_tniu0_sys_apb_porting_tniu0_sys_apb_porting_p_slverr,
+                tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_ready,
+                tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_slverr
+            })) begin
+                if ($isunknown(iniu0_iniu0_sys_apb_porting_iniu0_sys_apb_porting_p_ready)) $display("[TB][XCHK] iniu0 p_ready is X/Z");
+                if ($isunknown(iniu0_iniu0_sys_apb_porting_iniu0_sys_apb_porting_p_slverr)) $display("[TB][XCHK] iniu0 p_slverr is X/Z");
+                if ($isunknown(iniu1_iniu1_sys_apb_porting_iniu1_sys_apb_porting_p_ready)) $display("[TB][XCHK] iniu1 p_ready is X/Z");
+                if ($isunknown(iniu1_iniu1_sys_apb_porting_iniu1_sys_apb_porting_p_slverr)) $display("[TB][XCHK] iniu1 p_slverr is X/Z");
+                if ($isunknown(iniu2_iniu2_sys_apb_porting_iniu2_sys_apb_porting_p_ready)) $display("[TB][XCHK] iniu2 p_ready is X/Z");
+                if ($isunknown(iniu2_iniu2_sys_apb_porting_iniu2_sys_apb_porting_p_slverr)) $display("[TB][XCHK] iniu2 p_slverr is X/Z");
+                if ($isunknown(iniu3_iniu3_sys_apb_porting_iniu3_sys_apb_porting_p_ready)) $display("[TB][XCHK] iniu3 p_ready is X/Z");
+                if ($isunknown(iniu3_iniu3_sys_apb_porting_iniu3_sys_apb_porting_p_slverr)) $display("[TB][XCHK] iniu3 p_slverr is X/Z");
+                if ($isunknown(tniu0_tniu0_sys_apb_porting_tniu0_sys_apb_porting_p_ready)) $display("[TB][XCHK] tniu0 p_ready is X/Z");
+                if ($isunknown(tniu0_tniu0_sys_apb_porting_tniu0_sys_apb_porting_p_slverr)) $display("[TB][XCHK] tniu0 p_slverr is X/Z");
+                if ($isunknown(tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_ready)) $display("[TB][XCHK] tniu1 p_ready is X/Z");
+                if ($isunknown(tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_slverr)) $display("[TB][XCHK] tniu1 p_slverr is X/Z");
+                $fatal(1, "[TB] %s observed X/Z after reset", tag);
+            end
+        end
     endtask
 
     // ---- Generic expect helpers ----
@@ -623,11 +614,25 @@ module tb_intr_ring_noc_4i2t;
             $display("[TB] tc001_power_on_defaults");
             reset_dut();
             wait_sys(50);
+            check_no_x_after_reset("tc001_power_on_defaults");
             // All TNIU interrupt outputs should be 0 after reset
             expect_tniu_intr("tc001 tniu0 intr35", 0, 35, 1'b0);
             expect_tniu_intr("tc001 tniu1 intr52", 1, 52, 1'b0);
             expect_bit("tc001 tniu0 merge0", tniu0_tniu0_sys_v_merge_interrupt_porting_tniu0_sys_v_merge_interrupt_porting_v_merge_interrupt[0], 1'b0);
             expect_bit("tc001 tniu1 merge0", tniu1_tniu1_sys_v_merge_interrupt_porting_tniu1_sys_v_merge_interrupt_porting_v_merge_interrupt[0], 1'b0);
+        end
+    endtask
+
+    task automatic tc_sanity();
+        begin
+            tc001_power_on_defaults();
+            tc002_lut_programming();
+            tc003_e2e_iniu0_tniu0();
+            tc004_e2e_clear();
+            tc005_tniu0_apb_controls();
+            tc006_cross_ring_iniu3_tniu1();
+            tc007_simultaneous_multi_source();
+            tc008_multi_iniu_to_tniu0();
         end
     endtask
 
@@ -754,15 +759,13 @@ module tb_intr_ring_noc_4i2t;
     initial begin
         fail_count = 0;
         pass_count = 0;
+        if (!$value$plusargs("TESTCASE=%s", testcase)) testcase = "tc_sanity";
 
-        tc001_power_on_defaults();
-        tc002_lut_programming();
-        tc003_e2e_iniu0_tniu0();
-        tc004_e2e_clear();
-        tc005_tniu0_apb_controls();
-        tc006_cross_ring_iniu3_tniu1();
-        tc007_simultaneous_multi_source();
-        tc008_multi_iniu_to_tniu0();
+        if ((testcase == "all") || (testcase == "tc_sanity")) begin
+            tc_sanity();
+        end else begin
+            $fatal(1, "[TB] Unknown TESTCASE=%s", testcase);
+        end
 
         $display("[TB] pass_count=%0d  fail_count=%0d", pass_count, fail_count);
         if (fail_count != 0) begin
