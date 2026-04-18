@@ -25,6 +25,25 @@ Topology shape:
 - `mipi/gpu_ss0/gpu_ss1/dp/display` merge through a display-side subtree
 - The two major branches merge at `soc_dti_sw_root` and terminate at `sys_tcu`
 
+## Python Dependency Structure
+
+**Generator entrypoint:** `gen_soc_dti_topo.py`
+
+**Required SOC-specific files (do NOT omit):**
+- `SocDtiTreeTopo.py` — SOC-level topology definition
+- `SocDtiNode.py` — SOC node factories (INIU/TNIU generators)
+- `SocDtiTemplate.py` — SOC node template configs
+
+**Inherited base files (from same directory):**
+- `DtiTreeNode.py` — base switch node definitions
+- `DtiTreeTopo.py` — base topology utilities
+
+**Note:** The directory contains TWO parallel generator sets:
+- Base DTI: `gen_dti_topo.py`, `DtiNode.py`, `DtiTemplate.py`, `DtiTreeTopo.py` 
+- SOC DTI: `gen_soc_dti_topo.py`, `SocDtiNode.py`, `SocDtiTemplate.py`, `SocDtiTreeTopo.py`
+
+Use `gen_soc_dti_topo.py` (not `gen_dti_topo.py`) for this SOC demo.
+
 Primary entrypoint:
 - `/home/lgzhu/dev/noc_work/lwnoc_network_demo/.venv/bin/python gen_soc_dti_topo.py`
 
