@@ -1,6 +1,0 @@
-`define dti_sw_left_noc1_DTI_INIU0_MAX 19
-`define dti_sw_left_noc1_DTI_INIU0_MIN 0
-`define dti_sw_left_noc1_DTI_INIU1_MAX 23
-`define dti_sw_left_noc1_DTI_INIU1_MIN 20
-`define dti_sw_left_noc1_DTI_TNIU_MAX 23
-`define dti_sw_left_noc1_DTI_TNIU_MIN 0

@@ -1,3 +1,0 @@
-$DTI_SW_LEFT_DSP1_OUT_DIR/dti_sw_left_dsp1_macros_5bcb37104d.sv
-$DTI_SW_LEFT_DSP1_OUT_DIR/dti_sw_left_dsp1_dti_noc_switch.sv
-$DTI_SW_LEFT_DSP1_OUT_DIR/dti_sw_left_dsp1_dti_switch_2i1o_wrap.sv

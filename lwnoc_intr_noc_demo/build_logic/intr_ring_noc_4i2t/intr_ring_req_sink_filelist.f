@@ -1,1 +1,0 @@
-$INTR_RING_NOC_DIR/intr_ring_req_sink_intr_ring_req_sink.sv

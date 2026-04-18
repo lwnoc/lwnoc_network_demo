@@ -1,7 +1,0 @@
-$STS_DEMO_DEC4_OUT_DIR/sts_demo_dec4_macros_ad1fe12539.sv
-$STS_DEMO_DEC4_OUT_DIR/sts_demo_dec4_lwnoc_sts_pack.sv
-$STS_DEMO_DEC4_OUT_DIR/sts_demo_dec4_sts_iniu_addr_map.sv
-$STS_DEMO_DEC4_OUT_DIR/sts_demo_dec4_cti_handle.sv
-$STS_DEMO_DEC4_OUT_DIR/sts_demo_dec4_sts_noc_dec_node.sv
-$STS_DEMO_DEC4_OUT_DIR/sts_demo_dec4_sts_tniu_apb_dec.sv
-$STS_DEMO_DEC4_OUT_DIR/sts_demo_dec4_sts_demo_dec4_wrap.sv

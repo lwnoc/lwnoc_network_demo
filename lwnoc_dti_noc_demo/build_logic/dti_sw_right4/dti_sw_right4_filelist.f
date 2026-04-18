@@ -1,3 +1,0 @@
-$DTI_SW_RIGHT4_OUT_DIR/dti_sw_right4_macros_071459ec32.sv
-$DTI_SW_RIGHT4_OUT_DIR/dti_sw_right4_dti_noc_switch.sv
-$DTI_SW_RIGHT4_OUT_DIR/dti_sw_right4_dti_switch_4i1o_wrap.sv

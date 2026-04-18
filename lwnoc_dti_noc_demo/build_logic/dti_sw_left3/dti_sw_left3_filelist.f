@@ -1,3 +1,0 @@
-$DTI_SW_LEFT3_OUT_DIR/dti_sw_left3_macros_2856c03863.sv
-$DTI_SW_LEFT3_OUT_DIR/dti_sw_left3_dti_noc_switch.sv
-$DTI_SW_LEFT3_OUT_DIR/dti_sw_left3_dti_switch_3i1o_wrap.sv

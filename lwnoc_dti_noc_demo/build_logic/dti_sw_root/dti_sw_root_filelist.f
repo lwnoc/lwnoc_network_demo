@@ -1,3 +1,0 @@
-$DTI_SW_ROOT_OUT_DIR/dti_sw_root_macros_89b88dd769.sv
-$DTI_SW_ROOT_OUT_DIR/dti_sw_root_dti_noc_switch.sv
-$DTI_SW_ROOT_OUT_DIR/dti_sw_root_dti_switch_2i1o_wrap.sv
