@@ -1,0 +1,1 @@
+$INTR_NOC_NETWORK_DIR/lwnoc_ring_sp.sv

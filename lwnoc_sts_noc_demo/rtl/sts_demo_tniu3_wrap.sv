@@ -1,5 +1,13 @@
 module `_PREFIX_(sts_demo_tniu3_wrap)
     import `_PREFIX_(lwnoc_sts_pack)::*;
+#(
+    parameter int unsigned STS_DEMO_APB_ADDR_WIDTH = 32,
+    parameter logic [TGT_ID_WIDTH-1:0] STS_DEMO_LOCAL_RSC_TGT_ID = '0,
+    parameter logic [TGT_ID_WIDTH-1:0] STS_DEMO_LOCAL_REGBANK_TGT_ID = '0,
+    parameter int unsigned STS_DEMO_SYS_APB_MASTER_NUM = 10,
+    parameter logic [STS_DEMO_SYS_APB_MASTER_NUM*TGT_ID_WIDTH-1:0] STS_DEMO_SYS_APB_ROUTE_BASE = '0,
+    parameter logic [STS_DEMO_SYS_APB_MASTER_NUM*TGT_ID_WIDTH-1:0] STS_DEMO_SYS_APB_ROUTE_MASK = '0
+)
 (
     input   logic                    clk_src,
     input   logic                    clk_dst,
@@ -47,18 +55,15 @@ module `_PREFIX_(sts_demo_tniu3_wrap)
     input   logic [CTI_EVENT_WIDTH-1:0]               noc_cti_channel_in
 );
 
-    localparam logic [`STS_DEMO_SYS_APB_MASTER_NUM*TGT_ID_WIDTH-1:0] SYS_APB_ROUTE_BASE = `STS_DEMO_SYS_APB_ROUTE_BASE;
-    localparam logic [`STS_DEMO_SYS_APB_MASTER_NUM*TGT_ID_WIDTH-1:0] SYS_APB_ROUTE_MASK = `STS_DEMO_SYS_APB_ROUTE_MASK;
-
     `_PREFIX_(sts_tniu_top) #(
         .DBG_DATA_WIDTH        (32),
         .DBG_TIMESTAMP_WIDTH   (64),
-        .APB_ADDR_WIDTH        (`STS_DEMO_APB_ADDR_WIDTH),
-        .LOCAL_RSC_TGT_ID      (`STS_DEMO_LOCAL_RSC_TGT_ID),
-        .LOCAL_REGBANK_TGT_ID  (`STS_DEMO_LOCAL_REGBANK_TGT_ID),
-        .SYS_APB_MASTER_NUM    (`STS_DEMO_SYS_APB_MASTER_NUM),
-        .SYS_APB_ROUTE_BASE    (SYS_APB_ROUTE_BASE),
-        .SYS_APB_ROUTE_MASK    (SYS_APB_ROUTE_MASK)
+        .APB_ADDR_WIDTH        (STS_DEMO_APB_ADDR_WIDTH),
+        .LOCAL_RSC_TGT_ID      (STS_DEMO_LOCAL_RSC_TGT_ID),
+        .LOCAL_REGBANK_TGT_ID  (STS_DEMO_LOCAL_REGBANK_TGT_ID),
+        .SYS_APB_MASTER_NUM    (STS_DEMO_SYS_APB_MASTER_NUM),
+        .SYS_APB_ROUTE_BASE    (STS_DEMO_SYS_APB_ROUTE_BASE),
+        .SYS_APB_ROUTE_MASK    (STS_DEMO_SYS_APB_ROUTE_MASK)
     ) u_sts_tniu_top (
         .clk_src            (clk_dst),
         .clk_dst            (clk_src),

@@ -15,14 +15,24 @@ export DTI_TEST_DIR
 export RTL_PATH
 export FCIP_DIR
 export LWNOC_LOWPOWER_COMPONENT
-export DTI_SW_ROOT_OUT_DIR       := $(DEMO_DIR)/build_logic/dti_sw_root
-export DTI_SW_RIGHT_NOC0_OUT_DIR := $(DEMO_DIR)/build_logic/dti_sw_right_noc0
-export DTI_SW_RIGHT4_OUT_DIR     := $(DEMO_DIR)/build_logic/dti_sw_right4
-export DTI_SW_LEFT_NOC1_OUT_DIR  := $(DEMO_DIR)/build_logic/dti_sw_left_noc1
-export DTI_SW_LEFT_DSP0_OUT_DIR  := $(DEMO_DIR)/build_logic/dti_sw_left_dsp0
-export DTI_SW_LEFT_DSP1_OUT_DIR  := $(DEMO_DIR)/build_logic/dti_sw_left_dsp1
-export DTI_SW_LEFT3_OUT_DIR      := $(DEMO_DIR)/build_logic/dti_sw_left3
+export DTI_LOGIC_TOPO_DIR       := $(DEMO_DIR)/build_logic/dti_logic_topo
+# Left-branch INIU sys dirs (SRCIDs 0-5)
+export PCIE_ETH_INIU_SYS_DIR    := $(DEMO_DIR)/build_logic/pcie_eth_iniu_sys
+export VPU_INIU_SYS_DIR         := $(DEMO_DIR)/build_logic/vpu_iniu_sys
+export DSP2_INIU_SYS_DIR        := $(DEMO_DIR)/build_logic/dsp2_iniu_sys
+export DSP1_INIU_SYS_DIR        := $(DEMO_DIR)/build_logic/dsp1_iniu_sys
+export DSP0_INIU_SYS_DIR        := $(DEMO_DIR)/build_logic/dsp0_iniu_sys
+export NOC_TBU1_INIU_SYS_DIR    := $(DEMO_DIR)/build_logic/noc_tbu1_iniu_sys
+# Right-branch INIU sys dirs (SRCIDs 6-10)
+export USB_UFS_INIU_SYS_DIR     := $(DEMO_DIR)/build_logic/usb_ufs_iniu_sys
+export MIPI0_INIU_SYS_DIR       := $(DEMO_DIR)/build_logic/mipi0_iniu_sys
+export MIPI1_INIU_SYS_DIR       := $(DEMO_DIR)/build_logic/mipi1_iniu_sys
+export CAMERA_INIU_SYS_DIR      := $(DEMO_DIR)/build_logic/camera_iniu_sys
+export NOC_TBU0_INIU_SYS_DIR    := $(DEMO_DIR)/build_logic/noc_tbu0_iniu_sys
+# TNIU sys dir
+export SYS_TCU_TNIU_SYS_DIR    := $(DEMO_DIR)/build_logic/sys_tcu_tniu_sys
 
+DTI_COMMON_DEP_F := $(DEMO_DIR)/filelists/dti_common_dep.f
 BUILD_DIR    := $(SIM_DIR)/build
 SIMV         := $(BUILD_DIR)/simv
 COMPILE_LOG  := $(BUILD_DIR)/compile.log
@@ -40,6 +50,7 @@ VCS_FLAGS := -full64 \
              -timescale=1ns/1ps \
              +v2k \
              +notimingcheck \
+			 +lint=TFIPC-L \
              +define+ASIC_SIM \
              -P $(VERDI_PLI_TAB) $(VERDI_PLI_LIB)
 
@@ -50,6 +61,7 @@ all: compile regression
 compile:
 	mkdir -p $(BUILD_DIR)
 	cd $(SIM_DIR) && $(VCS) $(VCS_FLAGS) \
+	    -f $(DTI_COMMON_DEP_F) \
 	    -f $(DUT_FILELIST) \
 	    $(TB_SV) \
 	    -top tb_dti_logic_topo_tree \
@@ -76,7 +88,7 @@ sim_wave: $(SIMV)
 	cd $(BUILD_DIR) && $(SIMV) +TESTCASE=all +DUMP_FSDB $(SIM_ARGS) -l logs/wave.log
 
 wave:
-	$(VERDI) -sv -f $(DUT_FILELIST) $(TB_SV) -ssf $(BUILD_DIR)/dti_logic_topo_tree.fsdb -dbdir $(BUILD_DIR)/simv.daidir &
+	$(VERDI) -sv -f $(DTI_COMMON_DEP_F) -f $(DUT_FILELIST) $(TB_SV) -ssf $(BUILD_DIR)/dti_logic_topo_tree.fsdb -dbdir $(BUILD_DIR)/simv.daidir &
 
 clean:
 	rm -rf $(BUILD_DIR)

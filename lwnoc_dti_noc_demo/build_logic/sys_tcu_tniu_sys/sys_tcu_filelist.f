@@ -1,0 +1,4 @@
+$SYS_TCU_TNIU_SYS_DIR/sys_tcu_dti_tniu_define.sv
+$SYS_TCU_TNIU_SYS_DIR/sys_tcu_dti_tniu_pack.sv
+$SYS_TCU_TNIU_SYS_DIR/sys_tcu_gnpd_to_dti_conv.sv
+$SYS_TCU_TNIU_SYS_DIR/sys_tcu_dti_tniu_async_sys_side.sv

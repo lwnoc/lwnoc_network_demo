@@ -1,0 +1,127 @@
+//[UHDL]Content Start [md5:a62892ff786e2419bcb5806f5bfc1282]
+-f $INTR_RING_REQ_ZERO_SOURCE_OUT_DIR/intr_ring_req_zero_source_filelist.f
+-f $INTR_RING_LINK_OUT_DIR/intr_ring_link_filelist.f
+-f $INTR_RING_STATION_OUT_DIR/intr_ring_station_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ucie_ss0_tniu_ring.v
+-f $SOC_INTR_UCIE_SS0_TNIU_SYS_OUT_DIR/ucie_ss0_tniu_filelist.f
+-f $INTR_RING_NOC_DIR/intr_tniu_top_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ucie_ss0_tniu.v
+-f $INTR_RING_REQ_SINK_OUT_DIR/intr_ring_req_sink_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ucie_ss0_iniu_ring.v
+-f $INTR_RING_NOC_DIR/intr_iniu_top_filelist.f
+-f $SOC_INTR_UCIE_SS0_INIU_SYS_OUT_DIR/ucie_ss0_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ucie_ss0_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr5_iniu_ring.v
+-f $SOC_INTR_DDR5_INIU_SYS_OUT_DIR/ddr5_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr5_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr4_iniu_ring.v
+-f $SOC_INTR_DDR4_INIU_SYS_OUT_DIR/ddr4_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr4_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr3_iniu_ring.v
+-f $SOC_INTR_DDR3_INIU_SYS_OUT_DIR/ddr3_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr3_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr2_iniu_ring.v
+-f $SOC_INTR_DDR2_INIU_SYS_OUT_DIR/ddr2_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr2_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr1_iniu_ring.v
+-f $SOC_INTR_DDR1_INIU_SYS_OUT_DIR/ddr1_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr1_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr0_iniu_ring.v
+-f $SOC_INTR_DDR0_INIU_SYS_OUT_DIR/ddr0_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr0_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss0_tniu_ring.v
+-f $SOC_INTR_DSPSS0_TNIU_SYS_OUT_DIR/dspss0_tniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss0_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss1_iniu_ring.v
+-f $SOC_INTR_DSPSS1_INIU_SYS_OUT_DIR/dspss1_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss1_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss2_tniu_ring.v
+-f $SOC_INTR_DSPSS2_TNIU_SYS_OUT_DIR/dspss2_tniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss2_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss3_iniu_ring.v
+-f $SOC_INTR_DSPSS3_INIU_SYS_OUT_DIR/dspss3_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss3_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss4_tniu_ring.v
+-f $SOC_INTR_DSPSS4_TNIU_SYS_OUT_DIR/dspss4_tniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss4_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss5_iniu_ring.v
+-f $SOC_INTR_DSPSS5_INIU_SYS_OUT_DIR/dspss5_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dspss5_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ucie_ss1_tniu_ring.v
+-f $SOC_INTR_UCIE_SS1_TNIU_SYS_OUT_DIR/ucie_ss1_tniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ucie_ss1_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ucie_ss1_iniu_ring.v
+-f $SOC_INTR_UCIE_SS1_INIU_SYS_OUT_DIR/ucie_ss1_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ucie_ss1_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/aon_ss_tniu_ring.v
+-f $SOC_INTR_AON_SS_TNIU_SYS_OUT_DIR/aon_ss_tniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/aon_ss_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/aon_ss_iniu_ring.v
+-f $SOC_INTR_AON_SS_INIU_SYS_OUT_DIR/aon_ss_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/aon_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/debug_ss_iniu_ring.v
+-f $SOC_INTR_DEBUG_SS_INIU_SYS_OUT_DIR/debug_ss_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/debug_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/pcie_eth_ss_iniu_ring.v
+-f $SOC_INTR_PCIE_ETH_SS_INIU_SYS_OUT_DIR/pcie_eth_ss_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/pcie_eth_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/vpu_ss_iniu_ring.v
+-f $SOC_INTR_VPU_SS_INIU_SYS_OUT_DIR/vpu_ss_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/vpu_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/camera_ss_iniu_ring.v
+-f $SOC_INTR_CAMERA_SS_INIU_SYS_OUT_DIR/camera_ss_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/camera_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/camera_ss_tniu_ring.v
+-f $SOC_INTR_CAMERA_SS_TNIU_SYS_OUT_DIR/camera_ss_tniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/camera_ss_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ufs_ss_iniu_ring.v
+-f $SOC_INTR_UFS_SS_INIU_SYS_OUT_DIR/ufs_ss_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ufs_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/mipi_ss_iniu_ring.v
+-f $SOC_INTR_MIPI_SS_INIU_SYS_OUT_DIR/mipi_ss_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/mipi_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr11_tniu_ring.v
+-f $SOC_INTR_DDR11_TNIU_SYS_OUT_DIR/ddr11_tniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr11_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr10_iniu_ring.v
+-f $SOC_INTR_DDR10_INIU_SYS_OUT_DIR/ddr10_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr10_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr9_iniu_ring.v
+-f $SOC_INTR_DDR9_INIU_SYS_OUT_DIR/ddr9_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr9_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr8_iniu_ring.v
+-f $SOC_INTR_DDR8_INIU_SYS_OUT_DIR/ddr8_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr8_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr7_iniu_ring.v
+-f $SOC_INTR_DDR7_INIU_SYS_OUT_DIR/ddr7_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr7_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr6_iniu_ring.v
+-f $SOC_INTR_DDR6_INIU_SYS_OUT_DIR/ddr6_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/ddr6_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dp_ss_iniu_ring.v
+-f $SOC_INTR_DP_SS_INIU_SYS_OUT_DIR/dp_ss_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/dp_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/display_ss_tniu_ring.v
+-f $SOC_INTR_DISPLAY_SS_TNIU_SYS_OUT_DIR/display_ss_tniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/display_ss_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/gpu_ss0_tniu_ring.v
+-f $SOC_INTR_GPU_SS0_TNIU_SYS_OUT_DIR/gpu_ss0_tniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/gpu_ss0_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/gpu_ss1_iniu_ring.v
+-f $SOC_INTR_GPU_SS1_INIU_SYS_OUT_DIR/gpu_ss1_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/gpu_ss1_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/peri_ss_tniu_ring.v
+-f $SOC_INTR_PERI_SS_TNIU_SYS_OUT_DIR/peri_ss_tniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/peri_ss_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/audio_ss_iniu_ring.v
+-f $SOC_INTR_AUDIO_SS_INIU_SYS_OUT_DIR/audio_ss_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/audio_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/cpu_ss_tniu_ring.v
+-f $SOC_INTR_CPU_SS_TNIU_SYS_OUT_DIR/cpu_ss_tniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/cpu_ss_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/cpu_ss_iniu_ring.v
+-f $SOC_INTR_CPU_SS_INIU_SYS_OUT_DIR/cpu_ss_iniu_filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/cpu_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_27i12t/soc_intr_ring_noc_27i12t.v
+//[UHDL]Content End [md5:a62892ff786e2419bcb5806f5bfc1282]
+

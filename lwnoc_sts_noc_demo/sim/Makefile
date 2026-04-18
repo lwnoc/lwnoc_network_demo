@@ -16,12 +16,12 @@ export STS_NOC_DEMO_DIR
 export RTL_PATH
 export STS_INIU
 export STS_TNIU
-export STS_DEMO_INIU_OUT_DIR  := $(DEMO_DIR)/build_logic/sts_demo_iniu
-export STS_DEMO_DEC4_OUT_DIR  := $(DEMO_DIR)/build_logic/sts_demo_dec4
-export STS_DEMO_TNIU0_OUT_DIR := $(DEMO_DIR)/build_logic/sts_demo_tniu0
-export STS_DEMO_TNIU1_OUT_DIR := $(DEMO_DIR)/build_logic/sts_demo_tniu1
-export STS_DEMO_TNIU2_OUT_DIR := $(DEMO_DIR)/build_logic/sts_demo_tniu2
-export STS_DEMO_TNIU3_OUT_DIR := $(DEMO_DIR)/build_logic/sts_demo_tniu3
+export STS_DEMO_INIU_SYS_OUT_DIR       := $(DEMO_DIR)/build_logic/sts_demo_iniu_sys
+export STS_LOGIC_TOPO_DIR             := $(DEMO_DIR)/build_logic/sts_logic_topo_1i4t
+export STS_DEMO_TNIU0_SYS_OUT_DIR := $(DEMO_DIR)/build_logic/sts_demo_tniu0_sys
+export STS_DEMO_TNIU1_SYS_OUT_DIR := $(DEMO_DIR)/build_logic/sts_demo_tniu1_sys
+export STS_DEMO_TNIU2_SYS_OUT_DIR := $(DEMO_DIR)/build_logic/sts_demo_tniu2_sys
+export STS_DEMO_TNIU3_SYS_OUT_DIR := $(DEMO_DIR)/build_logic/sts_demo_tniu3_sys
 export FCIP_DIR
 
 BUILD_DIR    := $(SIM_DIR)/build
@@ -42,6 +42,7 @@ VCS_FLAGS := -full64 \
              -timescale=1ns/1ps \
              +v2k \
              +notimingcheck \
+			 +lint=TFIPC-L \
              +define+ASIC_SIM \
              -P $(VERDI_PLI_TAB) $(VERDI_PLI_LIB)
 
@@ -61,7 +62,6 @@ compile:
 	    -f $(FCIP_DIR)/vc/sync_fifo.f \
 	    -f $(FCIP_DIR)/vc/handshake.f \
 	    $(FCIP_DIR)/bak/fifo/bak/cmn_vrp_reg_fifo.sv \
-	    -f $(COMMON_DEPS_F) \
 	    -f $(DUT_FILELIST) \
 	    $(TB_SV) \
 	    -top tb_sts_logic_topo_1i4t \

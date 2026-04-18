@@ -1,0 +1,3 @@
+-f $DTI_PR/vc/network_filelist.f
+-f $FCIP_DIR/vc/async_fifo.f
+-f $FCIP_DIR/vc/regslice.f

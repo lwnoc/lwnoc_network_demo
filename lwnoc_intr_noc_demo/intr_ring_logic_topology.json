@@ -227,6 +227,437 @@
     ]
   },
   "nodes": {
+    "intr_ring_noc_4i2t.tniu0": {
+      "type": "wrapper",
+      "node_name": "tniu0",
+      "attrs": {},
+      "interfaces": {
+        "clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_noc": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "rst_noc_n": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "pring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu0_top.timeout_val_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu0_top.lp_hub_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu0_sys.tniu_tgt_id_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu0_sys.v_interrupt_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu0_sys.v_merge_interrupt_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu0_sys.apb_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu0_sys.timeout_val_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t"
+      ],
+      "sub_nodes": [
+        "intr_ring_noc_4i2t.tniu0.tniu0_top",
+        "intr_ring_noc_4i2t.tniu0.tniu0_sys",
+        "intr_ring_noc_4i2t.tniu0.tniu0_ring",
+        "intr_ring_noc_4i2t.tniu0.tniu0_ring_source"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu0": {
+      "type": "wrapper",
+      "node_name": "iniu0",
+      "attrs": {},
+      "interfaces": {
+        "clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_noc": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "rst_noc_n": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "pring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu0_sys.v_interrupt_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu0_sys.iniu_src_id_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu0_sys.apb_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu0_sys.timeout_val_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu0_sys.lp_hub_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t"
+      ],
+      "sub_nodes": [
+        "intr_ring_noc_4i2t.iniu0.iniu0_sys",
+        "intr_ring_noc_4i2t.iniu0.iniu0_top",
+        "intr_ring_noc_4i2t.iniu0.iniu0_ring",
+        "intr_ring_noc_4i2t.iniu0.iniu0_ring_sink"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_sta": {
+      "type": "atomic",
+      "node_name": "iniu3_ring_sta",
+      "attrs": {},
+      "interfaces": {
+        "local_tx": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "local_rx": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "cw_in": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "cw_out": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "ccw_in": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "ccw_out": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu3.iniu3_ring"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu3": {
+      "type": "wrapper",
+      "node_name": "iniu3",
+      "attrs": {},
+      "interfaces": {
+        "clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_noc": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "rst_noc_n": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "pring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu3_sys.v_interrupt_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu3_sys.iniu_src_id_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu3_sys.apb_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu3_sys.timeout_val_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu3_sys.lp_hub_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t"
+      ],
+      "sub_nodes": [
+        "intr_ring_noc_4i2t.iniu3.iniu3_sys",
+        "intr_ring_noc_4i2t.iniu3.iniu3_top",
+        "intr_ring_noc_4i2t.iniu3.iniu3_ring",
+        "intr_ring_noc_4i2t.iniu3.iniu3_ring_sink"
+      ]
+    },
+    "intr_ring_noc_4i2t.tniu1": {
+      "type": "wrapper",
+      "node_name": "tniu1",
+      "attrs": {},
+      "interfaces": {
+        "clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_noc": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "rst_noc_n": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "pring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu1_top.timeout_val_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu1_top.lp_hub_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu1_sys.tniu_tgt_id_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu1_sys.v_interrupt_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu1_sys.v_merge_interrupt_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu1_sys.apb_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "tniu1_sys.timeout_val_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t"
+      ],
+      "sub_nodes": [
+        "intr_ring_noc_4i2t.tniu1.tniu1_top",
+        "intr_ring_noc_4i2t.tniu1.tniu1_sys",
+        "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+        "intr_ring_noc_4i2t.tniu1.tniu1_ring_source"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_sta": {
+      "type": "atomic",
+      "node_name": "iniu2_ring_sta",
+      "attrs": {},
+      "interfaces": {
+        "local_tx": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "local_rx": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "cw_in": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "cw_out": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "ccw_in": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "ccw_out": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu2.iniu2_ring"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu2": {
+      "type": "wrapper",
+      "node_name": "iniu2",
+      "attrs": {},
+      "interfaces": {
+        "clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_noc": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "rst_noc_n": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "pring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu2_sys.v_interrupt_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu2_sys.iniu_src_id_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu2_sys.apb_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu2_sys.timeout_val_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        },
+        "iniu2_sys.lp_hub_porting": {
+          "is_exposed_port": true,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t"
+      ],
+      "sub_nodes": [
+        "intr_ring_noc_4i2t.iniu2.iniu2_sys",
+        "intr_ring_noc_4i2t.iniu2.iniu2_top",
+        "intr_ring_noc_4i2t.iniu2.iniu2_ring",
+        "intr_ring_noc_4i2t.iniu2.iniu2_ring_sink"
+      ]
+    },
     "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_sta": {
       "type": "atomic",
       "node_name": "iniu0_ring_sta",
@@ -258,8 +689,117 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu0.iniu0_ring",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu0.iniu0_ring"
+      ]
+    },
+    "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_link_cw": {
+      "type": "atomic",
+      "node_name": "tniu0_ring_link_cw",
+      "attrs": {},
+      "interfaces": {
+        "s_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "m_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.tniu0.tniu0_ring"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu0.iniu0_sys": {
+      "type": "atomic",
+      "node_name": "iniu0_sys",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "v_interrupt": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "iniu_src_id": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "async_fifo": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "timeout_val": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "lp_async": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "lp_hub": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu0"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_sta": {
+      "type": "atomic",
+      "node_name": "iniu1_ring_sta",
+      "attrs": {},
+      "interfaces": {
+        "local_tx": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "local_rx": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "cw_in": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "cw_out": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "ccw_in": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "ccw_out": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu1.iniu1_ring"
       ]
     },
     "intr_ring_noc_4i2t.tniu0.tniu0_sys": {
@@ -309,70 +849,8 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.tniu0",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_link_cw": {
-      "type": "atomic",
-      "node_name": "tniu0_ring_link_cw",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "s_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "m_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.tniu0.tniu0_ring",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_sta": {
-      "type": "atomic",
-      "node_name": "iniu1_ring_sta",
-      "attrs": {},
-      "interfaces": {
-        "local_tx": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "local_rx": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "cw_in": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "cw_out": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "ccw_in": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "ccw_out": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.iniu1.iniu1_ring",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.tniu0"
       ]
     },
     "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_cw": {
@@ -380,19 +858,19 @@
       "node_name": "tniu1_ring_link_cw",
       "attrs": {},
       "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
         "s_req": {
           "is_exposed_port": false,
           "is_global": false
         },
         "m_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
           "is_exposed_port": false,
           "is_global": false
         }
@@ -461,8 +939,8 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t"
       ],
       "sub_nodes": [
         "intr_ring_noc_4i2t.iniu1.iniu1_sys",
@@ -510,13 +988,40 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.tniu0",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.tniu0"
       ],
       "sub_nodes": [
         "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_sta",
         "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_link_cw",
         "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_link_ccw"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_ccw": {
+      "type": "atomic",
+      "node_name": "iniu0_ring_link_ccw",
+      "attrs": {},
+      "interfaces": {
+        "s_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "m_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu0.iniu0_ring"
       ]
     },
     "intr_ring_noc_4i2t.tniu1.tniu1_sys": {
@@ -566,197 +1071,7 @@
         }
       },
       "parents": [
-        "__global_virtual_wrapper__",
-        "intr_ring_noc_4i2t.tniu1"
-      ]
-    },
-    "intr_ring_noc_4i2t.tniu0.tniu0_ring_source": {
-      "type": "atomic",
-      "node_name": "tniu0_ring_source",
-      "attrs": {},
-      "interfaces": {
-        "local_tx": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.tniu0",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.tniu1.tniu1_ring_source": {
-      "type": "atomic",
-      "node_name": "tniu1_ring_source",
-      "attrs": {},
-      "interfaces": {
-        "local_tx": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "intr_ring_noc_4i2t.tniu1"
-      ]
-    },
-    "intr_ring_noc_4i2t.tniu1.tniu1_ring": {
-      "type": "wrapper",
-      "node_name": "tniu1_ring",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "pring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "pring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "local_tx": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "local_rx": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "intr_ring_noc_4i2t.tniu1"
-      ],
-      "sub_nodes": [
-        "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_sta",
-        "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_cw",
-        "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_ccw"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_cw": {
-      "type": "atomic",
-      "node_name": "iniu3_ring_link_cw",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "s_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "m_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu3.iniu3_ring_sink": {
-      "type": "atomic",
-      "node_name": "iniu3_ring_sink",
-      "attrs": {},
-      "interfaces": {
-        "local_rx": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "intr_ring_noc_4i2t.iniu3"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_link_cw": {
-      "type": "atomic",
-      "node_name": "iniu2_ring_link_cw",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "s_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "m_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.iniu2.iniu2_ring",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.tniu0.tniu0_top": {
-      "type": "atomic",
-      "node_name": "tniu0_top",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "async_fifo": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "timeout_val": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "lp_hub": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "lp_niu_hub": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "lp_async": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "ring_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.tniu0",
+        "intr_ring_noc_4i2t.tniu1",
         "__global_virtual_wrapper__"
       ]
     },
@@ -1010,6 +1325,208 @@
         "intr_ring_noc_4i2t.tniu1"
       ]
     },
+    "intr_ring_noc_4i2t.tniu1.tniu1_ring": {
+      "type": "wrapper",
+      "node_name": "tniu1_ring",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": true
+        },
+        "pring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_in_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "nring_out_if": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "local_tx": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "local_rx": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "intr_ring_noc_4i2t.tniu1",
+        "__global_virtual_wrapper__"
+      ],
+      "sub_nodes": [
+        "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_sta",
+        "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_cw",
+        "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_ccw"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_cw": {
+      "type": "atomic",
+      "node_name": "iniu3_ring_link_cw",
+      "attrs": {},
+      "interfaces": {
+        "s_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "m_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu3.iniu3_ring"
+      ]
+    },
+    "intr_ring_noc_4i2t.tniu1.tniu1_ring_source": {
+      "type": "atomic",
+      "node_name": "tniu1_ring_source",
+      "attrs": {},
+      "interfaces": {
+        "local_tx": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "intr_ring_noc_4i2t.tniu1",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "intr_ring_noc_4i2t.tniu0.tniu0_ring_source": {
+      "type": "atomic",
+      "node_name": "tniu0_ring_source",
+      "attrs": {},
+      "interfaces": {
+        "local_tx": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.tniu0"
+      ]
+    },
+    "intr_ring_noc_4i2t.tniu0.tniu0_top": {
+      "type": "atomic",
+      "node_name": "tniu0_top",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "async_fifo": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "timeout_val": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "lp_hub": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "lp_niu_hub": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "lp_async": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "ring_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.tniu0"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_cw": {
+      "type": "atomic",
+      "node_name": "iniu0_ring_link_cw",
+      "attrs": {},
+      "interfaces": {
+        "s_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "m_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu0.iniu0_ring"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_link_cw": {
+      "type": "atomic",
+      "node_name": "iniu2_ring_link_cw",
+      "attrs": {},
+      "interfaces": {
+        "s_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "m_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu2.iniu2_ring"
+      ]
+    },
     "intr_ring_noc_4i2t.iniu3.iniu3_top": {
       "type": "atomic",
       "node_name": "iniu3_top",
@@ -1037,8 +1554,8 @@
         }
       },
       "parents": [
-        "__global_virtual_wrapper__",
-        "intr_ring_noc_4i2t.iniu3"
+        "intr_ring_noc_4i2t.iniu3",
+        "__global_virtual_wrapper__"
       ]
     },
     "intr_ring_noc_4i2t.iniu3.iniu3_ring": {
@@ -1080,8 +1597,8 @@
         }
       },
       "parents": [
-        "__global_virtual_wrapper__",
-        "intr_ring_noc_4i2t.iniu3"
+        "intr_ring_noc_4i2t.iniu3",
+        "__global_virtual_wrapper__"
       ],
       "sub_nodes": [
         "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_sta",
@@ -1094,14 +1611,6 @@
       "node_name": "tniu0_ring_link_ccw",
       "attrs": {},
       "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
         "s_req": {
           "is_exposed_port": false,
           "is_global": false
@@ -1109,18 +1618,7 @@
         "m_req": {
           "is_exposed_port": false,
           "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.tniu0.tniu0_ring",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_cw": {
-      "type": "atomic",
-      "node_name": "iniu0_ring_link_cw",
-      "attrs": {},
-      "interfaces": {
+        },
         "clk": {
           "is_exposed_port": false,
           "is_global": false
@@ -1128,19 +1626,11 @@
         "rst_n": {
           "is_exposed_port": false,
           "is_global": false
-        },
-        "s_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "m_req": {
-          "is_exposed_port": false,
-          "is_global": false
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu0.iniu0_ring",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.tniu0.tniu0_ring"
       ]
     },
     "intr_ring_noc_4i2t.iniu3.iniu3_sys": {
@@ -1186,8 +1676,50 @@
         }
       },
       "parents": [
+        "intr_ring_noc_4i2t.iniu3",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu3.iniu3_ring_sink": {
+      "type": "atomic",
+      "node_name": "iniu3_ring_sink",
+      "attrs": {},
+      "interfaces": {
+        "local_rx": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "intr_ring_noc_4i2t.iniu3",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_link_cw": {
+      "type": "atomic",
+      "node_name": "iniu1_ring_link_cw",
+      "attrs": {},
+      "interfaces": {
+        "s_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "m_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
         "__global_virtual_wrapper__",
-        "intr_ring_noc_4i2t.iniu3"
+        "intr_ring_noc_4i2t.iniu1.iniu1_ring"
       ]
     },
     "intr_ring_noc_4i2t.tniu1.tniu1_top": {
@@ -1229,8 +1761,8 @@
         }
       },
       "parents": [
-        "__global_virtual_wrapper__",
-        "intr_ring_noc_4i2t.tniu1"
+        "intr_ring_noc_4i2t.tniu1",
+        "__global_virtual_wrapper__"
       ]
     },
     "intr_ring_noc_4i2t.iniu2.iniu2_top": {
@@ -1260,97 +1792,8 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu2",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_link_cw": {
-      "type": "atomic",
-      "node_name": "iniu1_ring_link_cw",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "s_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "m_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.iniu1.iniu1_ring",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu0.iniu0_sys": {
-      "type": "atomic",
-      "node_name": "iniu0_sys",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "v_interrupt": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "iniu_src_id": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "apb": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "async_fifo": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "timeout_val": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "lp_async": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "lp_hub": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.iniu0",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu2.iniu2_ring_sink": {
-      "type": "atomic",
-      "node_name": "iniu2_ring_sink",
-      "attrs": {},
-      "interfaces": {
-        "local_rx": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.iniu2",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu2"
       ]
     },
     "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_ccw": {
@@ -1358,19 +1801,19 @@
       "node_name": "tniu1_ring_link_ccw",
       "attrs": {},
       "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
         "s_req": {
           "is_exposed_port": false,
           "is_global": false
         },
         "m_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
           "is_exposed_port": false,
           "is_global": false
         }
@@ -1419,13 +1862,28 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu2",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu2"
       ],
       "sub_nodes": [
         "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_sta",
         "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_link_cw",
         "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_link_ccw"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu2.iniu2_ring_sink": {
+      "type": "atomic",
+      "node_name": "iniu2_ring_sink",
+      "attrs": {},
+      "interfaces": {
+        "local_rx": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu2"
       ]
     },
     "intr_ring_noc_4i2t.iniu2.iniu2_sys": {
@@ -1471,8 +1929,8 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu2",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu2"
       ]
     },
     "intr_ring_noc_4i2t.iniu0.iniu0_top": {
@@ -1502,23 +1960,8 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu0",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu1.iniu1_ring_sink": {
-      "type": "atomic",
-      "node_name": "iniu1_ring_sink",
-      "attrs": {},
-      "interfaces": {
-        "local_rx": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.iniu1",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu0"
       ]
     },
     "intr_ring_noc_4i2t.iniu1.iniu1_top": {
@@ -1548,8 +1991,8 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu1",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu1"
       ]
     },
     "intr_ring_noc_4i2t.iniu1.iniu1_ring": {
@@ -1591,8 +2034,8 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu1",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu1"
       ],
       "sub_nodes": [
         "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_sta",
@@ -1605,14 +2048,6 @@
       "node_name": "iniu3_ring_link_ccw",
       "attrs": {},
       "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
         "s_req": {
           "is_exposed_port": false,
           "is_global": false
@@ -1620,11 +2055,34 @@
         "m_req": {
           "is_exposed_port": false,
           "is_global": false
+        },
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu3.iniu3_ring"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu1.iniu1_ring_sink": {
+      "type": "atomic",
+      "node_name": "iniu1_ring_sink",
+      "attrs": {},
+      "interfaces": {
+        "local_rx": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu1"
       ]
     },
     "intr_ring_noc_4i2t.iniu0.iniu0_ring": {
@@ -1666,97 +2124,13 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu0",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu0"
       ],
       "sub_nodes": [
         "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_sta",
         "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_cw",
         "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_ccw"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu0.iniu0_ring_sink": {
-      "type": "atomic",
-      "node_name": "iniu0_ring_sink",
-      "attrs": {},
-      "interfaces": {
-        "local_rx": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.iniu0",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu0": {
-      "type": "wrapper",
-      "node_name": "iniu0",
-      "attrs": {},
-      "interfaces": {
-        "clk_sys": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_sys_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_noc": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "rst_noc_n": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "pring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "pring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "iniu0_sys.v_interrupt_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu0_sys.iniu_src_id_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu0_sys.apb_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu0_sys.timeout_val_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu0_sys.lp_hub_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t",
-        "__global_virtual_wrapper__"
-      ],
-      "sub_nodes": [
-        "intr_ring_noc_4i2t.iniu0.iniu0_sys",
-        "intr_ring_noc_4i2t.iniu0.iniu0_top",
-        "intr_ring_noc_4i2t.iniu0.iniu0_ring",
-        "intr_ring_noc_4i2t.iniu0.iniu0_ring_sink"
       ]
     },
     "intr_ring_noc_4i2t.iniu1.iniu1_sys": {
@@ -1802,8 +2176,23 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu1",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu1"
+      ]
+    },
+    "intr_ring_noc_4i2t.iniu0.iniu0_ring_sink": {
+      "type": "atomic",
+      "node_name": "iniu0_ring_sink",
+      "attrs": {},
+      "interfaces": {
+        "local_rx": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu0"
       ]
     },
     "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_link_ccw": {
@@ -1811,14 +2200,6 @@
       "node_name": "iniu2_ring_link_ccw",
       "attrs": {},
       "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
         "s_req": {
           "is_exposed_port": false,
           "is_global": false
@@ -1826,11 +2207,19 @@
         "m_req": {
           "is_exposed_port": false,
           "is_global": false
+        },
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu2.iniu2_ring",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu2.iniu2_ring"
       ]
     },
     "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_sta": {
@@ -1864,35 +2253,8 @@
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.tniu0.tniu0_ring",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_link_ccw": {
-      "type": "atomic",
-      "node_name": "iniu1_ring_link_ccw",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "s_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "m_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.iniu1.iniu1_ring",
-        "__global_virtual_wrapper__"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.tniu0.tniu0_ring"
       ]
     },
     "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_sta": {
@@ -1930,96 +2292,11 @@
         "intr_ring_noc_4i2t.tniu1.tniu1_ring"
       ]
     },
-    "intr_ring_noc_4i2t.tniu0": {
-      "type": "wrapper",
-      "node_name": "tniu0",
-      "attrs": {},
-      "interfaces": {
-        "clk_sys": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_sys_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_noc": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "rst_noc_n": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "pring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "pring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "tniu0_top.timeout_val_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu0_top.lp_hub_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu0_sys.tniu_tgt_id_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu0_sys.v_interrupt_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu0_sys.v_merge_interrupt_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu0_sys.apb_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu0_sys.timeout_val_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t",
-        "__global_virtual_wrapper__"
-      ],
-      "sub_nodes": [
-        "intr_ring_noc_4i2t.tniu0.tniu0_top",
-        "intr_ring_noc_4i2t.tniu0.tniu0_sys",
-        "intr_ring_noc_4i2t.tniu0.tniu0_ring",
-        "intr_ring_noc_4i2t.tniu0.tniu0_ring_source"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_ccw": {
+    "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_link_ccw": {
       "type": "atomic",
-      "node_name": "iniu0_ring_link_ccw",
+      "node_name": "iniu1_ring_link_ccw",
       "attrs": {},
       "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
         "s_req": {
           "is_exposed_port": false,
           "is_global": false
@@ -2027,296 +2304,19 @@
         "m_req": {
           "is_exposed_port": false,
           "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.iniu0.iniu0_ring",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_sta": {
-      "type": "atomic",
-      "node_name": "iniu3_ring_sta",
-      "attrs": {},
-      "interfaces": {
-        "local_tx": {
+        },
+        "clk": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "local_rx": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "cw_in": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "cw_out": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "ccw_in": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "ccw_out": {
+        "rst_n": {
           "is_exposed_port": false,
           "is_global": false
         }
       },
       "parents": [
-        "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu3": {
-      "type": "wrapper",
-      "node_name": "iniu3",
-      "attrs": {},
-      "interfaces": {
-        "clk_sys": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_sys_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_noc": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "rst_noc_n": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "pring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "pring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "iniu3_sys.v_interrupt_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu3_sys.iniu_src_id_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu3_sys.apb_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu3_sys.timeout_val_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu3_sys.lp_hub_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t",
-        "__global_virtual_wrapper__"
-      ],
-      "sub_nodes": [
-        "intr_ring_noc_4i2t.iniu3.iniu3_sys",
-        "intr_ring_noc_4i2t.iniu3.iniu3_top",
-        "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-        "intr_ring_noc_4i2t.iniu3.iniu3_ring_sink"
-      ]
-    },
-    "intr_ring_noc_4i2t.tniu1": {
-      "type": "wrapper",
-      "node_name": "tniu1",
-      "attrs": {},
-      "interfaces": {
-        "clk_sys": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_sys_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_noc": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "rst_noc_n": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "pring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "pring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "tniu1_top.timeout_val_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu1_top.lp_hub_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu1_sys.tniu_tgt_id_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu1_sys.v_interrupt_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu1_sys.v_merge_interrupt_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu1_sys.apb_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "tniu1_sys.timeout_val_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t",
-        "__global_virtual_wrapper__"
-      ],
-      "sub_nodes": [
-        "intr_ring_noc_4i2t.tniu1.tniu1_top",
-        "intr_ring_noc_4i2t.tniu1.tniu1_sys",
-        "intr_ring_noc_4i2t.tniu1.tniu1_ring",
-        "intr_ring_noc_4i2t.tniu1.tniu1_ring_source"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_sta": {
-      "type": "atomic",
-      "node_name": "iniu2_ring_sta",
-      "attrs": {},
-      "interfaces": {
-        "local_tx": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "local_rx": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "cw_in": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "cw_out": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "ccw_in": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "ccw_out": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t.iniu2.iniu2_ring",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "intr_ring_noc_4i2t.iniu2": {
-      "type": "wrapper",
-      "node_name": "iniu2",
-      "attrs": {},
-      "interfaces": {
-        "clk_sys": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_sys_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_noc": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "rst_noc_n": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "pring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "pring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_in_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "nring_out_if": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "iniu2_sys.v_interrupt_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu2_sys.iniu_src_id_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu2_sys.apb_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu2_sys.timeout_val_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "iniu2_sys.lp_hub_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "intr_ring_noc_4i2t",
-        "__global_virtual_wrapper__"
-      ],
-      "sub_nodes": [
-        "intr_ring_noc_4i2t.iniu2.iniu2_sys",
-        "intr_ring_noc_4i2t.iniu2.iniu2_top",
-        "intr_ring_noc_4i2t.iniu2.iniu2_ring",
-        "intr_ring_noc_4i2t.iniu2.iniu2_ring_sink"
+        "__global_virtual_wrapper__",
+        "intr_ring_noc_4i2t.iniu1.iniu1_ring"
       ]
     }
   },
@@ -2381,14 +2381,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
-            "interface_id": "local_tx"
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_top",
+            "interface_id": "ring_req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_top",
-            "interface_id": "ring_req"
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
+            "interface_id": "local_tx"
           }
         }
       ]
@@ -2399,13 +2399,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_sta",
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
             "interface_id": "local_rx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_sta",
             "interface_id": "local_rx"
           }
         }
@@ -2417,13 +2417,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring_sink",
             "interface_id": "local_rx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring_sink",
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
             "interface_id": "local_rx"
           }
         }
@@ -2435,14 +2435,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "clk_sys"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu0.clk_sys_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu0.clk_sys_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "clk_sys"
           }
         }
       ]
@@ -2453,14 +2453,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_sys",
-            "interface_id": "clk"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "clk_sys"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "clk_sys"
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_sys",
+            "interface_id": "clk"
           }
         }
       ]
@@ -2471,14 +2471,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "rst_sys_n"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu0.rst_sys_n_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu0.rst_sys_n_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "rst_sys_n"
           }
         }
       ]
@@ -2507,13 +2507,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_cw",
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_ccw",
             "interface_id": "clk"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_ccw",
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_cw",
             "interface_id": "clk"
           }
         },
@@ -2555,14 +2555,14 @@
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
-            "interface_id": "clk"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "clk_noc"
           }
         },
         {
           "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "clk_noc"
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
+            "interface_id": "clk"
           }
         }
       ]
@@ -2573,19 +2573,19 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_cw",
             "interface_id": "rst_n"
           }
         },
         {
-          "endpoint3": {
+          "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_link_ccw",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
             "interface_id": "rst_n"
           }
         }
@@ -2621,14 +2621,14 @@
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
-            "interface_id": "rst_n"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "rst_noc_n"
           }
         },
         {
           "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "rst_noc_n"
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
+            "interface_id": "rst_n"
           }
         }
       ]
@@ -2639,13 +2639,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_sys",
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_top",
             "interface_id": "async_fifo"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_top",
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_sys",
             "interface_id": "async_fifo"
           }
         }
@@ -2675,14 +2675,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu0.iniu0_sys.v_interrupt_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "iniu0_sys.v_interrupt_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "iniu0_sys.v_interrupt_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu0.iniu0_sys.v_interrupt_porting"
           }
         }
       ]
@@ -2693,14 +2693,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "iniu0_sys.v_interrupt_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_sys",
+            "interface_id": "v_interrupt"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_sys",
-            "interface_id": "v_interrupt"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "iniu0_sys.v_interrupt_porting"
           }
         }
       ]
@@ -2711,14 +2711,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "iniu0_sys.iniu_src_id_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu0.iniu0_sys.iniu_src_id_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu0.iniu0_sys.iniu_src_id_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "iniu0_sys.iniu_src_id_porting"
           }
         }
       ]
@@ -2729,14 +2729,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "iniu0_sys.iniu_src_id_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_sys",
+            "interface_id": "iniu_src_id"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_sys",
-            "interface_id": "iniu_src_id"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "iniu0_sys.iniu_src_id_porting"
           }
         }
       ]
@@ -2783,14 +2783,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu0.iniu0_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "iniu0_sys.timeout_val_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "iniu0_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu0.iniu0_sys.timeout_val_porting"
           }
         }
       ]
@@ -2801,14 +2801,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "iniu0_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_sys",
+            "interface_id": "timeout_val"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_sys",
-            "interface_id": "timeout_val"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "iniu0_sys.timeout_val_porting"
           }
         }
       ]
@@ -2855,14 +2855,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_link_cw",
-            "interface_id": "s_req"
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_sta",
+            "interface_id": "cw_out"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_sta",
-            "interface_id": "cw_out"
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_link_cw",
+            "interface_id": "s_req"
           }
         }
       ]
@@ -2891,14 +2891,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_top",
-            "interface_id": "ring_req"
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
+            "interface_id": "local_tx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
-            "interface_id": "local_tx"
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_top",
+            "interface_id": "ring_req"
           }
         }
       ]
@@ -2922,24 +2922,6 @@
       ]
     },
     {
-      "id": "iniu1_ring_sta_iniu1_ring_local_rx_local_rx_33@intr_ring_noc_4i2t.iniu1.iniu1_ring",
-      "scope": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_sta",
-            "interface_id": "local_rx"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
-            "interface_id": "local_rx"
-          }
-        }
-      ]
-    },
-    {
       "id": "iniu1_ring_sta_iniu1_ring_local_rx_local_rx_33@intr_ring_noc_4i2t.iniu1",
       "scope": "intr_ring_noc_4i2t.iniu1",
       "endpoints": [
@@ -2958,19 +2940,19 @@
       ]
     },
     {
-      "id": "iniu1_sys_iniu1_clk_clk_sys_34@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
+      "id": "iniu1_ring_sta_iniu1_ring_local_rx_local_rx_33@intr_ring_noc_4i2t.iniu1.iniu1_ring",
+      "scope": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu1.clk_sys_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_sta",
+            "interface_id": "local_rx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1",
-            "interface_id": "clk_sys"
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
+            "interface_id": "local_rx"
           }
         }
       ]
@@ -2994,19 +2976,37 @@
       ]
     },
     {
+      "id": "iniu1_sys_iniu1_clk_clk_sys_34@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu1",
+            "interface_id": "clk_sys"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu1.clk_sys_porting"
+          }
+        }
+      ]
+    },
+    {
       "id": "iniu1_sys_iniu1_rst_n_rst_sys_n_35@intr_ring_noc_4i2t.iniu1",
       "scope": "intr_ring_noc_4i2t.iniu1",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu1",
-            "interface_id": "rst_sys_n"
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_sys",
+            "interface_id": "rst_n"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_sys",
-            "interface_id": "rst_n"
+            "node_id": "intr_ring_noc_4i2t.iniu1",
+            "interface_id": "rst_sys_n"
           }
         }
       ]
@@ -3054,30 +3054,6 @@
       ]
     },
     {
-      "id": "merged_iniu1_ring_link_cw_iniu1_ring_clk_clk_24_iniu1_top_iniu1_clk_clk_noc_36_38@intr_ring_noc_4i2t.iniu1.iniu1_ring",
-      "scope": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_link_cw",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_link_ccw",
-            "interface_id": "clk"
-          }
-        }
-      ]
-    },
-    {
       "id": "merged_iniu1_ring_link_cw_iniu1_ring_clk_clk_24_iniu1_top_iniu1_clk_clk_noc_36_38@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
@@ -3091,6 +3067,54 @@
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t",
             "interface_id": "iniu1.clk_noc_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_iniu1_ring_link_cw_iniu1_ring_clk_clk_24_iniu1_top_iniu1_clk_clk_noc_36_38@intr_ring_noc_4i2t.iniu1.iniu1_ring",
+      "scope": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_link_cw",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_link_ccw",
+            "interface_id": "clk"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_iniu1_ring_link_cw_iniu1_ring_rst_n_rst_n_25_iniu1_top_iniu1_rst_n_rst_noc_n_37_39@intr_ring_noc_4i2t.iniu1",
+      "scope": "intr_ring_noc_4i2t.iniu1",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu1",
+            "interface_id": "rst_noc_n"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_top",
+            "interface_id": "rst_n"
           }
         }
       ]
@@ -3125,37 +3149,13 @@
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint3": {
             "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_link_ccw",
             "interface_id": "rst_n"
           }
-        }
-      ]
-    },
-    {
-      "id": "merged_iniu1_ring_link_cw_iniu1_ring_rst_n_rst_n_25_iniu1_top_iniu1_rst_n_rst_noc_n_37_39@intr_ring_noc_4i2t.iniu1",
-      "scope": "intr_ring_noc_4i2t.iniu1",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu1",
-            "interface_id": "rst_noc_n"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
-            "interface_id": "rst_n"
-          }
         },
         {
           "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_top",
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
             "interface_id": "rst_n"
           }
         }
@@ -3167,13 +3167,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_top",
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_sys",
             "interface_id": "async_fifo"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_sys",
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_top",
             "interface_id": "async_fifo"
           }
         }
@@ -3198,24 +3198,6 @@
       ]
     },
     {
-      "id": "iniu1_iniu1_sys_iniu1_sys.v_interrupt_porting_v_interrupt_42@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu1.iniu1_sys.v_interrupt_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1",
-            "interface_id": "iniu1_sys.v_interrupt_porting"
-          }
-        }
-      ]
-    },
-    {
       "id": "iniu1_iniu1_sys_iniu1_sys.v_interrupt_porting_v_interrupt_42@intr_ring_noc_4i2t.iniu1",
       "scope": "intr_ring_noc_4i2t.iniu1",
       "endpoints": [
@@ -3234,19 +3216,37 @@
       ]
     },
     {
-      "id": "iniu1_iniu1_sys_iniu1_sys.iniu_src_id_porting_iniu_src_id_43@intr_ring_noc_4i2t.iniu1",
-      "scope": "intr_ring_noc_4i2t.iniu1",
+      "id": "iniu1_iniu1_sys_iniu1_sys.v_interrupt_porting_v_interrupt_42@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_sys",
-            "interface_id": "iniu_src_id"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu1.iniu1_sys.v_interrupt_porting"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.iniu1",
+            "interface_id": "iniu1_sys.v_interrupt_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "iniu1_iniu1_sys_iniu1_sys.iniu_src_id_porting_iniu_src_id_43@intr_ring_noc_4i2t.iniu1",
+      "scope": "intr_ring_noc_4i2t.iniu1",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu1",
             "interface_id": "iniu1_sys.iniu_src_id_porting"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_sys",
+            "interface_id": "iniu_src_id"
           }
         }
       ]
@@ -3329,14 +3329,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu1",
-            "interface_id": "iniu1_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu1.iniu1_sys.timeout_val_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu1.iniu1_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu1",
+            "interface_id": "iniu1_sys.timeout_val_porting"
           }
         }
       ]
@@ -3401,14 +3401,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_sta",
-            "interface_id": "ccw_out"
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_link_ccw",
+            "interface_id": "s_req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_link_ccw",
-            "interface_id": "s_req"
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_sta",
+            "interface_id": "ccw_out"
           }
         }
       ]
@@ -3419,13 +3419,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_sta",
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring",
             "interface_id": "local_tx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring",
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_sta",
             "interface_id": "local_tx"
           }
         }
@@ -3437,14 +3437,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_top",
-            "interface_id": "ring_req"
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring",
+            "interface_id": "local_tx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring",
-            "interface_id": "local_tx"
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_top",
+            "interface_id": "ring_req"
           }
         }
       ]
@@ -3473,13 +3473,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring",
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring_sink",
             "interface_id": "local_rx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring_sink",
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring",
             "interface_id": "local_rx"
           }
         }
@@ -3527,14 +3527,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu2.rst_sys_n_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "rst_sys_n"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "rst_sys_n"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu2.rst_sys_n_porting"
           }
         }
       ]
@@ -3545,14 +3545,32 @@
       "endpoints": [
         {
           "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "rst_sys_n"
+          }
+        },
+        {
+          "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
             "interface_id": "rst_n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_iniu2_ring_link_cw_iniu2_ring_clk_clk_47_iniu2_top_iniu2_clk_clk_noc_59_61@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu2.clk_noc_porting"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "rst_sys_n"
+            "interface_id": "clk_noc"
           }
         }
       ]
@@ -3582,24 +3600,6 @@
       ]
     },
     {
-      "id": "merged_iniu2_ring_link_cw_iniu2_ring_clk_clk_47_iniu2_top_iniu2_clk_clk_noc_59_61@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "clk_noc"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu2.clk_noc_porting"
-          }
-        }
-      ]
-    },
-    {
       "id": "merged_iniu2_ring_link_cw_iniu2_ring_clk_clk_47_iniu2_top_iniu2_clk_clk_noc_59_61@intr_ring_noc_4i2t.iniu2",
       "scope": "intr_ring_noc_4i2t.iniu2",
       "endpoints": [
@@ -3624,6 +3624,24 @@
       ]
     },
     {
+      "id": "merged_iniu2_ring_link_cw_iniu2_ring_rst_n_rst_n_48_iniu2_top_iniu2_rst_n_rst_noc_n_60_62@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu2.rst_noc_n_porting"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "rst_noc_n"
+          }
+        }
+      ]
+    },
+    {
       "id": "merged_iniu2_ring_link_cw_iniu2_ring_rst_n_rst_n_48_iniu2_top_iniu2_rst_n_rst_noc_n_60_62@intr_ring_noc_4i2t.iniu2.iniu2_ring",
       "scope": "intr_ring_noc_4i2t.iniu2.iniu2_ring",
       "endpoints": [
@@ -3643,24 +3661,6 @@
           "endpoint3": {
             "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_link_ccw",
             "interface_id": "rst_n"
-          }
-        }
-      ]
-    },
-    {
-      "id": "merged_iniu2_ring_link_cw_iniu2_ring_rst_n_rst_n_48_iniu2_top_iniu2_rst_n_rst_noc_n_60_62@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu2.rst_noc_n_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "rst_noc_n"
           }
         }
       ]
@@ -3695,13 +3695,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_top",
             "interface_id": "async_fifo"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_top",
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
             "interface_id": "async_fifo"
           }
         }
@@ -3713,13 +3713,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_top",
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
             "interface_id": "lp_async"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_top",
             "interface_id": "lp_async"
           }
         }
@@ -3731,14 +3731,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu2.iniu2_sys.v_interrupt_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "iniu2_sys.v_interrupt_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "iniu2_sys.v_interrupt_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu2.iniu2_sys.v_interrupt_porting"
           }
         }
       ]
@@ -3749,14 +3749,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
-            "interface_id": "v_interrupt"
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "iniu2_sys.v_interrupt_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "iniu2_sys.v_interrupt_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
+            "interface_id": "v_interrupt"
           }
         }
       ]
@@ -3767,14 +3767,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu2.iniu2_sys.iniu_src_id_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "iniu2_sys.iniu_src_id_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "iniu2_sys.iniu_src_id_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu2.iniu2_sys.iniu_src_id_porting"
           }
         }
       ]
@@ -3785,14 +3785,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
-            "interface_id": "iniu_src_id"
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "iniu2_sys.iniu_src_id_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "iniu2_sys.iniu_src_id_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
+            "interface_id": "iniu_src_id"
           }
         }
       ]
@@ -3803,14 +3803,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "iniu2_sys.apb_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu2.iniu2_sys.apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu2.iniu2_sys.apb_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "iniu2_sys.apb_porting"
           }
         }
       ]
@@ -3821,14 +3821,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "iniu2_sys.apb_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
+            "interface_id": "apb"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
-            "interface_id": "apb"
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "iniu2_sys.apb_porting"
           }
         }
       ]
@@ -3839,14 +3839,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu2.iniu2_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "iniu2_sys.timeout_val_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "iniu2_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu2.iniu2_sys.timeout_val_porting"
           }
         }
       ]
@@ -3857,14 +3857,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
-            "interface_id": "timeout_val"
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "iniu2_sys.timeout_val_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "iniu2_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_sys",
+            "interface_id": "timeout_val"
           }
         }
       ]
@@ -3929,14 +3929,32 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_ccw",
-            "interface_id": "s_req"
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_sta",
+            "interface_id": "ccw_out"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_sta",
-            "interface_id": "ccw_out"
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_ccw",
+            "interface_id": "s_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "iniu3_ring_sta_iniu3_ring_local_tx_local_tx_78@intr_ring_noc_4i2t.iniu3",
+      "scope": "intr_ring_noc_4i2t.iniu3",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_top",
+            "interface_id": "ring_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
+            "interface_id": "local_tx"
           }
         }
       ]
@@ -3960,42 +3978,6 @@
       ]
     },
     {
-      "id": "iniu3_ring_sta_iniu3_ring_local_tx_local_tx_78@intr_ring_noc_4i2t.iniu3",
-      "scope": "intr_ring_noc_4i2t.iniu3",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-            "interface_id": "local_tx"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_top",
-            "interface_id": "ring_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "iniu3_ring_sta_iniu3_ring_local_rx_local_rx_79@intr_ring_noc_4i2t.iniu3.iniu3_ring",
-      "scope": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_sta",
-            "interface_id": "local_rx"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-            "interface_id": "local_rx"
-          }
-        }
-      ]
-    },
-    {
       "id": "iniu3_ring_sta_iniu3_ring_local_rx_local_rx_79@intr_ring_noc_4i2t.iniu3",
       "scope": "intr_ring_noc_4i2t.iniu3",
       "endpoints": [
@@ -4014,19 +3996,19 @@
       ]
     },
     {
-      "id": "iniu3_sys_iniu3_clk_clk_sys_80@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
+      "id": "iniu3_ring_sta_iniu3_ring_local_rx_local_rx_79@intr_ring_noc_4i2t.iniu3.iniu3_ring",
+      "scope": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu3.clk_sys_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
+            "interface_id": "local_rx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "clk_sys"
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_sta",
+            "interface_id": "local_rx"
           }
         }
       ]
@@ -4050,19 +4032,19 @@
       ]
     },
     {
-      "id": "iniu3_sys_iniu3_rst_n_rst_sys_n_81@intr_ring_noc_4i2t",
+      "id": "iniu3_sys_iniu3_clk_clk_sys_80@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "rst_sys_n"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu3.clk_sys_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu3.rst_sys_n_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu3",
+            "interface_id": "clk_sys"
           }
         }
       ]
@@ -4086,43 +4068,19 @@
       ]
     },
     {
-      "id": "merged_iniu3_ring_link_cw_iniu3_ring_clk_clk_70_iniu3_top_iniu3_clk_clk_noc_82_84@intr_ring_noc_4i2t",
+      "id": "iniu3_sys_iniu3_rst_n_rst_sys_n_81@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "clk_noc"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu3.clk_noc_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "merged_iniu3_ring_link_cw_iniu3_ring_clk_clk_70_iniu3_top_iniu3_clk_clk_noc_82_84@intr_ring_noc_4i2t.iniu3.iniu3_ring",
-      "scope": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-            "interface_id": "clk"
+            "interface_id": "iniu3.rst_sys_n_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_cw",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_ccw",
-            "interface_id": "clk"
+            "node_id": "intr_ring_noc_4i2t.iniu3",
+            "interface_id": "rst_sys_n"
           }
         }
       ]
@@ -4152,6 +4110,96 @@
       ]
     },
     {
+      "id": "merged_iniu3_ring_link_cw_iniu3_ring_clk_clk_70_iniu3_top_iniu3_clk_clk_noc_82_84@intr_ring_noc_4i2t.iniu3.iniu3_ring",
+      "scope": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_cw",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_ccw",
+            "interface_id": "clk"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_iniu3_ring_link_cw_iniu3_ring_clk_clk_70_iniu3_top_iniu3_clk_clk_noc_82_84@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu3",
+            "interface_id": "clk_noc"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu3.clk_noc_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_iniu3_ring_link_cw_iniu3_ring_rst_n_rst_n_71_iniu3_top_iniu3_rst_n_rst_noc_n_83_85@intr_ring_noc_4i2t.iniu3",
+      "scope": "intr_ring_noc_4i2t.iniu3",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_top",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "intr_ring_noc_4i2t.iniu3",
+            "interface_id": "rst_noc_n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_iniu3_ring_link_cw_iniu3_ring_rst_n_rst_n_71_iniu3_top_iniu3_rst_n_rst_noc_n_83_85@intr_ring_noc_4i2t.iniu3.iniu3_ring",
+      "scope": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_ccw",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_cw",
+            "interface_id": "rst_n"
+          }
+        }
+      ]
+    },
+    {
       "id": "merged_iniu3_ring_link_cw_iniu3_ring_rst_n_rst_n_71_iniu3_top_iniu3_rst_n_rst_noc_n_83_85@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
@@ -4170,66 +4218,18 @@
       ]
     },
     {
-      "id": "merged_iniu3_ring_link_cw_iniu3_ring_rst_n_rst_n_71_iniu3_top_iniu3_rst_n_rst_noc_n_83_85@intr_ring_noc_4i2t.iniu3.iniu3_ring",
-      "scope": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_cw",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_ccw",
-            "interface_id": "rst_n"
-          }
-        }
-      ]
-    },
-    {
-      "id": "merged_iniu3_ring_link_cw_iniu3_ring_rst_n_rst_n_71_iniu3_top_iniu3_rst_n_rst_noc_n_83_85@intr_ring_noc_4i2t.iniu3",
-      "scope": "intr_ring_noc_4i2t.iniu3",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_top",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "rst_noc_n"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-            "interface_id": "rst_n"
-          }
-        }
-      ]
-    },
-    {
       "id": "iniu3_sys_iniu3_top_async_fifo_async_fifo_86@intr_ring_noc_4i2t.iniu3",
       "scope": "intr_ring_noc_4i2t.iniu3",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_sys",
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_top",
             "interface_id": "async_fifo"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_top",
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_sys",
             "interface_id": "async_fifo"
           }
         }
@@ -4254,24 +4254,6 @@
       ]
     },
     {
-      "id": "iniu3_iniu3_sys_iniu3_sys.v_interrupt_porting_v_interrupt_88@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "iniu3_sys.v_interrupt_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu3.iniu3_sys.v_interrupt_porting"
-          }
-        }
-      ]
-    },
-    {
       "id": "iniu3_iniu3_sys_iniu3_sys.v_interrupt_porting_v_interrupt_88@intr_ring_noc_4i2t.iniu3",
       "scope": "intr_ring_noc_4i2t.iniu3",
       "endpoints": [
@@ -4290,19 +4272,19 @@
       ]
     },
     {
-      "id": "iniu3_iniu3_sys_iniu3_sys.iniu_src_id_porting_iniu_src_id_89@intr_ring_noc_4i2t",
+      "id": "iniu3_iniu3_sys_iniu3_sys.v_interrupt_porting_v_interrupt_88@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
             "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "iniu3_sys.iniu_src_id_porting"
+            "interface_id": "iniu3_sys.v_interrupt_porting"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu3.iniu3_sys.iniu_src_id_porting"
+            "interface_id": "iniu3.iniu3_sys.v_interrupt_porting"
           }
         }
       ]
@@ -4326,19 +4308,19 @@
       ]
     },
     {
-      "id": "iniu3_iniu3_sys_iniu3_sys.apb_porting_apb_90@intr_ring_noc_4i2t",
+      "id": "iniu3_iniu3_sys_iniu3_sys.iniu_src_id_porting_iniu_src_id_89@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
             "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu3.iniu3_sys.apb_porting"
+            "interface_id": "iniu3.iniu3_sys.iniu_src_id_porting"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "iniu3_sys.apb_porting"
+            "interface_id": "iniu3_sys.iniu_src_id_porting"
           }
         }
       ]
@@ -4349,32 +4331,32 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_sys",
-            "interface_id": "apb"
+            "node_id": "intr_ring_noc_4i2t.iniu3",
+            "interface_id": "iniu3_sys.apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "iniu3_sys.apb_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_sys",
+            "interface_id": "apb"
           }
         }
       ]
     },
     {
-      "id": "iniu3_iniu3_sys_iniu3_sys.timeout_val_porting_timeout_val_91@intr_ring_noc_4i2t",
+      "id": "iniu3_iniu3_sys_iniu3_sys.apb_porting_apb_90@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
             "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "iniu3_sys.timeout_val_porting"
+            "interface_id": "iniu3_sys.apb_porting"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu3.iniu3_sys.timeout_val_porting"
+            "interface_id": "iniu3.iniu3_sys.apb_porting"
           }
         }
       ]
@@ -4398,19 +4380,19 @@
       ]
     },
     {
-      "id": "iniu3_iniu3_sys_iniu3_sys.lp_hub_porting_lp_hub_92@intr_ring_noc_4i2t",
+      "id": "iniu3_iniu3_sys_iniu3_sys.timeout_val_porting_timeout_val_91@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "iniu3.iniu3_sys.lp_hub_porting"
+            "node_id": "intr_ring_noc_4i2t.iniu3",
+            "interface_id": "iniu3_sys.timeout_val_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "iniu3_sys.lp_hub_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu3.iniu3_sys.timeout_val_porting"
           }
         }
       ]
@@ -4421,14 +4403,32 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_sys",
-            "interface_id": "lp_hub"
+            "node_id": "intr_ring_noc_4i2t.iniu3",
+            "interface_id": "iniu3_sys.lp_hub_porting"
           }
         },
         {
           "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_sys",
+            "interface_id": "lp_hub"
+          }
+        }
+      ]
+    },
+    {
+      "id": "iniu3_iniu3_sys_iniu3_sys.lp_hub_porting_lp_hub_92@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
             "node_id": "intr_ring_noc_4i2t.iniu3",
             "interface_id": "iniu3_sys.lp_hub_porting"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "iniu3.iniu3_sys.lp_hub_porting"
           }
         }
       ]
@@ -4475,13 +4475,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring_source",
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
             "interface_id": "local_tx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring_source",
             "interface_id": "local_tx"
           }
         }
@@ -4493,13 +4493,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_sta",
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
             "interface_id": "local_tx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_sta",
             "interface_id": "local_tx"
           }
         }
@@ -4542,24 +4542,6 @@
       ]
     },
     {
-      "id": "tniu0_sys_tniu0_clk_clk_sys_103@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "clk_sys"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu0.clk_sys_porting"
-          }
-        }
-      ]
-    },
-    {
       "id": "tniu0_sys_tniu0_clk_clk_sys_103@intr_ring_noc_4i2t.tniu0",
       "scope": "intr_ring_noc_4i2t.tniu0",
       "endpoints": [
@@ -4578,19 +4560,19 @@
       ]
     },
     {
-      "id": "tniu0_sys_tniu0_rst_n_rst_sys_n_104@intr_ring_noc_4i2t",
+      "id": "tniu0_sys_tniu0_clk_clk_sys_103@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "rst_sys_n"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu0.clk_sys_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu0.rst_sys_n_porting"
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "clk_sys"
           }
         }
       ]
@@ -4614,6 +4596,48 @@
       ]
     },
     {
+      "id": "tniu0_sys_tniu0_rst_n_rst_sys_n_104@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu0.rst_sys_n_porting"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "rst_sys_n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_tniu0_ring_link_cw_tniu0_ring_clk_clk_93_tniu0_top_tniu0_clk_clk_noc_105_107@intr_ring_noc_4i2t.tniu0",
+      "scope": "intr_ring_noc_4i2t.tniu0",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_top",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "clk_noc"
+          }
+        }
+      ]
+    },
+    {
       "id": "merged_tniu0_ring_link_cw_tniu0_ring_clk_clk_93_tniu0_top_tniu0_clk_clk_noc_105_107@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
@@ -4632,67 +4656,25 @@
       ]
     },
     {
-      "id": "merged_tniu0_ring_link_cw_tniu0_ring_clk_clk_93_tniu0_top_tniu0_clk_clk_noc_105_107@intr_ring_noc_4i2t.tniu0",
-      "scope": "intr_ring_noc_4i2t.tniu0",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_top",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "clk_noc"
-          }
-        }
-      ]
-    },
-    {
       "id": "merged_tniu0_ring_link_cw_tniu0_ring_clk_clk_93_tniu0_top_tniu0_clk_clk_noc_105_107@intr_ring_noc_4i2t.tniu0.tniu0_ring",
       "scope": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
       "endpoints": [
         {
           "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_link_ccw",
             "interface_id": "clk"
           }
         },
         {
-          "endpoint2": {
+          "endpoint3": {
             "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_link_cw",
             "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
-            "interface_id": "clk"
-          }
-        }
-      ]
-    },
-    {
-      "id": "merged_tniu0_ring_link_cw_tniu0_ring_rst_n_rst_n_94_tniu0_top_tniu0_rst_n_rst_noc_n_106_108@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "rst_noc_n"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu0.rst_noc_n_porting"
           }
         }
       ]
@@ -4722,6 +4704,24 @@
       ]
     },
     {
+      "id": "merged_tniu0_ring_link_cw_tniu0_ring_rst_n_rst_n_94_tniu0_top_tniu0_rst_n_rst_noc_n_106_108@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "rst_noc_n"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu0.rst_noc_n_porting"
+          }
+        }
+      ]
+    },
+    {
       "id": "merged_tniu0_ring_link_cw_tniu0_ring_rst_n_rst_n_94_tniu0_top_tniu0_rst_n_rst_noc_n_106_108@intr_ring_noc_4i2t.tniu0.tniu0_ring",
       "scope": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
       "endpoints": [
@@ -4733,13 +4733,13 @@
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_link_ccw",
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
             "interface_id": "rst_n"
           }
         },
         {
           "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring.tniu0_ring_link_ccw",
             "interface_id": "rst_n"
           }
         }
@@ -4751,13 +4751,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_top",
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_sys",
             "interface_id": "async_fifo"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_sys",
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_top",
             "interface_id": "async_fifo"
           }
         }
@@ -4769,13 +4769,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_sys",
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_top",
             "interface_id": "lp_async"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_top",
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_sys",
             "interface_id": "lp_async"
           }
         }
@@ -4787,32 +4787,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_top",
-            "interface_id": "lp_niu_hub"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_sys",
             "interface_id": "lp_niu_hub"
           }
-        }
-      ]
-    },
-    {
-      "id": "tniu0_tniu0_top_tniu0_top.timeout_val_porting_timeout_val_112@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "tniu0_top.timeout_val_porting"
-          }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu0.tniu0_top.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_top",
+            "interface_id": "lp_niu_hub"
           }
         }
       ]
@@ -4823,8 +4805,26 @@
       "endpoints": [
         {
           "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "tniu0_top.timeout_val_porting"
+          }
+        },
+        {
+          "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_top",
             "interface_id": "timeout_val"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu0_tniu0_top_tniu0_top.timeout_val_porting_timeout_val_112@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu0.tniu0_top.timeout_val_porting"
           }
         },
         {
@@ -4836,55 +4836,37 @@
       ]
     },
     {
-      "id": "tniu0_tniu0_top_tniu0_top.lp_hub_porting_lp_hub_113@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu0.tniu0_top.lp_hub_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "tniu0_top.lp_hub_porting"
-          }
-        }
-      ]
-    },
-    {
       "id": "tniu0_tniu0_top_tniu0_top.lp_hub_porting_lp_hub_113@intr_ring_noc_4i2t.tniu0",
       "scope": "intr_ring_noc_4i2t.tniu0",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_top",
-            "interface_id": "lp_hub"
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "tniu0_top.lp_hub_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "tniu0_top.lp_hub_porting"
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_top",
+            "interface_id": "lp_hub"
           }
         }
       ]
     },
     {
-      "id": "tniu0_tniu0_sys_tniu0_sys.tniu_tgt_id_porting_tniu_tgt_id_114@intr_ring_noc_4i2t",
+      "id": "tniu0_tniu0_top_tniu0_top.lp_hub_porting_lp_hub_113@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
             "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "tniu0_sys.tniu_tgt_id_porting"
+            "interface_id": "tniu0_top.lp_hub_porting"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu0.tniu0_sys.tniu_tgt_id_porting"
+            "interface_id": "tniu0.tniu0_top.lp_hub_porting"
           }
         }
       ]
@@ -4908,19 +4890,19 @@
       ]
     },
     {
-      "id": "tniu0_tniu0_sys_tniu0_sys.v_interrupt_porting_v_interrupt_115@intr_ring_noc_4i2t",
+      "id": "tniu0_tniu0_sys_tniu0_sys.tniu_tgt_id_porting_tniu_tgt_id_114@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
             "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu0.tniu0_sys.v_interrupt_porting"
+            "interface_id": "tniu0.tniu0_sys.tniu_tgt_id_porting"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "tniu0_sys.v_interrupt_porting"
+            "interface_id": "tniu0_sys.tniu_tgt_id_porting"
           }
         }
       ]
@@ -4931,32 +4913,32 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_sys",
-            "interface_id": "v_interrupt"
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "tniu0_sys.v_interrupt_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "tniu0_sys.v_interrupt_porting"
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_sys",
+            "interface_id": "v_interrupt"
           }
         }
       ]
     },
     {
-      "id": "tniu0_tniu0_sys_tniu0_sys.v_merge_interrupt_porting_v_merge_interrupt_116@intr_ring_noc_4i2t",
+      "id": "tniu0_tniu0_sys_tniu0_sys.v_interrupt_porting_v_interrupt_115@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
             "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "tniu0_sys.v_merge_interrupt_porting"
+            "interface_id": "tniu0_sys.v_interrupt_porting"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu0.tniu0_sys.v_merge_interrupt_porting"
+            "interface_id": "tniu0.tniu0_sys.v_interrupt_porting"
           }
         }
       ]
@@ -4980,19 +4962,19 @@
       ]
     },
     {
-      "id": "tniu0_tniu0_sys_tniu0_sys.apb_porting_apb_117@intr_ring_noc_4i2t",
+      "id": "tniu0_tniu0_sys_tniu0_sys.v_merge_interrupt_porting_v_merge_interrupt_116@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
             "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu0.tniu0_sys.apb_porting"
+            "interface_id": "tniu0.tniu0_sys.v_merge_interrupt_porting"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "tniu0_sys.apb_porting"
+            "interface_id": "tniu0_sys.v_merge_interrupt_porting"
           }
         }
       ]
@@ -5003,32 +4985,32 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_sys",
-            "interface_id": "apb"
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "tniu0_sys.apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "tniu0_sys.apb_porting"
+            "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_sys",
+            "interface_id": "apb"
           }
         }
       ]
     },
     {
-      "id": "tniu0_tniu0_sys_tniu0_sys.timeout_val_porting_timeout_val_118@intr_ring_noc_4i2t",
+      "id": "tniu0_tniu0_sys_tniu0_sys.apb_porting_apb_117@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu0.tniu0_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "tniu0_sys.apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "tniu0_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu0.tniu0_sys.apb_porting"
           }
         }
       ]
@@ -5052,19 +5034,37 @@
       ]
     },
     {
+      "id": "tniu0_tniu0_sys_tniu0_sys.timeout_val_porting_timeout_val_118@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu0.tniu0_sys.timeout_val_porting"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "tniu0_sys.timeout_val_porting"
+          }
+        }
+      ]
+    },
+    {
       "id": "tniu1_ring_sta_tniu1_ring_link_cw_cw_out_s_req_121@intr_ring_noc_4i2t.tniu1.tniu1_ring",
       "scope": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_sta",
-            "interface_id": "cw_out"
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_cw",
+            "interface_id": "s_req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_cw",
-            "interface_id": "s_req"
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_sta",
+            "interface_id": "cw_out"
           }
         }
       ]
@@ -5075,32 +5075,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_ccw",
-            "interface_id": "s_req"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_sta",
             "interface_id": "ccw_out"
           }
-        }
-      ]
-    },
-    {
-      "id": "tniu1_ring_sta_tniu1_ring_local_tx_local_tx_127@intr_ring_noc_4i2t.tniu1.tniu1_ring",
-      "scope": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
-            "interface_id": "local_tx"
-          }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_sta",
-            "interface_id": "local_tx"
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_ccw",
+            "interface_id": "s_req"
           }
         }
       ]
@@ -5111,13 +5093,31 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring_source",
             "interface_id": "local_tx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring_source",
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+            "interface_id": "local_tx"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu1_ring_sta_tniu1_ring_local_tx_local_tx_127@intr_ring_noc_4i2t.tniu1.tniu1_ring",
+      "scope": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_sta",
+            "interface_id": "local_tx"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
             "interface_id": "local_tx"
           }
         }
@@ -5129,14 +5129,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_top",
-            "interface_id": "ring_req"
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+            "interface_id": "local_rx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
-            "interface_id": "local_rx"
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_top",
+            "interface_id": "ring_req"
           }
         }
       ]
@@ -5147,14 +5147,32 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_sta",
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
             "interface_id": "local_rx"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_sta",
             "interface_id": "local_rx"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu1_sys_tniu1_clk_clk_sys_129@intr_ring_noc_4i2t.tniu1",
+      "scope": "intr_ring_noc_4i2t.tniu1",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "clk_sys"
           }
         }
       ]
@@ -5178,42 +5196,6 @@
       ]
     },
     {
-      "id": "tniu1_sys_tniu1_clk_clk_sys_129@intr_ring_noc_4i2t.tniu1",
-      "scope": "intr_ring_noc_4i2t.tniu1",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "clk_sys"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
-            "interface_id": "clk"
-          }
-        }
-      ]
-    },
-    {
-      "id": "tniu1_sys_tniu1_rst_n_rst_sys_n_130@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "rst_sys_n"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu1.rst_sys_n_porting"
-          }
-        }
-      ]
-    },
-    {
       "id": "tniu1_sys_tniu1_rst_n_rst_sys_n_130@intr_ring_noc_4i2t.tniu1",
       "scope": "intr_ring_noc_4i2t.tniu1",
       "endpoints": [
@@ -5232,43 +5214,19 @@
       ]
     },
     {
-      "id": "merged_tniu1_ring_link_cw_tniu1_ring_clk_clk_119_tniu1_top_tniu1_clk_clk_noc_131_133@intr_ring_noc_4i2t.tniu1.tniu1_ring",
-      "scope": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_ccw",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_cw",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
-            "interface_id": "clk"
-          }
-        }
-      ]
-    },
-    {
-      "id": "merged_tniu1_ring_link_cw_tniu1_ring_clk_clk_119_tniu1_top_tniu1_clk_clk_noc_131_133@intr_ring_noc_4i2t",
+      "id": "tniu1_sys_tniu1_rst_n_rst_sys_n_130@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "clk_noc"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu1.rst_sys_n_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu1.clk_noc_porting"
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "rst_sys_n"
           }
         }
       ]
@@ -5293,6 +5251,72 @@
           "endpoint3": {
             "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
             "interface_id": "clk"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_tniu1_ring_link_cw_tniu1_ring_clk_clk_119_tniu1_top_tniu1_clk_clk_noc_131_133@intr_ring_noc_4i2t.tniu1.tniu1_ring",
+      "scope": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_cw",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_link_ccw",
+            "interface_id": "clk"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_tniu1_ring_link_cw_tniu1_ring_clk_clk_119_tniu1_top_tniu1_clk_clk_noc_131_133@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "clk_noc"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu1.clk_noc_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_tniu1_ring_link_cw_tniu1_ring_rst_n_rst_n_120_tniu1_top_tniu1_rst_n_rst_noc_n_132_134@intr_ring_noc_4i2t.tniu1",
+      "scope": "intr_ring_noc_4i2t.tniu1",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_top",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "rst_noc_n"
           }
         }
       ]
@@ -5340,42 +5364,18 @@
       ]
     },
     {
-      "id": "merged_tniu1_ring_link_cw_tniu1_ring_rst_n_rst_n_120_tniu1_top_tniu1_rst_n_rst_noc_n_132_134@intr_ring_noc_4i2t.tniu1",
-      "scope": "intr_ring_noc_4i2t.tniu1",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_top",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "rst_noc_n"
-          }
-        }
-      ]
-    },
-    {
       "id": "tniu1_sys_tniu1_top_async_fifo_async_fifo_135@intr_ring_noc_4i2t.tniu1",
       "scope": "intr_ring_noc_4i2t.tniu1",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_top",
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
             "interface_id": "async_fifo"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_top",
             "interface_id": "async_fifo"
           }
         }
@@ -5405,32 +5405,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
-            "interface_id": "lp_niu_hub"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_top",
             "interface_id": "lp_niu_hub"
           }
-        }
-      ]
-    },
-    {
-      "id": "tniu1_tniu1_top_tniu1_top.timeout_val_porting_timeout_val_138@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu1.tniu1_top.timeout_val_porting"
-          }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "tniu1_top.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
+            "interface_id": "lp_niu_hub"
           }
         }
       ]
@@ -5454,19 +5436,19 @@
       ]
     },
     {
-      "id": "tniu1_tniu1_top_tniu1_top.lp_hub_porting_lp_hub_139@intr_ring_noc_4i2t",
+      "id": "tniu1_tniu1_top_tniu1_top.timeout_val_porting_timeout_val_138@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
             "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu1.tniu1_top.lp_hub_porting"
+            "interface_id": "tniu1.tniu1_top.timeout_val_porting"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "tniu1_top.lp_hub_porting"
+            "interface_id": "tniu1_top.timeout_val_porting"
           }
         }
       ]
@@ -5477,14 +5459,50 @@
       "endpoints": [
         {
           "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "tniu1_top.lp_hub_porting"
+          }
+        },
+        {
+          "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_top",
             "interface_id": "lp_hub"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu1_tniu1_top_tniu1_top.lp_hub_porting_lp_hub_139@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "tniu1_top.lp_hub_porting"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu1.tniu1_top.lp_hub_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu1_tniu1_sys_tniu1_sys.tniu_tgt_id_porting_tniu_tgt_id_140@intr_ring_noc_4i2t.tniu1",
+      "scope": "intr_ring_noc_4i2t.tniu1",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
+            "interface_id": "tniu_tgt_id"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "tniu1_top.lp_hub_porting"
+            "interface_id": "tniu1_sys.tniu_tgt_id_porting"
           }
         }
       ]
@@ -5508,42 +5526,6 @@
       ]
     },
     {
-      "id": "tniu1_tniu1_sys_tniu1_sys.tniu_tgt_id_porting_tniu_tgt_id_140@intr_ring_noc_4i2t.tniu1",
-      "scope": "intr_ring_noc_4i2t.tniu1",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "tniu1_sys.tniu_tgt_id_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
-            "interface_id": "tniu_tgt_id"
-          }
-        }
-      ]
-    },
-    {
-      "id": "tniu1_tniu1_sys_tniu1_sys.v_interrupt_porting_v_interrupt_141@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu1.tniu1_sys.v_interrupt_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "tniu1_sys.v_interrupt_porting"
-          }
-        }
-      ]
-    },
-    {
       "id": "tniu1_tniu1_sys_tniu1_sys.v_interrupt_porting_v_interrupt_141@intr_ring_noc_4i2t.tniu1",
       "scope": "intr_ring_noc_4i2t.tniu1",
       "endpoints": [
@@ -5562,19 +5544,19 @@
       ]
     },
     {
-      "id": "tniu1_tniu1_sys_tniu1_sys.v_merge_interrupt_porting_v_merge_interrupt_142@intr_ring_noc_4i2t",
+      "id": "tniu1_tniu1_sys_tniu1_sys.v_interrupt_porting_v_interrupt_141@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu1.tniu1_sys.v_merge_interrupt_porting"
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "tniu1_sys.v_interrupt_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "tniu1_sys.v_merge_interrupt_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu1.tniu1_sys.v_interrupt_porting"
           }
         }
       ]
@@ -5598,19 +5580,19 @@
       ]
     },
     {
-      "id": "tniu1_tniu1_sys_tniu1_sys.apb_porting_apb_143@intr_ring_noc_4i2t",
+      "id": "tniu1_tniu1_sys_tniu1_sys.v_merge_interrupt_porting_v_merge_interrupt_142@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
             "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu1.tniu1_sys.apb_porting"
+            "interface_id": "tniu1.tniu1_sys.v_merge_interrupt_porting"
           }
         },
         {
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "tniu1_sys.apb_porting"
+            "interface_id": "tniu1_sys.v_merge_interrupt_porting"
           }
         }
       ]
@@ -5621,32 +5603,32 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
-            "interface_id": "apb"
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "tniu1_sys.apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "tniu1_sys.apb_porting"
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
+            "interface_id": "apb"
           }
         }
       ]
     },
     {
-      "id": "tniu1_tniu1_sys_tniu1_sys.timeout_val_porting_timeout_val_144@intr_ring_noc_4i2t",
+      "id": "tniu1_tniu1_sys_tniu1_sys.apb_porting_apb_143@intr_ring_noc_4i2t",
       "scope": "intr_ring_noc_4i2t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t",
-            "interface_id": "tniu1.tniu1_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "tniu1_sys.apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "tniu1_sys.timeout_val_porting"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu1.tniu1_sys.apb_porting"
           }
         }
       ]
@@ -5657,14 +5639,32 @@
       "endpoints": [
         {
           "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
+            "interface_id": "timeout_val"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "tniu1_sys.timeout_val_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu1_tniu1_sys_tniu1_sys.timeout_val_porting_timeout_val_144@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
             "node_id": "intr_ring_noc_4i2t.tniu1",
             "interface_id": "tniu1_sys.timeout_val_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_sys",
-            "interface_id": "timeout_val"
+            "node_id": "intr_ring_noc_4i2t",
+            "interface_id": "tniu1.tniu1_sys.timeout_val_porting"
           }
         }
       ]
@@ -5675,14 +5675,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_sta",
-            "interface_id": "cw_in"
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
+            "interface_id": "pring_in_if"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
-            "interface_id": "pring_in_if"
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring.iniu1_ring_sta",
+            "interface_id": "cw_in"
           }
         }
       ]
@@ -5711,13 +5711,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu1",
+            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
             "interface_id": "pring_in_if"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1.iniu1_ring",
+            "node_id": "intr_ring_noc_4i2t.iniu1",
             "interface_id": "pring_in_if"
           }
         }
@@ -5729,13 +5729,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
             "interface_id": "pring_out_if"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
+            "node_id": "intr_ring_noc_4i2t.iniu0",
             "interface_id": "pring_out_if"
           }
         }
@@ -5747,14 +5747,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "pring_out_if"
+            "node_id": "intr_ring_noc_4i2t.iniu1",
+            "interface_id": "pring_in_if"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu1",
-            "interface_id": "pring_in_if"
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "pring_out_if"
           }
         }
       ]
@@ -5783,14 +5783,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
-            "interface_id": "nring_in_if"
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_sta",
+            "interface_id": "ccw_in"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring.iniu0_ring_sta",
-            "interface_id": "ccw_in"
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
+            "interface_id": "nring_in_if"
           }
         }
       ]
@@ -5819,13 +5819,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
             "interface_id": "nring_in_if"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0.iniu0_ring",
+            "node_id": "intr_ring_noc_4i2t.iniu0",
             "interface_id": "nring_in_if"
           }
         }
@@ -5999,14 +5999,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring",
-            "interface_id": "nring_out_if"
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_link_ccw",
+            "interface_id": "m_req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring.iniu2_ring_link_ccw",
-            "interface_id": "m_req"
+            "node_id": "intr_ring_noc_4i2t.iniu2.iniu2_ring",
+            "interface_id": "nring_out_if"
           }
         }
       ]
@@ -6025,24 +6025,6 @@
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.iniu2",
             "interface_id": "nring_out_if"
-          }
-        }
-      ]
-    },
-    {
-      "id": "merged_iniu2_ring_link_cw_iniu2_ring_m_req_pring_out_if_52_iniu3_ring_sta_iniu3_ring_cw_in_pring_in_if_74_149@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "pring_out_if"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "pring_in_if"
           }
         }
       ]
@@ -6073,6 +6055,24 @@
           "endpoint1": {
             "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
             "interface_id": "pring_in_if"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu3",
+            "interface_id": "pring_in_if"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_iniu2_ring_link_cw_iniu2_ring_m_req_pring_out_if_52_iniu3_ring_sta_iniu3_ring_cw_in_pring_in_if_74_149@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "pring_out_if"
           }
         },
         {
@@ -6120,37 +6120,19 @@
       ]
     },
     {
-      "id": "merged_iniu3_ring_link_ccw_iniu3_ring_m_req_nring_out_if_77_iniu2_ring_sta_iniu2_ring_ccw_in_nring_in_if_53_150@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "nring_out_if"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu2",
-            "interface_id": "nring_in_if"
-          }
-        }
-      ]
-    },
-    {
       "id": "merged_iniu3_ring_link_ccw_iniu3_ring_m_req_nring_out_if_77_iniu2_ring_sta_iniu2_ring_ccw_in_nring_in_if_53_150@intr_ring_noc_4i2t.iniu3.iniu3_ring",
       "scope": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
-            "interface_id": "nring_out_if"
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_ccw",
+            "interface_id": "m_req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring.iniu3_ring_link_ccw",
-            "interface_id": "m_req"
+            "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
+            "interface_id": "nring_out_if"
           }
         }
       ]
@@ -6169,6 +6151,24 @@
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
             "interface_id": "nring_out_if"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_iniu3_ring_link_ccw_iniu3_ring_m_req_nring_out_if_77_iniu2_ring_sta_iniu2_ring_ccw_in_nring_in_if_53_150@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu3",
+            "interface_id": "nring_out_if"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu2",
+            "interface_id": "nring_in_if"
           }
         }
       ]
@@ -6228,24 +6228,6 @@
       ]
     },
     {
-      "id": "merged_iniu3_ring_link_cw_iniu3_ring_m_req_pring_out_if_75_tniu0_ring_sta_tniu0_ring_cw_in_pring_in_if_97_151@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "pring_in_if"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "pring_out_if"
-          }
-        }
-      ]
-    },
-    {
       "id": "merged_iniu3_ring_link_cw_iniu3_ring_m_req_pring_out_if_75_tniu0_ring_sta_tniu0_ring_cw_in_pring_in_if_97_151@intr_ring_noc_4i2t.iniu3.iniu3_ring",
       "scope": "intr_ring_noc_4i2t.iniu3.iniu3_ring",
       "endpoints": [
@@ -6300,6 +6282,24 @@
       ]
     },
     {
+      "id": "merged_iniu3_ring_link_cw_iniu3_ring_m_req_pring_out_if_75_tniu0_ring_sta_tniu0_ring_cw_in_pring_in_if_97_151@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "pring_in_if"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu3",
+            "interface_id": "pring_out_if"
+          }
+        }
+      ]
+    },
+    {
       "id": "merged_tniu0_ring_link_ccw_tniu0_ring_m_req_nring_out_if_100_iniu3_ring_sta_iniu3_ring_ccw_in_nring_in_if_76_152@intr_ring_noc_4i2t.tniu0",
       "scope": "intr_ring_noc_4i2t.tniu0",
       "endpoints": [
@@ -6307,24 +6307,6 @@
           "endpoint1": {
             "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
             "interface_id": "nring_out_if"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "nring_out_if"
-          }
-        }
-      ]
-    },
-    {
-      "id": "merged_tniu0_ring_link_ccw_tniu0_ring_m_req_nring_out_if_100_iniu3_ring_sta_iniu3_ring_ccw_in_nring_in_if_76_152@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu3",
-            "interface_id": "nring_in_if"
           }
         },
         {
@@ -6390,6 +6372,24 @@
       ]
     },
     {
+      "id": "merged_tniu0_ring_link_ccw_tniu0_ring_m_req_nring_out_if_100_iniu3_ring_sta_iniu3_ring_ccw_in_nring_in_if_76_152@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu3",
+            "interface_id": "nring_in_if"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "nring_out_if"
+          }
+        }
+      ]
+    },
+    {
       "id": "merged_tniu0_ring_link_cw_tniu0_ring_m_req_pring_out_if_98_tniu1_ring_sta_tniu1_ring_cw_in_pring_in_if_123_153@intr_ring_noc_4i2t.tniu0",
       "scope": "intr_ring_noc_4i2t.tniu0",
       "endpoints": [
@@ -6403,24 +6403,6 @@
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
             "interface_id": "pring_out_if"
-          }
-        }
-      ]
-    },
-    {
-      "id": "merged_tniu0_ring_link_cw_tniu0_ring_m_req_pring_out_if_98_tniu1_ring_sta_tniu1_ring_cw_in_pring_in_if_123_153@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "pring_out_if"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "pring_in_if"
           }
         }
       ]
@@ -6449,13 +6431,31 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
             "interface_id": "pring_in_if"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "pring_in_if"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_tniu0_ring_link_cw_tniu0_ring_m_req_pring_out_if_98_tniu1_ring_sta_tniu1_ring_cw_in_pring_in_if_123_153@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "pring_out_if"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu1",
             "interface_id": "pring_in_if"
           }
         }
@@ -6498,24 +6498,6 @@
       ]
     },
     {
-      "id": "merged_tniu1_ring_link_ccw_tniu1_ring_m_req_nring_out_if_126_tniu0_ring_sta_tniu0_ring_ccw_in_nring_in_if_99_154@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "nring_out_if"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu0",
-            "interface_id": "nring_in_if"
-          }
-        }
-      ]
-    },
-    {
       "id": "merged_tniu1_ring_link_ccw_tniu1_ring_m_req_nring_out_if_126_tniu0_ring_sta_tniu0_ring_ccw_in_nring_in_if_99_154@intr_ring_noc_4i2t.tniu0.tniu0_ring",
       "scope": "intr_ring_noc_4i2t.tniu0.tniu0_ring",
       "endpoints": [
@@ -6539,14 +6521,32 @@
       "endpoints": [
         {
           "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+            "interface_id": "nring_out_if"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "nring_out_if"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_tniu1_ring_link_ccw_tniu1_ring_m_req_nring_out_if_126_tniu0_ring_sta_tniu0_ring_ccw_in_nring_in_if_99_154@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
             "node_id": "intr_ring_noc_4i2t.tniu1",
             "interface_id": "nring_out_if"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
-            "interface_id": "nring_out_if"
+            "node_id": "intr_ring_noc_4i2t.tniu0",
+            "interface_id": "nring_in_if"
           }
         }
       ]
@@ -6588,24 +6588,6 @@
       ]
     },
     {
-      "id": "merged_tniu1_ring_link_cw_tniu1_ring_m_req_pring_out_if_124_iniu0_ring_sta_iniu0_ring_cw_in_pring_in_if_5_155@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "pring_in_if"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "pring_out_if"
-          }
-        }
-      ]
-    },
-    {
       "id": "merged_tniu1_ring_link_cw_tniu1_ring_m_req_pring_out_if_124_iniu0_ring_sta_iniu0_ring_cw_in_pring_in_if_5_155@intr_ring_noc_4i2t.iniu0",
       "scope": "intr_ring_noc_4i2t.iniu0",
       "endpoints": [
@@ -6629,13 +6611,31 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
             "interface_id": "pring_out_if"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "pring_out_if"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_tniu1_ring_link_cw_tniu1_ring_m_req_pring_out_if_124_iniu0_ring_sta_iniu0_ring_cw_in_pring_in_if_5_155@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "pring_in_if"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.tniu1",
             "interface_id": "pring_out_if"
           }
         }
@@ -6678,24 +6678,6 @@
       ]
     },
     {
-      "id": "merged_iniu0_ring_link_ccw_iniu0_ring_m_req_nring_out_if_8_tniu1_ring_sta_tniu1_ring_ccw_in_nring_in_if_125_156@intr_ring_noc_4i2t",
-      "scope": "intr_ring_noc_4i2t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
-            "interface_id": "nring_in_if"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.iniu0",
-            "interface_id": "nring_out_if"
-          }
-        }
-      ]
-    },
-    {
       "id": "merged_iniu0_ring_link_ccw_iniu0_ring_m_req_nring_out_if_8_tniu1_ring_sta_tniu1_ring_ccw_in_nring_in_if_125_156@intr_ring_noc_4i2t.iniu0",
       "scope": "intr_ring_noc_4i2t.iniu0",
       "endpoints": [
@@ -6719,13 +6701,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
             "interface_id": "nring_in_if"
           }
         },
         {
           "endpoint2": {
-            "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring",
+            "node_id": "intr_ring_noc_4i2t.tniu1",
             "interface_id": "nring_in_if"
           }
         }
@@ -6745,6 +6727,24 @@
           "endpoint2": {
             "node_id": "intr_ring_noc_4i2t.tniu1.tniu1_ring.tniu1_ring_sta",
             "interface_id": "ccw_in"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged_iniu0_ring_link_ccw_iniu0_ring_m_req_nring_out_if_8_tniu1_ring_sta_tniu1_ring_ccw_in_nring_in_if_125_156@intr_ring_noc_4i2t",
+      "scope": "intr_ring_noc_4i2t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "intr_ring_noc_4i2t.tniu1",
+            "interface_id": "nring_in_if"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "intr_ring_noc_4i2t.iniu0",
+            "interface_id": "nring_out_if"
           }
         }
       ]

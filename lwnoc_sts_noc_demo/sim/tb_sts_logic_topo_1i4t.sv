@@ -70,10 +70,12 @@ module tb_sts_logic_topo_1i4t;
     localparam int unsigned SYS_NUM = 10;
     localparam int unsigned TIMEOUT_CYCLES = 20000;
 
-    logic clk_src = 1'b0;
+    logic iniu0_clk_sys = 1'b0;
+    logic [TNIU_NUM-1:0] tniu_clk_sys = '0;
     logic clk_dst = 1'b0;
     logic clk_dbg_timer = 1'b0;
-    logic rstn_src = 1'b0;
+    logic iniu0_rstn_src = 1'b0;
+    logic [TNIU_NUM-1:0] tniu_rstn_src = '0;
     logic rstn_dst = 1'b0;
     logic rstn_dbg_timer = 1'b0;
 
@@ -147,11 +149,37 @@ module tb_sts_logic_topo_1i4t;
     int unsigned debug_lines;
     string testcase;
 
-    always #1 clk_src = ~clk_src;
-    always #2 clk_dst = ~clk_dst;
-    always #3 clk_dbg_timer = ~clk_dbg_timer;
+    // Phase offsets avoid artificial edge alignment between nominally async domains.
+    initial begin
+        #0.4;
+        forever #1 iniu0_clk_sys = ~iniu0_clk_sys;
+    end
+    initial begin
+        #1.3;
+        forever #4 tniu_clk_sys[0] = ~tniu_clk_sys[0];
+    end
+    initial begin
+        #0.9;
+        forever #5 tniu_clk_sys[1] = ~tniu_clk_sys[1];
+    end
+    initial begin
+        #1.7;
+        forever #6 tniu_clk_sys[2] = ~tniu_clk_sys[2];
+    end
+    initial begin
+        #0.6;
+        forever #7 tniu_clk_sys[3] = ~tniu_clk_sys[3];
+    end
+    initial begin
+        #0.2;
+        forever #2 clk_dst = ~clk_dst;
+    end
+    initial begin
+        #0.8;
+        forever #3 clk_dbg_timer = ~clk_dbg_timer;
+    end
 
-    always @(posedge clk_src) begin
+    always @(posedge iniu0_clk_sys) begin
         if ($test$plusargs("DEBUG_STS") && (debug_lines < 128) &&
             (iniu0_axi_porting_s_awvalid || iniu0_axi_porting_s_wvalid || iniu0_axi_porting_s_bvalid ||
              dut.iniu0_TO_noc_dec_SIG_out_req_vld || dut.noc_dec_TO_iniu0_SIG_mst_rsp_vld ||
@@ -301,14 +329,16 @@ module tb_sts_logic_topo_1i4t;
         begin
             drive_axi_idle();
             set_all_stall(0);
-            rstn_src = 1'b0;
+            iniu0_rstn_src = 1'b0;
+            tniu_rstn_src = '0;
             rstn_dst = 1'b0;
             rstn_dbg_timer = 1'b0;
-            repeat (12) @(posedge clk_src);
-            rstn_src = 1'b1;
+            repeat (12) @(posedge iniu0_clk_sys);
+            iniu0_rstn_src = 1'b1;
+            tniu_rstn_src = '1;
             rstn_dst = 1'b1;
             rstn_dbg_timer = 1'b1;
-            repeat (12) @(posedge clk_src);
+            repeat (12) @(posedge iniu0_clk_sys);
             repeat (12) @(posedge clk_dst);
         end
     endtask
@@ -327,7 +357,7 @@ module tb_sts_logic_topo_1i4t;
             aw_done = 0;
             w_done = 0;
             got_b = 0;
-            @(negedge clk_src);
+            @(negedge iniu0_clk_sys);
             iniu0_axi_porting_s_awaddr = addr;
             iniu0_axi_porting_s_awid = id;
             iniu0_axi_porting_s_awvalid = 1'b1;
@@ -338,12 +368,12 @@ module tb_sts_logic_topo_1i4t;
                 begin
                     fork : aw_wait_or_timeout
                         begin
-                            @(posedge clk_src iff iniu0_axi_porting_s_awready);
+                            @(posedge iniu0_clk_sys iff iniu0_axi_porting_s_awready);
                             iniu0_axi_porting_s_awvalid = 1'b0;
                             aw_done = 1;
                         end
                         begin
-                            repeat (TIMEOUT_CYCLES) @(posedge clk_src);
+                            repeat (TIMEOUT_CYCLES) @(posedge iniu0_clk_sys);
                         end
                     join_any
                     disable aw_wait_or_timeout;
@@ -351,12 +381,12 @@ module tb_sts_logic_topo_1i4t;
                 begin
                     fork : w_wait_or_timeout
                         begin
-                            @(posedge clk_src iff iniu0_axi_porting_s_wready);
+                            @(posedge iniu0_clk_sys iff iniu0_axi_porting_s_wready);
                             iniu0_axi_porting_s_wvalid = 1'b0;
                             w_done = 1;
                         end
                         begin
-                            repeat (TIMEOUT_CYCLES) @(posedge clk_src);
+                            repeat (TIMEOUT_CYCLES) @(posedge iniu0_clk_sys);
                         end
                     join_any
                     disable w_wait_or_timeout;
@@ -364,7 +394,7 @@ module tb_sts_logic_topo_1i4t;
             join
             if (!(aw_done && w_done)) $fatal(1, "[STS DEMO] WRITE timeout addr=0x%08h", addr);
             for (int cycle = 0; cycle < TIMEOUT_CYCLES; cycle++) begin
-                @(posedge clk_src);
+                @(posedge iniu0_clk_sys);
                 if (iniu0_axi_porting_s_bvalid && iniu0_axi_porting_s_bready) begin
                     got_b = 1;
                     break;
@@ -373,7 +403,7 @@ module tb_sts_logic_topo_1i4t;
             if (!got_b) $fatal(1, "[STS DEMO] WRITE response timeout addr=0x%08h", addr);
             if (iniu0_axi_porting_s_bid !== id) $fatal(1, "[STS DEMO] WRITE id mismatch exp=%0d act=%0d", id, iniu0_axi_porting_s_bid);
             if (iniu0_axi_porting_s_bresp !== exp_resp) $fatal(1, "[STS DEMO] WRITE resp mismatch addr=0x%08h exp=%0d act=%0d", addr, exp_resp, iniu0_axi_porting_s_bresp);
-            @(posedge clk_src);
+            @(posedge iniu0_clk_sys);
         end
     endtask
 
@@ -389,24 +419,24 @@ module tb_sts_logic_topo_1i4t;
         begin
             ar_done = 0;
             got_r = 0;
-            @(negedge clk_src);
+            @(negedge iniu0_clk_sys);
             iniu0_axi_porting_s_araddr = addr;
             iniu0_axi_porting_s_arid = id;
             iniu0_axi_porting_s_arvalid = 1'b1;
             fork : ar_wait_or_timeout
                 begin
-                    @(posedge clk_src iff iniu0_axi_porting_s_arready);
+                    @(posedge iniu0_clk_sys iff iniu0_axi_porting_s_arready);
                     iniu0_axi_porting_s_arvalid = 1'b0;
                     ar_done = 1;
                 end
                 begin
-                    repeat (TIMEOUT_CYCLES) @(posedge clk_src);
+                    repeat (TIMEOUT_CYCLES) @(posedge iniu0_clk_sys);
                 end
             join_any
             disable ar_wait_or_timeout;
             if (!ar_done) $fatal(1, "[STS DEMO] READ timeout addr=0x%08h", addr);
             for (int cycle = 0; cycle < TIMEOUT_CYCLES; cycle++) begin
-                @(posedge clk_src);
+                @(posedge iniu0_clk_sys);
                 if (iniu0_axi_porting_s_rvalid && iniu0_axi_porting_s_rready) begin
                     got_r = 1;
                     break;
@@ -416,7 +446,7 @@ module tb_sts_logic_topo_1i4t;
             if (iniu0_axi_porting_s_rid !== id) $fatal(1, "[STS DEMO] READ id mismatch exp=%0d act=%0d", id, iniu0_axi_porting_s_rid);
             if (iniu0_axi_porting_s_rresp !== exp_resp) $fatal(1, "[STS DEMO] READ resp mismatch addr=0x%08h exp=%0d act=%0d", addr, exp_resp, iniu0_axi_porting_s_rresp);
             if (check_data && (iniu0_axi_porting_s_rdata !== exp_data)) $fatal(1, "[STS DEMO] READ data mismatch addr=0x%08h exp=0x%08h act=0x%08h", addr, exp_data, iniu0_axi_porting_s_rdata);
-            @(posedge clk_src);
+            @(posedge iniu0_clk_sys);
         end
     endtask
 
@@ -507,13 +537,18 @@ module tb_sts_logic_topo_1i4t;
     endtask
 
     task automatic tc_apb_stall;
+        int unsigned settle_cycles;
         begin
             for (int stall = 0; stall <= 4; stall++) begin
                 set_all_stall(stall);
+                settle_cycles = 16 + stall * 16;
+                repeat (settle_cycles) @(posedge iniu0_clk_sys);
                 for (int t = 0; t < TNIU_NUM; t++) begin
                     do_axi_write(window_base(t, 1), 32'hCC00_0000 + stall * 16 + t, 8'(t), 4'hf, 2'b00);
+                    repeat (settle_cycles) @(posedge iniu0_clk_sys);
                     do_axi_read(window_base(t, 1), 8'(t), 2'b00, 32'hCC00_0000 + stall * 16 + t, 1'b1);
                     do_axi_write(window_base(t, 2), 32'hDD00_0000 + stall * 16 + t, 8'(t + 16), 4'hf, 2'b00);
+                    repeat (settle_cycles) @(posedge iniu0_clk_sys);
                     do_axi_read(window_base(t, 2), 8'(t + 16), 2'b00, 32'hDD00_0000 + stall * 16 + t, 1'b1);
                 end
             end
@@ -523,12 +558,20 @@ module tb_sts_logic_topo_1i4t;
     endtask
 
     sts_logic_topo_1i4t dut (
-        .clk_src(clk_src),
-        .clk_dst(clk_dst),
+        .iniu0_clk_sys(iniu0_clk_sys),
+        .iniu0_rst_sys_n(iniu0_rstn_src),
+        .tniu0_clk_sys(tniu_clk_sys[0]),
+        .tniu0_rst_sys_n(tniu_rstn_src[0]),
+        .tniu1_clk_sys(tniu_clk_sys[1]),
+        .tniu1_rst_sys_n(tniu_rstn_src[1]),
+        .tniu2_clk_sys(tniu_clk_sys[2]),
+        .tniu2_rst_sys_n(tniu_rstn_src[2]),
+        .tniu3_clk_sys(tniu_clk_sys[3]),
+        .tniu3_rst_sys_n(tniu_rstn_src[3]),
+        .clk_noc(clk_dst),
         .clk_dbg_timer(clk_dbg_timer),
-        .rstn_src(rstn_src),
-        .rstn_dst(rstn_dst),
-        .rstn_dbg_timer(rstn_dbg_timer),
+        .rst_noc_n(rstn_dst),
+        .rst_dbg_timer_n(rstn_dbg_timer),
         .iniu0_node_id_porting_node_id(iniu0_node_id_porting_node_id),
         .iniu0_axi_porting_s_araddr(iniu0_axi_porting_s_araddr),
         .iniu0_axi_porting_s_arburst(iniu0_axi_porting_s_arburst),
@@ -721,8 +764,8 @@ module tb_sts_logic_topo_1i4t;
                 sts_demo_apb_stub_slave #(
                     .INIT_PATTERN(32'hA100_0000 + (t * 32'h1000_0000) + (s * 32'h0100_0000))
                 ) u_sys_stub (
-                    .clk(clk_src),
-                    .rst_n(rstn_src),
+                    .clk(tniu_clk_sys[t]),
+                    .rst_n(tniu_rstn_src[t]),
                     .psel(sys_psel[t][s]),
                     .penable(sys_penable[t]),
                     .paddr(sys_paddr[t]),
@@ -767,7 +810,7 @@ module tb_sts_logic_topo_1i4t;
             else $fatal(1, "[STS DEMO] Unknown TESTCASE=%s", testcase);
         end
 
-        repeat (10) @(posedge clk_src);
+        repeat (10) @(posedge iniu0_clk_sys);
         $display("[STS DEMO] PASS: %0d tests passed", pass_count);
         $finish;
     end

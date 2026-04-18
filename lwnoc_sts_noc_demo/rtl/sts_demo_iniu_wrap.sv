@@ -1,5 +1,13 @@
 module `_PREFIX_(sts_demo_iniu_wrap)
     import `_PREFIX_(lwnoc_sts_pack)::*;
+#(
+    parameter int unsigned STS_DEMO_NODE_NUM = 2,
+    parameter int unsigned STS_DEMO_ADDR_MAP_ENTRY_NUM = 48,
+    parameter logic [STS_DEMO_ADDR_MAP_ENTRY_NUM*AXI_ADDR_WIDTH-1:0] STS_DEMO_ADDR_MAP_BASE_TABLE = '0,
+    parameter logic [STS_DEMO_ADDR_MAP_ENTRY_NUM*AXI_ADDR_WIDTH-1:0] STS_DEMO_ADDR_MAP_MASK_TABLE = '0,
+    parameter logic [STS_DEMO_ADDR_MAP_ENTRY_NUM*TGT_ID_WIDTH-1:0] STS_DEMO_ADDR_MAP_TGT_ID_TABLE = '0,
+    parameter logic [TGT_ID_WIDTH-1:0] STS_DEMO_ADDR_MAP_DEFAULT_TGT_ID = '1
+)
 (
     input   logic                       clk_src,
     input   logic                       clk_dst,
@@ -59,18 +67,13 @@ module `_PREFIX_(sts_demo_iniu_wrap)
     input   sts_rsp_typ                 in_rsp_pld
 );
 
-    localparam int unsigned ENTRY_NUM = `STS_DEMO_ADDR_MAP_ENTRY_NUM;
-    localparam logic [ENTRY_NUM*AXI_ADDR_WIDTH-1:0] ADDR_MAP_BASE_TABLE = `STS_DEMO_ADDR_MAP_BASE_TABLE;
-    localparam logic [ENTRY_NUM*AXI_ADDR_WIDTH-1:0] ADDR_MAP_MASK_TABLE = `STS_DEMO_ADDR_MAP_MASK_TABLE;
-    localparam logic [ENTRY_NUM*TGT_ID_WIDTH-1:0] ADDR_MAP_TGT_ID_TABLE = `STS_DEMO_ADDR_MAP_TGT_ID_TABLE;
-
     `_PREFIX_(sts_iniu_top) #(
-        .NODE_NUM                (`STS_DEMO_NODE_NUM),
-        .ADDR_MAP_ENTRY_NUM      (ENTRY_NUM),
-        .ADDR_MAP_BASE_TABLE     (ADDR_MAP_BASE_TABLE),
-        .ADDR_MAP_MASK_TABLE     (ADDR_MAP_MASK_TABLE),
-        .ADDR_MAP_TGT_ID_TABLE   (ADDR_MAP_TGT_ID_TABLE),
-        .ADDR_MAP_DEFAULT_TGT_ID (`STS_DEMO_ADDR_MAP_DEFAULT_TGT_ID)
+        .NODE_NUM                (STS_DEMO_NODE_NUM),
+        .ADDR_MAP_ENTRY_NUM      (STS_DEMO_ADDR_MAP_ENTRY_NUM),
+        .ADDR_MAP_BASE_TABLE     (STS_DEMO_ADDR_MAP_BASE_TABLE),
+        .ADDR_MAP_MASK_TABLE     (STS_DEMO_ADDR_MAP_MASK_TABLE),
+        .ADDR_MAP_TGT_ID_TABLE   (STS_DEMO_ADDR_MAP_TGT_ID_TABLE),
+        .ADDR_MAP_DEFAULT_TGT_ID (STS_DEMO_ADDR_MAP_DEFAULT_TGT_ID)
     ) u_sts_iniu_top (
         .clk_src             (clk_src),
         .clk_dst             (clk_dst),

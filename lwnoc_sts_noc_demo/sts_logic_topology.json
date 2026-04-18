@@ -106,335 +106,8 @@
         }
       },
       "parents": [
-        "__global_virtual_wrapper__",
-        "sts_logic_topo_1i4t"
-      ]
-    },
-    "sts_logic_topo_1i4t.noc_dec": {
-      "type": "atomic",
-      "node_name": "noc_dec",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_logic_topo_1i4t"
-      ]
-    },
-    "sts_logic_topo_1i4t.iniu0": {
-      "type": "atomic",
-      "node_name": "iniu0",
-      "attrs": {},
-      "interfaces": {
-        "clk_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "node_id": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "axi": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_logic_topo_1i4t"
-      ]
-    },
-    "sts_logic_topo_1i4t.tniu1": {
-      "type": "atomic",
-      "node_name": "tniu1",
-      "attrs": {},
-      "interfaces": {
-        "clk_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_dbg_timer": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_dbg_timer": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "pmc_apb": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sys_apb": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "dbg_data": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "dbg_timestamp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sys_cti_event": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "noc_cti_event": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sys_cti_channel": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "noc_cti_channel": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_logic_topo_1i4t"
-      ]
-    },
-    "sts_logic_topo_1i4t.tniu2": {
-      "type": "atomic",
-      "node_name": "tniu2",
-      "attrs": {},
-      "interfaces": {
-        "clk_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_dbg_timer": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_dbg_timer": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "pmc_apb": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sys_apb": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "dbg_data": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "dbg_timestamp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sys_cti_event": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "noc_cti_event": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sys_cti_channel": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "noc_cti_channel": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_logic_topo_1i4t"
-      ]
-    },
-    "sts_logic_topo_1i4t.tniu0": {
-      "type": "atomic",
-      "node_name": "tniu0",
-      "attrs": {},
-      "interfaces": {
-        "clk_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_dbg_timer": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_dbg_timer": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "pmc_apb": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sys_apb": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "dbg_data": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "dbg_timestamp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sys_cti_event": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "noc_cti_event": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sys_cti_channel": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "noc_cti_channel": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_logic_topo_1i4t"
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
       ]
     },
     "sts_logic_topo_1i4t": {
@@ -442,11 +115,47 @@
       "node_name": "sts_logic_topo_1i4t",
       "attrs": {},
       "interfaces": {
-        "clk_src": {
+        "iniu0_clk_sys": {
           "is_exposed_port": false,
-          "is_global": true
+          "is_global": false
         },
-        "clk_dst": {
+        "iniu0_rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu0_clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu0_rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu1_clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu1_rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu2_clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu2_rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu3_clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu3_rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_noc": {
           "is_exposed_port": false,
           "is_global": true
         },
@@ -454,15 +163,11 @@
           "is_exposed_port": false,
           "is_global": true
         },
-        "rstn_src": {
+        "rst_noc_n": {
           "is_exposed_port": false,
           "is_global": true
         },
-        "rstn_dst": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "rstn_dbg_timer": {
+        "rst_dbg_timer_n": {
           "is_exposed_port": false,
           "is_global": true
         },
@@ -614,227 +319,542 @@
         "sts_logic_topo_1i4t.tniu2",
         "sts_logic_topo_1i4t.tniu3"
       ]
+    },
+    "sts_logic_topo_1i4t.noc_dec": {
+      "type": "atomic",
+      "node_name": "noc_dec",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "mst_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "mst_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv2_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv2_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv3_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv3_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "sts_logic_topo_1i4t.iniu0": {
+      "type": "atomic",
+      "node_name": "iniu0",
+      "attrs": {},
+      "interfaces": {
+        "clk_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "node_id": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "axi": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "sts_logic_topo_1i4t.tniu1": {
+      "type": "atomic",
+      "node_name": "tniu1",
+      "attrs": {},
+      "interfaces": {
+        "clk_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pmc_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_data": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_timestamp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "sts_logic_topo_1i4t.tniu0": {
+      "type": "atomic",
+      "node_name": "tniu0",
+      "attrs": {},
+      "interfaces": {
+        "clk_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pmc_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_data": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_timestamp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "sts_logic_topo_1i4t.tniu2": {
+      "type": "atomic",
+      "node_name": "tniu2",
+      "attrs": {},
+      "interfaces": {
+        "clk_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pmc_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_data": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_timestamp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
+      ]
     }
   },
   "connections": [
     {
-      "id": "iniu0_sts_logic_topo_1i4t_clk_src_clk_src_1@sts_logic_topo_1i4t",
+      "id": "iniu0_sts_logic_topo_1i4t_clk_src_iniu0_clk_sys_1@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t",
+            "node_id": "sts_logic_topo_1i4t.iniu0",
             "interface_id": "clk_src"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t.tniu3",
-            "interface_id": "clk_src"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "sts_logic_topo_1i4t.tniu1",
-            "interface_id": "clk_src"
-          }
-        },
-        {
-          "endpoint4": {
-            "node_id": "sts_logic_topo_1i4t.tniu2",
-            "interface_id": "clk_src"
-          }
-        },
-        {
-          "endpoint5": {
-            "node_id": "sts_logic_topo_1i4t.tniu0",
-            "interface_id": "clk_src"
-          }
-        },
-        {
-          "endpoint6": {
-            "node_id": "sts_logic_topo_1i4t.iniu0",
-            "interface_id": "clk_src"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "iniu0_clk_sys"
           }
         }
       ]
     },
     {
-      "id": "iniu0_sts_logic_topo_1i4t_clk_dst_clk_dst_2@sts_logic_topo_1i4t",
+      "id": "iniu0_sts_logic_topo_1i4t_clk_dst_clk_noc_2@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "clk_noc"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "clk_dst"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "clk_dst"
+          }
+        },
+        {
+          "endpoint4": {
             "node_id": "sts_logic_topo_1i4t.noc_dec",
             "interface_id": "clk"
           }
         },
         {
-          "endpoint2": {
+          "endpoint5": {
             "node_id": "sts_logic_topo_1i4t.tniu3",
             "interface_id": "clk_dst"
           }
         },
         {
-          "endpoint3": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "clk_dst"
-          }
-        },
-        {
-          "endpoint4": {
-            "node_id": "sts_logic_topo_1i4t.tniu0",
-            "interface_id": "clk_dst"
-          }
-        },
-        {
-          "endpoint5": {
-            "node_id": "sts_logic_topo_1i4t.tniu2",
-            "interface_id": "clk_dst"
-          }
-        },
-        {
           "endpoint6": {
-            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "node_id": "sts_logic_topo_1i4t.iniu0",
             "interface_id": "clk_dst"
           }
         },
         {
           "endpoint7": {
-            "node_id": "sts_logic_topo_1i4t.iniu0",
+            "node_id": "sts_logic_topo_1i4t.tniu1",
             "interface_id": "clk_dst"
           }
         }
       ]
     },
     {
-      "id": "iniu0_sts_logic_topo_1i4t_rstn_src_rstn_src_3@sts_logic_topo_1i4t",
+      "id": "iniu0_sts_logic_topo_1i4t_rstn_src_iniu0_rst_sys_n_3@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu1",
-            "interface_id": "rstn_src"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "iniu0_rst_sys_n"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t.tniu3",
-            "interface_id": "rstn_src"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "sts_logic_topo_1i4t.tniu0",
-            "interface_id": "rstn_src"
-          }
-        },
-        {
-          "endpoint4": {
-            "node_id": "sts_logic_topo_1i4t.tniu2",
-            "interface_id": "rstn_src"
-          }
-        },
-        {
-          "endpoint5": {
             "node_id": "sts_logic_topo_1i4t.iniu0",
-            "interface_id": "rstn_src"
-          }
-        },
-        {
-          "endpoint6": {
-            "node_id": "sts_logic_topo_1i4t",
             "interface_id": "rstn_src"
           }
         }
       ]
     },
     {
-      "id": "iniu0_sts_logic_topo_1i4t_rstn_dst_rstn_dst_4@sts_logic_topo_1i4t",
+      "id": "iniu0_sts_logic_topo_1i4t_rstn_dst_rst_noc_n_4@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.iniu0",
+            "node_id": "sts_logic_topo_1i4t.tniu2",
             "interface_id": "rstn_dst"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t",
+            "node_id": "sts_logic_topo_1i4t.tniu0",
             "interface_id": "rstn_dst"
           }
         },
         {
           "endpoint3": {
-            "node_id": "sts_logic_topo_1i4t.tniu1",
-            "interface_id": "rstn_dst"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "rst_noc_n"
           }
         },
         {
           "endpoint4": {
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "rstn_dst"
+          }
+        },
+        {
+          "endpoint5": {
             "node_id": "sts_logic_topo_1i4t.noc_dec",
             "interface_id": "rst_n"
           }
         },
         {
-          "endpoint5": {
-            "node_id": "sts_logic_topo_1i4t.tniu3",
-            "interface_id": "rstn_dst"
-          }
-        },
-        {
           "endpoint6": {
-            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "node_id": "sts_logic_topo_1i4t.iniu0",
             "interface_id": "rstn_dst"
           }
         },
         {
           "endpoint7": {
-            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "node_id": "sts_logic_topo_1i4t.tniu1",
             "interface_id": "rstn_dst"
           }
         }
       ]
     },
     {
-      "id": "tniu0_sts_logic_topo_1i4t_clk_dbg_timer_clk_dbg_timer_5@sts_logic_topo_1i4t",
+      "id": "tniu0_sts_logic_topo_1i4t_clk_src_tniu0_clk_sys_5@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "clk_src"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0_clk_sys"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu0_sts_logic_topo_1i4t_clk_dbg_timer_clk_dbg_timer_6@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t",
             "interface_id": "clk_dbg_timer"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t.tniu2",
-            "interface_id": "clk_dbg_timer"
-          }
-        },
-        {
-          "endpoint3": {
             "node_id": "sts_logic_topo_1i4t.tniu0",
             "interface_id": "clk_dbg_timer"
           }
         },
         {
+          "endpoint3": {
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "clk_dbg_timer"
+          }
+        },
+        {
           "endpoint4": {
-            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "node_id": "sts_logic_topo_1i4t.tniu1",
             "interface_id": "clk_dbg_timer"
           }
         },
         {
           "endpoint5": {
-            "node_id": "sts_logic_topo_1i4t",
+            "node_id": "sts_logic_topo_1i4t.tniu3",
             "interface_id": "clk_dbg_timer"
           }
         }
       ]
     },
     {
-      "id": "tniu0_sts_logic_topo_1i4t_rstn_dbg_timer_rstn_dbg_timer_6@sts_logic_topo_1i4t",
+      "id": "tniu0_sts_logic_topo_1i4t_rstn_src_tniu0_rst_sys_n_7@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0_rst_sys_n"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "rstn_src"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu0_sts_logic_topo_1i4t_rstn_dbg_timer_rst_dbg_timer_n_8@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -845,7 +865,7 @@
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t",
+            "node_id": "sts_logic_topo_1i4t.tniu3",
             "interface_id": "rstn_dbg_timer"
           }
         },
@@ -863,14 +883,122 @@
         },
         {
           "endpoint5": {
-            "node_id": "sts_logic_topo_1i4t.tniu3",
-            "interface_id": "rstn_dbg_timer"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "rst_dbg_timer_n"
           }
         }
       ]
     },
     {
-      "id": "iniu0_noc_dec_req_mst_req_7@sts_logic_topo_1i4t",
+      "id": "tniu1_sts_logic_topo_1i4t_clk_src_tniu1_clk_sys_9@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "clk_src"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1_clk_sys"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu1_sts_logic_topo_1i4t_rstn_src_tniu1_rst_sys_n_10@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1_rst_sys_n"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "rstn_src"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu2_sts_logic_topo_1i4t_clk_src_tniu2_clk_sys_11@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "clk_src"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2_clk_sys"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu2_sts_logic_topo_1i4t_rstn_src_tniu2_rst_sys_n_12@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2_rst_sys_n"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "rstn_src"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu3_sts_logic_topo_1i4t_clk_src_tniu3_clk_sys_13@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "clk_src"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3_clk_sys"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tniu3_sts_logic_topo_1i4t_rstn_src_tniu3_rst_sys_n_14@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3_rst_sys_n"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "rstn_src"
+          }
+        }
+      ]
+    },
+    {
+      "id": "iniu0_noc_dec_req_mst_req_15@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -888,97 +1016,97 @@
       ]
     },
     {
-      "id": "iniu0_noc_dec_rsp_mst_rsp_8@sts_logic_topo_1i4t",
+      "id": "iniu0_noc_dec_rsp_mst_rsp_16@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.iniu0",
-            "interface_id": "rsp"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t.noc_dec",
             "interface_id": "mst_rsp"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.iniu0",
+            "interface_id": "rsp"
+          }
         }
       ]
     },
     {
-      "id": "noc_dec_tniu0_slv0_req_req_9@sts_logic_topo_1i4t",
+      "id": "noc_dec_tniu0_slv0_req_req_17@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu0",
-            "interface_id": "req"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t.noc_dec",
             "interface_id": "slv0_req"
           }
-        }
-      ]
-    },
-    {
-      "id": "noc_dec_tniu0_slv0_rsp_rsp_10@sts_logic_topo_1i4t",
-      "scope": "sts_logic_topo_1i4t",
-      "endpoints": [
+        },
         {
-          "endpoint1": {
+          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t.tniu0",
-            "interface_id": "rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t.noc_dec",
-            "interface_id": "slv0_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "noc_dec_tniu1_slv1_req_req_11@sts_logic_topo_1i4t",
-      "scope": "sts_logic_topo_1i4t",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.noc_dec",
-            "interface_id": "slv1_req"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t.tniu1",
             "interface_id": "req"
           }
         }
       ]
     },
     {
-      "id": "noc_dec_tniu1_slv1_rsp_rsp_12@sts_logic_topo_1i4t",
+      "id": "noc_dec_tniu0_slv0_rsp_rsp_18@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
             "node_id": "sts_logic_topo_1i4t.noc_dec",
-            "interface_id": "slv1_rsp"
+            "interface_id": "slv0_rsp"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "node_id": "sts_logic_topo_1i4t.tniu0",
             "interface_id": "rsp"
           }
         }
       ]
     },
     {
-      "id": "noc_dec_tniu2_slv2_req_req_13@sts_logic_topo_1i4t",
+      "id": "noc_dec_tniu1_slv1_req_req_19@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
+            "interface_id": "slv1_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "noc_dec_tniu1_slv1_rsp_rsp_20@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
+            "interface_id": "slv1_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "noc_dec_tniu2_slv2_req_req_21@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -996,43 +1124,43 @@
       ]
     },
     {
-      "id": "noc_dec_tniu2_slv2_rsp_rsp_14@sts_logic_topo_1i4t",
+      "id": "noc_dec_tniu2_slv2_rsp_rsp_22@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu2",
-            "interface_id": "rsp"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t.noc_dec",
             "interface_id": "slv2_rsp"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "rsp"
+          }
         }
       ]
     },
     {
-      "id": "noc_dec_tniu3_slv3_req_req_15@sts_logic_topo_1i4t",
+      "id": "noc_dec_tniu3_slv3_req_req_23@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu3",
-            "interface_id": "req"
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
+            "interface_id": "slv3_req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t.noc_dec",
-            "interface_id": "slv3_req"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "req"
           }
         }
       ]
     },
     {
-      "id": "noc_dec_tniu3_slv3_rsp_rsp_16@sts_logic_topo_1i4t",
+      "id": "noc_dec_tniu3_slv3_rsp_rsp_24@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1050,7 +1178,7 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_iniu0_iniu0.node_id_porting_node_id_17@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_iniu0_iniu0.node_id_porting_node_id_25@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1068,7 +1196,7 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_iniu0_iniu0.axi_porting_axi_18@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_iniu0_iniu0.axi_porting_axi_26@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1086,43 +1214,43 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu0_tniu0.pmc_apb_porting_pmc_apb_19@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.pmc_apb_porting_pmc_apb_27@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu0",
-            "interface_id": "pmc_apb"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t",
             "interface_id": "tniu0.pmc_apb_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "pmc_apb"
+          }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu0_tniu0.sys_apb_porting_sys_apb_20@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.sys_apb_porting_sys_apb_28@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu0",
-            "interface_id": "sys_apb"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0.sys_apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu0.sys_apb_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "sys_apb"
           }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu0_tniu0.dbg_data_porting_dbg_data_21@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.dbg_data_porting_dbg_data_29@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1140,7 +1268,7 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu0_tniu0.dbg_timestamp_porting_dbg_timestamp_22@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.dbg_timestamp_porting_dbg_timestamp_30@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1158,7 +1286,7 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu0_tniu0.sys_cti_event_porting_sys_cti_event_23@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.sys_cti_event_porting_sys_cti_event_31@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1176,43 +1304,43 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu0_tniu0.noc_cti_event_porting_noc_cti_event_24@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.noc_cti_event_porting_noc_cti_event_32@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu0",
-            "interface_id": "noc_cti_event"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t",
             "interface_id": "tniu0.noc_cti_event_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "noc_cti_event"
+          }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu0_tniu0.sys_cti_channel_porting_sys_cti_channel_25@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.sys_cti_channel_porting_sys_cti_channel_33@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu0",
-            "interface_id": "sys_cti_channel"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0.sys_cti_channel_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu0.sys_cti_channel_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "sys_cti_channel"
           }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu0_tniu0.noc_cti_channel_porting_noc_cti_channel_26@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.noc_cti_channel_porting_noc_cti_channel_34@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1230,25 +1358,25 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu1_tniu1.pmc_apb_porting_pmc_apb_27@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.pmc_apb_porting_pmc_apb_35@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu1",
-            "interface_id": "pmc_apb"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.pmc_apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu1.pmc_apb_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "pmc_apb"
           }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu1_tniu1.sys_apb_porting_sys_apb_28@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.sys_apb_porting_sys_apb_36@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1266,61 +1394,61 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu1_tniu1.dbg_data_porting_dbg_data_29@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.dbg_data_porting_dbg_data_37@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu1.dbg_data_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t.tniu1",
             "interface_id": "dbg_data"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.dbg_data_porting"
+          }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu1_tniu1.dbg_timestamp_porting_dbg_timestamp_30@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.dbg_timestamp_porting_dbg_timestamp_38@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu1",
-            "interface_id": "dbg_timestamp"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t",
             "interface_id": "tniu1.dbg_timestamp_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "dbg_timestamp"
+          }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu1_tniu1.sys_cti_event_porting_sys_cti_event_31@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.sys_cti_event_porting_sys_cti_event_39@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu1",
-            "interface_id": "sys_cti_event"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.sys_cti_event_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu1.sys_cti_event_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "sys_cti_event"
           }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu1_tniu1.noc_cti_event_porting_noc_cti_event_32@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.noc_cti_event_porting_noc_cti_event_40@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1338,97 +1466,97 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu1_tniu1.sys_cti_channel_porting_sys_cti_channel_33@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.sys_cti_channel_porting_sys_cti_channel_41@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu1.sys_cti_channel_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t.tniu1",
             "interface_id": "sys_cti_channel"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.sys_cti_channel_porting"
+          }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu1_tniu1.noc_cti_channel_porting_noc_cti_channel_34@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.noc_cti_channel_porting_noc_cti_channel_42@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu1",
-            "interface_id": "noc_cti_channel"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t",
             "interface_id": "tniu1.noc_cti_channel_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "noc_cti_channel"
+          }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu2_tniu2.pmc_apb_porting_pmc_apb_35@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.pmc_apb_porting_pmc_apb_43@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu2.pmc_apb_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t.tniu2",
             "interface_id": "pmc_apb"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.pmc_apb_porting"
+          }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu2_tniu2.sys_apb_porting_sys_apb_36@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.sys_apb_porting_sys_apb_44@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu2",
-            "interface_id": "sys_apb"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t",
             "interface_id": "tniu2.sys_apb_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "sys_apb"
+          }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu2_tniu2.dbg_data_porting_dbg_data_37@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.dbg_data_porting_dbg_data_45@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu2",
-            "interface_id": "dbg_data"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.dbg_data_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu2.dbg_data_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "dbg_data"
           }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu2_tniu2.dbg_timestamp_porting_dbg_timestamp_38@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.dbg_timestamp_porting_dbg_timestamp_46@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1446,61 +1574,61 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu2_tniu2.sys_cti_event_porting_sys_cti_event_39@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.sys_cti_event_porting_sys_cti_event_47@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu2.sys_cti_event_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t.tniu2",
             "interface_id": "sys_cti_event"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.sys_cti_event_porting"
+          }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu2_tniu2.noc_cti_event_porting_noc_cti_event_40@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.noc_cti_event_porting_noc_cti_event_48@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu2",
-            "interface_id": "noc_cti_event"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "sts_logic_topo_1i4t",
             "interface_id": "tniu2.noc_cti_event_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "noc_cti_event"
+          }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu2_tniu2.sys_cti_channel_porting_sys_cti_channel_41@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.sys_cti_channel_porting_sys_cti_channel_49@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu2",
-            "interface_id": "sys_cti_channel"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.sys_cti_channel_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu2.sys_cti_channel_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "sys_cti_channel"
           }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu2_tniu2.noc_cti_channel_porting_noc_cti_channel_42@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.noc_cti_channel_porting_noc_cti_channel_50@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1518,7 +1646,7 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu3_tniu3.pmc_apb_porting_pmc_apb_43@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.pmc_apb_porting_pmc_apb_51@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1536,7 +1664,7 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu3_tniu3.sys_apb_porting_sys_apb_44@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.sys_apb_porting_sys_apb_52@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1554,25 +1682,25 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu3_tniu3.dbg_data_porting_dbg_data_45@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.dbg_data_porting_dbg_data_53@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu3",
-            "interface_id": "dbg_data"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3.dbg_data_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu3.dbg_data_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "dbg_data"
           }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu3_tniu3.dbg_timestamp_porting_dbg_timestamp_46@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.dbg_timestamp_porting_dbg_timestamp_54@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1590,7 +1718,7 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu3_tniu3.sys_cti_event_porting_sys_cti_event_47@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.sys_cti_event_porting_sys_cti_event_55@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1608,7 +1736,7 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu3_tniu3.noc_cti_event_porting_noc_cti_event_48@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.noc_cti_event_porting_noc_cti_event_56@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
@@ -1626,37 +1754,37 @@
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu3_tniu3.sys_cti_channel_porting_sys_cti_channel_49@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.sys_cti_channel_porting_sys_cti_channel_57@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu3",
-            "interface_id": "sys_cti_channel"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3.sys_cti_channel_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu3.sys_cti_channel_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "sys_cti_channel"
           }
         }
       ]
     },
     {
-      "id": "sts_logic_topo_1i4t_tniu3_tniu3.noc_cti_channel_porting_noc_cti_channel_50@sts_logic_topo_1i4t",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.noc_cti_channel_porting_noc_cti_channel_58@sts_logic_topo_1i4t",
       "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_logic_topo_1i4t.tniu3",
-            "interface_id": "noc_cti_channel"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3.noc_cti_channel_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_logic_topo_1i4t",
-            "interface_id": "tniu3.noc_cti_channel_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "noc_cti_channel"
           }
         }
       ]

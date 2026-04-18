@@ -55,6 +55,11 @@ module tb_intr_ring_noc_4i2t;
     logic clk_noc  = 1'b0;
     logic rstn_sys = 1'b0;
     logic rstn_noc = 1'b0;
+    logic rst_noc_n;
+    logic iniu0_ring_buf_clk_noc_porting;
+    logic iniu0_ring_buf_rst_noc_n_porting;
+    logic ring_network_clk_noc_porting;
+    logic ring_network_rst_noc_n_porting;
 
     always #5  clk_sys = ~clk_sys;    // 100 MHz
     always #7  clk_noc = ~clk_noc;    // ~71  MHz
@@ -64,6 +69,8 @@ module tb_intr_ring_noc_4i2t;
         rstn_sys = 1'b1;
         rstn_noc = 1'b1;
     end
+
+    assign rst_noc_n = rstn_noc;
 
     // -------------------------------------------------------------------------
     // Pass/fail counters
@@ -190,6 +197,218 @@ module tb_intr_ring_noc_4i2t;
     logic          tniu1_tniu1_sys_apb_porting_tniu1_sys_apb_porting_p_slverr;
     logic [12:0]   tniu1_tniu1_top_lp_hub_porting_tniu1_top_lp_hub_porting_lp_hub_tx_req;
 
+    // Auto-added station/buffer ports for wildcard DUT connection
+    logic buf_iniu0_to_iniu1_clk_noc_porting;
+    logic buf_iniu0_to_iniu1_rst_noc_n_porting;
+    logic buf_iniu1_to_iniu2_clk_noc_porting;
+    logic buf_iniu1_to_iniu2_rst_noc_n_porting;
+    logic buf_iniu2_to_iniu3_clk_noc_porting;
+    logic buf_iniu2_to_iniu3_rst_noc_n_porting;
+    logic buf_iniu3_to_tniu0_clk_noc_porting;
+    logic buf_iniu3_to_tniu0_rst_noc_n_porting;
+    logic buf_tniu0_to_tniu1_clk_noc_porting;
+    logic buf_tniu0_to_tniu1_rst_noc_n_porting;
+    logic buf_tniu1_to_iniu0_clk_noc_porting;
+    logic buf_tniu1_to_iniu0_rst_noc_n_porting;
+    logic iniu0_sta_ccw_in_porting_ccw_in_last;
+    logic [39:0] iniu0_sta_ccw_in_porting_ccw_in_payload;
+    logic [3:0] iniu0_sta_ccw_in_porting_ccw_in_qos;
+    logic iniu0_sta_ccw_in_porting_ccw_in_ready;
+    logic [7:0] iniu0_sta_ccw_in_porting_ccw_in_srcid;
+    logic [7:0] iniu0_sta_ccw_in_porting_ccw_in_tgtid;
+    logic iniu0_sta_ccw_in_porting_ccw_in_valid;
+    logic iniu0_sta_ccw_out_porting_ccw_out_last;
+    logic [39:0] iniu0_sta_ccw_out_porting_ccw_out_payload;
+    logic [3:0] iniu0_sta_ccw_out_porting_ccw_out_qos;
+    logic iniu0_sta_ccw_out_porting_ccw_out_ready;
+    logic [7:0] iniu0_sta_ccw_out_porting_ccw_out_srcid;
+    logic [7:0] iniu0_sta_ccw_out_porting_ccw_out_tgtid;
+    logic iniu0_sta_ccw_out_porting_ccw_out_valid;
+    logic iniu0_sta_local_rx_porting_local_rx_last;
+    logic [39:0] iniu0_sta_local_rx_porting_local_rx_payload;
+    logic [3:0] iniu0_sta_local_rx_porting_local_rx_qos;
+    logic iniu0_sta_local_rx_porting_local_rx_ready;
+    logic [7:0] iniu0_sta_local_rx_porting_local_rx_srcid;
+    logic [7:0] iniu0_sta_local_rx_porting_local_rx_tgtid;
+    logic iniu0_sta_local_rx_porting_local_rx_valid;
+    logic iniu1_sta_ccw_in_porting_ccw_in_last;
+    logic [39:0] iniu1_sta_ccw_in_porting_ccw_in_payload;
+    logic [3:0] iniu1_sta_ccw_in_porting_ccw_in_qos;
+    logic iniu1_sta_ccw_in_porting_ccw_in_ready;
+    logic [7:0] iniu1_sta_ccw_in_porting_ccw_in_srcid;
+    logic [7:0] iniu1_sta_ccw_in_porting_ccw_in_tgtid;
+    logic iniu1_sta_ccw_in_porting_ccw_in_valid;
+    logic iniu1_sta_ccw_out_porting_ccw_out_last;
+    logic [39:0] iniu1_sta_ccw_out_porting_ccw_out_payload;
+    logic [3:0] iniu1_sta_ccw_out_porting_ccw_out_qos;
+    logic iniu1_sta_ccw_out_porting_ccw_out_ready;
+    logic [7:0] iniu1_sta_ccw_out_porting_ccw_out_srcid;
+    logic [7:0] iniu1_sta_ccw_out_porting_ccw_out_tgtid;
+    logic iniu1_sta_ccw_out_porting_ccw_out_valid;
+    logic iniu1_sta_local_rx_porting_local_rx_last;
+    logic [39:0] iniu1_sta_local_rx_porting_local_rx_payload;
+    logic [3:0] iniu1_sta_local_rx_porting_local_rx_qos;
+    logic iniu1_sta_local_rx_porting_local_rx_ready;
+    logic [7:0] iniu1_sta_local_rx_porting_local_rx_srcid;
+    logic [7:0] iniu1_sta_local_rx_porting_local_rx_tgtid;
+    logic iniu1_sta_local_rx_porting_local_rx_valid;
+    logic iniu2_sta_ccw_in_porting_ccw_in_last;
+    logic [39:0] iniu2_sta_ccw_in_porting_ccw_in_payload;
+    logic [3:0] iniu2_sta_ccw_in_porting_ccw_in_qos;
+    logic iniu2_sta_ccw_in_porting_ccw_in_ready;
+    logic [7:0] iniu2_sta_ccw_in_porting_ccw_in_srcid;
+    logic [7:0] iniu2_sta_ccw_in_porting_ccw_in_tgtid;
+    logic iniu2_sta_ccw_in_porting_ccw_in_valid;
+    logic iniu2_sta_ccw_out_porting_ccw_out_last;
+    logic [39:0] iniu2_sta_ccw_out_porting_ccw_out_payload;
+    logic [3:0] iniu2_sta_ccw_out_porting_ccw_out_qos;
+    logic iniu2_sta_ccw_out_porting_ccw_out_ready;
+    logic [7:0] iniu2_sta_ccw_out_porting_ccw_out_srcid;
+    logic [7:0] iniu2_sta_ccw_out_porting_ccw_out_tgtid;
+    logic iniu2_sta_ccw_out_porting_ccw_out_valid;
+    logic iniu2_sta_local_rx_porting_local_rx_last;
+    logic [39:0] iniu2_sta_local_rx_porting_local_rx_payload;
+    logic [3:0] iniu2_sta_local_rx_porting_local_rx_qos;
+    logic iniu2_sta_local_rx_porting_local_rx_ready;
+    logic [7:0] iniu2_sta_local_rx_porting_local_rx_srcid;
+    logic [7:0] iniu2_sta_local_rx_porting_local_rx_tgtid;
+    logic iniu2_sta_local_rx_porting_local_rx_valid;
+    logic iniu3_sta_ccw_in_porting_ccw_in_last;
+    logic [39:0] iniu3_sta_ccw_in_porting_ccw_in_payload;
+    logic [3:0] iniu3_sta_ccw_in_porting_ccw_in_qos;
+    logic iniu3_sta_ccw_in_porting_ccw_in_ready;
+    logic [7:0] iniu3_sta_ccw_in_porting_ccw_in_srcid;
+    logic [7:0] iniu3_sta_ccw_in_porting_ccw_in_tgtid;
+    logic iniu3_sta_ccw_in_porting_ccw_in_valid;
+    logic iniu3_sta_ccw_out_porting_ccw_out_last;
+    logic [39:0] iniu3_sta_ccw_out_porting_ccw_out_payload;
+    logic [3:0] iniu3_sta_ccw_out_porting_ccw_out_qos;
+    logic iniu3_sta_ccw_out_porting_ccw_out_ready;
+    logic [7:0] iniu3_sta_ccw_out_porting_ccw_out_srcid;
+    logic [7:0] iniu3_sta_ccw_out_porting_ccw_out_tgtid;
+    logic iniu3_sta_ccw_out_porting_ccw_out_valid;
+    logic iniu3_sta_local_rx_porting_local_rx_last;
+    logic [39:0] iniu3_sta_local_rx_porting_local_rx_payload;
+    logic [3:0] iniu3_sta_local_rx_porting_local_rx_qos;
+    logic iniu3_sta_local_rx_porting_local_rx_ready;
+    logic [7:0] iniu3_sta_local_rx_porting_local_rx_srcid;
+    logic [7:0] iniu3_sta_local_rx_porting_local_rx_tgtid;
+    logic iniu3_sta_local_rx_porting_local_rx_valid;
+    logic tniu0_sta_ccw_in_porting_ccw_in_last;
+    logic [39:0] tniu0_sta_ccw_in_porting_ccw_in_payload;
+    logic [3:0] tniu0_sta_ccw_in_porting_ccw_in_qos;
+    logic tniu0_sta_ccw_in_porting_ccw_in_ready;
+    logic [7:0] tniu0_sta_ccw_in_porting_ccw_in_srcid;
+    logic [7:0] tniu0_sta_ccw_in_porting_ccw_in_tgtid;
+    logic tniu0_sta_ccw_in_porting_ccw_in_valid;
+    logic tniu0_sta_ccw_out_porting_ccw_out_last;
+    logic [39:0] tniu0_sta_ccw_out_porting_ccw_out_payload;
+    logic [3:0] tniu0_sta_ccw_out_porting_ccw_out_qos;
+    logic tniu0_sta_ccw_out_porting_ccw_out_ready;
+    logic [7:0] tniu0_sta_ccw_out_porting_ccw_out_srcid;
+    logic [7:0] tniu0_sta_ccw_out_porting_ccw_out_tgtid;
+    logic tniu0_sta_ccw_out_porting_ccw_out_valid;
+    logic tniu0_sta_local_tx_porting_local_tx_last;
+    logic [39:0] tniu0_sta_local_tx_porting_local_tx_payload;
+    logic [3:0] tniu0_sta_local_tx_porting_local_tx_qos;
+    logic tniu0_sta_local_tx_porting_local_tx_ready;
+    logic [7:0] tniu0_sta_local_tx_porting_local_tx_srcid;
+    logic [7:0] tniu0_sta_local_tx_porting_local_tx_tgtid;
+    logic tniu0_sta_local_tx_porting_local_tx_valid;
+    logic tniu1_sta_ccw_in_porting_ccw_in_last;
+    logic [39:0] tniu1_sta_ccw_in_porting_ccw_in_payload;
+    logic [3:0] tniu1_sta_ccw_in_porting_ccw_in_qos;
+    logic tniu1_sta_ccw_in_porting_ccw_in_ready;
+    logic [7:0] tniu1_sta_ccw_in_porting_ccw_in_srcid;
+    logic [7:0] tniu1_sta_ccw_in_porting_ccw_in_tgtid;
+    logic tniu1_sta_ccw_in_porting_ccw_in_valid;
+    logic tniu1_sta_ccw_out_porting_ccw_out_last;
+    logic [39:0] tniu1_sta_ccw_out_porting_ccw_out_payload;
+    logic [3:0] tniu1_sta_ccw_out_porting_ccw_out_qos;
+    logic tniu1_sta_ccw_out_porting_ccw_out_ready;
+    logic [7:0] tniu1_sta_ccw_out_porting_ccw_out_srcid;
+    logic [7:0] tniu1_sta_ccw_out_porting_ccw_out_tgtid;
+    logic tniu1_sta_ccw_out_porting_ccw_out_valid;
+    logic tniu1_sta_local_tx_porting_local_tx_last;
+    logic [39:0] tniu1_sta_local_tx_porting_local_tx_payload;
+    logic [3:0] tniu1_sta_local_tx_porting_local_tx_qos;
+    logic tniu1_sta_local_tx_porting_local_tx_ready;
+    logic [7:0] tniu1_sta_local_tx_porting_local_tx_srcid;
+    logic [7:0] tniu1_sta_local_tx_porting_local_tx_tgtid;
+    logic tniu1_sta_local_tx_porting_local_tx_valid;
+
+    // Default tie-offs for newly exposed DUT inputs
+    assign buf_iniu0_to_iniu1_clk_noc_porting = clk_noc;
+    assign buf_iniu0_to_iniu1_rst_noc_n_porting = rstn_noc;
+    assign buf_iniu1_to_iniu2_clk_noc_porting = clk_noc;
+    assign buf_iniu1_to_iniu2_rst_noc_n_porting = rstn_noc;
+    assign buf_iniu2_to_iniu3_clk_noc_porting = clk_noc;
+    assign buf_iniu2_to_iniu3_rst_noc_n_porting = rstn_noc;
+    assign buf_iniu3_to_tniu0_clk_noc_porting = clk_noc;
+    assign buf_iniu3_to_tniu0_rst_noc_n_porting = rstn_noc;
+    assign buf_tniu0_to_tniu1_clk_noc_porting = clk_noc;
+    assign buf_tniu0_to_tniu1_rst_noc_n_porting = rstn_noc;
+    assign buf_tniu1_to_iniu0_clk_noc_porting = clk_noc;
+    assign buf_tniu1_to_iniu0_rst_noc_n_porting = rstn_noc;
+    assign iniu0_sta_ccw_in_porting_ccw_in_last = '0;
+    assign iniu0_sta_ccw_in_porting_ccw_in_payload = '0;
+    assign iniu0_sta_ccw_in_porting_ccw_in_qos = '0;
+    assign iniu0_sta_ccw_in_porting_ccw_in_srcid = '0;
+    assign iniu0_sta_ccw_in_porting_ccw_in_tgtid = '0;
+    assign iniu0_sta_ccw_in_porting_ccw_in_valid = '0;
+    assign iniu0_sta_ccw_out_porting_ccw_out_ready = 1'b1;
+    assign iniu0_sta_local_rx_porting_local_rx_ready = 1'b1;
+    assign iniu1_sta_ccw_in_porting_ccw_in_last = '0;
+    assign iniu1_sta_ccw_in_porting_ccw_in_payload = '0;
+    assign iniu1_sta_ccw_in_porting_ccw_in_qos = '0;
+    assign iniu1_sta_ccw_in_porting_ccw_in_srcid = '0;
+    assign iniu1_sta_ccw_in_porting_ccw_in_tgtid = '0;
+    assign iniu1_sta_ccw_in_porting_ccw_in_valid = '0;
+    assign iniu1_sta_ccw_out_porting_ccw_out_ready = 1'b1;
+    assign iniu1_sta_local_rx_porting_local_rx_ready = 1'b1;
+    assign iniu2_sta_ccw_in_porting_ccw_in_last = '0;
+    assign iniu2_sta_ccw_in_porting_ccw_in_payload = '0;
+    assign iniu2_sta_ccw_in_porting_ccw_in_qos = '0;
+    assign iniu2_sta_ccw_in_porting_ccw_in_srcid = '0;
+    assign iniu2_sta_ccw_in_porting_ccw_in_tgtid = '0;
+    assign iniu2_sta_ccw_in_porting_ccw_in_valid = '0;
+    assign iniu2_sta_ccw_out_porting_ccw_out_ready = 1'b1;
+    assign iniu2_sta_local_rx_porting_local_rx_ready = 1'b1;
+    assign iniu3_sta_ccw_in_porting_ccw_in_last = '0;
+    assign iniu3_sta_ccw_in_porting_ccw_in_payload = '0;
+    assign iniu3_sta_ccw_in_porting_ccw_in_qos = '0;
+    assign iniu3_sta_ccw_in_porting_ccw_in_srcid = '0;
+    assign iniu3_sta_ccw_in_porting_ccw_in_tgtid = '0;
+    assign iniu3_sta_ccw_in_porting_ccw_in_valid = '0;
+    assign iniu3_sta_ccw_out_porting_ccw_out_ready = 1'b1;
+    assign iniu3_sta_local_rx_porting_local_rx_ready = 1'b1;
+    assign tniu0_sta_ccw_in_porting_ccw_in_last = '0;
+    assign tniu0_sta_ccw_in_porting_ccw_in_payload = '0;
+    assign tniu0_sta_ccw_in_porting_ccw_in_qos = '0;
+    assign tniu0_sta_ccw_in_porting_ccw_in_srcid = '0;
+    assign tniu0_sta_ccw_in_porting_ccw_in_tgtid = '0;
+    assign tniu0_sta_ccw_in_porting_ccw_in_valid = '0;
+    assign tniu0_sta_ccw_out_porting_ccw_out_ready = 1'b1;
+    assign tniu0_sta_local_tx_porting_local_tx_last = '0;
+    assign tniu0_sta_local_tx_porting_local_tx_payload = '0;
+    assign tniu0_sta_local_tx_porting_local_tx_qos = '0;
+    assign tniu0_sta_local_tx_porting_local_tx_srcid = '0;
+    assign tniu0_sta_local_tx_porting_local_tx_tgtid = '0;
+    assign tniu0_sta_local_tx_porting_local_tx_valid = '0;
+    assign tniu1_sta_ccw_in_porting_ccw_in_last = '0;
+    assign tniu1_sta_ccw_in_porting_ccw_in_payload = '0;
+    assign tniu1_sta_ccw_in_porting_ccw_in_qos = '0;
+    assign tniu1_sta_ccw_in_porting_ccw_in_srcid = '0;
+    assign tniu1_sta_ccw_in_porting_ccw_in_tgtid = '0;
+    assign tniu1_sta_ccw_in_porting_ccw_in_valid = '0;
+    assign tniu1_sta_ccw_out_porting_ccw_out_ready = 1'b1;
+    assign tniu1_sta_local_tx_porting_local_tx_last = '0;
+    assign tniu1_sta_local_tx_porting_local_tx_payload = '0;
+    assign tniu1_sta_local_tx_porting_local_tx_qos = '0;
+    assign tniu1_sta_local_tx_porting_local_tx_srcid = '0;
+    assign tniu1_sta_local_tx_porting_local_tx_tgtid = '0;
+    assign tniu1_sta_local_tx_porting_local_tx_valid = '0;
+
     // =========================================================================
     // DUT instantiation (all ports connected via wildcard .*)
     // Clock/reset: shared across all nodes
@@ -218,6 +437,10 @@ module tb_intr_ring_noc_4i2t;
     assign tniu1_rst_sys_n_porting_rst_sys_n_rst_n          = rstn_sys;
     assign tniu1_clk_noc_porting                            = clk_noc;
     assign tniu1_rst_noc_n_porting                          = rstn_noc;
+    assign iniu0_ring_buf_clk_noc_porting                   = clk_noc;
+    assign iniu0_ring_buf_rst_noc_n_porting                 = rstn_noc;
+    assign ring_network_clk_noc_porting                     = clk_noc;
+    assign ring_network_rst_noc_n_porting                   = rstn_noc;
 
     intr_ring_noc_4i2t dut (.*);
 
@@ -286,8 +509,12 @@ module tb_intr_ring_noc_4i2t;
     // =========================================================================
     initial begin
         if ($test$plusargs("dump_fsdb")) begin
+`ifndef NO_FSDB
             $fsdbDumpfile("intr_ring_noc_4i2t.fsdb");
             $fsdbDumpvars(0, tb_intr_ring_noc_4i2t, "+all");
+`else
+            $display("[TB] dump_fsdb requested but NO_FSDB is defined; skipping FSDB dump");
+`endif
         end
     end
 

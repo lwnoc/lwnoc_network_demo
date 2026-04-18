@@ -1,5 +1,12 @@
 module `_PREFIX_(sts_demo_dec4_wrap)
     import `_PREFIX_(lwnoc_sts_pack)::*;
+#(
+    parameter int unsigned STS_DEMO_DEC_SLAVE_NUM = 4,
+    parameter logic [STS_DEMO_DEC_SLAVE_NUM*TGT_ID_WIDTH-1:0] STS_DEMO_ROUTE_BASE = '0,
+    parameter logic [STS_DEMO_DEC_SLAVE_NUM*TGT_ID_WIDTH-1:0] STS_DEMO_ROUTE_MASK = '0,
+    parameter int unsigned STS_DEMO_DBG_TIMESTAMP_WIDTH = 1,
+    parameter int unsigned STS_DEMO_DBG_DATA_WIDTH = 1
+)
 (
     input   logic       clk,
     input   logic       rst_n,
@@ -69,11 +76,11 @@ module `_PREFIX_(sts_demo_dec4_wrap)
     assign slv3_rsp_rdy = slv_rsp_rdy_bus[3];
 
     `_PREFIX_(sts_noc_dec_node) #(
-        .SLAVE_NUM            (`STS_DEMO_DEC_SLAVE_NUM),
-        .ROUTE_BASE           (`STS_DEMO_ROUTE_BASE),
-        .ROUTE_MASK           (`STS_DEMO_ROUTE_MASK),
-        .DBG_TIMESTAMP_WIDTH  (`STS_DEMO_DBG_TIMESTAMP_WIDTH),
-        .DBG_DATA_WIDTH       (`STS_DEMO_DBG_DATA_WIDTH)
+        .SLAVE_NUM            (STS_DEMO_DEC_SLAVE_NUM),
+        .ROUTE_BASE           (STS_DEMO_ROUTE_BASE),
+        .ROUTE_MASK           (STS_DEMO_ROUTE_MASK),
+        .DBG_TIMESTAMP_WIDTH  (STS_DEMO_DBG_TIMESTAMP_WIDTH),
+        .DBG_DATA_WIDTH       (STS_DEMO_DBG_DATA_WIDTH)
     ) u_sts_noc_dec_node (
         .clk                 (clk),
         .rst_n               (rst_n),

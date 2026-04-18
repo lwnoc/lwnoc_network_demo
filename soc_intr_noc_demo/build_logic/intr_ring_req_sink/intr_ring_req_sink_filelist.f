@@ -1,0 +1,2 @@
+$INTR_RING_REQ_SINK_OUT_DIR/intr_ring_req_sink_intr_demo_prefix_define.sv
+$INTR_RING_REQ_SINK_OUT_DIR/intr_ring_req_sink_intr_ring_req_sink.sv

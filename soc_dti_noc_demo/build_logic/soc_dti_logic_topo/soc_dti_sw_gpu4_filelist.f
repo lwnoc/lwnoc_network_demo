@@ -1,0 +1,2 @@
+$SOC_DTI_LOGIC_TOPO_DIR/soc_dti_sw_gpu4_dti_noc_switch.sv
+$SOC_DTI_LOGIC_TOPO_DIR/soc_dti_sw_gpu4_dti_switch_4i1o_wrap.sv
