@@ -1,5 +1,0 @@
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_top_side/intr_iniu_top_interrupt_iniu_define.sv
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_top_side/intr_iniu_top_interrupt_iniu_pkg.sv
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_top_side/intr_iniu_top_lwnoc_lp_define_package.sv
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_top_side/intr_iniu_top_lwnoc_lp_struct_package.sv
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_iniu_top_side/intr_iniu_top_interrupt_iniu_async_top_side.sv

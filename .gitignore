@@ -1,3 +1,21 @@
+# AI session diagnostic reports (do not commit)
+skill_improve_*.md
+skill_improve_intr_ring_req_review.md
+*_manual_run.sh
+
+# Temporary and validation outputs
+tmpstccfiph*/
+_regen_validate/
+build/
+
+# One-off session analysis docs
+RTL_ANALYSIS_*.md
+sdc_generation_summary_*.md
+
+# VS Code / tool cache
+.vscode/
+.toolcache/
+
 # Python
 __pycache__/
 *.pyc
@@ -9,6 +27,7 @@ UHDL.log
 
 # VCS simulation artifacts
 */sim/build/
+*/build/temp/
 csrc/
 simv
 simv.daidir/

@@ -13,6 +13,7 @@ THIS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = THIS_DIR.parent                                     # lwnoc_network_demo/
 LWNOC_TOPO_ROOT = REPO_ROOT / "lwnoc_topo"
 INTR_NOC_ROOT = REPO_ROOT / "subs" / "lwnoc_interrupt_noc"
+RING_NETWORK_ROOT = REPO_ROOT / "subs" / "lwnoc_ring_network" / "de" / "rtl"
 
 if str(LWNOC_TOPO_ROOT) not in sys.path:
     sys.path.insert(0, str(LWNOC_TOPO_ROOT))
@@ -21,7 +22,9 @@ from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
 
 # ── env vars referenced in .f filelists ──────────────────────────────────────
 os.environ["INTR_NOC_DIR"]               = str(INTR_NOC_ROOT)
+os.environ["INTR_NOC_STANDALONE_DIR"]    = "/home/lgzhu/dev/noc_work/lwnoc_interrupt_noc"
 os.environ["INTR_NOC_DEMO_DIR"]          = str(THIS_DIR)
+os.environ["INTR_NOC_NETWORK_DIR"]       = str(RING_NETWORK_ROOT)
 os.environ["LWNOC_LOWPOWER_COMPONENT"]   = str(INTR_NOC_ROOT / "lwnoc_lowpower_component")
 
 FILELIST_DIR = THIS_DIR / "filelist"
@@ -98,18 +101,39 @@ intr_tniu_top_config = _new_cfg(
     env_var="INTR_TNIU_TOP_OUT_DIR",
 )
 
-intr_ring_sta_config = _new_cfg(
-    name="intr_ring_sta",
-    prefix="intr_ring_sta_",
-    filelist_name="intr_ring_station.f",
-    env_var="INTR_RING_STA_OUT_DIR",
+intr_ring_network_config = _new_cfg(
+    name="intr_ring_network",
+    prefix="intr_ring_network_",
+    filelist_name="intr_ring_network_wrap.f",
+    env_var="INTR_RING_NETWORK_OUT_DIR",
 )
 
-intr_ring_lnk_config = _new_cfg(
-    name="intr_ring_lnk",
-    prefix="intr_ring_lnk_",
+intr_ring_buf_config = _new_cfg(
+    name="intr_ring_buf",
+    prefix="intr_ring_buf_",
+    filelist_name="intr_ring_buf_wrap.f",
+    env_var="INTR_RING_BUF_OUT_DIR",
+)
+
+intr_ring_station_config = _new_cfg(
+    name="intr_ring_station",
+    prefix="intr_ring_station_",
+    filelist_name="intr_ring_station.f",
+    env_var="INTR_RING_STATION_OUT_DIR",
+)
+
+intr_ring_sp_config = _new_cfg(
+    name="intr_ring_sp",
+    prefix="intr_ring_sp_",
+    filelist_name="intr_ring_sp.f",
+    env_var="INTR_RING_SP_OUT_DIR",
+)
+
+intr_ring_link_config = _new_cfg(
+    name="intr_ring_link",
+    prefix="intr_ring_link_",
     filelist_name="intr_ring_link.f",
-    env_var="INTR_RING_LNK_OUT_DIR",
+    env_var="INTR_RING_LINK_OUT_DIR",
 )
 
 intr_ring_req_sink_config = _new_cfg(

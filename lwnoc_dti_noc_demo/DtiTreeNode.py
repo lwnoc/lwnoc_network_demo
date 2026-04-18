@@ -15,7 +15,8 @@ from uhdl.uhdl.core.TemplateIP import TemplateComponent
 
 class DtiSwitchNode(UhdlComponentNode):
     def __init__(self, id: str, cfg, top: str, input_count: int):
-        comp = TemplateComponent(config=cfg, top=top)
+        params = getattr(cfg, 'param_overrides', {})
+        comp = TemplateComponent(config=cfg, top=top, **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", r"^clk$")

@@ -1,1 +1,0 @@
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/build/temp/intr_ring_lnk/intr_ring_lnk_interrupt_req_ring_link.sv

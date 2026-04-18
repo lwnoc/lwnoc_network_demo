@@ -13,6 +13,7 @@ Outputs:
 import os
 import re
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -61,8 +62,8 @@ def main():
     comp.output_dir = str(build_dir)
     comp.generate_verilog(iteration=True)
     comp.generate_filelist()
+    _emit_topology_visualization(topo, THIS_DIR / "intr_ring_topology.png")
 
-    _patch_ring_station_params(build_dir / "intr_ring_noc_4i2t")
     from IntrNode import IntrIniuSysNode, IntrTniuSysNode
     _patch_async_fifo_depths(
         build_dir,
@@ -72,15 +73,93 @@ def main():
     _patch_lp_struct_links(build_dir / "intr_ring_noc_4i2t")
     _normalize_boundary_import_style(build_dir)
     _consolidate_top_side(build_dir)
+    _tieoff_unused_input_ports(build_dir / "intr_ring_noc_4i2t")
     _flatten_lp_boundary_typedef_ports(build_dir)
     _publish_top_filelist(
         build_dir / "intr_ring_noc_4i2t" / "filelist.f",
         THIS_DIR / "filelist" / "filelist.f",
     )
+    _run_top_io_boundary_check(build_dir / "intr_ring_noc_4i2t" / "intr_ring_noc_4i2t.v")
 
     print(f"Topology JSON written to {topology_json}")
     print(f"Generated RTL written to  {build_dir}")
     print(f"Top filelist written to   {THIS_DIR / 'filelist' / 'filelist.f'}")
+
+
+def _emit_topology_visualization(topo: IntrRingLogicTopo, output_path: Path) -> None:
+    """Emit node-level topology PNG for debug/documentation collateral.
+
+    Controlled by env var INTR_EMIT_TOPOLOGY_GRAPH:
+      - default: enabled
+      - set to 0 to disable
+
+    This is non-blocking collateral generation. Missing visualization
+    dependencies should not fail RTL generation flow.
+    """
+    if os.environ.get("INTR_EMIT_TOPOLOGY_GRAPH", "1") == "0":
+        print("  [topo_viz] disabled by INTR_EMIT_TOPOLOGY_GRAPH=0")
+        return
+
+    try:
+        import matplotlib.pyplot as plt
+        import networkx as nx
+    except Exception as exc:
+        print(f"  [topo_viz] WARNING: skip visualization (missing deps): {exc}")
+        return
+
+    try:
+        graph = topo.datatopo.to_networkx(node_level=True)
+        if graph.number_of_nodes() == 0:
+            print("  [topo_viz] WARNING: graph is empty, skip image output")
+            return
+
+        figure = plt.figure(figsize=(16, 12))
+        if nx.is_directed_acyclic_graph(graph):
+            pos = nx.spring_layout(graph, k=2.5, iterations=120, seed=42)
+        else:
+            pos = nx.kamada_kawai_layout(graph)
+
+        nx.draw_networkx_nodes(graph, pos, node_color="#87CEEB", node_size=1600, alpha=0.9)
+        nx.draw_networkx_labels(graph, pos, font_size=8, font_weight="bold")
+        nx.draw_networkx_edges(graph, pos, arrows=True, arrowsize=12, width=1.2, alpha=0.7)
+
+        plt.title(f"Intr Topology Graph ({graph.number_of_nodes()} nodes, {graph.number_of_edges()} edges)")
+        plt.axis("off")
+        plt.tight_layout()
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        figure.savefig(output_path, dpi=150, bbox_inches="tight")
+        plt.close(figure)
+        print(f"  [topo_viz] topology graph written to {output_path}")
+    except Exception as exc:
+        print(f"  [topo_viz] WARNING: failed to render topology graph: {exc}")
+
+
+def _run_top_io_boundary_check(top_file: Path) -> None:
+    """Run ownership-based boundary check after generation.
+
+    Default mode is strict to prevent leaking internal node interfaces to
+    generated top-level IO. Can be relaxed via env STRICT_TOPO_IO_BOUNDARY=0.
+    """
+    checker = THIS_DIR / "sim" / "check_top_io_boundary.py"
+    if not checker.exists():
+        print(f"  [boundary_check] WARNING: checker not found: {checker}")
+        return
+    if not top_file.exists():
+        print(f"  [boundary_check] WARNING: generated top not found: {top_file}")
+        return
+
+    strict = os.environ.get("STRICT_TOPO_IO_BOUNDARY", "1") != "0"
+    cmd = [sys.executable, str(checker), "--top-file", str(top_file)]
+    if strict:
+        cmd.append("--strict")
+
+    print(f"  [boundary_check] running: {' '.join(cmd)}")
+    result = subprocess.run(cmd, cwd=THIS_DIR)
+    if result.returncode != 0:
+        mode = "strict" if strict else "warn"
+        raise RuntimeError(
+            f"Top-IO boundary check failed in {mode} mode (rc={result.returncode})."
+        )
 
 
 # -----------------------------------------------------------------------------
@@ -292,6 +371,23 @@ def _patch_lp_struct_links(ring_dir: Path) -> None:
             print(f"  [lp_patch] {fpath.name}: restored internal LP hub links")
 
 
+def _tieoff_unused_input_ports(ring_dir: Path) -> None:
+    """Tie off known-unused input ports so wrappers never emit undriven inputs.
+
+    Current source IP keeps INIU `req_threshold` as a top-side input with
+    "no use" semantics. The wrapper interface intentionally excludes this
+    sideband from ring_req publication, so we tie off only INIU wrappers.
+    """
+
+    for fpath in sorted(ring_dir.glob("iniu*.v")):
+        if fpath.stem.endswith("_ring"):
+            continue
+        text = fpath.read_text()
+        updated = text.replace(".req_threshold());", ".req_threshold(1'b0));")
+        if updated != text:
+            fpath.write_text(updated)
+            print(f"  [tieoff] {fpath.name}: tied off req_threshold input to 1'b0")
+
 def _normalize_boundary_import_style(build_dir: Path) -> None:
     """Force package-level imports in generated boundary modules."""
 
@@ -408,10 +504,8 @@ _SHARED_ENV = "INTR_RING_NOC_DIR"
 _TOP_SIDE_BLOCKS = {
     "intr_iniu_top_side": "INTR_INIU_TOP_OUT_DIR",
     "intr_tniu_top_side": "INTR_TNIU_TOP_OUT_DIR",
-    "intr_ring_lnk":     "INTR_RING_LNK_OUT_DIR",
-    "intr_ring_sta":     "INTR_RING_STA_OUT_DIR",
-    "intr_ring_req_sink": "INTR_RING_REQ_SINK_OUT_DIR",
-    "intr_ring_req_zero_source": "INTR_RING_REQ_ZERO_SOURCE_OUT_DIR",
+    "intr_ring_network":  "INTR_RING_NETWORK_OUT_DIR",
+    "intr_ring_buf": "INTR_RING_BUF_OUT_DIR",
 }
 
 

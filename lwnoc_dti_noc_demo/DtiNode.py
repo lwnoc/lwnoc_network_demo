@@ -12,16 +12,73 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 from topo_core.node.uhdlComponentNode import UhdlComponentNode
 from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
 from topo_core.utils.networkHierOpt import connect
-from uhdl.uhdl.core import And, Component, Cut, Equal, Input, Not, Output, UInt, when
+from uhdl.uhdl.core import And, BitXor, Component, Cut, Equal, Input, Not, Output, UInt, when
 from uhdl.uhdl.core.TemplateIP import TemplateComponent
 
 from DtiTemplate import (
+    dti_link_buf_config,
+    dti_link_pipe_config,
+    dti_req_rsp_async_config,
     iniu_top_config,
-    npu_iniu_sys_config,
+    pcie_eth_iniu_sys_config,
+    vpu_iniu_sys_config,
+    dsp2_iniu_sys_config,
+    dsp1_iniu_sys_config,
+    dsp0_iniu_sys_config,
+    noc_tbu1_iniu_sys_config,
+    usb_ufs_iniu_sys_config,
+    mipi0_iniu_sys_config,
+    mipi1_iniu_sys_config,
+    camera_iniu_sys_config,
+    noc_tbu0_iniu_sys_config,
     tcu_tniu_sys_config,
     tniu_top_config,
-    vpu_iniu_sys_config,
 )
+
+
+class DtiReqRspAsyncBridgeSlvNode(UhdlComponentNode):
+    def __init__(self, id: str = "dti_req_rsp_async_slv"):
+        comp = TemplateComponent(config=dti_req_rsp_async_config, top="dti_async_bridge_slv")
+        super().__init__(id=id, impl=comp)
+
+        self.add_interface("clk", r"^clk$")
+        self.add_interface("rst_n", r"^rst_n$")
+        self.add_interface("s_chan", r"^s_(valid|ready|payload|last|srcid|tgtid|qos|threshold)$")
+        self.add_interface("sync", r"^(wptr_async|rptr_async|rptr_sync|pld_sync)$")
+
+
+class DtiReqRspAsyncBridgeMstNode(UhdlComponentNode):
+    def __init__(self, id: str = "dti_req_rsp_async_mst"):
+        comp = TemplateComponent(config=dti_req_rsp_async_config, top="dti_async_bridge_mst")
+        super().__init__(id=id, impl=comp)
+
+        self.add_interface("clk", r"^clk$")
+        self.add_interface("rst_n", r"^rst_n$")
+        self.add_interface("m_chan", r"^m_(valid|ready|payload|last|srcid|tgtid|qos|threshold)$")
+        self.add_interface("sync", r"^(wptr_async|rptr_async|rptr_sync|pld_sync)$")
+
+
+class DtiLinkPipeNode(UhdlComponentNode):
+    def __init__(self, id: str = "dti_link_pipe"):
+        comp = TemplateComponent(config=dti_link_pipe_config, top="dti_link_pipe")
+        super().__init__(id=id, impl=comp)
+
+        self.add_interface("clk", r"^clk$")
+        self.add_interface("rst_n", r"^rst_n$")
+        self.add_interface("s_chan", r"^s_(valid|ready|payload|last|srcid|tgtid|qos|threshold)$")
+        self.add_interface("m_chan", r"^m_(valid|ready|payload|last|srcid|tgtid|qos|threshold)$")
+
+
+class DtiLinkBufNode(UhdlComponentNode):
+    def __init__(self, id: str = "dti_link_buf"):
+        comp = TemplateComponent(config=dti_link_buf_config, top="dti_link_buf")
+        super().__init__(id=id, impl=comp)
+
+        self.add_interface("clk", r"^clk$")
+        self.add_interface("rst_n", r"^rst_n$")
+        self.add_interface("s_chan", r"^(write_req_(valid|ready|payload|last|srcid|tgtid|qos|threshold))$")
+        self.add_interface("m_chan", r"^(read_resp_(valid|ready|payload|last|srcid|tgtid|qos|threshold))$")
+        self.add_interface("ctrl", r"^(stall|clear|idle|almost_full|almost_empty|empty|full)$")
 
 
 class DtiSharedTcuSwitchComponent(Component):
@@ -145,9 +202,79 @@ class DtiSharedTcuSwitchNode(UhdlComponentNode):
         return
 
 
+# ── Protocol bridge tieoff components ────────────────────────────────────────
+# INIU top-side: initiator (drives valid/payload/srcid/last; receives ready)
+#   Extra signals not supported by 5-signal switch:
+#     req_qos/req_tgtid : INIU outputs → sink (tieoff absorbs)
+#     req_threshold     : INIU input   → drive 0 (no switch backpressure)
+#     rsp_qos/rsp_tgtid : INIU inputs  → drive 0 (switch has no qos/tgtid output)
+#     rsp_threshold     : INIU output  → sink (tieoff absorbs)
+class DtiIniuTopExtTieoffComponent(Component):
+    def circuit(self):
+        self.req_qos = Input(UInt(1))           # absorb INIU req_qos output
+        self.req_threshold = Output(UInt(1))    # drive 0 → INIU req_threshold input
+        self.req_tgtid = Input(UInt(6))         # absorb INIU req_tgtid output
+        self.rsp_qos = Output(UInt(1))          # drive 0 → INIU rsp_qos input
+        self.rsp_threshold = Input(UInt(1))     # absorb INIU rsp_threshold output
+        self.rsp_tgtid = Output(UInt(6))        # drive 0 → INIU rsp_tgtid input
+        # UInt(w, 0) is falsy in Python; use BitXor(x,x)=0 to force constant zero
+        self.req_threshold += BitXor(UInt(1, 1), UInt(1, 1))
+        self.rsp_qos += BitXor(UInt(1, 1), UInt(1, 1))
+        self.rsp_tgtid += BitXor(UInt(6, 63), UInt(6, 63))
+
+
+class DtiIniuTopExtTieoffNode(UhdlComponentNode):
+    def __init__(self, id: str):
+        comp = DtiIniuTopExtTieoffComponent()
+        super().__init__(id=id, impl=comp)
+        self.add_interface("top_req_ext", r"req_(qos|threshold|tgtid)")
+        self.add_interface("top_rsp_ext", r"rsp_(qos|threshold|tgtid)")
+
+    def build_uhdl(self):
+        # clear_io_states() (called by parent wrapper before build_uhdl) wipes
+        # the _rvalue set in circuit() for constant tie-off outputs.
+        # Recreate the component fresh so circuit() re-runs and restores constants.
+        self.uhdl_component = DtiIniuTopExtTieoffComponent()
+        return self.uhdl_component
+
+
+# TNIU top-side: target (receives valid/payload/srcid/last; drives ready)
+#   Extra signals mirrored:
+#     req_qos/req_tgtid : TNIU inputs  → drive 0
+#     req_threshold     : TNIU output  → sink
+#     rsp_qos/rsp_tgtid : TNIU outputs → sink
+#     rsp_threshold     : TNIU input   → drive 0
+class DtiTniuTopExtTieoffComponent(Component):
+    def circuit(self):
+        self.req_qos = Output(UInt(1))          # drive 0 → TNIU req_qos input
+        self.req_threshold = Input(UInt(1))     # absorb TNIU req_threshold output
+        self.req_tgtid = Output(UInt(6))        # drive 0 → TNIU req_tgtid input
+        self.rsp_qos = Input(UInt(1))           # absorb TNIU rsp_qos output
+        self.rsp_threshold = Output(UInt(1))    # drive 0 → TNIU rsp_threshold input
+        self.rsp_tgtid = Input(UInt(6))         # absorb TNIU rsp_tgtid output
+        # UInt(w, 0) is falsy in Python; use BitXor(x,x)=0 to force constant zero
+        self.req_qos += BitXor(UInt(1, 1), UInt(1, 1))
+        self.req_tgtid += BitXor(UInt(6, 63), UInt(6, 63))
+        self.rsp_threshold += BitXor(UInt(1, 1), UInt(1, 1))
+
+
+class DtiTniuTopExtTieoffNode(UhdlComponentNode):
+    def __init__(self, id: str):
+        comp = DtiTniuTopExtTieoffComponent()
+        super().__init__(id=id, impl=comp)
+        self.add_interface("top_req_ext", r"req_(qos|threshold|tgtid)")
+        self.add_interface("top_rsp_ext", r"rsp_(qos|threshold|tgtid)")
+
+    def build_uhdl(self):
+        # Same reason as DtiIniuTopExtTieoffNode: recreate to restore circuit() constants.
+        self.uhdl_component = DtiTniuTopExtTieoffComponent()
+        return self.uhdl_component
+
+
 class DtiIniuSysNode(UhdlComponentNode):
     def __init__(self, id: str, cfg):
-        comp = TemplateComponent(config=cfg, top="dti_pr_iniu_async_sys_side")
+        params = getattr(cfg, 'param_overrides', {})
+        comp = TemplateComponent(config=cfg, top="dti_pr_iniu_async_sys_side", **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", "clk")
@@ -171,8 +298,12 @@ class DtiIniuTopNode(UhdlComponentNode):
         self.add_interface("async_fifo", r".*wptr_async|.*rptr_async|.*rptr_sync|.*pld_sync")
         self.add_interface("lp_top_tx", r"lp_hub_tx_req")
         self.add_interface("lp_top_rx", r"lp_hub_rx_req")
-        self.add_interface("top_req", r"req_(valid|payload|last|srcid|tgtid|qos|threshold|ready)")
-        self.add_interface("top_rsp", r"rsp_(valid|payload|last|srcid|tgtid|qos|threshold|ready)")
+        # 5-signal switch-compatible subset
+        self.add_interface("top_req", r"req_(valid|payload|last|srcid|ready)")
+        self.add_interface("top_rsp", r"rsp_(valid|payload|last|srcid|ready)")
+        # Extra 3-signal group (qos/tgtid/threshold) handled by tieoff inside DtiIniuNode
+        self.add_interface("top_req_ext", r"req_(qos|threshold|tgtid)")
+        self.add_interface("top_rsp_ext", r"rsp_(qos|threshold|tgtid)")
 
 
 class DtiTniuSysNode(UhdlComponentNode):
@@ -200,8 +331,12 @@ class DtiTniuTopNode(UhdlComponentNode):
         self.add_interface("async_fifo", r".*wptr_async|.*rptr_async|.*rptr_sync|.*pld_sync")
         self.add_interface("lp_top_tx", r"lp_hub_tx_req")
         self.add_interface("lp_top_rx", r"lp_hub_rx_req")
-        self.add_interface("top_req", r"req_(valid|payload|last|srcid|tgtid|qos|threshold|ready)")
-        self.add_interface("top_rsp", r"rsp_(valid|payload|last|srcid|tgtid|qos|threshold|ready)")
+        # 5-signal switch-compatible subset
+        self.add_interface("top_req", r"req_(valid|payload|last|srcid|ready)")
+        self.add_interface("top_rsp", r"rsp_(valid|payload|last|srcid|ready)")
+        # Extra 3-signal group (qos/tgtid/threshold) handled by tieoff inside DtiTniuNode
+        self.add_interface("top_req_ext", r"req_(qos|threshold|tgtid)")
+        self.add_interface("top_rsp_ext", r"rsp_(qos|threshold|tgtid)")
 
 
 class DtiIniuNode(UhdlWrapperNode):
@@ -217,11 +352,14 @@ class DtiIniuNode(UhdlWrapperNode):
         self.add_interface("dti_rsp")
         self.add_interface("timeout_val")
         self.add_interface("pchnl_ctrl")
+        # 5-signal switch-compatible top interface (qos/tgtid/threshold handled by tieoff below)
         self.add_interface("top_req")
         self.add_interface("top_rsp")
 
         self.sys_side = DtiIniuSysNode(id=f"{node_name}_sys_side", cfg=sys_cfg)
         self.top_side = DtiIniuTopNode(id=f"{node_name}_top_side")
+        # Tieoff: absorbs unused INIU outputs (qos/tgtid) and drives threshold=0
+        self.top_ext_tieoff = DtiIniuTopExtTieoffNode(id=f"{node_name}_top_ext_tieoff")
 
         connect(self.sys_side.clk, self.clk_sys)
         connect(self.sys_side.rst_n, self.rst_sys_n)
@@ -235,8 +373,12 @@ class DtiIniuNode(UhdlWrapperNode):
 
         connect(self.top_side.clk, self.clk_top)
         connect(self.top_side.rst_n, self.rst_top_n)
+        # 5-signal passthrough; exposed as top_req/top_rsp for switch connection in DtiLogicTopo
         connect(self.top_side.top_req, self.top_req)
         connect(self.top_side.top_rsp, self.top_rsp)
+        # Absorb/tie-off extra 3 signals (qos/tgtid/threshold) per direction
+        connect(self.top_side.top_req_ext, self.top_ext_tieoff.top_req_ext)
+        connect(self.top_side.top_rsp_ext, self.top_ext_tieoff.top_rsp_ext)
 
         self.expose_unconnected_interfaces()
 
@@ -253,11 +395,14 @@ class DtiTniuNode(UhdlWrapperNode):
         self.add_interface("dti_req")
         self.add_interface("dti_rsp")
         self.add_interface("pchnl_ctrl")
+        # 5-signal switch-compatible top interface (qos/tgtid/threshold handled by tieoff below)
         self.add_interface("top_req")
         self.add_interface("top_rsp")
 
         self.sys_side = DtiTniuSysNode(id=f"{node_name}_sys_side")
         self.top_side = DtiTniuTopNode(id=f"{node_name}_top_side")
+        # Tieoff: drives 0 for TNIU inputs (qos/tgtid) and absorbs threshold output
+        self.top_ext_tieoff = DtiTniuTopExtTieoffNode(id=f"{node_name}_top_ext_tieoff")
 
         connect(self.sys_side.clk, self.clk_sys)
         connect(self.sys_side.rst_n, self.rst_sys_n)
@@ -270,19 +415,60 @@ class DtiTniuNode(UhdlWrapperNode):
 
         connect(self.top_side.clk, self.clk_top)
         connect(self.top_side.rst_n, self.rst_top_n)
+        # 5-signal passthrough; exposed as top_req/top_rsp for switch connection in DtiLogicTopo
         connect(self.top_side.top_req, self.top_req)
         connect(self.top_side.top_rsp, self.top_rsp)
+        # Absorb/tie-off extra 3 signals (qos/tgtid/threshold) per direction
+        connect(self.top_side.top_req_ext, self.top_ext_tieoff.top_req_ext)
+        connect(self.top_side.top_rsp_ext, self.top_ext_tieoff.top_rsp_ext)
 
         self.expose_unconnected_interfaces()
 
 
-def make_npu_iniu_node(id: str = "sys_npu_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=npu_iniu_sys_config, node_name="sys_npu_iniu")
+# ── Per-endpoint TBU INIU factory functions ───────────────────────────────────
+def make_pcie_eth_iniu_node(id: str = "pcie_eth_iniu_node") -> DtiIniuNode:
+    return DtiIniuNode(id=id, sys_cfg=pcie_eth_iniu_sys_config, node_name="pcie_eth")
 
 
-def make_vpu_iniu_node(id: str = "sys_vpu_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=vpu_iniu_sys_config, node_name="sys_vpu_iniu")
+def make_vpu_iniu_node(id: str = "vpu_iniu_node") -> DtiIniuNode:
+    return DtiIniuNode(id=id, sys_cfg=vpu_iniu_sys_config, node_name="vpu")
 
 
-def make_tcu_tniu_node(id: str = "sys_tcu_tniu_node") -> DtiTniuNode:
+def make_dsp2_iniu_node(id: str = "dsp2_iniu_node") -> DtiIniuNode:
+    return DtiIniuNode(id=id, sys_cfg=dsp2_iniu_sys_config, node_name="dsp2")
+
+
+def make_dsp1_iniu_node(id: str = "dsp1_iniu_node") -> DtiIniuNode:
+    return DtiIniuNode(id=id, sys_cfg=dsp1_iniu_sys_config, node_name="dsp1")
+
+
+def make_dsp0_iniu_node(id: str = "dsp0_iniu_node") -> DtiIniuNode:
+    return DtiIniuNode(id=id, sys_cfg=dsp0_iniu_sys_config, node_name="dsp0")
+
+
+def make_noc_tbu1_iniu_node(id: str = "noc_tbu1_iniu_node") -> DtiIniuNode:
+    return DtiIniuNode(id=id, sys_cfg=noc_tbu1_iniu_sys_config, node_name="noc_tbu1")
+
+
+def make_usb_ufs_iniu_node(id: str = "usb_ufs_iniu_node") -> DtiIniuNode:
+    return DtiIniuNode(id=id, sys_cfg=usb_ufs_iniu_sys_config, node_name="usb_ufs")
+
+
+def make_mipi0_iniu_node(id: str = "mipi0_iniu_node") -> DtiIniuNode:
+    return DtiIniuNode(id=id, sys_cfg=mipi0_iniu_sys_config, node_name="mipi0")
+
+
+def make_mipi1_iniu_node(id: str = "mipi1_iniu_node") -> DtiIniuNode:
+    return DtiIniuNode(id=id, sys_cfg=mipi1_iniu_sys_config, node_name="mipi1")
+
+
+def make_camera_iniu_node(id: str = "camera_iniu_node") -> DtiIniuNode:
+    return DtiIniuNode(id=id, sys_cfg=camera_iniu_sys_config, node_name="camera")
+
+
+def make_noc_tbu0_iniu_node(id: str = "noc_tbu0_iniu_node") -> DtiIniuNode:
+    return DtiIniuNode(id=id, sys_cfg=noc_tbu0_iniu_sys_config, node_name="noc_tbu0")
+
+
+def make_tcu_tniu_node(id: str = "tcu_tniu_node") -> DtiTniuNode:
     return DtiTniuNode(id=id, node_name="sys_tcu_tniu")

@@ -1,11 +1,10 @@
-"""
-IntrRingTopo.py — Interrupt ring NoC topology: 4 INIU + 2 TNIU.
+"""IntrRingTopo.py — Interrupt ring NoC topology: 4 INIU + 2 TNIU.
 
 Ring order (CW direction): iniu0 → iniu1 → iniu2 → iniu3 → tniu0 → tniu1 → iniu0
 
 Connections:
-  CW  (pring): node[i].pring_out_if  → node[(i+1)%N].pring_in_if
-  CCW (nring): node[(i+1)%N].nring_out_if → node[i].nring_in_if
+    CW  (pring): node[i].pring_out_if  → node[(i+1)%N].pring_in_if
+    CCW (nring): node[(i+1)%N].nring_out_if → node[i].nring_in_if
 """
 import sys
 from pathlib import Path
@@ -50,11 +49,11 @@ class IntrRingLogicTopo(UhdlWrapperNode):
         # Ring order list (CW sequence)
         nodes = [self.iniu0, self.iniu1, self.iniu2, self.iniu3,
                  self.tniu0, self.tniu1]
-        N = len(nodes)
+        count = len(nodes)
 
         # ── Bi-directional ring connectivity ────────────────────────────────
-        for i in range(N):
-            nxt = (i + 1) % N
+        for i in range(count):
+            nxt = (i + 1) % count
             # CW: node[i] → node[i+1]
             connect(nodes[i].pring_out_if, nodes[nxt].pring_in_if)
             # CCW: node[i+1] → node[i]
