@@ -1,0 +1,1 @@
+`define ASYNC_FIFO_DEPTH 10

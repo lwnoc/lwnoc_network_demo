@@ -1,0 +1,3 @@
+-f $INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_up_harden_wrap/filelist.f
+-f $INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_dn_harden_wrap/filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_top_pd/soc_intr_ring_top_pd.v

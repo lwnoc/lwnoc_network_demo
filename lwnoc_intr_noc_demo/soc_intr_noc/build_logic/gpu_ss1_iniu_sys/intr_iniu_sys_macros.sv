@@ -1,0 +1,1 @@
+`define gpu_ss1_iniu_ASYNC_FIFO_DEPTH 16

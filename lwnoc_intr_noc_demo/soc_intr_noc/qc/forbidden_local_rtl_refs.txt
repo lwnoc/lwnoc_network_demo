@@ -1,0 +1,3 @@
+status: pass
+forbidden_prefix: $INTR_NOC_DEMO_DIR/rtl/
+offenders: 0

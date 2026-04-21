@@ -1,0 +1,1 @@
+`define dspss4_tniu_ASYNC_FIFO_DEPTH 10

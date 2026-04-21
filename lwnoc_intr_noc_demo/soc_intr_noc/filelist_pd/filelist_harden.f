@@ -1,0 +1,1 @@
+-f $INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap_pd/filelist.f

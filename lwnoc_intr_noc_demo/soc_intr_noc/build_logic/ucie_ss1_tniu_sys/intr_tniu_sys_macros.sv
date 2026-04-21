@@ -1,0 +1,1 @@
+`define ucie_ss1_tniu_ASYNC_FIFO_DEPTH 10

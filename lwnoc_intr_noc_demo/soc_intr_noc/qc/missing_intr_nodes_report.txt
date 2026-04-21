@@ -1,0 +1,42 @@
+status: pass
+rtl_root: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl
+required_count: 15
+found_count: 15
+missing_count: 0
+
+found_modules:
+  - interrupt_iniu_aync_sys_side
+  - interrupt_iniu_aync_top_side
+  - interrupt_tniu_aync_sys_side
+  - interrupt_tniu_aync_top_side
+  - intr_ring_req_sink
+  - intr_ring_req_zero_source
+  - interrupt_req_ring_station
+  - intr_ring_buf_wrap
+  - intr_station_temp_mem_model
+  - lwnoc_ring_buf
+  - lwnoc_ring_station
+  - lwnoc_ring_sp
+  - lwnoc_ring_async_bridge_slv
+  - lwnoc_ring_async_bridge_mst
+  - lwnoc_ring_async_bridge
+
+missing_modules:
+
+alias_resolutions:
+  - interrupt_req_ring_station => intr_ring_buf_wrap
+  - intr_ring_req_sink => lwnoc_intr_default_tgtid_sink
+  - intr_ring_req_zero_source => lwnoc_intr_dummy_endpoint
+
+migration_candidates:
+  - (none)
+
+required_interrupt_req_ring_station_ports:
+  - local_tx_(valid|ready|payload|srcid|tgtid|qos|last)
+  - local_rx_(valid|ready|payload|srcid|tgtid|qos|last)
+  - cw_in_(valid|ready|payload|srcid|tgtid|qos|last)
+  - cw_out_(valid|ready|payload|srcid|tgtid|qos|last)
+  - ccw_in_(valid|ready|payload|srcid|tgtid|qos|last)
+  - ccw_out_(valid|ready|payload|srcid|tgtid|qos|last)
+
+note: generation is blocked if any required module is missing under external RTL root.

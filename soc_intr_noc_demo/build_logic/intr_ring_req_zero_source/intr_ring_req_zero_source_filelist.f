@@ -1,2 +1,0 @@
-$INTR_RING_REQ_ZERO_SOURCE_OUT_DIR/intr_ring_req_zero_source_intr_demo_prefix_define.sv
-$INTR_RING_REQ_ZERO_SOURCE_OUT_DIR/intr_ring_req_zero_source_intr_ring_req_zero_source.sv

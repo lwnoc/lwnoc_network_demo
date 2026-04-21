@@ -1,0 +1,18 @@
+`ifndef EXCLUDE_FOUNDATION_IP
+-f $INTR_NOC_DEMO_DIR/filelist/intr_common_dep.f
+`endif
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/filelist/soc_intr_niu_ring_noc_define.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/interrupt_iniu_define.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/iniu/interrupt_iniu_pkg.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/iniu/interrupt_iniu_event_recorder.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/iniu/interrupt_iniu_lut.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/iniu/interrupt_iniu_reg_bank.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/iniu/interrupt_iniu_arb.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/iniu/interrupt_iniu.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_4096x20.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_2048x20.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_1024x20.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_512x20.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_256x20.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_128x20.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/interrupt_iniu_async_sys_side.sv
