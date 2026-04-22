@@ -119,6 +119,7 @@ module gpu_ss1_iniu_interrupt_iniu_reg_bank
     // address sram enable
     //===========================================================================
 
+`ifndef VERILATOR
     generate
         for(genvar i = 0; i < INTERRUPT_NUM; i=i+1) begin : gen_intr_lut_sram_enable
             always_ff @(posedge clk or negedge rst_n) begin
@@ -131,6 +132,7 @@ module gpu_ss1_iniu_interrupt_iniu_reg_bank
             end
         end
     endgenerate
+`endif
 
     // pulse mode CSR: 1=pulse, 0=level (default)
     generate

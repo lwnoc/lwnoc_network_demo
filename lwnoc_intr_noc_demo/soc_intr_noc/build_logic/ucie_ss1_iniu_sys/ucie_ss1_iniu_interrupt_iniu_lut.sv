@@ -47,6 +47,7 @@ module ucie_ss1_iniu_interrupt_iniu_lut
 
 //===========================================================================
 // logic declarations
+    logic                                   read_req_vld;
 //===========================================================================
 
     logic                                   memory_req_vld;

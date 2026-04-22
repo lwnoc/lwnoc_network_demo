@@ -659,6 +659,9 @@ def generate(flow: str = "dv"):
         _patch_async_fifo_depths(build_dir, iniu_depth=16, tniu_depth=10)
         _rename_generated_lwmnoc_define_shims(build_dir)
         _consolidate_top_side(build_dir, combined_dir)
+        _patch_missing_read_req_declarations(build_dir)
+        _patch_sva_for_verilator(build_dir)
+        _patch_verilator_generate_loops(build_dir)
     _localize_generated_prefix_defines(build_dir)
     _tieoff_unused_input_ports(build_dir / combined_dir)
     if flow == "dv":
@@ -1054,6 +1057,120 @@ def _patch_async_fifo_depths(build_dir: Path, iniu_depth: int, tniu_depth: int) 
         for sv_path in sorted(tniu_sys_dir.glob("*_interrupt_tniu_async_sys_side.sv")):
             _replace_depth(sv_path, old_depth=16, new_depth=tniu_depth)
 
+
+_LOGIC_DECL_LINE_RE = re.compile(r"^\s*logic\b[^;]*;\s*$", re.MULTILINE)
+
+
+def _patch_missing_read_req_declarations(build_dir: Path) -> None:
+    """Add missing logic declarations for read_req_vld / read_req_rdy in
+    generated INIU LUT and TNIU event-conflict-check files that Verilator
+    flags as implicit-wire errors."""
+    _iniu_lut_required = ("read_req_vld",)
+    _tniu_check_required = ("read_req_vld", "read_req_rdy")
+    for iniu_sys_dir in sorted(build_dir.glob("*_iniu_sys")):
+        for sv_path in sorted(iniu_sys_dir.glob("*_interrupt_iniu_lut.sv")):
+            _insert_missing_logic_decls(sv_path, _iniu_lut_required)
+    for tniu_sys_dir in sorted(build_dir.glob("*_tniu_sys")):
+        for sv_path in sorted(tniu_sys_dir.glob("*_interrupt_tniu_event_conflict_check.sv")):
+            _insert_missing_logic_decls(sv_path, _tniu_check_required)
+
+
+def _insert_missing_logic_decls(sv_path: Path, required: tuple[str, ...]) -> None:
+    text = sv_path.read_text()
+    declared = set(re.findall(r"\blogic\b\s+\S[^;]*?\b(\w+)\s*;", text))
+    missing = [sig for sig in required if sig not in declared]
+    if not missing:
+        return
+    last_logic_match = None
+    for m in _LOGIC_DECL_LINE_RE.finditer(text):
+        last_logic_match = m
+    if last_logic_match is None:
+        return
+    insert_pos = last_logic_match.end()
+    insertion = "".join(
+        f"    logic                                   {sig};\n" for sig in missing
+    )
+    new_text = text[:insert_pos] + insertion + text[insert_pos:]
+    sv_path.write_text(new_text)
+    sigs = "/".join(missing)
+    print(f"  [verilator_fix] {sv_path.parent.name}/{sv_path.name}: added {sigs} decl")
+
+
+_SVA_BLOCK_RE = re.compile(
+    r"([ \t]*(?://[^\n]+\n[ \t]*)?"
+    r"property[ \t]+\w+;[\s\S]+?endproperty[ \t]*\n"
+    r"(?:[ \t]*\n)?"
+    r"[ \t]*assert[ \t]+property\([^)]+\)[\s\S]*?\);)",
+)
+
+
+def _patch_sva_for_verilator(build_dir: Path) -> None:
+    """Wrap SVA property/assert blocks with `ifndef VERILATOR guards.
+
+    Verilator 4.x does not support the SystemVerilog Assertions 'property'
+    keyword.  The generated copies of lwnoc_intr_default_tgtid_sink.sv and
+    lwnoc_intr_dummy_endpoint.sv contain such blocks and must be guarded so
+    that the lint run succeeds.
+    """
+    sva_targets = [
+        *sorted(build_dir.rglob("lwnoc_intr_default_tgtid_sink.sv")),
+        *sorted(build_dir.rglob("lwnoc_intr_dummy_endpoint.sv")),
+    ]
+    for sv_path in sva_targets:
+        text = sv_path.read_text()
+        if "`ifndef VERILATOR" in text:
+            continue  # already guarded
+        new_text = _SVA_BLOCK_RE.sub(
+            lambda m: "`ifndef VERILATOR\n" + m.group(0) + "\n`endif",
+            text,
+        )
+        if new_text != text:
+            sv_path.write_text(new_text)
+            print(f"  [sva_patch] {sv_path.parent.name}/{sv_path.name}: wrapped SVA blocks for Verilator 4.x")
+
+
+_GEN_BLOCK_RE = re.compile(r"([ \t]*generate\b.*?[ \t]*endgenerate)", re.DOTALL)
+
+
+def _patch_verilator_generate_loops(build_dir: Path) -> None:
+    """Wrap large generate-for loops with `ifndef VERILATOR guards.
+
+    Verilator 4.x cannot elaborate INTERRUPT_NUM=4096 generate instances
+    without running out of memory.  Guards any generate...endgenerate block
+    that contains a full-width INTERRUPT_NUM loop (i.e. 'INTERRUPT_NUM;')
+    in the generated *_interrupt_iniu.sv and *_interrupt_tniu.sv files.
+    """
+    # Scan all .sv files in the generated iniu_sys / tniu_sys / ring_top dirs.
+    # Files include *_interrupt_iniu.sv, *_interrupt_iniu_arb.sv,
+    # *_interrupt_iniu_reg_bank.sv, *_interrupt_tniu.sv and their
+    # non-prefixed equivalents copied to soc_intr_ring_top/.
+    scan_dirs = (
+        *sorted(build_dir.glob("*_iniu_sys")),
+        *sorted(build_dir.glob("*_tniu_sys")),
+        build_dir / TOPO_ID,
+    )
+    targets = sorted(
+        sv for d in scan_dirs if d.is_dir() for sv in d.glob("*.sv")
+        if "INTERRUPT_NUM;" in sv.read_text()
+    )
+    for sv_path in targets:
+        text = sv_path.read_text()
+        if "`ifndef VERILATOR" in text:
+            continue  # already patched
+
+        def _guard_if_large(m: re.Match) -> str:
+            block = m.group(0)
+            if re.search(r"INTERRUPT_NUM\s*;", block):
+                return "`ifndef VERILATOR\n" + block + "\n`endif"
+            return block
+
+        new_text = _GEN_BLOCK_RE.sub(_guard_if_large, text)
+        if new_text != text:
+            sv_path.write_text(new_text)
+            print(
+                f"  [gen_patch] {sv_path.parent.name}/{sv_path.name}: "
+                "guarded large generate loop for Verilator 4.x"
+            )
 
 def _rename_generated_lwmnoc_define_shims(build_dir: Path) -> None:
     """Rename generated *_lwmnoc_define.sv shims to *_ring_noc_define.sv."""

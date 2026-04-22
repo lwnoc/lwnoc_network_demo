@@ -26,7 +26,7 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 from topo_core.node.node import reset_global_state
 from topo_core.utils.serialization import TopologySerializer
 
-from StsSocTopo import StsSocLogicTopo
+from StsSocTopo import BLUE_CHAIN_LEAF_OWNERSHIP, StsSocLogicTopo
 
 
 from StsTemplate import (
@@ -177,6 +177,25 @@ _SOC_TNIU_ALIAS_NAMES = [
     "gpu_ss0_sink",
 ]
 
+_PD_HARDEN_DN_LEAVES = (
+    "camera_ss",
+    "display_ss_sink",
+)
+
+_PD_HARDEN_UP_LEAVES = (
+    "dspss0",
+    "dspss1",
+    "dspss2",
+    "dspss3",
+    "dspss4",
+    "dspss5",
+)
+
+_PD_HARDEN_NON_PARTITIONED_BLUE_CHAIN_LEAVES = (
+    "dp_ss_sink",
+    "cpu_ss_sink",
+)
+
 
 def _build_sys_components(build_dir: Path) -> None:
     """Build per-instance sys-side configs via ip_builder."""
@@ -308,7 +327,7 @@ def _dedup_sys_filelists(build_dir: Path) -> set:
     canon_dir = build_dir / canon_cfg.name
     canon_fl = canon_dir / f"{canon_cfg.prefix}filelist.f"
     if not canon_fl.exists():
-        return
+        return set()
 
     def _extract_module_name(sv_path: Path) -> str:
         """Extract first module/package name from an SV file."""
@@ -586,6 +605,312 @@ def _format_param_block(params: dict) -> str:
     return " #(\n\t\t" + ",\n\t\t".join(items) + ")"
 
 
+def _discover_sys_node_names(build_dir: Path) -> tuple[list[str], list[str]]:
+    """Discover INIU/TNIU node names from generated sys-side directories."""
+    iniu_nodes = sorted(
+        p.name[: -len("_iniu_sys")]
+        for p in build_dir.glob("*_iniu_sys")
+        if p.is_dir() and p.name.endswith("_iniu_sys")
+    )
+    tniu_nodes = sorted(
+        p.name[: -len("_tniu_sys")]
+        for p in build_dir.glob("*_tniu_sys")
+        if p.is_dir() and p.name.endswith("_tniu_sys")
+    )
+    iniu_nodes = [n for n in iniu_nodes if not n.startswith("sts_demo")]
+    tniu_nodes = [n for n in tniu_nodes if not n.startswith("sts_demo")]
+    return iniu_nodes, tniu_nodes
+
+
+def _render_sts_soc_logic_topo_fallback(iniu_nodes: list[str], tniu_nodes: list[str]) -> str:
+    """Render fallback SoC top wrapper using discovered node-boundary ports."""
+    lines: list[str] = [
+        "module sts_soc_logic_topo (",
+        "    input clk_sys,",
+        "    input rst_sys_n,",
+        "    input clk_noc,",
+        "    input rst_noc_n,",
+        "    input clk_harden_dn_func,",
+        "    input rst_harden_dn_func_n,",
+        "    input clk_harden_up_func,",
+        "    input rst_harden_up_func_n,",
+        "    input clk_dbg_timer,",
+        "    input rst_dbg_timer_n,",
+        "",
+    ]
+
+    for idx, name in enumerate(iniu_nodes):
+        comma = "," if idx != len(iniu_nodes) - 1 or tniu_nodes else ""
+        lines.extend(
+            [
+                f"    input         {name}_iniu_sys_req_vld,",
+                f"    input  [63:0] {name}_iniu_sys_req_pld,",
+                f"    output        {name}_iniu_sys_req_rdy{comma}",
+                "",
+            ]
+        )
+
+    for idx, name in enumerate(tniu_nodes):
+        comma = "," if idx != len(tniu_nodes) - 1 else ""
+        lines.extend(
+            [
+                f"    output        {name}_tniu_sys_rsp_vld,",
+                f"    output [63:0] {name}_tniu_sys_rsp_pld,",
+                f"    input         {name}_tniu_sys_rsp_rdy{comma}",
+                "",
+            ]
+        )
+
+    lines.extend(
+        [
+            ");",
+            "",
+            "// Auto-rendered fallback wrapper with node-derived integration ports.",
+            "localparam integer STS_SOC_BRIDGE_DATA_WIDTH = 64;",
+            "localparam integer STS_SOC_BRIDGE_FIFO_DEPTH = 16;",
+            "",
+            "reg  [STS_SOC_BRIDGE_DATA_WIDTH-1:0] dn_req_payload;",
+            "wire                                  dn_req_valid;",
+            "wire                                  dn_req_ready;",
+            "",
+            "wire                                  up_rsp_valid;",
+            "wire [STS_SOC_BRIDGE_DATA_WIDTH-1:0] up_rsp_payload;",
+            "reg                                   up_rsp_ready;",
+            "",
+            "wire [STS_SOC_BRIDGE_FIFO_DEPTH-1:0] async_wptr;",
+            "wire [STS_SOC_BRIDGE_FIFO_DEPTH-1:0] async_rptr;",
+            "wire [STS_SOC_BRIDGE_FIFO_DEPTH-1:0] async_rptr_sync;",
+            "wire [STS_SOC_BRIDGE_DATA_WIDTH:0]   async_pld_sync;",
+            "",
+            "reg [31:0] dn_domain_req_ctr;",
+            "reg [31:0] up_domain_rsp_ctr;",
+            "",
+            "always @(posedge clk_harden_dn_func or negedge rst_harden_dn_func_n) begin",
+            "    if (!rst_harden_dn_func_n) begin",
+            "        dn_domain_req_ctr <= 32'h0;",
+            "    end else if (dn_req_valid && dn_req_ready) begin",
+            "        dn_domain_req_ctr <= dn_domain_req_ctr + 1'b1;",
+            "    end",
+            "end",
+            "",
+        ]
+    )
+
+    if iniu_nodes:
+        lines.append("assign dn_req_valid = " + " | ".join(f"{n}_iniu_sys_req_vld" for n in iniu_nodes) + ";")
+        for name in iniu_nodes:
+            lines.append(f"assign {name}_iniu_sys_req_rdy = dn_req_ready & {name}_iniu_sys_req_vld;")
+        lines.extend(["", "always @(*) begin"])
+        first = iniu_nodes[0]
+        lines.append(f"    if ({first}_iniu_sys_req_vld) begin")
+        lines.append(f"        dn_req_payload = {first}_iniu_sys_req_pld;")
+        lines.append("    end")
+        for name in iniu_nodes[1:]:
+            lines.append(f"    else if ({name}_iniu_sys_req_vld) begin")
+            lines.append(f"        dn_req_payload = {name}_iniu_sys_req_pld;")
+            lines.append("    end")
+        lines.append("    else begin")
+        lines.append("        dn_req_payload = {32'h5354_5344, dn_domain_req_ctr};")
+        lines.append("    end")
+        lines.append("end")
+    else:
+        lines.extend(
+            [
+                "assign dn_req_valid = 1'b0;",
+                "always @(*) begin",
+                "    dn_req_payload = {32'h5354_5344, dn_domain_req_ctr};",
+                "end",
+            ]
+        )
+
+    lines.extend(
+        [
+            "",
+            "sts_async_bridge_slv #(",
+            "    .FIFO_DEPTH (STS_SOC_BRIDGE_FIFO_DEPTH),",
+            "    .DATA_WIDTH (STS_SOC_BRIDGE_DATA_WIDTH)",
+            ") u_sts_soc_harden_dn_async_bridge_slv (",
+            "    .clk        (clk_harden_dn_func),",
+            "    .rst_n      (rst_harden_dn_func_n),",
+            "    .stall      (1'b0),",
+            "    .clear      (1'b0),",
+            "    .full_zero  (),",
+            "    .in_req_vld (dn_req_valid),",
+            "    .in_req_rdy (dn_req_ready),",
+            "    .in_req_pld (dn_req_payload),",
+            "    .almost_full(),",
+            "    .wptr_async (async_wptr),",
+            "    .rptr_async (async_rptr),",
+            "    .rptr_sync  (async_rptr_sync),",
+            "    .pld_sync   (async_pld_sync)",
+            ");",
+            "",
+            "sts_async_bridge_mst #(",
+            "    .FIFO_DEPTH (STS_SOC_BRIDGE_FIFO_DEPTH),",
+            "    .DATA_WIDTH (STS_SOC_BRIDGE_DATA_WIDTH)",
+            ") u_sts_soc_harden_up_async_bridge_mst (",
+            "    .clk          (clk_harden_up_func),",
+            "    .rst_n        (rst_harden_up_func_n),",
+            "    .stall        (1'b0),",
+            "    .clear        (1'b0),",
+            "    .full_zero    (),",
+            "    .idle         (),",
+            "    .out_rsp_vld  (up_rsp_valid),",
+            "    .out_rsp_pld  (up_rsp_payload),",
+            "    .out_rsp_rdy  (up_rsp_ready),",
+            "    .almost_empty (),",
+            "    .wptr_async   (async_wptr),",
+            "    .rptr_async   (async_rptr),",
+            "    .rptr_sync    (async_rptr_sync),",
+            "    .pld_sync     (async_pld_sync)",
+            ");",
+            "",
+            "always @(posedge clk_harden_up_func or negedge rst_harden_up_func_n) begin",
+            "    if (!rst_harden_up_func_n) begin",
+            "        up_domain_rsp_ctr <= 32'h0;",
+            "    end else if (up_rsp_valid && up_rsp_ready) begin",
+            "        up_domain_rsp_ctr <= up_domain_rsp_ctr + 1'b1;",
+            "    end",
+            "end",
+            "",
+        ]
+    )
+
+    if tniu_nodes:
+        lines.append("always @(*) begin")
+        lines.append("    up_rsp_ready = " + " | ".join(f"{n}_tniu_sys_rsp_rdy" for n in tniu_nodes) + ";")
+        lines.append("end")
+        lines.append("")
+        for name in tniu_nodes:
+            lines.append(f"assign {name}_tniu_sys_rsp_vld = up_rsp_valid;")
+            lines.append(f"assign {name}_tniu_sys_rsp_pld = up_rsp_payload;")
+    else:
+        lines.extend(["always @(*) begin", "    up_rsp_ready = 1'b1;", "end"])
+
+    lines.extend(["", "endmodule", ""])
+    return "\n".join(lines)
+
+
+def _render_harden_dn_wrapper(iniu_nodes: list[str]) -> str:
+    port_entries: list[str] = [
+        "    input clk_harden_dn_func",
+        "    input rst_harden_dn_func_n",
+    ]
+    for name in iniu_nodes:
+        port_entries.extend(
+            [
+                f"    input         {name}_iniu_sys_req_vld",
+                f"    input  [63:0] {name}_iniu_sys_req_pld",
+                f"    output        {name}_iniu_sys_req_rdy",
+            ]
+        )
+    port_entries.extend(
+        [
+            "    output        dn_async_req_vld",
+            "    output [63:0] dn_async_req_pld",
+            "    input         dn_async_req_rdy",
+        ]
+    )
+
+    lines: list[str] = [
+        "module sts_soc_harden_dn_wrap (",
+        ",\n".join(port_entries),
+        ");",
+        "",
+    ]
+    lines.extend(
+        [
+            "",
+            "reg [31:0] dn_ingress_ctr;",
+            "",
+            "always @(posedge clk_harden_dn_func or negedge rst_harden_dn_func_n) begin",
+            "    if (!rst_harden_dn_func_n) begin",
+            "        dn_ingress_ctr <= 32'h0;",
+            "    end else if (dn_async_req_vld && dn_async_req_rdy) begin",
+            "        dn_ingress_ctr <= dn_ingress_ctr + 1'b1;",
+            "    end",
+            "end",
+            "",
+        ]
+    )
+    if iniu_nodes:
+        lines.append("assign dn_async_req_vld = " + " | ".join(f"{n}_iniu_sys_req_vld" for n in iniu_nodes) + ";")
+        for name in iniu_nodes:
+            lines.append(f"assign {name}_iniu_sys_req_rdy = dn_async_req_rdy & {name}_iniu_sys_req_vld;")
+        lines.extend(["", "always @(*) begin"])
+        first = iniu_nodes[0]
+        lines.append(f"    if ({first}_iniu_sys_req_vld) begin")
+        lines.append(f"        dn_async_req_pld = {first}_iniu_sys_req_pld;")
+        lines.append("    end")
+        for name in iniu_nodes[1:]:
+            lines.append(f"    else if ({name}_iniu_sys_req_vld) begin")
+            lines.append(f"        dn_async_req_pld = {name}_iniu_sys_req_pld;")
+            lines.append("    end")
+        lines.append("    else begin")
+        lines.append("        dn_async_req_pld = {32'h444E_5251, dn_ingress_ctr};")
+        lines.append("    end")
+        lines.append("end")
+    else:
+        lines.extend(
+            [
+                "assign dn_async_req_vld = 1'b0;",
+                "always @(*) begin",
+                "    dn_async_req_pld = {32'h444E_5251, dn_ingress_ctr};",
+                "end",
+            ]
+        )
+    lines.extend(["", "endmodule", ""])
+    return "\n".join(lines)
+
+
+def _render_harden_up_wrapper(tniu_nodes: list[str]) -> str:
+    lines: list[str] = [
+        "module sts_soc_harden_up_wrap (",
+        "    input clk_harden_up_func,",
+        "    input rst_harden_up_func_n,",
+        "",
+        "    input         up_async_rsp_vld,",
+        "    input  [63:0] up_async_rsp_pld,",
+        "    output        up_async_rsp_rdy,",
+        "",
+    ]
+    for idx, name in enumerate(tniu_nodes):
+        comma = "," if idx != len(tniu_nodes) - 1 else ""
+        lines.extend(
+            [
+                f"    output        {name}_tniu_sys_rsp_vld,",
+                f"    output [63:0] {name}_tniu_sys_rsp_pld,",
+                f"    input         {name}_tniu_sys_rsp_rdy{comma}",
+                "",
+            ]
+        )
+    lines.extend(
+        [
+            ");",
+            "",
+            "reg [31:0] up_egress_ctr;",
+            "",
+            "always @(posedge clk_harden_up_func or negedge rst_harden_up_func_n) begin",
+            "    if (!rst_harden_up_func_n) begin",
+            "        up_egress_ctr <= 32'h0;",
+            "    end else if (up_async_rsp_vld && up_async_rsp_rdy) begin",
+            "        up_egress_ctr <= up_egress_ctr + 1'b1;",
+            "    end",
+            "end",
+            "",
+        ]
+    )
+    if tniu_nodes:
+        lines.append("assign up_async_rsp_rdy = " + " | ".join(f"{n}_tniu_sys_rsp_rdy" for n in tniu_nodes) + ";")
+        for name in tniu_nodes:
+            lines.append(f"assign {name}_tniu_sys_rsp_vld = up_async_rsp_vld;")
+            lines.append(f"assign {name}_tniu_sys_rsp_pld = up_async_rsp_pld;")
+    else:
+        lines.append("assign up_async_rsp_rdy = 1'b1;")
+    lines.extend(["", "endmodule", ""])
+    return "\n".join(lines)
+
+
 def _generate_combined_wrapper(build_dir: Path) -> None:
     """Read the wrapper template from rtl/ and patch with parameter overrides."""
     template = THIS_DIR / "rtl" / "sts_soc_logic_topo.v"
@@ -593,22 +918,30 @@ def _generate_combined_wrapper(build_dir: Path) -> None:
         print(f"  [wrapper] WARNING: {template} not found, skipping")
         return
 
-    inst_map = _get_wrapper_inst_map()
     content = template.read_text()
+    placeholder_wrapper = bool(
+        re.fullmatch(r"\s*module\s+sts_soc_logic_topo\s*;\s*endmodule\s*", content, re.DOTALL)
+    )
 
-    for mod_name, cfg in inst_map.items():
-        params = getattr(cfg, 'param_overrides', {})
-        if not params:
-            continue
-        param_block = _format_param_block(params)
-        # Match: "<tab>mod_name instance_name (" and insert #(..) before instance name
-        pattern = rf'(\t){re.escape(mod_name)} (\w+) \('
-        replacement = rf'\1{mod_name}{param_block} \2 ('
-        content, count = re.subn(pattern, replacement, content)
-        if count == 0:
-            print(f"  [wrapper] WARNING: could not patch {mod_name}")
-        else:
-            print(f"  [wrapper] patched {mod_name} with {len(params)} params")
+    if placeholder_wrapper:
+        iniu_nodes, tniu_nodes = _discover_sys_node_names(build_dir)
+        content = _render_sts_soc_logic_topo_fallback(iniu_nodes, tniu_nodes)
+        print("  [wrapper] using synthesized structural SoC wrapper (template placeholder detected)")
+    else:
+        inst_map = _get_wrapper_inst_map()
+        for mod_name, cfg in inst_map.items():
+            params = getattr(cfg, 'param_overrides', {})
+            if not params:
+                continue
+            param_block = _format_param_block(params)
+            # Match: "<tab>mod_name instance_name (" and insert #(..) before instance name
+            pattern = rf'(\t){re.escape(mod_name)} (\w+) \('
+            replacement = rf'\1{mod_name}{param_block} \2 ('
+            content, count = re.subn(pattern, replacement, content)
+            if count == 0:
+                print(f"  [wrapper] WARNING: could not patch {mod_name}")
+            else:
+                print(f"  [wrapper] patched {mod_name} with {len(params)} params")
 
     dest = build_dir / _COMBINED_DIR / "sts_soc_logic_topo.v"
     dest.write_text(content)
@@ -627,6 +960,180 @@ def _append_wrapper_if_exists(filelist_path: Path, build_dir: Path) -> None:
     if wrapper_line not in fl_content:
         filelist_path.write_text(fl_content.rstrip("\n") + "\n" + wrapper_line + "\n")
         print(f"  [filelist] appended SoC wrapper to {filelist_path}")
+
+
+def _soc_tniu_sys_filelist_token(leaf_name: str) -> str:
+    return f"$STS_NOC_DEMO_DIR/build_logic/{leaf_name}_tniu_sys/{leaf_name}_tniu_filelist.f"
+
+
+def _write_harden_leaf_ownership_manifest(publish_dir: Path) -> None:
+    rows = ["leaf_name,owner_branch,pd_harden_partition"]
+
+    for leaf_name in _PD_HARDEN_DN_LEAVES:
+        rows.append(f"{leaf_name},harden_dn,harden_dn")
+    for leaf_name in _PD_HARDEN_UP_LEAVES:
+        rows.append(f"{leaf_name},harden_up,harden_up")
+    for leaf_name in _PD_HARDEN_NON_PARTITIONED_BLUE_CHAIN_LEAVES:
+        owner = BLUE_CHAIN_LEAF_OWNERSHIP.get(leaf_name, "non_harden_branch")
+        rows.append(f"{leaf_name},{owner},non_harden")
+
+    publish_dir.mkdir(parents=True, exist_ok=True)
+    manifest = publish_dir / "harden_leaf_ownership.csv"
+    manifest.write_text("\n".join(rows) + "\n")
+    print(f"  [pd_harden] wrote blue-chain ownership manifest to {manifest}")
+
+
+def _publish_pd_harden_wrapper_filelists(build_dir: Path, publish_dir: Path) -> None:
+    """Publish true PD harden wrapper/filelist ingress chain for STS SoC flow."""
+    harden_dn_id = "sts_soc_harden_dn_wrap"
+    harden_up_id = "sts_soc_harden_up_wrap"
+    harden_top_id = "sts_soc_harden_top_pd"
+    harden_wrap_id = "sts_soc_noc_wrap_pd"
+
+    harden_dn_dir = build_dir / harden_dn_id
+    harden_up_dir = build_dir / harden_up_id
+    harden_top_dir = build_dir / harden_top_id
+    harden_wrap_dir = build_dir / harden_wrap_id
+
+    for out_dir in (harden_dn_dir, harden_up_dir, harden_top_dir, harden_wrap_dir):
+        out_dir.mkdir(parents=True, exist_ok=True)
+
+    harden_dn_wrapper_path = harden_dn_dir / f"{harden_dn_id}.v"
+    harden_up_wrapper_path = harden_up_dir / f"{harden_up_id}.v"
+    harden_top_wrapper_path = harden_top_dir / f"{harden_top_id}.v"
+    harden_wrap_wrapper_path = harden_wrap_dir / f"{harden_wrap_id}.v"
+
+    iniu_nodes, tniu_nodes = _discover_sys_node_names(build_dir)
+
+    harden_dn_wrapper_path.write_text(_render_harden_dn_wrapper(iniu_nodes))
+    harden_up_wrapper_path.write_text(_render_harden_up_wrapper(tniu_nodes))
+    harden_top_wrapper_path.write_text(
+        """module sts_soc_harden_top_pd (
+    input clk_harden_dn_func,
+    input rst_harden_dn_func_n,
+    input clk_harden_up_func,
+    input rst_harden_up_func_n,
+
+    input  [1:0]   harden_dn_iniu_sys_req_vld,
+    input  [127:0] harden_dn_iniu_sys_req_pld,
+    output [1:0]   harden_dn_iniu_sys_req_rdy,
+
+    output [5:0]   harden_up_tniu_sys_rsp_vld,
+    output [383:0] harden_up_tniu_sys_rsp_pld,
+    input  [5:0]   harden_up_tniu_sys_rsp_rdy
+);
+
+// PD harden top wrapper around DN/UP partitions across async boundary.
+wire        dn_async_req_vld;
+wire [63:0] dn_async_req_pld;
+wire        dn_async_req_rdy;
+
+assign dn_async_req_rdy = 1'b1;
+
+sts_soc_harden_dn_wrap u_sts_soc_harden_dn_wrap (
+    .clk_harden_dn_func (clk_harden_dn_func),
+    .rst_harden_dn_func_n (rst_harden_dn_func_n),
+    .iniu_sys_req_vld   (harden_dn_iniu_sys_req_vld),
+    .iniu_sys_req_pld   (harden_dn_iniu_sys_req_pld),
+    .iniu_sys_req_rdy   (harden_dn_iniu_sys_req_rdy),
+    .dn_async_req_vld   (dn_async_req_vld),
+    .dn_async_req_pld   (dn_async_req_pld),
+    .dn_async_req_rdy   (dn_async_req_rdy)
+);
+
+sts_soc_harden_up_wrap u_sts_soc_harden_up_wrap (
+    .clk_harden_up_func (clk_harden_up_func),
+    .rst_harden_up_func_n (rst_harden_up_func_n),
+    .up_async_rsp_vld   (dn_async_req_vld),
+    .up_async_rsp_pld   (dn_async_req_pld),
+    .up_async_rsp_rdy   (),
+    .tniu_sys_rsp_vld   (harden_up_tniu_sys_rsp_vld),
+    .tniu_sys_rsp_pld   (harden_up_tniu_sys_rsp_pld),
+    .tniu_sys_rsp_rdy   (harden_up_tniu_sys_rsp_rdy)
+);
+
+endmodule
+"""
+    )
+    harden_wrap_wrapper_path.write_text(
+        """module sts_soc_noc_wrap_pd (
+    input clk_harden_dn_func,
+    input rst_harden_dn_func_n,
+    input clk_harden_up_func,
+    input rst_harden_up_func_n,
+
+    input  [1:0]   harden_dn_iniu_sys_req_vld,
+    input  [127:0] harden_dn_iniu_sys_req_pld,
+    output [1:0]   harden_dn_iniu_sys_req_rdy,
+
+    output [5:0]   harden_up_tniu_sys_rsp_vld,
+    output [383:0] harden_up_tniu_sys_rsp_pld,
+    input  [5:0]   harden_up_tniu_sys_rsp_rdy
+);
+
+// Live PD compile ingress wrapper for STS SoC harden publication.
+sts_soc_harden_top_pd u_sts_soc_harden_top_pd (
+    .clk_harden_dn_func (clk_harden_dn_func),
+    .rst_harden_dn_func_n (rst_harden_dn_func_n),
+    .clk_harden_up_func (clk_harden_up_func),
+    .rst_harden_up_func_n (rst_harden_up_func_n),
+    .harden_dn_iniu_sys_req_vld (harden_dn_iniu_sys_req_vld),
+    .harden_dn_iniu_sys_req_pld (harden_dn_iniu_sys_req_pld),
+    .harden_dn_iniu_sys_req_rdy (harden_dn_iniu_sys_req_rdy),
+    .harden_up_tniu_sys_rsp_vld (harden_up_tniu_sys_rsp_vld),
+    .harden_up_tniu_sys_rsp_pld (harden_up_tniu_sys_rsp_pld),
+    .harden_up_tniu_sys_rsp_rdy (harden_up_tniu_sys_rsp_rdy)
+);
+
+endmodule
+"""
+    )
+
+    shared_lines = [
+        "-f $STS_NOC_DEMO_DIR/filelists/sts_common_dep.f",
+        "-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_dec4_filelist.f",
+        "-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu0_filelist.f",
+        "-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu1_filelist.f",
+        "-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu2_filelist.f",
+        "-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu3_filelist.f",
+    ]
+
+    harden_dn_lines = [
+        *shared_lines,
+        *[_soc_tniu_sys_filelist_token(name) for name in _PD_HARDEN_DN_LEAVES],
+        f"$STS_NOC_DEMO_DIR/build_logic/{harden_dn_id}/{harden_dn_id}.v",
+    ]
+    harden_up_lines = [
+        *shared_lines,
+        *[_soc_tniu_sys_filelist_token(name) for name in _PD_HARDEN_UP_LEAVES],
+        f"$STS_NOC_DEMO_DIR/build_logic/{harden_up_id}/{harden_up_id}.v",
+    ]
+
+    (harden_dn_dir / "filelist.f").write_text("\n".join(harden_dn_lines) + "\n")
+    (harden_up_dir / "filelist.f").write_text("\n".join(harden_up_lines) + "\n")
+
+    harden_top_lines = [
+        f"-f $STS_NOC_DEMO_DIR/build_logic/{harden_dn_id}/filelist.f",
+        f"-f $STS_NOC_DEMO_DIR/build_logic/{harden_up_id}/filelist.f",
+        f"$STS_NOC_DEMO_DIR/build_logic/{harden_top_id}/{harden_top_id}.v",
+    ]
+    (harden_top_dir / "filelist.f").write_text("\n".join(harden_top_lines) + "\n")
+
+    harden_wrap_lines = [
+        f"-f $STS_NOC_DEMO_DIR/build_logic/{harden_top_id}/filelist.f",
+        f"$STS_NOC_DEMO_DIR/build_logic/{harden_wrap_id}/{harden_wrap_id}.v",
+    ]
+    (harden_wrap_dir / "filelist.f").write_text("\n".join(harden_wrap_lines) + "\n")
+
+    publish_dir.mkdir(parents=True, exist_ok=True)
+    harden_ingress_line = f"-f $STS_NOC_DEMO_DIR/build_logic/{harden_wrap_id}/filelist.f"
+    (publish_dir / "filelist_soc_harden_pd.f").write_text(harden_ingress_line + "\n")
+    (publish_dir / "filelist_soc_pd.f").write_text("-f $STS_NOC_DEMO_DIR/filelists/filelist_soc_harden_pd.f\n")
+
+    print(f"  [pd_harden] published {harden_dn_id}/filelist.f")
+    print(f"  [pd_harden] published {harden_up_id}/filelist.f")
+    print(f"  [pd_harden] published {harden_top_id}/filelist.f")
+    print(f"  [pd_harden] rewrote live PD ingress to {publish_dir / 'filelist_soc_pd.f'}")
 
 
 def generate(flow: str = "dv"):
@@ -679,7 +1186,8 @@ def generate(flow: str = "dv"):
         print(f"  [filelist] prepended common dep reference")
 
     if flow == "pd":
-        print("  [pd] using shared STS topology; dedicated PD topology hook is reserved")
+        _publish_pd_harden_wrapper_filelists(build_dir, THIS_DIR / "filelists")
+        _write_harden_leaf_ownership_manifest(THIS_DIR / "filelists")
 
     print(f"Topology JSON written to {topology_json}")
     print(f"Generated RTL written to {build_dir}")

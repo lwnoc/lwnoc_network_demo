@@ -36,12 +36,12 @@ module sys_tcu_dti_tniu_async_sys_side
     output logic    [90+6+6+1+1         :0]             rsp_pld_sync                               ,
     // lp
     input  logic                                        preq                                       ,
-    input logic [$bits(lwnoc_pchannel_state_t)-1:0]                       pstate                                     ,
-    output logic [$bits(lwnoc_pchannel_active_t)-1:0]                      pactive                                    ,
+    input logic [2-1:0]                       pstate                                     ,
+    output logic [2-1:0]                      pactive                                    ,
     output logic                                        paccept                                    ,
     output logic                                        pdeny                                      ,
-    input logic [$bits(lwnoc_lp_req_signal_t)-1:0]                        lp_hub_rx_req                              ,
-    output logic [$bits(lwnoc_lp_req_signal_t)-1:0]                        lp_hub_tx_req
+    input logic [9-1:0]                        lp_hub_rx_req                              ,
+    output logic [9-1:0]                        lp_hub_tx_req
 );
 
     //Flattened LP boundary typedef bridge.

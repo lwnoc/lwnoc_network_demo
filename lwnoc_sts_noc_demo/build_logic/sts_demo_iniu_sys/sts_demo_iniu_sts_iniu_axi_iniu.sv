@@ -19,8 +19,6 @@ import sts_demo_iniu_lwnoc_sts_pack::*;
     input logic rst_n     ,
 
     input logic [SRC_ID_WIDTH-1:0]  node_id,
-    input logic [NODE_NUM-1:0]      flow_ctrl_busy  ,
-    input logic                     flow_ctrl_update,
 
     input   logic                   upstrm_aw_vld   ,
     output  logic                   upstrm_aw_rdy   ,
@@ -102,18 +100,23 @@ import sts_demo_iniu_lwnoc_sts_pack::*;
         .pld_m          (arb_pld        )
     );
 
-    sts_demo_iniu_lwnoc_flow_ctrl_chk #(
-        .NODE_NUM           (NODE_NUM       ),
-        .PLD_TYPE           (sts_req_typ    )
-    ) u_flow_ctrl_req (
-        .flow_ctrl_busy     (flow_ctrl_busy ),
-        .in_vld             (arb_vld        ),
-        .in_rdy             (arb_rdy        ),
-        .in_pld             (arb_pld        ),
-        .out_vld            (out_req_vld    ),
-        .out_rdy            (out_req_rdy    ),
-        .out_pld            (out_req_pld    )
-    );
+    // `_PREFIX_(lwnoc_flow_ctrl_chk) #(
+    //     .NODE_NUM           (NODE_NUM       ),
+    //     .PLD_TYPE           (sts_req_typ    )
+    // ) u_flow_ctrl_req (
+    //     .flow_ctrl_busy     (flow_ctrl_busy ),
+    //     .in_vld             (arb_vld        ),
+    //     .in_rdy             (arb_rdy        ),
+    //     .in_pld             (arb_pld        ),
+    //     .out_vld            (out_req_vld    ),
+    //     .out_rdy            (out_req_rdy    ),
+    //     .out_pld            (out_req_pld    )
+    // );
+
+    // Flow-control gating is disabled after removing flow_ctrl_* interface.
+    assign out_req_vld = arb_vld;
+    assign arb_rdy     = out_req_rdy;
+    assign out_req_pld = arb_pld;
 
 //============ Response Generation ================//
 // why lwnoc_cfg use lwnoc_flow_ctrl_buf for rsp? TODO

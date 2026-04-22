@@ -157,6 +157,7 @@ module ufs_ss_iniu_interrupt_iniu
     //===========================================================================
     // recorder
     //===========================================================================
+`ifndef VERILATOR
     generate
         for(genvar i = 0; i < INTERRUPT_NUM; i=i+1) begin : gen_interrupt_iniu_event_recorder
             ufs_ss_iniu_interrupt_iniu_event_recorder #(
@@ -178,6 +179,7 @@ module ufs_ss_iniu_interrupt_iniu
             );
         end
     endgenerate
+`endif
 
 
     //===========================================================================

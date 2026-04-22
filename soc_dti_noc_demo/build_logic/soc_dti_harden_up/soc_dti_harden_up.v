@@ -21,8 +21,8 @@ module soc_dti_harden_up
 	input  [15:0]                                         gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async   ,
 	input  [15:0]                                         gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync    ,
 	output [15:0]                                         gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async   ,
-	output logic [$bits(lwnoc_lp_struct_package::lwnoc_lp_req_signal_t)-1:0] gpu_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req      ,
-	input logic [$bits(lwnoc_lp_struct_package::lwnoc_lp_req_signal_t)-1:0] gpu_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req      ,
+	output logic [13-1:0] gpu_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req      ,
+	input logic [13-1:0] gpu_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req      ,
 	input  [104:0]                                        gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync     ,
 	output [15:0]                                         gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async   ,
 	output [15:0]                                         gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync    ,
@@ -31,8 +31,8 @@ module soc_dti_harden_up
 	input  [15:0]                                         gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async   ,
 	input  [15:0]                                         gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync    ,
 	output [15:0]                                         gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async   ,
-	output logic [$bits(lwnoc_lp_struct_package::lwnoc_lp_req_signal_t)-1:0] gpu_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req      ,
-	input logic [$bits(lwnoc_lp_struct_package::lwnoc_lp_req_signal_t)-1:0] gpu_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req      ,
+	output logic [13-1:0] gpu_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req      ,
+	input logic [13-1:0] gpu_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req      ,
 	input  [104:0]                                        dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync       ,
 	output [15:0]                                         dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async     ,
 	output [15:0]                                         dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync      ,
@@ -41,8 +41,8 @@ module soc_dti_harden_up
 	input  [15:0]                                         dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async     ,
 	input  [15:0]                                         dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync      ,
 	output [15:0]                                         dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async     ,
-	output logic [$bits(lwnoc_lp_struct_package::lwnoc_lp_req_signal_t)-1:0] dp_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req        ,
-	input logic [$bits(lwnoc_lp_struct_package::lwnoc_lp_req_signal_t)-1:0] dp_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req        ,
+	output logic [13-1:0] dp_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req        ,
+	input logic [13-1:0] dp_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req        ,
 	input  [104:0]                                        display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync  ,
 	output [15:0]                                         display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async,
 	output [15:0]                                         display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync ,
@@ -51,8 +51,8 @@ module soc_dti_harden_up
 	input  [15:0]                                         display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async,
 	input  [15:0]                                         display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync ,
 	output [15:0]                                         display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async,
-	output logic [$bits(lwnoc_lp_struct_package::lwnoc_lp_req_signal_t)-1:0] display_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req   ,
-	input logic [$bits(lwnoc_lp_struct_package::lwnoc_lp_req_signal_t)-1:0] display_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req   );
+	output logic [13-1:0] display_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req   ,
+	input logic [13-1:0] display_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req   );
 
 	//Wire define for this module.
 

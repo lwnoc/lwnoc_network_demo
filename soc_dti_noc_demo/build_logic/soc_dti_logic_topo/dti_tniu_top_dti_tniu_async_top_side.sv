@@ -1,4 +1,6 @@
 module dti_tniu_top_dti_tniu_async_top_side
+    import lwnoc_lp_define_package::*;
+    import lwnoc_lp_struct_package::*;
     import dti_tniu_top_dti_tniu_pack::*;
 #(
     parameter integer unsigned ASYNC_FIFO_DEPTH = 10
@@ -34,16 +36,9 @@ module dti_tniu_top_dti_tniu_async_top_side
     output logic    [ASYNC_FIFO_DEPTH-1                  :0] rsp_rptr_sync                              ,
     input  logic    [90+6+6+1+1                          :0] rsp_pld_sync                               ,
     // lp
-    input logic [$bits(lwnoc_lp_req_signal_t)-1:0]                             lp_hub_rx_req                              ,
-    output logic [$bits(lwnoc_lp_req_signal_t)-1:0]                             lp_hub_tx_req
+    input  lwnoc_lp_req_signal_t                             lp_hub_rx_req                              ,
+    output lwnoc_lp_req_signal_t                             lp_hub_tx_req
 );
-
-    //Flattened LP boundary typedef bridge.
-    lwnoc_lp_req_signal_t lp_hub_rx_req__typed;
-    lwnoc_lp_req_signal_t lp_hub_tx_req__typed;
-
-    assign lp_hub_rx_req__typed = lwnoc_lp_req_signal_t'(lp_hub_rx_req);
-    assign lp_hub_tx_req = lp_hub_tx_req__typed;
     logic [90+6+6+1+1-1:0]  req_pld_vector     ;
     logic                   async_req_stall    ;
     logic                   async_req_clear    ;
@@ -66,11 +61,11 @@ module dti_tniu_top_dti_tniu_async_top_side
     //===========================================================================
     assign v_stage_1_hub_rx_req[0] = async_slave_hub_rx_req;
     assign v_stage_1_hub_rx_req[1] = async_master_hub_rx_req;
-    assign v_stage_1_hub_rx_req[2] = lp_hub_rx_req__typed;
+    assign v_stage_1_hub_rx_req[2] = lp_hub_rx_req;
 
     assign async_slave_hub_tx_req  = v_stage_1_hub_tx_req[0];
     assign async_master_hub_tx_req = v_stage_1_hub_tx_req[1];
-    assign lp_hub_tx_req__typed           = v_stage_1_hub_tx_req[2];
+    assign lp_hub_tx_req           = v_stage_1_hub_tx_req[2];
 
     lwnoc_lp_hub_wrapper #(
         .NUM_TERMINAL       (3                          )

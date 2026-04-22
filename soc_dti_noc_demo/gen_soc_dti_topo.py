@@ -54,11 +54,134 @@ LP_TYPE_PORT_RE = re.compile(
 )
 # Literal bit-widths for known LP types so generated top-level ports need no package import.
 _BARE_TYPE_NAME_RE = re.compile(r"(?:[A-Za-z0-9_]+::)?([A-Za-z0-9_]+)$")
-LP_TYPE_WIDTHS: dict[str, int] = {
+_LP_BITS_EXPR_RE = re.compile(r"\$bits\((?P<type>(?:[A-Za-z0-9_]+::)?[A-Za-z0-9_]+)\)")
+LP_TYPE_WIDTHS_DEFAULT: dict[str, int] = {
+    "lwnoc_lp_req_signal_t": 9,
     "lwnoc_pchannel_active_t": 2,
     "lwnoc_pchannel_state_t": 2,
 }
 _LP_HEADER_IMPORT_RE = re.compile(r"\n[ \t]+import[ \t]+lwnoc_lp_[A-Za-z0-9_]+::\*;")
+
+
+def _parse_sv_logic_width(type_decl_text: str) -> int | None:
+    """Extract packed logic width from declaration text like 'logic [2:0]' or 'logic'."""
+    packed = re.search(r"logic\s*\[(\d+)\s*:\s*(\d+)\]", type_decl_text)
+    if packed:
+        msb = int(packed.group(1))
+        lsb = int(packed.group(2))
+        return abs(msb - lsb) + 1
+    if re.search(r"\blogic\b", type_decl_text):
+        return 1
+    return None
+
+
+def _parse_typedef_enum_widths(lp_define_text: str) -> dict[str, int]:
+    widths: dict[str, int] = {}
+    enum_re = re.compile(
+        r"typedef\s+enum\s+(?P<decl>logic(?:\s*\[[^\]]+\])?)\s*\{[^}]*\}\s*(?P<name>[A-Za-z0-9_]+)\s*;",
+        re.DOTALL,
+    )
+    for match in enum_re.finditer(lp_define_text):
+        width = _parse_sv_logic_width(match.group("decl"))
+        if width is None:
+            continue
+        widths[match.group("name")] = width
+    return widths
+
+
+def _parse_typedef_logic_widths(sv_text: str) -> dict[str, int]:
+    widths: dict[str, int] = {}
+    logic_re = re.compile(
+        r"typedef\s+(?P<decl>logic(?:\s*\[[^\]]+\])?)\s*(?P<name>[A-Za-z0-9_]+)\s*;"
+    )
+    for match in logic_re.finditer(sv_text):
+        width = _parse_sv_logic_width(match.group("decl"))
+        if width is None:
+            continue
+        widths[match.group("name")] = width
+    return widths
+
+
+def _bare_type_name(type_name: str) -> str:
+    bare = _BARE_TYPE_NAME_RE.search(type_name)
+    return bare.group(1) if bare else type_name
+
+
+def _parse_lp_req_struct_width(lp_struct_text: str, type_widths: dict[str, int]) -> int | None:
+    struct_match = re.search(
+        r"typedef\s+struct\s+packed\s*\{(?P<body>[^}]*)\}\s*lwnoc_lp_req_signal_t\s*;",
+        lp_struct_text,
+        re.DOTALL,
+    )
+    if not struct_match:
+        return None
+
+    width = 0
+    for raw_line in struct_match.group("body").splitlines():
+        line = raw_line.split("//", 1)[0].strip()
+        if not line or not line.endswith(";"):
+            continue
+        line = line[:-1].strip()
+        if not line:
+            continue
+        parts = line.split()
+        if len(parts) < 2:
+            continue
+        decl = " ".join(parts[:-1])
+        leaf_type = _bare_type_name(parts[0])
+
+        logic_width = _parse_sv_logic_width(decl)
+        if logic_width is not None:
+            width += logic_width
+            continue
+
+        mapped = type_widths.get(leaf_type)
+        if mapped is not None:
+            width += mapped
+
+    return width if width > 0 else None
+
+
+def _detect_lp_type_widths() -> dict[str, int]:
+    widths = dict(LP_TYPE_WIDTHS_DEFAULT)
+
+    env_root = os.environ.get("LWNOC_LOWPOWER_COMPONENT")
+    candidate_roots = [
+        Path(env_root) if env_root else None,
+        REPO_ROOT / "subs" / "lwnoc_dti_noc" / "lwnoc_lowpower_component",
+        REPO_ROOT / "subs" / "lwnoc_interrupt_noc" / "lwnoc_lowpower_component",
+    ]
+
+    for root in candidate_roots:
+        if root is None:
+            continue
+        rtl_dir = root / "src" / "rtl"
+        lp_define = rtl_dir / "lwnoc_lp_define_package.sv"
+        lp_struct = rtl_dir / "lwnoc_lp_struct_package.sv"
+        if not lp_define.exists() or not lp_struct.exists():
+            continue
+
+        define_text = lp_define.read_text()
+        struct_text = lp_struct.read_text()
+
+        enum_widths = _parse_typedef_enum_widths(define_text)
+        enum_widths.update(_parse_typedef_logic_widths(define_text))
+        enum_widths.update(_parse_typedef_enum_widths(struct_text))
+        enum_widths.update(_parse_typedef_logic_widths(struct_text))
+        for key in ("lwnoc_pchannel_active_t", "lwnoc_pchannel_state_t"):
+            if key in enum_widths:
+                widths[key] = enum_widths[key]
+
+        req_width = _parse_lp_req_struct_width(struct_text, enum_widths)
+        if req_width is not None:
+            widths["lwnoc_lp_req_signal_t"] = req_width
+
+        break
+
+    return widths
+
+
+LP_TYPE_WIDTHS: dict[str, int] = _detect_lp_type_widths()
 
 _TIEOFF_ASSIGN_PATCHES = {
     "DtiIniuTopExtTieoffComponent.v": (
@@ -189,14 +312,29 @@ def _normalize_boundary_import_style(build_dir: Path) -> None:
 
 
 def _flatten_lp_boundary_typedef_ports(build_dir: Path) -> None:
-    candidate_paths = {
-        *build_dir.glob("**/*_async_top_side.sv"),
-        *build_dir.glob("**/*.v"),
-    }
+    candidate_paths = set(build_dir.glob("**/*.v"))
 
     for path in sorted(candidate_paths):
         if _flatten_lp_boundary_ports_in_file(path):
             print(f"  [lp_flatten] flattened {path.relative_to(build_dir)}")
+
+
+def _replace_known_lp_bits_exprs(path: Path) -> bool:
+    text = path.read_text()
+
+    def _replace(match: re.Match[str]) -> str:
+        bare = _BARE_TYPE_NAME_RE.search(match.group("type"))
+        bare_name = bare.group(1) if bare else match.group("type")
+        known_width = LP_TYPE_WIDTHS.get(bare_name)
+        if known_width is None:
+            return match.group(0)
+        return str(known_width)
+
+    updated = _LP_BITS_EXPR_RE.sub(_replace, text)
+    if updated == text:
+        return False
+    path.write_text(updated)
+    return True
 
 
 def _flatten_lp_boundary_ports_in_file(path: Path) -> bool:
@@ -208,7 +346,7 @@ def _flatten_lp_boundary_ports_in_file(path: Path) -> bool:
     header = text[: header_end + 2]
     body = text[header_end + 2 :]
     if not LP_TYPE_PORT_RE.search(header):
-        return False
+        return _replace_known_lp_bits_exprs(path)
 
     port_specs: list[dict[str, str]] = []
 
@@ -236,7 +374,8 @@ def _flatten_lp_boundary_ports_in_file(path: Path) -> bool:
     new_header = LP_TYPE_PORT_RE.sub(_replace_port, header)
     # Remove LP package imports from the module header — top-level files must not
     # contain wildcard package imports; ports now use plain integer widths.
-    new_header = _LP_HEADER_IMPORT_RE.sub("", new_header)
+    if path.suffix == ".v":
+        new_header = _LP_HEADER_IMPORT_RE.sub("", new_header)
     new_body = body
     for spec in port_specs:
         new_body = re.sub(rf"\b{spec['name']}\b", spec["alias"], new_body)

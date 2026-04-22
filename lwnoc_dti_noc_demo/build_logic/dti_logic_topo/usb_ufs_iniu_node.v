@@ -1,7 +1,5 @@
 //[UHDL]Content Start [md5:2a85107b91fca902465807b0287db8c9]
 module usb_ufs_iniu_node
-	import lwnoc_lp_define_package::*;
-	import lwnoc_lp_struct_package::*;
 	(
 	input                                                   clk_sys_clk            ,
 	input                                                   rst_sys_n_rst_n        ,
@@ -21,10 +19,10 @@ module usb_ufs_iniu_node
 	output                                                  dti_rsp_rsp_tvalid     ,
 	input  [9:0]                                            timeout_val_timeout_val,
 	output                                                  pchnl_ctrl_paccept     ,
-	output logic [$bits(lwnoc_lp_define_package::lwnoc_pchannel_active_t)-1:0] pchnl_ctrl_pactive     ,
+	output logic [2-1:0] pchnl_ctrl_pactive     ,
 	output                                                  pchnl_ctrl_pdeny       ,
 	input                                                   pchnl_ctrl_preq        ,
-	input logic [$bits(lwnoc_lp_define_package::lwnoc_pchannel_state_t)-1:0]  pchnl_ctrl_pstate      ,
+	input logic [2-1:0]  pchnl_ctrl_pstate      ,
 	output                                                  top_req_req_last       ,
 	output [89:0]                                           top_req_req_payload    ,
 	input                                                   top_req_req_ready      ,

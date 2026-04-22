@@ -36,8 +36,8 @@ module dti_iniu_top_dti_pr_iniu_async_top_side
     input  logic    [ASYNC_FIFO_DEPTH-1                   :0]  rsp_rptr_sync ,
     output logic    [90+6+6+1+1                           :0]  rsp_pld_sync  ,
     // LP
-    input logic [$bits(lwnoc_lp_req_signal_t)-1:0]                               lp_hub_rx_req ,
-    output logic [$bits(lwnoc_lp_req_signal_t)-1:0]                               lp_hub_tx_req
+    input logic [9-1:0]                               lp_hub_rx_req ,
+    output logic [9-1:0]                               lp_hub_tx_req
     );
 
     //Flattened LP boundary typedef bridge.

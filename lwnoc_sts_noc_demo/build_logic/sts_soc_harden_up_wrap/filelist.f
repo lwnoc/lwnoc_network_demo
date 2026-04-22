@@ -1,0 +1,13 @@
+-f $STS_NOC_DEMO_DIR/filelists/sts_common_dep.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_dec4_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu0_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu1_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu2_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu3_filelist.f
+$STS_NOC_DEMO_DIR/build_logic/dspss0_tniu_sys/dspss0_tniu_filelist.f
+$STS_NOC_DEMO_DIR/build_logic/dspss1_tniu_sys/dspss1_tniu_filelist.f
+$STS_NOC_DEMO_DIR/build_logic/dspss2_tniu_sys/dspss2_tniu_filelist.f
+$STS_NOC_DEMO_DIR/build_logic/dspss3_tniu_sys/dspss3_tniu_filelist.f
+$STS_NOC_DEMO_DIR/build_logic/dspss4_tniu_sys/dspss4_tniu_filelist.f
+$STS_NOC_DEMO_DIR/build_logic/dspss5_tniu_sys/dspss5_tniu_filelist.f
+$STS_NOC_DEMO_DIR/build_logic/sts_soc_harden_up_wrap/sts_soc_harden_up_wrap.v

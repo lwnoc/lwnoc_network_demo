@@ -19,6 +19,17 @@ from StsNode import (
 )
 
 
+# Blue-chain ownership policy around harden_dn <-> async <-> harden_up cut.
+# - display_ss_sink stays inside harden_dn.
+# - dp_ss_sink remains on DP media branch (outside harden).
+# - cpu_ss_sink remains on display-misc branch (outside harden).
+BLUE_CHAIN_LEAF_OWNERSHIP = {
+    "display_ss_sink": "harden_dn",
+    "dp_ss_sink": "dp_media_branch",
+    "cpu_ss_sink": "display_misc_branch",
+}
+
+
 class StsSocLogicTopo(UhdlWrapperNode):
     """SoC-scale STS topology (diagram-oriented) built from reusable STS demo blocks.
 
@@ -35,6 +46,10 @@ class StsSocLogicTopo(UhdlWrapperNode):
         self.add_interface("rst_sys_n")
         self.add_interface("clk_noc", is_global=True)
         self.add_interface("rst_noc_n", is_global=True)
+        self.add_interface("clk_harden_dn_func", is_global=True)
+        self.add_interface("rst_harden_dn_func_n", is_global=True)
+        self.add_interface("clk_harden_up_func", is_global=True)
+        self.add_interface("rst_harden_up_func_n", is_global=True)
         self.add_interface("clk_dbg_timer", is_global=True)
         self.add_interface("rst_dbg_timer_n", is_global=True)
 
@@ -46,8 +61,12 @@ class StsSocLogicTopo(UhdlWrapperNode):
         for iniu in (self.cpu_ss_iniu, self.dp_ss_iniu, self.display_ss_iniu):
             connect(iniu.clk_src, self.clk_sys)
             connect(iniu.rstn_src, self.rst_sys_n)
-            connect(iniu.clk_dst, self.clk_noc)
-            connect(iniu.rstn_dst, self.rst_noc_n)
+            if iniu is self.display_ss_iniu:
+                connect(iniu.clk_dst, self.clk_harden_dn_func)
+                connect(iniu.rstn_dst, self.rst_harden_dn_func_n)
+            else:
+                connect(iniu.clk_dst, self.clk_noc)
+                connect(iniu.rstn_dst, self.rst_noc_n)
 
         # Decoder hierarchy.
         self.cpu_root_dec = StsDec4Node(id="cpu_root_dec")
@@ -72,7 +91,7 @@ class StsSocLogicTopo(UhdlWrapperNode):
             id="harden_up_async_bridge_mst"
         )
 
-        dec_nodes = (
+        noc_domain_decs = (
             self.cpu_root_dec,
             self.cpu_ddr_lo_dec,
             self.cpu_ddr_hi_dec,
@@ -82,18 +101,30 @@ class StsSocLogicTopo(UhdlWrapperNode):
             self.dp_io_dec,
             self.display_root_dec,
             self.display_misc_dec,
-            self.harden_dn_dec,
-            self.harden_up_dec,
-            self.harden_up_dsp_ext_dec,
         )
-        for dec in dec_nodes:
+        for dec in noc_domain_decs:
             connect(dec.clk, self.clk_noc)
             connect(dec.rst_n, self.rst_noc_n)
 
-        connect(self.harden_dn_async_bridge_slv.clk, self.clk_noc)
-        connect(self.harden_dn_async_bridge_slv.rst_n, self.rst_noc_n)
-        connect(self.harden_up_async_bridge_mst.clk, self.clk_noc)
-        connect(self.harden_up_async_bridge_mst.rst_n, self.rst_noc_n)
+        harden_dn_decs = (
+            self.harden_dn_dec,
+        )
+        for dec in harden_dn_decs:
+            connect(dec.clk, self.clk_harden_dn_func)
+            connect(dec.rst_n, self.rst_harden_dn_func_n)
+
+        harden_up_decs = (
+            self.harden_up_dec,
+            self.harden_up_dsp_ext_dec,
+        )
+        for dec in harden_up_decs:
+            connect(dec.clk, self.clk_harden_up_func)
+            connect(dec.rst_n, self.rst_harden_up_func_n)
+
+        connect(self.harden_dn_async_bridge_slv.clk, self.clk_harden_dn_func)
+        connect(self.harden_dn_async_bridge_slv.rst_n, self.rst_harden_dn_func_n)
+        connect(self.harden_up_async_bridge_mst.clk, self.clk_harden_up_func)
+        connect(self.harden_up_async_bridge_mst.rst_n, self.rst_harden_up_func_n)
         connect(self.harden_dn_async_bridge_slv.sync, self.harden_up_async_bridge_mst.sync)
 
         # TNIU leaves (SoC block labels from the provided diagram).
@@ -135,6 +166,19 @@ class StsSocLogicTopo(UhdlWrapperNode):
             "gpu_ss0_sink",
         ]
 
+        harden_dn_leaf_names = {
+            "camera_ss",
+            "display_ss_sink",
+        }
+        harden_up_leaf_names = {
+            "dspss0",
+            "dspss1",
+            "dspss2",
+            "dspss3",
+            "dspss4",
+            "dspss5",
+        }
+
         self.tniu_nodes = {}
         for idx, name in enumerate(leaf_names):
             node = make_sts_tniu_node(idx % 4, id=f"{name}_tniu")
@@ -142,8 +186,15 @@ class StsSocLogicTopo(UhdlWrapperNode):
             self.tniu_nodes[name] = node
             connect(node.clk_src, self.clk_sys)
             connect(node.rstn_src, self.rst_sys_n)
-            connect(node.clk_dst, self.clk_noc)
-            connect(node.rstn_dst, self.rst_noc_n)
+            if name in harden_dn_leaf_names:
+                connect(node.clk_dst, self.clk_harden_dn_func)
+                connect(node.rstn_dst, self.rst_harden_dn_func_n)
+            elif name in harden_up_leaf_names:
+                connect(node.clk_dst, self.clk_harden_up_func)
+                connect(node.rstn_dst, self.rst_harden_up_func_n)
+            else:
+                connect(node.clk_dst, self.clk_noc)
+                connect(node.rstn_dst, self.rst_noc_n)
             connect(node.clk_dbg_timer, self.clk_dbg_timer)
             connect(node.rstn_dbg_timer, self.rst_dbg_timer_n)
 
@@ -180,6 +231,7 @@ class StsSocLogicTopo(UhdlWrapperNode):
         connect_leaf(self.cpu_ddr_ext_dec, 3, "ddr11")
 
         # DP path: retain the media and IO leaves that stay outside the harden cut.
+        # dp_ss_sink ownership is explicitly fixed to DP media branch.
         connect(self.dp_ss_iniu.req, self.dp_root_dec.mst_req)
         connect(self.dp_ss_iniu.rsp, self.dp_root_dec.mst_rsp)
         connect_dec(self.dp_root_dec, 0, self.dp_media_dec)
@@ -197,6 +249,7 @@ class StsSocLogicTopo(UhdlWrapperNode):
         connect_leaf(self.dp_io_dec, 3, "audio_ss")
 
         # Display/AON path: model the blue async cut as harden_dn -> async -> harden_up.
+        # cpu_ss_sink stays on display_misc branch; display_ss_sink stays in harden_dn.
         connect(self.display_ss_iniu.req, self.display_root_dec.mst_req)
         connect(self.display_ss_iniu.rsp, self.display_root_dec.mst_rsp)
         connect_dec(self.display_root_dec, 0, self.display_misc_dec)

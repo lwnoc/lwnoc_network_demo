@@ -1,7 +1,5 @@
 //[UHDL]Content Start [md5:ed678c48f069785523eeb9298e881154]
 module tcu_tniu_node
-	import lwnoc_lp_define_package::*;
-	import lwnoc_lp_struct_package::*;
 	(
 	input                                                   clk_sys_clk        ,
 	input                                                   rst_sys_n_rst_n    ,
@@ -20,10 +18,10 @@ module tcu_tniu_node
 	input  [5:0]                                            dti_rsp_rsp_ttid   ,
 	input                                                   dti_rsp_rsp_tvalid ,
 	output                                                  pchnl_ctrl_paccept ,
-	output logic [$bits(lwnoc_lp_define_package::lwnoc_pchannel_active_t)-1:0] pchnl_ctrl_pactive ,
+	output logic [2-1:0] pchnl_ctrl_pactive ,
 	output                                                  pchnl_ctrl_pdeny   ,
 	input                                                   pchnl_ctrl_preq    ,
-	input logic [$bits(lwnoc_lp_define_package::lwnoc_pchannel_state_t)-1:0]  pchnl_ctrl_pstate  ,
+	input logic [2-1:0]  pchnl_ctrl_pstate  ,
 	input                                                   top_req_req_last   ,
 	input  [89:0]                                           top_req_req_payload,
 	output                                                  top_req_req_ready  ,

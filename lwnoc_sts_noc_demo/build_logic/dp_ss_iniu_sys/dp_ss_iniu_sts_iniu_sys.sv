@@ -31,8 +31,6 @@ import dp_ss_iniu_lwnoc_sts_pack::*;
     // interface with axi iniu
     //=================================================================
     input   logic [SRC_ID_WIDTH-1:0]          node_id,
-    input   logic [NODE_NUM-1:0]              flow_ctrl_busy,
-    output  logic                             flow_ctrl_update,
 
     input   logic                             s_awvalid,
     output  logic                             s_awready,
@@ -225,8 +223,8 @@ import dp_ss_iniu_lwnoc_sts_pack::*;
         .clk             (clk_src         ),
         .rst_n           (rstn_src        ),
         .node_id         (node_id         ),
-        .flow_ctrl_busy  (flow_ctrl_busy  ),
-        .flow_ctrl_update(flow_ctrl_update),
+        // .flow_ctrl_busy  (flow_ctrl_busy  ),
+        // .flow_ctrl_update(flow_ctrl_update),
         .upstrm_aw_vld   (bundle_aw_vld   ),
         .upstrm_aw_rdy   (bundle_aw_rdy   ),
         .upstrm_aw_pld   (bundle_aw_pld   ),

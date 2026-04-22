@@ -1,0 +1,9 @@
+-f $STS_NOC_DEMO_DIR/filelists/sts_common_dep.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_dec4_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu0_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu1_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu2_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu3_filelist.f
+$STS_NOC_DEMO_DIR/build_logic/camera_ss_tniu_sys/camera_ss_tniu_filelist.f
+$STS_NOC_DEMO_DIR/build_logic/display_ss_sink_tniu_sys/display_ss_sink_tniu_filelist.f
+$STS_NOC_DEMO_DIR/build_logic/sts_soc_harden_dn_wrap/sts_soc_harden_dn_wrap.v

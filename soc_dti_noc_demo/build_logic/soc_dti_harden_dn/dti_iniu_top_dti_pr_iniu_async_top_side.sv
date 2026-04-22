@@ -1,4 +1,6 @@
 module dti_iniu_top_dti_pr_iniu_async_top_side
+    import lwnoc_lp_define_package::*;
+    import lwnoc_lp_struct_package::*;
     import dti_iniu_top_dti_iniu_pack::*;
     #(
         parameter ASYNC_FIFO_DEPTH = 16
@@ -34,16 +36,10 @@ module dti_iniu_top_dti_pr_iniu_async_top_side
     input  logic    [ASYNC_FIFO_DEPTH-1                   :0]  rsp_rptr_sync ,
     output logic    [90+6+6+1+1                           :0]  rsp_pld_sync  ,
     // LP
-    input logic [$bits(lwnoc_lp_req_signal_t)-1:0]                               lp_hub_rx_req ,
-    output logic [$bits(lwnoc_lp_req_signal_t)-1:0]                               lp_hub_tx_req
+    input  lwnoc_lp_req_signal_t                               lp_hub_rx_req ,
+    output lwnoc_lp_req_signal_t                               lp_hub_tx_req
     );
 
-    //Flattened LP boundary typedef bridge.
-    lwnoc_lp_req_signal_t lp_hub_rx_req__typed;
-    lwnoc_lp_req_signal_t lp_hub_tx_req__typed;
-
-    assign lp_hub_rx_req__typed = lwnoc_lp_req_signal_t'(lp_hub_rx_req);
-    assign lp_hub_tx_req = lp_hub_tx_req__typed;
     logic [90+6+6+1+1-1:0]  req_pld_vector     ;
     logic                   req_async_clear    ;
     logic                   req_async_stall    ;
@@ -65,10 +61,10 @@ module dti_iniu_top_dti_pr_iniu_async_top_side
     //=================================================
     // LP
     //=================================================
-    assign v_stage_1_hub_rx_req[0] = lp_hub_rx_req__typed;
+    assign v_stage_1_hub_rx_req[0] = lp_hub_rx_req;
     assign v_stage_1_hub_rx_req[1] = async_slave_hub_rx_req;
     assign v_stage_1_hub_rx_req[2] = async_master_hub_rx_req;
-    assign lp_hub_tx_req__typed           = v_stage_1_hub_tx_req[0];
+    assign lp_hub_tx_req           = v_stage_1_hub_tx_req[0];
     assign async_slave_hub_tx_req  = v_stage_1_hub_tx_req[1];
     assign async_master_hub_tx_req = v_stage_1_hub_tx_req[2];
 
