@@ -16,3 +16,6 @@
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/network/lwnoc_vcbuf.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/network/intr_station_temp_mem_model.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/network/intr_ring_buf_wrap.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/network/lwnoc_intr_ring_async_bridge_wrap_mst.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/network/lwnoc_intr_ring_async_bridge_wrap_slv.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/network/lwnoc_intr_ring_sp_wrap.sv

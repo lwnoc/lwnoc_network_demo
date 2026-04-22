@@ -1,0 +1,2 @@
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/soc_dti_sw_io5_dti_noc_switch.sv
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/soc_dti_sw_io5_dti_switch_5i1o_wrap.sv

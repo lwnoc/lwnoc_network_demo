@@ -104,6 +104,9 @@ TNIU_NODE_NAMES = [
 INIU_ASYNC_FIFO_DEPTH = 16
 TNIU_ASYNC_FIFO_DEPTH = 10
 SOC_INTR_RING_NODE_NUM = len(INIU_NODE_NAMES) + len(TNIU_NODE_NAMES)
+SOC_INTR_REQ_PLD_WIDTH = 40
+SOC_INTR_REQ_ID_WIDTH = 8
+SOC_INTR_REQ_QOS_WIDTH = 4
 
 
 def _new_cfg(name: str, prefix: str, filelist_name: str, env_var: str) -> TemplateIPConfig:
@@ -169,6 +172,10 @@ soc_intr_ring_network_config = _new_cfg(
     filelist_name="intr_ring_network_wrap.f",
     env_var="INTR_RING_NETWORK_OUT_DIR",
 )
+soc_intr_ring_network_config.set_macro("PLD_WIDTH", SOC_INTR_REQ_PLD_WIDTH)
+soc_intr_ring_network_config.set_macro("ID_WIDTH", SOC_INTR_REQ_ID_WIDTH)
+soc_intr_ring_network_config.set_macro("QOS_WIDTH", SOC_INTR_REQ_QOS_WIDTH)
+soc_intr_ring_network_config.set_macro("NODE_NUM", SOC_INTR_RING_NODE_NUM)
 
 soc_intr_ring_buf_config = _new_cfg(
     name="intr_ring_buf",
@@ -199,6 +206,7 @@ soc_intr_ring_req_sink_config = _new_cfg(
     filelist_name="intr_ring_req_sink.f",
     env_var="INTR_RING_REQ_SINK_OUT_DIR",
 )
+soc_intr_ring_req_sink_config.set_macro("NODE_NUM", SOC_INTR_RING_NODE_NUM)
 
 soc_intr_ring_req_zero_source_config = _new_cfg(
     name="intr_ring_req_zero_source",
@@ -206,3 +214,4 @@ soc_intr_ring_req_zero_source_config = _new_cfg(
     filelist_name="intr_ring_req_zero_source.f",
     env_var="INTR_RING_REQ_ZERO_SOURCE_OUT_DIR",
 )
+soc_intr_ring_req_zero_source_config.set_macro("NODE_NUM", SOC_INTR_RING_NODE_NUM)

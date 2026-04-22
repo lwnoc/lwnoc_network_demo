@@ -281,6 +281,8 @@ class DtiIniuSysNode(UhdlComponentNode):
         self.add_interface("rst_n", "rst_n")
         self.add_interface("dti_req", r"req_t(valid|data|keep|last|tid|ready)")
         self.add_interface("dti_rsp", r"rsp_t(valid|data|keep|last|tid|ready)")
+        self.add_interface("req_twakeup", "req_twakeup")
+        self.add_interface("rsp_twakeup", "rsp_twakeup")
         self.add_interface("async_fifo", r".*wptr_async|.*rptr_async|.*rptr_sync|.*pld_sync")
         self.add_interface("lp_top_tx", r"lp_hub_tx_req")
         self.add_interface("lp_top_rx", r"lp_hub_rx_req")
@@ -315,6 +317,8 @@ class DtiTniuSysNode(UhdlComponentNode):
         self.add_interface("rst_n", "rst_n")
         self.add_interface("dti_req", r"req_t(valid|data|keep|last|tid|ready)")
         self.add_interface("dti_rsp", r"rsp_t(valid|data|keep|last|tid|ready)")
+        self.add_interface("req_twakeup", "req_twakeup")
+        self.add_interface("rsp_twakeup", "rsp_twakeup")
         self.add_interface("async_fifo", r".*wptr_async|.*rptr_async|.*rptr_sync|.*pld_sync")
         self.add_interface("lp_top_tx", r"lp_hub_tx_req")
         self.add_interface("lp_top_rx", r"lp_hub_rx_req")
@@ -339,6 +343,62 @@ class DtiTniuTopNode(UhdlComponentNode):
         self.add_interface("top_rsp_ext", r"rsp_(qos|threshold|tgtid)")
 
 
+class DtiIniuTopWrapNode(UhdlWrapperNode):
+    def __init__(self, id: str, node_name: str):
+        super().__init__(id=id)
+
+        self.add_interface("clk_top", is_global=True)
+        self.add_interface("rst_top_n", is_global=True)
+        self.add_interface("async_fifo")
+        self.add_interface("lp_top_tx")
+        self.add_interface("lp_top_rx")
+        self.add_interface("top_req")
+        self.add_interface("top_rsp")
+
+        self.top_side = DtiIniuTopNode(id=f"{node_name}_top_side")
+        self.top_ext_tieoff = DtiIniuTopExtTieoffNode(id=f"{node_name}_top_ext_tieoff")
+
+        connect(self.top_side.clk, self.clk_top)
+        connect(self.top_side.rst_n, self.rst_top_n)
+        connect(self.top_side.async_fifo, self.async_fifo)
+        connect(self.top_side.lp_top_tx, self.lp_top_tx)
+        connect(self.top_side.lp_top_rx, self.lp_top_rx)
+        connect(self.top_side.top_req, self.top_req)
+        connect(self.top_side.top_rsp, self.top_rsp)
+        connect(self.top_side.top_req_ext, self.top_ext_tieoff.top_req_ext)
+        connect(self.top_side.top_rsp_ext, self.top_ext_tieoff.top_rsp_ext)
+
+        self.expose_unconnected_interfaces()
+
+
+class DtiTniuTopWrapNode(UhdlWrapperNode):
+    def __init__(self, id: str, node_name: str):
+        super().__init__(id=id)
+
+        self.add_interface("clk_top", is_global=True)
+        self.add_interface("rst_top_n", is_global=True)
+        self.add_interface("async_fifo")
+        self.add_interface("lp_top_tx")
+        self.add_interface("lp_top_rx")
+        self.add_interface("top_req")
+        self.add_interface("top_rsp")
+
+        self.top_side = DtiTniuTopNode(id=f"{node_name}_top_side")
+        self.top_ext_tieoff = DtiTniuTopExtTieoffNode(id=f"{node_name}_top_ext_tieoff")
+
+        connect(self.top_side.clk, self.clk_top)
+        connect(self.top_side.rst_n, self.rst_top_n)
+        connect(self.top_side.async_fifo, self.async_fifo)
+        connect(self.top_side.lp_top_tx, self.lp_top_tx)
+        connect(self.top_side.lp_top_rx, self.lp_top_rx)
+        connect(self.top_side.top_req, self.top_req)
+        connect(self.top_side.top_rsp, self.top_rsp)
+        connect(self.top_side.top_req_ext, self.top_ext_tieoff.top_req_ext)
+        connect(self.top_side.top_rsp_ext, self.top_ext_tieoff.top_rsp_ext)
+
+        self.expose_unconnected_interfaces()
+
+
 class DtiIniuNode(UhdlWrapperNode):
     def __init__(self, id: str, sys_cfg, node_name: str):
         super().__init__(id=id)
@@ -350,6 +410,8 @@ class DtiIniuNode(UhdlWrapperNode):
 
         self.add_interface("dti_req")
         self.add_interface("dti_rsp")
+        self.add_interface("req_twakeup")
+        self.add_interface("rsp_twakeup")
         self.add_interface("timeout_val")
         self.add_interface("pchnl_ctrl")
         # 5-signal switch-compatible top interface (qos/tgtid/threshold handled by tieoff below)
@@ -365,6 +427,8 @@ class DtiIniuNode(UhdlWrapperNode):
         connect(self.sys_side.rst_n, self.rst_sys_n)
         connect(self.sys_side.dti_req, self.dti_req)
         connect(self.sys_side.dti_rsp, self.dti_rsp)
+        connect(self.sys_side.req_twakeup, self.req_twakeup)
+        connect(self.sys_side.rsp_twakeup, self.rsp_twakeup)
         connect(self.sys_side.timeout_val, self.timeout_val)
         connect(self.sys_side.pchnl_ctrl, self.pchnl_ctrl)
         connect(self.sys_side.async_fifo, self.top_side.async_fifo)
@@ -394,6 +458,8 @@ class DtiTniuNode(UhdlWrapperNode):
 
         self.add_interface("dti_req")
         self.add_interface("dti_rsp")
+        self.add_interface("req_twakeup")
+        self.add_interface("rsp_twakeup")
         self.add_interface("pchnl_ctrl")
         # 5-signal switch-compatible top interface (qos/tgtid/threshold handled by tieoff below)
         self.add_interface("top_req")
@@ -408,6 +474,8 @@ class DtiTniuNode(UhdlWrapperNode):
         connect(self.sys_side.rst_n, self.rst_sys_n)
         connect(self.sys_side.dti_req, self.dti_req)
         connect(self.sys_side.dti_rsp, self.dti_rsp)
+        connect(self.sys_side.req_twakeup, self.req_twakeup)
+        connect(self.sys_side.rsp_twakeup, self.rsp_twakeup)
         connect(self.sys_side.pchnl_ctrl, self.pchnl_ctrl)
         connect(self.sys_side.async_fifo, self.top_side.async_fifo)
         connect(self.sys_side.lp_top_tx, self.top_side.lp_top_rx)

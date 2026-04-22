@@ -127,6 +127,36 @@ noc_tbu0_iniu_sys_config = _new_cfg(
 noc_tbu0_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
 
 
+INIU_NODE_NAMES = [
+    "pcie_eth",
+    "vpu",
+    "dsp2",
+    "dsp1",
+    "dsp0",
+    "noc_tbu1",
+    "usb_ufs",
+    "mipi0",
+    "mipi1",
+    "camera",
+    "noc_tbu0",
+]
+
+
+INIU_SYS_CONFIGS: dict[str, TemplateIPConfig] = {
+    "pcie_eth": pcie_eth_iniu_sys_config,
+    "vpu": vpu_iniu_sys_config,
+    "dsp2": dsp2_iniu_sys_config,
+    "dsp1": dsp1_iniu_sys_config,
+    "dsp0": dsp0_iniu_sys_config,
+    "noc_tbu1": noc_tbu1_iniu_sys_config,
+    "usb_ufs": usb_ufs_iniu_sys_config,
+    "mipi0": mipi0_iniu_sys_config,
+    "mipi1": mipi1_iniu_sys_config,
+    "camera": camera_iniu_sys_config,
+    "noc_tbu0": noc_tbu0_iniu_sys_config,
+}
+
+
 iniu_top_config = _new_cfg(
     name="dti_iniu_top_side",
     prefix="dti_iniu_top_",

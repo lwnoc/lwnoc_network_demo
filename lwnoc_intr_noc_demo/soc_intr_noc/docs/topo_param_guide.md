@@ -195,12 +195,12 @@ Date: 2026-04-21
 为什么需要它:
 - 稳定编译入口名字：上层编译脚本只盯一个固定 wrapper 入口，不受内部 top 命名调整影响。
 - 入口解耦：把“功能 RTL 生成”与“发布给编译系统的入口形态”分离。
-- 便于 DV/PD 发布一致化：DV 用 `soc_intr_noc_wrap`，PD 用对应 `soc_intr_noc_wrap_pd` 机制。
+- 便于 shared build_logic packaging：DV live ingress 直接指向 `soc_intr_ring_top/filelist.f`，wrapper 作为同根附加发布物保留；PD 继续用对应 `soc_intr_noc_wrap_pd` 机制。
 
 证据链（源码）:
 - 生成 wrapper 的核心函数在 `gen_soc_intr_topo.py`：`_publish_named_top_wrapper(...)`
 - 发布 DV 入口的函数在 `gen_soc_intr_topo.py`：`_publish_top_filelist(...)`
-- 最终 compile 入口在 `filelist/filelist.f`，会 `-f build_logic/soc_intr_noc_wrap/filelist.f`
+- 最终 compile 入口在 `filelist/filelist.f`，会 `-f build_logic/soc_intr_ring_top/filelist.f`
 
 如果要改，应该怎么改:
 
@@ -214,5 +214,6 @@ Date: 2026-04-21
 
 3) 重新生成并验证
 - 重新执行 `gen_soc_intr_topo.py`（DV/PD 对应 flow）
-- 验证 `build_logic/soc_intr_noc_wrap/filelist.f` 与 `filelist/filelist.f` ingress 一致
+- 验证 `build_logic/soc_intr_ring_top/filelist.f` 与 `filelist/filelist.f` ingress 一致
+- 验证 `build_logic/soc_intr_noc_wrap/filelist.f` 仅作为同根附加 wrapper 发布物存在，不再作为 live DV ingress
 - 验证 `soc_intr_noc_wrap.v` 端口与内部 top 实例映射满足预期

@@ -42,10 +42,6 @@ import sts_demo_tniu3_lwnoc_sts_pack::*;
     output  logic [ASYNC_FIFO_DEPTH-1:0]   rsp_rptr_sync   ,
     input   logic [RSP_PLD_WIDTH+1:0]      rsp_pld_sync    ,
 
-    input   logic   write_stall    ,
-    input   logic   write_clear    ,
-    output  logic   write_full_zero,
-
     //============================================================
     // APB with PMC
     //============================================================

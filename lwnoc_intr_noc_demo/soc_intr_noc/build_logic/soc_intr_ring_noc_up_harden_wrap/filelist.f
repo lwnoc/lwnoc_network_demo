@@ -1,6 +1,3 @@
--f $INTR_NOC_DEMO_DIR/filelist/intr_common_dep.f
--f $INTR_NOC_DEMO_DIR/filelist/intr_niu_core.f
--f $INTR_NOC_DEMO_DIR/filelist/intr_network_core.f
 $INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_up_harden_wrap/cpu_ss_iniu_noc_side_ring.v
 $INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_up_harden_wrap/cpu_ss_iniu_noc_side.v
 $INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_up_harden_wrap/cpu_ss_tniu_noc_side_ring.v

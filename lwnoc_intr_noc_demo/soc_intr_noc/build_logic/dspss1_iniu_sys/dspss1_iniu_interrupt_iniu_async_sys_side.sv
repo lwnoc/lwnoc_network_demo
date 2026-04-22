@@ -1,4 +1,4 @@
-module dspss1_iniu_interrupt_iniu_aync_sys_side
+module dspss1_iniu_interrupt_iniu_async_sys_side
 
     import lwnoc_lp_define_package::*;
     import lwnoc_lp_struct_package::*;

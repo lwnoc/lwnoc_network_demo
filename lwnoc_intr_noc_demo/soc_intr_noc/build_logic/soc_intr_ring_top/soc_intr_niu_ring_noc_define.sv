@@ -4,3 +4,4 @@
 `define _PREFIX_(x) x
 `endif
 `endif
+`undef _PREFIX_

@@ -1,0 +1,3 @@
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dti_iniu_top_dti_pr_iniu_define.sv
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dti_iniu_top_dti_iniu_pack.sv
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dti_iniu_top_dti_pr_iniu_async_top_side.sv

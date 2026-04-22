@@ -1,0 +1,37 @@
+
+Warning-[LINX_KRNL] Unsupported Linux kernel
+  Linux kernel '5.15.133.1-microsoft-standard-WSL2' is not supported.
+  Supported versions are 2.4* or 2.6*.
+
+*** Using c compiler gcc-4.8 instead of cc ...
+
+Error-[P1ARGS-CANTOPN-F] Cannot open file
+  Unable to open '$INTR_NOC_DEMO_DIR/filelist/intr_common_dep.f' due to 'No 
+  such file or directory'.
+  Please fix the reason mentioned above and continue.
+
+CPU time: .068 seconds to compile
+Command exited with non-zero status 255
+	Command being timed: "vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed -sverilog -timescale=1ns/1ps +v2k +notimingcheck +lint=TFIPC-L +error+OPD -f /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_noc_wrap/filelist.f /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/sim/tb_soc_intr_noc_sanity.sv -top tb_soc_intr_noc_sanity -Mdir=/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/sim/build/csrc -o /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/sim/build/simv -l /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/sim/build/compile.log"
+	User time (seconds): 0.51
+	System time (seconds): 0.42
+	Percent of CPU this job got: 83%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.13
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 52176
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 119654
+	Voluntary context switches: 1229
+	Involuntary context switches: 110
+	Swaps: 0
+	File system inputs: 8
+	File system outputs: 64
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 255

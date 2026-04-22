@@ -1,6 +1,6 @@
 module lwnoc_sync_cell #(
-    parameter  integer unsigned INIT_VALUE = 0,
     parameter  integer unsigned WIDTH      = 4,
+    parameter  logic [WIDTH-1:0] INIT_VALUE = '0,
     parameter  integer unsigned SYNC_LEVEL = 3
 ) (
     input logic [WIDTH-1:0] din,

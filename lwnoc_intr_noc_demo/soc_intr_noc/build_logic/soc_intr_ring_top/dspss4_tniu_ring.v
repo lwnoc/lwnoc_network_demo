@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:e9efb878f7adae4ff17efad4443b3d02]
+//[UHDL]Content Start [md5:128cbcb284e68cd0d451f6444e91ae08]
 module dspss4_tniu_ring (
 	input         clk                              ,
 	input         rst_n                            ,
@@ -56,7 +56,16 @@ module dspss4_tniu_ring (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	intr_ring_buf_wrap ring_buf (
+	intr_ring_buf_wrap #(
+		.RING_ID(32'd26),
+		.NODE_NUM(32'd39),
+		.PLD_WIDTH(32'd40),
+		.ID_WIDTH(32'd8),
+		.QOS_WIDTH(32'd4),
+		.SINGLE_THR_WIDTH(32'd1),
+		.HAS_INIU(1'b1),
+		.HAS_TNIU(1'b1))
+	ring_buf (
 		.clk(clk),
 		.rst_n(rst_n),
 		.pring_in_if_valid(pring_in_if_pring_in_if_valid),
@@ -103,5 +112,5 @@ module dspss4_tniu_ring (
 		.local_rx_last(local_rx_local_rx_last));
 
 endmodule
-//[UHDL]Content End [md5:e9efb878f7adae4ff17efad4443b3d02]
+//[UHDL]Content End [md5:128cbcb284e68cd0d451f6444e91ae08]
 

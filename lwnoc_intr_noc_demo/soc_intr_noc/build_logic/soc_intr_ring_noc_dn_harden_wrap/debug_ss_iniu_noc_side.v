@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:0ed0a5071f726f55366e5a1d79bb2490]
+//[UHDL]Content Start [md5:598f07e5766330f0ab6d7486fd232e6d]
 module debug_ss_iniu_noc_side (
 	input         clk_top_func                                  ,
 	input         rst_top_func_n                                ,
@@ -62,7 +62,7 @@ module debug_ss_iniu_noc_side (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	interrupt_iniu_aync_top_side iniu_top (
+	interrupt_iniu_async_top_side iniu_top (
 		.clk(clk_top_func),
 		.rst_n(rst_top_func_n),
 		.wptr_async(async_fifo_wptr_async),
@@ -124,7 +124,13 @@ module debug_ss_iniu_noc_side (
 		.local_rx_local_rx_srcid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_srcid),
 		.local_rx_local_rx_tgtid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_tgtid),
 		.local_rx_local_rx_valid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_valid));
-	lwnoc_intr_default_tgtid_sink ring_sink (
+	lwnoc_intr_default_tgtid_sink #(
+		.PLD_WIDTH(32'd40),
+		.ID_WIDTH(32'd8),
+		.QOS_WIDTH(32'd4),
+		.NODE_NUM(32'd39),
+		.SINK_EN(1'b1))
+	ring_sink (
 		.clk(clk_top_func),
 		.rst_n(rst_top_func_n),
 		.rx_valid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_valid),
@@ -139,5 +145,5 @@ module debug_ss_iniu_noc_side (
 		.invalid_tgtid_sticky());
 
 endmodule
-//[UHDL]Content End [md5:0ed0a5071f726f55366e5a1d79bb2490]
+//[UHDL]Content End [md5:598f07e5766330f0ab6d7486fd232e6d]
 

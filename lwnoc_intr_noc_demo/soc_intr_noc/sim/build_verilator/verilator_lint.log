@@ -1,0 +1,7 @@
+%Error: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/lwnoc_intr_default_tgtid_sink.sv:45:5: syntax error, unexpected property
+   45 |     property p_sink_accept_invalid_when_enabled;
+      |     ^~~~~~~~
+%Error: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/lwnoc_intr_dummy_endpoint.sv:77:5: syntax error, unexpected property
+   77 |     property p_dummy_tieoff_never_source;
+      |     ^~~~~~~~
+%Error: Exiting due to 2 error(s)

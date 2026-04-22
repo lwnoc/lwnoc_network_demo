@@ -51,3 +51,7 @@ Primary outputs after generation:
 - `soc_dti_logic_topology.json`
 - `build_logic/`
 - `filelists/filelist.f`
+
+Capability check:
+- `/home/lgzhu/dev/noc_work/lwnoc_network_demo/.venv/bin/python /home/lgzhu/dev/noc_work/lwnoc_network_demo/tools/check_topo_capability.py soc_dti_noc_demo`
+- Add `--json` to inspect the same capability matrix in machine-readable form.

@@ -37,7 +37,7 @@ module ucie_ss0_iniu_interrupt_iniu_reg_bank
     //===========================================================================
     logic           wreq_vld;
     logic           wreq_rdy;
-    logic           paddr_en;
+    logic           paddr_lut_en;
     logic           rreq_vld;
     logic           rreq_rdy;
     logic           default_ready;
@@ -46,10 +46,8 @@ module ucie_ss0_iniu_interrupt_iniu_reg_bank
     // APB interface signals
     //===========================================================================
 
-    // assign p_ready = ~paddr_en ? default_ready  :
-    //                   wreq_vld ? wreq_rdy       : rreq_rdy;
-    assign p_ready = ~paddr_en ? default_ready  :
-                      p_write ? wreq_rdy       : rreq_rdy;
+    assign p_ready = ~paddr_lut_en ? default_ready  :
+                      p_write     ? wreq_rdy       : rreq_rdy;
     always_comb begin
         automatic logic [31:0] rdata_pulse;
         rdata_pulse = 32'hfffffffe;
@@ -57,14 +55,14 @@ module ucie_ss0_iniu_interrupt_iniu_reg_bank
             if (p_addr == (INTR_PULSE_MODE_BASE_ADDR + 32'(i*4)))
                 rdata_pulse = intr_pulse_mode[i*32 +: 32];
         end
-        if (paddr_en)
+        if (paddr_lut_en)
             p_rdata = {8'b0,apb_r_ack_data[19:12],4'b0,apb_r_ack_data[11:0]};
         else
             p_rdata = rdata_pulse;
     end
 	assign p_slverr = 1'b0;
 
-    assign default_ready = p_sel && p_enable && ~paddr_en;
+    assign default_ready = p_sel && p_enable && ~paddr_lut_en;
     //===========================================================================
     // wreq
     //===========================================================================
@@ -72,7 +70,7 @@ module ucie_ss0_iniu_interrupt_iniu_reg_bank
         if (~rst_n) begin
             wreq_vld <= 1'b0;
         end
-        else if (p_sel && ~p_enable && p_write && paddr_en) begin
+        else if (p_sel && ~p_enable && p_write && paddr_lut_en) begin
             wreq_vld <= 1'b1;
         end
         else if (apb_w_req_vld && apb_w_req_rdy) begin
@@ -89,7 +87,7 @@ module ucie_ss0_iniu_interrupt_iniu_reg_bank
         if (~rst_n) begin
             rreq_vld <= 1'b0;
         end
-        else if (p_sel && ~p_enable && ~p_write && paddr_en) begin //early read vld
+        else if (p_sel && ~p_enable && ~p_write && paddr_lut_en) begin //early read vld
             rreq_vld <= 1'b1;
         end
         else if(apb_r_req_vld && apb_r_req_rdy)begin
@@ -114,14 +112,8 @@ module ucie_ss0_iniu_interrupt_iniu_reg_bank
     // paddr protection
     //===========================================================================
 
-    always_comb begin
-        if((p_addr >= INTR_LUT_BASE_ADDR) && (p_addr < INTR_LUT_BASE_ADDR + 4*INTERRUPT_NUM)) begin
-            paddr_en = 1'b1;
-        end
-        else begin
-            paddr_en = 1'b0;
-        end
-    end
+    assign paddr_lut_en = (p_addr >= INTR_LUT_BASE_ADDR) &&
+                         (p_addr <  INTR_LUT_BASE_ADDR + 4*INTERRUPT_NUM);
 
     //===========================================================================
     // address sram enable

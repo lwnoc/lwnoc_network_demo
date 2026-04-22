@@ -9,7 +9,7 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 
 from topo_core.node.uhdlComponentNode import UhdlComponentNode
 from uhdl.uhdl.core import BitXor, Component, Input, Output, UInt
-from uhdl.uhdl.core.TemplateIP import TemplateComponent
+from uhdl.uhdl.core.TemplateIP import TemplateComponent, TemplateIPConfig
 
 from StsTemplate import (
     sts_demo_dec4_config,
@@ -21,6 +21,13 @@ from StsTemplate import (
     sts_demo_tniu1_config,
     sts_demo_tniu2_config,
     sts_demo_tniu3_config,
+)
+
+
+sts_demo_req_rsp_async_raw_config = TemplateIPConfig(
+    name="sts_demo_req_rsp_async_raw",
+    filelist=sts_demo_req_rsp_async_config.filelist,
+    prefix="",
 )
 
 
@@ -67,7 +74,7 @@ class StsReqZeroSourceNode(UhdlComponentNode):
 
 class StsReqRspAsyncBridgeSlvNode(UhdlComponentNode):
     def __init__(self, id: str = "sts_req_rsp_async_slv"):
-        comp = TemplateComponent(config=sts_demo_req_rsp_async_config, top="sts_async_bridge_slv")
+        comp = TemplateComponent(config=sts_demo_req_rsp_async_raw_config, top="sts_async_bridge_slv")
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", r"^clk$")
@@ -78,7 +85,7 @@ class StsReqRspAsyncBridgeSlvNode(UhdlComponentNode):
 
 class StsReqRspAsyncBridgeMstNode(UhdlComponentNode):
     def __init__(self, id: str = "sts_req_rsp_async_mst"):
-        comp = TemplateComponent(config=sts_demo_req_rsp_async_config, top="sts_async_bridge_mst")
+        comp = TemplateComponent(config=sts_demo_req_rsp_async_raw_config, top="sts_async_bridge_mst")
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", r"^clk$")

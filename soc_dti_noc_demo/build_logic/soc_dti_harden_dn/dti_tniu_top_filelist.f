@@ -1,0 +1,3 @@
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dti_tniu_top_dti_tniu_define.sv
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dti_tniu_top_dti_tniu_pack.sv
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dti_tniu_top_dti_tniu_async_top_side.sv

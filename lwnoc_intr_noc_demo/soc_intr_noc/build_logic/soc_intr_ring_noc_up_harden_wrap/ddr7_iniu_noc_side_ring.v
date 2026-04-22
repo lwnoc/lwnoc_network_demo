@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:5241cb98e4705bbba65a090c1c82d8f4]
+//[UHDL]Content Start [md5:9e6648f28f15ee49ad92c61688e24a7d]
 module ddr7_iniu_noc_side_ring (
 	input         clk                              ,
 	input         rst_n                            ,
@@ -56,7 +56,16 @@ module ddr7_iniu_noc_side_ring (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	intr_ring_buf_wrap ring_buf (
+	intr_ring_buf_wrap #(
+		.RING_ID(32'd9),
+		.NODE_NUM(32'd39),
+		.PLD_WIDTH(32'd40),
+		.ID_WIDTH(32'd8),
+		.QOS_WIDTH(32'd4),
+		.SINGLE_THR_WIDTH(32'd1),
+		.HAS_INIU(1'b1),
+		.HAS_TNIU(1'b0))
+	ring_buf (
 		.clk(clk),
 		.rst_n(rst_n),
 		.pring_in_if_valid(pring_in_if_pring_in_if_valid),
@@ -103,5 +112,5 @@ module ddr7_iniu_noc_side_ring (
 		.local_rx_last(local_rx_local_rx_last));
 
 endmodule
-//[UHDL]Content End [md5:5241cb98e4705bbba65a090c1c82d8f4]
+//[UHDL]Content End [md5:9e6648f28f15ee49ad92c61688e24a7d]
 

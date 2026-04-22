@@ -21,7 +21,16 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 from topo_core.node.node import reset_global_state
 from topo_core.utils.serialization import TopologySerializer
 
-from SocDtiTreeTopo import SocDtiLogicTopo
+from SocDtiTreeTopo import (
+    DN_HARDEN_ID,
+    DN_HARDEN_MEMBER_IDS,
+    TOPO_ID,
+    UP_HARDEN_ID,
+    UP_HARDEN_MEMBER_IDS,
+    SocDtiDnHardenWrap,
+    SocDtiLogicTopo,
+    SocDtiUpHardenWrap,
+)
 
 
 MACRO_DEFINE_RE = re.compile(r"^`define\s+([A-Za-z0-9_]+)\s+(.+)$")
@@ -43,6 +52,13 @@ LP_TYPE_PORT_RE = re.compile(
     r"(?P<spacing>\s+)(?P<name>[A-Za-z0-9_]+)(?P<tail>\s*(?:,|\)\s*;))$",
     re.MULTILINE,
 )
+# Literal bit-widths for known LP types so generated top-level ports need no package import.
+_BARE_TYPE_NAME_RE = re.compile(r"(?:[A-Za-z0-9_]+::)?([A-Za-z0-9_]+)$")
+LP_TYPE_WIDTHS: dict[str, int] = {
+    "lwnoc_pchannel_active_t": 2,
+    "lwnoc_pchannel_state_t": 2,
+}
+_LP_HEADER_IMPORT_RE = re.compile(r"\n[ \t]+import[ \t]+lwnoc_lp_[A-Za-z0-9_]+::\*;")
 
 _TIEOFF_ASSIGN_PATCHES = {
     "DtiIniuTopExtTieoffComponent.v": (
@@ -59,6 +75,17 @@ _TIEOFF_ASSIGN_PATCHES = {
 
 _COMBINED_DIR = "soc_dti_logic_topo"
 _SHARED_ENV = "SOC_DTI_LOGIC_TOPO_DIR"
+_LOCAL_BUILD_ROOT = "$DTI_TEST_DIR/build_logic"
+_HARDEN_PREFIX = "soc_dti_harden_"
+_HARDEN_WRAPPER_BUILD_ROOT = THIS_DIR / "build" / "temp" / "__harden_wrapper_gen"
+_HARDEN_SPECS: dict[str, list[str]] = {
+    UP_HARDEN_ID: UP_HARDEN_MEMBER_IDS,
+    DN_HARDEN_ID: DN_HARDEN_MEMBER_IDS,
+}
+_HARDEN_WRAPPER_FACTORIES = {
+    UP_HARDEN_ID: SocDtiUpHardenWrap,
+    DN_HARDEN_ID: SocDtiDnHardenWrap,
+}
 _TOP_SIDE_BLOCKS = {
     "soc_dti_sw_dsp6": "SOC_DTI_SW_DSP6_OUT_DIR",
     "soc_dti_sw_io5": "SOC_DTI_SW_IO5_OUT_DIR",
@@ -68,6 +95,11 @@ _TOP_SIDE_BLOCKS = {
     "dti_iniu_top_side": "DTI_INIU_TOP_DIR",
     "dti_tniu_top_side": "DTI_TNIU_TOP_DIR",
 }
+
+
+def _write_filelist(dst_path: Path, lines: list[str]) -> None:
+    dst_path.parent.mkdir(parents=True, exist_ok=True)
+    dst_path.write_text("\n".join(lines) + "\n")
 
 
 def _load_prefixed_macros(macro_file: Path) -> dict[str, str]:
@@ -184,7 +216,10 @@ def _flatten_lp_boundary_ports_in_file(path: Path) -> bool:
         type_name = match.group("type")
         name = match.group("name")
         alias = f"{name}__typed"
-        width_expr = f"$bits({type_name})"
+        bare = _BARE_TYPE_NAME_RE.search(type_name)
+        bare_name = bare.group(1) if bare else type_name
+        known_width = LP_TYPE_WIDTHS.get(bare_name)
+        width_expr = str(known_width) if known_width is not None else f"$bits({type_name})"
         port_specs.append(
             {
                 "direction": match.group("direction"),
@@ -199,6 +234,9 @@ def _flatten_lp_boundary_ports_in_file(path: Path) -> bool:
         )
 
     new_header = LP_TYPE_PORT_RE.sub(_replace_port, header)
+    # Remove LP package imports from the module header — top-level files must not
+    # contain wildcard package imports; ports now use plain integer widths.
+    new_header = _LP_HEADER_IMPORT_RE.sub("", new_header)
     new_body = body
     for spec in port_specs:
         new_body = re.sub(rf"\b{spec['name']}\b", spec["alias"], new_body)
@@ -308,23 +346,237 @@ def _consolidate_top_side(build_dir: Path) -> None:
         print("  [consolidate] rewrote umbrella filelist env vars")
 
 
+def _copy_local_file(source_dir: Path, target_dir: Path, filename: str, copied_files: set[str]) -> None:
+    if filename in copied_files:
+        return
+
+    shutil.copyfile(source_dir / filename, target_dir / filename)
+    copied_files.add(filename)
+
+
+def _copy_local_filelist(
+    source_dir: Path,
+    target_dir: Path,
+    filename: str,
+    target_root: str,
+    copied_files: set[str],
+    copied_filelists: set[str],
+) -> None:
+    if filename in copied_filelists:
+        return
+
+    local_file_prefix = f"${_SHARED_ENV}/"
+    local_filelist_prefix = f"-f ${_SHARED_ENV}/"
+    out_lines: list[str] = []
+
+    for raw_line in (source_dir / filename).read_text().splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+
+        if line.startswith(local_filelist_prefix):
+            nested_name = line[len(local_filelist_prefix) :]
+            _copy_local_filelist(
+                source_dir,
+                target_dir,
+                nested_name,
+                target_root,
+                copied_files,
+                copied_filelists,
+            )
+            out_lines.append(f"-f {target_root}/{nested_name}")
+            continue
+
+        if line.startswith(local_file_prefix):
+            local_name = line[len(local_file_prefix) :]
+            _copy_local_file(source_dir, target_dir, local_name, copied_files)
+            out_lines.append(f"{target_root}/{local_name}")
+            continue
+
+        out_lines.append(line)
+
+    _write_filelist(target_dir / filename, out_lines)
+    copied_filelists.add(filename)
+
+
+def _sys_filelist_entry(node_id: str) -> str:
+    if node_id == "sys_tcu_tniu_node":
+        return "-f $SYS_TCU_TNIU_SYS_DIR/sys_tcu_filelist.f"
+
+    if node_id.endswith("_iniu_node"):
+        base_name = node_id[: -len("_iniu_node")]
+        env_name = f"SOC_DTI_{base_name.upper()}_INIU_SYS_DIR"
+        return f"-f ${env_name}/{base_name}_filelist.f"
+
+    raise ValueError(f"Unsupported harden node system filelist mapping: {node_id}")
+
+
+def _publish_harden_partition_dir(
+    source_dir: Path,
+    wrapper_source_dir: Path,
+    target_dir: Path,
+    partition_id: str,
+    member_ids: list[str],
+) -> None:
+    if target_dir.exists():
+        shutil.rmtree(target_dir)
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    target_root = f"{_LOCAL_BUILD_ROOT}/{partition_id}"
+    copied_files: set[str] = set()
+    copied_filelists: set[str] = set()
+    out_lines: list[str] = []
+
+    if any(member_id.endswith("_iniu_top_wrap") for member_id in member_ids):
+        _copy_local_file(source_dir, target_dir, "DtiIniuTopExtTieoffComponent.v", copied_files)
+        _copy_local_filelist(
+            source_dir,
+            target_dir,
+            "dti_iniu_top_filelist.f",
+            target_root,
+            copied_files,
+            copied_filelists,
+        )
+
+    if any(member_id.endswith("_tniu_top_wrap") for member_id in member_ids):
+        _copy_local_file(source_dir, target_dir, "DtiTniuTopExtTieoffComponent.v", copied_files)
+        _copy_local_filelist(
+            source_dir,
+            target_dir,
+            "dti_tniu_top_filelist.f",
+            target_root,
+            copied_files,
+            copied_filelists,
+        )
+
+    for member_id in member_ids:
+        if member_id.endswith("_top_wrap"):
+            _copy_local_file(wrapper_source_dir, target_dir, f"{member_id}.v", copied_files)
+            out_lines.append(f"{target_root}/{member_id}.v")
+            continue
+
+        if member_id.endswith("_node"):
+            out_lines.append(_sys_filelist_entry(member_id))
+            _copy_local_file(source_dir, target_dir, f"{member_id}.v", copied_files)
+            out_lines.append(f"{target_root}/{member_id}.v")
+            continue
+
+        local_filelist = f"{member_id}_filelist.f"
+        _copy_local_filelist(
+            source_dir,
+            target_dir,
+            local_filelist,
+            target_root,
+            copied_files,
+            copied_filelists,
+        )
+        out_lines.append(f"-f {target_root}/{local_filelist}")
+
+    _copy_local_file(wrapper_source_dir, target_dir, f"{partition_id}.v", copied_files)
+    out_lines.append(f"{target_root}/{partition_id}.v")
+
+    _write_filelist(target_dir / "filelist.f", out_lines)
+    print(f"  [harden_publish] published {partition_id}/filelist.f")
+
+
+def _rewrite_harden_top_filelist(source_dir: Path, partition_ids: list[str]) -> None:
+    local_prefix = f"{TOPO_ID}/"
+    switch_filelists = {
+        f"-f ${_SHARED_ENV}/{switch_id}_filelist.f"
+        for switch_id in _TOP_SIDE_BLOCKS
+        if switch_id.startswith("soc_dti_sw_")
+    }
+
+    def _normalize_line(line: str) -> str:
+        if line.startswith("-f "):
+            nested = line[3:]
+            if nested.startswith(local_prefix):
+                return f"-f ${_SHARED_ENV}/{nested[len(local_prefix):]}"
+            return line
+
+        if line.startswith(local_prefix):
+            return f"${_SHARED_ENV}/{line[len(local_prefix):]}"
+
+        return line
+
+    original_lines = [
+        _normalize_line(line.strip())
+        for line in (source_dir / "filelist.f").read_text().splitlines()
+        if line.strip() and _normalize_line(line.strip()) not in switch_filelists
+    ]
+    partition_lines = [f"-f {_LOCAL_BUILD_ROOT}/{partition_id}/filelist.f" for partition_id in partition_ids]
+    top_line = f"${_SHARED_ENV}/{TOPO_ID}.v"
+
+    if top_line in original_lines:
+        top_idx = original_lines.index(top_line)
+        out_lines = original_lines[:top_idx] + partition_lines + original_lines[top_idx:]
+    else:
+        out_lines = original_lines + partition_lines
+
+    _write_filelist(source_dir / "filelist.f", out_lines)
+    print("  [harden_publish] rewrote top assembly filelist")
+
+
+def _generate_harden_wrapper_modules(build_dir: Path) -> None:
+    combined_dir = build_dir / _COMBINED_DIR
+    if _HARDEN_WRAPPER_BUILD_ROOT.exists():
+        shutil.rmtree(_HARDEN_WRAPPER_BUILD_ROOT)
+    _HARDEN_WRAPPER_BUILD_ROOT.mkdir(parents=True, exist_ok=True)
+
+    for partition_id, wrapper_factory in _HARDEN_WRAPPER_FACTORIES.items():
+        reset_global_state()
+        wrapper_node = wrapper_factory()
+        wrapper_build_dir = _HARDEN_WRAPPER_BUILD_ROOT / partition_id
+        comp = wrapper_node.build_uhdl()
+        comp.output_dir = str(wrapper_build_dir)
+        comp.generate_verilog(iteration=True)
+
+        wrapper_path = wrapper_build_dir / partition_id / f"{partition_id}.v"
+        if not wrapper_path.exists():
+            raise FileNotFoundError(f"Generated harden wrapper not found: {wrapper_path}")
+
+        # Flatten LP typedef ports (and strip module-header imports) in ALL .v
+        # files in the wrapper output dir — not just the top wrapper itself.
+        for v_path in sorted((wrapper_build_dir / partition_id).glob("*.v")):
+            _flatten_lp_boundary_ports_in_file(v_path)
+        shutil.copyfile(wrapper_path, combined_dir / f"{partition_id}.v")
+        print(f"  [harden_publish] generated {partition_id}.v")
+
+
+def _publish_partitioned_harden_outputs(build_dir: Path) -> None:
+    source_dir = build_dir / _COMBINED_DIR
+    _generate_harden_wrapper_modules(build_dir)
+
+    harden_specs = _HARDEN_SPECS
+    if not harden_specs:
+        print("  [harden_publish] WARNING: no harden wrappers found in topology metadata")
+        return
+
+    for partition_id, member_ids in harden_specs.items():
+        _publish_harden_partition_dir(
+            source_dir,
+            _HARDEN_WRAPPER_BUILD_ROOT / partition_id / partition_id,
+            build_dir / partition_id,
+            partition_id,
+            member_ids,
+        )
+
+    _rewrite_harden_top_filelist(source_dir, list(harden_specs.keys()))
+
+
 def _publish_top_filelist(src_path: Path, dst_path: Path) -> None:
     if not src_path.exists():
         print(f"  [filelist] WARNING: {src_path} not found, skipping")
         return
 
-    dst_path.parent.mkdir(parents=True, exist_ok=True)
-
-    out_lines = []
-    for line in src_path.read_text().splitlines():
-        if line.startswith(f"{_COMBINED_DIR}/"):
-            out_lines.append(line.replace(f"{_COMBINED_DIR}/", f"${_SHARED_ENV}/", 1))
-        else:
-            out_lines.append(line)
-
-    dst_path.write_text("\n".join(out_lines) + "\n")
-    src_path.unlink()
+    out_lines = [line.strip() for line in src_path.read_text().splitlines() if line.strip()]
+    _write_filelist(dst_path, out_lines)
     print(f"  [filelist] published top filelist to {dst_path}")
+
+
+def _publish_compile_entry(dst_path: Path) -> None:
+    _write_filelist(dst_path, [f"-f $DTI_TEST_DIR/filelists/{TOPO_ID}.f"])
+    print(f"  [filelist] published compile entry to {dst_path}")
 
 
 def main() -> None:
@@ -347,14 +599,16 @@ def main() -> None:
     _consolidate_top_side(build_dir)
     _flatten_lp_boundary_typedef_ports(build_dir)
     _patch_generated_tieoff_components(build_dir)
+    _publish_partitioned_harden_outputs(build_dir)
     _publish_top_filelist(
         build_dir / _COMBINED_DIR / "filelist.f",
-        THIS_DIR / "filelists" / "soc_dti_logic_topo.f",
+        THIS_DIR / "filelists" / f"{TOPO_ID}.f",
     )
+    _publish_compile_entry(THIS_DIR / "filelists" / "filelist.f")
 
     print(f"Topology JSON written to {topology_json}")
     print(f"Generated RTL written to {build_dir}")
-    print(f"Top filelist written to {THIS_DIR / 'filelists' / 'soc_dti_logic_topo.f'}")
+    print(f"Top filelist written to {THIS_DIR / 'filelists' / f'{TOPO_ID}.f'}")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:944cfdcc3f1c04f1ebde1a63d609fe74]
+//[UHDL]Content Start [md5:923bd8bc59a3b07a94f79c05e2c35c90]
 module ddr11_tniu (
 	input           clk_sys_clk                                               ,
 	input           rst_sys_n_rst_n                                           ,
@@ -56,10 +56,10 @@ module ddr11_tniu (
 	//Wire define for sub module.
 	wire [9:0]  tniu_top_TO_tniu_sys_SIG_wptr_async                ;
 	wire [61:0] tniu_top_TO_tniu_sys_SIG_pld_sync                  ;
-	wire [12:0] tniu_top_TO_tniu_sys_SIG_s_async_master_hub_tx_req ;
+	wire [8:0]  tniu_top_TO_tniu_sys_SIG_s_async_master_hub_tx_req ;
 	wire [9:0]  tniu_sys_TO_tniu_top_SIG_rptr_async                ;
 	wire [9:0]  tniu_sys_TO_tniu_top_SIG_rptr_sync                 ;
-	wire [12:0] tniu_sys_TO_tniu_top_SIG_m_async_master_hub_rx_req ;
+	wire [8:0]  tniu_sys_TO_tniu_top_SIG_m_async_master_hub_rx_req ;
 	wire        ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_valid  ;
 	wire [39:0] ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_payload;
 	wire [7:0]  ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_srcid  ;
@@ -82,7 +82,7 @@ module ddr11_tniu (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	ddr11_tniu_interrupt_tniu_aync_sys_side tniu_sys (
+	ddr11_tniu_interrupt_tniu_async_sys_side tniu_sys (
 		.clk(clk_sys_clk),
 		.rst_n(rst_sys_n_rst_n),
 		.tniu_tgt_id(ddr11_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id),
@@ -104,11 +104,11 @@ module ddr11_tniu (
 		.m_async_master_hub_rx_req(tniu_sys_TO_tniu_top_SIG_m_async_master_hub_rx_req),
 		.m_async_master_hub_tx_req(tniu_top_TO_tniu_sys_SIG_s_async_master_hub_tx_req),
 		.preq(pchannel_preq),
-		.pstate(pchannel_pstate),
+		.pstate(lwnoc_lp_define_package::lwnoc_pchannel_state_t'(pchannel_pstate)),
 		.pactive(pchannel_pactive),
 		.paccept(pchannel_paccept),
 		.pdeny(pchannel_pdeny));
-	interrupt_tniu_aync_top_side tniu_top (
+	interrupt_tniu_async_top_side tniu_top (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.wptr_async(tniu_top_TO_tniu_sys_SIG_wptr_async),
@@ -171,7 +171,18 @@ module ddr11_tniu (
 		.local_rx_local_rx_srcid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_srcid),
 		.local_rx_local_rx_tgtid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_tgtid),
 		.local_rx_local_rx_valid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_valid));
-	lwnoc_intr_dummy_endpoint ring_zero (
+	lwnoc_intr_dummy_endpoint #(
+		.PLD_WIDTH(32'd40),
+		.ID_WIDTH(32'd8),
+		.QOS_WIDTH(32'd4),
+		.NODE_NUM(32'd39),
+		.DUMMY_EN(1'b1),
+		.SINK_EN(1'b1),
+		.DUMMY_SRCID(8'd0),
+		.DUMMY_TGTID(8'd0),
+		.DUMMY_QOS(4'b0),
+		.DUMMY_PLD(40'h0))
+	ring_zero (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.real_tx_valid(),
@@ -202,5 +213,5 @@ module ddr11_tniu (
 		.sink_drop_invalid_sticky());
 
 endmodule
-//[UHDL]Content End [md5:944cfdcc3f1c04f1ebde1a63d609fe74]
+//[UHDL]Content End [md5:923bd8bc59a3b07a94f79c05e2c35c90]
 

@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:af54462b52506b0de80e287a54b32fdd]
+//[UHDL]Content Start [md5:f2def0295bd5d09bddbd3ede8d7c0dee]
 module ddr10_iniu_ring (
 	input         clk                              ,
 	input         rst_n                            ,
@@ -56,7 +56,16 @@ module ddr10_iniu_ring (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	intr_ring_buf_wrap ring_buf (
+	intr_ring_buf_wrap #(
+		.RING_ID(32'd12),
+		.NODE_NUM(32'd39),
+		.PLD_WIDTH(32'd40),
+		.ID_WIDTH(32'd8),
+		.QOS_WIDTH(32'd4),
+		.SINGLE_THR_WIDTH(32'd1),
+		.HAS_INIU(1'b1),
+		.HAS_TNIU(1'b0))
+	ring_buf (
 		.clk(clk),
 		.rst_n(rst_n),
 		.pring_in_if_valid(pring_in_if_pring_in_if_valid),
@@ -103,5 +112,5 @@ module ddr10_iniu_ring (
 		.local_rx_last(local_rx_local_rx_last));
 
 endmodule
-//[UHDL]Content End [md5:af54462b52506b0de80e287a54b32fdd]
+//[UHDL]Content End [md5:f2def0295bd5d09bddbd3ede8d7c0dee]
 

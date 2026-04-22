@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:4d51755fbaa6a41bb507aaecb754c3dd]
+//[UHDL]Content Start [md5:1e25109c4f9d33d1bef55960d153d5a2]
 module ucie_ss1_iniu (
 	input           clk_sys_clk                                      ,
 	input           rst_sys_n_rst_n                                  ,
@@ -54,10 +54,10 @@ module ucie_ss1_iniu (
 	//Wire define for sub module.
 	wire [15:0] iniu_top_TO_iniu_sys_SIG_rptr_async                 ;
 	wire [15:0] iniu_top_TO_iniu_sys_SIG_rptr_sync                  ;
-	wire [12:0] iniu_top_TO_iniu_sys_SIG_m_async_master_hub_rx_req  ;
+	wire [8:0]  iniu_top_TO_iniu_sys_SIG_m_async_master_hub_rx_req  ;
 	wire [15:0] iniu_sys_TO_iniu_top_SIG_wptr_async                 ;
 	wire [61:0] iniu_sys_TO_iniu_top_SIG_pld_sync                   ;
-	wire [12:0] iniu_sys_TO_iniu_top_SIG_s_async_master_hub_tx_req  ;
+	wire [8:0]  iniu_sys_TO_iniu_top_SIG_s_async_master_hub_tx_req  ;
 	wire        ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready   ;
 	wire        iniu_top_TO_ring_wrap_SIG_req_last                  ;
 	wire [39:0] iniu_top_TO_ring_wrap_SIG_req_payload               ;
@@ -80,7 +80,7 @@ module ucie_ss1_iniu (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	ucie_ss1_iniu_interrupt_iniu_aync_sys_side iniu_sys (
+	ucie_ss1_iniu_interrupt_iniu_async_sys_side iniu_sys (
 		.clk(clk_sys_clk),
 		.rst_n(rst_sys_n_rst_n),
 		.v_interrupt(ucie_ss1_iniu_sys_v_interrupt_porting_v_interrupt),
@@ -101,11 +101,11 @@ module ucie_ss1_iniu (
 		.s_async_master_hub_rx_req(iniu_top_TO_iniu_sys_SIG_m_async_master_hub_rx_req),
 		.s_async_master_hub_tx_req(iniu_sys_TO_iniu_top_SIG_s_async_master_hub_tx_req),
 		.preq(pchannel_preq),
-		.pstate(pchannel_pstate),
+		.pstate(lwnoc_lp_define_package::lwnoc_pchannel_state_t'(pchannel_pstate)),
 		.pactive(pchannel_pactive),
 		.paccept(pchannel_paccept),
 		.pdeny(pchannel_pdeny));
-	interrupt_iniu_aync_top_side iniu_top (
+	interrupt_iniu_async_top_side iniu_top (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.wptr_async(iniu_sys_TO_iniu_top_SIG_wptr_async),
@@ -167,7 +167,13 @@ module ucie_ss1_iniu (
 		.local_rx_local_rx_srcid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_srcid),
 		.local_rx_local_rx_tgtid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_tgtid),
 		.local_rx_local_rx_valid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_valid));
-	lwnoc_intr_default_tgtid_sink ring_sink (
+	lwnoc_intr_default_tgtid_sink #(
+		.PLD_WIDTH(32'd40),
+		.ID_WIDTH(32'd8),
+		.QOS_WIDTH(32'd4),
+		.NODE_NUM(32'd39),
+		.SINK_EN(1'b1))
+	ring_sink (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.rx_valid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_valid),
@@ -182,5 +188,5 @@ module ucie_ss1_iniu (
 		.invalid_tgtid_sticky());
 
 endmodule
-//[UHDL]Content End [md5:4d51755fbaa6a41bb507aaecb754c3dd]
+//[UHDL]Content End [md5:1e25109c4f9d33d1bef55960d153d5a2]
 

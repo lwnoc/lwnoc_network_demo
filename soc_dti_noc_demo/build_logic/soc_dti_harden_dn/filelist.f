@@ -1,0 +1,17 @@
+-f $DTI_TEST_DIR/build_logic/soc_dti_harden_dn/soc_dti_sw_dsp6_filelist.f
+-f $DTI_TEST_DIR/build_logic/soc_dti_harden_dn/soc_dti_sw_io5_filelist.f
+-f $DTI_TEST_DIR/build_logic/soc_dti_harden_dn/soc_dti_sw_right_filelist.f
+-f $DTI_TEST_DIR/build_logic/soc_dti_harden_dn/soc_dti_sw_root_filelist.f
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dsp_ss0_iniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dsp_ss1_iniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dsp_ss2_iniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dsp_ss3_iniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dsp_ss4_iniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dsp_ss5_iniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/vpu_ss_iniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/pcie_rtg_ss_iniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/ufs_ss_iniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/camera_ss_iniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/mipi_ss_iniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/sys_tcu_tniu_top_wrap.v
+$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/soc_dti_harden_dn.v

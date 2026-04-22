@@ -1,3 +1,4 @@
+$INTR_RING_REQ_SINK_OUT_DIR/intr_ring_req_sink_macros_6e0f3ea0b7.sv
 $INTR_RING_REQ_SINK_OUT_DIR/soc_intr_network_ring_noc_define.sv
 $INTR_RING_REQ_SINK_OUT_DIR/lwmnoc_flow_ctrl_buf.sv
 $INTR_RING_REQ_SINK_OUT_DIR/lwmnoc_flow_ctrl_chk.sv
@@ -16,3 +17,6 @@ $INTR_RING_REQ_SINK_OUT_DIR/lwnoc_sync_cell.sv
 $INTR_RING_REQ_SINK_OUT_DIR/lwnoc_vcbuf.sv
 $INTR_RING_REQ_SINK_OUT_DIR/intr_station_temp_mem_model.sv
 $INTR_RING_REQ_SINK_OUT_DIR/intr_ring_buf_wrap.sv
+$INTR_RING_REQ_SINK_OUT_DIR/lwnoc_intr_ring_async_bridge_wrap_mst.sv
+$INTR_RING_REQ_SINK_OUT_DIR/lwnoc_intr_ring_async_bridge_wrap_slv.sv
+$INTR_RING_REQ_SINK_OUT_DIR/lwnoc_intr_ring_sp_wrap.sv

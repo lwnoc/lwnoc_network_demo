@@ -13,14 +13,21 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
 from topo_core.utils.networkHierOpt import connect
 
-from SocIntrNode import make_iniu_top_layer_node, make_tniu_top_layer_node
-from SocIntrTopoConfig import DN_HARDEN_ID, HARDEN_TOP_ID, INIU_COUNT, RING_PLAN, TNIU_COUNT, UP_HARDEN_ID
+from SocIntrNode import make_iniu_top_layer_node, make_ring_async_node, make_ring_sink_node, make_ring_sp_node, make_tniu_top_layer_node
+from SocIntrTopoConfig import (
+    ASYNC_CUT_PLAN,
+    DN_HARDEN_ID,
+    DN_RING_PLAN,
+    HARDEN_TOP_ID,
+    INIU_COUNT,
+    TNIU_COUNT,
+    UP_HARDEN_ID,
+    UP_RING_PLAN,
+)
 
 
-_UP_PLAN = [(t, n, d) for t, n, d in RING_PLAN if d == "a"]
-_DN_PLAN = [(t, n, d) for t, n, d in RING_PLAN if d == "b"]
-_UP_COUNT = len(_UP_PLAN)
-_DN_COUNT = len(_DN_PLAN)
+_UP_COUNT = len(UP_RING_PLAN)
+_DN_COUNT = len(DN_RING_PLAN)
 
 PD_TOPO_ID = HARDEN_TOP_ID
 
@@ -38,17 +45,34 @@ class SocIntrUpHardenWrap(UhdlWrapperNode):
 
         total = INIU_COUNT + TNIU_COUNT
         self.ring_nodes = []
-        for global_idx, (node_type, node_name, _) in enumerate(RING_PLAN):
-            if global_idx >= _UP_COUNT:
-                break
+        self.node_map = {}
+        for entry in UP_RING_PLAN:
+            node_type = entry["kind"]
+            node_name = entry["name"]
+
             if node_type == "iniu":
-                node = make_iniu_top_layer_node(node_name=node_name, node_id=global_idx, node_count=total)
+                node = make_iniu_top_layer_node(node_name=node_name, node_id=entry["node_id"], node_count=total)
+            elif node_type == "tniu":
+                node = make_tniu_top_layer_node(node_name=node_name, node_id=entry["node_id"], node_count=total)
+            elif node_type == "sink":
+                node = make_ring_sink_node(node_name=node_name, node_id=entry["node_id"], node_count=total)
+            elif node_type == "sp":
+                node = make_ring_sp_node(node_name=node_name)
             else:
-                node = make_tniu_top_layer_node(node_name=node_name, node_id=global_idx, node_count=total)
+                raise ValueError(f"Unsupported up-harden ring node kind: {node_type}")
+
             setattr(self, node_name, node)
+            self.node_map[node_name] = node
             self.ring_nodes.append(node)
-            connect(node.clk_top_func, self.clk_up_func)
-            connect(node.rst_top_func_n, self.rst_up_func_n)
+
+            if node_type in ("iniu", "tniu"):
+                connect(node.clk_top_func, self.clk_up_func)
+                connect(node.rst_top_func_n, self.rst_up_func_n)
+            elif node_type == "sink":
+                connect(node.clk, self.clk_up_func)
+                connect(node.rst_n, self.rst_up_func_n)
+            elif node_type == "sp":
+                connect(node.clk, self.clk_up_func)
 
         for index in range(_UP_COUNT - 1):
             connect(self.ring_nodes[index].pring_out_if, self.ring_nodes[index + 1].pring_in_if)
@@ -75,17 +99,34 @@ class SocIntrDnHardenWrap(UhdlWrapperNode):
 
         total = INIU_COUNT + TNIU_COUNT
         self.ring_nodes = []
-        for global_idx, (node_type, node_name, _) in enumerate(RING_PLAN):
-            if global_idx < _UP_COUNT:
-                continue
+        self.node_map = {}
+        for entry in DN_RING_PLAN:
+            node_type = entry["kind"]
+            node_name = entry["name"]
+
             if node_type == "iniu":
-                node = make_iniu_top_layer_node(node_name=node_name, node_id=global_idx, node_count=total)
+                node = make_iniu_top_layer_node(node_name=node_name, node_id=entry["node_id"], node_count=total)
+            elif node_type == "tniu":
+                node = make_tniu_top_layer_node(node_name=node_name, node_id=entry["node_id"], node_count=total)
+            elif node_type == "sink":
+                node = make_ring_sink_node(node_name=node_name, node_id=entry["node_id"], node_count=total)
+            elif node_type == "sp":
+                node = make_ring_sp_node(node_name=node_name)
             else:
-                node = make_tniu_top_layer_node(node_name=node_name, node_id=global_idx, node_count=total)
+                raise ValueError(f"Unsupported dn-harden ring node kind: {node_type}")
+
             setattr(self, node_name, node)
+            self.node_map[node_name] = node
             self.ring_nodes.append(node)
-            connect(node.clk_top_func, self.clk_dn_func)
-            connect(node.rst_top_func_n, self.rst_dn_func_n)
+
+            if node_type in ("iniu", "tniu"):
+                connect(node.clk_top_func, self.clk_dn_func)
+                connect(node.rst_top_func_n, self.rst_dn_func_n)
+            elif node_type == "sink":
+                connect(node.clk, self.clk_dn_func)
+                connect(node.rst_n, self.rst_dn_func_n)
+            elif node_type == "sp":
+                connect(node.clk, self.clk_dn_func)
 
         for index in range(_DN_COUNT - 1):
             connect(self.ring_nodes[index].pring_out_if, self.ring_nodes[index + 1].pring_in_if)
@@ -112,16 +153,43 @@ class SocIntrPdTopo(UhdlWrapperNode):
 
         self.up_harden = SocIntrUpHardenWrap()
         self.dn_harden = SocIntrDnHardenWrap()
+        self.async_nodes = {}
+
+        for entry in ASYNC_CUT_PLAN:
+            async_node = make_ring_async_node(entry["name"])
+            setattr(self, entry["name"], async_node)
+            self.async_nodes[entry["name"]] = async_node
+
+            if entry["src_domain"] == "a":
+                connect(async_node.clk_src, self.clk_up_func)
+                connect(async_node.rst_src_n, self.rst_up_func_n)
+            else:
+                connect(async_node.clk_src, self.clk_dn_func)
+                connect(async_node.rst_src_n, self.rst_dn_func_n)
+
+            if entry["dst_domain"] == "a":
+                connect(async_node.clk_dst, self.clk_up_func)
+                connect(async_node.rst_dst_n, self.rst_up_func_n)
+            else:
+                connect(async_node.clk_dst, self.clk_dn_func)
+                connect(async_node.rst_dst_n, self.rst_dn_func_n)
 
         connect(self.up_harden.clk_up_func, self.clk_up_func)
         connect(self.up_harden.rst_up_func_n, self.rst_up_func_n)
         connect(self.dn_harden.clk_dn_func, self.clk_dn_func)
         connect(self.dn_harden.rst_dn_func_n, self.rst_dn_func_n)
 
-        connect(self.up_harden.pring_out_to_dn, self.dn_harden.pring_in_from_up)
-        connect(self.dn_harden.pring_out_to_up, self.up_harden.pring_in_from_dn)
-        connect(self.up_harden.nring_out_to_dn, self.dn_harden.nring_in_from_up)
-        connect(self.dn_harden.nring_out_to_up, self.up_harden.nring_in_from_dn)
+        async_up_to_dn = self.async_nodes["ring_async_cut_up_to_dn"]
+        connect(self.up_harden.pring_out_to_dn, async_up_to_dn.pring_in_if)
+        connect(async_up_to_dn.pring_out_if, self.dn_harden.pring_in_from_up)
+        connect(self.dn_harden.nring_out_to_up, async_up_to_dn.nring_in_if)
+        connect(async_up_to_dn.nring_out_if, self.up_harden.nring_in_from_dn)
+
+        async_dn_to_up = self.async_nodes["ring_async_cut_dn_to_up"]
+        connect(self.dn_harden.pring_out_to_up, async_dn_to_up.pring_in_if)
+        connect(async_dn_to_up.pring_out_if, self.up_harden.pring_in_from_dn)
+        connect(self.up_harden.nring_out_to_dn, async_dn_to_up.nring_in_if)
+        connect(async_dn_to_up.nring_out_if, self.dn_harden.nring_in_from_up)
 
         self.expose_unconnected_interfaces()
 

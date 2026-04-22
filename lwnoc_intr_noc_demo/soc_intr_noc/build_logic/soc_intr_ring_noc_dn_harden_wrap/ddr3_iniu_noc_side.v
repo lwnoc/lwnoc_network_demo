@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:5354c9be7e146fc8e6d980b5e9c4f1d7]
+//[UHDL]Content Start [md5:591ffe2f27cf0fbf2d160918301205f7]
 module ddr3_iniu_noc_side (
 	input         clk_top_func                                  ,
 	input         rst_top_func_n                                ,
@@ -62,7 +62,7 @@ module ddr3_iniu_noc_side (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	interrupt_iniu_aync_top_side iniu_top (
+	interrupt_iniu_async_top_side iniu_top (
 		.clk(clk_top_func),
 		.rst_n(rst_top_func_n),
 		.wptr_async(async_fifo_wptr_async),
@@ -124,7 +124,13 @@ module ddr3_iniu_noc_side (
 		.local_rx_local_rx_srcid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_srcid),
 		.local_rx_local_rx_tgtid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_tgtid),
 		.local_rx_local_rx_valid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_valid));
-	lwnoc_intr_default_tgtid_sink ring_sink (
+	lwnoc_intr_default_tgtid_sink #(
+		.PLD_WIDTH(32'd40),
+		.ID_WIDTH(32'd8),
+		.QOS_WIDTH(32'd4),
+		.NODE_NUM(32'd39),
+		.SINK_EN(1'b1))
+	ring_sink (
 		.clk(clk_top_func),
 		.rst_n(rst_top_func_n),
 		.rx_valid(ring_wrap_TO_ring_sink_SIG_local_rx_local_rx_valid),
@@ -139,5 +145,5 @@ module ddr3_iniu_noc_side (
 		.invalid_tgtid_sticky());
 
 endmodule
-//[UHDL]Content End [md5:5354c9be7e146fc8e6d980b5e9c4f1d7]
+//[UHDL]Content End [md5:591ffe2f27cf0fbf2d160918301205f7]
 

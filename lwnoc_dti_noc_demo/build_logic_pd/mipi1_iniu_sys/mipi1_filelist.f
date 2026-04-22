@@ -1,0 +1,6 @@
+$MIPI1_INIU_SYS_DIR/mipi1_dti_pr_iniu_define.sv
+$MIPI1_INIU_SYS_DIR/mipi1_dti_iniu_pack.sv
+$MIPI1_INIU_SYS_DIR/mipi1_dti_pr_rob_state_entry.sv
+$MIPI1_INIU_SYS_DIR/mipi1_dti_pr.sv
+$MIPI1_INIU_SYS_DIR/mipi1_dti_to_gnpd_conv.sv
+$MIPI1_INIU_SYS_DIR/mipi1_dti_pr_iniu_async_sys_side.sv

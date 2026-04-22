@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:79232bf5559953b7e30d91959c8d22a2]
+//[UHDL]Content Start [md5:7d9a56c1dc99ad111898facb0da7dda1]
 module aon_ss_tniu_noc_side_ring (
 	input         clk                              ,
 	input         rst_n                            ,
@@ -56,7 +56,16 @@ module aon_ss_tniu_noc_side_ring (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	intr_ring_buf_wrap ring_buf (
+	intr_ring_buf_wrap #(
+		.RING_ID(32'd22),
+		.NODE_NUM(32'd39),
+		.PLD_WIDTH(32'd40),
+		.ID_WIDTH(32'd8),
+		.QOS_WIDTH(32'd4),
+		.SINGLE_THR_WIDTH(32'd1),
+		.HAS_INIU(1'b1),
+		.HAS_TNIU(1'b1))
+	ring_buf (
 		.clk(clk),
 		.rst_n(rst_n),
 		.pring_in_if_valid(pring_in_if_pring_in_if_valid),
@@ -103,5 +112,5 @@ module aon_ss_tniu_noc_side_ring (
 		.local_rx_last(local_rx_local_rx_last));
 
 endmodule
-//[UHDL]Content End [md5:79232bf5559953b7e30d91959c8d22a2]
+//[UHDL]Content End [md5:7d9a56c1dc99ad111898facb0da7dda1]
 

@@ -1,11 +1,10 @@
-"""
-gen_sts_topo.py — Generate the STS 1-INIU + 4-TNIU demo topology.
+"""Generate the STS 1-INIU + 4-TNIU demo topology.
 
-Outputs:
-    sts_logic_topology.json       — serialised topology
-    build_logic/                  — generated Verilog
-    filelists/filelist.f          — top-level compile filelist
+Supports a shared flow entry (`generate(flow)`) plus thin DV/PD wrappers,
+matching the soc_intr demo script split. Current PD flow reuses DV topology
+generation and publishes to a dedicated filelist path as an integration hook.
 """
+import argparse
 import os
 import re
 import shutil
@@ -470,12 +469,16 @@ def _generate_combined_wrapper(build_dir: Path) -> None:
     print(f"  [wrapper] wrote {dest}")
 
 
-def main():
+def generate(flow: str = "dv"):
     reset_global_state()
 
+    if flow not in ("dv", "pd"):
+        raise ValueError(f"Unsupported flow: {flow}")
+
     topo = StsLogicTopo()
-    topology_json = THIS_DIR / "sts_logic_topology.json"
+    topology_json = THIS_DIR / ("sts_logic_topology_pd.json" if flow == "pd" else "sts_logic_topology.json")
     build_dir = THIS_DIR / "build_logic"
+    published_filelist = THIS_DIR / "filelists" / ("filelist_pd.f" if flow == "pd" else "filelist.f")
 
     TopologySerializer().save_to_file(topo, str(topology_json))
 
@@ -499,12 +502,12 @@ def main():
     _normalize_boundary_import_style(build_dir)
     _publish_top_filelist(
         build_dir / "sts_logic_topo_1i4t" / "filelist.f",
-        THIS_DIR / "filelists" / "filelist.f",
+        published_filelist,
     )
-    _append_sys_filelists(THIS_DIR / "filelists" / "filelist.f")
+    _append_sys_filelists(published_filelist)
 
     # Ensure the combined wrapper .v is in the published filelist
-    fl_path = THIS_DIR / "filelists" / "filelist.f"
+    fl_path = published_filelist
     fl_content = fl_path.read_text()
     wrapper_line = "$STS_LOGIC_TOPO_DIR/sts_logic_topo_1i4t.v"
     if wrapper_line not in fl_content:
@@ -518,9 +521,23 @@ def main():
         fl_path.write_text(common_dep_ref + "\n" + fl_content)
         print(f"  [filelist] prepended common dep reference")
 
+    if flow == "pd":
+        print("  [pd] using shared STS topology; dedicated PD topology hook is reserved")
+
     print(f"Topology JSON written to {topology_json}")
     print(f"Generated RTL written to {build_dir}")
-    print(f"Top filelist written to {THIS_DIR / 'filelists' / 'filelist.f'}")
+    print(f"Top filelist written to {published_filelist}")
+
+
+def _parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Generate STS NoC topology")
+    parser.add_argument("--flow", choices=["dv", "pd"], default="dv", help="generation flow")
+    return parser.parse_args()
+
+
+def main():
+    args = _parse_args()
+    generate(args.flow)
 
 
 if __name__ == "__main__":

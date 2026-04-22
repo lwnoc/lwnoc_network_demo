@@ -78,10 +78,10 @@ _PD_REFRESH_DIRS = (
 )
 
 REQUIRED_INTR_NODE_MODULES = (
-    "interrupt_iniu_aync_sys_side",
-    "interrupt_iniu_aync_top_side",
-    "interrupt_tniu_aync_sys_side",
-    "interrupt_tniu_aync_top_side",
+    "interrupt_iniu_async_sys_side",
+    "interrupt_iniu_async_top_side",
+    "interrupt_tniu_async_sys_side",
+    "interrupt_tniu_async_top_side",
     "intr_ring_req_sink",
     "intr_ring_req_zero_source",
     "interrupt_req_ring_station",
@@ -98,6 +98,18 @@ REQUIRED_INTR_NODE_MODULES = (
 # Canonical module names used by IntrNode contracts may differ from external
 # RTL module names. Keep alias mapping explicit and minimal.
 REQUIRED_INTR_NODE_ALIASES = {
+    "interrupt_iniu_async_sys_side": (
+        "interrupt_iniu_aync_sys_side",
+    ),
+    "interrupt_iniu_async_top_side": (
+        "interrupt_iniu_aync_top_side",
+    ),
+    "interrupt_tniu_async_sys_side": (
+        "interrupt_tniu_aync_sys_side",
+    ),
+    "interrupt_tniu_async_top_side": (
+        "interrupt_tniu_aync_top_side",
+    ),
     "intr_ring_req_sink": (
         "lwnoc_intr_default_tgtid_sink",
     ),
@@ -112,6 +124,18 @@ REQUIRED_INTR_NODE_ALIASES = {
 # Advisory-only mapping for architecture migration discussion.
 # These candidates do NOT satisfy canonical contract automatically.
 REQUIRED_INTR_NODE_MIGRATION_CANDIDATES = {
+    "interrupt_iniu_async_sys_side": (
+        "interrupt_iniu_aync_sys_side",
+    ),
+    "interrupt_iniu_async_top_side": (
+        "interrupt_iniu_aync_top_side",
+    ),
+    "interrupt_tniu_async_sys_side": (
+        "interrupt_tniu_aync_sys_side",
+    ),
+    "interrupt_tniu_async_top_side": (
+        "interrupt_tniu_aync_top_side",
+    ),
     # Req-only sink mapping (user-specified canonical equivalence).
     "intr_ring_req_sink": (
         "lwnoc_intr_default_tgtid_sink",
@@ -626,6 +650,7 @@ def generate(flow: str = "dv"):
     comp.generate_verilog(iteration=True)
     comp.generate_filelist()
     _emit_topology_visualization(topo, topo_png, topology_json)
+    _write_endpoint_id_tables(THIS_DIR / "build")
 
     # Keep only source-independent publication shaping here.
     # LP connectivity, LP boundary vectorization, and boundary import style are
@@ -634,6 +659,7 @@ def generate(flow: str = "dv"):
         _patch_async_fifo_depths(build_dir, iniu_depth=16, tniu_depth=10)
         _rename_generated_lwmnoc_define_shims(build_dir)
         _consolidate_top_side(build_dir, combined_dir)
+    _localize_generated_prefix_defines(build_dir)
     _tieoff_unused_input_ports(build_dir / combined_dir)
     if flow == "dv":
         _publish_top_filelist(
@@ -676,7 +702,7 @@ def _prepare_build_dir(flow: str, build_dir: Path) -> None:
     removed_entries = []
     if flow == "dv":
         for entry in sorted(build_dir.iterdir()):
-            if entry.name in {HARDEN_TOP_ID, *_HARDEN_PARTITION_IDS}:
+            if entry.name in {HARDEN_TOP_ID, SOC_INTR_PD_WRAP_DIR, *_HARDEN_PARTITION_IDS}:
                 continue
             _remove_generated_entry(entry)
             removed_entries.append(entry.name)
@@ -741,18 +767,195 @@ def _build_graph_from_topology_json(json_path: Path) -> object:
         return graph
     
     nodes, edges = _extract_nodes_recursive(root_topo)
-    
-    # Filter to only atomic nodes for cleaner visualization
-    atomic_nodes = {nid: ndata for nid, ndata in nodes.items() if ndata.get("type") == "atomic"}
-    
-    # Add nodes to graph
-    for node_id, node_data in atomic_nodes.items():
-        graph.add_node(node_id, label=node_data["label"])
+
+    for node_id, node_data in nodes.items():
+        graph.add_node(node_id, label=node_data["label"], node_type=node_data.get("type", "unknown"))
+
+    for parent_id, child_id in edges:
+        if parent_id in nodes and child_id in nodes:
+            graph.add_edge(parent_id, child_id)
     
     return graph
 
 
-def _emit_topology_visualization(topo: SocIntrLogicTopo, output_path: Path, topology_json: Path = None) -> None:
+def _collect_endpoint_id_rows() -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for ring_slot, entry in enumerate(RING_PLAN):
+        kind = entry.get("kind")
+        node_id = entry.get("node_id")
+        if kind not in {"iniu", "tniu"} or not isinstance(node_id, int):
+            continue
+        rows.append(
+            {
+                "node_id": node_id,
+                "kind": kind,
+                "name": entry["name"],
+                "domain": entry["domain"],
+                "ring_slot": ring_slot,
+            }
+        )
+    rows.sort(key=lambda row: (row["node_id"], row["kind"], row["name"]))
+    return rows
+
+
+def _write_endpoint_id_tables(output_dir: Path) -> None:
+    rows = _collect_endpoint_id_rows()
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    md_lines = [
+        "# SoC Intr Endpoint ID Table",
+        "",
+        "| Node ID | Kind | Name | Domain | Ring Slot |",
+        "|---|---|---|---|---|",
+    ]
+    csv_lines = ["node_id,kind,name,domain,ring_slot"]
+    for row in rows:
+        md_lines.append(
+            f"| {row['node_id']} | {row['kind']} | {row['name']} | {row['domain']} | {row['ring_slot']} |"
+        )
+        csv_lines.append(
+            f"{row['node_id']},{row['kind']},{row['name']},{row['domain']},{row['ring_slot']}"
+        )
+
+    md_path = output_dir / "soc_intr_endpoint_id_table.md"
+    csv_path = output_dir / "soc_intr_endpoint_id_table.csv"
+    md_path.write_text("\n".join(md_lines) + "\n")
+    csv_path.write_text("\n".join(csv_lines) + "\n")
+    print(f"  [id_table] wrote {md_path} and {csv_path}")
+
+
+def _build_soc_intr_ring_graph() -> object:
+    import networkx as nx
+
+    graph = nx.MultiDiGraph()
+    ordered_names: list[str] = []
+    for ring_slot, entry in enumerate(RING_PLAN):
+        node_name = entry.get("name")
+        if not isinstance(node_name, str):
+            continue
+        graph.add_node(
+            node_name,
+            label=node_name,
+            kind=entry.get("kind", "unknown"),
+            domain=entry.get("domain"),
+            ring_slot=ring_slot,
+            node_id=entry.get("node_id"),
+            src_domain=entry.get("src_domain"),
+            dst_domain=entry.get("dst_domain"),
+        )
+        ordered_names.append(node_name)
+
+    for idx, node_name in enumerate(ordered_names):
+        next_name = ordered_names[(idx + 1) % len(ordered_names)]
+        graph.add_edge(node_name, next_name, key=f"pring_{idx}", ring="pring")
+        graph.add_edge(next_name, node_name, key=f"nring_{idx}", ring="nring")
+
+    return graph
+
+
+def _build_soc_intr_ring_layout(graph: object) -> dict[str, tuple[float, float]]:
+    import math
+
+    ordered_nodes = sorted(graph.nodes, key=lambda node: graph.nodes[node].get("ring_slot", 0))
+    if not ordered_nodes:
+        return {}
+
+    radius = max(6.0, len(ordered_nodes) / 6.0)
+    pos = {}
+    for idx, node_name in enumerate(ordered_nodes):
+        angle = 2 * math.pi * idx / len(ordered_nodes) - math.pi / 2
+        pos[node_name] = (radius * math.cos(angle), radius * math.sin(angle))
+    return pos
+
+
+def _render_soc_intr_ring_graph(graph: object, output_path: Path) -> None:
+    import matplotlib.patches as mpatches
+    import matplotlib.pyplot as plt
+    import networkx as nx
+
+    pos = _build_soc_intr_ring_layout(graph)
+    figure = plt.figure(figsize=(22, 22))
+
+    node_colors = []
+    for node_name in graph.nodes:
+        kind = graph.nodes[node_name].get("kind")
+        domain = graph.nodes[node_name].get("domain")
+        if kind == "async":
+            node_colors.append("#f7a8b8")
+        elif kind == "sink":
+            node_colors.append("#ffd166")
+        elif kind == "sp":
+            node_colors.append("#cdb4db")
+        elif domain == "a":
+            node_colors.append("#8ecae6")
+        elif domain == "b":
+            node_colors.append("#b7e4c7")
+        else:
+            node_colors.append("#d9d9d9")
+
+    labels = {node_name: graph.nodes[node_name].get("label", node_name) for node_name in graph.nodes}
+    nx.draw_networkx_nodes(
+        graph,
+        pos,
+        node_color=node_colors,
+        node_size=1800,
+        alpha=0.95,
+        linewidths=1.0,
+        edgecolors="#404040",
+    )
+    nx.draw_networkx_labels(graph, pos, labels=labels, font_size=6, font_weight="bold")
+
+    pring_edges = [(u, v) for u, v, _, data in graph.edges(keys=True, data=True) if data.get("ring") == "pring"]
+    nring_edges = [(u, v) for u, v, _, data in graph.edges(keys=True, data=True) if data.get("ring") == "nring"]
+
+    nx.draw_networkx_edges(
+        graph,
+        pos,
+        edgelist=pring_edges,
+        arrows=True,
+        arrowsize=16,
+        width=1.6,
+        alpha=0.8,
+        edge_color="#4169E1",
+        connectionstyle="arc3,rad=0.14",
+        min_source_margin=20,
+        min_target_margin=20,
+    )
+    nx.draw_networkx_edges(
+        graph,
+        pos,
+        edgelist=nring_edges,
+        arrows=True,
+        arrowsize=16,
+        width=1.6,
+        alpha=0.8,
+        edge_color="#FF8C00",
+        connectionstyle="arc3,rad=-0.14",
+        min_source_margin=20,
+        min_target_margin=20,
+    )
+
+    legend_handles = [
+        mpatches.Patch(color="#4169E1", label="pring direction"),
+        mpatches.Patch(color="#FF8C00", label="nring direction"),
+        mpatches.Patch(color="#8ecae6", label="domain a"),
+        mpatches.Patch(color="#b7e4c7", label="domain b"),
+        mpatches.Patch(color="#f7a8b8", label="async cut"),
+        mpatches.Patch(color="#ffd166", label="default sink"),
+    ]
+    plt.legend(handles=legend_handles, loc="upper right", fontsize=10)
+    plt.title(
+        f"SoC Intr Ring Direction Graph ({graph.number_of_nodes()} nodes, {graph.number_of_edges()} directed edges)"
+    )
+    plt.axis("off")
+    plt.tight_layout()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(output_path, dpi=150, bbox_inches="tight")
+    plt.close(figure)
+    print(f"  [topo_viz] topology graph written to {output_path}")
+
+
+def _emit_topology_visualization(topo, output_path: Path, topology_json: Path = None) -> None:
     """Generate and save topology visualization PNG.
 
     Controlled by env var SKIP_TOPO_VIZ:
@@ -774,17 +977,22 @@ def _emit_topology_visualization(topo: SocIntrLogicTopo, output_path: Path, topo
 
     try:
         graph = None
-        
-        # Try to use topo.datatopo first (in-memory graph)
-        try:
-            graph = topo.datatopo.to_networkx(node_level=True)
-        except Exception:
-            # Fallback to JSON file if available
-            if topology_json and topology_json.exists():
-                graph = _build_graph_from_topology_json(topology_json)
+
+        if isinstance(topo, SocIntrLogicTopo):
+            graph = _build_soc_intr_ring_graph()
+        else:
+            try:
+                graph = topo.datatopo.to_networkx(node_level=True)
+            except Exception:
+                if topology_json and topology_json.exists():
+                    graph = _build_graph_from_topology_json(topology_json)
         
         if graph is None or graph.number_of_nodes() == 0:
             print("  [topo_viz] WARNING: graph is empty, skip image output")
+            return
+
+        if isinstance(topo, SocIntrLogicTopo):
+            _render_soc_intr_ring_graph(graph, output_path)
             return
 
         figure = plt.figure(figsize=(24, 16))
@@ -828,7 +1036,18 @@ def _patch_async_fifo_depths(build_dir: Path, iniu_depth: int, tniu_depth: int) 
             path.write_text(updated)
             print(f"  [depth_patch] {path.name}: ASYNC_FIFO_DEPTH {old_depth} -> {new_depth}")
 
-    for sv_path in sorted((build_dir / "intr_iniu_top_side").glob("*_interrupt_iniu_async_top_side.sv")):
+    iniu_top_side_dir = build_dir / "intr_iniu_top_side"
+    for sv_path in sorted(iniu_top_side_dir.glob("*_interrupt_iniu_async_top_side.sv")):
+        _replace_depth(sv_path, old_depth=10, new_depth=iniu_depth)
+
+    for sv_path in sorted(
+        path
+        for path in (
+            iniu_top_side_dir / "interrupt_iniu_async_top_side.sv",
+            build_dir / "soc_intr_ring_top" / "interrupt_iniu_async_top_side.sv",
+        )
+        if path.exists()
+    ):
         _replace_depth(sv_path, old_depth=10, new_depth=iniu_depth)
 
     for tniu_sys_dir in sorted(build_dir.glob("*_tniu_sys")):
@@ -869,6 +1088,36 @@ def _rename_generated_lwmnoc_define_shims(build_dir: Path) -> None:
             path.write_text(updated)
 
     print("  [rename] normalized generated *_lwmnoc_define.sv -> *_ring_noc_define.sv")
+
+
+def _localize_generated_prefix_defines(build_dir: Path) -> None:
+    """Keep generated macro shims local to the file that defines them."""
+    for path in sorted(build_dir.rglob("*_define.sv")):
+        text = path.read_text()
+        if "`define _PREFIX_(" not in text:
+            continue
+
+        updated = re.sub(r"`ifndef\s+[A-Za-z0-9_]+__PREFIX_\b", "`ifndef _PREFIX_", text)
+        if "`undef _PREFIX_" not in updated:
+            if not updated.endswith("\n"):
+                updated += "\n"
+            updated += "`undef _PREFIX_\n"
+
+        if updated != text:
+            path.write_text(updated)
+            print(f"  [prefix_guard] {path.name}: localized _PREFIX_ macro scope")
+
+    for path in sorted(build_dir.rglob("*_macros.sv")):
+        text = path.read_text()
+        if "`define ASYNC_FIFO_DEPTH" not in text or "`undef ASYNC_FIFO_DEPTH" in text:
+            continue
+
+        updated = text
+        if not updated.endswith("\n"):
+            updated += "\n"
+        updated += "`undef ASYNC_FIFO_DEPTH\n"
+        path.write_text(updated)
+        print(f"  [macro_guard] {path.name}: localized ASYNC_FIFO_DEPTH macro scope")
 
 
 def _patch_lp_struct_links(ring_dir: Path) -> None:
@@ -951,6 +1200,10 @@ def _tieoff_unused_input_ports(ring_dir: Path) -> None:
         updated = text
         updated = updated.replace(".req_threshold());", ".req_threshold(1'b0));")
         updated = updated.replace(".preq(),", ".preq(1'b0),")
+        updated = updated.replace(
+            ".pstate(pchannel_pstate),",
+            ".pstate(lwnoc_lp_define_package::lwnoc_pchannel_state_t'(pchannel_pstate)),",
+        )
         updated = updated.replace(".pstate(),", ".pstate('0),")
         if updated != text:
             fpath.write_text(updated)
@@ -962,6 +1215,10 @@ def _tieoff_unused_input_ports(ring_dir: Path) -> None:
         text = fpath.read_text()
         updated = text
         updated = updated.replace(".preq(),", ".preq(1'b0),")
+        updated = updated.replace(
+            ".pstate(pchannel_pstate),",
+            ".pstate(lwnoc_lp_define_package::lwnoc_pchannel_state_t'(pchannel_pstate)),",
+        )
         updated = updated.replace(".pstate(),", ".pstate('0),")
         if updated != text:
             fpath.write_text(updated)
@@ -1103,7 +1360,13 @@ def _extract_module_ports(module_text: str) -> tuple[str, list[str]]:
     return header_blob, port_names
 
 
-def _publish_named_top_wrapper(build_dir: Path, inner_dir_name: str, wrapper_dir_name: str) -> None:
+def _publish_named_top_wrapper(
+    build_dir: Path,
+    inner_dir_name: str,
+    wrapper_dir_name: str,
+    *,
+    include_common_dep: bool = True,
+) -> None:
     inner_dir = build_dir / inner_dir_name
     inner_top = inner_dir / f"{inner_dir_name}.v"
     if not inner_top.exists():
@@ -1130,33 +1393,238 @@ def _publish_named_top_wrapper(build_dir: Path, inner_dir_name: str, wrapper_dir
     wrapper_sv = wrapper_dir / f"{wrapper_dir_name}.v"
     wrapper_sv.write_text(wrapper_text)
 
-    wrapper_lines = [
-        f"-f $INTR_NOC_DEMO_DIR/{_SHARED_BUILD_DIR_NAME}/{inner_dir_name}/filelist.f",
-        f"$INTR_NOC_DEMO_DIR/{_SHARED_BUILD_DIR_NAME}/{wrapper_dir_name}/{wrapper_dir_name}.v",
-    ]
+    wrapper_lines = []
+    if include_common_dep:
+        wrapper_lines.append(f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}")
+    wrapper_lines.extend(
+        [
+            f"-f $INTR_NOC_DEMO_DIR/{_SHARED_BUILD_DIR_NAME}/{inner_dir_name}/filelist.f",
+            f"$INTR_NOC_DEMO_DIR/{_SHARED_BUILD_DIR_NAME}/{wrapper_dir_name}/{wrapper_dir_name}.v",
+        ]
+    )
     _write_filelist(wrapper_dir / "filelist.f", wrapper_lines)
+
+
+def _as_demo_token(path: Path) -> str:
+    return f"$INTR_NOC_DEMO_DIR/{path.relative_to(THIS_DIR).as_posix()}"
+
+
+def _iter_localized_filelist_entries(filelist_path: Path, source_dir: Path):
+    if not filelist_path.exists():
+        return
+
+    seen_filenames = set()
+    for raw_line in filelist_path.read_text().splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("`") or line.startswith("+incdir+") or line.startswith("-f "):
+            continue
+
+        filename = Path(line).name
+        if filename in seen_filenames:
+            continue
+
+        candidate = source_dir / filename
+        if not candidate.exists():
+            continue
+
+        seen_filenames.add(filename)
+        yield candidate
+
+
+def _iter_sys_filelist_entries(build_dir: Path):
+    for sys_dir in sorted(build_dir.glob("*_sys")):
+        sys_filelists = [
+            path for path in sorted(sys_dir.glob("*_filelist.f")) if path.name != "expanded_filelist.f"
+        ]
+        if not sys_filelists:
+            sys_filelists = sorted(sys_dir.glob("*_filelist.f"))
+        if not sys_filelists:
+            continue
+        yield from _iter_localized_filelist_entries(sys_filelists[0], sys_dir)
+
+
+def _iter_dv_combined_core_entries(source_dir: Path):
+    for macro_name, wrapper_name in (
+        ("intr_iniu_top_macros.sv", "intr_iniu_top.f"),
+        ("intr_tniu_top_macros.sv", "intr_tniu_top.f"),
+    ):
+        macro_path = source_dir / macro_name
+        if macro_path.exists():
+            yield macro_path
+        yield from _iter_localized_filelist_entries(THIS_DIR / "filelist" / wrapper_name, source_dir)
+
+    for macro_path in sorted(source_dir.glob("intr_ring*macros*.sv")):
+        yield macro_path
+    yield from _iter_localized_filelist_entries(source_dir / "filelist.f", source_dir)
+
+
+def _iter_dv_leaf_filenames(source_dir: Path):
+    seen_filenames = set()
+    for entry in _iter_ring_plan_entries():
+        node_name = entry.get("name")
+        kind = entry.get("kind")
+        if not isinstance(node_name, str):
+            continue
+
+        if kind in {"iniu", "tniu", "sink"}:
+            candidates = (f"{node_name}_ring.v", f"{node_name}.v")
+        elif kind == "async":
+            candidates = (f"{node_name}.v",)
+        else:
+            continue
+
+        for filename in candidates:
+            if filename in seen_filenames or not (source_dir / filename).exists():
+                continue
+            seen_filenames.add(filename)
+            yield filename
+
+
+def _rewrite_dv_logic_filelist(build_dir: Path, combined_dir_name: str) -> None:
+    source_dir = build_dir / combined_dir_name
+    if not source_dir.exists():
+        return
+
+    out_lines = []
+    seen_lines = set()
+
+    def _append_path(path: Path) -> None:
+        line = _as_demo_token(path)
+        if line in seen_lines:
+            return
+        seen_lines.add(line)
+        out_lines.append(line)
+
+    for path in _iter_sys_filelist_entries(build_dir):
+        _append_path(path)
+    for path in _iter_dv_combined_core_entries(source_dir):
+        _append_path(path)
+    for filename in _iter_dv_leaf_filenames(source_dir):
+        _append_path(source_dir / filename)
+
+    top_path = source_dir / f"{combined_dir_name}.v"
+    if top_path.exists():
+        _append_path(top_path)
+
+    _write_filelist(source_dir / "filelist.f", out_lines)
 
 
 def _publish_top_filelist(src_path: Path, dst_path: Path, build_dir_name: str, combined_dir_name: str) -> None:
     if not src_path.exists():
         return
     build_dir = THIS_DIR / build_dir_name
+    _rewrite_dv_logic_filelist(build_dir, combined_dir_name)
     _publish_named_top_wrapper(build_dir, combined_dir_name, SOC_INTR_DV_WRAP_DIR)
 
-    wrapper_lines = [
+    top_lines = [
         f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}",
-        f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_NIU_CORE_FILELIST}",
-        f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_NETWORK_CORE_FILELIST}",
-        f"-f $INTR_NOC_DEMO_DIR/{build_dir_name}/{SOC_INTR_DV_WRAP_DIR}/filelist.f",
+        f"-f $INTR_NOC_DEMO_DIR/{build_dir_name}/{combined_dir_name}/filelist.f",
     ]
     dst_path.parent.mkdir(parents=True, exist_ok=True)
-    dst_path.write_text("\n".join(wrapper_lines) + "\n")
-    print(f"  [filelist] published wrapper filelist to {dst_path}")
+    dst_path.write_text("\n".join(top_lines) + "\n")
+    print(f"  [filelist] published top compile ingress to {dst_path}")
 
 
 def _write_filelist(path: Path, lines: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n")
+
+
+def _iter_ring_plan_entries(side: str | None = None):
+    for entry in RING_PLAN:
+        if not isinstance(entry, dict):
+            continue
+        if side is not None and entry.get("domain") != side:
+            continue
+        yield entry
+
+
+def _iter_ring_plan_nodes(side: str | None = None):
+    for entry in _iter_ring_plan_entries(side=side):
+        node_name = entry.get("name")
+        if not isinstance(node_name, str):
+            continue
+        yield node_name
+
+
+def _collect_generated_filelist_includes(source_dir: Path) -> list[str]:
+    source_filelist = source_dir / "filelist.f"
+    if not source_filelist.exists():
+        return []
+
+    include_lines = []
+    seen_lines = set()
+    for raw_line in source_filelist.read_text().splitlines():
+        line = raw_line.strip()
+        if not line or not line.startswith("-f ") or line in seen_lines:
+            continue
+        include_lines.append(line)
+        seen_lines.add(line)
+    return include_lines
+
+
+_PD_SHARED_OVERRIDE_FILENAMES = {
+    "default_tgtid_sink.v",
+    "default_tgtid_sink_ring.v",
+    "ring_async_cut_dn_to_up.v",
+    "ring_async_cut_up_to_dn.v",
+}
+
+
+def _iter_filtered_pd_shared_entries(source_dir: Path):
+    source_filelist = source_dir / "filelist.f"
+    if not source_filelist.exists():
+        return
+
+    seen_lines = set()
+    for raw_line in source_filelist.read_text().splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("`") or line.startswith("+incdir+") or line.startswith("-f "):
+            continue
+        if Path(line).name in _PD_SHARED_OVERRIDE_FILENAMES:
+            continue
+        if line in seen_lines:
+            continue
+        seen_lines.add(line)
+        yield line
+
+
+def _iter_partition_leaf_filenames(source_dir: Path, side: str):
+    seen_filenames = set()
+    for entry in _iter_ring_plan_entries(side=side):
+        node_name = entry.get("name")
+        kind = entry.get("kind")
+        if not isinstance(node_name, str):
+            continue
+
+        if kind in {"iniu", "tniu"}:
+            leaf_base = f"{node_name}{TOP_LAYER_SUFFIX}"
+        elif kind == "sink":
+            leaf_base = node_name
+        else:
+            continue
+
+        for suffix in ("_ring.v", ".v"):
+            filename = f"{leaf_base}{suffix}"
+            if filename in seen_filenames or not (source_dir / filename).exists():
+                continue
+            seen_filenames.add(filename)
+            yield filename
+
+
+def _iter_async_leaf_filenames(source_dir: Path):
+    seen_filenames = set()
+    for entry in _iter_ring_plan_entries():
+        if entry.get("kind") != "async":
+            continue
+        node_name = entry.get("name")
+        if not isinstance(node_name, str):
+            continue
+        filename = f"{node_name}.v"
+        if filename in seen_filenames or not (source_dir / filename).exists():
+            continue
+        seen_filenames.add(filename)
+        yield filename
 
 
 def _publish_harden_partition_dir(source_dir: Path, target_dir: Path, partition_id: str) -> None:
@@ -1166,20 +1634,11 @@ def _publish_harden_partition_dir(source_dir: Path, target_dir: Path, partition_
     target_dir.mkdir(parents=True, exist_ok=True)
 
     target_root = f"$INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{partition_id}"
-    out_lines = [
-        f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}",
-        f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_NIU_CORE_FILELIST}",
-        f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_NETWORK_CORE_FILELIST}",
-    ]
+    out_lines: list[str] = []
 
-    for _, node_name, node_side in RING_PLAN:
-        if node_side != side:
-            continue
-        leaf_base = f"{node_name}{TOP_LAYER_SUFFIX}"
-        for suffix in ("_ring.v", ".v"):
-            filename = f"{leaf_base}{suffix}"
-            shutil.copyfile(source_dir / filename, target_dir / filename)
-            out_lines.append(f"{target_root}/{filename}")
+    for filename in _iter_partition_leaf_filenames(source_dir, side):
+        shutil.copyfile(source_dir / filename, target_dir / filename)
+        out_lines.append(f"{target_root}/{filename}")
 
     wrapper_file = f"{partition_id}.v"
     shutil.copyfile(source_dir / wrapper_file, target_dir / wrapper_file)
@@ -1189,16 +1648,22 @@ def _publish_harden_partition_dir(source_dir: Path, target_dir: Path, partition_
 
 def _rewrite_harden_top_filelist(harden_dir: Path) -> None:
     top_root = f"$INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{HARDEN_TOP_ID}"
-    lines = [
-        f"-f $INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{UP_HARDEN_ID}/filelist.f",
-        f"-f $INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{DN_HARDEN_ID}/filelist.f",
-        f"{top_root}/{HARDEN_TOP_ID}.v",
-    ]
+    lines = [f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}"]
+    lines.extend(_iter_filtered_pd_shared_entries(THIS_DIR / _SHARED_BUILD_DIR_NAME / TOPO_ID))
+    lines.extend(
+        [
+            f"-f $INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{UP_HARDEN_ID}/filelist.f",
+            f"-f $INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{DN_HARDEN_ID}/filelist.f",
+        ]
+    )
+    for filename in _iter_async_leaf_filenames(harden_dir):
+        lines.append(f"{top_root}/{filename}")
+    lines.append(f"{top_root}/{HARDEN_TOP_ID}.v")
     _write_filelist(harden_dir / "filelist.f", lines)
 
 
 def _prune_harden_assembly_dir(harden_dir: Path) -> None:
-    keep_names = {f"{HARDEN_TOP_ID}.v", "filelist.f"}
+    keep_names = {f"{HARDEN_TOP_ID}.v", "filelist.f", *_iter_async_leaf_filenames(harden_dir)}
     removed_entries = []
     for entry in sorted(harden_dir.iterdir()):
         if entry.name in keep_names:
@@ -1214,7 +1679,7 @@ def _publish_partitioned_harden_outputs(build_dir: Path, harden_dir: Path, publi
     _publish_harden_partition_dir(harden_dir, build_dir / DN_HARDEN_ID, DN_HARDEN_ID)
     _rewrite_harden_top_filelist(harden_dir)
     _prune_harden_assembly_dir(harden_dir)
-    _publish_named_top_wrapper(build_dir, HARDEN_TOP_ID, SOC_INTR_PD_WRAP_DIR)
+    _publish_named_top_wrapper(build_dir, HARDEN_TOP_ID, SOC_INTR_PD_WRAP_DIR, include_common_dep=False)
 
     harden_ingress = f"-f $INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{SOC_INTR_PD_WRAP_DIR}/filelist.f"
     _write_filelist(publish_dir / "filelist_harden.f", [harden_ingress])
@@ -1230,24 +1695,16 @@ def _publish_harden_filelist(harden_dir: Path, dst_path: Path) -> None:
 
     dst_path.parent.mkdir(parents=True, exist_ok=True)
     harden_root = f"$INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{HARDEN_TOP_ID}"
-    out_lines = [
-        f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}",
-        f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_NIU_CORE_FILELIST}",
-        f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_NETWORK_CORE_FILELIST}",
-    ]
-
-    for _, node_name, _ in RING_PLAN:
-        leaf_base = f"{harden_root}/{node_name}{TOP_LAYER_SUFFIX}"
-        out_lines.append(f"{leaf_base}_ring.v")
-        out_lines.append(f"{leaf_base}.v")
-
-    out_lines.extend(
-        [
-            f"{harden_root}/soc_intr_ring_noc_up_harden_wrap.v",
-            f"{harden_root}/soc_intr_ring_noc_dn_harden_wrap.v",
-            f"{harden_root}/{HARDEN_TOP_ID}.v",
-        ]
-    )
+    source_prefix = f"{HARDEN_TOP_ID}/"
+    out_lines = []
+    for raw_line in (harden_dir / "filelist.f").read_text().splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        if line.startswith(source_prefix):
+            out_lines.append(f"{harden_root}/{line[len(source_prefix):]}")
+            continue
+        out_lines.append(line)
 
     dst_path.write_text("\n".join(out_lines) + "\n")
     print(f"  [harden_filelist] published to {dst_path}")

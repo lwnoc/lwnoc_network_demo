@@ -1,0 +1,6 @@
+$NOC_TBU0_INIU_SYS_DIR/noc_tbu0_dti_pr_iniu_define.sv
+$NOC_TBU0_INIU_SYS_DIR/noc_tbu0_dti_iniu_pack.sv
+$NOC_TBU0_INIU_SYS_DIR/noc_tbu0_dti_pr_rob_state_entry.sv
+$NOC_TBU0_INIU_SYS_DIR/noc_tbu0_dti_pr.sv
+$NOC_TBU0_INIU_SYS_DIR/noc_tbu0_dti_to_gnpd_conv.sv
+$NOC_TBU0_INIU_SYS_DIR/noc_tbu0_dti_pr_iniu_async_sys_side.sv

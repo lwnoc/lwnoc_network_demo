@@ -1,10 +1,16 @@
-"""
-gen_dti_topo.py — Generate the DTI tree demo topology.
+"""Generate DTI topology artifacts for DV/PD flows.
 
-Outputs:
-    dti_logic_topology.json       — serialised topology
-    build_logic/                  — generated Verilog
-    filelists/filelist.f          — top-level compile filelist
+Flow outputs:
+    dv:
+        dti_logic_topology_dv.json
+        dti_logic_topology_dv.png
+        build_logic/
+        filelist/filelist.f
+    pd:
+        dti_logic_topology_pd.json
+        dti_logic_topology_pd.png
+        build_logic_pd/
+        filelist_pd/filelist.f
 """
 import os
 import re
@@ -28,6 +34,7 @@ from topo_core.node.node import reset_global_state
 from topo_core.utils.serialization import TopologySerializer
 
 from DtiTreeTopo import DtiLogicTopo
+from gen_topo_png import generate_png
 
 
 MACRO_DEFINE_RE = re.compile(r"^`define\s+([A-Za-z0-9_]+)\s+(.+)$")
@@ -314,7 +321,7 @@ def _consolidate_top_side(build_dir: Path) -> None:
         print("  [consolidate] rewrote umbrella filelist env vars")
 
 
-def _publish_top_filelist(src_path: Path, dst_path: Path) -> None:
+def _publish_top_filelist(src_path: Path, dst_path: Path, published_build_root: str) -> None:
     """Move the generated umbrella filelist under filelists/ with stable paths."""
     if not src_path.exists():
         print(f"  [filelist] WARNING: {src_path} not found, skipping")
@@ -325,7 +332,7 @@ def _publish_top_filelist(src_path: Path, dst_path: Path) -> None:
     out_lines = []
     for line in src_path.read_text().splitlines():
         if line.startswith("dti_logic_topo/"):
-            out_lines.append(f"$DTI_TEST_DIR/build_logic/{line}")
+            out_lines.append(f"$DTI_TEST_DIR/{published_build_root}/{line}")
         else:
             out_lines.append(line)
 
@@ -334,14 +341,51 @@ def _publish_top_filelist(src_path: Path, dst_path: Path) -> None:
     print(f"  [filelist] published top filelist to {dst_path}")
 
 
-def main():
+def _flow_paths(flow: str) -> dict[str, Path | str]:
+    normalized = flow.strip().lower()
+    if normalized not in {"dv", "pd"}:
+        raise ValueError(f"Unsupported flow: {flow}. expected one of: dv, pd")
+
+    if normalized == "dv":
+        return {
+            "build_dir": THIS_DIR / "build_logic",
+            "filelist_out": THIS_DIR / "filelist" / "filelist.f",
+            "build_root_name": "build_logic",
+        }
+
+    return {
+        "build_dir": THIS_DIR / "build_logic_pd",
+        "filelist_out": THIS_DIR / "filelist_pd" / "filelist.f",
+        "build_root_name": "build_logic_pd",
+    }
+
+
+def generate(flow: str = "dv") -> None:
     reset_global_state()
 
+    flow_paths = _flow_paths(flow)
+    build_dir = flow_paths["build_dir"]
+    filelist_out = flow_paths["filelist_out"]
+    build_root_name = flow_paths["build_root_name"]
+    assert isinstance(build_dir, Path)
+    assert isinstance(filelist_out, Path)
+    assert isinstance(build_root_name, str)
+
     topo = DtiLogicTopo()
-    topology_json = THIS_DIR / "dti_logic_topology.json"
-    build_dir = THIS_DIR / "build_logic"
+    topology_json = THIS_DIR / f"dti_logic_topology_{flow}.json"
+    topology_png = THIS_DIR / f"dti_logic_topology_{flow}.png"
+
+    # Keep legacy default artifact for downstream compatibility.
+    if flow == "dv":
+        legacy_json = THIS_DIR / "dti_logic_topology.json"
+    else:
+        legacy_json = None
 
     TopologySerializer().save_to_file(topo, str(topology_json))
+    if legacy_json is not None:
+        shutil.copyfile(topology_json, legacy_json)
+
+    generate_png(topology_json, topology_png, title=f"DTI Logic Topology ({flow.upper()})")
 
     comp = topo.build_uhdl()
     comp.output_dir = str(build_dir)
@@ -355,12 +399,27 @@ def main():
     _patch_generated_tieoff_components(build_dir)
     _publish_top_filelist(
         build_dir / "dti_logic_topo" / "filelist.f",
-        THIS_DIR / "filelists" / "filelist.f",
+        filelist_out,
+        build_root_name,
     )
 
+    # Keep legacy top-level filelist path for older tooling.
+    legacy_filelist = THIS_DIR / "filelists" / "filelist.f"
+    legacy_filelist.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(filelist_out, legacy_filelist)
+
+    print(f"Flow: {flow}")
     print(f"Topology JSON written to {topology_json}")
+    print(f"Topology PNG written to {topology_png}")
     print(f"Generated RTL written to {build_dir}")
-    print(f"Top filelist written to {THIS_DIR / 'filelists' / 'filelist.f'}")
+    print(f"Top filelist written to {filelist_out}")
+    if legacy_json is not None:
+        print(f"Legacy JSON mirror written to {legacy_json}")
+    print(f"Legacy filelist mirror written to {legacy_filelist}")
+
+
+def main() -> None:
+    generate("dv")
 
 
 if __name__ == "__main__":

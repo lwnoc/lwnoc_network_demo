@@ -1,0 +1,13 @@
+-f $STS_NOC_DEMO_DIR/filelists/sts_common_dep.f
+-f $STS_DEMO_INIU_SYS_OUT_DIR/sts_demo_iniu_filelist.f
+-f $STS_DEMO_TNIU0_SYS_OUT_DIR/sts_demo_tniu0_filelist.f
+-f $STS_DEMO_TNIU1_SYS_OUT_DIR/sts_demo_tniu1_filelist.f
+-f $STS_DEMO_TNIU2_SYS_OUT_DIR/sts_demo_tniu2_filelist.f
+-f $STS_DEMO_TNIU3_SYS_OUT_DIR/sts_demo_tniu3_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_iniu_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu0_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu1_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu2_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu3_filelist.f
+-f $STS_SOC_LOGIC_TOPO_DIR/sts_demo_dec4_filelist.f
+$STS_SOC_LOGIC_TOPO_DIR/sts_soc_logic_topo.v

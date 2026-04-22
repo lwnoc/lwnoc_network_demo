@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:25e30597e6e472c36b81b790f0b866ad]
+//[UHDL]Content Start [md5:2495aa3aa3423e46b6c68d13dbb2cef5]
 module gpu_ss0_tniu_noc_side (
 	input         clk_top_func                                  ,
 	input         rst_top_func_n                                ,
@@ -63,7 +63,7 @@ module gpu_ss0_tniu_noc_side (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	interrupt_tniu_aync_top_side tniu_top (
+	interrupt_tniu_async_top_side tniu_top (
 		.clk(clk_top_func),
 		.rst_n(rst_top_func_n),
 		.wptr_async(async_fifo_wptr_async),
@@ -126,7 +126,18 @@ module gpu_ss0_tniu_noc_side (
 		.local_rx_local_rx_srcid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_srcid),
 		.local_rx_local_rx_tgtid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_tgtid),
 		.local_rx_local_rx_valid(ring_wrap_TO_tniu_top_SIG_local_rx_local_rx_valid));
-	lwnoc_intr_dummy_endpoint ring_zero (
+	lwnoc_intr_dummy_endpoint #(
+		.PLD_WIDTH(32'd40),
+		.ID_WIDTH(32'd8),
+		.QOS_WIDTH(32'd4),
+		.NODE_NUM(32'd39),
+		.DUMMY_EN(1'b1),
+		.SINK_EN(1'b1),
+		.DUMMY_SRCID(8'd0),
+		.DUMMY_TGTID(8'd0),
+		.DUMMY_QOS(4'b0),
+		.DUMMY_PLD(40'h0))
+	ring_zero (
 		.clk(clk_top_func),
 		.rst_n(rst_top_func_n),
 		.real_tx_valid(),
@@ -157,5 +168,5 @@ module gpu_ss0_tniu_noc_side (
 		.sink_drop_invalid_sticky());
 
 endmodule
-//[UHDL]Content End [md5:25e30597e6e472c36b81b790f0b866ad]
+//[UHDL]Content End [md5:2495aa3aa3423e46b6c68d13dbb2cef5]
 

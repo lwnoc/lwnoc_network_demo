@@ -16,6 +16,7 @@ from uhdl.uhdl.core import And, BitXor, Component, Cut, Equal, Input, Not, Outpu
 from uhdl.uhdl.core.TemplateIP import TemplateComponent
 
 from DtiTemplate import (
+    INIU_SYS_CONFIGS,
     dti_link_buf_config,
     dti_link_pipe_config,
     dti_req_rsp_async_config,
@@ -426,48 +427,55 @@ class DtiTniuNode(UhdlWrapperNode):
 
 
 # ── Per-endpoint TBU INIU factory functions ───────────────────────────────────
+def make_iniu_node(node_name: str, id: str | None = None) -> DtiIniuNode:
+    if node_name not in INIU_SYS_CONFIGS:
+        raise KeyError(f"Unknown DTI INIU node: {node_name}")
+    node_id = id or f"{node_name}_iniu_node"
+    return DtiIniuNode(id=node_id, sys_cfg=INIU_SYS_CONFIGS[node_name], node_name=node_name)
+
+
 def make_pcie_eth_iniu_node(id: str = "pcie_eth_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=pcie_eth_iniu_sys_config, node_name="pcie_eth")
+    return make_iniu_node(node_name="pcie_eth", id=id)
 
 
 def make_vpu_iniu_node(id: str = "vpu_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=vpu_iniu_sys_config, node_name="vpu")
+    return make_iniu_node(node_name="vpu", id=id)
 
 
 def make_dsp2_iniu_node(id: str = "dsp2_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=dsp2_iniu_sys_config, node_name="dsp2")
+    return make_iniu_node(node_name="dsp2", id=id)
 
 
 def make_dsp1_iniu_node(id: str = "dsp1_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=dsp1_iniu_sys_config, node_name="dsp1")
+    return make_iniu_node(node_name="dsp1", id=id)
 
 
 def make_dsp0_iniu_node(id: str = "dsp0_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=dsp0_iniu_sys_config, node_name="dsp0")
+    return make_iniu_node(node_name="dsp0", id=id)
 
 
 def make_noc_tbu1_iniu_node(id: str = "noc_tbu1_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=noc_tbu1_iniu_sys_config, node_name="noc_tbu1")
+    return make_iniu_node(node_name="noc_tbu1", id=id)
 
 
 def make_usb_ufs_iniu_node(id: str = "usb_ufs_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=usb_ufs_iniu_sys_config, node_name="usb_ufs")
+    return make_iniu_node(node_name="usb_ufs", id=id)
 
 
 def make_mipi0_iniu_node(id: str = "mipi0_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=mipi0_iniu_sys_config, node_name="mipi0")
+    return make_iniu_node(node_name="mipi0", id=id)
 
 
 def make_mipi1_iniu_node(id: str = "mipi1_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=mipi1_iniu_sys_config, node_name="mipi1")
+    return make_iniu_node(node_name="mipi1", id=id)
 
 
 def make_camera_iniu_node(id: str = "camera_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=camera_iniu_sys_config, node_name="camera")
+    return make_iniu_node(node_name="camera", id=id)
 
 
 def make_noc_tbu0_iniu_node(id: str = "noc_tbu0_iniu_node") -> DtiIniuNode:
-    return DtiIniuNode(id=id, sys_cfg=noc_tbu0_iniu_sys_config, node_name="noc_tbu0")
+    return make_iniu_node(node_name="noc_tbu0", id=id)
 
 
 def make_tcu_tniu_node(id: str = "tcu_tniu_node") -> DtiTniuNode:

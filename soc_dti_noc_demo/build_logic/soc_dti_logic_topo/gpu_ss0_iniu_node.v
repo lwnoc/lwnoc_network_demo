@@ -1,7 +1,5 @@
-//[UHDL]Content Start [md5:c56bb14cb18ed5ba0bb8e1146cae3265]
+//[UHDL]Content Start [md5:3da9699de9d7c3223cc3c63a0253f8e3]
 module gpu_ss0_iniu_node
-	import lwnoc_lp_define_package::*;
-	import lwnoc_lp_struct_package::*;
 	(
 	input                                                   clk_sys_clk            ,
 	input                                                   rst_sys_n_rst_n        ,
@@ -19,12 +17,14 @@ module gpu_ss0_iniu_node
 	input                                                   dti_rsp_rsp_tready     ,
 	output [5:0]                                            dti_rsp_rsp_ttid       ,
 	output                                                  dti_rsp_rsp_tvalid     ,
+	input                                                   req_twakeup_req_twakeup,
+	output                                                  rsp_twakeup_rsp_twakeup,
 	input  [9:0]                                            timeout_val_timeout_val,
 	output                                                  pchnl_ctrl_paccept     ,
-	output logic [$bits(lwnoc_lp_define_package::lwnoc_pchannel_active_t)-1:0] pchnl_ctrl_pactive     ,
+	output logic [2-1:0] pchnl_ctrl_pactive     ,
 	output                                                  pchnl_ctrl_pdeny       ,
 	input                                                   pchnl_ctrl_preq        ,
-	input logic [$bits(lwnoc_lp_define_package::lwnoc_pchannel_state_t)-1:0]  pchnl_ctrl_pstate      ,
+	input logic [2-1:0]  pchnl_ctrl_pstate      ,
 	output                                                  top_req_req_last       ,
 	output [89:0]                                           top_req_req_payload    ,
 	input                                                   top_req_req_ready      ,
@@ -70,12 +70,7 @@ module gpu_ss0_iniu_node
 	//Wire this module connect to sub module.
 
 	//module inst.
-	gpu_ss0_dti_pr_iniu_async_sys_side #(
-		.TBU_NUM(32'd1),
-		.TRANSACTION_MAX_NUM(32'd8),
-		.ASYNC_FIFO_DEPTH(32'd16),
-		.TIME_OUT_WIDTH(32'd10))
-	sys_side (
+	gpu_ss0_dti_pr_iniu_async_sys_side sys_side (
 		.clk(clk_sys_clk),
 		.rst_n(rst_sys_n_rst_n),
 		.req_tvalid(dti_req_req_tvalid),
@@ -90,8 +85,8 @@ module gpu_ss0_iniu_node
 		.rsp_tlast(dti_rsp_rsp_tlast),
 		.rsp_ttid(dti_rsp_rsp_ttid),
 		.rsp_tready(dti_rsp_rsp_tready),
-		.req_twakeup(),
-		.rsp_twakeup(),
+		.req_twakeup(req_twakeup_req_twakeup),
+		.rsp_twakeup(rsp_twakeup_rsp_twakeup),
 		.req_wptr_async(sys_side_TO_top_side_SIG_req_wptr_async),
 		.req_rptr_async(top_side_TO_sys_side_SIG_req_rptr_async),
 		.req_rptr_sync(top_side_TO_sys_side_SIG_req_rptr_sync),
@@ -146,5 +141,5 @@ module gpu_ss0_iniu_node
 		.rsp_tgtid(top_ext_tieoff_TO_top_side_SIG_rsp_tgtid));
 
 endmodule
-//[UHDL]Content End [md5:c56bb14cb18ed5ba0bb8e1146cae3265]
+//[UHDL]Content End [md5:3da9699de9d7c3223cc3c63a0253f8e3]
 

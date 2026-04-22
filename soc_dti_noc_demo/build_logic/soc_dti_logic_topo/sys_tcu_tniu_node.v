@@ -1,39 +1,39 @@
-//[UHDL]Content Start [md5:f1b12bb935b1a82699719b3ce8304cad]
+//[UHDL]Content Start [md5:ed3f04ee7d51ef2faad5b737bcd807fa]
 module sys_tcu_tniu_node
-	import lwnoc_lp_define_package::*;
-	import lwnoc_lp_struct_package::*;
 	(
-	input                                                   clk_sys_clk        ,
-	input                                                   rst_sys_n_rst_n    ,
-	input                                                   clk_top            ,
-	input                                                   rst_top_n          ,
-	output [79:0]                                           dti_req_req_tdata  ,
-	output [9:0]                                            dti_req_req_tkeep  ,
-	output                                                  dti_req_req_tlast  ,
-	input                                                   dti_req_req_tready ,
-	output [5:0]                                            dti_req_req_ttid   ,
-	output                                                  dti_req_req_tvalid ,
-	input  [79:0]                                           dti_rsp_rsp_tdata  ,
-	input  [9:0]                                            dti_rsp_rsp_tkeep  ,
-	input                                                   dti_rsp_rsp_tlast  ,
-	output                                                  dti_rsp_rsp_tready ,
-	input  [5:0]                                            dti_rsp_rsp_ttid   ,
-	input                                                   dti_rsp_rsp_tvalid ,
-	output                                                  pchnl_ctrl_paccept ,
-	output logic [$bits(lwnoc_lp_define_package::lwnoc_pchannel_active_t)-1:0] pchnl_ctrl_pactive ,
-	output                                                  pchnl_ctrl_pdeny   ,
-	input                                                   pchnl_ctrl_preq    ,
-	input logic [$bits(lwnoc_lp_define_package::lwnoc_pchannel_state_t)-1:0]  pchnl_ctrl_pstate  ,
-	input                                                   top_req_req_last   ,
-	input  [89:0]                                           top_req_req_payload,
-	output                                                  top_req_req_ready  ,
-	input  [5:0]                                            top_req_req_srcid  ,
-	input                                                   top_req_req_valid  ,
-	output                                                  top_rsp_rsp_last   ,
-	output [89:0]                                           top_rsp_rsp_payload,
-	input                                                   top_rsp_rsp_ready  ,
-	output [5:0]                                            top_rsp_rsp_srcid  ,
-	output                                                  top_rsp_rsp_valid  );
+	input                                                   clk_sys_clk            ,
+	input                                                   rst_sys_n_rst_n        ,
+	input                                                   clk_top                ,
+	input                                                   rst_top_n              ,
+	output [79:0]                                           dti_req_req_tdata      ,
+	output [9:0]                                            dti_req_req_tkeep      ,
+	output                                                  dti_req_req_tlast      ,
+	input                                                   dti_req_req_tready     ,
+	output [5:0]                                            dti_req_req_ttid       ,
+	output                                                  dti_req_req_tvalid     ,
+	input  [79:0]                                           dti_rsp_rsp_tdata      ,
+	input  [9:0]                                            dti_rsp_rsp_tkeep      ,
+	input                                                   dti_rsp_rsp_tlast      ,
+	output                                                  dti_rsp_rsp_tready     ,
+	input  [5:0]                                            dti_rsp_rsp_ttid       ,
+	input                                                   dti_rsp_rsp_tvalid     ,
+	output                                                  req_twakeup_req_twakeup,
+	input                                                   rsp_twakeup_rsp_twakeup,
+	output                                                  pchnl_ctrl_paccept     ,
+	output logic [2-1:0] pchnl_ctrl_pactive     ,
+	output                                                  pchnl_ctrl_pdeny       ,
+	input                                                   pchnl_ctrl_preq        ,
+	input logic [2-1:0]  pchnl_ctrl_pstate      ,
+	input                                                   top_req_req_last       ,
+	input  [89:0]                                           top_req_req_payload    ,
+	output                                                  top_req_req_ready      ,
+	input  [5:0]                                            top_req_req_srcid      ,
+	input                                                   top_req_req_valid      ,
+	output                                                  top_rsp_rsp_last       ,
+	output [89:0]                                           top_rsp_rsp_payload    ,
+	input                                                   top_rsp_rsp_ready      ,
+	output [5:0]                                            top_rsp_rsp_srcid      ,
+	output                                                  top_rsp_rsp_valid      );
 
 	//Wire define for this module.
 
@@ -78,8 +78,8 @@ module sys_tcu_tniu_node
 		.req_tlast(dti_req_req_tlast),
 		.req_ttid(dti_req_req_ttid),
 		.req_tready(dti_req_req_tready),
-		.req_twakeup(),
-		.rsp_twakeup(),
+		.req_twakeup(req_twakeup_req_twakeup),
+		.rsp_twakeup(rsp_twakeup_rsp_twakeup),
 		.rsp_tvalid(dti_rsp_rsp_tvalid),
 		.rsp_tdata(dti_rsp_rsp_tdata),
 		.rsp_tkeep(dti_rsp_rsp_tkeep),
@@ -139,5 +139,5 @@ module sys_tcu_tniu_node
 		.rsp_tgtid(top_side_TO_top_ext_tieoff_SIG_rsp_tgtid));
 
 endmodule
-//[UHDL]Content End [md5:f1b12bb935b1a82699719b3ce8304cad]
+//[UHDL]Content End [md5:ed3f04ee7d51ef2faad5b737bcd807fa]
 
