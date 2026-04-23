@@ -1,3 +1,171 @@
--f $INTR_NOC_DEMO_DIR/filelist/intr_common_dep.f
--f $INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_top/filelist.f
+-f $SOC_INTR_AON_SS_INIU_SYS_OUT_DIR/aon_ss_iniu_filelist.f
+-f $SOC_INTR_AON_SS_TNIU_SYS_OUT_DIR/aon_ss_tniu_filelist.f
+-f $SOC_INTR_AUDIO_SS_INIU_SYS_OUT_DIR/audio_ss_iniu_filelist.f
+-f $SOC_INTR_CAMERA_SS_INIU_SYS_OUT_DIR/camera_ss_iniu_filelist.f
+-f $SOC_INTR_CAMERA_SS_TNIU_SYS_OUT_DIR/camera_ss_tniu_filelist.f
+-f $SOC_INTR_CPU_SS_INIU_SYS_OUT_DIR/cpu_ss_iniu_filelist.f
+-f $SOC_INTR_CPU_SS_TNIU_SYS_OUT_DIR/cpu_ss_tniu_filelist.f
+-f $SOC_INTR_DDR_INIU_SYS_OUT_DIR/ddr_iniu_filelist.f
+-f $SOC_INTR_DDR_TNIU_SYS_OUT_DIR/ddr_tniu_filelist.f
+-f $SOC_INTR_DEBUG_SS_INIU_SYS_OUT_DIR/debug_ss_iniu_filelist.f
+-f $SOC_INTR_DISPLAY_SS_TNIU_SYS_OUT_DIR/display_ss_tniu_filelist.f
+-f $SOC_INTR_DP_SS_INIU_SYS_OUT_DIR/dp_ss_iniu_filelist.f
+-f $SOC_INTR_DSPSS_INIU_SYS_OUT_DIR/dspss_iniu_filelist.f
+-f $SOC_INTR_DSPSS_TNIU_SYS_OUT_DIR/dspss_tniu_filelist.f
+-f $SOC_INTR_GPU_SS_INIU_SYS_OUT_DIR/gpu_ss_iniu_filelist.f
+-f $SOC_INTR_GPU_SS_TNIU_SYS_OUT_DIR/gpu_ss_tniu_filelist.f
+-f $SOC_INTR_MIPI_SS_INIU_SYS_OUT_DIR/mipi_ss_iniu_filelist.f
+-f $SOC_INTR_PCIE_ETH_SS_INIU_SYS_OUT_DIR/pcie_eth_ss_iniu_filelist.f
+-f $SOC_INTR_PERI_SS_TNIU_SYS_OUT_DIR/peri_ss_tniu_filelist.f
+-f $SOC_INTR_UCIE_SS_INIU_SYS_OUT_DIR/ucie_ss_iniu_filelist.f
+-f $SOC_INTR_UCIE_SS_TNIU_SYS_OUT_DIR/ucie_ss_tniu_filelist.f
+-f $SOC_INTR_UFS_SS_INIU_SYS_OUT_DIR/ufs_ss_iniu_filelist.f
+-f $SOC_INTR_VPU_SS_INIU_SYS_OUT_DIR/vpu_ss_iniu_filelist.f
+-f $INTR_INIU_TOP_OUT_DIR/filelist.f
+-f $INTR_TNIU_TOP_OUT_DIR/filelist.f
+-f $INTR_RING_NETWORK_OUT_DIR/filelist.f
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/aon_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/aon_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/aon_ss_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/aon_ss_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/aon_ss_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/aon_ss_tniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/aon_ss_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/aon_ss_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/audio_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/audio_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/audio_ss_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/audio_ss_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/camera_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/camera_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/camera_ss_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/camera_ss_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/camera_ss_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/camera_ss_tniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/camera_ss_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/camera_ss_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/cpu_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/cpu_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/cpu_ss_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/cpu_ss_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/cpu_ss_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/cpu_ss_tniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/cpu_ss_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/cpu_ss_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr0_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr0_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr0_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr10_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr10_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr10_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr11_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr11_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr11_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr1_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr1_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr1_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr2_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr2_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr2_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr3_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr3_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr3_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr4_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr4_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr4_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr5_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr5_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr5_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr6_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr6_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr6_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr7_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr7_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr7_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr8_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr8_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr8_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr9_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr9_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr9_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ddr_tniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/debug_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/debug_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/debug_ss_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/debug_ss_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/default_tgtid_sink.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/default_tgtid_sink_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/display_ss_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/display_ss_tniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/display_ss_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/display_ss_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dp_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dp_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dp_ss_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dp_ss_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss0_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss0_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss0_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss1_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss1_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss1_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss2_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss2_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss2_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss3_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss3_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss3_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss4_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss4_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss4_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss5_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss5_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss5_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/dspss_tniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/gpu_ss0_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/gpu_ss0_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/gpu_ss0_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/gpu_ss1_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/gpu_ss1_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/gpu_ss1_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/gpu_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/gpu_ss_tniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/mipi_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/mipi_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/mipi_ss_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/mipi_ss_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/pcie_eth_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/pcie_eth_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/pcie_eth_ss_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/pcie_eth_ss_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/peri_ss_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/peri_ss_tniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/peri_ss_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/peri_ss_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ring_async_cut_dn_to_up.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ring_async_cut_up_to_dn.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss0_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss0_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss0_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss0_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss0_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss0_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss1_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss1_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss1_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss1_tniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss1_tniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss1_tniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ucie_ss_tniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ufs_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ufs_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ufs_ss_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/ufs_ss_iniu_top_wrap_ring.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/vpu_ss_iniu.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/vpu_ss_iniu_sys_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/vpu_ss_iniu_top_wrap.v
+$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/vpu_ss_iniu_top_wrap_ring.v
 $INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap/soc_intr_noc_wrap.v

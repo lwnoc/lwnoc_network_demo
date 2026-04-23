@@ -109,10 +109,10 @@ def _new_cfg(name: str, prefix: str, filelist_name: str, env_var: str) -> Templa
 
 
 sts_demo_iniu_sys_config = _new_cfg(
-    name="sts_demo_iniu_sys",
+    name="iniu0_sys",
     prefix="sts_demo_iniu_",
     filelist_name="sts_demo_iniu_sys.f",   # sys-side RTL (all except sts_iniu_top.sv + wrap)
-    env_var="STS_DEMO_INIU_SYS_OUT_DIR",
+    env_var="STS_INIU0_SYS_OUT_DIR",
 )
 
 _iniu_params = {
@@ -148,31 +148,31 @@ sts_demo_dec4_config.param_overrides = {
 
 # TNIU sys-side: one directory per consumer instance (hierarchical — sts_tniu_top instantiates sts_tniu_sys)
 sts_demo_tniu0_sys_config = _new_cfg(
-    name="sts_demo_tniu0_sys",
+    name="tniu0_sys",
     prefix="sts_demo_tniu0_",      # same prefix as top_side (hierarchical RTL)
     filelist_name="sts_demo_tniu_sys.f",
-    env_var="STS_DEMO_TNIU0_SYS_OUT_DIR",
+    env_var="STS_TNIU0_SYS_OUT_DIR",
 )
 
 sts_demo_tniu1_sys_config = _new_cfg(
-    name="sts_demo_tniu1_sys",
+    name="tniu1_sys",
     prefix="sts_demo_tniu1_",
     filelist_name="sts_demo_tniu_sys.f",
-    env_var="STS_DEMO_TNIU1_SYS_OUT_DIR",
+    env_var="STS_TNIU1_SYS_OUT_DIR",
 )
 
 sts_demo_tniu2_sys_config = _new_cfg(
-    name="sts_demo_tniu2_sys",
+    name="tniu2_sys",
     prefix="sts_demo_tniu2_",
     filelist_name="sts_demo_tniu_sys.f",
-    env_var="STS_DEMO_TNIU2_SYS_OUT_DIR",
+    env_var="STS_TNIU2_SYS_OUT_DIR",
 )
 
 sts_demo_tniu3_sys_config = _new_cfg(
-    name="sts_demo_tniu3_sys",
+    name="tniu3_sys",
     prefix="sts_demo_tniu3_",
     filelist_name="sts_demo_tniu_sys.f",
-    env_var="STS_DEMO_TNIU3_SYS_OUT_DIR",
+    env_var="STS_TNIU3_SYS_OUT_DIR",
 )
 
 # TNIU top-side: one directory per consumer instance (build_logic dir = sts_demo_tniu<N>_top_side)
@@ -209,10 +209,10 @@ sts_demo_tniu3_config = _new_cfg(
 sts_demo_tniu3_config.param_overrides = _tniu_params(3)
 
 sts_demo_req_rsp_async_config = _new_cfg(
-    name="sts_demo_req_rsp_async",
+    name="sts_req_rsp_async",
     prefix="sts_demo_req_rsp_async_",
     filelist_name="sts_demo_req_rsp_async.f",
-    env_var="STS_DEMO_REQ_RSP_ASYNC_OUT_DIR",
+    env_var="STS_REQ_RSP_ASYNC_OUT_DIR",
 )
 
 sts_demo_link_pipe_config = _new_cfg(

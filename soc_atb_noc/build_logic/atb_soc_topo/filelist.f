@@ -1,0 +1,6 @@
+-f /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/real_subip_expanded.f
+-f /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/filelist.f
+-f /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/camera_ss_iniu_sys/camera_ss_iniu_filelist.f
+-f /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/mipi_ss_iniu_sys/mipi_ss_iniu_filelist.f
+-f /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/debug_tniu_ss_tniu_sys/debug_tniu_ss_tniu_filelist.f
+-f /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/expanded_filelist.f

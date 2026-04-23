@@ -15,7 +15,7 @@ export DTI_TEST_DIR
 export RTL_PATH
 export FCIP_DIR
 export LWNOC_LOWPOWER_COMPONENT
-export SOC_DTI_LOGIC_TOPO_DIR        := $(DEMO_DIR)/build_logic/soc_dti_logic_topo
+export SOC_DTI_LOGIC_TOPO_DIR        := $(DEMO_DIR)/build_logic/soc_dti_top_wrap
 export DTI_INIU_TOP_DIR              := $(DEMO_DIR)/build_logic/dti_iniu_top_side
 export DTI_TNIU_TOP_DIR              := $(DEMO_DIR)/build_logic/dti_tniu_top_side
 export SOC_DTI_DSP_SS0_INIU_SYS_DIR  := $(DEMO_DIR)/build_logic/dsp_ss0_iniu_sys

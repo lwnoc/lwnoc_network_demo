@@ -1,4 +1,5 @@
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -10,6 +11,7 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 from topo_core.node.uhdlComponentNode import UhdlComponentNode
 from uhdl.uhdl.core import BitXor, Component, Input, Output, UInt
 from uhdl.uhdl.core.TemplateIP import TemplateComponent, TemplateIPConfig
+from uhdl.uhdl.core.VComponent import VComponent
 
 from StsTemplate import (
     sts_demo_dec4_config,
@@ -25,10 +27,80 @@ from StsTemplate import (
 
 
 sts_demo_req_rsp_async_raw_config = TemplateIPConfig(
-    name="sts_demo_req_rsp_async_raw",
+    name="sts_req_rsp_async_raw",
     filelist=sts_demo_req_rsp_async_config.filelist,
     prefix="",
 )
+
+
+class StsTopSideTemplateComponent(TemplateComponent):
+    _pending_init: dict | None = None
+
+    @classmethod
+    def build(cls, config: TemplateIPConfig, top: str, instance: str | None = None, **kwargs):
+        cls._pending_init = {
+            "config": config,
+            "top": top,
+            "instance": instance,
+            "kwargs": kwargs,
+        }
+        try:
+            return cls()
+        finally:
+            cls._pending_init = None
+
+    def __init__(self):
+        pending = self.__class__._pending_init
+        if pending is None:
+            raise RuntimeError("StsTopSideTemplateComponent.build() must be used")
+
+        config: TemplateIPConfig = pending["config"]
+        top: str = pending["top"]
+        instance: str | None = pending["instance"]
+        kwargs = dict(pending["kwargs"])
+
+        self._parent_template = config.get_or_create_ip()
+        self._parent_template.temp_build()
+
+        if instance is None:
+            instance = top
+
+        unity_wrapper_path = self._build_parse_unity_wrapper(config=config, top=top)
+        prefixed_top = config.prefix + top
+
+        VComponent.__init__(
+            self,
+            file=unity_wrapper_path,
+            top=prefixed_top,
+            instance=instance,
+            struct_mode="packed",
+            **kwargs,
+        )
+
+    def _build_parse_unity_wrapper(self, config: TemplateIPConfig, top: str) -> str:
+        top_side_dir = Path(self._parent_template.temp_output_dir)
+        wrapper_file = top_side_dir / f"{config.prefix}{top}.sv"
+
+        top_side_name = config.name
+        pack_dir_name = top_side_name.removesuffix("_top_side")
+        pack_dir = top_side_dir.parent / pack_dir_name
+        pack_file = pack_dir / f"{config.prefix}lwnoc_sts_pack.sv"
+
+        if not wrapper_file.exists() or not pack_file.exists():
+            return self._parent_template.get_unity_wrapper()
+
+        scratch_dir = Path(tempfile.mkdtemp(prefix=f"{config.name}_parse_"))
+        unity_wrapper = scratch_dir / f"{config.prefix}manual_unity_wrapper.sv"
+        unity_wrapper.write_text(
+            "\n".join(
+                [
+                    f'`include "{pack_file}"',
+                    f'`include "{wrapper_file}"',
+                    "",
+                ]
+            )
+        )
+        return str(unity_wrapper)
 
 
 class StsReqSinkComponent(Component):
@@ -74,7 +146,11 @@ class StsReqZeroSourceNode(UhdlComponentNode):
 
 class StsReqRspAsyncBridgeSlvNode(UhdlComponentNode):
     def __init__(self, id: str = "sts_req_rsp_async_slv"):
-        comp = TemplateComponent(config=sts_demo_req_rsp_async_raw_config, top="sts_async_bridge_slv")
+        comp = TemplateComponent(
+            config=sts_demo_req_rsp_async_raw_config,
+            top="sts_async_bridge_slv",
+            DATA_WIDTH=119,
+        )
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", r"^clk$")
@@ -85,7 +161,11 @@ class StsReqRspAsyncBridgeSlvNode(UhdlComponentNode):
 
 class StsReqRspAsyncBridgeMstNode(UhdlComponentNode):
     def __init__(self, id: str = "sts_req_rsp_async_mst"):
-        comp = TemplateComponent(config=sts_demo_req_rsp_async_raw_config, top="sts_async_bridge_mst")
+        comp = TemplateComponent(
+            config=sts_demo_req_rsp_async_raw_config,
+            top="sts_async_bridge_mst",
+            DATA_WIDTH=119,
+        )
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", r"^clk$")
@@ -120,7 +200,7 @@ class StsLinkBufNode(UhdlComponentNode):
 class StsIniuNode(UhdlComponentNode):
     def __init__(self, id: str = "iniu0"):
         params = getattr(sts_demo_iniu_top_side_config, 'param_overrides', {})
-        comp = TemplateComponent(config=sts_demo_iniu_top_side_config, top="sts_demo_iniu_wrap", **params)
+        comp = StsTopSideTemplateComponent.build(config=sts_demo_iniu_top_side_config, top="sts_demo_iniu_wrap", **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk_src", r"^clk_src$")
@@ -136,7 +216,7 @@ class StsIniuNode(UhdlComponentNode):
 class StsDec4Node(UhdlComponentNode):
     def __init__(self, id: str = "noc_dec"):
         params = getattr(sts_demo_dec4_config, 'param_overrides', {})
-        comp = TemplateComponent(config=sts_demo_dec4_config, top="sts_demo_dec4_wrap", **params)
+        comp = TemplateComponent(config=sts_demo_dec4_config, top="sts_demo_dec4_wrap", struct_mode="packed", **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", r"^clk$")
@@ -156,7 +236,7 @@ class StsDec4Node(UhdlComponentNode):
 class _BaseStsTniuNode(UhdlComponentNode):
     def __init__(self, id: str, cfg, top: str):
         params = getattr(cfg, 'param_overrides', {})
-        comp = TemplateComponent(config=cfg, top=top, **params)
+        comp = StsTopSideTemplateComponent.build(config=cfg, top=top, **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk_src", r"^clk_src$")

@@ -1,10 +1,58 @@
-%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/verilator_patches/fcip_bin2onehot.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/aon_ss_iniu_sys/intr_iniu_sys_macros.sv
 %Error: This may be because there's no search path specified with -I<dir>.
         ... Looked in:
-             /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/verilator_patches/fcip_bin2onehot.sv
-             /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/verilator_patches/fcip_bin2onehot.sv.v
-             /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/verilator_patches/fcip_bin2onehot.sv.sv
-             obj_dir//home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/verilator_patches/fcip_bin2onehot.sv
-             obj_dir//home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/verilator_patches/fcip_bin2onehot.sv.v
-             obj_dir//home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/verilator_patches/fcip_bin2onehot.sv.sv
-%Error: Exiting due to 2 error(s)
+             /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/aon_ss_iniu_sys/intr_iniu_sys_macros.sv
+             /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/aon_ss_iniu_sys/intr_iniu_sys_macros.sv.v
+             /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/aon_ss_iniu_sys/intr_iniu_sys_macros.sv.sv
+             obj_dir//home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/aon_ss_iniu_sys/intr_iniu_sys_macros.sv
+             obj_dir//home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/aon_ss_iniu_sys/intr_iniu_sys_macros.sv.v
+             obj_dir//home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/aon_ss_iniu_sys/intr_iniu_sys_macros.sv.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/aon_ss_tniu_sys/intr_tniu_sys_macros.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_soc_intr_niu_ring_noc_define.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_interrupt_iniu_define.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_interrupt_iniu_pkg.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_interrupt_iniu_event_recorder.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_interrupt_iniu_lut.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_interrupt_iniu_reg_bank.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_interrupt_iniu_arb.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_interrupt_iniu.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_spram_4096x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_spram_2048x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_spram_1024x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_spram_512x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_spram_256x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_spram_128x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr0_iniu_sys/ddr0_iniu_interrupt_iniu_async_sys_side.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_soc_intr_niu_ring_noc_define.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_interrupt_iniu_define.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_interrupt_iniu_pkg.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_interrupt_iniu_event_recorder.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_interrupt_iniu_lut.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_interrupt_iniu_reg_bank.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_interrupt_iniu_arb.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_interrupt_iniu.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_spram_4096x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_spram_2048x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_spram_1024x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_spram_512x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_spram_256x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_spram_128x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr10_iniu_sys/ddr10_iniu_interrupt_iniu_async_sys_side.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_soc_intr_niu_ring_noc_define.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_interrupt_tniu_define.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_interrupt_tniu_pkg.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_interrupt_tniu_mem_reg_bank.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_Regbank_regbank_tniu_internal_intr.v
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_interrupt_tniu_generate_reg_bank.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_interrupt_tniu_event_conflict_check.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_interrupt_tniu_context.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_interrupt_tniu_context_entry.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_interrupt_tniu_event_repeater.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_interrupt_tniu_event_merge.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_interrupt_tniu_xbar_internal.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_interrupt_tniu.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_spram_4096x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_spram_2048x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_spram_1024x20.sv
+%Error: Cannot find file containing module: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/ddr11_tniu_sys/ddr11_tniu_spram_512x20.sv
+%Error: Exiting due to too many errors encountered; --error-limit=50

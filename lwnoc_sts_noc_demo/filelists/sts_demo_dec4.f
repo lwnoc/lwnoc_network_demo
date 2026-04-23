@@ -11,4 +11,4 @@ $STS_NOC_DIR/rtl/common/lwring_id_remap.sv
 $STS_NOC_DIR/rtl/common/sts_ctm.sv
 $STS_NOC_DIR/rtl/common/sts_noc_dec_node.sv
 $STS_NOC_DIR/rtl/common/sts_tniu_apb_dec.sv
-$STS_NOC_DEMO_DIR/rtl/sts_demo_dec4_wrap.sv
+$STS_NOC_DEMO_DIR/build/temp/sts_top_wrapper_sources/sts_demo_dec4_wrap.sv

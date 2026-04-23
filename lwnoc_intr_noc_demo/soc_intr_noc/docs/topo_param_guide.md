@@ -195,7 +195,7 @@ Date: 2026-04-21
 为什么需要它:
 - 稳定编译入口名字：上层编译脚本只盯一个固定 wrapper 入口，不受内部 top 命名调整影响。
 - 入口解耦：把“功能 RTL 生成”与“发布给编译系统的入口形态”分离。
-- 便于 shared build_logic packaging：DV live ingress 直接指向 `soc_intr_ring_top/filelist.f`，wrapper 作为同根附加发布物保留；PD 继续用对应 `soc_intr_noc_wrap_pd` 机制。
+- 便于 shared build_logic packaging：DV live ingress 通过 `soc_intr_noc_wrap/filelist.f` 进入 full-top publish root；PD 不再额外发布 `soc_intr_noc_wrap_pd` 薄壳，`filelist_pd/filelist_harden.f` 直接指向 `soc_intr_ring_top_pd/filelist.f`，只保留切出来的 harden 分区和其 assembly top。
 
 证据链（源码）:
 - 生成 wrapper 的核心函数在 `gen_soc_intr_topo.py`：`_publish_named_top_wrapper(...)`

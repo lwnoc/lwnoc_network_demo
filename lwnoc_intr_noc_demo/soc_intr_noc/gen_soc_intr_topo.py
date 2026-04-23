@@ -31,7 +31,7 @@ from topo_core.utils.serialization import TopologySerializer
 from SocIntrNode import TOP_LAYER_SUFFIX
 from SocIntrTopo import HARDEN_TOP_ID
 from SocIntrTopoConfig import DN_HARDEN_ID, RING_PLAN, UP_HARDEN_ID
-from SocIntrTopoDv import SocIntrLogicTopo, TOPO_ID
+from SocIntrTopoDv import FULL_TOPO_ID, SocIntrFullLogicTopo, SocIntrLogicTopo, TOPO_ID
 from SocIntrTopoPd import PD_TOPO_ID, SocIntrHardenTopTopo, SocIntrPdTopo
 
 
@@ -65,6 +65,16 @@ _TOP_SIDE_BLOCKS = {
     "intr_ring_network": "INTR_RING_NETWORK_OUT_DIR",
     "intr_ring_buf": "INTR_RING_BUF_OUT_DIR",
 }
+_GENERATED_COMPONENT_BLOCKS = {
+    **_TOP_SIDE_BLOCKS,
+    "intr_ring_req_sink": "INTR_RING_REQ_SINK_OUT_DIR",
+    "intr_ring_req_zero_source": "INTR_RING_REQ_ZERO_SOURCE_OUT_DIR",
+}
+_DV_REDUNDANT_RING_FILELIST_BLOCKS = {
+    "intr_ring_buf",
+    "intr_ring_req_sink",
+    "intr_ring_req_zero_source",
+}
 _LEGACY_PD_REFRESH_DIRS = (
     "soc_intr_ring_noc_harden_top",
 )
@@ -72,6 +82,7 @@ _PD_REFRESH_DIRS = (
     "intr_ring_req_sink",
     "intr_ring_req_zero_source",
     HARDEN_TOP_ID,
+    "soc_intr_noc_wrap_pd",
     *_LEGACY_PD_REFRESH_DIRS,
     *_HARDEN_PARTITION_IDS,
     *_TOP_SIDE_BLOCKS.keys(),
@@ -225,13 +236,13 @@ def _bootstrap_soc_intr_filelists_from_subs() -> None:
         "INTERRUPT_TNIU": str(intr_root),
         "FCIP_DIR": str(intr_root / "fcip"),
         "LWNOC_LOWPOWER_COMPONENT": str(intr_root / "lwnoc_lowpower_component"),
+        "lwnoc_lowpower_component": str(intr_root / "lwnoc_lowpower_component"),
     }
+    for key, val in var_map.items():
+        os.environ.setdefault(key, val)
 
     def _resolve_vars(text: str) -> str:
-        out = text
-        for key, val in var_map.items():
-            out = out.replace(f"${key}", val)
-        return out
+        return os.path.expandvars(text)
 
     def _flatten_filelist(src: Path, visited: set[Path]) -> list[str]:
         src = src.resolve()
@@ -444,6 +455,8 @@ def _check_shared_intr_assets() -> None:
     os.environ.setdefault("INTERRUPT_INIU", str(intr_root))
     os.environ.setdefault("INTERRUPT_TNIU", str(intr_root))
     os.environ.setdefault("FCIP_DIR", str(intr_root / "fcip"))
+    os.environ.setdefault("LWNOC_LOWPOWER_COMPONENT", str(intr_root / "lwnoc_lowpower_component"))
+    os.environ.setdefault("lwnoc_lowpower_component", str(intr_root / "lwnoc_lowpower_component"))
 
     _bootstrap_soc_intr_filelists_from_subs()
 
@@ -628,6 +641,8 @@ def generate(flow: str = "dv"):
         topo = SocIntrLogicTopo()
         combined_dir = TOPO_ID
         topology_json = THIS_DIR / "soc_intr_logic_topology.json"
+        full_topology_json = THIS_DIR / f"{FULL_TOPO_ID}_logic_topology.json"
+        stale_full_topology_json = THIS_DIR / "soc_intr_full_logic_topology.json"
         build_dir = THIS_DIR / _SHARED_BUILD_DIR_NAME
         topo_png = THIS_DIR / "soc_intr_ring_topology.png"
         publish_dst = THIS_DIR / "filelist" / "filelist.f"
@@ -636,19 +651,35 @@ def generate(flow: str = "dv"):
         topo = SocIntrPdTopo()
         combined_dir = PD_TOPO_ID
         topology_json = THIS_DIR / "soc_intr_pd_topology.json"
+        full_topology_json = None
         build_dir = THIS_DIR / _SHARED_BUILD_DIR_NAME
         topo_png = THIS_DIR / "soc_intr_ring_topology_pd.png"
         publish_dst = THIS_DIR / "filelist_pd" / "filelist.f"
         build_dir_name = _SHARED_BUILD_DIR_NAME
+        stale_full_topology_json = None
+
+    if stale_full_topology_json and stale_full_topology_json != full_topology_json and stale_full_topology_json.exists():
+        stale_full_topology_json.unlink()
 
     _prepare_build_dir(flow, build_dir)
 
     TopologySerializer().save_to_file(topo, str(topology_json))
 
+    reset_global_state()
     comp = topo.build_uhdl()
     comp.output_dir = str(build_dir)
     comp.generate_verilog(iteration=True)
     comp.generate_filelist()
+
+    if flow == "dv":
+        reset_global_state()
+        full_topo = SocIntrFullLogicTopo()
+        TopologySerializer().save_to_file(full_topo, str(full_topology_json))
+        full_comp = full_topo.build_uhdl()
+        full_comp.output_dir = str(build_dir)
+        full_comp.generate_verilog(iteration=True)
+        full_comp.generate_filelist()
+
     _emit_topology_visualization(topo, topo_png, topology_json)
     _write_endpoint_id_tables(THIS_DIR / "build")
 
@@ -658,18 +689,18 @@ def generate(flow: str = "dv"):
     if flow == "dv":
         _patch_async_fifo_depths(build_dir, iniu_depth=16, tniu_depth=10)
         _rename_generated_lwmnoc_define_shims(build_dir)
-        _consolidate_top_side(build_dir, combined_dir)
         _patch_missing_read_req_declarations(build_dir)
         _patch_sva_for_verilator(build_dir)
         _patch_verilator_generate_loops(build_dir)
     _localize_generated_prefix_defines(build_dir)
-    _tieoff_unused_input_ports(build_dir / combined_dir)
+    _tieoff_unused_input_ports(build_dir / (FULL_TOPO_ID if flow == "dv" else combined_dir))
     if flow == "dv":
         _publish_top_filelist(
             build_dir / combined_dir / "filelist.f",
             publish_dst,
             build_dir_name,
             combined_dir,
+            wrapper_inner_dir_name=FULL_TOPO_ID,
         )
     else:
         _publish_partitioned_harden_outputs(
@@ -677,7 +708,9 @@ def generate(flow: str = "dv"):
             build_dir / combined_dir,
             THIS_DIR / "filelist_pd",
         )
-    _run_top_io_boundary_check(build_dir / combined_dir / f"{combined_dir}.v")
+    _run_top_io_boundary_check(
+        build_dir / ((FULL_TOPO_ID if flow == "dv" else combined_dir)) / f"{FULL_TOPO_ID if flow == 'dv' else combined_dir}.v"
+    )
 
     print(f"[{flow}] Topology JSON written to {topology_json}")
     print(f"[{flow}] Generated RTL written to  {build_dir}")
@@ -1048,6 +1081,7 @@ def _patch_async_fifo_depths(build_dir: Path, iniu_depth: int, tniu_depth: int) 
         for path in (
             iniu_top_side_dir / "interrupt_iniu_async_top_side.sv",
             build_dir / "soc_intr_ring_top" / "interrupt_iniu_async_top_side.sv",
+            build_dir / FULL_TOPO_ID / "interrupt_iniu_async_top_side.sv",
         )
         if path.exists()
     ):
@@ -1148,6 +1182,7 @@ def _patch_verilator_generate_loops(build_dir: Path) -> None:
         *sorted(build_dir.glob("*_iniu_sys")),
         *sorted(build_dir.glob("*_tniu_sys")),
         build_dir / TOPO_ID,
+        build_dir / FULL_TOPO_ID,
     )
     targets = sorted(
         sv for d in scan_dirs if d.is_dir() for sv in d.glob("*.sv")
@@ -1513,12 +1548,20 @@ def _publish_named_top_wrapper(
     wrapper_lines = []
     if include_common_dep:
         wrapper_lines.append(f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}")
-    wrapper_lines.extend(
-        [
-            f"-f $INTR_NOC_DEMO_DIR/{_SHARED_BUILD_DIR_NAME}/{inner_dir_name}/filelist.f",
-            f"$INTR_NOC_DEMO_DIR/{_SHARED_BUILD_DIR_NAME}/{wrapper_dir_name}/{wrapper_dir_name}.v",
-        ]
-    )
+
+    inner_filelist = inner_dir / "filelist.f"
+    if inner_filelist.exists():
+        seen_lines = set(wrapper_lines)
+        for raw_line in inner_filelist.read_text().splitlines():
+            line = raw_line.strip()
+            if not line or line in seen_lines:
+                continue
+            wrapper_lines.append(line)
+            seen_lines.add(line)
+    else:
+        wrapper_lines.append(f"-f $INTR_NOC_DEMO_DIR/{_SHARED_BUILD_DIR_NAME}/{inner_dir_name}/filelist.f")
+
+    wrapper_lines.append(f"$INTR_NOC_DEMO_DIR/{_SHARED_BUILD_DIR_NAME}/{wrapper_dir_name}/{wrapper_dir_name}.v")
     _write_filelist(wrapper_dir / "filelist.f", wrapper_lines)
 
 
@@ -1560,6 +1603,42 @@ def _iter_sys_filelist_entries(build_dir: Path):
         yield from _iter_localized_filelist_entries(sys_filelists[0], sys_dir)
 
 
+def _primary_generated_filelist(source_dir: Path) -> Path | None:
+    candidates = [path for path in sorted(source_dir.glob("*_filelist.f")) if path.name != "expanded_filelist.f"]
+    if candidates:
+        return candidates[0]
+
+    fallback = source_dir / "filelist.f"
+    if fallback.exists():
+        return fallback
+    return None
+
+
+def _sys_dir_env_var(dir_name: str) -> str:
+    return f"SOC_INTR_{dir_name.upper()}_OUT_DIR"
+
+
+def _iter_sys_filelist_refs(build_dir: Path):
+    for sys_dir in sorted(build_dir.glob("*_sys")):
+        filelist = _primary_generated_filelist(sys_dir)
+        if filelist is None:
+            continue
+        yield f"-f ${_sys_dir_env_var(sys_dir.name)}/{filelist.name}"
+
+
+def _iter_generated_component_filelist_refs(build_dir: Path):
+    for dir_name, env_var in _GENERATED_COMPONENT_BLOCKS.items():
+        # intr_ring_network already publishes the shared ring helper RTL and the
+        # wrapper leaf modules needed by buf/sink/zero_source. Including all four
+        # bundles in the top compile entry redefines the same modules/types in VCS.
+        if dir_name in _DV_REDUNDANT_RING_FILELIST_BLOCKS:
+            continue
+        filelist = _primary_generated_filelist(build_dir / dir_name)
+        if filelist is None:
+            continue
+        yield f"-f ${env_var}/{filelist.name}"
+
+
 def _iter_dv_combined_core_entries(source_dir: Path):
     for macro_name, wrapper_name in (
         ("intr_iniu_top_macros.sv", "intr_iniu_top.f"),
@@ -1576,28 +1655,14 @@ def _iter_dv_combined_core_entries(source_dir: Path):
 
 
 def _iter_dv_leaf_filenames(source_dir: Path):
-    seen_filenames = set()
-    for entry in _iter_ring_plan_entries():
-        node_name = entry.get("name")
-        kind = entry.get("kind")
-        if not isinstance(node_name, str):
+    top_filename = f"{source_dir.name}.v"
+    for path in sorted(source_dir.glob("*.v")):
+        if path.name == top_filename:
             continue
-
-        if kind in {"iniu", "tniu", "sink"}:
-            candidates = (f"{node_name}_ring.v", f"{node_name}.v")
-        elif kind == "async":
-            candidates = (f"{node_name}.v",)
-        else:
-            continue
-
-        for filename in candidates:
-            if filename in seen_filenames or not (source_dir / filename).exists():
-                continue
-            seen_filenames.add(filename)
-            yield filename
+        yield path.name
 
 
-def _rewrite_dv_logic_filelist(build_dir: Path, combined_dir_name: str) -> None:
+def _rewrite_dv_logic_filelist(build_dir: Path, combined_dir_name: str, *, include_sys_refs: bool) -> None:
     source_dir = build_dir / combined_dir_name
     if not source_dir.exists():
         return
@@ -1605,37 +1670,51 @@ def _rewrite_dv_logic_filelist(build_dir: Path, combined_dir_name: str) -> None:
     out_lines = []
     seen_lines = set()
 
-    def _append_path(path: Path) -> None:
-        line = _as_demo_token(path)
+    def _append_line(line: str) -> None:
         if line in seen_lines:
             return
         seen_lines.add(line)
         out_lines.append(line)
 
-    for path in _iter_sys_filelist_entries(build_dir):
-        _append_path(path)
-    for path in _iter_dv_combined_core_entries(source_dir):
-        _append_path(path)
+    if not include_sys_refs:
+        _append_line(f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}")
+    if include_sys_refs:
+        for line in _iter_sys_filelist_refs(build_dir):
+            _append_line(line)
+    for line in _iter_generated_component_filelist_refs(build_dir):
+        _append_line(line)
     for filename in _iter_dv_leaf_filenames(source_dir):
-        _append_path(source_dir / filename)
+        _append_line(_as_demo_token(source_dir / filename))
 
     top_path = source_dir / f"{combined_dir_name}.v"
     if top_path.exists():
-        _append_path(top_path)
+        _append_line(_as_demo_token(top_path))
 
     _write_filelist(source_dir / "filelist.f", out_lines)
 
 
-def _publish_top_filelist(src_path: Path, dst_path: Path, build_dir_name: str, combined_dir_name: str) -> None:
-    if not src_path.exists():
+def _publish_top_filelist(
+    src_path: Path,
+    dst_path: Path,
+    build_dir_name: str,
+    combined_dir_name: str,
+    *,
+    wrapper_inner_dir_name: str | None = None,
+) -> None:
+    source_dir = src_path.parent
+    if not source_dir.exists():
         return
     build_dir = THIS_DIR / build_dir_name
-    _rewrite_dv_logic_filelist(build_dir, combined_dir_name)
-    _publish_named_top_wrapper(build_dir, combined_dir_name, SOC_INTR_DV_WRAP_DIR)
+    inner_dir_name = wrapper_inner_dir_name or combined_dir_name
+    _rewrite_dv_logic_filelist(build_dir, combined_dir_name, include_sys_refs=False)
+    _rewrite_dv_logic_filelist(build_dir, inner_dir_name, include_sys_refs=True)
+    ingress_dir_name = inner_dir_name
+    if inner_dir_name != SOC_INTR_DV_WRAP_DIR:
+        _publish_named_top_wrapper(build_dir, inner_dir_name, SOC_INTR_DV_WRAP_DIR)
+        ingress_dir_name = SOC_INTR_DV_WRAP_DIR
 
     top_lines = [
-        f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}",
-        f"-f $INTR_NOC_DEMO_DIR/{build_dir_name}/{combined_dir_name}/filelist.f",
+        f"-f $INTR_NOC_DEMO_DIR/{build_dir_name}/{ingress_dir_name}/filelist.f",
     ]
     dst_path.parent.mkdir(parents=True, exist_ok=True)
     dst_path.write_text("\n".join(top_lines) + "\n")
@@ -1796,9 +1875,8 @@ def _publish_partitioned_harden_outputs(build_dir: Path, harden_dir: Path, publi
     _publish_harden_partition_dir(harden_dir, build_dir / DN_HARDEN_ID, DN_HARDEN_ID)
     _rewrite_harden_top_filelist(harden_dir)
     _prune_harden_assembly_dir(harden_dir)
-    _publish_named_top_wrapper(build_dir, HARDEN_TOP_ID, SOC_INTR_PD_WRAP_DIR, include_common_dep=False)
 
-    harden_ingress = f"-f $INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{SOC_INTR_PD_WRAP_DIR}/filelist.f"
+    harden_ingress = f"-f $INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{HARDEN_TOP_ID}/filelist.f"
     _write_filelist(publish_dir / "filelist_harden.f", [harden_ingress])
     print(f"  [harden_filelist] published to {publish_dir / 'filelist_harden.f'}")
     _stitch_pd_compile_entry(publish_dir)

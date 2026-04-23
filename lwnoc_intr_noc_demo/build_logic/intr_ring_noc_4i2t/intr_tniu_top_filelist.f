@@ -1,3 +1,0 @@
-$INTR_RING_NOC_DIR/intr_tniu_top_interrupt_tniu_define.sv
-$INTR_RING_NOC_DIR/intr_tniu_top_interrupt_tniu_pkg.sv
-$INTR_RING_NOC_DIR/intr_tniu_top_interrupt_tniu_async_top_side.sv

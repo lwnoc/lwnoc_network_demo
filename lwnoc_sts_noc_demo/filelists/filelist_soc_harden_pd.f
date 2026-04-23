@@ -1,1 +1,2 @@
+-f $STS_NOC_DEMO_DIR/filelists/sts_common_dep.f
 -f $STS_NOC_DEMO_DIR/build_logic/sts_soc_noc_wrap_pd/filelist.f

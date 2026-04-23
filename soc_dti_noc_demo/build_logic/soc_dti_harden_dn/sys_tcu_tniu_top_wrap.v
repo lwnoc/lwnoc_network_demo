@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:14ef41533530d3f2ecc7771b83553120]
+//[UHDL]Content Start [md5:8cbdd3264a7bd86a7c2a8d8d31ab9567]
 module sys_tcu_tniu_top_wrap
 	(
 	input                                                 clk_top                  ,
@@ -15,13 +15,19 @@ module sys_tcu_tniu_top_wrap
 	input logic [13-1:0] lp_top_rx_lp_hub_rx_req  ,
 	input                                                 top_req_req_last         ,
 	input  [89:0]                                         top_req_req_payload      ,
+	input                                                 top_req_req_qos          ,
 	output                                                top_req_req_ready        ,
 	input  [5:0]                                          top_req_req_srcid        ,
+	input  [5:0]                                          top_req_req_tgtid        ,
+	output                                                top_req_req_threshold    ,
 	input                                                 top_req_req_valid        ,
 	output                                                top_rsp_rsp_last         ,
 	output [89:0]                                         top_rsp_rsp_payload      ,
+	output                                                top_rsp_rsp_qos          ,
 	input                                                 top_rsp_rsp_ready        ,
 	output [5:0]                                          top_rsp_rsp_srcid        ,
+	output [5:0]                                          top_rsp_rsp_tgtid        ,
+	input                                                 top_rsp_rsp_threshold    ,
 	output                                                top_rsp_rsp_valid        );
 
 	//Wire define for this module.
@@ -34,12 +40,6 @@ module sys_tcu_tniu_top_wrap
 	assign lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(lp_top_rx_lp_hub_rx_req);
 
 	//Wire define for sub module.
-	wire [5:0] top_ext_tieoff_TO_top_side_SIG_req_tgtid    ;
-	wire       top_ext_tieoff_TO_top_side_SIG_req_qos      ;
-	wire       top_ext_tieoff_TO_top_side_SIG_rsp_threshold;
-	wire       top_side_TO_top_ext_tieoff_SIG_req_threshold;
-	wire       top_side_TO_top_ext_tieoff_SIG_rsp_qos      ;
-	wire [5:0] top_side_TO_top_ext_tieoff_SIG_rsp_tgtid    ;
 
 	//Wire define for Inout.
 
@@ -55,9 +55,9 @@ module sys_tcu_tniu_top_wrap
 		.req_payload(top_req_req_payload),
 		.req_last(top_req_req_last),
 		.req_srcid(top_req_req_srcid),
-		.req_tgtid(top_ext_tieoff_TO_top_side_SIG_req_tgtid),
-		.req_qos(top_ext_tieoff_TO_top_side_SIG_req_qos),
-		.req_threshold(top_side_TO_top_ext_tieoff_SIG_req_threshold),
+		.req_tgtid(top_req_req_tgtid),
+		.req_qos(top_req_req_qos),
+		.req_threshold(top_req_req_threshold),
 		.req_ready(top_req_req_ready),
 		.req_wptr_async(async_fifo_req_wptr_async),
 		.req_rptr_async(async_fifo_req_rptr_async),
@@ -67,9 +67,9 @@ module sys_tcu_tniu_top_wrap
 		.rsp_payload(top_rsp_rsp_payload),
 		.rsp_last(top_rsp_rsp_last),
 		.rsp_srcid(top_rsp_rsp_srcid),
-		.rsp_tgtid(top_side_TO_top_ext_tieoff_SIG_rsp_tgtid),
-		.rsp_qos(top_side_TO_top_ext_tieoff_SIG_rsp_qos),
-		.rsp_threshold(top_ext_tieoff_TO_top_side_SIG_rsp_threshold),
+		.rsp_tgtid(top_rsp_rsp_tgtid),
+		.rsp_qos(top_rsp_rsp_qos),
+		.rsp_threshold(top_rsp_rsp_threshold),
 		.rsp_ready(top_rsp_rsp_ready),
 		.rsp_wptr_async(async_fifo_rsp_wptr_async),
 		.rsp_rptr_async(async_fifo_rsp_rptr_async),
@@ -77,14 +77,7 @@ module sys_tcu_tniu_top_wrap
 		.rsp_pld_sync(async_fifo_rsp_pld_sync),
 		.lp_hub_rx_req(lp_top_rx_lp_hub_rx_req__typed),
 		.lp_hub_tx_req(lp_top_tx_lp_hub_tx_req__typed));
-	DtiTniuTopExtTieoffComponent top_ext_tieoff (
-		.req_qos(top_ext_tieoff_TO_top_side_SIG_req_qos),
-		.req_threshold(top_side_TO_top_ext_tieoff_SIG_req_threshold),
-		.req_tgtid(top_ext_tieoff_TO_top_side_SIG_req_tgtid),
-		.rsp_qos(top_side_TO_top_ext_tieoff_SIG_rsp_qos),
-		.rsp_threshold(top_ext_tieoff_TO_top_side_SIG_rsp_threshold),
-		.rsp_tgtid(top_side_TO_top_ext_tieoff_SIG_rsp_tgtid));
 
 endmodule
-//[UHDL]Content End [md5:14ef41533530d3f2ecc7771b83553120]
+//[UHDL]Content End [md5:8cbdd3264a7bd86a7c2a8d8d31ab9567]
 

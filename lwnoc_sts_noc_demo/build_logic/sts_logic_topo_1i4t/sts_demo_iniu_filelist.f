@@ -1,0 +1,3 @@
+$STS_LOGIC_TOPO_DIR/sts_demo_iniu_sts_iniu_noc.sv
+$STS_LOGIC_TOPO_DIR/sts_demo_iniu_sts_iniu_top.sv
+$STS_LOGIC_TOPO_DIR/sts_demo_iniu_sts_demo_iniu_wrap.sv

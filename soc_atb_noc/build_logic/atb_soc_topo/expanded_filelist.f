@@ -1,0 +1,13 @@
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/atb_primitives.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/atb_network_layer.v
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/dsp_ss0_atb_iniu_noc.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/dsp_ss1_atb_iniu_noc.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/dsp_ss2_atb_iniu_noc.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/dsp_ss3_atb_iniu_noc.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/dsp_ss4_atb_iniu_noc.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/dsp_ss5_atb_iniu_noc.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/camera_ss_atb_iniu_noc.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/mipi_ss_atb_iniu_noc.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/debug_tniu_ss_atb_tniu_noc.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/debug_tniu_ss_tniu_noc_side.v
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/atb_soc_topo/atb_soc_topo.v

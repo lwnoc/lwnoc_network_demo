@@ -1,2 +1,0 @@
-$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/soc_dti_sw_dsp6_dti_noc_switch.sv
-$DTI_TEST_DIR/build_logic/soc_dti_harden_dn/soc_dti_sw_dsp6_dti_switch_6i1o_wrap.sv

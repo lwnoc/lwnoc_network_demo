@@ -1,0 +1,2 @@
+# Standard-library-only generator for now.
+# Add external packages here if topology visualization/reporting grows.

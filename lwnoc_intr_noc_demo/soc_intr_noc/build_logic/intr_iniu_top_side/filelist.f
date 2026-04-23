@@ -1,0 +1,16 @@
+$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_macros.sv
+$INTR_INIU_TOP_OUT_DIR/soc_intr_niu_ring_noc_define.sv
+$INTR_INIU_TOP_OUT_DIR/interrupt_iniu_define.sv
+$INTR_INIU_TOP_OUT_DIR/interrupt_iniu_pkg.sv
+$INTR_INIU_TOP_OUT_DIR/interrupt_iniu_event_recorder.sv
+$INTR_INIU_TOP_OUT_DIR/interrupt_iniu_lut.sv
+$INTR_INIU_TOP_OUT_DIR/interrupt_iniu_reg_bank.sv
+$INTR_INIU_TOP_OUT_DIR/interrupt_iniu_arb.sv
+$INTR_INIU_TOP_OUT_DIR/interrupt_iniu.sv
+$INTR_INIU_TOP_OUT_DIR/spram_4096x20.sv
+$INTR_INIU_TOP_OUT_DIR/spram_2048x20.sv
+$INTR_INIU_TOP_OUT_DIR/spram_1024x20.sv
+$INTR_INIU_TOP_OUT_DIR/spram_512x20.sv
+$INTR_INIU_TOP_OUT_DIR/spram_256x20.sv
+$INTR_INIU_TOP_OUT_DIR/spram_128x20.sv
+$INTR_INIU_TOP_OUT_DIR/interrupt_iniu_async_top_side.sv

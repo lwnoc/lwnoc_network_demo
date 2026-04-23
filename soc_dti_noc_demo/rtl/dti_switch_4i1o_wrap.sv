@@ -17,80 +17,120 @@ module `_PREFIX_(dti_switch_4i1o_wrap) #(
     output  logic           iniu0_req_ready,
     input   logic [89:0]    iniu0_req_payload,
     input   logic [5:0]     iniu0_req_srcid,
+    input   logic [5:0]     iniu0_req_tgtid,
+    input   logic           iniu0_req_qos,
     input   logic           iniu0_req_last,
+    output  logic           iniu0_req_threshold,
     output  logic           iniu0_rsp_valid,
     input   logic           iniu0_rsp_ready,
     output  logic [89:0]    iniu0_rsp_payload,
     output  logic [5:0]     iniu0_rsp_srcid,
+    output  logic [5:0]     iniu0_rsp_tgtid,
+    output  logic           iniu0_rsp_qos,
     output  logic           iniu0_rsp_last,
+    input   logic           iniu0_rsp_threshold,
 
     input   logic           iniu1_req_valid,
     output  logic           iniu1_req_ready,
     input   logic [89:0]    iniu1_req_payload,
     input   logic [5:0]     iniu1_req_srcid,
+    input   logic [5:0]     iniu1_req_tgtid,
+    input   logic           iniu1_req_qos,
     input   logic           iniu1_req_last,
+    output  logic           iniu1_req_threshold,
     output  logic           iniu1_rsp_valid,
     input   logic           iniu1_rsp_ready,
     output  logic [89:0]    iniu1_rsp_payload,
     output  logic [5:0]     iniu1_rsp_srcid,
+    output  logic [5:0]     iniu1_rsp_tgtid,
+    output  logic           iniu1_rsp_qos,
     output  logic           iniu1_rsp_last,
+    input   logic           iniu1_rsp_threshold,
 
     input   logic           iniu2_req_valid,
     output  logic           iniu2_req_ready,
     input   logic [89:0]    iniu2_req_payload,
     input   logic [5:0]     iniu2_req_srcid,
+    input   logic [5:0]     iniu2_req_tgtid,
+    input   logic           iniu2_req_qos,
     input   logic           iniu2_req_last,
+    output  logic           iniu2_req_threshold,
     output  logic           iniu2_rsp_valid,
     input   logic           iniu2_rsp_ready,
     output  logic [89:0]    iniu2_rsp_payload,
     output  logic [5:0]     iniu2_rsp_srcid,
+    output  logic [5:0]     iniu2_rsp_tgtid,
+    output  logic           iniu2_rsp_qos,
     output  logic           iniu2_rsp_last,
+    input   logic           iniu2_rsp_threshold,
 
     input   logic           iniu3_req_valid,
     output  logic           iniu3_req_ready,
     input   logic [89:0]    iniu3_req_payload,
     input   logic [5:0]     iniu3_req_srcid,
+    input   logic [5:0]     iniu3_req_tgtid,
+    input   logic           iniu3_req_qos,
     input   logic           iniu3_req_last,
+    output  logic           iniu3_req_threshold,
     output  logic           iniu3_rsp_valid,
     input   logic           iniu3_rsp_ready,
     output  logic [89:0]    iniu3_rsp_payload,
     output  logic [5:0]     iniu3_rsp_srcid,
+    output  logic [5:0]     iniu3_rsp_tgtid,
+    output  logic           iniu3_rsp_qos,
     output  logic           iniu3_rsp_last,
+    input   logic           iniu3_rsp_threshold,
 
     output  logic           tniu_req_valid,
     input   logic           tniu_req_ready,
     output  logic [89:0]    tniu_req_payload,
     output  logic [5:0]     tniu_req_srcid,
+    output  logic [5:0]     tniu_req_tgtid,
+    output  logic           tniu_req_qos,
     output  logic           tniu_req_last,
+    input   logic           tniu_req_threshold,
     input   logic           tniu_rsp_valid,
     output  logic           tniu_rsp_ready,
     input   logic [89:0]    tniu_rsp_payload,
     input   logic [5:0]     tniu_rsp_srcid,
-    input   logic           tniu_rsp_last
+    input   logic [5:0]     tniu_rsp_tgtid,
+    input   logic           tniu_rsp_qos,
+    input   logic           tniu_rsp_last,
+    output  logic           tniu_rsp_threshold
 );
 
     logic [3:0]        iniu_req_valid_bus;
     logic [3:0]        iniu_req_ready_bus;
     logic [3:0][89:0]  iniu_req_payload_bus;
     logic [3:0][5:0]   iniu_req_srcid_bus;
+    logic [3:0][5:0]   iniu_req_tgtid_bus;
+    logic [3:0]        iniu_req_qos_bus;
     logic [3:0]        iniu_req_last_bus;
+    logic [3:0]        iniu_req_threshold_bus;
     logic [3:0]        iniu_rsp_valid_bus;
     logic [3:0][89:0]  iniu_rsp_payload_bus;
     logic [3:0][5:0]   iniu_rsp_srcid_bus;
+    logic [3:0][5:0]   iniu_rsp_tgtid_bus;
+    logic [3:0]        iniu_rsp_qos_bus;
     logic [3:0]        iniu_rsp_last_bus;
-    logic [3:0]        iniu_rsp_threshold_unused;
+    logic [3:0]        iniu_rsp_threshold_bus;
 
     logic [0:0]        tniu_req_valid_bus;
     logic [0:0]        tniu_req_ready_bus;
     logic [0:0][89:0]  tniu_req_payload_bus;
     logic [0:0][5:0]   tniu_req_srcid_bus;
+    logic [0:0][5:0]   tniu_req_tgtid_bus;
+    logic [0:0]        tniu_req_qos_bus;
     logic [0:0]        tniu_req_last_bus;
-    logic [0:0]        tniu_req_threshold_unused;
+    logic [0:0]        tniu_req_threshold_bus;
     logic [0:0]        tniu_rsp_valid_bus;
     logic [0:0]        tniu_rsp_ready_bus;
     logic [0:0][89:0]  tniu_rsp_payload_bus;
     logic [0:0][5:0]   tniu_rsp_srcid_bus;
+    logic [0:0][5:0]   tniu_rsp_tgtid_bus;
+    logic [0:0]        tniu_rsp_qos_bus;
     logic [0:0]        tniu_rsp_last_bus;
+    logic [0:0]        tniu_rsp_threshold_bus;
 
     assign iniu_req_valid_bus = {iniu3_req_valid, iniu2_req_valid, iniu1_req_valid, iniu0_req_valid};
     assign iniu_req_payload_bus[0] = iniu0_req_payload;
@@ -101,8 +141,14 @@ module `_PREFIX_(dti_switch_4i1o_wrap) #(
     assign iniu_req_srcid_bus[1] = iniu1_req_srcid;
     assign iniu_req_srcid_bus[2] = iniu2_req_srcid;
     assign iniu_req_srcid_bus[3] = iniu3_req_srcid;
+    assign iniu_req_tgtid_bus[0] = iniu0_req_tgtid;
+    assign iniu_req_tgtid_bus[1] = iniu1_req_tgtid;
+    assign iniu_req_tgtid_bus[2] = iniu2_req_tgtid;
+    assign iniu_req_tgtid_bus[3] = iniu3_req_tgtid;
+    assign iniu_req_qos_bus = {iniu3_req_qos, iniu2_req_qos, iniu1_req_qos, iniu0_req_qos};
     assign iniu_req_last_bus = {iniu3_req_last, iniu2_req_last, iniu1_req_last, iniu0_req_last};
     assign {iniu3_req_ready, iniu2_req_ready, iniu1_req_ready, iniu0_req_ready} = iniu_req_ready_bus;
+    assign {iniu3_req_threshold, iniu2_req_threshold, iniu1_req_threshold, iniu0_req_threshold} = iniu_req_threshold_bus;
 
     assign iniu0_rsp_valid = iniu_rsp_valid_bus[0];
     assign iniu1_rsp_valid = iniu_rsp_valid_bus[1];
@@ -116,21 +162,37 @@ module `_PREFIX_(dti_switch_4i1o_wrap) #(
     assign iniu1_rsp_srcid = iniu_rsp_srcid_bus[1];
     assign iniu2_rsp_srcid = iniu_rsp_srcid_bus[2];
     assign iniu3_rsp_srcid = iniu_rsp_srcid_bus[3];
+    assign iniu0_rsp_tgtid = iniu_rsp_tgtid_bus[0];
+    assign iniu1_rsp_tgtid = iniu_rsp_tgtid_bus[1];
+    assign iniu2_rsp_tgtid = iniu_rsp_tgtid_bus[2];
+    assign iniu3_rsp_tgtid = iniu_rsp_tgtid_bus[3];
+    assign iniu0_rsp_qos = iniu_rsp_qos_bus[0];
+    assign iniu1_rsp_qos = iniu_rsp_qos_bus[1];
+    assign iniu2_rsp_qos = iniu_rsp_qos_bus[2];
+    assign iniu3_rsp_qos = iniu_rsp_qos_bus[3];
     assign iniu0_rsp_last = iniu_rsp_last_bus[0];
     assign iniu1_rsp_last = iniu_rsp_last_bus[1];
     assign iniu2_rsp_last = iniu_rsp_last_bus[2];
     assign iniu3_rsp_last = iniu_rsp_last_bus[3];
+    assign iniu_rsp_threshold_bus = {iniu3_rsp_threshold, iniu2_rsp_threshold, iniu1_rsp_threshold, iniu0_rsp_threshold};
 
     assign tniu_req_valid = tniu_req_valid_bus[0];
     assign tniu_req_payload = tniu_req_payload_bus[0];
     assign tniu_req_srcid = tniu_req_srcid_bus[0];
+    assign tniu_req_tgtid = tniu_req_tgtid_bus[0];
+    assign tniu_req_qos = tniu_req_qos_bus[0];
     assign tniu_req_last = tniu_req_last_bus[0];
     assign tniu_req_ready_bus[0] = tniu_req_ready;
+    assign tniu_req_threshold_bus[0] = tniu_req_threshold;
+
     assign tniu_rsp_valid_bus[0] = tniu_rsp_valid;
     assign tniu_rsp_payload_bus[0] = tniu_rsp_payload;
     assign tniu_rsp_srcid_bus[0] = tniu_rsp_srcid;
+    assign tniu_rsp_tgtid_bus[0] = tniu_rsp_tgtid;
+    assign tniu_rsp_qos_bus[0] = tniu_rsp_qos;
     assign tniu_rsp_last_bus[0] = tniu_rsp_last;
     assign tniu_rsp_ready = tniu_rsp_ready_bus[0];
+    assign tniu_rsp_threshold = tniu_rsp_threshold_bus[0];
 
     `_PREFIX_(dti_noc_switch) #(
         .NUM_INIU      (4),
@@ -148,24 +210,34 @@ module `_PREFIX_(dti_switch_4i1o_wrap) #(
         .iniu_req_ready     (iniu_req_ready_bus),
         .iniu_req_payload   (iniu_req_payload_bus),
         .iniu_req_srcid     (iniu_req_srcid_bus),
+        .iniu_req_tgtid     (iniu_req_tgtid_bus),
+        .iniu_req_qos       (iniu_req_qos_bus),
         .iniu_req_last      (iniu_req_last_bus),
+        .iniu_req_threshold (iniu_req_threshold_bus),
         .iniu_rsp_valid     (iniu_rsp_valid_bus),
         .iniu_rsp_ready     ({iniu3_rsp_ready, iniu2_rsp_ready, iniu1_rsp_ready, iniu0_rsp_ready}),
         .iniu_rsp_payload   (iniu_rsp_payload_bus),
         .iniu_rsp_srcid     (iniu_rsp_srcid_bus),
+        .iniu_rsp_tgtid     (iniu_rsp_tgtid_bus),
+        .iniu_rsp_qos       (iniu_rsp_qos_bus),
         .iniu_rsp_last      (iniu_rsp_last_bus),
-        .iniu_rsp_threshold (iniu_rsp_threshold_unused),
+        .iniu_rsp_threshold (iniu_rsp_threshold_bus),
         .tniu_req_valid     (tniu_req_valid_bus),
         .tniu_req_ready     (tniu_req_ready_bus),
         .tniu_req_payload   (tniu_req_payload_bus),
         .tniu_req_srcid     (tniu_req_srcid_bus),
+        .tniu_req_tgtid     (tniu_req_tgtid_bus),
+        .tniu_req_qos       (tniu_req_qos_bus),
         .tniu_req_last      (tniu_req_last_bus),
-        .tniu_req_threshold (tniu_req_threshold_unused),
+        .tniu_req_threshold (tniu_req_threshold_bus),
         .tniu_rsp_valid     (tniu_rsp_valid_bus),
         .tniu_rsp_ready     (tniu_rsp_ready_bus),
         .tniu_rsp_payload   (tniu_rsp_payload_bus),
         .tniu_rsp_srcid     (tniu_rsp_srcid_bus),
-        .tniu_rsp_last      (tniu_rsp_last_bus)
+        .tniu_rsp_tgtid     (tniu_rsp_tgtid_bus),
+        .tniu_rsp_qos       (tniu_rsp_qos_bus),
+        .tniu_rsp_last      (tniu_rsp_last_bus),
+        .tniu_rsp_threshold (tniu_rsp_threshold_bus)
     );
 
 endmodule

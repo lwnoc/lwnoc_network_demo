@@ -1,0 +1,988 @@
+
+Warning-[LINX_KRNL] Unsupported Linux kernel
+  Linux kernel '5.15.133.1-microsoft-standard-WSL2' is not supported.
+  Supported versions are 2.4* or 2.6*.
+
+Command: vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed -sverilog \
+-timescale=1ns/1ps +v2k +notimingcheck +lint=TFIPC-L +define+ASIC_SIM -P /home/lgzhu/software/verdi2016/share/PLI/VCS/linux64/novas.tab \
+/home/lgzhu/software/verdi2016/share/PLI/VCS/linux64/pli.a -f /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/filelists/dti_common_dep.f \
+-f /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/filelists/soc_dti_logic_topo.f \
+-top soc_dti_logic_topo -Mdir=/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/sim/build_dut_only/csrc \
+-o /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/sim/build_dut_only/simv \
+-l /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/sim/build_dut_only/compile.log \
+
+*** Using c compiler gcc-4.8 instead of cc ...
+                         Chronologic VCS (TM)
+         Version L-2016.06_Full64 -- Thu Apr 23 20:38:16 2026
+               Copyright (c) 1991-2016 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_bin2onehot.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_booth_wallace_mul.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_lead_one.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_lead_one_msb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_lead_one_rev.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_lfsr4.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_list_lead_one.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_list_lead_one_rev.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_list_lead_zero.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_onehot2bin.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_rob_id_dec.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_rob_prealloc.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_onehot_demux.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_onehot_mux_pld.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_apb_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_doub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_mst_doub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_arb_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_arb_vrp.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_fix_arb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_grant_gen_fp.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_grant_gen_rr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_mtx_gen_age.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_mtx_gen_plru_tree.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_tree_plru_comb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_arb_vr_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_age_matrix_list.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_age_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_arb_vrp_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_marker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_clk_marker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_data_pipe.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_sync_arst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_sync_aset.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_sync_cell.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lwnoc_lp_define_package.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lwnoc_lp_struct_package.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_endpoint.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_nest.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_slv_adapter.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_slv_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_common/lp_fsm/lwnoc_lp_stg2_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_common/lp_fsm/lwnoc_lp_stg1_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_common/lp_fsm/lwnoc_lp_niu_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_subhub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_3terminal.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_tiny_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_small_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_large_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_async_bridge.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_func_tniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_func_iniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_dummy_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_stall_logic.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_iniu/lwnoc_lp_pchn_niu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_iniu/lwnoc_lp_iniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_network_component/soc_dti_sw_dsp6_dti_noc_switch.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_network_component/soc_dti_sw_dsp6_dti_switch_6i1o_wrap.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_network_component/soc_dti_sw_gpu4_dti_noc_switch.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_network_component/soc_dti_sw_gpu4_dti_switch_4i1o_wrap.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_network_component/soc_dti_sw_io5_dti_noc_switch.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_network_component/soc_dti_sw_io5_dti_switch_5i1o_wrap.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_network_component/soc_dti_sw_right_dti_noc_switch.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_network_component/soc_dti_sw_right_dti_switch_2i1o_wrap.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_network_component/soc_dti_sw_root_dti_noc_switch.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_network_component/soc_dti_sw_root_dti_switch_2i1o_wrap.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/DtiIniuTopExtTieoffComponent.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dti_iniu_top_side/dti_iniu_top_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dti_iniu_top_side/dti_iniu_top_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dti_iniu_top_side/dti_iniu_top_dti_pr_iniu_async_top_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/display_ss_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/display_ss_iniu_sys/display_ss_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/display_ss_iniu_sys/display_ss_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/display_ss_iniu_sys/display_ss_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/display_ss_iniu_sys/display_ss_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/display_ss_iniu_sys/display_ss_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/display_ss_iniu_sys/display_ss_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/display_ss_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/display_ss_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dp_ss_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dp_ss_iniu_sys/dp_ss_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dp_ss_iniu_sys/dp_ss_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dp_ss_iniu_sys/dp_ss_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dp_ss_iniu_sys/dp_ss_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dp_ss_iniu_sys/dp_ss_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dp_ss_iniu_sys/dp_ss_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dp_ss_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dp_ss_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss1_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss1_iniu_sys/gpu_ss1_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss1_iniu_sys/gpu_ss1_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss1_iniu_sys/gpu_ss1_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss1_iniu_sys/gpu_ss1_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss1_iniu_sys/gpu_ss1_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss1_iniu_sys/gpu_ss1_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss1_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss1_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss0_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss0_iniu_sys/gpu_ss0_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss0_iniu_sys/gpu_ss0_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss0_iniu_sys/gpu_ss0_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss0_iniu_sys/gpu_ss0_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss0_iniu_sys/gpu_ss0_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/gpu_ss0_iniu_sys/gpu_ss0_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss0_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss0_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/mipi_ss_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/mipi_ss_iniu_sys/mipi_ss_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/mipi_ss_iniu_sys/mipi_ss_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/mipi_ss_iniu_sys/mipi_ss_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/mipi_ss_iniu_sys/mipi_ss_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/mipi_ss_iniu_sys/mipi_ss_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/mipi_ss_iniu_sys/mipi_ss_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/mipi_ss_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/mipi_ss_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/camera_ss_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/camera_ss_iniu_sys/camera_ss_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/camera_ss_iniu_sys/camera_ss_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/camera_ss_iniu_sys/camera_ss_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/camera_ss_iniu_sys/camera_ss_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/camera_ss_iniu_sys/camera_ss_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/camera_ss_iniu_sys/camera_ss_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/camera_ss_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/camera_ss_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/ufs_ss_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/ufs_ss_iniu_sys/ufs_ss_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/ufs_ss_iniu_sys/ufs_ss_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/ufs_ss_iniu_sys/ufs_ss_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/ufs_ss_iniu_sys/ufs_ss_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/ufs_ss_iniu_sys/ufs_ss_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/ufs_ss_iniu_sys/ufs_ss_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/ufs_ss_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/ufs_ss_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/pcie_rtg_ss_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/pcie_rtg_ss_iniu_sys/pcie_rtg_ss_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/pcie_rtg_ss_iniu_sys/pcie_rtg_ss_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/pcie_rtg_ss_iniu_sys/pcie_rtg_ss_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/pcie_rtg_ss_iniu_sys/pcie_rtg_ss_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/pcie_rtg_ss_iniu_sys/pcie_rtg_ss_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/pcie_rtg_ss_iniu_sys/pcie_rtg_ss_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/pcie_rtg_ss_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/pcie_rtg_ss_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/vpu_ss_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/vpu_ss_iniu_sys/vpu_ss_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/vpu_ss_iniu_sys/vpu_ss_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/vpu_ss_iniu_sys/vpu_ss_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/vpu_ss_iniu_sys/vpu_ss_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/vpu_ss_iniu_sys/vpu_ss_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/vpu_ss_iniu_sys/vpu_ss_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/vpu_ss_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/vpu_ss_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss5_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss5_iniu_sys/dsp_ss5_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss5_iniu_sys/dsp_ss5_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss5_iniu_sys/dsp_ss5_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss5_iniu_sys/dsp_ss5_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss5_iniu_sys/dsp_ss5_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss5_iniu_sys/dsp_ss5_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss5_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss5_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss4_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss4_iniu_sys/dsp_ss4_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss4_iniu_sys/dsp_ss4_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss4_iniu_sys/dsp_ss4_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss4_iniu_sys/dsp_ss4_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss4_iniu_sys/dsp_ss4_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss4_iniu_sys/dsp_ss4_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss4_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss4_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss3_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss3_iniu_sys/dsp_ss3_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss3_iniu_sys/dsp_ss3_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss3_iniu_sys/dsp_ss3_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss3_iniu_sys/dsp_ss3_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss3_iniu_sys/dsp_ss3_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss3_iniu_sys/dsp_ss3_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss3_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss3_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss2_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss2_iniu_sys/dsp_ss2_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss2_iniu_sys/dsp_ss2_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss2_iniu_sys/dsp_ss2_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss2_iniu_sys/dsp_ss2_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss2_iniu_sys/dsp_ss2_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss2_iniu_sys/dsp_ss2_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss2_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss2_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss1_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss1_iniu_sys/dsp_ss1_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss1_iniu_sys/dsp_ss1_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss1_iniu_sys/dsp_ss1_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss1_iniu_sys/dsp_ss1_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss1_iniu_sys/dsp_ss1_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss1_iniu_sys/dsp_ss1_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss1_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss1_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss0_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss0_iniu_sys/dsp_ss0_dti_pr_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss0_iniu_sys/dsp_ss0_dti_iniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss0_iniu_sys/dsp_ss0_dti_pr_rob_state_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss0_iniu_sys/dsp_ss0_dti_pr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss0_iniu_sys/dsp_ss0_dti_to_gnpd_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dsp_ss0_iniu_sys/dsp_ss0_dti_pr_iniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss0_iniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss0_iniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/DtiTniuTopExtTieoffComponent.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dti_tniu_top_side/dti_tniu_top_dti_tniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dti_tniu_top_side/dti_tniu_top_dti_tniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/dti_tniu_top_side/dti_tniu_top_dti_tniu_async_top_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/sys_tcu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/sys_tcu_tniu_sys/sys_tcu_dti_tniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/sys_tcu_tniu_sys/sys_tcu_dti_tniu_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/sys_tcu_tniu_sys/sys_tcu_gnpd_to_dti_conv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/sys_tcu_tniu_sys/sys_tcu_dti_tniu_async_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/sys_tcu_tniu_sys_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/sys_tcu_tniu_node.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/ReqRspPathComponent.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_up/gpu_ss0_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_up/gpu_ss1_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_up/dp_ss_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_up/display_ss_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_up/soc_dti_harden_up.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/dsp_ss0_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/dsp_ss1_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/dsp_ss2_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/dsp_ss3_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/dsp_ss4_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/dsp_ss5_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/vpu_ss_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/pcie_rtg_ss_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/ufs_ss_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/camera_ss_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/mipi_ss_iniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/sys_tcu_tniu_top_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_harden_dn/soc_dti_harden_dn.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/soc_dti_logic_topo.v'
+Top Level Modules:
+       soc_dti_logic_topo
+TimeScale is 1 ns / 1 ps
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/display_ss_iniu_node.v, 65
+"display_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_re ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "display_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/display_ss_iniu_node.v, 65
+"display_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_re ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "display_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/display_ss_iniu_node.v, 98
+"display_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_w ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "display_ss_top_wrap", instance 
+  "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/display_ss_iniu_node.v, 98
+"display_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_w ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "display_ss_top_wrap", instance 
+  "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dp_ss_iniu_node.v, 65
+"dp_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_twa ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dp_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dp_ss_iniu_node.v, 65
+"dp_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_twa ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dp_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dp_ss_iniu_node.v, 98
+"dp_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap_S ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dp_ss_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dp_ss_iniu_node.v, 98
+"dp_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap_S ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dp_ss_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss1_iniu_node.v, 65
+"gpu_ss1_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "gpu_ss1_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss1_iniu_node.v, 65
+"gpu_ss1_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "gpu_ss1_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss1_iniu_node.v, 98
+"gpu_ss1_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "gpu_ss1_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss1_iniu_node.v, 98
+"gpu_ss1_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "gpu_ss1_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss0_iniu_node.v, 65
+"gpu_ss0_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "gpu_ss0_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss0_iniu_node.v, 65
+"gpu_ss0_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "gpu_ss0_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss0_iniu_node.v, 98
+"gpu_ss0_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "gpu_ss0_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/gpu_ss0_iniu_node.v, 98
+"gpu_ss0_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "gpu_ss0_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/mipi_ss_iniu_node.v, 65
+"mipi_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "mipi_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/mipi_ss_iniu_node.v, 65
+"mipi_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "mipi_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/mipi_ss_iniu_node.v, 98
+"mipi_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "mipi_ss_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/mipi_ss_iniu_node.v, 98
+"mipi_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "mipi_ss_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/camera_ss_iniu_node.v, 65
+"camera_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "camera_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/camera_ss_iniu_node.v, 65
+"camera_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "camera_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/camera_ss_iniu_node.v, 98
+"camera_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wr ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "camera_ss_top_wrap", instance 
+  "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/camera_ss_iniu_node.v, 98
+"camera_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wr ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "camera_ss_top_wrap", instance 
+  "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/ufs_ss_iniu_node.v, 65
+"ufs_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_tw ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "ufs_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/ufs_ss_iniu_node.v, 65
+"ufs_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_tw ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "ufs_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/ufs_ss_iniu_node.v, 98
+"ufs_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap_ ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "ufs_ss_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/ufs_ss_iniu_node.v, 98
+"ufs_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap_ ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "ufs_ss_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/pcie_rtg_ss_iniu_node.v, 65
+"pcie_rtg_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_r ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "pcie_rtg_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/pcie_rtg_ss_iniu_node.v, 65
+"pcie_rtg_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_r ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "pcie_rtg_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/pcie_rtg_ss_iniu_node.v, 98
+"pcie_rtg_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_ ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "pcie_rtg_ss_top_wrap", instance 
+  "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/pcie_rtg_ss_iniu_node.v, 98
+"pcie_rtg_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_ ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "pcie_rtg_ss_top_wrap", instance 
+  "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/vpu_ss_iniu_node.v, 65
+"vpu_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_tw ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "vpu_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/vpu_ss_iniu_node.v, 65
+"vpu_ss_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_tw ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "vpu_ss_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/vpu_ss_iniu_node.v, 98
+"vpu_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap_ ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "vpu_ss_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/vpu_ss_iniu_node.v, 98
+"vpu_ss_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap_ ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "vpu_ss_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss5_iniu_node.v, 65
+"dsp_ss5_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss5_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss5_iniu_node.v, 65
+"dsp_ss5_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss5_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss5_iniu_node.v, 98
+"dsp_ss5_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss5_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss5_iniu_node.v, 98
+"dsp_ss5_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss5_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss4_iniu_node.v, 65
+"dsp_ss4_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss4_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss4_iniu_node.v, 65
+"dsp_ss4_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss4_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss4_iniu_node.v, 98
+"dsp_ss4_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss4_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss4_iniu_node.v, 98
+"dsp_ss4_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss4_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss3_iniu_node.v, 65
+"dsp_ss3_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss3_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss3_iniu_node.v, 65
+"dsp_ss3_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss3_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss3_iniu_node.v, 98
+"dsp_ss3_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss3_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss3_iniu_node.v, 98
+"dsp_ss3_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss3_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss2_iniu_node.v, 65
+"dsp_ss2_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss2_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss2_iniu_node.v, 65
+"dsp_ss2_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss2_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss2_iniu_node.v, 98
+"dsp_ss2_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss2_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss2_iniu_node.v, 98
+"dsp_ss2_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss2_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss1_iniu_node.v, 65
+"dsp_ss1_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss1_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss1_iniu_node.v, 65
+"dsp_ss1_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss1_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss1_iniu_node.v, 98
+"dsp_ss1_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss1_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss1_iniu_node.v, 98
+"dsp_ss1_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss1_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss0_iniu_node.v, 65
+"dsp_ss0_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss0_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss0_iniu_node.v, 65
+"dsp_ss0_iniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss0_iniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss0_iniu_node.v, 98
+"dsp_ss0_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "dsp_ss0_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/dsp_ss0_iniu_node.v, 98
+"dsp_ss0_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "dsp_ss0_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/sys_tcu_tniu_node.v, 64
+"sys_tcu_tniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "sys_tcu_tniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/sys_tcu_tniu_node.v, 64
+"sys_tcu_tniu_sys_wrap sys_wrap( .clk_sys_clk (clk_sys_clk_sys_clk),  .rst_sys_n_rst_n (rst_sys_n_rst_sys_n_rst_n),  .dti_req_req_tdata (dti_req_dti_req_req_tdata),  .dti_req_req_tkeep (dti_req_dti_req_req_tkeep),  .dti_req_req_tlast (dti_req_dti_req_req_tlast),  .dti_req_req_tready (dti_req_dti_req_req_tready),  .dti_req_req_ttid (dti_req_dti_req_req_ttid),  .dti_req_req_tvalid (dti_req_dti_req_req_tvalid),  .dti_rsp_rsp_tdata (dti_rsp_dti_rsp_rsp_tdata),  .dti_rsp_rsp_tkeep (dti_rsp_dti_rsp_rsp_tkeep),  .dti_rsp_rsp_tlast (dti_rsp_dti_rsp_rsp_tlast),  .dti_rsp_rsp_tready (dti_rsp_dti_rsp_rsp_tready),  .dti_rsp_rsp_ttid (dti_rsp_dti_rsp_rsp_ttid),  .dti_rsp_rsp_tvalid (dti_rsp_dti_rsp_rsp_tvalid),  .req_twakeup_req_twakeup (req_twakeup_req_twakeup_req_t ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "sys_tcu_tniu_sys_wrap", instance 
+  "sys_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/sys_tcu_tniu_node.v, 96
+"sys_tcu_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_tx_lp_hub_tx_req" of module "sys_tcu_top_wrap", instance "top_wrap".
+  Expression: top_wrap_TO_sys_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/build_logic/soc_dti_top_wrap/sys_tcu_tniu_node.v, 96
+"sys_tcu_top_wrap top_wrap( .clk_top (clk_top),  .rst_top_n (rst_top_n),  .async_fifo_req_pld_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_req_pld_sync),  .async_fifo_req_rptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_req_rptr_async),  .async_fifo_req_rptr_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_req_rptr_sync),  .async_fifo_req_wptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_req_wptr_async),  .async_fifo_rsp_pld_sync (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_pld_sync),  .async_fifo_rsp_rptr_async (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_rptr_async),  .async_fifo_rsp_rptr_sync (top_wrap_TO_sys_wrap_SIG_async_fifo_rsp_rptr_sync),  .async_fifo_rsp_wptr_async (sys_wrap_TO_top_wrap_SIG_async_fifo_rsp_wptr_async),  .lp_top_tx_lp_hub_tx_req (top_wrap_TO_sys_wrap ... "
+  The following 9-bit expression is connected to 13-bit port 
+  "lp_top_rx_lp_hub_rx_req" of module "sys_tcu_top_wrap", instance "top_wrap".
+  Expression: sys_wrap_TO_top_wrap_SIG_lp_top_tx_lp_hub_tx_req
+  	use +lint=PCWM for more details
+
+Starting vcs inline pass...
+
+73 unique modules to generate
+73 modules and 0 UDP read. 
+recompiling package std
+recompiling module fcip_lead_one
+recompiling module fcip_afifo_mst
+recompiling module fcip_afifo_slv
+recompiling module fcip_marker
+recompiling module fcip_sync_arst
+recompiling module fcip_sync_cell
+recompiling package lwnoc_lp_define_package
+recompiling package lwnoc_lp_struct_package
+recompiling module lwnoc_lp_nest
+recompiling module lwnoc_lp_niu_fsm
+recompiling module lwnoc_lp_subhub
+recompiling module lwnoc_lp_hub_3terminal
+recompiling module lwnoc_lp_hub_tiny_wrapper
+recompiling module lwnoc_lp_hub_small_wrapper
+recompiling module lwnoc_lp_hub_wrapper
+recompiling module lwnoc_lp_tniu_async_bridge
+recompiling module lwnoc_lp_tniu_func_iniu
+recompiling module lwnoc_lp_iniu
+recompiling module soc_dti_sw_gpu4_dti_switch_4i1o_wrap
+recompiling module soc_dti_sw_right_dti_switch_2i1o_wrap
+recompiling module soc_dti_sw_root_dti_switch_2i1o_wrap
+recompiling package dti_iniu_top_dti_iniu_pack
+recompiling package display_ss_dti_iniu_pack
+recompiling module display_ss_dti_pr_rob_state_entry
+recompiling module display_ss_iniu_node
+recompiling package dp_ss_dti_iniu_pack
+recompiling module dp_ss_dti_pr_rob_state_entry
+recompiling module dp_ss_iniu_node
+recompiling package gpu_ss1_dti_iniu_pack
+recompiling module gpu_ss1_dti_pr_rob_state_entry
+recompiling module gpu_ss1_iniu_node
+recompiling package gpu_ss0_dti_iniu_pack
+recompiling module gpu_ss0_dti_pr_rob_state_entry
+recompiling module gpu_ss0_iniu_node
+recompiling package mipi_ss_dti_iniu_pack
+recompiling module mipi_ss_dti_pr_rob_state_entry
+recompiling module mipi_ss_iniu_node
+recompiling package camera_ss_dti_iniu_pack
+recompiling module camera_ss_dti_pr_rob_state_entry
+recompiling module camera_ss_iniu_node
+recompiling package ufs_ss_dti_iniu_pack
+recompiling module ufs_ss_dti_pr_rob_state_entry
+recompiling module ufs_ss_iniu_node
+recompiling package pcie_rtg_ss_dti_iniu_pack
+recompiling module pcie_rtg_ss_dti_pr_rob_state_entry
+recompiling module pcie_rtg_ss_iniu_node
+recompiling module vpu_ss_top_wrap
+recompiling package vpu_ss_dti_iniu_pack
+recompiling module vpu_ss_dti_pr_rob_state_entry
+50 of 73 modules done
+recompiling module vpu_ss_iniu_node
+recompiling package dsp_ss5_dti_iniu_pack
+recompiling module dsp_ss5_dti_pr_rob_state_entry
+recompiling module dsp_ss5_iniu_node
+recompiling package dsp_ss4_dti_iniu_pack
+recompiling module dsp_ss4_dti_pr_rob_state_entry
+recompiling module dsp_ss4_iniu_node
+recompiling package dsp_ss3_dti_iniu_pack
+recompiling module dsp_ss3_dti_pr_rob_state_entry
+recompiling module dsp_ss3_iniu_node
+recompiling package dsp_ss2_dti_iniu_pack
+recompiling module dsp_ss2_dti_pr_rob_state_entry
+recompiling module dsp_ss2_iniu_node
+recompiling package dsp_ss1_dti_iniu_pack
+recompiling module dsp_ss1_dti_pr_rob_state_entry
+recompiling module dsp_ss1_iniu_node
+recompiling package dsp_ss0_dti_iniu_pack
+recompiling module dsp_ss0_dti_pr_rob_state_entry
+recompiling module dsp_ss0_iniu_node
+recompiling package dti_tniu_top_dti_tniu_pack
+recompiling package sys_tcu_dti_tniu_pack
+recompiling module sys_tcu_tniu_node
+recompiling module soc_dti_logic_topo
+All of 73 modules done
+rm -f _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+if [ -x /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/sim/build_dut_only/simv \
+]; then chmod -x /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/sim/build_dut_only/simv; \
+fi
+g++-4.8  -o /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/sim/build_dut_only/simv \
+-Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ -Wl,-rpath=./simv.daidir/ -Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir \
+-L/usr/lib/x86_64-linux-gnu -L/lib/x86_64-linux-gnu -Wl,--no-as-needed -Wl,--no-as-needed \
+-rdynamic   amcQwB.o objs/amcQw_d.o  _964459_archive_1.so  SIM_l.o       rmapats_mop.o \
+rmapats.o rmar.o  rmar_llvm_0_1.o rmar_llvm_0_0.o          /home/lgzhu/software/vcs2016/linux64/lib/libzerosoft_rt_stubs.so \
+/home/lgzhu/software/vcs2016/linux64/lib/libvirsim.so /home/lgzhu/software/vcs2016/linux64/lib/liberrorinf.so \
+/home/lgzhu/software/vcs2016/linux64/lib/libsnpsmalloc.so /home/lgzhu/software/verdi2016/share/PLI/VCS/linux64/pli.a \
+/home/lgzhu/software/vcs2016/linux64/lib/libvcsnew.so /home/lgzhu/software/vcs2016/linux64/lib/libsimprofile.so \
+/home/lgzhu/software/vcs2016/linux64/lib/libreader_common.so /home/lgzhu/software/vcs2016/linux64/lib/libBA.a \
+/home/lgzhu/software/vcs2016/linux64/lib/libuclinative.so   -Wl,-whole-archive /home/lgzhu/software/vcs2016/linux64/lib/libvcsucli.so \
+-Wl,-no-whole-archive       _vcs_pli_stub_.o   /home/lgzhu/software/vcs2016/linux64/lib/vcs_save_restore_new.o \
+-ldl -lm  -lc -lpthread -ldl 
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_dti_noc_demo/sim/build_dut_only/simv \
+up to date
+CPU time: 4.543 seconds to compile + .650 seconds to elab + .284 seconds to link

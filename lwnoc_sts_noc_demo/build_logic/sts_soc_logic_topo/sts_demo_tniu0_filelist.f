@@ -1,2 +1,0 @@
-$STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu0_sts_tniu_top.sv
-$STS_SOC_LOGIC_TOPO_DIR/sts_demo_tniu0_sts_demo_tniu0_wrap.sv

@@ -1,6 +1,8 @@
 """TemplateIPConfig definitions for the SoC-scale interrupt ring NoC demo."""
 
 import os
+import re
+import shutil
 import sys
 from pathlib import Path
 
@@ -26,13 +28,27 @@ os.environ["LWNOC_LOWPOWER_COMPONENT"] = str(INTR_NOC_ROOT / "lwnoc_lowpower_com
 
 
 FILELIST_DIR = THIS_DIR / "filelist"
+TEMP_MACRO_YAML_DIR = THIS_DIR / "build" / "temp" / "macro_yaml"
 USE_SUBS_VC_FILELIST_MODE = os.environ.get("SOC_INTR_USE_SUBS_VC_FILELIST", "1") == "1"
 
 INIU_SYS_MACRO_YAML = str(FILELIST_DIR / "intr_iniu_sys_macros.yaml")
 TNIU_SYS_MACRO_YAML = str(FILELIST_DIR / "intr_tniu_sys_macros.yaml")
 INIU_TOP_MACRO_YAML = str(FILELIST_DIR / "intr_iniu_top_macros.yaml")
 TNIU_TOP_MACRO_YAML = str(FILELIST_DIR / "intr_tniu_top_macros.yaml")
+RING_NETWORK_MACRO_YAML = str(FILELIST_DIR / "intr_ring_network_macros.yaml")
 RING_BUF_MACRO_YAML = str(FILELIST_DIR / "intr_ring_buf_macros.yaml")
+RING_REQ_SINK_MACRO_YAML = str(FILELIST_DIR / "intr_ring_req_sink_macros.yaml")
+RING_REQ_ZERO_SOURCE_MACRO_YAML = str(FILELIST_DIR / "intr_ring_req_zero_source_macros.yaml")
+
+
+def _macro_yaml_with_node_prefix(node_name: str, shared_macro_yaml: str) -> str:
+    source = Path(shared_macro_yaml)
+    macro_owner = node_name.removesuffix("_iniu").removesuffix("_tniu")
+    TEMP_MACRO_YAML_DIR.mkdir(parents=True, exist_ok=True)
+    prefixed = TEMP_MACRO_YAML_DIR / f"{macro_owner}_{source.name}"
+    if not prefixed.exists() or prefixed.read_text(encoding="utf-8") != source.read_text(encoding="utf-8"):
+        shutil.copyfile(source, prefixed)
+    return str(prefixed)
 
 
 def _effective_prefix(prefix: str, filelist_name: str) -> str:
@@ -122,29 +138,61 @@ def _to_env_token(node_name: str) -> str:
     return node_name.upper().replace("-", "_")
 
 
-INIU_SYS_CONFIGS: dict[str, TemplateIPConfig] = {}
-for node_name in INIU_NODE_NAMES:
+def _shared_sys_name(node_name: str) -> str:
+    for suffix in ("_iniu", "_tniu"):
+        if node_name.endswith(suffix):
+            stem = node_name[: -len(suffix)]
+            if "_" in stem:
+                head, tail = stem.rsplit("_", 1)
+                tail = re.sub(r"\d+$", "", tail)
+                stem = f"{head}_{tail}"
+            else:
+                stem = re.sub(r"\d+$", "", stem)
+            return f"{stem}{suffix}"
+    return node_name
+
+
+def _new_shared_sys_cfg(shared_name: str, filelist_name: str, macro_yaml: str, async_fifo_depth: int) -> TemplateIPConfig:
     cfg = _new_cfg(
-        name=f"{node_name}_sys",
-        prefix=f"{node_name}_",
-        filelist_name="intr_iniu_sys.f",
-        env_var=f"SOC_INTR_{_to_env_token(node_name)}_SYS_OUT_DIR",
+        name=f"{shared_name}_sys",
+        prefix=f"{shared_name}_",
+        filelist_name=filelist_name,
+        env_var=f"SOC_INTR_{_to_env_token(shared_name)}_SYS_OUT_DIR",
     )
-    cfg.set_macro("ASYNC_FIFO_DEPTH", INIU_ASYNC_FIFO_DEPTH)
-    cfg.macro_yaml = INIU_SYS_MACRO_YAML
+    cfg.set_macro("ASYNC_FIFO_DEPTH", async_fifo_depth)
+    cfg.macro_yaml = _macro_yaml_with_node_prefix(shared_name, macro_yaml)
+    return cfg
+
+
+INIU_SYS_CONFIGS: dict[str, TemplateIPConfig] = {}
+_shared_iniu_sys_cfgs: dict[str, TemplateIPConfig] = {}
+for node_name in INIU_NODE_NAMES:
+    shared_name = _shared_sys_name(node_name)
+    cfg = _shared_iniu_sys_cfgs.get(shared_name)
+    if cfg is None:
+        cfg = _new_shared_sys_cfg(
+            shared_name=shared_name,
+            filelist_name="intr_iniu_sys.f",
+            macro_yaml=INIU_SYS_MACRO_YAML,
+            async_fifo_depth=INIU_ASYNC_FIFO_DEPTH,
+        )
+        _shared_iniu_sys_cfgs[shared_name] = cfg
     INIU_SYS_CONFIGS[node_name] = cfg
 
 
 TNIU_SYS_CONFIGS: dict[str, TemplateIPConfig] = {}
+_shared_tniu_sys_cfgs: dict[str, TemplateIPConfig] = {}
 for node_name in TNIU_NODE_NAMES:
-    cfg = _new_cfg(
-        name=f"{node_name}_sys",
-        prefix=f"{node_name}_",
-        filelist_name="intr_tniu_sys.f",
-        env_var=f"SOC_INTR_{_to_env_token(node_name)}_SYS_OUT_DIR",
-    )
-    cfg.set_macro("ASYNC_FIFO_DEPTH", TNIU_ASYNC_FIFO_DEPTH)
-    cfg.macro_yaml = TNIU_SYS_MACRO_YAML
+    shared_name = _shared_sys_name(node_name)
+    cfg = _shared_tniu_sys_cfgs.get(shared_name)
+    if cfg is None:
+        cfg = _new_shared_sys_cfg(
+            shared_name=shared_name,
+            filelist_name="intr_tniu_sys.f",
+            macro_yaml=TNIU_SYS_MACRO_YAML,
+            async_fifo_depth=TNIU_ASYNC_FIFO_DEPTH,
+        )
+        _shared_tniu_sys_cfgs[shared_name] = cfg
     TNIU_SYS_CONFIGS[node_name] = cfg
 
 
@@ -176,6 +224,7 @@ soc_intr_ring_network_config.set_macro("PLD_WIDTH", SOC_INTR_REQ_PLD_WIDTH)
 soc_intr_ring_network_config.set_macro("ID_WIDTH", SOC_INTR_REQ_ID_WIDTH)
 soc_intr_ring_network_config.set_macro("QOS_WIDTH", SOC_INTR_REQ_QOS_WIDTH)
 soc_intr_ring_network_config.set_macro("NODE_NUM", SOC_INTR_RING_NODE_NUM)
+soc_intr_ring_network_config.macro_yaml = RING_NETWORK_MACRO_YAML
 
 soc_intr_ring_buf_config = _new_cfg(
     name="intr_ring_buf",
@@ -207,6 +256,7 @@ soc_intr_ring_req_sink_config = _new_cfg(
     env_var="INTR_RING_REQ_SINK_OUT_DIR",
 )
 soc_intr_ring_req_sink_config.set_macro("NODE_NUM", SOC_INTR_RING_NODE_NUM)
+soc_intr_ring_req_sink_config.macro_yaml = RING_REQ_SINK_MACRO_YAML
 
 soc_intr_ring_req_zero_source_config = _new_cfg(
     name="intr_ring_req_zero_source",
@@ -215,3 +265,4 @@ soc_intr_ring_req_zero_source_config = _new_cfg(
     env_var="INTR_RING_REQ_ZERO_SOURCE_OUT_DIR",
 )
 soc_intr_ring_req_zero_source_config.set_macro("NODE_NUM", SOC_INTR_RING_NODE_NUM)
+soc_intr_ring_req_zero_source_config.macro_yaml = RING_REQ_ZERO_SOURCE_MACRO_YAML

@@ -2,70 +2,117 @@
   "metadata": {
     "version": "1.0",
     "serialization_time": null,
-    "root_wrapper": "sts_soc_logic_topo"
+    "root_wrapper": "sts_logic_topo_1i4t"
   },
   "topology": {
-    "id": "sts_soc_logic_topo",
+    "id": "sts_logic_topo_1i4t",
     "type": "wrapper",
     "children": [
       {
-        "id": "cpu_ss_iniu",
+        "id": "iniu0",
         "type": "atomic"
       },
       {
-        "id": "dp_ss_iniu",
+        "id": "noc_dec",
         "type": "atomic"
       },
       {
-        "id": "display_ss_iniu",
+        "id": "tniu0",
         "type": "atomic"
       },
       {
-        "id": "cpu_root_dec",
+        "id": "tniu1",
         "type": "atomic"
       },
       {
-        "id": "cpu_ddr_lo_dec",
+        "id": "tniu2",
         "type": "atomic"
       },
       {
-        "id": "cpu_ddr_hi_dec",
-        "type": "atomic"
-      },
-      {
-        "id": "cpu_ddr_ext_dec",
-        "type": "atomic"
-      },
-      {
-        "id": "dp_root_dec",
-        "type": "atomic"
-      },
-      {
-        "id": "dp_dsp_dec",
-        "type": "atomic"
-      },
-      {
-        "id": "dp_media_dec",
-        "type": "atomic"
-      },
-      {
-        "id": "dp_io_dec",
-        "type": "atomic"
-      },
-      {
-        "id": "display_root_dec",
-        "type": "atomic"
-      },
-      {
-        "id": "display_misc_dec",
+        "id": "tniu3",
         "type": "atomic"
       }
     ]
   },
   "nodes": {
-    "sts_soc_logic_topo.cpu_root_dec": {
+    "sts_logic_topo_1i4t.tniu1": {
       "type": "atomic",
-      "node_name": "cpu_root_dec",
+      "node_name": "tniu1",
+      "attrs": {},
+      "interfaces": {
+        "clk_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pmc_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_data": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_timestamp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "sts_logic_topo_1i4t.noc_dec": {
+      "type": "atomic",
+      "node_name": "noc_dec",
       "attrs": {},
       "interfaces": {
         "clk": {
@@ -118,197 +165,320 @@
         }
       },
       "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
       ]
     },
-    "sts_soc_logic_topo.dp_root_dec": {
+    "sts_logic_topo_1i4t.tniu2": {
       "type": "atomic",
-      "node_name": "dp_root_dec",
+      "node_name": "tniu2",
       "attrs": {},
       "interfaces": {
-        "clk": {
+        "clk_src": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "rst_n": {
+        "clk_dst": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "mst_req": {
+        "clk_dbg_timer": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "mst_rsp": {
+        "rstn_src": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv0_req": {
+        "rstn_dst": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv0_rsp": {
+        "rstn_dbg_timer": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv1_req": {
+        "req": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv1_rsp": {
+        "rsp": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv2_req": {
+        "pmc_apb": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv2_rsp": {
+        "sys_apb": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv3_req": {
+        "dbg_data": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv3_rsp": {
+        "dbg_timestamp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_channel": {
           "is_exposed_port": false,
           "is_global": false
         }
       },
       "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
       ]
     },
-    "sts_soc_logic_topo.cpu_ddr_ext_dec": {
+    "sts_logic_topo_1i4t.tniu3": {
       "type": "atomic",
-      "node_name": "cpu_ddr_ext_dec",
+      "node_name": "tniu3",
       "attrs": {},
       "interfaces": {
-        "clk": {
+        "clk_src": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "rst_n": {
+        "clk_dst": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "mst_req": {
+        "clk_dbg_timer": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "mst_rsp": {
+        "rstn_src": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv0_req": {
+        "rstn_dst": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv0_rsp": {
+        "rstn_dbg_timer": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv1_req": {
+        "req": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv1_rsp": {
+        "rsp": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv2_req": {
+        "pmc_apb": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv2_rsp": {
+        "sys_apb": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv3_req": {
+        "dbg_data": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv3_rsp": {
+        "dbg_timestamp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_channel": {
           "is_exposed_port": false,
           "is_global": false
         }
       },
       "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
       ]
     },
-    "sts_soc_logic_topo.cpu_ddr_lo_dec": {
+    "sts_logic_topo_1i4t.iniu0": {
       "type": "atomic",
-      "node_name": "cpu_ddr_lo_dec",
+      "node_name": "iniu0",
       "attrs": {},
       "interfaces": {
-        "clk": {
+        "clk_src": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "rst_n": {
+        "clk_dst": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "mst_req": {
+        "rstn_src": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "mst_rsp": {
+        "rstn_dst": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv0_req": {
+        "node_id": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv0_rsp": {
+        "axi": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv1_req": {
+        "req": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "slv1_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_rsp": {
+        "rsp": {
           "is_exposed_port": false,
           "is_global": false
         }
       },
       "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
       ]
     },
-    "sts_soc_logic_topo": {
+    "sts_logic_topo_1i4t.tniu0": {
+      "type": "atomic",
+      "node_name": "tniu0",
+      "attrs": {},
+      "interfaces": {
+        "clk_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pmc_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_data": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_timestamp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "sts_logic_topo_1i4t",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "sts_logic_topo_1i4t": {
       "type": "wrapper",
-      "node_name": "sts_soc_logic_topo",
+      "node_name": "sts_logic_topo_1i4t",
       "attrs": {},
       "interfaces": {
-        "clk_sys": {
+        "iniu0_clk_sys": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "rst_sys_n": {
+        "iniu0_rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu0_clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu0_rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu1_clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu1_rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu2_clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu2_rst_sys_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu3_clk_sys": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "tniu3_rst_sys_n": {
           "is_exposed_port": false,
           "is_global": false
         },
@@ -316,11 +486,11 @@
           "is_exposed_port": false,
           "is_global": true
         },
-        "rst_noc_n": {
+        "clk_dbg_timer": {
           "is_exposed_port": false,
           "is_global": true
         },
-        "clk_dbg_timer": {
+        "rst_noc_n": {
           "is_exposed_port": false,
           "is_global": true
         },
@@ -328,291 +498,139 @@
           "is_exposed_port": false,
           "is_global": true
         },
-        "cpu_ss_iniu.node_id_porting": {
+        "iniu0.node_id_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ss_iniu.axi_porting": {
+        "iniu0.axi_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "dp_ss_iniu.node_id_porting": {
+        "tniu0.pmc_apb_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "dp_ss_iniu.axi_porting": {
+        "tniu0.sys_apb_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "display_ss_iniu.node_id_porting": {
+        "tniu0.dbg_data_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "display_ss_iniu.axi_porting": {
+        "tniu0.dbg_timestamp_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_root_dec.slv3_req_porting": {
+        "tniu0.sys_cti_event_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_root_dec.slv3_rsp_porting": {
+        "tniu0.noc_cti_event_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_lo_dec.slv0_req_porting": {
+        "tniu0.sys_cti_channel_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_lo_dec.slv0_rsp_porting": {
+        "tniu0.noc_cti_channel_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_lo_dec.slv1_req_porting": {
+        "tniu1.pmc_apb_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_lo_dec.slv1_rsp_porting": {
+        "tniu1.sys_apb_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_lo_dec.slv2_req_porting": {
+        "tniu1.dbg_data_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_lo_dec.slv2_rsp_porting": {
+        "tniu1.dbg_timestamp_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_lo_dec.slv3_req_porting": {
+        "tniu1.sys_cti_event_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_lo_dec.slv3_rsp_porting": {
+        "tniu1.noc_cti_event_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_hi_dec.slv0_req_porting": {
+        "tniu1.sys_cti_channel_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_hi_dec.slv0_rsp_porting": {
+        "tniu1.noc_cti_channel_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_hi_dec.slv1_req_porting": {
+        "tniu2.pmc_apb_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_hi_dec.slv1_rsp_porting": {
+        "tniu2.sys_apb_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_hi_dec.slv2_req_porting": {
+        "tniu2.dbg_data_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_hi_dec.slv2_rsp_porting": {
+        "tniu2.dbg_timestamp_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_hi_dec.slv3_req_porting": {
+        "tniu2.sys_cti_event_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_hi_dec.slv3_rsp_porting": {
+        "tniu2.noc_cti_event_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_ext_dec.slv0_req_porting": {
+        "tniu2.sys_cti_channel_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_ext_dec.slv0_rsp_porting": {
+        "tniu2.noc_cti_channel_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_ext_dec.slv1_req_porting": {
+        "tniu3.pmc_apb_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_ext_dec.slv1_rsp_porting": {
+        "tniu3.sys_apb_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_ext_dec.slv2_req_porting": {
+        "tniu3.dbg_data_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_ext_dec.slv2_rsp_porting": {
+        "tniu3.dbg_timestamp_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_ext_dec.slv3_req_porting": {
+        "tniu3.sys_cti_event_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "cpu_ddr_ext_dec.slv3_rsp_porting": {
+        "tniu3.noc_cti_event_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "dp_root_dec.slv3_req_porting": {
+        "tniu3.sys_cti_channel_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
-        "dp_root_dec.slv3_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_dsp_dec.slv0_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_dsp_dec.slv0_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_dsp_dec.slv1_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_dsp_dec.slv1_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_dsp_dec.slv2_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_dsp_dec.slv2_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_dsp_dec.slv3_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_dsp_dec.slv3_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_media_dec.slv0_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_media_dec.slv0_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_media_dec.slv1_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_media_dec.slv1_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_media_dec.slv2_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_media_dec.slv2_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_media_dec.slv3_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_media_dec.slv3_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_io_dec.slv0_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_io_dec.slv0_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_io_dec.slv1_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_io_dec.slv1_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_io_dec.slv2_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_io_dec.slv2_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_io_dec.slv3_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dp_io_dec.slv3_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_root_dec.slv1_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_root_dec.slv1_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_root_dec.slv2_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_root_dec.slv2_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_root_dec.slv3_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_root_dec.slv3_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_misc_dec.slv0_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_misc_dec.slv0_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_misc_dec.slv1_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_misc_dec.slv1_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_misc_dec.slv2_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_misc_dec.slv2_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_misc_dec.slv3_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "display_misc_dec.slv3_rsp_porting": {
+        "tniu3.noc_cti_channel_porting": {
           "is_exposed_port": true,
           "is_global": false
         }
@@ -621,2398 +639,1152 @@
         "__global_virtual_wrapper__"
       ],
       "sub_nodes": [
-        "sts_soc_logic_topo.cpu_ss_iniu",
-        "sts_soc_logic_topo.dp_ss_iniu",
-        "sts_soc_logic_topo.display_ss_iniu",
-        "sts_soc_logic_topo.cpu_root_dec",
-        "sts_soc_logic_topo.cpu_ddr_lo_dec",
-        "sts_soc_logic_topo.cpu_ddr_hi_dec",
-        "sts_soc_logic_topo.cpu_ddr_ext_dec",
-        "sts_soc_logic_topo.dp_root_dec",
-        "sts_soc_logic_topo.dp_dsp_dec",
-        "sts_soc_logic_topo.dp_media_dec",
-        "sts_soc_logic_topo.dp_io_dec",
-        "sts_soc_logic_topo.display_root_dec",
-        "sts_soc_logic_topo.display_misc_dec"
-      ]
-    },
-    "sts_soc_logic_topo.cpu_ddr_hi_dec": {
-      "type": "atomic",
-      "node_name": "cpu_ddr_hi_dec",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
-      ]
-    },
-    "sts_soc_logic_topo.dp_ss_iniu": {
-      "type": "atomic",
-      "node_name": "dp_ss_iniu",
-      "attrs": {},
-      "interfaces": {
-        "clk_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "node_id": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "axi": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
-      ]
-    },
-    "sts_soc_logic_topo.display_misc_dec": {
-      "type": "atomic",
-      "node_name": "display_misc_dec",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
-      ]
-    },
-    "sts_soc_logic_topo.display_root_dec": {
-      "type": "atomic",
-      "node_name": "display_root_dec",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
-      ]
-    },
-    "sts_soc_logic_topo.dp_io_dec": {
-      "type": "atomic",
-      "node_name": "dp_io_dec",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
-      ]
-    },
-    "sts_soc_logic_topo.cpu_ss_iniu": {
-      "type": "atomic",
-      "node_name": "cpu_ss_iniu",
-      "attrs": {},
-      "interfaces": {
-        "clk_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "node_id": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "axi": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
-      ]
-    },
-    "sts_soc_logic_topo.dp_media_dec": {
-      "type": "atomic",
-      "node_name": "dp_media_dec",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
-      ]
-    },
-    "sts_soc_logic_topo.display_ss_iniu": {
-      "type": "atomic",
-      "node_name": "display_ss_iniu",
-      "attrs": {},
-      "interfaces": {
-        "clk_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "clk_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_src": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rstn_dst": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "node_id": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "axi": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
-      ]
-    },
-    "sts_soc_logic_topo.dp_dsp_dec": {
-      "type": "atomic",
-      "node_name": "dp_dsp_dec",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "__global_virtual_wrapper__",
-        "sts_soc_logic_topo"
+        "sts_logic_topo_1i4t.iniu0",
+        "sts_logic_topo_1i4t.noc_dec",
+        "sts_logic_topo_1i4t.tniu0",
+        "sts_logic_topo_1i4t.tniu1",
+        "sts_logic_topo_1i4t.tniu2",
+        "sts_logic_topo_1i4t.tniu3"
       ]
     }
   },
   "connections": [
     {
-      "id": "cpu_ss_iniu_sts_soc_logic_topo_clk_src_clk_sys_1@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "iniu0_sts_logic_topo_1i4t_clk_src_iniu0_clk_sys_1@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ss_iniu",
+            "node_id": "sts_logic_topo_1i4t.iniu0",
             "interface_id": "clk_src"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_ss_iniu",
-            "interface_id": "clk_src"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "clk_sys"
-          }
-        },
-        {
-          "endpoint4": {
-            "node_id": "sts_soc_logic_topo.display_ss_iniu",
-            "interface_id": "clk_src"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "iniu0_clk_sys"
           }
         }
       ]
     },
     {
-      "id": "cpu_ss_iniu_sts_soc_logic_topo_rstn_src_rst_sys_n_2@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "iniu0_sts_logic_topo_1i4t_clk_dst_clk_noc_2@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_ss_iniu",
-            "interface_id": "rstn_src"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_ss_iniu",
-            "interface_id": "rstn_src"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "sts_soc_logic_topo.cpu_ss_iniu",
-            "interface_id": "rstn_src"
-          }
-        },
-        {
-          "endpoint4": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "rst_sys_n"
-          }
-        }
-      ]
-    },
-    {
-      "id": "cpu_ss_iniu_sts_soc_logic_topo_clk_dst_clk_noc_3@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
             "interface_id": "clk"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "clk"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "clk_dst"
           }
         },
         {
           "endpoint3": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
-            "interface_id": "clk"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "clk_dst"
           }
         },
         {
           "endpoint4": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "clk"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "clk_dst"
           }
         },
         {
           "endpoint5": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "clk"
+            "node_id": "sts_logic_topo_1i4t.iniu0",
+            "interface_id": "clk_dst"
           }
         },
         {
           "endpoint6": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "clk_noc"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "clk_dst"
           }
         },
         {
           "endpoint7": {
-            "node_id": "sts_soc_logic_topo.dp_ss_iniu",
-            "interface_id": "clk_dst"
-          }
-        },
-        {
-          "endpoint8": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint9": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint10": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint11": {
-            "node_id": "sts_soc_logic_topo.cpu_ss_iniu",
-            "interface_id": "clk_dst"
-          }
-        },
-        {
-          "endpoint12": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint13": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint14": {
-            "node_id": "sts_soc_logic_topo.display_ss_iniu",
-            "interface_id": "clk_dst"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "clk_noc"
           }
         }
       ]
     },
     {
-      "id": "cpu_ss_iniu_sts_soc_logic_topo_rstn_dst_rst_noc_n_4@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "iniu0_sts_logic_topo_1i4t_rstn_src_iniu0_rst_sys_n_3@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "rst_n"
+            "node_id": "sts_logic_topo_1i4t.iniu0",
+            "interface_id": "rstn_src"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
-            "interface_id": "rst_n"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "iniu0_rst_sys_n"
+          }
+        }
+      ]
+    },
+    {
+      "id": "iniu0_sts_logic_topo_1i4t_rstn_dst_rst_noc_n_4@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t.iniu0",
+            "interface_id": "rstn_dst"
           }
         },
         {
-          "endpoint3": {
-            "node_id": "sts_soc_logic_topo",
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t",
             "interface_id": "rst_noc_n"
           }
         },
         {
-          "endpoint4": {
-            "node_id": "sts_soc_logic_topo.cpu_ss_iniu",
+          "endpoint3": {
+            "node_id": "sts_logic_topo_1i4t.tniu1",
             "interface_id": "rstn_dst"
+          }
+        },
+        {
+          "endpoint4": {
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
+            "interface_id": "rst_n"
           }
         },
         {
           "endpoint5": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "rst_n"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "rstn_dst"
           }
         },
         {
           "endpoint6": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "rst_n"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "rstn_dst"
           }
         },
         {
           "endpoint7": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint8": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint9": {
-            "node_id": "sts_soc_logic_topo.dp_ss_iniu",
+            "node_id": "sts_logic_topo_1i4t.tniu3",
             "interface_id": "rstn_dst"
           }
-        },
-        {
-          "endpoint10": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint11": {
-            "node_id": "sts_soc_logic_topo.display_ss_iniu",
-            "interface_id": "rstn_dst"
-          }
-        },
-        {
-          "endpoint12": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint13": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint14": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "rst_n"
-          }
         }
       ]
     },
     {
-      "id": "cpu_ss_iniu_cpu_root_dec_req_mst_req_5@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "tniu0_sts_logic_topo_1i4t_clk_src_tniu0_clk_sys_5@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ss_iniu",
-            "interface_id": "req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0_clk_sys"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "mst_req"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "clk_src"
           }
         }
       ]
     },
     {
-      "id": "cpu_ss_iniu_cpu_root_dec_rsp_mst_rsp_6@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "tniu0_sts_logic_topo_1i4t_clk_dbg_timer_clk_dbg_timer_6@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "mst_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "clk_dbg_timer"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ss_iniu",
-            "interface_id": "rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "clk_dbg_timer"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "clk_dbg_timer"
+          }
+        },
+        {
+          "endpoint4": {
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "clk_dbg_timer"
+          }
+        },
+        {
+          "endpoint5": {
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "clk_dbg_timer"
           }
         }
       ]
     },
     {
-      "id": "cpu_root_dec_cpu_ddr_lo_dec_slv0_req_mst_req_7@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "tniu0_sts_logic_topo_1i4t_rstn_src_tniu0_rst_sys_n_7@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "mst_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0_rst_sys_n"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "slv0_req"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "rstn_src"
           }
         }
       ]
     },
     {
-      "id": "cpu_root_dec_cpu_ddr_lo_dec_slv0_rsp_mst_rsp_8@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "tniu0_sts_logic_topo_1i4t_rstn_dbg_timer_rst_dbg_timer_n_8@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "mst_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "rstn_dbg_timer"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "slv0_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "rstn_dbg_timer"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "rstn_dbg_timer"
+          }
+        },
+        {
+          "endpoint4": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "rst_dbg_timer_n"
+          }
+        },
+        {
+          "endpoint5": {
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "rstn_dbg_timer"
           }
         }
       ]
     },
     {
-      "id": "cpu_root_dec_cpu_ddr_hi_dec_slv1_req_mst_req_9@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "tniu1_sts_logic_topo_1i4t_clk_src_tniu1_clk_sys_9@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "slv1_req"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "clk_src"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
-            "interface_id": "mst_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1_clk_sys"
           }
         }
       ]
     },
     {
-      "id": "cpu_root_dec_cpu_ddr_hi_dec_slv1_rsp_mst_rsp_10@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "tniu1_sts_logic_topo_1i4t_rstn_src_tniu1_rst_sys_n_10@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "slv1_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1_rst_sys_n"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
-            "interface_id": "mst_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "rstn_src"
           }
         }
       ]
     },
     {
-      "id": "cpu_root_dec_cpu_ddr_ext_dec_slv2_req_mst_req_11@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "tniu2_sts_logic_topo_1i4t_clk_src_tniu2_clk_sys_11@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "slv2_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2_clk_sys"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "mst_req"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "clk_src"
           }
         }
       ]
     },
     {
-      "id": "cpu_root_dec_cpu_ddr_ext_dec_slv2_rsp_mst_rsp_12@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "tniu2_sts_logic_topo_1i4t_rstn_src_tniu2_rst_sys_n_12@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "mst_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "rstn_src"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "slv2_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2_rst_sys_n"
           }
         }
       ]
     },
     {
-      "id": "dp_ss_iniu_dp_root_dec_req_mst_req_13@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "tniu3_sts_logic_topo_1i4t_clk_src_tniu3_clk_sys_13@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "mst_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3_clk_sys"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_ss_iniu",
-            "interface_id": "req"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "clk_src"
           }
         }
       ]
     },
     {
-      "id": "dp_ss_iniu_dp_root_dec_rsp_mst_rsp_14@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "tniu3_sts_logic_topo_1i4t_rstn_src_tniu3_rst_sys_n_14@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "mst_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3_rst_sys_n"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_ss_iniu",
-            "interface_id": "rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "rstn_src"
           }
         }
       ]
     },
     {
-      "id": "dp_root_dec_dp_dsp_dec_slv0_req_mst_req_15@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "iniu0_noc_dec_req_mst_req_15@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "mst_req"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "slv0_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "dp_root_dec_dp_dsp_dec_slv0_rsp_mst_rsp_16@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "mst_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "slv0_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "dp_root_dec_dp_media_dec_slv1_req_mst_req_17@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "slv1_req"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "mst_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "dp_root_dec_dp_media_dec_slv1_rsp_mst_rsp_18@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "slv1_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "mst_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "dp_root_dec_dp_io_dec_slv2_req_mst_req_19@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "slv2_req"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "mst_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "dp_root_dec_dp_io_dec_slv2_rsp_mst_rsp_20@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "mst_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "slv2_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "display_ss_iniu_display_root_dec_req_mst_req_21@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
             "interface_id": "mst_req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_ss_iniu",
+            "node_id": "sts_logic_topo_1i4t.iniu0",
             "interface_id": "req"
           }
         }
       ]
     },
     {
-      "id": "display_ss_iniu_display_root_dec_rsp_mst_rsp_22@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "iniu0_noc_dec_rsp_mst_rsp_16@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_ss_iniu",
+            "node_id": "sts_logic_topo_1i4t.iniu0",
             "interface_id": "rsp"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
             "interface_id": "mst_rsp"
           }
         }
       ]
     },
     {
-      "id": "display_root_dec_display_misc_dec_slv0_req_mst_req_23@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "noc_dec_tniu0_slv0_req_req_17@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "mst_req"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
             "interface_id": "slv0_req"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "req"
+          }
         }
       ]
     },
     {
-      "id": "display_root_dec_display_misc_dec_slv0_rsp_mst_rsp_24@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "noc_dec_tniu0_slv0_rsp_rsp_18@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "mst_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
             "interface_id": "slv0_rsp"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "rsp"
+          }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ss_iniu_cpu_ss_iniu.node_id_porting_node_id_25@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "noc_dec_tniu1_slv1_req_req_19@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ss_iniu.node_id_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ss_iniu",
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
+            "interface_id": "slv1_req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "noc_dec_tniu1_slv1_rsp_rsp_20@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
+            "interface_id": "slv1_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "noc_dec_tniu2_slv2_req_req_21@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
+            "interface_id": "slv2_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "noc_dec_tniu2_slv2_rsp_rsp_22@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
+            "interface_id": "slv2_rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "noc_dec_tniu3_slv3_req_req_23@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
+            "interface_id": "slv3_req"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "req"
+          }
+        }
+      ]
+    },
+    {
+      "id": "noc_dec_tniu3_slv3_rsp_rsp_24@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t.noc_dec",
+            "interface_id": "slv3_rsp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "rsp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sts_logic_topo_1i4t_iniu0_iniu0.node_id_porting_node_id_25@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "iniu0.node_id_porting"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "sts_logic_topo_1i4t.iniu0",
             "interface_id": "node_id"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ss_iniu_cpu_ss_iniu.axi_porting_axi_26@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_iniu0_iniu0.axi_porting_axi_26@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ss_iniu",
-            "interface_id": "axi"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "iniu0.axi_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ss_iniu.axi_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_ss_iniu_dp_ss_iniu.node_id_porting_node_id_27@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_ss_iniu",
-            "interface_id": "node_id"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_ss_iniu.node_id_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_ss_iniu_dp_ss_iniu.axi_porting_axi_28@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_ss_iniu.axi_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_ss_iniu",
+            "node_id": "sts_logic_topo_1i4t.iniu0",
             "interface_id": "axi"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_display_ss_iniu_display_ss_iniu.node_id_porting_node_id_29@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.pmc_apb_porting_pmc_apb_27@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_ss_iniu",
-            "interface_id": "node_id"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0.pmc_apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_ss_iniu.node_id_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "pmc_apb"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_display_ss_iniu_display_ss_iniu.axi_porting_axi_30@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.sys_apb_porting_sys_apb_28@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_ss_iniu.axi_porting"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0.sys_apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_ss_iniu",
-            "interface_id": "axi"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "sys_apb"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_root_dec_cpu_root_dec.slv3_req_porting_slv3_req_31@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.dbg_data_porting_dbg_data_29@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "slv3_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0.dbg_data_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_root_dec.slv3_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "dbg_data"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_root_dec_cpu_root_dec.slv3_rsp_porting_slv3_rsp_32@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.dbg_timestamp_porting_dbg_timestamp_30@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_root_dec.slv3_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "dbg_timestamp"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_root_dec",
-            "interface_id": "slv3_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0.dbg_timestamp_porting"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_lo_dec_cpu_ddr_lo_dec.slv0_req_porting_slv0_req_33@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.sys_cti_event_porting_sys_cti_event_31@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "slv0_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0.sys_cti_event_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_lo_dec.slv0_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "sys_cti_event"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_lo_dec_cpu_ddr_lo_dec.slv0_rsp_porting_slv0_rsp_34@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.noc_cti_event_porting_noc_cti_event_32@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "slv0_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0.noc_cti_event_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_lo_dec.slv0_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "noc_cti_event"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_lo_dec_cpu_ddr_lo_dec.slv1_req_porting_slv1_req_35@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.sys_cti_channel_porting_sys_cti_channel_33@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_lo_dec.slv1_req_porting"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0.sys_cti_channel_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "slv1_req"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "sys_cti_channel"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_lo_dec_cpu_ddr_lo_dec.slv1_rsp_porting_slv1_rsp_36@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu0_tniu0.noc_cti_channel_porting_noc_cti_channel_34@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_lo_dec.slv1_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu0",
+            "interface_id": "noc_cti_channel"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "slv1_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu0.noc_cti_channel_porting"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_lo_dec_cpu_ddr_lo_dec.slv2_req_porting_slv2_req_37@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.pmc_apb_porting_pmc_apb_35@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "slv2_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.pmc_apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_lo_dec.slv2_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "pmc_apb"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_lo_dec_cpu_ddr_lo_dec.slv2_rsp_porting_slv2_rsp_38@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.sys_apb_porting_sys_apb_36@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "slv2_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "sys_apb"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_lo_dec.slv2_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.sys_apb_porting"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_lo_dec_cpu_ddr_lo_dec.slv3_req_porting_slv3_req_39@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.dbg_data_porting_dbg_data_37@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_lo_dec.slv3_req_porting"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.dbg_data_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "slv3_req"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "dbg_data"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_lo_dec_cpu_ddr_lo_dec.slv3_rsp_porting_slv3_rsp_40@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.dbg_timestamp_porting_dbg_timestamp_38@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_lo_dec.slv3_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.dbg_timestamp_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_lo_dec",
-            "interface_id": "slv3_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "dbg_timestamp"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_hi_dec_cpu_ddr_hi_dec.slv0_req_porting_slv0_req_41@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.sys_cti_event_porting_sys_cti_event_39@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
-            "interface_id": "slv0_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.sys_cti_event_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_hi_dec.slv0_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "sys_cti_event"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_hi_dec_cpu_ddr_hi_dec.slv0_rsp_porting_slv0_rsp_42@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.noc_cti_event_porting_noc_cti_event_40@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_hi_dec.slv0_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "noc_cti_event"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
-            "interface_id": "slv0_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.noc_cti_event_porting"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_hi_dec_cpu_ddr_hi_dec.slv1_req_porting_slv1_req_43@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.sys_cti_channel_porting_sys_cti_channel_41@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
-            "interface_id": "slv1_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.sys_cti_channel_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_hi_dec.slv1_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "sys_cti_channel"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_hi_dec_cpu_ddr_hi_dec.slv1_rsp_porting_slv1_rsp_44@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu1_tniu1.noc_cti_channel_porting_noc_cti_channel_42@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_hi_dec.slv1_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu1.noc_cti_channel_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
-            "interface_id": "slv1_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu1",
+            "interface_id": "noc_cti_channel"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_hi_dec_cpu_ddr_hi_dec.slv2_req_porting_slv2_req_45@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.pmc_apb_porting_pmc_apb_43@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
-            "interface_id": "slv2_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.pmc_apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_hi_dec.slv2_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "pmc_apb"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_hi_dec_cpu_ddr_hi_dec.slv2_rsp_porting_slv2_rsp_46@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.sys_apb_porting_sys_apb_44@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_hi_dec.slv2_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.sys_apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
-            "interface_id": "slv2_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "sys_apb"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_hi_dec_cpu_ddr_hi_dec.slv3_req_porting_slv3_req_47@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.dbg_data_porting_dbg_data_45@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
-            "interface_id": "slv3_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.dbg_data_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_hi_dec.slv3_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "dbg_data"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_hi_dec_cpu_ddr_hi_dec.slv3_rsp_porting_slv3_rsp_48@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.dbg_timestamp_porting_dbg_timestamp_46@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_hi_dec.slv3_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "dbg_timestamp"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_hi_dec",
-            "interface_id": "slv3_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.dbg_timestamp_porting"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_ext_dec_cpu_ddr_ext_dec.slv0_req_porting_slv0_req_49@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.sys_cti_event_porting_sys_cti_event_47@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "slv0_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.sys_cti_event_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_ext_dec.slv0_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "sys_cti_event"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_ext_dec_cpu_ddr_ext_dec.slv0_rsp_porting_slv0_rsp_50@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.noc_cti_event_porting_noc_cti_event_48@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_ext_dec.slv0_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.noc_cti_event_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "slv0_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "noc_cti_event"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_ext_dec_cpu_ddr_ext_dec.slv1_req_porting_slv1_req_51@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.sys_cti_channel_porting_sys_cti_channel_49@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "slv1_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.sys_cti_channel_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_ext_dec.slv1_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "sys_cti_channel"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_ext_dec_cpu_ddr_ext_dec.slv1_rsp_porting_slv1_rsp_52@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu2_tniu2.noc_cti_channel_porting_noc_cti_channel_50@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_ext_dec.slv1_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu2",
+            "interface_id": "noc_cti_channel"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "slv1_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu2.noc_cti_channel_porting"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_ext_dec_cpu_ddr_ext_dec.slv2_req_porting_slv2_req_53@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.pmc_apb_porting_pmc_apb_51@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "slv2_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3.pmc_apb_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_ext_dec.slv2_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "pmc_apb"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_ext_dec_cpu_ddr_ext_dec.slv2_rsp_porting_slv2_rsp_54@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.sys_apb_porting_sys_apb_52@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_ext_dec.slv2_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "sys_apb"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "slv2_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3.sys_apb_porting"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_ext_dec_cpu_ddr_ext_dec.slv3_req_porting_slv3_req_55@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.dbg_data_porting_dbg_data_53@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "slv3_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3.dbg_data_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_ext_dec.slv3_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "dbg_data"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_cpu_ddr_ext_dec_cpu_ddr_ext_dec.slv3_rsp_porting_slv3_rsp_56@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.dbg_timestamp_porting_dbg_timestamp_54@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "cpu_ddr_ext_dec.slv3_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3.dbg_timestamp_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.cpu_ddr_ext_dec",
-            "interface_id": "slv3_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "dbg_timestamp"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_dp_root_dec_dp_root_dec.slv3_req_porting_slv3_req_57@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.sys_cti_event_porting_sys_cti_event_55@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "slv3_req"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3.sys_cti_event_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_root_dec.slv3_req_porting"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "sys_cti_event"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_dp_root_dec_dp_root_dec.slv3_rsp_porting_slv3_rsp_58@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.noc_cti_event_porting_noc_cti_event_56@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_root_dec",
-            "interface_id": "slv3_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "noc_cti_event"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_root_dec.slv3_rsp_porting"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3.noc_cti_event_porting"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_dp_dsp_dec_dp_dsp_dec.slv0_req_porting_slv0_req_59@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.sys_cti_channel_porting_sys_cti_channel_57@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_dsp_dec.slv0_req_porting"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3.sys_cti_channel_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "slv0_req"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "sys_cti_channel"
           }
         }
       ]
     },
     {
-      "id": "sts_soc_logic_topo_dp_dsp_dec_dp_dsp_dec.slv0_rsp_porting_slv0_rsp_60@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
+      "id": "sts_logic_topo_1i4t_tniu3_tniu3.noc_cti_channel_porting_noc_cti_channel_58@sts_logic_topo_1i4t",
+      "scope": "sts_logic_topo_1i4t",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "slv0_rsp"
+            "node_id": "sts_logic_topo_1i4t",
+            "interface_id": "tniu3.noc_cti_channel_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_dsp_dec.slv0_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_dsp_dec_dp_dsp_dec.slv1_req_porting_slv1_req_61@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_dsp_dec.slv1_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "slv1_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_dsp_dec_dp_dsp_dec.slv1_rsp_porting_slv1_rsp_62@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "slv1_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_dsp_dec.slv1_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_dsp_dec_dp_dsp_dec.slv2_req_porting_slv2_req_63@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_dsp_dec.slv2_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "slv2_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_dsp_dec_dp_dsp_dec.slv2_rsp_porting_slv2_rsp_64@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "slv2_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_dsp_dec.slv2_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_dsp_dec_dp_dsp_dec.slv3_req_porting_slv3_req_65@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_dsp_dec.slv3_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "slv3_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_dsp_dec_dp_dsp_dec.slv3_rsp_porting_slv3_rsp_66@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_dsp_dec",
-            "interface_id": "slv3_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_dsp_dec.slv3_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_media_dec_dp_media_dec.slv0_req_porting_slv0_req_67@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_media_dec.slv0_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "slv0_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_media_dec_dp_media_dec.slv0_rsp_porting_slv0_rsp_68@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "slv0_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_media_dec.slv0_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_media_dec_dp_media_dec.slv1_req_porting_slv1_req_69@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "slv1_req"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_media_dec.slv1_req_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_media_dec_dp_media_dec.slv1_rsp_porting_slv1_rsp_70@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_media_dec.slv1_rsp_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "slv1_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_media_dec_dp_media_dec.slv2_req_porting_slv2_req_71@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_media_dec.slv2_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "slv2_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_media_dec_dp_media_dec.slv2_rsp_porting_slv2_rsp_72@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "slv2_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_media_dec.slv2_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_media_dec_dp_media_dec.slv3_req_porting_slv3_req_73@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "slv3_req"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_media_dec.slv3_req_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_media_dec_dp_media_dec.slv3_rsp_porting_slv3_rsp_74@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_media_dec.slv3_rsp_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_media_dec",
-            "interface_id": "slv3_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_io_dec_dp_io_dec.slv0_req_porting_slv0_req_75@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_io_dec.slv0_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "slv0_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_io_dec_dp_io_dec.slv0_rsp_porting_slv0_rsp_76@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_io_dec.slv0_rsp_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "slv0_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_io_dec_dp_io_dec.slv1_req_porting_slv1_req_77@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_io_dec.slv1_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "slv1_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_io_dec_dp_io_dec.slv1_rsp_porting_slv1_rsp_78@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "slv1_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_io_dec.slv1_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_io_dec_dp_io_dec.slv2_req_porting_slv2_req_79@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_io_dec.slv2_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "slv2_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_io_dec_dp_io_dec.slv2_rsp_porting_slv2_rsp_80@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_io_dec.slv2_rsp_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "slv2_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_io_dec_dp_io_dec.slv3_req_porting_slv3_req_81@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_io_dec.slv3_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "slv3_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_dp_io_dec_dp_io_dec.slv3_rsp_porting_slv3_rsp_82@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.dp_io_dec",
-            "interface_id": "slv3_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "dp_io_dec.slv3_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_root_dec_display_root_dec.slv1_req_porting_slv1_req_83@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_root_dec.slv1_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
-            "interface_id": "slv1_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_root_dec_display_root_dec.slv1_rsp_porting_slv1_rsp_84@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
-            "interface_id": "slv1_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_root_dec.slv1_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_root_dec_display_root_dec.slv2_req_porting_slv2_req_85@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_root_dec.slv2_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
-            "interface_id": "slv2_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_root_dec_display_root_dec.slv2_rsp_porting_slv2_rsp_86@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
-            "interface_id": "slv2_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_root_dec.slv2_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_root_dec_display_root_dec.slv3_req_porting_slv3_req_87@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_root_dec.slv3_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
-            "interface_id": "slv3_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_root_dec_display_root_dec.slv3_rsp_porting_slv3_rsp_88@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_root_dec",
-            "interface_id": "slv3_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_root_dec.slv3_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_misc_dec_display_misc_dec.slv0_req_porting_slv0_req_89@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_misc_dec.slv0_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "slv0_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_misc_dec_display_misc_dec.slv0_rsp_porting_slv0_rsp_90@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "slv0_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_misc_dec.slv0_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_misc_dec_display_misc_dec.slv1_req_porting_slv1_req_91@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "slv1_req"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_misc_dec.slv1_req_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_misc_dec_display_misc_dec.slv1_rsp_porting_slv1_rsp_92@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "slv1_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_misc_dec.slv1_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_misc_dec_display_misc_dec.slv2_req_porting_slv2_req_93@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_misc_dec.slv2_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "slv2_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_misc_dec_display_misc_dec.slv2_rsp_porting_slv2_rsp_94@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_misc_dec.slv2_rsp_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "slv2_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_misc_dec_display_misc_dec.slv3_req_porting_slv3_req_95@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "slv3_req"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_misc_dec.slv3_req_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "sts_soc_logic_topo_display_misc_dec_display_misc_dec.slv3_rsp_porting_slv3_rsp_96@sts_soc_logic_topo",
-      "scope": "sts_soc_logic_topo",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "sts_soc_logic_topo",
-            "interface_id": "display_misc_dec.slv3_rsp_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "sts_soc_logic_topo.display_misc_dec",
-            "interface_id": "slv3_rsp"
+            "node_id": "sts_logic_topo_1i4t.tniu3",
+            "interface_id": "noc_cti_channel"
           }
         }
       ]

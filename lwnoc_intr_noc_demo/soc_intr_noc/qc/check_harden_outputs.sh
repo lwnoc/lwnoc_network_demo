@@ -3,11 +3,12 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SHARED_BUILD_DIR="$ROOT_DIR/build_logic"
-FULL_RING_DIR="$SHARED_BUILD_DIR/soc_intr_ring_noc_27i12t"
+FULL_RING_DIR="$SHARED_BUILD_DIR/soc_intr_ring_top"
 UP_HARDEN_DIR="$SHARED_BUILD_DIR/soc_intr_ring_noc_up_harden_wrap"
 DN_HARDEN_DIR="$SHARED_BUILD_DIR/soc_intr_ring_noc_dn_harden_wrap"
-HARDEN_TOP_DIR="$SHARED_BUILD_DIR/soc_intr_ring_noc_harden_top"
+HARDEN_TOP_DIR="$SHARED_BUILD_DIR/soc_intr_ring_top_pd"
 LEGACY_HARDEN_TOP_DIR="$ROOT_DIR/build_logic_pd/soc_intr_ring_noc_harden_top"
+LEGACY_PD_WRAP_DIR="$SHARED_BUILD_DIR/soc_intr_noc_wrap_pd"
 HARDEN_FILELIST="$ROOT_DIR/filelist_pd/filelist_harden.f"
 PD_ENTRY_FILELIST="$ROOT_DIR/filelist_pd/filelist.f"
 UP_FILELIST="$UP_HARDEN_DIR/filelist.f"
@@ -51,7 +52,7 @@ fi
 
 UP_WRAP="$UP_HARDEN_DIR/soc_intr_ring_noc_up_harden_wrap.v"
 DN_WRAP="$DN_HARDEN_DIR/soc_intr_ring_noc_dn_harden_wrap.v"
-HARDEN_TOP_WRAP="$HARDEN_TOP_DIR/soc_intr_ring_noc_harden_top.v"
+HARDEN_TOP_WRAP="$HARDEN_TOP_DIR/soc_intr_ring_top_pd.v"
 
 MISSING_WRAPPERS=()
 [[ ! -f "$UP_WRAP" ]] && MISSING_WRAPPERS+=("$UP_WRAP")
@@ -109,7 +110,7 @@ if rg -n "build_logic_pd" "$HARDEN_FILELIST" >/dev/null 2>&1; then
 fi
 
 EXPECTED_HARDEN_FILELIST_ENTRIES=(
-  '-f $INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap_pd/filelist.f'
+  '-f $INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_top_pd/filelist.f'
 )
 
 MISSING_FILELIST_ENTRIES=()
@@ -127,18 +128,12 @@ if [[ ${#MISSING_FILELIST_ENTRIES[@]} -gt 0 ]]; then
 fi
 
 EXPECTED_UP_FILELIST_ENTRIES=(
-  '-f $INTR_NOC_DEMO_DIR/filelist/intr_common_dep.f'
-  '-f $INTR_NOC_DEMO_DIR/filelist/intr_niu_core.f'
-  '-f $INTR_NOC_DEMO_DIR/filelist/intr_network_core.f'
   '$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_up_harden_wrap/cpu_ss_iniu_noc_side.v'
   '$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr11_tniu_noc_side.v'
   '$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_up_harden_wrap/soc_intr_ring_noc_up_harden_wrap.v'
 )
 
 EXPECTED_DN_FILELIST_ENTRIES=(
-  '-f $INTR_NOC_DEMO_DIR/filelist/intr_common_dep.f'
-  '-f $INTR_NOC_DEMO_DIR/filelist/intr_niu_core.f'
-  '-f $INTR_NOC_DEMO_DIR/filelist/intr_network_core.f'
   '$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_dn_harden_wrap/mipi_ss_iniu_noc_side.v'
   '$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_dn_harden_wrap/ucie_ss0_tniu_noc_side.v'
   '$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_dn_harden_wrap/soc_intr_ring_noc_dn_harden_wrap.v'
@@ -147,7 +142,7 @@ EXPECTED_DN_FILELIST_ENTRIES=(
 EXPECTED_TOP_FILELIST_ENTRIES=(
   '-f $INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_up_harden_wrap/filelist.f'
   '-f $INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_dn_harden_wrap/filelist.f'
-  '$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_noc_harden_top/soc_intr_ring_noc_harden_top.v'
+  '$INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_top_pd/soc_intr_ring_top_pd.v'
 )
 
 check_filelist_entries() {
@@ -214,6 +209,13 @@ if [[ ${#LEAKED_PARTITION_FLATS[@]} -gt 0 ]]; then
   exit 10
 fi
 
+if [[ -d "$LEGACY_PD_WRAP_DIR" ]]; then
+  echo "status: fail"
+  echo "reason: legacy_pd_wrapper_dir_present"
+  echo "path: $LEGACY_PD_WRAP_DIR"
+  exit 10
+fi
+
 if ! rg -n "filelist_harden\.f" "$PD_ENTRY_FILELIST" >/dev/null 2>&1; then
   echo "status: fail"
   echo "reason: pd_entry_missing_harden_ingress"
@@ -233,6 +235,7 @@ if [[ -d "$LEGACY_HARDEN_TOP_DIR" ]]; then
 else
   echo "legacy_harden_top_dir: absent"
 fi
+echo "legacy_pd_wrap_dir: absent"
 echo "up_harden_wrap: $(basename $UP_WRAP) found"
 echo "dn_harden_wrap: $(basename $DN_WRAP) found"
 echo "harden_top_wrap: $(basename $HARDEN_TOP_WRAP) found"

@@ -100,36 +100,54 @@ class _ReqRspPathComponent(Component):
         self.s_req_payload = Input(UInt(90))
         self.s_req_last = Input(UInt(1))
         self.s_req_srcid = Input(UInt(6))
+        self.s_req_tgtid = Input(UInt(6))
+        self.s_req_qos = Input(UInt(1))
+        self.s_req_threshold = Output(UInt(1))
         self.s_req_ready = Output(UInt(1))
 
         self.m_req_valid = Output(UInt(1))
         self.m_req_payload = Output(UInt(90))
         self.m_req_last = Output(UInt(1))
         self.m_req_srcid = Output(UInt(6))
+        self.m_req_tgtid = Output(UInt(6))
+        self.m_req_qos = Output(UInt(1))
+        self.m_req_threshold = Input(UInt(1))
         self.m_req_ready = Input(UInt(1))
 
         self.s_rsp_valid = Input(UInt(1))
         self.s_rsp_payload = Input(UInt(90))
         self.s_rsp_last = Input(UInt(1))
         self.s_rsp_srcid = Input(UInt(6))
+        self.s_rsp_tgtid = Input(UInt(6))
+        self.s_rsp_qos = Input(UInt(1))
+        self.s_rsp_threshold = Output(UInt(1))
         self.s_rsp_ready = Output(UInt(1))
 
         self.m_rsp_valid = Output(UInt(1))
         self.m_rsp_payload = Output(UInt(90))
         self.m_rsp_last = Output(UInt(1))
         self.m_rsp_srcid = Output(UInt(6))
+        self.m_rsp_tgtid = Output(UInt(6))
+        self.m_rsp_qos = Output(UInt(1))
+        self.m_rsp_threshold = Input(UInt(1))
         self.m_rsp_ready = Input(UInt(1))
 
         self.m_req_valid += self.s_req_valid
         self.m_req_payload += self.s_req_payload
         self.m_req_last += self.s_req_last
         self.m_req_srcid += self.s_req_srcid
+        self.m_req_tgtid += self.s_req_tgtid
+        self.m_req_qos += self.s_req_qos
+        self.s_req_threshold += self.m_req_threshold
         self.s_req_ready += self.m_req_ready
 
         self.m_rsp_valid += self.s_rsp_valid
         self.m_rsp_payload += self.s_rsp_payload
         self.m_rsp_last += self.s_rsp_last
         self.m_rsp_srcid += self.s_rsp_srcid
+        self.m_rsp_tgtid += self.s_rsp_tgtid
+        self.m_rsp_qos += self.s_rsp_qos
+        self.s_rsp_threshold += self.m_rsp_threshold
         self.s_rsp_ready += self.m_rsp_ready
 
 
@@ -138,10 +156,15 @@ class _ReqRspPathNode(UhdlComponentNode):
         super().__init__(id=id, impl=_ReqRspPathComponent())
         self.add_interface("clk", r"^clk$")
         self.add_interface("rst_n", r"^rst_n$")
-        self.add_interface("s_req", r"^s_req_(valid|payload|last|srcid|ready)$")
-        self.add_interface("m_req", r"^m_req_(valid|payload|last|srcid|ready)$")
-        self.add_interface("s_rsp", r"^s_rsp_(valid|payload|last|srcid|ready)$")
-        self.add_interface("m_rsp", r"^m_rsp_(valid|payload|last|srcid|ready)$")
+        self.add_interface("s_req", r"^s_req_(valid|payload|last|srcid|tgtid|qos|threshold|ready)$")
+        self.add_interface("m_req", r"^m_req_(valid|payload|last|srcid|tgtid|qos|threshold|ready)$")
+        self.add_interface("s_rsp", r"^s_rsp_(valid|payload|last|srcid|tgtid|qos|threshold|ready)$")
+        self.add_interface("m_rsp", r"^m_rsp_(valid|payload|last|srcid|tgtid|qos|threshold|ready)$")
+
+    def clear_io_states(self):
+        # This node's behavior is handwritten in _ReqRspPathComponent.circuit().
+        # Clearing generic IO states would drop those assignments and emit an empty shell.
+        return
 
 
 class SocDtiUpHardenWrap(UhdlWrapperNode):

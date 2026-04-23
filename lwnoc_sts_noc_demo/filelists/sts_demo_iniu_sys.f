@@ -6,5 +6,4 @@ $STS_INIU/rtl/iniu/sts_iniu_axi_bundle.sv
 $STS_INIU/rtl/iniu/sts_iniu_wr_channel.sv
 $STS_INIU/rtl/iniu/sts_iniu_rd_channel.sv
 $STS_INIU/rtl/iniu/sts_iniu_axi_iniu.sv
-$STS_INIU/rtl/iniu/sts_iniu_noc.sv
 $STS_INIU/rtl/iniu/sts_iniu_sys.sv

@@ -1,0 +1,6 @@
+$SOC_STS_NOC_DIR/sts_demo_dec4_lwnoc_sts_pack.sv
+$SOC_STS_NOC_DIR/sts_demo_dec4_sts_iniu_addr_map.sv
+$SOC_STS_NOC_DIR/sts_demo_dec4_cti_handle.sv
+$SOC_STS_NOC_DIR/sts_demo_dec4_sts_noc_dec_node.sv
+$SOC_STS_NOC_DIR/sts_demo_dec4_sts_tniu_apb_dec.sv
+$SOC_STS_NOC_DIR/sts_demo_dec4_sts_demo_dec4_wrap.sv

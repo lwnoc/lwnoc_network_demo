@@ -5,6 +5,7 @@ import re
 import shutil
 import sys
 from pathlib import Path
+from typing import TypedDict
 
 
 THIS_DIR = Path(__file__).resolve().parent
@@ -61,6 +62,14 @@ LP_TYPE_WIDTHS_DEFAULT: dict[str, int] = {
     "lwnoc_pchannel_state_t": 2,
 }
 _LP_HEADER_IMPORT_RE = re.compile(r"\n[ \t]+import[ \t]+lwnoc_lp_[A-Za-z0-9_]+::\*;")
+
+
+class _FlattenedPortSpec(TypedDict):
+    direction: str
+    type: str
+    name: str
+    alias: str
+    use_alias: bool
 
 
 def _parse_sv_logic_width(type_decl_text: str) -> int | None:
@@ -196,9 +205,11 @@ _TIEOFF_ASSIGN_PATCHES = {
     ),
 }
 
-_COMBINED_DIR = "soc_dti_logic_topo"
+_COMBINED_DIR = TOPO_ID
 _SHARED_ENV = "SOC_DTI_LOGIC_TOPO_DIR"
 _LOCAL_BUILD_ROOT = "$DTI_TEST_DIR/build_logic"
+_TOP_WRAP_DIR = "soc_dti_top_wrap"
+_NETWORK_COMPONENT_DIR = "soc_dti_network_component"
 _HARDEN_PREFIX = "soc_dti_harden_"
 _HARDEN_WRAPPER_BUILD_ROOT = THIS_DIR / "build" / "temp" / "__harden_wrapper_gen"
 _HARDEN_SPECS: dict[str, list[str]] = {
@@ -209,6 +220,18 @@ _HARDEN_WRAPPER_FACTORIES = {
     UP_HARDEN_ID: SocDtiUpHardenWrap,
     DN_HARDEN_ID: SocDtiDnHardenWrap,
 }
+_ROLE_PUBLISH_SPECS = {
+    "DTI_INIU_TOP_DIR": {
+        "dir_name": "dti_iniu_top_side",
+        "filelist": "dti_iniu_top_filelist.f",
+        "prefixes": ("dti_iniu_top_",),
+    },
+    "DTI_TNIU_TOP_DIR": {
+        "dir_name": "dti_tniu_top_side",
+        "filelist": "dti_tniu_top_filelist.f",
+        "prefixes": ("dti_tniu_top_",),
+    },
+}
 _TOP_SIDE_BLOCKS = {
     "soc_dti_sw_dsp6": "SOC_DTI_SW_DSP6_OUT_DIR",
     "soc_dti_sw_io5": "SOC_DTI_SW_IO5_OUT_DIR",
@@ -218,6 +241,16 @@ _TOP_SIDE_BLOCKS = {
     "dti_iniu_top_side": "DTI_INIU_TOP_DIR",
     "dti_tniu_top_side": "DTI_TNIU_TOP_DIR",
 }
+
+
+def _is_switch_payload(name: str) -> bool:
+    return name.startswith("soc_dti_sw_")
+
+
+def _is_top_side_payload(name: str) -> bool:
+    if name in {"dti_iniu_top_filelist.f", "dti_tniu_top_filelist.f"}:
+        return True
+    return name.startswith("dti_iniu_top_") or name.startswith("dti_tniu_top_")
 
 
 def _write_filelist(dst_path: Path, lines: list[str]) -> None:
@@ -348,7 +381,7 @@ def _flatten_lp_boundary_ports_in_file(path: Path) -> bool:
     if not LP_TYPE_PORT_RE.search(header):
         return _replace_known_lp_bits_exprs(path)
 
-    port_specs: list[dict[str, str]] = []
+    port_specs: list[_FlattenedPortSpec] = []
 
     def _replace_port(match: re.Match[str]) -> str:
         type_name = match.group("type")
@@ -358,12 +391,14 @@ def _flatten_lp_boundary_ports_in_file(path: Path) -> bool:
         bare_name = bare.group(1) if bare else type_name
         known_width = LP_TYPE_WIDTHS.get(bare_name)
         width_expr = str(known_width) if known_width is not None else f"$bits({type_name})"
+        use_alias = match.group("direction") == "input" or bare_name == "lwnoc_lp_req_signal_t"
         port_specs.append(
             {
                 "direction": match.group("direction"),
                 "type": type_name,
                 "name": name,
                 "alias": alias,
+                "use_alias": use_alias,
             }
         )
         return (
@@ -378,27 +413,30 @@ def _flatten_lp_boundary_ports_in_file(path: Path) -> bool:
         new_header = _LP_HEADER_IMPORT_RE.sub("", new_header)
     new_body = body
     for spec in port_specs:
-        new_body = re.sub(rf"\b{spec['name']}\b", spec["alias"], new_body)
+        if spec["use_alias"]:
+            new_body = re.sub(rf"\b{spec['name']}\b", spec["alias"], new_body)
 
     decl_indent = "\t" if "\n\t//Wire define for this module." in new_body else "    "
-    bridge_lines = ["", f"{decl_indent}//Flattened LP boundary typedef bridge."]
-    for spec in port_specs:
-        bridge_lines.append(f"{decl_indent}{spec['type']} {spec['alias']};")
-    bridge_lines.append("")
-    for spec in port_specs:
-        if spec["direction"] == "input":
-            bridge_lines.append(
-                f"{decl_indent}assign {spec['alias']} = {spec['type']}'({spec['name']});"
-            )
-        else:
-            bridge_lines.append(f"{decl_indent}assign {spec['name']} = {spec['alias']};")
-    bridge_block = "\n".join(bridge_lines) + "\n"
+    bridge_specs = [spec for spec in port_specs if spec["use_alias"]]
+    if bridge_specs:
+        bridge_lines = ["", f"{decl_indent}//Flattened LP boundary typedef bridge."]
+        for spec in bridge_specs:
+            bridge_lines.append(f"{decl_indent}{spec['type']} {spec['alias']};")
+        bridge_lines.append("")
+        for spec in bridge_specs:
+            if spec["direction"] == "input":
+                bridge_lines.append(
+                    f"{decl_indent}assign {spec['alias']} = {spec['type']}'({spec['name']});"
+                )
+            else:
+                bridge_lines.append(f"{decl_indent}assign {spec['name']} = {spec['alias']};")
+        bridge_block = "\n".join(bridge_lines) + "\n"
 
-    wire_marker = f"{decl_indent}//Wire define for this module.\n"
-    if wire_marker in new_body:
-        new_body = new_body.replace(wire_marker, wire_marker + bridge_block, 1)
-    else:
-        new_body = "\n" + bridge_block + new_body.lstrip("\n")
+        wire_marker = f"{decl_indent}//Wire define for this module.\n"
+        if wire_marker in new_body:
+            new_body = new_body.replace(wire_marker, wire_marker + bridge_block, 1)
+        else:
+            new_body = "\n" + bridge_block + new_body.lstrip("\n")
 
     updated = new_header + new_body
     if updated == text:
@@ -412,7 +450,6 @@ def _patch_generated_tieoff_components(build_dir: Path) -> None:
     for file_name, assigns in _TIEOFF_ASSIGN_PATCHES.items():
         path = combined_dir / file_name
         if not path.exists():
-            print(f"  [tieoff_patch] WARNING: {path.relative_to(build_dir)} not found")
             continue
 
         text = path.read_text()
@@ -538,6 +575,115 @@ def _copy_local_filelist(
     copied_filelists.add(filename)
 
 
+def _rewrite_role_filelist_env(line: str) -> str:
+    role_rewrites = {
+        f"-f ${_SHARED_ENV}/dti_iniu_top_filelist.f": "-f $DTI_INIU_TOP_DIR/dti_iniu_top_filelist.f",
+        f"-f ${_SHARED_ENV}/dti_tniu_top_filelist.f": "-f $DTI_TNIU_TOP_DIR/dti_tniu_top_filelist.f",
+    }
+    return role_rewrites.get(line, line)
+
+
+def _publish_role_payload_dirs(build_dir: Path) -> None:
+    source_dir = build_dir / _COMBINED_DIR
+    for env_name, spec in _ROLE_PUBLISH_SPECS.items():
+        target_dir = build_dir / spec["dir_name"]
+        if target_dir.exists():
+            shutil.rmtree(target_dir)
+        target_dir.mkdir(parents=True, exist_ok=True)
+
+        selected_names = {spec["filelist"]}
+        for file_path in sorted(source_dir.iterdir()):
+            if not file_path.is_file():
+                continue
+            if any(file_path.name.startswith(prefix) for prefix in spec["prefixes"]):
+                selected_names.add(file_path.name)
+
+        for name in sorted(selected_names):
+            src_path = source_dir / name
+            if not src_path.exists():
+                continue
+            dst_path = target_dir / name
+            shutil.copyfile(src_path, dst_path)
+            if dst_path.suffix == ".f":
+                content = dst_path.read_text().replace(f"${_SHARED_ENV}/", f"${env_name}/")
+                dst_path.write_text(content)
+
+        print(f"  [role_publish] published {spec['dir_name']}/")
+
+
+def _publish_network_component_dir(build_dir: Path) -> None:
+    source_dir = build_dir / _COMBINED_DIR
+    target_dir = build_dir / _NETWORK_COMPONENT_DIR
+    target_root = f"{_LOCAL_BUILD_ROOT}/{_NETWORK_COMPONENT_DIR}"
+
+    if target_dir.exists():
+        shutil.rmtree(target_dir)
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    switch_filelists: list[str] = []
+    for src_path in sorted(source_dir.iterdir()):
+        if not src_path.is_file() or not _is_switch_payload(src_path.name):
+            continue
+
+        dst_path = target_dir / src_path.name
+        shutil.copyfile(src_path, dst_path)
+        if dst_path.suffix == ".f":
+            content = dst_path.read_text().replace(f"${_SHARED_ENV}/", f"{target_root}/")
+            dst_path.write_text(content)
+            switch_filelists.append(dst_path.name)
+
+    out_lines = [f"-f {target_root}/{name}" for name in sorted(switch_filelists)]
+    _write_filelist(target_dir / "filelist.f", out_lines)
+    print(f"  [role_publish] published {_NETWORK_COMPONENT_DIR}/")
+
+
+def _publish_top_wrap_dir(build_dir: Path) -> None:
+    source_dir = build_dir / _COMBINED_DIR
+    target_dir = build_dir / _TOP_WRAP_DIR
+    network_filelist = f"-f {_LOCAL_BUILD_ROOT}/{_NETWORK_COMPONENT_DIR}/filelist.f"
+
+    if target_dir.exists():
+        shutil.rmtree(target_dir)
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    for src_path in sorted(source_dir.iterdir()):
+        if not src_path.is_file():
+            continue
+        if _is_switch_payload(src_path.name) or _is_top_side_payload(src_path.name):
+            continue
+        shutil.copyfile(src_path, target_dir / src_path.name)
+
+    out_lines: list[str] = [network_filelist]
+    for raw_line in (source_dir / "filelist.f").read_text().splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+
+        line = _rewrite_role_filelist_env(line)
+        if line.startswith(f"-f ${_SHARED_ENV}/"):
+            nested_name = line[len(f"-f ${_SHARED_ENV}/") :]
+            if _is_switch_payload(nested_name) or _is_top_side_payload(nested_name):
+                continue
+        elif line.startswith(f"${_SHARED_ENV}/"):
+            local_name = line[len(f"${_SHARED_ENV}/") :]
+            if _is_switch_payload(local_name) or _is_top_side_payload(local_name):
+                continue
+
+        out_lines.append(line)
+
+    _write_filelist(target_dir / "filelist.f", out_lines)
+    print(f"  [role_publish] published {_TOP_WRAP_DIR}/")
+
+
+def _cleanup_internal_combined_dir(build_dir: Path) -> None:
+    scratch_dir = build_dir / _COMBINED_DIR
+    if not scratch_dir.exists():
+        return
+
+    shutil.rmtree(scratch_dir)
+    print(f"  [cleanup] removed scratch {_COMBINED_DIR}/")
+
+
 def _sys_filelist_entry(node_id: str) -> str:
     if node_id == "sys_tcu_tniu_node":
         return "-f $SYS_TCU_TNIU_SYS_DIR/sys_tcu_filelist.f"
@@ -567,7 +713,6 @@ def _publish_harden_partition_dir(
     out_lines: list[str] = []
 
     if any(member_id.endswith("_iniu_top_wrap") for member_id in member_ids):
-        _copy_local_file(source_dir, target_dir, "DtiIniuTopExtTieoffComponent.v", copied_files)
         _copy_local_filelist(
             source_dir,
             target_dir,
@@ -578,7 +723,6 @@ def _publish_harden_partition_dir(
         )
 
     if any(member_id.endswith("_tniu_top_wrap") for member_id in member_ids):
-        _copy_local_file(source_dir, target_dir, "DtiTniuTopExtTieoffComponent.v", copied_files)
         _copy_local_filelist(
             source_dir,
             target_dir,
@@ -598,6 +742,9 @@ def _publish_harden_partition_dir(
             out_lines.append(_sys_filelist_entry(member_id))
             _copy_local_file(source_dir, target_dir, f"{member_id}.v", copied_files)
             out_lines.append(f"{target_root}/{member_id}.v")
+            continue
+
+        if member_id.startswith("soc_dti_sw_"):
             continue
 
         local_filelist = f"{member_id}_filelist.f"
@@ -708,7 +855,11 @@ def _publish_top_filelist(src_path: Path, dst_path: Path) -> None:
         print(f"  [filelist] WARNING: {src_path} not found, skipping")
         return
 
-    out_lines = [line.strip() for line in src_path.read_text().splitlines() if line.strip()]
+    out_lines = [
+        _rewrite_role_filelist_env(line.strip())
+        for line in src_path.read_text().splitlines()
+        if line.strip()
+    ]
     _write_filelist(dst_path, out_lines)
     print(f"  [filelist] published top filelist to {dst_path}")
 
@@ -739,8 +890,12 @@ def main() -> None:
     _flatten_lp_boundary_typedef_ports(build_dir)
     _patch_generated_tieoff_components(build_dir)
     _publish_partitioned_harden_outputs(build_dir)
+    _publish_role_payload_dirs(build_dir)
+    _publish_network_component_dir(build_dir)
+    _publish_top_wrap_dir(build_dir)
+    _cleanup_internal_combined_dir(build_dir)
     _publish_top_filelist(
-        build_dir / _COMBINED_DIR / "filelist.f",
+        build_dir / _TOP_WRAP_DIR / "filelist.f",
         THIS_DIR / "filelists" / f"{TOPO_ID}.f",
     )
     _publish_compile_entry(THIS_DIR / "filelists" / "filelist.f")

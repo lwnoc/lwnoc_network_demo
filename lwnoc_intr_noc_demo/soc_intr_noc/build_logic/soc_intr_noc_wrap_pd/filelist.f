@@ -1,2 +1,0 @@
--f $INTR_NOC_DEMO_DIR/build_logic/soc_intr_ring_top_pd/filelist.f
-$INTR_NOC_DEMO_DIR/build_logic/soc_intr_noc_wrap_pd/soc_intr_noc_wrap_pd.v

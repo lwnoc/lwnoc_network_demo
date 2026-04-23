@@ -1,1 +1,0 @@
-$INTR_RING_LINK_OUT_DIR/intr_ring_link_interrupt_req_ring_link.sv

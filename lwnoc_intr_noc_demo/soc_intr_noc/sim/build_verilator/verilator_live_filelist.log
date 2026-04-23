@@ -1,0 +1,177 @@
+%Warning-MODDUP: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_4096x20.sv:1:8: Duplicate declaration of module: 'spram_4096x20'
+    1 | module spram_4096x20 (
+      |        ^~~~~~~~~~~~~
+                 /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_4096x20.sv:1:8: ... Location of original declaration
+    1 | module spram_4096x20 (
+      |        ^~~~~~~~~~~~~
+                 ... Use "/* verilator lint_off MODDUP */" and lint_on around source to disable this message.
+%Warning-MODDUP: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_2048x20.sv:1:8: Duplicate declaration of module: 'spram_2048x20'
+    1 | module spram_2048x20 (
+      |        ^~~~~~~~~~~~~
+                 /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_2048x20.sv:1:8: ... Location of original declaration
+    1 | module spram_2048x20 (
+      |        ^~~~~~~~~~~~~
+%Warning-MODDUP: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_1024x20.sv:1:8: Duplicate declaration of module: 'spram_1024x20'
+    1 | module spram_1024x20 (
+      |        ^~~~~~~~~~~~~
+                 /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_1024x20.sv:1:8: ... Location of original declaration
+    1 | module spram_1024x20 (
+      |        ^~~~~~~~~~~~~
+%Warning-MODDUP: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_512x20.sv:1:8: Duplicate declaration of module: 'spram_512x20'
+    1 | module spram_512x20 (
+      |        ^~~~~~~~~~~~
+                 /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_512x20.sv:1:8: ... Location of original declaration
+    1 | module spram_512x20 (
+      |        ^~~~~~~~~~~~
+%Warning-MODDUP: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_256x20.sv:1:8: Duplicate declaration of module: 'spram_256x20'
+    1 | module spram_256x20 (
+      |        ^~~~~~~~~~~~
+                 /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_256x20.sv:1:8: ... Location of original declaration
+    1 | module spram_256x20 (
+      |        ^~~~~~~~~~~~
+%Warning-MODDUP: /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_128x20.sv:1:8: Duplicate declaration of module: 'spram_128x20'
+    1 | module spram_128x20 (
+      |        ^~~~~~~~~~~~
+                 /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_128x20.sv:1:8: ... Location of original declaration
+    1 | module spram_128x20 (
+      |        ^~~~~~~~~~~~
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1231:20: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1231 |         repeat (n) @(posedge clk_sys);
+      |                    ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1260:13: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1260 |             @(negedge clk_sys);
+      |             ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1453:13: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1453 |             @(negedge clk_sys);
+      |             ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1542:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1542 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1548:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1548 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1554:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1554 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1560:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1560 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1566:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1566 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1572:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1572 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1578:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1578 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1584:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1584 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1590:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1590 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1596:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1596 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1602:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1602 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1608:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1608 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1614:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1614 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1620:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1620 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1626:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1626 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1632:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1632 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1638:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1638 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1644:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1644 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1650:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1650 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1656:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1656 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1662:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1662 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1668:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1668 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1674:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1674 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1680:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1680 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1686:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1686 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1692:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1692 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1698:21: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1698 |                     @(posedge clk_sys);
+      |                     ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1704:13: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1704 |             @(negedge clk_sys);
+      |             ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1925:13: Unsupported: timing control statement in this location
+                                                     : ... Suggest have one timing control statement per procedure, at the top of the procedure
+ 1925 |             @(negedge clk_sys);
+      |             ^
+%Error-UNSUPPORTED: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/mem_model/fcip_dpram_model.sv:84:17: Unsupported: timing control statement in this location
+                                                                                                                                    : ... Suggest have one timing control statement per procedure, at the top of the procedure
+   84 |                 @(posedge clk)
+      |                 ^
+%Error-UNSUPPORTED: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/mem_model/fcip_spram_model.sv:83:17: Unsupported: timing control statement in this location
+                                                                                                                                    : ... Suggest have one timing control statement per procedure, at the top of the procedure
+   83 |                 @(posedge clk)
+      |                 ^
+%Error-UNSUPPORTED: tb_soc_intr_noc_sanity.sv:1236:13: Unsupported: wait statements
+ 1236 |             wait (rstn_sys === 1'b1 && rst_noc_up_n === 1'b1 && rst_noc_dn_n === 1'b1);
+      |             ^~~~
+%Error: Exiting due to 35 error(s)

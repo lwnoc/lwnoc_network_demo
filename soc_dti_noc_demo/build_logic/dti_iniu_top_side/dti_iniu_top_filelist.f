@@ -1,0 +1,3 @@
+$DTI_INIU_TOP_DIR/dti_iniu_top_dti_pr_iniu_define.sv
+$DTI_INIU_TOP_DIR/dti_iniu_top_dti_iniu_pack.sv
+$DTI_INIU_TOP_DIR/dti_iniu_top_dti_pr_iniu_async_top_side.sv
