@@ -11,8 +11,8 @@ module display_ss_top_wrap
 	input  [15:0]                                         async_fifo_rsp_rptr_async,
 	input  [15:0]                                         async_fifo_rsp_rptr_sync ,
 	output [15:0]                                         async_fifo_rsp_wptr_async,
-	output logic [13-1:0] lp_top_tx_lp_hub_tx_req  ,
-	input logic [13-1:0] lp_top_rx_lp_hub_rx_req  ,
+	output logic [9-1:0] lp_top_tx_lp_hub_tx_req  ,
+	input logic [9-1:0] lp_top_rx_lp_hub_rx_req  ,
 	output                                                top_req_req_last         ,
 	output [89:0]                                         top_req_req_payload      ,
 	output                                                top_req_req_qos          ,
@@ -31,13 +31,6 @@ module display_ss_top_wrap
 	input                                                 top_rsp_rsp_valid        );
 
 	//Wire define for this module.
-
-	//Flattened LP boundary typedef bridge.
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t lp_top_rx_lp_hub_rx_req__typed;
-
-	assign lp_top_tx_lp_hub_tx_req = lp_top_tx_lp_hub_tx_req__typed;
-	assign lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(lp_top_rx_lp_hub_rx_req);
 
 	//Wire define for sub module.
 
@@ -75,8 +68,8 @@ module display_ss_top_wrap
 		.rsp_rptr_async(async_fifo_rsp_rptr_async),
 		.rsp_rptr_sync(async_fifo_rsp_rptr_sync),
 		.rsp_pld_sync(async_fifo_rsp_pld_sync),
-		.lp_hub_rx_req(lp_top_rx_lp_hub_rx_req__typed),
-		.lp_hub_tx_req(lp_top_tx_lp_hub_tx_req__typed));
+		.lp_hub_rx_req(lp_top_rx_lp_hub_rx_req),
+		.lp_hub_tx_req(lp_top_tx_lp_hub_tx_req));
 
 endmodule
 //[UHDL]Content End [md5:677185eebed2ff2c5a0ce119bc8b6499]

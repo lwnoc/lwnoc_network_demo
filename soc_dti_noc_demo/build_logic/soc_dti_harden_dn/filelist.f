@@ -1,3 +1,5 @@
+-f $DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dti_iniu_top_filelist.f
+-f $DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dti_tniu_top_filelist.f
 $DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dsp_ss0_iniu_top_wrap.v
 $DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dsp_ss1_iniu_top_wrap.v
 $DTI_TEST_DIR/build_logic/soc_dti_harden_dn/dsp_ss2_iniu_top_wrap.v

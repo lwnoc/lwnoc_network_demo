@@ -50,8 +50,6 @@ class StsSocLogicTopo(UhdlWrapperNode):
         # Shared domain clocks/resets for SoC-level assembly.
         self.add_interface("clk_sys", is_global=True)
         self.add_interface("rst_sys_n", is_global=True)
-        self.add_interface("clk_noc", is_global=True)
-        self.add_interface("rst_noc_n", is_global=True)
         self.add_interface("clk_harden_dn_func", is_global=True)
         self.add_interface("rst_harden_dn_func_n", is_global=True)
         self.add_interface("clk_harden_up_func", is_global=True)
@@ -67,6 +65,9 @@ class StsSocLogicTopo(UhdlWrapperNode):
         connect(self.aon_ss_iniu.rstn_dst, self.rst_harden_dn_func_n)
 
         # Decoder hierarchy following the user-described route.
+        # These are topology nodes that participate in route resolution and generate
+        # components, but the fallback sys-boundary wrapper instantiates only sys-side
+        # blocks (INIU/TNIU). Decoder logic remains in lower-level modules.
         self.dec0 = StsDec4Node(id="dec0")
         self.dec1 = StsDec4Node(id="dec1")
         self.dec2 = StsDec4Node(id="dec2")
@@ -130,6 +131,12 @@ class StsSocLogicTopo(UhdlWrapperNode):
             "dspss4",
             "dspss5",
         }
+        noc_domain_leaf_names = set(leaf_names) - harden_dn_leaf_names - harden_up_leaf_names
+
+        if noc_domain_decs or noc_domain_leaf_names:
+            self.add_interface("clk_noc", is_global=True)
+            self.add_interface("rst_noc_n", is_global=True)
+
         self.harden_dn_leaf_names = tuple(sorted(harden_dn_leaf_names))
         self.harden_up_leaf_names = tuple(sorted(harden_up_leaf_names))
 

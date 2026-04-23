@@ -12,26 +12,28 @@ module tb_soc_dti_logic_topo_tree;
     } dti_beat_t;
 
 `define SOC_DTI_INIU_PORTS(NAME, IDX) \
-        .NAME``_iniu_node_clk_sys_porting_clk_sys_clk(clk_sys[IDX]), \
-        .NAME``_iniu_node_rst_sys_n_porting_rst_sys_n_rst_n(rst_sys_n[IDX]), \
-        .NAME``_iniu_node_dti_req_porting_dti_req_req_tdata(iniu_req_tdata[IDX]), \
-        .NAME``_iniu_node_dti_req_porting_dti_req_req_tkeep(iniu_req_tkeep[IDX]), \
-        .NAME``_iniu_node_dti_req_porting_dti_req_req_tlast(iniu_req_tlast[IDX]), \
-        .NAME``_iniu_node_dti_req_porting_dti_req_req_tready(iniu_req_tready[IDX]), \
-        .NAME``_iniu_node_dti_req_porting_dti_req_req_ttid(iniu_req_ttid[IDX]), \
-        .NAME``_iniu_node_dti_req_porting_dti_req_req_tvalid(iniu_req_tvalid[IDX]), \
-        .NAME``_iniu_node_dti_rsp_porting_dti_rsp_rsp_tdata(iniu_rsp_tdata[IDX]), \
-        .NAME``_iniu_node_dti_rsp_porting_dti_rsp_rsp_tkeep(iniu_rsp_tkeep[IDX]), \
-        .NAME``_iniu_node_dti_rsp_porting_dti_rsp_rsp_tlast(iniu_rsp_tlast[IDX]), \
-        .NAME``_iniu_node_dti_rsp_porting_dti_rsp_rsp_tready(iniu_rsp_tready[IDX]), \
-        .NAME``_iniu_node_dti_rsp_porting_dti_rsp_rsp_ttid(iniu_rsp_ttid[IDX]), \
-        .NAME``_iniu_node_dti_rsp_porting_dti_rsp_rsp_tvalid(iniu_rsp_tvalid[IDX]), \
-        .NAME``_iniu_node_timeout_val_porting_timeout_val_timeout_val(iniu_timeout_val[IDX]), \
-        .NAME``_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_paccept(iniu_paccept[IDX]), \
-        .NAME``_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pactive(iniu_pactive[IDX]), \
-        .NAME``_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pdeny(iniu_pdeny[IDX]), \
-        .NAME``_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_preq(iniu_preq[IDX]), \
-        .NAME``_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pstate(iniu_pstate[IDX])
+    .NAME``_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk(clk_sys[IDX]), \
+    .NAME``_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n(rst_sys_n[IDX]), \
+    .NAME``_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata(iniu_req_tdata[IDX]), \
+    .NAME``_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep(iniu_req_tkeep[IDX]), \
+    .NAME``_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast(iniu_req_tlast[IDX]), \
+    .NAME``_iniu_node_dti_req_porting_dti_req_dti_req_req_tready(iniu_req_tready[IDX]), \
+    .NAME``_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid(iniu_req_ttid[IDX]), \
+    .NAME``_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid(iniu_req_tvalid[IDX]), \
+    .NAME``_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata(iniu_rsp_tdata[IDX]), \
+    .NAME``_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep(iniu_rsp_tkeep[IDX]), \
+    .NAME``_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast(iniu_rsp_tlast[IDX]), \
+    .NAME``_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready(iniu_rsp_tready[IDX]), \
+    .NAME``_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid(iniu_rsp_ttid[IDX]), \
+    .NAME``_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid(iniu_rsp_tvalid[IDX]), \
+    .NAME``_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup(iniu_req_twakeup[IDX]), \
+    .NAME``_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup(iniu_rsp_twakeup[IDX]), \
+    .NAME``_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val(iniu_timeout_val[IDX]), \
+    .NAME``_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept(iniu_paccept[IDX]), \
+    .NAME``_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive(iniu_pactive[IDX]), \
+    .NAME``_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny(iniu_pdeny[IDX]), \
+    .NAME``_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq(iniu_preq[IDX]), \
+    .NAME``_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate(iniu_pstate[IDX])
 
     logic clk_noc = 1'b0;
     logic rst_noc_n = 1'b0;
@@ -53,6 +55,8 @@ module tb_soc_dti_logic_topo_tree;
     logic [LEAF_NUM-1:0]       iniu_rsp_tready;
     logic [LEAF_NUM-1:0][5:0]  iniu_rsp_ttid;
     logic [LEAF_NUM-1:0]       iniu_rsp_tvalid;
+    logic [LEAF_NUM-1:0]       iniu_req_twakeup;
+    logic [LEAF_NUM-1:0]       iniu_rsp_twakeup;
 
     logic [LEAF_NUM-1:0][9:0]  iniu_timeout_val;
     logic [LEAF_NUM-1:0]       iniu_paccept;
@@ -74,6 +78,8 @@ module tb_soc_dti_logic_topo_tree;
     logic        tcu_rsp_tready;
     logic [5:0]  tcu_rsp_ttid;
     logic        tcu_rsp_tvalid;
+    logic        tcu_req_twakeup;
+    logic        tcu_rsp_twakeup;
 
     logic        tcu_paccept;
     logic [1:0]  tcu_pactive;
@@ -112,6 +118,7 @@ module tb_soc_dti_logic_topo_tree;
             iniu_req_ttid = '0;
             iniu_req_tvalid = '0;
             iniu_rsp_tready = '1;
+            iniu_req_twakeup = '0;
             iniu_preq = '1;
             for (int i = 0; i < LEAF_NUM; i++) begin
                 iniu_timeout_val[i] = 10'd32;
@@ -124,6 +131,7 @@ module tb_soc_dti_logic_topo_tree;
             tcu_rsp_tlast = 1'b0;
             tcu_rsp_ttid = '0;
             tcu_rsp_tvalid = 1'b0;
+            tcu_rsp_twakeup = 1'b0;
             tcu_preq = 1'b1;
             tcu_pstate = lwnoc_lp_define_package::P_POWER_ON;
         end
@@ -152,10 +160,7 @@ module tb_soc_dti_logic_topo_tree;
                 for (int i = 0; i < LEAF_NUM; i++) begin
                     all_power_on &= (iniu_pactive[i] == 2'd1);
                 end
-                if (all_power_on &&
-                    !dut.dsp_ss0_iniu.top_side.req_async_clear &&
-                    !dut.display_ss_iniu.top_side.req_async_clear &&
-                    !dut.sys_tcu_tniu.sys_side.req_async_clear) begin
+                if (all_power_on) begin
                     return;
                 end
             end
@@ -343,24 +348,26 @@ module tb_soc_dti_logic_topo_tree;
         `SOC_DTI_INIU_PORTS(gpu_ss1, 12),
         `SOC_DTI_INIU_PORTS(dp_ss, 13),
         `SOC_DTI_INIU_PORTS(display_ss, 14),
-        .sys_tcu_tniu_node_clk_sys_porting_clk_sys_clk(clk_sys_tcu),
-        .sys_tcu_tniu_node_rst_sys_n_porting_rst_sys_n_rst_n(rst_sys_tcu_n),
-        .sys_tcu_tniu_node_dti_req_porting_dti_req_req_tdata(tcu_req_tdata),
-        .sys_tcu_tniu_node_dti_req_porting_dti_req_req_tkeep(tcu_req_tkeep),
-        .sys_tcu_tniu_node_dti_req_porting_dti_req_req_tlast(tcu_req_tlast),
-        .sys_tcu_tniu_node_dti_req_porting_dti_req_req_tready(tcu_req_tready),
-        .sys_tcu_tniu_node_dti_req_porting_dti_req_req_ttid(tcu_req_ttid),
-        .sys_tcu_tniu_node_dti_req_porting_dti_req_req_tvalid(tcu_req_tvalid),
-        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_rsp_tdata(tcu_rsp_tdata),
-        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_rsp_tkeep(tcu_rsp_tkeep),
-        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_rsp_tlast(tcu_rsp_tlast),
-        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_rsp_tready(tcu_rsp_tready),
-        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_rsp_ttid(tcu_rsp_ttid),
-        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_rsp_tvalid(tcu_rsp_tvalid),
-        .sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_paccept(tcu_paccept),
-        .sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pactive(tcu_pactive),
-        .sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pdeny(tcu_pdeny),
-        .sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_preq(tcu_preq),
-        .sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pstate(tcu_pstate)
+        .sys_tcu_tniu_node_clk_sys_porting_clk_sys_clk_sys_clk(clk_sys_tcu),
+        .sys_tcu_tniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n(rst_sys_tcu_n),
+        .sys_tcu_tniu_node_dti_req_porting_dti_req_dti_req_req_tdata(tcu_req_tdata),
+        .sys_tcu_tniu_node_dti_req_porting_dti_req_dti_req_req_tkeep(tcu_req_tkeep),
+        .sys_tcu_tniu_node_dti_req_porting_dti_req_dti_req_req_tlast(tcu_req_tlast),
+        .sys_tcu_tniu_node_dti_req_porting_dti_req_dti_req_req_tready(tcu_req_tready),
+        .sys_tcu_tniu_node_dti_req_porting_dti_req_dti_req_req_ttid(tcu_req_ttid),
+        .sys_tcu_tniu_node_dti_req_porting_dti_req_dti_req_req_tvalid(tcu_req_tvalid),
+        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata(tcu_rsp_tdata),
+        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep(tcu_rsp_tkeep),
+        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast(tcu_rsp_tlast),
+        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready(tcu_rsp_tready),
+        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid(tcu_rsp_ttid),
+        .sys_tcu_tniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid(tcu_rsp_tvalid),
+        .sys_tcu_tniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup(tcu_req_twakeup),
+        .sys_tcu_tniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup(tcu_rsp_twakeup),
+        .sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept(tcu_paccept),
+        .sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive(tcu_pactive),
+        .sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny(tcu_pdeny),
+        .sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq(tcu_preq),
+        .sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate(tcu_pstate)
     );
 endmodule

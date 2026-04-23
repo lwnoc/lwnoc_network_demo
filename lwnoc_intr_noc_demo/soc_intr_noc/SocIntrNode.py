@@ -89,36 +89,38 @@ class SocIntrXbarRoutingLutComponent(Component):
     """
     
     def __init__(self, lut_data: Dict[Tuple[int, int], int], num_nodes: int, node_id_width: int, num_channels: int):
-        super().__init__()
         self.lut_data = lut_data
         self.num_nodes = num_nodes
         self.node_id_width = node_id_width
         self.num_channels = num_channels
+        super().__init__()
+
+    @property
+    def module_name(self):
+        return f"soc_intr_xbar_routing_lut_w{self.node_id_width}_c{self.num_channels}"
     
     def circuit(self):
         """Generate the routing LUT circuit."""
-        src_id = Input(name="src_id", width=UInt(self.node_id_width))
+        self.src_id = Input(UInt(self.node_id_width))
         channel_ports = []
         for ch in range(self.num_channels):
-            tgt_id_ch = Input(name=f"xbar_ch{ch}_tgt_id", width=UInt(self.node_id_width))
-            sel_bit_ch = Output(name=f"xbar_ch{ch}_sel_bit", width=UInt(1))
+            tgt_id_ch = self.create(f"xbar_ch{ch}_tgt_id", Input(UInt(self.node_id_width)))
+            sel_bit_ch = self.create(f"xbar_ch{ch}_sel_bit", Output(UInt(1)))
             channel_ports.append((tgt_id_ch, sel_bit_ch))
         
         sorted_lut = sorted(self.lut_data.items())
         
         for ch, (tgt_id_ch, sel_bit_ch) in enumerate(channel_ports):
-            when_chain = []
+            sel_lut = EmptyWhen()
             for (src, tgt), sel_val in sorted_lut:
-                combined_key = Combine(UInt(src, self.node_id_width), UInt(tgt, self.node_id_width))
-                actual_combined = Combine(src_id, tgt_id_ch)
-                when_chain.append(Equal(actual_combined, combined_key))
-                when_chain.append(UInt(sel_val, 1))
-            
-            when_chain.append(UInt(0, 1))
-            sel_lut = EmptyWhen(*when_chain)
-            sel_bit_ch.assign(sel_lut)
+                combined_key = Combine(UInt(self.node_id_width, src), UInt(self.node_id_width, tgt))
+                actual_combined = Combine(self.src_id, tgt_id_ch)
+                sel_lut = sel_lut.when(Equal(actual_combined, combined_key)).then(UInt(1, sel_val))
+
+            sel_lut = sel_lut.otherwise(UInt(1, 0))
+            sel_bit_ch += sel_lut
         
-        return [src_id] + [ch[0] for ch in channel_ports] + [ch[1] for ch in channel_ports]
+        return [self.src_id] + [ch[0] for ch in channel_ports] + [ch[1] for ch in channel_ports]
 
 
 class SocIntrXbarRoutingLutNode(UhdlComponentNode):
@@ -171,15 +173,16 @@ class SocIntrXbarRoutingLutNode(UhdlComponentNode):
     def build_uhdl(self):
         """Build UHDL circuit, using DataTopology if available to compute routing LUT."""
         _datatopo = None
-        parent_queue = deque([self.parent])
+        parent_queue = deque(getattr(self, "parents", []))
         
         while parent_queue and not _datatopo:
             node = parent_queue.popleft()
             if node and hasattr(node, '_datatopo'):
                 _datatopo = node._datatopo
                 break
-            if node and hasattr(node, 'parent') and node.parent:
-                parent_queue.append(node.parent)
+            if node and hasattr(node, 'parents'):
+                for parent in node.parents:
+                    parent_queue.append(parent)
         
         if _datatopo:
             lut_data = self._compute_lut_from_shortest_paths(_datatopo)
@@ -189,7 +192,8 @@ class SocIntrXbarRoutingLutNode(UhdlComponentNode):
             _logger.warning(f"DataTopology not found for {self.id}, using default all-pring LUT")
         
         self._component.lut_data = lut_data
-        self.impl = self._component
+        self.uhdl_component = self._component
+        return self._component
 
 
 class SocIntrIniuSysNode(UhdlComponentNode):

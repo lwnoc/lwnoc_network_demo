@@ -28,7 +28,7 @@ if str(THIS_DIR) not in sys.path:
 from topo_core.node.node import reset_global_state
 from topo_core.utils.serialization import TopologySerializer
 
-from SocIntrNode import TOP_LAYER_SUFFIX
+from SocIntrNode import SocIntrXbarRoutingLutNode, TOP_LAYER_SUFFIX
 from SocIntrTopo import HARDEN_TOP_ID
 from SocIntrTopoConfig import DN_HARDEN_ID, RING_PLAN, UP_HARDEN_ID
 from SocIntrTopoDv import FULL_TOPO_ID, SocIntrFullLogicTopo, SocIntrLogicTopo, TOPO_ID
@@ -57,6 +57,7 @@ LP_TYPE_PORT_RE = re.compile(
     r"(?P<spacing>\s+)(?P<name>[A-Za-z0-9_]+)(?P<tail>\s*(?:,|\)\s*;))$",
     re.MULTILINE,
 )
+XBAR_LUT_MODULE_RE = re.compile(r"\bsoc_intr_xbar_routing_lut_w(?P<width>\d+)_c(?P<channels>\d+)\b")
 
 _SHARED_ENV = "INTR_RING_NOC_DIR"
 _TOP_SIDE_BLOCKS = {
@@ -680,6 +681,8 @@ def generate(flow: str = "dv"):
         full_comp.generate_verilog(iteration=True)
         full_comp.generate_filelist()
 
+    xbar_lut_tokens = tuple(_emit_xbar_lut_modules(build_dir, build_dir / combined_dir, topo))
+
     _emit_topology_visualization(topo, topo_png, topology_json)
     _write_endpoint_id_tables(THIS_DIR / "build")
 
@@ -701,12 +704,14 @@ def generate(flow: str = "dv"):
             build_dir_name,
             combined_dir,
             wrapper_inner_dir_name=FULL_TOPO_ID,
+            extra_rtl_tokens=xbar_lut_tokens,
         )
     else:
         _publish_partitioned_harden_outputs(
             build_dir,
             build_dir / combined_dir,
             THIS_DIR / "filelist_pd",
+            extra_rtl_tokens=xbar_lut_tokens,
         )
     _run_top_io_boundary_check(
         build_dir / ((FULL_TOPO_ID if flow == "dv" else combined_dir)) / f"{FULL_TOPO_ID if flow == 'dv' else combined_dir}.v"
@@ -1134,7 +1139,7 @@ _SVA_BLOCK_RE = re.compile(
     r"([ \t]*(?://[^\n]+\n[ \t]*)?"
     r"property[ \t]+\w+;[\s\S]+?endproperty[ \t]*\n"
     r"(?:[ \t]*\n)?"
-    r"[ \t]*assert[ \t]+property\([^)]+\)[\s\S]*?\);)",
+    r"[ \t]*assert[ \t]+property\([^)]+\)[\s\S]*?;)"
 )
 
 
@@ -1639,6 +1644,51 @@ def _iter_generated_component_filelist_refs(build_dir: Path):
         yield f"-f ${env_var}/{filelist.name}"
 
 
+def _collect_xbar_lut_specs(search_root: Path) -> list[tuple[int, int]]:
+    specs: set[tuple[int, int]] = set()
+    if not search_root.exists():
+        return []
+
+    for rtl_path in sorted(search_root.rglob("*.v")):
+        content = rtl_path.read_text()
+        for match in XBAR_LUT_MODULE_RE.finditer(content):
+            specs.add((int(match.group("width")), int(match.group("channels"))))
+
+    return sorted(specs)
+
+
+def _emit_xbar_lut_modules(build_dir: Path, search_root: Path, topo) -> list[str]:
+    specs = _collect_xbar_lut_specs(search_root)
+    if not specs:
+        return []
+
+    tokens: list[str] = []
+    for node_id_width, num_channels in specs:
+        lut_node = SocIntrXbarRoutingLutNode(
+            id=f"soc_intr_xbar_lut_gen_w{node_id_width}_c{num_channels}",
+            node_id_width=node_id_width,
+            num_channels=num_channels,
+        )
+        if hasattr(topo, "_datatopo"):
+            lut_data = lut_node._compute_lut_from_shortest_paths(topo._datatopo)
+        else:
+            lut_data = {
+                (src_id, tgt_id): 0
+                for src_id in range(2**node_id_width)
+                for tgt_id in range(2**node_id_width)
+            }
+
+        lut_node._component.lut_data = lut_data
+        lut_comp = lut_node._component
+        lut_comp.output_dir = str(build_dir)
+        lut_comp.generate_verilog(iteration=False)
+
+        lut_path = build_dir / lut_comp.module_name / f"{lut_comp.module_name}.v"
+        tokens.append(_as_demo_token(lut_path))
+
+    return tokens
+
+
 def _iter_dv_combined_core_entries(source_dir: Path):
     for macro_name, wrapper_name in (
         ("intr_iniu_top_macros.sv", "intr_iniu_top.f"),
@@ -1662,7 +1712,13 @@ def _iter_dv_leaf_filenames(source_dir: Path):
         yield path.name
 
 
-def _rewrite_dv_logic_filelist(build_dir: Path, combined_dir_name: str, *, include_sys_refs: bool) -> None:
+def _rewrite_dv_logic_filelist(
+    build_dir: Path,
+    combined_dir_name: str,
+    *,
+    include_sys_refs: bool,
+    extra_rtl_tokens: tuple[str, ...] = (),
+) -> None:
     source_dir = build_dir / combined_dir_name
     if not source_dir.exists():
         return
@@ -1676,13 +1732,14 @@ def _rewrite_dv_logic_filelist(build_dir: Path, combined_dir_name: str, *, inclu
         seen_lines.add(line)
         out_lines.append(line)
 
-    if not include_sys_refs:
-        _append_line(f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}")
+    _append_line(f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}")
     if include_sys_refs:
         for line in _iter_sys_filelist_refs(build_dir):
             _append_line(line)
     for line in _iter_generated_component_filelist_refs(build_dir):
         _append_line(line)
+    for token in extra_rtl_tokens:
+        _append_line(token)
     for filename in _iter_dv_leaf_filenames(source_dir):
         _append_line(_as_demo_token(source_dir / filename))
 
@@ -1700,14 +1757,25 @@ def _publish_top_filelist(
     combined_dir_name: str,
     *,
     wrapper_inner_dir_name: str | None = None,
+    extra_rtl_tokens: tuple[str, ...] = (),
 ) -> None:
     source_dir = src_path.parent
     if not source_dir.exists():
         return
     build_dir = THIS_DIR / build_dir_name
     inner_dir_name = wrapper_inner_dir_name or combined_dir_name
-    _rewrite_dv_logic_filelist(build_dir, combined_dir_name, include_sys_refs=False)
-    _rewrite_dv_logic_filelist(build_dir, inner_dir_name, include_sys_refs=True)
+    _rewrite_dv_logic_filelist(
+        build_dir,
+        combined_dir_name,
+        include_sys_refs=False,
+        extra_rtl_tokens=extra_rtl_tokens,
+    )
+    _rewrite_dv_logic_filelist(
+        build_dir,
+        inner_dir_name,
+        include_sys_refs=True,
+        extra_rtl_tokens=extra_rtl_tokens,
+    )
     ingress_dir_name = inner_dir_name
     if inner_dir_name != SOC_INTR_DV_WRAP_DIR:
         _publish_named_top_wrapper(build_dir, inner_dir_name, SOC_INTR_DV_WRAP_DIR)
@@ -1842,9 +1910,10 @@ def _publish_harden_partition_dir(source_dir: Path, target_dir: Path, partition_
     _write_filelist(target_dir / "filelist.f", out_lines)
 
 
-def _rewrite_harden_top_filelist(harden_dir: Path) -> None:
+def _rewrite_harden_top_filelist(harden_dir: Path, extra_rtl_tokens: tuple[str, ...] = ()) -> None:
     top_root = f"$INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{HARDEN_TOP_ID}"
     lines = [f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}"]
+    lines.extend(_iter_generated_component_filelist_refs(THIS_DIR / _SHARED_BUILD_DIR_NAME))
     lines.extend(_iter_filtered_pd_shared_entries(THIS_DIR / _SHARED_BUILD_DIR_NAME / TOPO_ID))
     lines.extend(
         [
@@ -1852,6 +1921,7 @@ def _rewrite_harden_top_filelist(harden_dir: Path) -> None:
             f"-f $INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{DN_HARDEN_ID}/filelist.f",
         ]
     )
+    lines.extend(extra_rtl_tokens)
     for filename in _iter_async_leaf_filenames(harden_dir):
         lines.append(f"{top_root}/{filename}")
     lines.append(f"{top_root}/{HARDEN_TOP_ID}.v")
@@ -1870,10 +1940,16 @@ def _prune_harden_assembly_dir(harden_dir: Path) -> None:
         print(f"  [harden_publish] pruned {HARDEN_TOP_ID}/ to assembly-only payload")
 
 
-def _publish_partitioned_harden_outputs(build_dir: Path, harden_dir: Path, publish_dir: Path) -> None:
+def _publish_partitioned_harden_outputs(
+    build_dir: Path,
+    harden_dir: Path,
+    publish_dir: Path,
+    *,
+    extra_rtl_tokens: tuple[str, ...] = (),
+) -> None:
     _publish_harden_partition_dir(harden_dir, build_dir / UP_HARDEN_ID, UP_HARDEN_ID)
     _publish_harden_partition_dir(harden_dir, build_dir / DN_HARDEN_ID, DN_HARDEN_ID)
-    _rewrite_harden_top_filelist(harden_dir)
+    _rewrite_harden_top_filelist(harden_dir, extra_rtl_tokens=extra_rtl_tokens)
     _prune_harden_assembly_dir(harden_dir)
 
     harden_ingress = f"-f $INTR_NOC_DEMO_DIR/{_HARDEN_BUILD_DIR_NAME}/{HARDEN_TOP_ID}/filelist.f"

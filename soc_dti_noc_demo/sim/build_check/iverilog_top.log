@@ -1,0 +1,4 @@
+$FCIP_DIR/ip/basic/fcip_bin2onehot.sv: No such file or directory
+error: Unable to find the root module "soc_dti_logic_topo" in the Verilog source.
+     : Perhaps ``-s soc_dti_logic_topo'' is incorrect?
+1 error(s) during elaboration.

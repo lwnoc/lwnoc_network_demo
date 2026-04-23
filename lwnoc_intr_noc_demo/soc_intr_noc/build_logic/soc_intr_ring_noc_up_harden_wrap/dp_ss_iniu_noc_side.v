@@ -1,41 +1,44 @@
-//[UHDL]Content Start [md5:95854daa55616eece28a6c61d66c1d58]
+//[UHDL]Content Start [md5:535a5f5f080866da3612cf06dc91c496]
 module dp_ss_iniu_noc_side (
-	input         clk_top_func                                  ,
-	input         rst_top_func_n                                ,
-	input         pring_in_if_pring_in_if_pring_in_if_last      ,
-	input  [39:0] pring_in_if_pring_in_if_pring_in_if_payload   ,
-	input  [3:0]  pring_in_if_pring_in_if_pring_in_if_qos       ,
-	output        pring_in_if_pring_in_if_pring_in_if_ready     ,
-	input  [7:0]  pring_in_if_pring_in_if_pring_in_if_srcid     ,
-	input  [7:0]  pring_in_if_pring_in_if_pring_in_if_tgtid     ,
-	input         pring_in_if_pring_in_if_pring_in_if_valid     ,
-	output        pring_out_if_pring_out_if_pring_out_if_last   ,
-	output [39:0] pring_out_if_pring_out_if_pring_out_if_payload,
-	output [3:0]  pring_out_if_pring_out_if_pring_out_if_qos    ,
-	input         pring_out_if_pring_out_if_pring_out_if_ready  ,
-	output [7:0]  pring_out_if_pring_out_if_pring_out_if_srcid  ,
-	output [7:0]  pring_out_if_pring_out_if_pring_out_if_tgtid  ,
-	output        pring_out_if_pring_out_if_pring_out_if_valid  ,
-	input         nring_in_if_nring_in_if_nring_in_if_last      ,
-	input  [39:0] nring_in_if_nring_in_if_nring_in_if_payload   ,
-	input  [3:0]  nring_in_if_nring_in_if_nring_in_if_qos       ,
-	output        nring_in_if_nring_in_if_nring_in_if_ready     ,
-	input  [7:0]  nring_in_if_nring_in_if_nring_in_if_srcid     ,
-	input  [7:0]  nring_in_if_nring_in_if_nring_in_if_tgtid     ,
-	input         nring_in_if_nring_in_if_nring_in_if_valid     ,
-	output        nring_out_if_nring_out_if_nring_out_if_last   ,
-	output [39:0] nring_out_if_nring_out_if_nring_out_if_payload,
-	output [3:0]  nring_out_if_nring_out_if_nring_out_if_qos    ,
-	input         nring_out_if_nring_out_if_nring_out_if_ready  ,
-	output [7:0]  nring_out_if_nring_out_if_nring_out_if_srcid  ,
-	output [7:0]  nring_out_if_nring_out_if_nring_out_if_tgtid  ,
-	output        nring_out_if_nring_out_if_nring_out_if_valid  ,
-	input  [61:0] async_fifo_pld_sync                           ,
-	output [15:0] async_fifo_rptr_async                         ,
-	output [15:0] async_fifo_rptr_sync                          ,
-	input  [15:0] async_fifo_wptr_async                         ,
-	output [8:0]  lp_async_m_async_master_hub_rx_req            ,
-	input  [8:0]  lp_async_m_async_master_hub_tx_req            );
+	input         clk_top_func                                                 ,
+	input         rst_top_func_n                                               ,
+	input  [4:0]  node_id                                                      ,
+	input         pring_in_if_pring_in_if_pring_in_if_last                     ,
+	input  [39:0] pring_in_if_pring_in_if_pring_in_if_payload                  ,
+	input  [3:0]  pring_in_if_pring_in_if_pring_in_if_qos                      ,
+	output        pring_in_if_pring_in_if_pring_in_if_ready                    ,
+	input  [7:0]  pring_in_if_pring_in_if_pring_in_if_srcid                    ,
+	input  [7:0]  pring_in_if_pring_in_if_pring_in_if_tgtid                    ,
+	input         pring_in_if_pring_in_if_pring_in_if_valid                    ,
+	output        pring_out_if_pring_out_if_pring_out_if_last                  ,
+	output [39:0] pring_out_if_pring_out_if_pring_out_if_payload               ,
+	output [3:0]  pring_out_if_pring_out_if_pring_out_if_qos                   ,
+	input         pring_out_if_pring_out_if_pring_out_if_ready                 ,
+	output [7:0]  pring_out_if_pring_out_if_pring_out_if_srcid                 ,
+	output [7:0]  pring_out_if_pring_out_if_pring_out_if_tgtid                 ,
+	output        pring_out_if_pring_out_if_pring_out_if_valid                 ,
+	input         nring_in_if_nring_in_if_nring_in_if_last                     ,
+	input  [39:0] nring_in_if_nring_in_if_nring_in_if_payload                  ,
+	input  [3:0]  nring_in_if_nring_in_if_nring_in_if_qos                      ,
+	output        nring_in_if_nring_in_if_nring_in_if_ready                    ,
+	input  [7:0]  nring_in_if_nring_in_if_nring_in_if_srcid                    ,
+	input  [7:0]  nring_in_if_nring_in_if_nring_in_if_tgtid                    ,
+	input         nring_in_if_nring_in_if_nring_in_if_valid                    ,
+	output        nring_out_if_nring_out_if_nring_out_if_last                  ,
+	output [39:0] nring_out_if_nring_out_if_nring_out_if_payload               ,
+	output [3:0]  nring_out_if_nring_out_if_nring_out_if_qos                   ,
+	input         nring_out_if_nring_out_if_nring_out_if_ready                 ,
+	output [7:0]  nring_out_if_nring_out_if_nring_out_if_srcid                 ,
+	output [7:0]  nring_out_if_nring_out_if_nring_out_if_tgtid                 ,
+	output        nring_out_if_nring_out_if_nring_out_if_valid                 ,
+	input  [61:0] async_fifo_pld_sync                                          ,
+	output [15:0] async_fifo_rptr_async                                        ,
+	output [15:0] async_fifo_rptr_sync                                         ,
+	input  [15:0] async_fifo_wptr_async                                        ,
+	output [8:0]  lp_async_m_async_master_hub_rx_req                           ,
+	input  [8:0]  lp_async_m_async_master_hub_tx_req                           ,
+	input  [4:0]  dp_ss_iniu_xbar_lut_xbar_ch0_tgt_id_porting_xbar_ch0_tgt_id  ,
+	output        dp_ss_iniu_xbar_lut_xbar_ch0_sel_bit_porting_xbar_ch0_sel_bit);
 
 	//Wire define for this module.
 
@@ -62,6 +65,10 @@ module dp_ss_iniu_noc_side (
 	//Wire this module connect to sub module.
 
 	//module inst.
+	soc_intr_xbar_routing_lut_w5_c1 xbar_routing_lut (
+		.src_id(node_id),
+		.xbar_ch0_tgt_id(dp_ss_iniu_xbar_lut_xbar_ch0_tgt_id_porting_xbar_ch0_tgt_id),
+		.xbar_ch0_sel_bit(dp_ss_iniu_xbar_lut_xbar_ch0_sel_bit_porting_xbar_ch0_sel_bit));
 	interrupt_iniu_async_top_side iniu_top (
 		.clk(clk_top_func),
 		.rst_n(rst_top_func_n),
@@ -145,5 +152,5 @@ module dp_ss_iniu_noc_side (
 		.invalid_tgtid_sticky());
 
 endmodule
-//[UHDL]Content End [md5:95854daa55616eece28a6c61d66c1d58]
+//[UHDL]Content End [md5:535a5f5f080866da3612cf06dc91c496]
 

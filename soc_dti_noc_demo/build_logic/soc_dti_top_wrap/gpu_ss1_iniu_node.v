@@ -44,11 +44,6 @@ module gpu_ss1_iniu_node
 
 	//Wire define for this module.
 
-	//Flattened LP boundary typedef bridge.
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t pchnl_ctrl_pchnl_ctrl_pstate__typed;
-
-	assign pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(pchnl_ctrl_pchnl_ctrl_pstate);
-
 	//Wire define for sub module.
 	wire                                           [15:0]  top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async;
 	wire                                           [15:0]  top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync ;
@@ -90,7 +85,7 @@ module gpu_ss1_iniu_node
 		.pchnl_ctrl_pactive(pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pdeny(pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_preq(pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pstate(pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pstate(pchnl_ctrl_pchnl_ctrl_pstate),
 		.async_fifo_req_pld_sync(sys_wrap_TO_top_wrap_SIG_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(top_wrap_TO_sys_wrap_SIG_async_fifo_req_rptr_sync),

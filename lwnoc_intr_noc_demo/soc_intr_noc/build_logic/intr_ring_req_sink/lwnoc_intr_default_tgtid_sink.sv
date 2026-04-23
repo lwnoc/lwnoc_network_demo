@@ -41,6 +41,7 @@ module lwnoc_intr_default_tgtid_sink #(
     assign invalid_tgtid_pulse = 1'b0;
     assign invalid_tgtid_sticky= 1'b0;
 
+`ifndef VERILATOR
     // Contract check: when sink is enabled, invalid packets must be accepted.
     property p_sink_accept_invalid_when_enabled;
         @(posedge clk) disable iff(!rst_n)
@@ -49,6 +50,7 @@ module lwnoc_intr_default_tgtid_sink #(
 
     assert property(p_sink_accept_invalid_when_enabled)
         else $error("[lwnoc_intr_default_tgtid_sink] sink enabled but invalid packet not accepted");
+`endif
 
     logic _unused_ok;
     assign _unused_ok = &{1'b0, rx_payload, rx_srcid, rx_qos, rx_last};

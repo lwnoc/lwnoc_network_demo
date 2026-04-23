@@ -131,10 +131,7 @@ module atb_soc_harden_dn_wrap (
     .noc_atwakeup(w_camera_ss_noc_atwakeup)
   );
   assign w_camera_ss_noc_valid = w_camera_ss_noc_atvalid;
-  assign w_camera_ss_noc_data = w_camera_ss_noc_atdata;
-  assign w_camera_ss_noc_atready = 1'b1;
-  assign w_camera_ss_noc_afvalid = 1'b0;
-  assign w_camera_ss_noc_syncreq = 1'b0;
+  assign w_camera_ss_noc_payload = {w_camera_ss_noc_atbytes, w_camera_ss_noc_atid, w_camera_ss_noc_atdata};
 
   mipi_ss_iniu_sys_side #(.DATA_W(128)) u_mipi_ss_sys_side (
     .clk(clk_core),
@@ -164,10 +161,7 @@ module atb_soc_harden_dn_wrap (
     .noc_atwakeup(w_mipi_ss_noc_atwakeup)
   );
   assign w_mipi_ss_noc_valid = w_mipi_ss_noc_atvalid;
-  assign w_mipi_ss_noc_data = w_mipi_ss_noc_atdata;
-  assign w_mipi_ss_noc_atready = 1'b1;
-  assign w_mipi_ss_noc_afvalid = 1'b0;
-  assign w_mipi_ss_noc_syncreq = 1'b0;
+  assign w_mipi_ss_noc_payload = {w_mipi_ss_noc_atbytes, w_mipi_ss_noc_atid, w_mipi_ss_noc_atdata};
 
   atb_async_bridge_mst #(.DATA_W(128)) u_async_bridge_mst (
     .clk(clk_core),
@@ -196,9 +190,7 @@ module atb_soc_harden_dn_wrap (
   );
 
   assign w_debug_tniu_ss_noc_atvalid = w_debug_tniu_ss_noc_valid;
-  assign w_debug_tniu_ss_noc_atdata = w_debug_tniu_ss_noc_data;
-  assign w_debug_tniu_ss_noc_atbytes = 4'hf;
-  assign w_debug_tniu_ss_noc_atid = 7'h0;
+  assign {w_debug_tniu_ss_noc_atbytes, w_debug_tniu_ss_noc_atid, w_debug_tniu_ss_noc_atdata} = w_debug_tniu_ss_noc_payload;
   assign w_debug_tniu_ss_noc_afready = 1'b1;
   assign w_debug_tniu_ss_noc_atwakeup = 1'b0;
   debug_tniu_ss_tniu_noc_side #(.DATA_W(128)) u_debug_tniu_ss_noc_side (

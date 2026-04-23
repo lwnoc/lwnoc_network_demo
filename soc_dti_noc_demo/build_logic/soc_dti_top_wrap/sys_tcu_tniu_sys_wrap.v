@@ -30,19 +30,10 @@ module sys_tcu_tniu_sys_wrap
 	input  [9:0]                                            async_fifo_rsp_rptr_async,
 	input  [9:0]                                            async_fifo_rsp_rptr_sync ,
 	output [9:0]                                            async_fifo_rsp_wptr_async,
-	output logic [13-1:0]   lp_top_tx_lp_hub_tx_req  ,
-	input logic [13-1:0]   lp_top_rx_lp_hub_rx_req  );
+	output logic [9-1:0]   lp_top_tx_lp_hub_tx_req  ,
+	input logic [9-1:0]   lp_top_rx_lp_hub_rx_req  );
 
 	//Wire define for this module.
-
-	//Flattened LP boundary typedef bridge.
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t pchnl_ctrl_pstate__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t lp_top_rx_lp_hub_rx_req__typed;
-
-	assign pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(pchnl_ctrl_pstate);
-	assign lp_top_tx_lp_hub_tx_req = lp_top_tx_lp_hub_tx_req__typed;
-	assign lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(lp_top_rx_lp_hub_rx_req);
 
 	//Wire define for sub module.
 
@@ -79,12 +70,12 @@ module sys_tcu_tniu_sys_wrap
 		.rsp_rptr_sync(async_fifo_rsp_rptr_sync),
 		.rsp_pld_sync(async_fifo_rsp_pld_sync),
 		.preq(pchnl_ctrl_preq),
-		.pstate(pchnl_ctrl_pstate__typed),
+		.pstate(pchnl_ctrl_pstate),
 		.pactive(pchnl_ctrl_pactive),
 		.paccept(pchnl_ctrl_paccept),
 		.pdeny(pchnl_ctrl_pdeny),
-		.lp_hub_rx_req(lp_top_rx_lp_hub_rx_req__typed),
-		.lp_hub_tx_req(lp_top_tx_lp_hub_tx_req__typed));
+		.lp_hub_rx_req(lp_top_rx_lp_hub_rx_req),
+		.lp_hub_tx_req(lp_top_tx_lp_hub_tx_req));
 
 endmodule
 //[UHDL]Content End [md5:8616c4fc89083478972b86b9dbd114f8]

@@ -33,15 +33,13 @@ from topo_core.node.node import reset_global_state
 from topo_core.utils.serialization import TopologySerializer
 
 from StsSocTopo import BLUE_CHAIN_LEAF_OWNERSHIP, SOC_STS_NOC_TOP_ID, StsSocLogicTopo
-from sts_wrapper_shims import ensure_top_wrapper_shims
 
 
 from StsTemplate import (
-    sts_demo_iniu_sys_config,
-    sts_demo_tniu0_sys_config,
-    sts_demo_tniu1_sys_config,
-    sts_demo_tniu2_sys_config,
-    sts_demo_tniu3_sys_config,
+    aon_ss_iniu_sys_config,
+    vpu_ss_tniu_sys_config,
+    camera_ss_tniu_sys_config,
+    dspss_tniu_sys_config,
 )
 
 
@@ -73,6 +71,18 @@ _TOP_SIDE_BLOCKS = {
     "sts_demo_tniu3_top_side": "STS_DEMO_TNIU3_OUT_DIR",
     "sts_demo_dec4":           "STS_DEMO_DEC4_OUT_DIR",
 }
+
+_COMBINED_CONTENT_REWRITES = (
+    ("sts_demo_tniu3", "soc_sts_tniu3"),
+    ("sts_demo_tniu2", "soc_sts_tniu2"),
+    ("sts_demo_tniu1", "soc_sts_tniu1"),
+    ("sts_demo_tniu0", "soc_sts_tniu0"),
+    ("sts_demo_iniu", "soc_sts_iniu"),
+    ("sts_demo_dec4", "soc_sts_dec4"),
+    ("STS_DEMO", "SOC_STS"),
+    ("fcip_", "soc_sts_util_"),
+    ("FCIP_", "SOC_STS_UTIL_"),
+)
 
 
 def _consolidate_top_side(build_dir: Path) -> None:
@@ -148,6 +158,82 @@ def _publish_top_filelist(src_path: Path, dst_path: Path) -> None:
     print(f"  [filelist] published top filelist to {dst_path}")
 
 
+def _rewrite_combined_payload_text(content: str) -> str:
+    updated = content
+    for old, new in _COMBINED_CONTENT_REWRITES:
+        updated = updated.replace(old, new)
+    return updated
+
+
+def _rewrite_combined_payload_name(file_name: str) -> str:
+    updated = file_name
+    for old, new in _COMBINED_CONTENT_REWRITES:
+        updated = updated.replace(old, new)
+    return updated
+
+
+def _normalize_combined_publish(build_dir: Path) -> None:
+    """Rewrite the combined SoC publish root to semantic, non-legacy names."""
+    combined = build_dir / _COMBINED_DIR
+    if not combined.exists():
+        return
+
+    staged_files: list[tuple[str, str]] = []
+    for entry in sorted(combined.iterdir()):
+        if entry.is_dir():
+            continue
+        new_name = _rewrite_combined_payload_name(entry.name)
+        new_content = _rewrite_combined_payload_text(entry.read_text(errors="replace"))
+        staged_files.append((new_name, new_content))
+
+    for entry in list(combined.iterdir()):
+        if entry.is_dir():
+            shutil.rmtree(entry)
+        else:
+            entry.unlink()
+
+    for new_name, new_content in staged_files:
+        (combined / new_name).write_text(new_content)
+
+    print(f"  [publish] normalized {_COMBINED_DIR}/ away from legacy sts_demo/fcip names")
+
+
+def _prune_unused_combined_top_ports(build_dir: Path) -> None:
+    """Remove dead top-level ports from the published combined wrapper."""
+    wrapper_path = build_dir / _COMBINED_DIR / _SOC_TOP_WRAPPER_FILE
+    if not wrapper_path.exists():
+        return
+
+    lines = wrapper_path.read_text().splitlines()
+    try:
+        module_start = next(idx for idx, line in enumerate(lines) if line.startswith("module "))
+        header_end = next(idx for idx, line in enumerate(lines[module_start:], start=module_start) if line.strip() == ");")
+    except StopIteration:
+        return
+
+    removed_ports: list[str] = []
+    for port_name in ("clk_noc", "rst_noc_n"):
+        if len(re.findall(rf"\b{re.escape(port_name)}\b", "\n".join(lines))) != 1:
+            continue
+        for idx in range(module_start + 1, header_end):
+            if re.search(rf"\b{re.escape(port_name)}\b", lines[idx]):
+                lines.pop(idx)
+                header_end -= 1
+                removed_ports.append(port_name)
+                break
+
+    if not removed_ports:
+        return
+
+    for idx in range(header_end - 1, module_start, -1):
+        if lines[idx].strip() and not lines[idx].strip().startswith("//"):
+            lines[idx] = lines[idx].rstrip().rstrip(",")
+            break
+
+    wrapper_path.write_text("\n".join(lines) + "\n")
+    print(f"  [publish] pruned unused top ports from {_SOC_TOP_WRAPPER_FILE}: {', '.join(removed_ports)}")
+
+
 # ---------------------------------------------------------------------------
 # Per-instance sys-side processing.
 # STS sys modules are hierarchically inside their top modules (top instantiates
@@ -156,11 +242,10 @@ def _publish_top_filelist(src_path: Path, dst_path: Path) -> None:
 # instantiations in the topology wrapper.
 # ---------------------------------------------------------------------------
 _SYS_CONFIGS = [
-    sts_demo_iniu_sys_config,
-    sts_demo_tniu0_sys_config,
-    sts_demo_tniu1_sys_config,
-    sts_demo_tniu2_sys_config,
-    sts_demo_tniu3_sys_config,
+    aon_ss_iniu_sys_config,
+    vpu_ss_tniu_sys_config,
+    camera_ss_tniu_sys_config,
+    dspss_tniu_sys_config,
 ]
 
 _SOC_INIU_ALIAS_NAMES = [
@@ -259,34 +344,42 @@ _INIU_AXI_VALID_INPUTS = ("s_awvalid", "s_wvalid", "s_arvalid")
 
 
 def _canonical_iniu_sys_name(alias_node_name: str) -> str:
-    """Map SoC-visible INIU alias (e.g. 'aon_ss') to canonical sys name.
-    
-    For STS SoC flow, all INIU aliases currently map to the single canonical
-    'iniu0' config (output dir: 'iniu0_sys'), which is shared across all INIU endpoints.
+    """Map SoC-visible INIU alias to source sys payload key.
+
+    This key is only used in staging during generation. Published build_logic
+    directories are semantic aliases (for example `aon_ss_iniu_sys`).
     """
     return "iniu0"
 
 
 def _canonical_tniu_sys_name(alias_leaf_name: str) -> str:
-    """Map SoC-visible TNIU alias (e.g. 'vpu_ss', 'dspss0') to canonical sys name.
-    
-    For STS SoC flow, TNIU aliases round-robin over the 4 canonical configs:
-    - vpu_ss, camera_ss, dspss0, dspss1 -> tniu0, tniu1, tniu2, tniu3
-    - dspss2, dspss3, dspss4, dspss5 -> (cycle repeats)
-    
-    Returns the config stem (e.g. 'tniu0') which becomes 'tniu0_sys' in build_logic.
+    """Map SoC-visible TNIU alias to source sys payload key.
+
+    Source payload keys are used only in staging for dedup/reuse. Published
+    build_logic directories remain semantic aliases.
     """
-    canonical_configs = [
-        "tniu0",
-        "tniu1",
-        "tniu2",
-        "tniu3",
-    ]
-    tniu_aliases = _SOC_TNIU_ALIAS_NAMES
-    if alias_leaf_name in tniu_aliases:
-        idx = tniu_aliases.index(alias_leaf_name)
-        return canonical_configs[idx % len(canonical_configs)]
+    if alias_leaf_name == "vpu_ss":
+        return "tniu0"
+    if alias_leaf_name == "camera_ss":
+        return "tniu1"
+    if alias_leaf_name.startswith("dspss"):
+        return "tniu2"
     raise ValueError(f"Unknown TNIU alias: {alias_leaf_name}")
+
+
+def _publish_sys_alias_map() -> dict[str, str]:
+    """Build release-facing semantic alias dirs mapped to source payload keys."""
+    alias_map: dict[str, str] = {}
+    for iniu_alias in _SOC_INIU_ALIAS_NAMES:
+        alias_map[f"{iniu_alias}_iniu_sys"] = f"{_canonical_iniu_sys_name(iniu_alias)}_sys"
+
+    # Keep one directory for the whole DSP family rather than dspss0~5 fanout.
+    tniu_publish_aliases = ("vpu_ss", "camera_ss", "dspss0")
+    for tniu_alias in tniu_publish_aliases:
+        publish_name = "dspss_tniu_sys" if tniu_alias.startswith("dspss") else f"{tniu_alias}_tniu_sys"
+        alias_map[publish_name] = f"{_canonical_tniu_sys_name(tniu_alias)}_sys"
+
+    return alias_map
 
 
 @dataclass(frozen=True)
@@ -809,6 +902,63 @@ def _soc_sys_alias_env_var(alias_dir_name: str) -> str:
     return f"STS_{alias_dir_name.upper()}_OUT_DIR"
 
 
+def _soc_sys_dir_env_var(dir_name: str) -> str:
+    return f"STS_{dir_name.upper()}_OUT_DIR"
+
+
+def _primary_generated_filelist(source_dir: Path) -> Path | None:
+    candidates = [path for path in sorted(source_dir.glob("*_filelist.f")) if path.name != "expanded_filelist.f"]
+    if candidates:
+        return candidates[0]
+
+    fallback = source_dir / "filelist.f"
+    if fallback.exists():
+        return fallback
+    return None
+
+
+def _detect_sys_prefix_from_filelist(filelist_name: str) -> str:
+    if not filelist_name.endswith("_filelist.f"):
+        raise RuntimeError(f"Unexpected sys filelist name: {filelist_name}")
+    return filelist_name[: -len("_filelist.f")]
+
+
+def _alias_prefix_from_dir(alias_dir_name: str) -> str:
+    if alias_dir_name.endswith("_iniu_sys"):
+        return alias_dir_name[: -len("_sys")]
+    if alias_dir_name.endswith("_tniu_sys"):
+        return alias_dir_name[: -len("_sys")]
+    raise RuntimeError(f"Unsupported alias sys dir naming: {alias_dir_name}")
+
+
+def _write_soc_compile_ingress(flow: str, build_dir: Path) -> None:
+    alias_map = _publish_sys_alias_map()
+    ingress_lines: list[str] = []
+
+    common_dep = DEMO_ROOT / "filelists" / "sts_common_dep.f"
+    if common_dep.exists():
+        ingress_lines.append("-f $STS_NOC_DEMO_DIR/filelists/sts_common_dep.f")
+
+    for alias_dir in sorted(alias_map.keys()):
+        source_dir = build_dir / alias_dir
+        filelist = _primary_generated_filelist(source_dir)
+        if filelist is None:
+            raise RuntimeError(f"Missing primary sys filelist for published alias: {source_dir}")
+        ingress_lines.append(f"$STS_NOC_DEMO_DIR/build_logic/{alias_dir}/{filelist.name}")
+
+    combined_dir = build_dir / _COMBINED_DIR
+    if combined_dir.exists():
+        for filelist in sorted(combined_dir.glob("*_filelist.f")):
+            ingress_lines.append(f"-f $SOC_STS_NOC_DIR/{filelist.name}")
+        top_wrapper = combined_dir / _SOC_TOP_WRAPPER_FILE
+        if top_wrapper.exists():
+            ingress_lines.append(f"$SOC_STS_NOC_DIR/{_SOC_TOP_WRAPPER_FILE}")
+
+    published_filelist = DEMO_ROOT / "filelists" / f"filelist_soc{('_pd' if flow == 'pd' else '')}.f"
+    published_filelist.write_text("\n".join(ingress_lines) + "\n")
+    print(f"  [filelist] published compile ingress to {published_filelist}")
+
+
 def _clone_sys_payload_alias(
     src_dir: Path,
     *,
@@ -822,8 +972,11 @@ def _clone_sys_payload_alias(
     if not src_dir.exists():
         raise RuntimeError(f"Missing canonical sys build for alias publish: {src_dir}")
 
-    if alias_dir.exists():
-        shutil.rmtree(alias_dir)
+    if alias_dir.exists() or alias_dir.is_symlink():
+        if alias_dir.is_symlink() or alias_dir.is_file():
+            alias_dir.unlink()
+        else:
+            shutil.rmtree(alias_dir)
     alias_dir.mkdir(parents=True, exist_ok=True)
     os.environ[alias_env_var] = str(alias_dir)
 
@@ -861,41 +1014,57 @@ def _clone_sys_payload_alias(
 
 
 def _publish_canonical_sys_builds(sys_build_dir: Path, build_dir: Path) -> None:
-    """Publish canonical sys builds from staging area to build_logic.
-    
-    Unlike the previous approach that cloned and prefixed sys dirs for each alias,
-    we now publish only the canonical sys builds (iniu0, tniu0, tniu1, tniu2, tniu3)
-    directly to build_logic. The mapping from SoC-visible aliases to these canonical
-    configs is handled in _load_*_sys_spec() and wrapper generation.
+    """Publish only semantic sys directories to build_logic.
+
+    Source payloads are read from staging canonical keys (for example
+    `iniu0_sys`, `tniu0_sys`) and rewritten into semantic release directories
+    (for example `aon_ss_iniu_sys`, `vpu_ss_tniu_sys`).
     """
-    # Only canonical sys dirs should be present in build_logic
-    active_canonical = {"iniu0_sys", "tniu0_sys", "tniu1_sys", "tniu2_sys", "tniu3_sys"}
-    
-    # Clean up any stale non-canonical *_sys directories
+    alias_map = _publish_sys_alias_map()
+
+    active_sys_views = set(alias_map.keys())
+
+    # Clean up any stale *_sys directories/symlinks.
     for stale_dir in sorted(build_dir.glob("*_sys")):
-        if not stale_dir.is_dir():
+        if not stale_dir.exists() and not stale_dir.is_symlink():
             continue
-        if stale_dir.name not in active_canonical:
-            shutil.rmtree(stale_dir)
+        if stale_dir.name not in active_sys_views:
+            if stale_dir.is_symlink() or stale_dir.is_file():
+                stale_dir.unlink()
+            else:
+                shutil.rmtree(stale_dir)
             print(f"  [sys-publish] pruned stale sys dir {stale_dir.name}/")
     
-    # Copy canonical sys builds from staging to build_logic
-    for canonical_name in active_canonical:
+    # Publish topology-readable alias payloads with semantic filenames.
+    published_alias = 0
+    for alias_name, canonical_name in sorted(alias_map.items()):
         src_dir = sys_build_dir / canonical_name
-        dst_dir = build_dir / canonical_name
-        
+        alias_dir = build_dir / alias_name
         if not src_dir.exists():
-            # Skip if this particular config wasn't built (e.g., if generator flow changed)
             continue
-        
-        if dst_dir.exists():
-            shutil.rmtree(dst_dir)
-        
-        # Copy the entire directory tree as-is (no prefix rewriting)
-        shutil.copytree(src_dir, dst_dir)
-        print(f"  [sys-publish] published canonical sys {canonical_name}/")
-    
-    print(f"  [sys-publish] published {len(active_canonical)} canonical sys configs")
+
+        src_filelist = _primary_generated_filelist(src_dir)
+        if src_filelist is None:
+            raise RuntimeError(f"Missing canonical sys filelist for alias publish: {src_dir}")
+
+        src_prefix = _detect_sys_prefix_from_filelist(src_filelist.name)
+        alias_prefix = _alias_prefix_from_dir(alias_name)
+        src_env_var = _soc_sys_dir_env_var(canonical_name)
+        alias_env_var = _soc_sys_alias_env_var(alias_name)
+
+        _clone_sys_payload_alias(
+            src_dir,
+            src_prefix=src_prefix,
+            src_env_var=src_env_var,
+            alias_dir=alias_dir,
+            alias_prefix=alias_prefix,
+            alias_env_var=alias_env_var,
+        )
+
+        published_alias += 1
+        print(f"  [sys-view] published topo alias payload {alias_name}/ from {canonical_name}/")
+
+    print(f"  [sys-view] published {published_alias} semantic sys directories")
 
 
 def _dedup_sys_filelists(sys_build_dir: Path) -> set:
@@ -1085,8 +1254,8 @@ def _absorb_async_raw_support_into_combined(build_dir: Path) -> None:
 
 
 def _print_sys_mapping_info() -> None:
-    """Print endpoint-to-canonical sys mapping for transparency."""
-    print("  [mapping] endpoint → canonical sys folder")
+    """Print endpoint-to-source/published sys mapping for transparency."""
+    print("  [mapping] endpoint → source payload key")
     
     for iniu_alias in _SOC_INIU_ALIAS_NAMES:
         canonical = _canonical_iniu_sys_name(iniu_alias)
@@ -1095,6 +1264,10 @@ def _print_sys_mapping_info() -> None:
     for tniu_alias in _SOC_TNIU_ALIAS_NAMES:
         canonical = _canonical_tniu_sys_name(tniu_alias)
         print(f"  [mapping]   {tniu_alias:20s} → {canonical}_sys")
+
+    print("  [mapping] published semantic dirs")
+    for alias_dir, canonical_dir in sorted(_publish_sys_alias_map().items()):
+        print(f"  [mapping]   {alias_dir:20s} → {canonical_dir}")
     
     print("  [mapping-harden] PD partition assignments")
     print(f"  [mapping-harden]   DN (dn_wrap): {', '.join(_PD_HARDEN_DN_LEAVES)}")
@@ -1119,9 +1292,13 @@ def generate(flow: str = "dv") -> None:
     
     _build_sys_components(sys_build_dir)
     _prune_legacy_sys_dirs(build_dir)
+    _prune_out_of_scope_publish_dirs(build_dir)
     _publish_canonical_sys_builds(sys_build_dir, build_dir)
+    _normalize_combined_publish(build_dir)
+    _prune_unused_combined_top_ports(build_dir)
     _print_sys_mapping_info()  # NEW: Print mapping for transparency
     shared_mods = _dedup_sys_filelists(sys_build_dir)
+    _write_soc_compile_ingress(flow, build_dir)
     
     print(f"Topology JSON written to {topology_json}")
     print(f"Generated RTL written to {build_dir}")

@@ -1,2 +1,0 @@
-$SOC_DTI_LOGIC_TOPO_DIR/soc_dti_sw_right_dti_noc_switch.sv
-$SOC_DTI_LOGIC_TOPO_DIR/soc_dti_sw_right_dti_switch_2i1o_wrap.sv

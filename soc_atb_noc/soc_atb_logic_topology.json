@@ -554,20 +554,7 @@
         "payload_bridge": {
           "fabric_valid_wire": "noc_atvalid",
           "fabric_data_wire": "noc_atdata",
-          "tieoffs": [
-            {
-              "port": "noc_atready",
-              "signal": "1'b1"
-            },
-            {
-              "port": "noc_afvalid",
-              "signal": "1'b0"
-            },
-            {
-              "port": "noc_syncreq",
-              "signal": "1'b0"
-            }
-          ]
+          "tieoffs": []
         }
       }
     },
@@ -1123,20 +1110,7 @@
         "payload_bridge": {
           "fabric_valid_wire": "noc_atvalid",
           "fabric_data_wire": "noc_atdata",
-          "tieoffs": [
-            {
-              "port": "noc_atready",
-              "signal": "1'b1"
-            },
-            {
-              "port": "noc_afvalid",
-              "signal": "1'b0"
-            },
-            {
-              "port": "noc_syncreq",
-              "signal": "1'b0"
-            }
-          ]
+          "tieoffs": []
         }
       }
     },
@@ -1692,20 +1666,7 @@
         "payload_bridge": {
           "fabric_valid_wire": "noc_atvalid",
           "fabric_data_wire": "noc_atdata",
-          "tieoffs": [
-            {
-              "port": "noc_atready",
-              "signal": "1'b1"
-            },
-            {
-              "port": "noc_afvalid",
-              "signal": "1'b0"
-            },
-            {
-              "port": "noc_syncreq",
-              "signal": "1'b0"
-            }
-          ]
+          "tieoffs": []
         }
       }
     },
@@ -2261,20 +2222,7 @@
         "payload_bridge": {
           "fabric_valid_wire": "noc_atvalid",
           "fabric_data_wire": "noc_atdata",
-          "tieoffs": [
-            {
-              "port": "noc_atready",
-              "signal": "1'b1"
-            },
-            {
-              "port": "noc_afvalid",
-              "signal": "1'b0"
-            },
-            {
-              "port": "noc_syncreq",
-              "signal": "1'b0"
-            }
-          ]
+          "tieoffs": []
         }
       }
     },
@@ -2830,20 +2778,7 @@
         "payload_bridge": {
           "fabric_valid_wire": "noc_atvalid",
           "fabric_data_wire": "noc_atdata",
-          "tieoffs": [
-            {
-              "port": "noc_atready",
-              "signal": "1'b1"
-            },
-            {
-              "port": "noc_afvalid",
-              "signal": "1'b0"
-            },
-            {
-              "port": "noc_syncreq",
-              "signal": "1'b0"
-            }
-          ]
+          "tieoffs": []
         }
       }
     },
@@ -3399,20 +3334,7 @@
         "payload_bridge": {
           "fabric_valid_wire": "noc_atvalid",
           "fabric_data_wire": "noc_atdata",
-          "tieoffs": [
-            {
-              "port": "noc_atready",
-              "signal": "1'b1"
-            },
-            {
-              "port": "noc_afvalid",
-              "signal": "1'b0"
-            },
-            {
-              "port": "noc_syncreq",
-              "signal": "1'b0"
-            }
-          ]
+          "tieoffs": []
         }
       }
     },
@@ -3968,20 +3890,7 @@
         "payload_bridge": {
           "fabric_valid_wire": "noc_atvalid",
           "fabric_data_wire": "noc_atdata",
-          "tieoffs": [
-            {
-              "port": "noc_atready",
-              "signal": "1'b1"
-            },
-            {
-              "port": "noc_afvalid",
-              "signal": "1'b0"
-            },
-            {
-              "port": "noc_syncreq",
-              "signal": "1'b0"
-            }
-          ]
+          "tieoffs": []
         }
       }
     },
@@ -4537,20 +4446,7 @@
         "payload_bridge": {
           "fabric_valid_wire": "noc_atvalid",
           "fabric_data_wire": "noc_atdata",
-          "tieoffs": [
-            {
-              "port": "noc_atready",
-              "signal": "1'b1"
-            },
-            {
-              "port": "noc_afvalid",
-              "signal": "1'b0"
-            },
-            {
-              "port": "noc_syncreq",
-              "signal": "1'b0"
-            }
-          ]
+          "tieoffs": []
         }
       }
     },
@@ -4594,26 +4490,96 @@
         ],
         "top_in": [
           {
-            "name": "in_valid",
+            "name": "s_atvalid",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in_data",
+            "name": "s_atready",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "s_atbytes",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "s_atdata",
             "direction": "input",
             "width": 128
+          },
+          {
+            "name": "s_atid",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "s_afvalid",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "s_afready",
+            "direction": "input",
+            "width": 1
+          },
+          {
+            "name": "s_syncreq",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "s_atwakeup",
+            "direction": "input",
+            "width": 1
           }
         ],
         "async_out": [
           {
-            "name": "out_valid",
+            "name": "m_atvalid",
             "direction": "output",
             "width": 1
           },
           {
-            "name": "out_data",
+            "name": "m_atready",
+            "direction": "input",
+            "width": 1
+          },
+          {
+            "name": "m_atbytes",
+            "direction": "output",
+            "width": 4
+          },
+          {
+            "name": "m_atdata",
             "direction": "output",
             "width": 128
+          },
+          {
+            "name": "m_atid",
+            "direction": "output",
+            "width": 7
+          },
+          {
+            "name": "m_afvalid",
+            "direction": "input",
+            "width": 1
+          },
+          {
+            "name": "m_afready",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "m_syncreq",
+            "direction": "input",
+            "width": 1
+          },
+          {
+            "name": "m_atwakeup",
+            "direction": "output",
+            "width": 1
           }
         ]
       }
@@ -4658,26 +4624,96 @@
         ],
         "async_in": [
           {
-            "name": "in_valid",
+            "name": "s_atvalid",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in_data",
+            "name": "s_atready",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "s_atbytes",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "s_atdata",
             "direction": "input",
             "width": 128
+          },
+          {
+            "name": "s_atid",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "s_afvalid",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "s_afready",
+            "direction": "input",
+            "width": 1
+          },
+          {
+            "name": "s_syncreq",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "s_atwakeup",
+            "direction": "input",
+            "width": 1
           }
         ],
         "top_out": [
           {
-            "name": "out_valid",
+            "name": "m_atvalid",
             "direction": "output",
             "width": 1
           },
           {
-            "name": "out_data",
+            "name": "m_atready",
+            "direction": "input",
+            "width": 1
+          },
+          {
+            "name": "m_atbytes",
+            "direction": "output",
+            "width": 4
+          },
+          {
+            "name": "m_atdata",
             "direction": "output",
             "width": 128
+          },
+          {
+            "name": "m_atid",
+            "direction": "output",
+            "width": 7
+          },
+          {
+            "name": "m_afvalid",
+            "direction": "input",
+            "width": 1
+          },
+          {
+            "name": "m_afready",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "m_syncreq",
+            "direction": "input",
+            "width": 1
+          },
+          {
+            "name": "m_atwakeup",
+            "direction": "output",
+            "width": 1
           }
         ]
       }
@@ -4705,76 +4741,171 @@
       "interfaces": {
         "top_in": [
           {
-            "name": "in0_valid",
+            "name": "atvalids[0]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in0_data",
+            "name": "atbytess[0]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[0]",
             "direction": "input",
             "width": 128
           },
           {
-            "name": "in1_valid",
+            "name": "atids[0]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[0]",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "atvalids[1]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in1_data",
+            "name": "atbytess[1]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[1]",
             "direction": "input",
             "width": 128
           },
           {
-            "name": "in2_valid",
+            "name": "atids[1]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[1]",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "atvalids[2]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in2_data",
+            "name": "atbytess[2]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[2]",
             "direction": "input",
             "width": 128
           },
           {
-            "name": "in3_valid",
+            "name": "atids[2]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[2]",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "atvalids[3]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in3_data",
+            "name": "atbytess[3]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[3]",
             "direction": "input",
             "width": 128
           },
           {
-            "name": "in4_valid",
+            "name": "atids[3]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[3]",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "atvalids[4]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in4_data",
+            "name": "atbytess[4]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[4]",
             "direction": "input",
             "width": 128
           },
           {
-            "name": "in5_valid",
+            "name": "atids[4]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[4]",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "atvalids[5]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in5_data",
+            "name": "atbytess[5]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[5]",
             "direction": "input",
             "width": 128
+          },
+          {
+            "name": "atids[5]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[5]",
+            "direction": "output",
+            "width": 1
           }
         ],
         "top_out": [
           {
-            "name": "out_valid",
+            "name": "atreadym",
             "direction": "output",
             "width": 1
           },
           {
-            "name": "out_data",
+            "name": "afvalidm",
             "direction": "output",
-            "width": 128
+            "width": 1
+          },
+          {
+            "name": "syncreqm",
+            "direction": "output",
+            "width": 1
           }
         ]
       }
@@ -4802,46 +4933,96 @@
       "interfaces": {
         "top_in": [
           {
-            "name": "in0_valid",
+            "name": "atvalids[0]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in0_data",
+            "name": "atbytess[0]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[0]",
             "direction": "input",
             "width": 128
           },
           {
-            "name": "in1_valid",
+            "name": "atids[0]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[0]",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "atvalids[1]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in1_data",
+            "name": "atbytess[1]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[1]",
             "direction": "input",
             "width": 128
           },
           {
-            "name": "in2_valid",
+            "name": "atids[1]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[1]",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "atvalids[2]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in2_data",
+            "name": "atbytess[2]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[2]",
             "direction": "input",
             "width": 128
+          },
+          {
+            "name": "atids[2]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[2]",
+            "direction": "output",
+            "width": 1
           }
         ],
         "top_out": [
           {
-            "name": "out_valid",
+            "name": "atreadym",
             "direction": "output",
             "width": 1
           },
           {
-            "name": "out_data",
+            "name": "afvalidm",
             "direction": "output",
-            "width": 128
+            "width": 1
+          },
+          {
+            "name": "syncreqm",
+            "direction": "output",
+            "width": 1
           }
         ]
       }
@@ -4869,46 +5050,96 @@
       "interfaces": {
         "top_in": [
           {
-            "name": "in0_valid",
+            "name": "atvalids[0]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in0_data",
+            "name": "atbytess[0]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[0]",
             "direction": "input",
             "width": 128
           },
           {
-            "name": "in1_valid",
+            "name": "atids[0]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[0]",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "atvalids[1]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in1_data",
+            "name": "atbytess[1]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[1]",
             "direction": "input",
             "width": 128
           },
           {
-            "name": "in2_valid",
+            "name": "atids[1]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[1]",
+            "direction": "output",
+            "width": 1
+          },
+          {
+            "name": "atvalids[2]",
             "direction": "input",
             "width": 1
           },
           {
-            "name": "in2_data",
+            "name": "atbytess[2]",
+            "direction": "input",
+            "width": 4
+          },
+          {
+            "name": "atdatas[2]",
             "direction": "input",
             "width": 128
+          },
+          {
+            "name": "atids[2]",
+            "direction": "input",
+            "width": 7
+          },
+          {
+            "name": "afreadys[2]",
+            "direction": "output",
+            "width": 1
           }
         ],
         "top_out": [
           {
-            "name": "out_valid",
+            "name": "atreadym",
             "direction": "output",
             "width": 1
           },
           {
-            "name": "out_data",
+            "name": "afvalidm",
             "direction": "output",
-            "width": 128
+            "width": 1
+          },
+          {
+            "name": "syncreqm",
+            "direction": "output",
+            "width": 1
           }
         ]
       }
@@ -5293,14 +5524,6 @@
           "fabric_data_wire": "noc_atdata",
           "defaults": [
             {
-              "port": "noc_atbytes",
-              "signal": "4'hf"
-            },
-            {
-              "port": "noc_atid",
-              "signal": "7'h0"
-            },
-            {
               "port": "noc_afready",
               "signal": "1'b1"
             },
@@ -5317,79 +5540,79 @@
     {
       "src": "dsp_ss0",
       "dst": "left_funnel",
-      "width": 128,
+      "width": 139,
       "note": "DSP INIU0 top-side -> left funnel"
     },
     {
       "src": "dsp_ss1",
       "dst": "left_funnel",
-      "width": 128,
+      "width": 139,
       "note": "DSP INIU1 top-side -> left funnel"
     },
     {
       "src": "dsp_ss2",
       "dst": "left_funnel",
-      "width": 128,
+      "width": 139,
       "note": "DSP INIU2 top-side -> left funnel"
     },
     {
       "src": "dsp_ss3",
       "dst": "left_funnel",
-      "width": 128,
+      "width": 139,
       "note": "DSP INIU3 top-side -> left funnel"
     },
     {
       "src": "dsp_ss4",
       "dst": "left_funnel",
-      "width": 128,
+      "width": 139,
       "note": "DSP INIU4 top-side -> left funnel"
     },
     {
       "src": "dsp_ss5",
       "dst": "left_funnel",
-      "width": 128,
+      "width": 139,
       "note": "DSP INIU5 top-side -> left funnel"
     },
     {
       "src": "camera_ss",
       "dst": "camera_funnel",
-      "width": 128,
+      "width": 139,
       "note": "camera INIU top-side -> camera funnel"
     },
     {
       "src": "mipi_ss",
       "dst": "camera_funnel",
-      "width": 128,
-      "note": "mipi INIU top-side (128b) -> camera funnel"
+      "width": 139,
+      "note": "mipi INIU top-side payload -> camera funnel"
     },
     {
       "src": "left_funnel",
       "dst": "async_bridge_slv",
-      "width": 128,
+      "width": 139,
       "note": "left funnel -> async bridge slv (source domain)"
     },
     {
       "src": "async_bridge_slv",
       "dst": "async_bridge_mst",
-      "width": 128,
+      "width": 139,
       "note": "async bridge CDC cut"
     },
     {
       "src": "async_bridge_mst",
       "dst": "right_funnel",
-      "width": 128,
+      "width": 139,
       "note": "async bridge mst (dest domain) -> right funnel"
     },
     {
       "src": "camera_funnel",
       "dst": "right_funnel",
-      "width": 128,
+      "width": 139,
       "note": "camera aggregate path -> right funnel"
     },
     {
       "src": "right_funnel",
       "dst": "debug_tniu_ss",
-      "width": 128,
+      "width": 139,
       "note": "right funnel -> TNIU top-side -> debug SS"
     }
   ]

@@ -1,4 +1,0 @@
-$SOC_STS_NOC_DIR/sts_demo_tniu2_sts_tniu_noc_dec2.sv
-$SOC_STS_NOC_DIR/sts_demo_tniu2_sts_tniu_noc.sv
-$SOC_STS_NOC_DIR/sts_demo_tniu2_sts_tniu_top.sv
-$SOC_STS_NOC_DIR/sts_demo_tniu2_sts_demo_tniu2_wrap.sv

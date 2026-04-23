@@ -156,9 +156,9 @@ def _detect_lp_type_widths() -> dict[str, int]:
 
     env_root = os.environ.get("LWNOC_LOWPOWER_COMPONENT")
     candidate_roots = [
-        Path(env_root) if env_root else None,
         REPO_ROOT / "subs" / "lwnoc_dti_noc" / "lwnoc_lowpower_component",
         REPO_ROOT / "subs" / "lwnoc_interrupt_noc" / "lwnoc_lowpower_component",
+        Path(env_root) if env_root else None,
     ]
 
     for root in candidate_roots:
@@ -381,29 +381,15 @@ def _flatten_lp_boundary_ports_in_file(path: Path) -> bool:
     if not LP_TYPE_PORT_RE.search(header):
         return _replace_known_lp_bits_exprs(path)
 
-    port_specs: list[_FlattenedPortSpec] = []
-
     def _replace_port(match: re.Match[str]) -> str:
         type_name = match.group("type")
-        name = match.group("name")
-        alias = f"{name}__typed"
         bare = _BARE_TYPE_NAME_RE.search(type_name)
         bare_name = bare.group(1) if bare else type_name
         known_width = LP_TYPE_WIDTHS.get(bare_name)
         width_expr = str(known_width) if known_width is not None else f"$bits({type_name})"
-        use_alias = match.group("direction") == "input" or bare_name == "lwnoc_lp_req_signal_t"
-        port_specs.append(
-            {
-                "direction": match.group("direction"),
-                "type": type_name,
-                "name": name,
-                "alias": alias,
-                "use_alias": use_alias,
-            }
-        )
         return (
             f"{match.group('indent')}{match.group('direction')} logic "
-            f"[{width_expr}-1:0]{match.group('spacing')}{name}{match.group('tail')}"
+            f"[{width_expr}-1:0]{match.group('spacing')}{match.group('name')}{match.group('tail')}"
         )
 
     new_header = LP_TYPE_PORT_RE.sub(_replace_port, header)
@@ -411,34 +397,7 @@ def _flatten_lp_boundary_ports_in_file(path: Path) -> bool:
     # contain wildcard package imports; ports now use plain integer widths.
     if path.suffix == ".v":
         new_header = _LP_HEADER_IMPORT_RE.sub("", new_header)
-    new_body = body
-    for spec in port_specs:
-        if spec["use_alias"]:
-            new_body = re.sub(rf"\b{spec['name']}\b", spec["alias"], new_body)
-
-    decl_indent = "\t" if "\n\t//Wire define for this module." in new_body else "    "
-    bridge_specs = [spec for spec in port_specs if spec["use_alias"]]
-    if bridge_specs:
-        bridge_lines = ["", f"{decl_indent}//Flattened LP boundary typedef bridge."]
-        for spec in bridge_specs:
-            bridge_lines.append(f"{decl_indent}{spec['type']} {spec['alias']};")
-        bridge_lines.append("")
-        for spec in bridge_specs:
-            if spec["direction"] == "input":
-                bridge_lines.append(
-                    f"{decl_indent}assign {spec['alias']} = {spec['type']}'({spec['name']});"
-                )
-            else:
-                bridge_lines.append(f"{decl_indent}assign {spec['name']} = {spec['alias']};")
-        bridge_block = "\n".join(bridge_lines) + "\n"
-
-        wire_marker = f"{decl_indent}//Wire define for this module.\n"
-        if wire_marker in new_body:
-            new_body = new_body.replace(wire_marker, wire_marker + bridge_block, 1)
-        else:
-            new_body = "\n" + bridge_block + new_body.lstrip("\n")
-
-    updated = new_header + new_body
+    updated = new_header + body
     if updated == text:
         return False
     path.write_text(updated)
@@ -653,7 +612,14 @@ def _publish_top_wrap_dir(build_dir: Path) -> None:
             continue
         shutil.copyfile(src_path, target_dir / src_path.name)
 
+    # OPD FIX: Reorder filelist to avoid duplicate declarations
+    # Pattern: common packages first, then specific modules
     out_lines: list[str] = [network_filelist]
+    package_lines: list[str] = []  # LP packages from top-side
+    iniu_pack_lines: dict[str, str] = {}  # Deduplicate iniu_pack per subsystem
+    module_lines: list[str] = []  # Regular module files
+    seen_lines: set[str] = {network_filelist}
+
     for raw_line in (source_dir / "filelist.f").read_text().splitlines():
         line = raw_line.strip()
         if not line:
@@ -669,7 +635,34 @@ def _publish_top_wrap_dir(build_dir: Path) -> None:
             if _is_switch_payload(local_name) or _is_top_side_payload(local_name):
                 continue
 
-        out_lines.append(line)
+        if line in seen_lines:
+            continue
+        seen_lines.add(line)
+
+        # Categorize lines for better ordering
+        if "_iniu_pack.sv" in line or "_tniu_pack.sv" in line or "_define.sv" in line:
+            # Subsystem-specific packages: deduplicate by base name
+            base_match = re.search(r"(\w+_(?:iniu|tniu)_pack)", line)
+            if base_match:
+                pack_key = base_match.group(1)
+                if pack_key not in iniu_pack_lines:
+                    iniu_pack_lines[pack_key] = line
+            else:
+                package_lines.append(line)
+        elif line.startswith("-f "):
+            # Filelists (top-side, system-specific)
+            if "iniu_top" in line or "tniu_top" in line:
+                package_lines.append(line)
+            else:
+                module_lines.append(line)
+        else:
+            # Module files
+            module_lines.append(line)
+
+    # Assemble in order: network -> common packages -> system packages -> modules
+    out_lines.extend(package_lines)
+    out_lines.extend(iniu_pack_lines.values())
+    out_lines.extend(module_lines)
 
     _write_filelist(target_dir / "filelist.f", out_lines)
     print(f"  [role_publish] published {_TOP_WRAP_DIR}/")
@@ -711,37 +704,58 @@ def _publish_harden_partition_dir(
     copied_files: set[str] = set()
     copied_filelists: set[str] = set()
     out_lines: list[str] = []
+    seen_entries: set[str] = set()  # OPD FIX: Track seen entries to avoid duplicates
 
     if any(member_id.endswith("_iniu_top_wrap") for member_id in member_ids):
+        filelist_name = "dti_iniu_top_filelist.f"
         _copy_local_filelist(
             source_dir,
             target_dir,
-            "dti_iniu_top_filelist.f",
+            filelist_name,
             target_root,
             copied_files,
             copied_filelists,
         )
+        entry = f"-f {target_root}/{filelist_name}"
+        if entry not in seen_entries:
+            out_lines.append(entry)
+            seen_entries.add(entry)
 
     if any(member_id.endswith("_tniu_top_wrap") for member_id in member_ids):
+        filelist_name = "dti_tniu_top_filelist.f"
         _copy_local_filelist(
             source_dir,
             target_dir,
-            "dti_tniu_top_filelist.f",
+            filelist_name,
             target_root,
             copied_files,
             copied_filelists,
         )
+        entry = f"-f {target_root}/{filelist_name}"
+        if entry not in seen_entries:
+            out_lines.append(entry)
+            seen_entries.add(entry)
 
     for member_id in member_ids:
         if member_id.endswith("_top_wrap"):
             _copy_local_file(wrapper_source_dir, target_dir, f"{member_id}.v", copied_files)
-            out_lines.append(f"{target_root}/{member_id}.v")
+            entry = f"{target_root}/{member_id}.v"
+            if entry not in seen_entries:
+                out_lines.append(entry)
+                seen_entries.add(entry)
             continue
 
         if member_id.endswith("_node"):
-            out_lines.append(_sys_filelist_entry(member_id))
+            sys_entry = _sys_filelist_entry(member_id)
+            if sys_entry not in seen_entries:
+                out_lines.append(sys_entry)
+                seen_entries.add(sys_entry)
+            
             _copy_local_file(source_dir, target_dir, f"{member_id}.v", copied_files)
-            out_lines.append(f"{target_root}/{member_id}.v")
+            entry = f"{target_root}/{member_id}.v"
+            if entry not in seen_entries:
+                out_lines.append(entry)
+                seen_entries.add(entry)
             continue
 
         if member_id.startswith("soc_dti_sw_"):
@@ -756,10 +770,16 @@ def _publish_harden_partition_dir(
             copied_files,
             copied_filelists,
         )
-        out_lines.append(f"-f {target_root}/{local_filelist}")
+        entry = f"-f {target_root}/{local_filelist}"
+        if entry not in seen_entries:
+            out_lines.append(entry)
+            seen_entries.add(entry)
 
     _copy_local_file(wrapper_source_dir, target_dir, f"{partition_id}.v", copied_files)
-    out_lines.append(f"{target_root}/{partition_id}.v")
+    entry = f"{target_root}/{partition_id}.v"
+    if entry not in seen_entries:
+        out_lines.append(entry)
+        seen_entries.add(entry)
 
     _write_filelist(target_dir / "filelist.f", out_lines)
     print(f"  [harden_publish] published {partition_id}/filelist.f")
@@ -887,6 +907,8 @@ def main() -> None:
     _normalize_boundary_import_style(build_dir)
     _promote_temp_blocks(build_dir)
     _consolidate_top_side(build_dir)
+    # Align with soc_intr_noc_wrap: flatten LP typedef ports to vectors
+    # without creating per-port __typed cast bridges.
     _flatten_lp_boundary_typedef_ports(build_dir)
     _patch_generated_tieoff_components(build_dir)
     _publish_partitioned_harden_outputs(build_dir)

@@ -1,42 +1,45 @@
-//[UHDL]Content Start [md5:2495aa3aa3423e46b6c68d13dbb2cef5]
+//[UHDL]Content Start [md5:c60a4097b96b4603a57911f9c59402a7]
 module gpu_ss0_tniu_noc_side (
-	input         clk_top_func                                  ,
-	input         rst_top_func_n                                ,
-	input         pring_in_if_pring_in_if_pring_in_if_last      ,
-	input  [39:0] pring_in_if_pring_in_if_pring_in_if_payload   ,
-	input  [3:0]  pring_in_if_pring_in_if_pring_in_if_qos       ,
-	output        pring_in_if_pring_in_if_pring_in_if_ready     ,
-	input  [7:0]  pring_in_if_pring_in_if_pring_in_if_srcid     ,
-	input  [7:0]  pring_in_if_pring_in_if_pring_in_if_tgtid     ,
-	input         pring_in_if_pring_in_if_pring_in_if_valid     ,
-	output        pring_out_if_pring_out_if_pring_out_if_last   ,
-	output [39:0] pring_out_if_pring_out_if_pring_out_if_payload,
-	output [3:0]  pring_out_if_pring_out_if_pring_out_if_qos    ,
-	input         pring_out_if_pring_out_if_pring_out_if_ready  ,
-	output [7:0]  pring_out_if_pring_out_if_pring_out_if_srcid  ,
-	output [7:0]  pring_out_if_pring_out_if_pring_out_if_tgtid  ,
-	output        pring_out_if_pring_out_if_pring_out_if_valid  ,
-	input         nring_in_if_nring_in_if_nring_in_if_last      ,
-	input  [39:0] nring_in_if_nring_in_if_nring_in_if_payload   ,
-	input  [3:0]  nring_in_if_nring_in_if_nring_in_if_qos       ,
-	output        nring_in_if_nring_in_if_nring_in_if_ready     ,
-	input  [7:0]  nring_in_if_nring_in_if_nring_in_if_srcid     ,
-	input  [7:0]  nring_in_if_nring_in_if_nring_in_if_tgtid     ,
-	input         nring_in_if_nring_in_if_nring_in_if_valid     ,
-	output        nring_out_if_nring_out_if_nring_out_if_last   ,
-	output [39:0] nring_out_if_nring_out_if_nring_out_if_payload,
-	output [3:0]  nring_out_if_nring_out_if_nring_out_if_qos    ,
-	input         nring_out_if_nring_out_if_nring_out_if_ready  ,
-	output [7:0]  nring_out_if_nring_out_if_nring_out_if_srcid  ,
-	output [7:0]  nring_out_if_nring_out_if_nring_out_if_tgtid  ,
-	output        nring_out_if_nring_out_if_nring_out_if_valid  ,
-	output [61:0] async_fifo_pld_sync                           ,
-	input  [9:0]  async_fifo_rptr_async                         ,
-	input  [9:0]  async_fifo_rptr_sync                          ,
-	output [9:0]  async_fifo_wptr_async                         ,
-	input  [9:0]  timeout_val_timeout_val                       ,
-	input  [8:0]  lp_async_s_async_master_hub_rx_req            ,
-	output [8:0]  lp_async_s_async_master_hub_tx_req            );
+	input         clk_top_func                                                   ,
+	input         rst_top_func_n                                                 ,
+	input  [4:0]  node_id                                                        ,
+	input         pring_in_if_pring_in_if_pring_in_if_last                       ,
+	input  [39:0] pring_in_if_pring_in_if_pring_in_if_payload                    ,
+	input  [3:0]  pring_in_if_pring_in_if_pring_in_if_qos                        ,
+	output        pring_in_if_pring_in_if_pring_in_if_ready                      ,
+	input  [7:0]  pring_in_if_pring_in_if_pring_in_if_srcid                      ,
+	input  [7:0]  pring_in_if_pring_in_if_pring_in_if_tgtid                      ,
+	input         pring_in_if_pring_in_if_pring_in_if_valid                      ,
+	output        pring_out_if_pring_out_if_pring_out_if_last                    ,
+	output [39:0] pring_out_if_pring_out_if_pring_out_if_payload                 ,
+	output [3:0]  pring_out_if_pring_out_if_pring_out_if_qos                     ,
+	input         pring_out_if_pring_out_if_pring_out_if_ready                   ,
+	output [7:0]  pring_out_if_pring_out_if_pring_out_if_srcid                   ,
+	output [7:0]  pring_out_if_pring_out_if_pring_out_if_tgtid                   ,
+	output        pring_out_if_pring_out_if_pring_out_if_valid                   ,
+	input         nring_in_if_nring_in_if_nring_in_if_last                       ,
+	input  [39:0] nring_in_if_nring_in_if_nring_in_if_payload                    ,
+	input  [3:0]  nring_in_if_nring_in_if_nring_in_if_qos                        ,
+	output        nring_in_if_nring_in_if_nring_in_if_ready                      ,
+	input  [7:0]  nring_in_if_nring_in_if_nring_in_if_srcid                      ,
+	input  [7:0]  nring_in_if_nring_in_if_nring_in_if_tgtid                      ,
+	input         nring_in_if_nring_in_if_nring_in_if_valid                      ,
+	output        nring_out_if_nring_out_if_nring_out_if_last                    ,
+	output [39:0] nring_out_if_nring_out_if_nring_out_if_payload                 ,
+	output [3:0]  nring_out_if_nring_out_if_nring_out_if_qos                     ,
+	input         nring_out_if_nring_out_if_nring_out_if_ready                   ,
+	output [7:0]  nring_out_if_nring_out_if_nring_out_if_srcid                   ,
+	output [7:0]  nring_out_if_nring_out_if_nring_out_if_tgtid                   ,
+	output        nring_out_if_nring_out_if_nring_out_if_valid                   ,
+	output [61:0] async_fifo_pld_sync                                            ,
+	input  [9:0]  async_fifo_rptr_async                                          ,
+	input  [9:0]  async_fifo_rptr_sync                                           ,
+	output [9:0]  async_fifo_wptr_async                                          ,
+	input  [9:0]  timeout_val_timeout_val                                        ,
+	input  [8:0]  lp_async_s_async_master_hub_rx_req                             ,
+	output [8:0]  lp_async_s_async_master_hub_tx_req                             ,
+	input  [4:0]  gpu_ss0_tniu_xbar_lut_xbar_ch0_tgt_id_porting_xbar_ch0_tgt_id  ,
+	output        gpu_ss0_tniu_xbar_lut_xbar_ch0_sel_bit_porting_xbar_ch0_sel_bit);
 
 	//Wire define for this module.
 
@@ -63,6 +66,10 @@ module gpu_ss0_tniu_noc_side (
 	//Wire this module connect to sub module.
 
 	//module inst.
+	soc_intr_xbar_routing_lut_w5_c1 xbar_routing_lut (
+		.src_id(node_id),
+		.xbar_ch0_tgt_id(gpu_ss0_tniu_xbar_lut_xbar_ch0_tgt_id_porting_xbar_ch0_tgt_id),
+		.xbar_ch0_sel_bit(gpu_ss0_tniu_xbar_lut_xbar_ch0_sel_bit_porting_xbar_ch0_sel_bit));
 	interrupt_tniu_async_top_side tniu_top (
 		.clk(clk_top_func),
 		.rst_n(rst_top_func_n),
@@ -168,5 +175,5 @@ module gpu_ss0_tniu_noc_side (
 		.sink_drop_invalid_sticky());
 
 endmodule
-//[UHDL]Content End [md5:2495aa3aa3423e46b6c68d13dbb2cef5]
+//[UHDL]Content End [md5:c60a4097b96b4603a57911f9c59402a7]
 

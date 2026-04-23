@@ -27,8 +27,8 @@ module soc_dti_harden_up
 	input  [15:0]                                         gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async   ,
 	input  [15:0]                                         gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync    ,
 	output [15:0]                                         gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async   ,
-	output logic [13-1:0] gpu_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req      ,
-	input logic [13-1:0] gpu_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req      ,
+	output logic [9-1:0] gpu_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req      ,
+	input logic [9-1:0] gpu_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req      ,
 	input  [104:0]                                        gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync     ,
 	output [15:0]                                         gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async   ,
 	output [15:0]                                         gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync    ,
@@ -37,8 +37,8 @@ module soc_dti_harden_up
 	input  [15:0]                                         gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async   ,
 	input  [15:0]                                         gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync    ,
 	output [15:0]                                         gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async   ,
-	output logic [13-1:0] gpu_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req      ,
-	input logic [13-1:0] gpu_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req      ,
+	output logic [9-1:0] gpu_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req      ,
+	input logic [9-1:0] gpu_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req      ,
 	input  [104:0]                                        dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync       ,
 	output [15:0]                                         dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async     ,
 	output [15:0]                                         dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync      ,
@@ -47,8 +47,8 @@ module soc_dti_harden_up
 	input  [15:0]                                         dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async     ,
 	input  [15:0]                                         dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync      ,
 	output [15:0]                                         dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async     ,
-	output logic [13-1:0] dp_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req        ,
-	input logic [13-1:0] dp_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req        ,
+	output logic [9-1:0] dp_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req        ,
+	input logic [9-1:0] dp_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req        ,
 	input  [104:0]                                        display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync  ,
 	output [15:0]                                         display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async,
 	output [15:0]                                         display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync ,
@@ -57,29 +57,10 @@ module soc_dti_harden_up
 	input  [15:0]                                         display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async,
 	input  [15:0]                                         display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync ,
 	output [15:0]                                         display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async,
-	output logic [13-1:0] display_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req   ,
-	input logic [13-1:0] display_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req   );
+	output logic [9-1:0] display_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req   ,
+	input logic [9-1:0] display_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req   );
 
 	//Wire define for this module.
-
-	//Flattened LP boundary typedef bridge.
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t gpu_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t gpu_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t gpu_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t gpu_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dp_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dp_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t display_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t display_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-
-	assign gpu_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = gpu_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign gpu_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(gpu_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign gpu_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = gpu_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign gpu_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(gpu_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign dp_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = dp_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign dp_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(dp_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign display_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = display_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign display_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(display_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
 
 	//Wire define for sub module.
 	wire        gpu_ss0_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_valid       ;
@@ -248,8 +229,8 @@ module soc_dti_harden_up
 		.async_fifo_rsp_rptr_async(gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(gpu_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(gpu_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(gpu_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(gpu_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(gpu_ss0_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_last),
 		.top_req_req_payload(gpu_ss0_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_payload),
 		.top_req_req_qos(gpu_ss0_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_qos),
@@ -277,8 +258,8 @@ module soc_dti_harden_up
 		.async_fifo_rsp_rptr_async(gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(gpu_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(gpu_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(gpu_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(gpu_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(gpu_ss1_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_last),
 		.top_req_req_payload(gpu_ss1_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_payload),
 		.top_req_req_qos(gpu_ss1_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_qos),
@@ -306,8 +287,8 @@ module soc_dti_harden_up
 		.async_fifo_rsp_rptr_async(dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(dp_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(dp_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(dp_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(dp_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(dp_ss_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_last),
 		.top_req_req_payload(dp_ss_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_payload),
 		.top_req_req_qos(dp_ss_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_qos),
@@ -335,8 +316,8 @@ module soc_dti_harden_up
 		.async_fifo_rsp_rptr_async(display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(display_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(display_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(display_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(display_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(display_ss_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_last),
 		.top_req_req_payload(display_ss_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_payload),
 		.top_req_req_qos(display_ss_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_qos),

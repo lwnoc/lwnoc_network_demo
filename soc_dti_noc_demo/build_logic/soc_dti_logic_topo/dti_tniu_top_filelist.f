@@ -1,3 +1,0 @@
-$SOC_DTI_LOGIC_TOPO_DIR/dti_tniu_top_dti_tniu_define.sv
-$SOC_DTI_LOGIC_TOPO_DIR/dti_tniu_top_dti_tniu_pack.sv
-$SOC_DTI_LOGIC_TOPO_DIR/dti_tniu_top_dti_tniu_async_top_side.sv

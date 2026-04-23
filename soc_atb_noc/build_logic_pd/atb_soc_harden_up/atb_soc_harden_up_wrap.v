@@ -242,10 +242,7 @@ module atb_soc_harden_up_wrap (
     .noc_atwakeup(w_dsp_ss0_noc_atwakeup)
   );
   assign w_dsp_ss0_noc_valid = w_dsp_ss0_noc_atvalid;
-  assign w_dsp_ss0_noc_data = w_dsp_ss0_noc_atdata;
-  assign w_dsp_ss0_noc_atready = 1'b1;
-  assign w_dsp_ss0_noc_afvalid = 1'b0;
-  assign w_dsp_ss0_noc_syncreq = 1'b0;
+  assign w_dsp_ss0_noc_payload = {w_dsp_ss0_noc_atbytes, w_dsp_ss0_noc_atid, w_dsp_ss0_noc_atdata};
 
   dsp_ss1_iniu_sys_side #(.DATA_W(128)) u_dsp_ss1_sys_side (
     .clk(clk_core),
@@ -275,10 +272,7 @@ module atb_soc_harden_up_wrap (
     .noc_atwakeup(w_dsp_ss1_noc_atwakeup)
   );
   assign w_dsp_ss1_noc_valid = w_dsp_ss1_noc_atvalid;
-  assign w_dsp_ss1_noc_data = w_dsp_ss1_noc_atdata;
-  assign w_dsp_ss1_noc_atready = 1'b1;
-  assign w_dsp_ss1_noc_afvalid = 1'b0;
-  assign w_dsp_ss1_noc_syncreq = 1'b0;
+  assign w_dsp_ss1_noc_payload = {w_dsp_ss1_noc_atbytes, w_dsp_ss1_noc_atid, w_dsp_ss1_noc_atdata};
 
   dsp_ss2_iniu_sys_side #(.DATA_W(128)) u_dsp_ss2_sys_side (
     .clk(clk_core),
@@ -308,10 +302,7 @@ module atb_soc_harden_up_wrap (
     .noc_atwakeup(w_dsp_ss2_noc_atwakeup)
   );
   assign w_dsp_ss2_noc_valid = w_dsp_ss2_noc_atvalid;
-  assign w_dsp_ss2_noc_data = w_dsp_ss2_noc_atdata;
-  assign w_dsp_ss2_noc_atready = 1'b1;
-  assign w_dsp_ss2_noc_afvalid = 1'b0;
-  assign w_dsp_ss2_noc_syncreq = 1'b0;
+  assign w_dsp_ss2_noc_payload = {w_dsp_ss2_noc_atbytes, w_dsp_ss2_noc_atid, w_dsp_ss2_noc_atdata};
 
   dsp_ss3_iniu_sys_side #(.DATA_W(128)) u_dsp_ss3_sys_side (
     .clk(clk_core),
@@ -341,10 +332,7 @@ module atb_soc_harden_up_wrap (
     .noc_atwakeup(w_dsp_ss3_noc_atwakeup)
   );
   assign w_dsp_ss3_noc_valid = w_dsp_ss3_noc_atvalid;
-  assign w_dsp_ss3_noc_data = w_dsp_ss3_noc_atdata;
-  assign w_dsp_ss3_noc_atready = 1'b1;
-  assign w_dsp_ss3_noc_afvalid = 1'b0;
-  assign w_dsp_ss3_noc_syncreq = 1'b0;
+  assign w_dsp_ss3_noc_payload = {w_dsp_ss3_noc_atbytes, w_dsp_ss3_noc_atid, w_dsp_ss3_noc_atdata};
 
   dsp_ss4_iniu_sys_side #(.DATA_W(128)) u_dsp_ss4_sys_side (
     .clk(clk_core),
@@ -374,10 +362,7 @@ module atb_soc_harden_up_wrap (
     .noc_atwakeup(w_dsp_ss4_noc_atwakeup)
   );
   assign w_dsp_ss4_noc_valid = w_dsp_ss4_noc_atvalid;
-  assign w_dsp_ss4_noc_data = w_dsp_ss4_noc_atdata;
-  assign w_dsp_ss4_noc_atready = 1'b1;
-  assign w_dsp_ss4_noc_afvalid = 1'b0;
-  assign w_dsp_ss4_noc_syncreq = 1'b0;
+  assign w_dsp_ss4_noc_payload = {w_dsp_ss4_noc_atbytes, w_dsp_ss4_noc_atid, w_dsp_ss4_noc_atdata};
 
   dsp_ss5_iniu_sys_side #(.DATA_W(128)) u_dsp_ss5_sys_side (
     .clk(clk_core),
@@ -407,10 +392,7 @@ module atb_soc_harden_up_wrap (
     .noc_atwakeup(w_dsp_ss5_noc_atwakeup)
   );
   assign w_dsp_ss5_noc_valid = w_dsp_ss5_noc_atvalid;
-  assign w_dsp_ss5_noc_data = w_dsp_ss5_noc_atdata;
-  assign w_dsp_ss5_noc_atready = 1'b1;
-  assign w_dsp_ss5_noc_afvalid = 1'b0;
-  assign w_dsp_ss5_noc_syncreq = 1'b0;
+  assign w_dsp_ss5_noc_payload = {w_dsp_ss5_noc_atbytes, w_dsp_ss5_noc_atid, w_dsp_ss5_noc_atdata};
 
   atb_funnel6 #(.DATA_W(128)) u_left_funnel (
     .in0_valid(w_dsp_ss0_noc_valid), .in0_data(w_dsp_ss0_noc_data),

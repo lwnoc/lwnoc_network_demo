@@ -1,3 +1,4 @@
+-f $DTI_TEST_DIR/build_logic/soc_dti_harden_up/dti_iniu_top_filelist.f
 $DTI_TEST_DIR/build_logic/soc_dti_harden_up/gpu_ss0_iniu_top_wrap.v
 $DTI_TEST_DIR/build_logic/soc_dti_harden_up/gpu_ss1_iniu_top_wrap.v
 $DTI_TEST_DIR/build_logic/soc_dti_harden_up/dp_ss_iniu_top_wrap.v

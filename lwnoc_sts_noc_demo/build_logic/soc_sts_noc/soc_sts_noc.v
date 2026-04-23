@@ -1,6 +1,4 @@
 module soc_sts_noc(
-    input logic clk_noc,
-    input logic rst_noc_n,
     input logic clk_harden_dn_func,
     input logic rst_harden_dn_func_n,
     input logic clk_harden_up_func,
@@ -365,7 +363,7 @@ module soc_sts_noc(
 
 // Auto-rendered fallback wrapper with node-derived sys-side boundaries.
 
-sts_demo_iniu_sts_iniu_sys u_aon_ss_iniu_sys (
+soc_sts_iniu_sts_iniu_sys u_aon_ss_iniu_sys (
     .clk_src (aon_ss_iniu_sys_clk_src),
     .clk_dst (clk_harden_dn_func),
     .rstn_src(aon_ss_iniu_sys_rstn_src),
@@ -436,7 +434,7 @@ sts_demo_iniu_sts_iniu_sys u_aon_ss_iniu_sys (
     .rsp_pld_sync     (aon_ss_iniu_sys_rsp_pld_sync)
  );
 
-sts_demo_tniu0_sts_tniu_sys u_vpu_ss_tniu_sys (
+soc_sts_tniu0_sts_tniu_sys u_vpu_ss_tniu_sys (
     .clk_src       (clk_harden_dn_func),
     .clk_dst       (vpu_ss_tniu_sys_clk_dst),
     .clk_dbg_timer (clk_dbg_timer),
@@ -479,7 +477,7 @@ sts_demo_tniu0_sts_tniu_sys u_vpu_ss_tniu_sys (
     .rsp_wptr_async   (vpu_ss_tniu_sys_rsp_wptr_async)
  );
 
-sts_demo_tniu1_sts_tniu_sys u_camera_ss_tniu_sys (
+soc_sts_tniu1_sts_tniu_sys u_camera_ss_tniu_sys (
     .clk_src       (clk_harden_dn_func),
     .clk_dst       (camera_ss_tniu_sys_clk_dst),
     .clk_dbg_timer (clk_dbg_timer),
@@ -522,7 +520,7 @@ sts_demo_tniu1_sts_tniu_sys u_camera_ss_tniu_sys (
     .rsp_wptr_async   (camera_ss_tniu_sys_rsp_wptr_async)
  );
 
-sts_demo_tniu2_sts_tniu_sys u_dspss0_tniu_sys (
+soc_sts_tniu2_sts_tniu_sys u_dspss0_tniu_sys (
     .clk_src       (clk_harden_up_func),
     .clk_dst       (dspss0_tniu_sys_clk_dst),
     .clk_dbg_timer (clk_dbg_timer),
@@ -565,7 +563,7 @@ sts_demo_tniu2_sts_tniu_sys u_dspss0_tniu_sys (
     .rsp_wptr_async   (dspss0_tniu_sys_rsp_wptr_async)
  );
 
-sts_demo_tniu3_sts_tniu_sys u_dspss1_tniu_sys (
+soc_sts_tniu3_sts_tniu_sys u_dspss1_tniu_sys (
     .clk_src       (clk_harden_up_func),
     .clk_dst       (dspss1_tniu_sys_clk_dst),
     .clk_dbg_timer (clk_dbg_timer),
@@ -608,7 +606,7 @@ sts_demo_tniu3_sts_tniu_sys u_dspss1_tniu_sys (
     .rsp_wptr_async   (dspss1_tniu_sys_rsp_wptr_async)
  );
 
-sts_demo_tniu0_sts_tniu_sys u_dspss2_tniu_sys (
+soc_sts_tniu0_sts_tniu_sys u_dspss2_tniu_sys (
     .clk_src       (clk_harden_up_func),
     .clk_dst       (dspss2_tniu_sys_clk_dst),
     .clk_dbg_timer (clk_dbg_timer),
@@ -651,7 +649,7 @@ sts_demo_tniu0_sts_tniu_sys u_dspss2_tniu_sys (
     .rsp_wptr_async   (dspss2_tniu_sys_rsp_wptr_async)
  );
 
-sts_demo_tniu1_sts_tniu_sys u_dspss3_tniu_sys (
+soc_sts_tniu1_sts_tniu_sys u_dspss3_tniu_sys (
     .clk_src       (clk_harden_up_func),
     .clk_dst       (dspss3_tniu_sys_clk_dst),
     .clk_dbg_timer (clk_dbg_timer),
@@ -694,7 +692,7 @@ sts_demo_tniu1_sts_tniu_sys u_dspss3_tniu_sys (
     .rsp_wptr_async   (dspss3_tniu_sys_rsp_wptr_async)
  );
 
-sts_demo_tniu2_sts_tniu_sys u_dspss4_tniu_sys (
+soc_sts_tniu2_sts_tniu_sys u_dspss4_tniu_sys (
     .clk_src       (clk_harden_up_func),
     .clk_dst       (dspss4_tniu_sys_clk_dst),
     .clk_dbg_timer (clk_dbg_timer),
@@ -737,7 +735,7 @@ sts_demo_tniu2_sts_tniu_sys u_dspss4_tniu_sys (
     .rsp_wptr_async   (dspss4_tniu_sys_rsp_wptr_async)
  );
 
-sts_demo_tniu3_sts_tniu_sys u_dspss5_tniu_sys (
+soc_sts_tniu3_sts_tniu_sys u_dspss5_tniu_sys (
     .clk_src       (clk_harden_up_func),
     .clk_dst       (dspss5_tniu_sys_clk_dst),
     .clk_dbg_timer (clk_dbg_timer),

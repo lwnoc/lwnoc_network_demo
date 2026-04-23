@@ -1,6 +1,7 @@
 -f $DTI_TEST_DIR/build_logic/soc_dti_network_component/filelist.f
-//[UHDL]Content Start [md5:96c92d0c8caf8ce553f690a9392d9cb1]
 -f $DTI_INIU_TOP_DIR/dti_iniu_top_filelist.f
+-f $DTI_TNIU_TOP_DIR/dti_tniu_top_filelist.f
+//[UHDL]Content Start [md5:b54189df4fa135ec4678b03d58c48237]
 $SOC_DTI_LOGIC_TOPO_DIR/display_ss_top_wrap.v
 -f $SOC_DTI_DISPLAY_SS_INIU_SYS_DIR/display_ss_filelist.f
 $SOC_DTI_LOGIC_TOPO_DIR/display_ss_iniu_sys_wrap.v
@@ -61,13 +62,11 @@ $SOC_DTI_LOGIC_TOPO_DIR/dsp_ss0_top_wrap.v
 -f $SOC_DTI_DSP_SS0_INIU_SYS_DIR/dsp_ss0_filelist.f
 $SOC_DTI_LOGIC_TOPO_DIR/dsp_ss0_iniu_sys_wrap.v
 $SOC_DTI_LOGIC_TOPO_DIR/dsp_ss0_iniu_node.v
--f $DTI_TNIU_TOP_DIR/dti_tniu_top_filelist.f
 $SOC_DTI_LOGIC_TOPO_DIR/sys_tcu_top_wrap.v
 -f $SYS_TCU_TNIU_SYS_DIR/sys_tcu_filelist.f
 $SOC_DTI_LOGIC_TOPO_DIR/sys_tcu_tniu_sys_wrap.v
 $SOC_DTI_LOGIC_TOPO_DIR/sys_tcu_tniu_node.v
-$SOC_DTI_LOGIC_TOPO_DIR/ReqRspPathComponent.v
 -f $DTI_TEST_DIR/build_logic/soc_dti_harden_up/filelist.f
 -f $DTI_TEST_DIR/build_logic/soc_dti_harden_dn/filelist.f
 $SOC_DTI_LOGIC_TOPO_DIR/soc_dti_logic_topo.v
-//[UHDL]Content End [md5:96c92d0c8caf8ce553f690a9392d9cb1]
+//[UHDL]Content End [md5:b54189df4fa135ec4678b03d58c48237]

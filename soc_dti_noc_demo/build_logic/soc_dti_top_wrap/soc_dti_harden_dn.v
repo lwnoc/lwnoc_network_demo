@@ -27,8 +27,8 @@ module soc_dti_harden_dn
 	output [9:0]                                          sys_tcu_tniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async    ,
 	output [9:0]                                          sys_tcu_tniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync     ,
 	input  [9:0]                                          sys_tcu_tniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async    ,
-	output logic [13-1:0] sys_tcu_tniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
-	input logic [13-1:0] sys_tcu_tniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
+	output logic [9-1:0] sys_tcu_tniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
+	input logic [9-1:0] sys_tcu_tniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
 	input  [104:0]                                        dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync      ,
 	output [15:0]                                         dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async    ,
 	output [15:0]                                         dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync     ,
@@ -37,8 +37,8 @@ module soc_dti_harden_dn
 	input  [15:0]                                         dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async    ,
 	input  [15:0]                                         dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync     ,
 	output [15:0]                                         dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async    ,
-	output logic [13-1:0] dsp_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
-	input logic [13-1:0] dsp_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
+	output logic [9-1:0] dsp_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
+	input logic [9-1:0] dsp_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
 	input  [104:0]                                        dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync      ,
 	output [15:0]                                         dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async    ,
 	output [15:0]                                         dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync     ,
@@ -47,8 +47,8 @@ module soc_dti_harden_dn
 	input  [15:0]                                         dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async    ,
 	input  [15:0]                                         dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync     ,
 	output [15:0]                                         dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async    ,
-	output logic [13-1:0] dsp_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
-	input logic [13-1:0] dsp_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
+	output logic [9-1:0] dsp_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
+	input logic [9-1:0] dsp_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
 	input  [104:0]                                        dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync      ,
 	output [15:0]                                         dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async    ,
 	output [15:0]                                         dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync     ,
@@ -57,8 +57,8 @@ module soc_dti_harden_dn
 	input  [15:0]                                         dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async    ,
 	input  [15:0]                                         dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync     ,
 	output [15:0]                                         dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async    ,
-	output logic [13-1:0] dsp_ss2_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
-	input logic [13-1:0] dsp_ss2_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
+	output logic [9-1:0] dsp_ss2_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
+	input logic [9-1:0] dsp_ss2_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
 	input  [104:0]                                        dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync      ,
 	output [15:0]                                         dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async    ,
 	output [15:0]                                         dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync     ,
@@ -67,8 +67,8 @@ module soc_dti_harden_dn
 	input  [15:0]                                         dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async    ,
 	input  [15:0]                                         dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync     ,
 	output [15:0]                                         dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async    ,
-	output logic [13-1:0] dsp_ss3_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
-	input logic [13-1:0] dsp_ss3_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
+	output logic [9-1:0] dsp_ss3_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
+	input logic [9-1:0] dsp_ss3_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
 	input  [104:0]                                        dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync      ,
 	output [15:0]                                         dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async    ,
 	output [15:0]                                         dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync     ,
@@ -77,8 +77,8 @@ module soc_dti_harden_dn
 	input  [15:0]                                         dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async    ,
 	input  [15:0]                                         dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync     ,
 	output [15:0]                                         dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async    ,
-	output logic [13-1:0] dsp_ss4_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
-	input logic [13-1:0] dsp_ss4_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
+	output logic [9-1:0] dsp_ss4_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
+	input logic [9-1:0] dsp_ss4_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
 	input  [104:0]                                        dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync      ,
 	output [15:0]                                         dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async    ,
 	output [15:0]                                         dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync     ,
@@ -87,8 +87,8 @@ module soc_dti_harden_dn
 	input  [15:0]                                         dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async    ,
 	input  [15:0]                                         dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync     ,
 	output [15:0]                                         dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async    ,
-	output logic [13-1:0] dsp_ss5_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
-	input logic [13-1:0] dsp_ss5_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
+	output logic [9-1:0] dsp_ss5_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
+	input logic [9-1:0] dsp_ss5_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       ,
 	input  [104:0]                                        vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync       ,
 	output [15:0]                                         vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async     ,
 	output [15:0]                                         vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync      ,
@@ -97,8 +97,8 @@ module soc_dti_harden_dn
 	input  [15:0]                                         vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async     ,
 	input  [15:0]                                         vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync      ,
 	output [15:0]                                         vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async     ,
-	output logic [13-1:0] vpu_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req        ,
-	input logic [13-1:0] vpu_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req        ,
+	output logic [9-1:0] vpu_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req        ,
+	input logic [9-1:0] vpu_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req        ,
 	input  [104:0]                                        pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync  ,
 	output [15:0]                                         pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async,
 	output [15:0]                                         pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync ,
@@ -107,8 +107,8 @@ module soc_dti_harden_dn
 	input  [15:0]                                         pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async,
 	input  [15:0]                                         pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync ,
 	output [15:0]                                         pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async,
-	output logic [13-1:0] pcie_rtg_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req   ,
-	input logic [13-1:0] pcie_rtg_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req   ,
+	output logic [9-1:0] pcie_rtg_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req   ,
+	input logic [9-1:0] pcie_rtg_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req   ,
 	input  [104:0]                                        ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync       ,
 	output [15:0]                                         ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async     ,
 	output [15:0]                                         ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync      ,
@@ -117,8 +117,8 @@ module soc_dti_harden_dn
 	input  [15:0]                                         ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async     ,
 	input  [15:0]                                         ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync      ,
 	output [15:0]                                         ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async     ,
-	output logic [13-1:0] ufs_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req        ,
-	input logic [13-1:0] ufs_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req        ,
+	output logic [9-1:0] ufs_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req        ,
+	input logic [9-1:0] ufs_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req        ,
 	input  [104:0]                                        camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync    ,
 	output [15:0]                                         camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async  ,
 	output [15:0]                                         camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync   ,
@@ -127,8 +127,8 @@ module soc_dti_harden_dn
 	input  [15:0]                                         camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async  ,
 	input  [15:0]                                         camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync   ,
 	output [15:0]                                         camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async  ,
-	output logic [13-1:0] camera_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req     ,
-	input logic [13-1:0] camera_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req     ,
+	output logic [9-1:0] camera_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req     ,
+	input logic [9-1:0] camera_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req     ,
 	input  [104:0]                                        mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync      ,
 	output [15:0]                                         mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async    ,
 	output [15:0]                                         mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync     ,
@@ -137,61 +137,10 @@ module soc_dti_harden_dn
 	input  [15:0]                                         mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async    ,
 	input  [15:0]                                         mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync     ,
 	output [15:0]                                         mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async    ,
-	output logic [13-1:0] mipi_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
-	input logic [13-1:0] mipi_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       );
+	output logic [9-1:0] mipi_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req       ,
+	input logic [9-1:0] mipi_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req       );
 
 	//Wire define for this module.
-
-	//Flattened LP boundary typedef bridge.
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t sys_tcu_tniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t sys_tcu_tniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss2_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss2_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss3_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss3_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss4_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss4_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss5_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t dsp_ss5_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t vpu_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t vpu_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t pcie_rtg_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t pcie_rtg_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t ufs_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t ufs_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t camera_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t camera_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t mipi_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	lwnoc_lp_struct_package::lwnoc_lp_req_signal_t mipi_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed;
-
-	assign sys_tcu_tniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = sys_tcu_tniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign sys_tcu_tniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(sys_tcu_tniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign dsp_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = dsp_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign dsp_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(dsp_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign dsp_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = dsp_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign dsp_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(dsp_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign dsp_ss2_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = dsp_ss2_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign dsp_ss2_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(dsp_ss2_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign dsp_ss3_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = dsp_ss3_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign dsp_ss3_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(dsp_ss3_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign dsp_ss4_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = dsp_ss4_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign dsp_ss4_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(dsp_ss4_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign dsp_ss5_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = dsp_ss5_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign dsp_ss5_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(dsp_ss5_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign vpu_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = vpu_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign vpu_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(vpu_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign pcie_rtg_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = pcie_rtg_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign pcie_rtg_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(pcie_rtg_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign ufs_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = ufs_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign ufs_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(ufs_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign camera_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = camera_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign camera_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(camera_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
-	assign mipi_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req = mipi_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed;
-	assign mipi_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed = lwnoc_lp_struct_package::lwnoc_lp_req_signal_t'(mipi_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req);
 
 	//Wire define for sub module.
 	wire        dsp_ss0_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_valid       ;
@@ -769,8 +718,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(sys_tcu_tniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(sys_tcu_tniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(sys_tcu_tniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(sys_tcu_tniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(sys_tcu_tniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(sys_tcu_tniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(sys_tcu_tniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(sw_root_TO_sys_tcu_tniu_top_wrap_SIG_tniu_req_last),
 		.top_req_req_payload(sw_root_TO_sys_tcu_tniu_top_wrap_SIG_tniu_req_payload),
 		.top_req_req_qos(sw_root_TO_sys_tcu_tniu_top_wrap_SIG_tniu_req_qos),
@@ -798,8 +747,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(dsp_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(dsp_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(dsp_ss0_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(dsp_ss0_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(dsp_ss0_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_last),
 		.top_req_req_payload(dsp_ss0_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_payload),
 		.top_req_req_qos(dsp_ss0_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_qos),
@@ -827,8 +776,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(dsp_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(dsp_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(dsp_ss1_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(dsp_ss1_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(dsp_ss1_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_last),
 		.top_req_req_payload(dsp_ss1_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_payload),
 		.top_req_req_qos(dsp_ss1_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_qos),
@@ -856,8 +805,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(dsp_ss2_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(dsp_ss2_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(dsp_ss2_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(dsp_ss2_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(dsp_ss2_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_last),
 		.top_req_req_payload(dsp_ss2_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_payload),
 		.top_req_req_qos(dsp_ss2_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_qos),
@@ -885,8 +834,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(dsp_ss3_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(dsp_ss3_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(dsp_ss3_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(dsp_ss3_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(dsp_ss3_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_last),
 		.top_req_req_payload(dsp_ss3_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_payload),
 		.top_req_req_qos(dsp_ss3_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_qos),
@@ -914,8 +863,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(dsp_ss4_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(dsp_ss4_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(dsp_ss4_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(dsp_ss4_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(dsp_ss4_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_last),
 		.top_req_req_payload(dsp_ss4_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_payload),
 		.top_req_req_qos(dsp_ss4_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_qos),
@@ -943,8 +892,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(dsp_ss5_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(dsp_ss5_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(dsp_ss5_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(dsp_ss5_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(dsp_ss5_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_last),
 		.top_req_req_payload(dsp_ss5_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_payload),
 		.top_req_req_qos(dsp_ss5_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_qos),
@@ -972,8 +921,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(vpu_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(vpu_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(vpu_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(vpu_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(vpu_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last),
 		.top_req_req_payload(vpu_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload),
 		.top_req_req_qos(vpu_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_qos),
@@ -1001,8 +950,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(pcie_rtg_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(pcie_rtg_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(pcie_rtg_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(pcie_rtg_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last),
 		.top_req_req_payload(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload),
 		.top_req_req_qos(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_qos),
@@ -1030,8 +979,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(ufs_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(ufs_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(ufs_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(ufs_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(ufs_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last),
 		.top_req_req_payload(ufs_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload),
 		.top_req_req_qos(ufs_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_qos),
@@ -1059,8 +1008,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(camera_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(camera_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(camera_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(camera_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(camera_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last),
 		.top_req_req_payload(camera_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload),
 		.top_req_req_qos(camera_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_qos),
@@ -1088,8 +1037,8 @@ module soc_dti_harden_dn
 		.async_fifo_rsp_rptr_async(mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
 		.async_fifo_rsp_rptr_sync(mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
 		.async_fifo_rsp_wptr_async(mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(mipi_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req__typed),
-		.lp_top_rx_lp_hub_rx_req(mipi_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req__typed),
+		.lp_top_tx_lp_hub_tx_req(mipi_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(mipi_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
 		.top_req_req_last(mipi_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last),
 		.top_req_req_payload(mipi_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload),
 		.top_req_req_qos(mipi_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_qos),

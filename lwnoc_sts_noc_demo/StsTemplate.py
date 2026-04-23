@@ -115,6 +115,9 @@ sts_demo_iniu_sys_config = _new_cfg(
     env_var="STS_INIU0_SYS_OUT_DIR",
 )
 
+# Semantic aliases for SoC-level generators.
+aon_ss_iniu_sys_config = sts_demo_iniu_sys_config
+
 _iniu_params = {
     "STS_DEMO_NODE_NUM": STS_DEMO_NODE_NUM,
     "STS_DEMO_ADDR_MAP_ENTRY_NUM": 48,
@@ -154,6 +157,8 @@ sts_demo_tniu0_sys_config = _new_cfg(
     env_var="STS_TNIU0_SYS_OUT_DIR",
 )
 
+vpu_ss_tniu_sys_config = sts_demo_tniu0_sys_config
+
 sts_demo_tniu1_sys_config = _new_cfg(
     name="tniu1_sys",
     prefix="sts_demo_tniu1_",
@@ -161,12 +166,16 @@ sts_demo_tniu1_sys_config = _new_cfg(
     env_var="STS_TNIU1_SYS_OUT_DIR",
 )
 
+camera_ss_tniu_sys_config = sts_demo_tniu1_sys_config
+
 sts_demo_tniu2_sys_config = _new_cfg(
     name="tniu2_sys",
     prefix="sts_demo_tniu2_",
     filelist_name="sts_demo_tniu_sys.f",
     env_var="STS_TNIU2_SYS_OUT_DIR",
 )
+
+dspss_tniu_sys_config = sts_demo_tniu2_sys_config
 
 sts_demo_tniu3_sys_config = _new_cfg(
     name="tniu3_sys",

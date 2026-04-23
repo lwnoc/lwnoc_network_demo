@@ -1,0 +1,397 @@
+{
+    "fcip_afifo_mst_0001": [
+        "fcip_afifo_mst_0001",
+        "Zad8J",
+        "module"
+    ],
+    "dsp_ss3_dti_iniu_pack": [
+        "dsp_ss3_dti_iniu_pack",
+        "KHETu",
+        "module"
+    ],
+    "mipi_ss_dti_iniu_pack": [
+        "mipi_ss_dti_iniu_pack",
+        "M5UsM",
+        "module"
+    ],
+    "lwnoc_lp_hub_small_wrapper_0000": [
+        "lwnoc_lp_hub_small_wrapper_0000",
+        "yMEuh",
+        "module"
+    ],
+    "std": [
+        "std",
+        "reYIK",
+        "module"
+    ],
+    "dp_ss_iniu_node": [
+        "dp_ss_iniu_node",
+        "ZG8RB",
+        "module"
+    ],
+    "lwnoc_lp_nest": [
+        "lwnoc_lp_nest",
+        "tg51t",
+        "module"
+    ],
+    "lwnoc_lp_tniu_async_bridge": [
+        "lwnoc_lp_tniu_async_bridge",
+        "uy1v3",
+        "module"
+    ],
+    "fcip_afifo_mst_0000": [
+        "fcip_afifo_mst_0000",
+        "CbFd1",
+        "module"
+    ],
+    "gpu_ss1_dti_pr_rob_state_entry": [
+        "gpu_ss1_dti_pr_rob_state_entry",
+        "Bwa7Y",
+        "module"
+    ],
+    "fcip_lead_one_0000": [
+        "fcip_lead_one_0000",
+        "cWDyT",
+        "module"
+    ],
+    "display_ss_iniu_node": [
+        "display_ss_iniu_node",
+        "AIy2h",
+        "module"
+    ],
+    "dsp_ss0_dti_iniu_pack": [
+        "dsp_ss0_dti_iniu_pack",
+        "wFany",
+        "module"
+    ],
+    "lwnoc_lp_hub_wrapper_0000": [
+        "lwnoc_lp_hub_wrapper_0000",
+        "Eeisk",
+        "module"
+    ],
+    "fcip_afifo_slv_0000": [
+        "fcip_afifo_slv_0000",
+        "yth9k",
+        "module"
+    ],
+    "lwnoc_lp_niu_fsm": [
+        "lwnoc_lp_niu_fsm",
+        "SSupQ",
+        "module"
+    ],
+    "dsp_ss3_dti_pr_rob_state_entry": [
+        "dsp_ss3_dti_pr_rob_state_entry",
+        "emUi2",
+        "module"
+    ],
+    "soc_dti_logic_topo": [
+        "soc_dti_logic_topo",
+        "C8y77",
+        "module"
+    ],
+    "fcip_afifo_slv_0001": [
+        "fcip_afifo_slv_0001",
+        "MB0bd",
+        "module"
+    ],
+    "fcip_sync_arst_0000": [
+        "fcip_sync_arst_0000",
+        "fJcHE",
+        "module"
+    ],
+    "fcip_marker_0001": [
+        "fcip_marker_0001",
+        "bdQxn",
+        "module"
+    ],
+    "lwnoc_lp_tniu_func_iniu": [
+        "lwnoc_lp_tniu_func_iniu",
+        "pUYt7",
+        "module"
+    ],
+    "lwnoc_lp_struct_package": [
+        "lwnoc_lp_struct_package",
+        "ttirx",
+        "module"
+    ],
+    "fcip_marker_0002": [
+        "fcip_marker_0002",
+        "smh6A",
+        "module"
+    ],
+    "dsp_ss2_dti_iniu_pack": [
+        "dsp_ss2_dti_iniu_pack",
+        "RkaI3",
+        "module"
+    ],
+    "fcip_sync_arst": [
+        "fcip_sync_arst",
+        "V1k6D",
+        "module"
+    ],
+    "fcip_marker_0003": [
+        "fcip_marker_0003",
+        "CsRBf",
+        "module"
+    ],
+    "...MASTER...": [
+        "SIM",
+        "amcQw",
+        "module"
+    ],
+    "fcip_sync_cell_0002": [
+        "fcip_sync_cell_0002",
+        "cUnSH",
+        "module"
+    ],
+    "soc_dti_sw_right_dti_switch_2i1o_wrap": [
+        "soc_dti_sw_right_dti_switch_2i1o_wrap",
+        "g3aTj",
+        "module"
+    ],
+    "lwnoc_lp_subhub": [
+        "lwnoc_lp_subhub",
+        "ia1AA",
+        "module"
+    ],
+    "lwnoc_lp_define_package": [
+        "lwnoc_lp_define_package",
+        "BVK8T",
+        "module"
+    ],
+    "lwnoc_lp_hub_3terminal_0000": [
+        "lwnoc_lp_hub_3terminal_0000",
+        "fQdzq",
+        "module"
+    ],
+    "lwnoc_lp_hub_tiny_wrapper_0000": [
+        "lwnoc_lp_hub_tiny_wrapper_0000",
+        "IwDPd",
+        "module"
+    ],
+    "display_ss_dti_iniu_pack": [
+        "display_ss_dti_iniu_pack",
+        "GS92j",
+        "module"
+    ],
+    "lwnoc_lp_hub_wrapper_0001": [
+        "lwnoc_lp_hub_wrapper_0001",
+        "RDakR",
+        "module"
+    ],
+    "vpu_ss_dti_iniu_pack": [
+        "vpu_ss_dti_iniu_pack",
+        "AUptv",
+        "module"
+    ],
+    "lwnoc_lp_iniu": [
+        "lwnoc_lp_iniu",
+        "GWHws",
+        "module"
+    ],
+    "soc_dti_sw_gpu4_dti_switch_4i1o_wrap": [
+        "soc_dti_sw_gpu4_dti_switch_4i1o_wrap",
+        "nnH81",
+        "module"
+    ],
+    "soc_dti_sw_root_dti_switch_2i1o_wrap": [
+        "soc_dti_sw_root_dti_switch_2i1o_wrap",
+        "gKcSF",
+        "module"
+    ],
+    "dti_iniu_top_dti_iniu_pack": [
+        "dti_iniu_top_dti_iniu_pack",
+        "iNHRj",
+        "module"
+    ],
+    "display_ss_dti_pr_rob_state_entry": [
+        "display_ss_dti_pr_rob_state_entry",
+        "WrZuQ",
+        "module"
+    ],
+    "gpu_ss0_dti_iniu_pack": [
+        "gpu_ss0_dti_iniu_pack",
+        "SEzSD",
+        "module"
+    ],
+    "mipi_ss_iniu_node": [
+        "mipi_ss_iniu_node",
+        "U1ghh",
+        "module"
+    ],
+    "dp_ss_dti_iniu_pack": [
+        "dp_ss_dti_iniu_pack",
+        "m9qJd",
+        "module"
+    ],
+    "gpu_ss0_dti_pr_rob_state_entry": [
+        "gpu_ss0_dti_pr_rob_state_entry",
+        "jPrda",
+        "module"
+    ],
+    "dp_ss_dti_pr_rob_state_entry": [
+        "dp_ss_dti_pr_rob_state_entry",
+        "k6t2D",
+        "module"
+    ],
+    "dsp_ss1_dti_pr_rob_state_entry": [
+        "dsp_ss1_dti_pr_rob_state_entry",
+        "u4CFy",
+        "module"
+    ],
+    "gpu_ss1_dti_iniu_pack": [
+        "gpu_ss1_dti_iniu_pack",
+        "MAxHt",
+        "module"
+    ],
+    "gpu_ss1_iniu_node": [
+        "gpu_ss1_iniu_node",
+        "u2uvb",
+        "module"
+    ],
+    "gpu_ss0_iniu_node": [
+        "gpu_ss0_iniu_node",
+        "qK1Fb",
+        "module"
+    ],
+    "vpu_ss_iniu_node": [
+        "vpu_ss_iniu_node",
+        "qV1nf",
+        "module"
+    ],
+    "mipi_ss_dti_pr_rob_state_entry": [
+        "mipi_ss_dti_pr_rob_state_entry",
+        "D0DaI",
+        "module"
+    ],
+    "camera_ss_dti_iniu_pack": [
+        "camera_ss_dti_iniu_pack",
+        "Ewj0G",
+        "module"
+    ],
+    "camera_ss_dti_pr_rob_state_entry": [
+        "camera_ss_dti_pr_rob_state_entry",
+        "uT5za",
+        "module"
+    ],
+    "camera_ss_iniu_node": [
+        "camera_ss_iniu_node",
+        "fLA3W",
+        "module"
+    ],
+    "ufs_ss_dti_iniu_pack": [
+        "ufs_ss_dti_iniu_pack",
+        "METxG",
+        "module"
+    ],
+    "ufs_ss_dti_pr_rob_state_entry": [
+        "ufs_ss_dti_pr_rob_state_entry",
+        "qNf1x",
+        "module"
+    ],
+    "ufs_ss_iniu_node": [
+        "ufs_ss_iniu_node",
+        "itY4M",
+        "module"
+    ],
+    "pcie_rtg_ss_dti_iniu_pack": [
+        "pcie_rtg_ss_dti_iniu_pack",
+        "Gm1t4",
+        "module"
+    ],
+    "dsp_ss5_dti_pr_rob_state_entry": [
+        "dsp_ss5_dti_pr_rob_state_entry",
+        "cv61Y",
+        "module"
+    ],
+    "pcie_rtg_ss_dti_pr_rob_state_entry": [
+        "pcie_rtg_ss_dti_pr_rob_state_entry",
+        "gw5QV",
+        "module"
+    ],
+    "dsp_ss4_dti_iniu_pack": [
+        "dsp_ss4_dti_iniu_pack",
+        "Tzux1",
+        "module"
+    ],
+    "pcie_rtg_ss_iniu_node": [
+        "pcie_rtg_ss_iniu_node",
+        "BLMrC",
+        "module"
+    ],
+    "vpu_ss_dti_pr_rob_state_entry": [
+        "vpu_ss_dti_pr_rob_state_entry",
+        "GpdNZ",
+        "module"
+    ],
+    "dsp_ss3_iniu_node": [
+        "dsp_ss3_iniu_node",
+        "KCxS5",
+        "module"
+    ],
+    "dsp_ss5_dti_iniu_pack": [
+        "dsp_ss5_dti_iniu_pack",
+        "tT5FS",
+        "module"
+    ],
+    "dsp_ss5_iniu_node": [
+        "dsp_ss5_iniu_node",
+        "Gj0iY",
+        "module"
+    ],
+    "dsp_ss4_dti_pr_rob_state_entry": [
+        "dsp_ss4_dti_pr_rob_state_entry",
+        "FFvEp",
+        "module"
+    ],
+    "dsp_ss4_iniu_node": [
+        "dsp_ss4_iniu_node",
+        "Zxc3i",
+        "module"
+    ],
+    "dsp_ss2_dti_pr_rob_state_entry": [
+        "dsp_ss2_dti_pr_rob_state_entry",
+        "exZGT",
+        "module"
+    ],
+    "dsp_ss2_iniu_node": [
+        "dsp_ss2_iniu_node",
+        "nxt6A",
+        "module"
+    ],
+    "dsp_ss1_dti_iniu_pack": [
+        "dsp_ss1_dti_iniu_pack",
+        "IbvC2",
+        "module"
+    ],
+    "dsp_ss1_iniu_node": [
+        "dsp_ss1_iniu_node",
+        "M9IKu",
+        "module"
+    ],
+    "dsp_ss0_dti_pr_rob_state_entry": [
+        "dsp_ss0_dti_pr_rob_state_entry",
+        "FIwLD",
+        "module"
+    ],
+    "dsp_ss0_iniu_node": [
+        "dsp_ss0_iniu_node",
+        "NTcz3",
+        "module"
+    ],
+    "dti_tniu_top_dti_tniu_pack": [
+        "dti_tniu_top_dti_tniu_pack",
+        "TwuAw",
+        "module"
+    ],
+    "sys_tcu_dti_tniu_pack": [
+        "sys_tcu_dti_tniu_pack",
+        "IrVnn",
+        "module"
+    ],
+    "sys_tcu_tniu_node": [
+        "sys_tcu_tniu_node",
+        "uDcpS",
+        "module"
+    ]
+}

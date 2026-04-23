@@ -4,52 +4,52 @@ module atb_network_layer (
   input logic clk_async,
   input logic rst_n,
   input logic dsp_ss0_in_valid,
-  input logic [127:0] dsp_ss0_in_data,
+  input logic [138:0] dsp_ss0_in_data,
   input logic dsp_ss1_in_valid,
-  input logic [127:0] dsp_ss1_in_data,
+  input logic [138:0] dsp_ss1_in_data,
   input logic dsp_ss2_in_valid,
-  input logic [127:0] dsp_ss2_in_data,
+  input logic [138:0] dsp_ss2_in_data,
   input logic dsp_ss3_in_valid,
-  input logic [127:0] dsp_ss3_in_data,
+  input logic [138:0] dsp_ss3_in_data,
   input logic dsp_ss4_in_valid,
-  input logic [127:0] dsp_ss4_in_data,
+  input logic [138:0] dsp_ss4_in_data,
   input logic dsp_ss5_in_valid,
-  input logic [127:0] dsp_ss5_in_data,
+  input logic [138:0] dsp_ss5_in_data,
   input logic camera_ss_in_valid,
-  input logic [127:0] camera_ss_in_data,
+  input logic [138:0] camera_ss_in_data,
   input logic mipi_ss_in_valid,
-  input logic [127:0] mipi_ss_in_data,
+  input logic [138:0] mipi_ss_in_data,
   output logic debug_tniu_ss_out_valid,
-  output logic [127:0] debug_tniu_ss_out_data
+  output logic [138:0] debug_tniu_ss_out_data
 );
 
   // Topology edge wires
   logic w_dsp_ss0_to_left_funnel_valid;
-  logic [127:0] w_dsp_ss0_to_left_funnel_data;
+  logic [138:0] w_dsp_ss0_to_left_funnel_data;
   logic w_dsp_ss1_to_left_funnel_valid;
-  logic [127:0] w_dsp_ss1_to_left_funnel_data;
+  logic [138:0] w_dsp_ss1_to_left_funnel_data;
   logic w_dsp_ss2_to_left_funnel_valid;
-  logic [127:0] w_dsp_ss2_to_left_funnel_data;
+  logic [138:0] w_dsp_ss2_to_left_funnel_data;
   logic w_dsp_ss3_to_left_funnel_valid;
-  logic [127:0] w_dsp_ss3_to_left_funnel_data;
+  logic [138:0] w_dsp_ss3_to_left_funnel_data;
   logic w_dsp_ss4_to_left_funnel_valid;
-  logic [127:0] w_dsp_ss4_to_left_funnel_data;
+  logic [138:0] w_dsp_ss4_to_left_funnel_data;
   logic w_dsp_ss5_to_left_funnel_valid;
-  logic [127:0] w_dsp_ss5_to_left_funnel_data;
+  logic [138:0] w_dsp_ss5_to_left_funnel_data;
   logic w_camera_ss_to_camera_funnel_valid;
-  logic [127:0] w_camera_ss_to_camera_funnel_data;
+  logic [138:0] w_camera_ss_to_camera_funnel_data;
   logic w_mipi_ss_to_camera_funnel_valid;
-  logic [127:0] w_mipi_ss_to_camera_funnel_data;
+  logic [138:0] w_mipi_ss_to_camera_funnel_data;
   logic w_left_funnel_to_async_bridge_slv_valid;
-  logic [127:0] w_left_funnel_to_async_bridge_slv_data;
+  logic [138:0] w_left_funnel_to_async_bridge_slv_data;
   logic w_async_bridge_slv_to_async_bridge_mst_valid;
-  logic [127:0] w_async_bridge_slv_to_async_bridge_mst_data;
+  logic [138:0] w_async_bridge_slv_to_async_bridge_mst_data;
   logic w_async_bridge_mst_to_right_funnel_valid;
-  logic [127:0] w_async_bridge_mst_to_right_funnel_data;
+  logic [138:0] w_async_bridge_mst_to_right_funnel_data;
   logic w_camera_funnel_to_right_funnel_valid;
-  logic [127:0] w_camera_funnel_to_right_funnel_data;
+  logic [138:0] w_camera_funnel_to_right_funnel_data;
   logic w_right_funnel_to_debug_tniu_ss_valid;
-  logic [127:0] w_right_funnel_to_debug_tniu_ss_data;
+  logic [138:0] w_right_funnel_to_debug_tniu_ss_data;
 
   assign w_dsp_ss0_to_left_funnel_valid = dsp_ss0_in_valid;
   assign w_dsp_ss0_to_left_funnel_data = dsp_ss0_in_data;
@@ -72,7 +72,7 @@ module atb_network_layer (
 
   // Generated topology instances
   // async_bridge_slv: internal topology helper; no standalone published ATB leaf directory.
-  atb_async_bridge_slv #(.DATA_W(128)) u_async_bridge_slv (
+  atb_async_bridge_slv #(.DATA_W(139)) u_async_bridge_slv (
     .clk(clk_core),
     .clk_async(clk_async),
     .rst_n(rst_n),
@@ -83,7 +83,7 @@ module atb_network_layer (
   );
 
   // async_bridge_mst: internal topology helper; no standalone published ATB leaf directory.
-  atb_async_bridge_mst #(.DATA_W(128)) u_async_bridge_mst (
+  atb_async_bridge_mst #(.DATA_W(139)) u_async_bridge_mst (
     .clk(clk_core),
     .clk_async(clk_async),
     .rst_n(rst_n),
@@ -94,7 +94,7 @@ module atb_network_layer (
   );
 
   // left_funnel: internal topology helper; no standalone published ATB leaf directory.
-  atb_funnel6 #(.DATA_W(128)) u_left_funnel (
+  atb_funnel6 #(.DATA_W(139)) u_left_funnel (
     .in0_valid(w_dsp_ss0_to_left_funnel_valid),
     .in0_data(w_dsp_ss0_to_left_funnel_data),
     .in1_valid(w_dsp_ss1_to_left_funnel_valid),
@@ -112,25 +112,25 @@ module atb_network_layer (
   );
 
   // camera_funnel: internal topology helper; no standalone published ATB leaf directory.
-  atb_funnel3 #(.DATA_W(128)) u_camera_funnel (
+  atb_funnel3 #(.DATA_W(139)) u_camera_funnel (
     .in0_valid(w_camera_ss_to_camera_funnel_valid),
     .in0_data(w_camera_ss_to_camera_funnel_data),
     .in1_valid(w_mipi_ss_to_camera_funnel_valid),
     .in1_data(w_mipi_ss_to_camera_funnel_data),
     .in2_valid(1'b0),
-    .in2_data(128'b0),
+    .in2_data(139'b0),
     .out_valid(w_camera_funnel_to_right_funnel_valid),
     .out_data(w_camera_funnel_to_right_funnel_data)
   );
 
   // right_funnel: internal topology helper; no standalone published ATB leaf directory.
-  atb_funnel3 #(.DATA_W(128)) u_right_funnel (
+  atb_funnel3 #(.DATA_W(139)) u_right_funnel (
     .in0_valid(w_async_bridge_mst_to_right_funnel_valid),
     .in0_data(w_async_bridge_mst_to_right_funnel_data),
     .in1_valid(w_camera_funnel_to_right_funnel_valid),
     .in1_data(w_camera_funnel_to_right_funnel_data),
     .in2_valid(1'b0),
-    .in2_data(128'b0),
+    .in2_data(139'b0),
     .out_valid(w_right_funnel_to_debug_tniu_ss_valid),
     .out_data(w_right_funnel_to_debug_tniu_ss_data)
   );

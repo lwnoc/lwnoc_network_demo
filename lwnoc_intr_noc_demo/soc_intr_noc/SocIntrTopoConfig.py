@@ -32,6 +32,8 @@ def _async_cut(name: str, src_domain: str, dst_domain: str) -> dict[str, object]
 INVALID_TGTID_SINK_NODE_ID = SOC_INTR_RING_NODE_NUM
 
 RING_PLAN: list[dict[str, object]] = [
+    _endpoint("iniu", "ucie_ss0_iniu", "a", 37),
+    _endpoint("tniu", "ucie_ss0_tniu", "a", 38),
     _endpoint("iniu", "cpu_ss_iniu", "a", 0),
     _endpoint("tniu", "cpu_ss_tniu", "a", 1),
     _endpoint("iniu", "audio_ss_iniu", "a", 2),
@@ -72,8 +74,6 @@ RING_PLAN: list[dict[str, object]] = [
     _endpoint("iniu", "ddr3_iniu", "b", 34),
     _endpoint("iniu", "ddr4_iniu", "b", 35),
     _endpoint("iniu", "ddr5_iniu", "b", 36),
-    _endpoint("iniu", "ucie_ss0_iniu", "b", 37),
-    _endpoint("tniu", "ucie_ss0_tniu", "b", 38),
     _async_cut("ring_async_cut_dn_to_up", "b", "a"),
 ]
 

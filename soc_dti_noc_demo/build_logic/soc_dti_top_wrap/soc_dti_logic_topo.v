@@ -1,72 +1,8 @@
-//[UHDL]Content Start [md5:c6651509ddc1fc93201ac8a2adee9045]
+//[UHDL]Content Start [md5:94a052acf116cf49c3d900c3079806dd]
 module soc_dti_logic_topo
 	(
 	input                                                   clk_noc                                                                      ,
 	input                                                   rst_noc_n                                                                    ,
-	input                                                   soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_last                                 ,
-	input  [89:0]                                           soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_payload                              ,
-	input                                                   soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_qos                                  ,
-	output                                                  soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_ready                                ,
-	input  [5:0]                                            soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_srcid                                ,
-	input  [5:0]                                            soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_tgtid                                ,
-	output                                                  soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_threshold                            ,
-	input                                                   soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_valid                                ,
-	output                                                  soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_last                                 ,
-	output [89:0]                                           soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_payload                              ,
-	output                                                  soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_qos                                  ,
-	input                                                   soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_ready                                ,
-	output [5:0]                                            soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_srcid                                ,
-	output [5:0]                                            soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_tgtid                                ,
-	input                                                   soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_threshold                            ,
-	output                                                  soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_valid                                ,
-	input                                                   soc_dti_gpu_req_async_s_rsp_porting_s_rsp_last                               ,
-	input  [89:0]                                           soc_dti_gpu_req_async_s_rsp_porting_s_rsp_payload                            ,
-	input                                                   soc_dti_gpu_req_async_s_rsp_porting_s_rsp_qos                                ,
-	output                                                  soc_dti_gpu_req_async_s_rsp_porting_s_rsp_ready                              ,
-	input  [5:0]                                            soc_dti_gpu_req_async_s_rsp_porting_s_rsp_srcid                              ,
-	input  [5:0]                                            soc_dti_gpu_req_async_s_rsp_porting_s_rsp_tgtid                              ,
-	output                                                  soc_dti_gpu_req_async_s_rsp_porting_s_rsp_threshold                          ,
-	input                                                   soc_dti_gpu_req_async_s_rsp_porting_s_rsp_valid                              ,
-	output                                                  soc_dti_gpu_req_async_m_rsp_porting_m_rsp_last                               ,
-	output [89:0]                                           soc_dti_gpu_req_async_m_rsp_porting_m_rsp_payload                            ,
-	output                                                  soc_dti_gpu_req_async_m_rsp_porting_m_rsp_qos                                ,
-	input                                                   soc_dti_gpu_req_async_m_rsp_porting_m_rsp_ready                              ,
-	output [5:0]                                            soc_dti_gpu_req_async_m_rsp_porting_m_rsp_srcid                              ,
-	output [5:0]                                            soc_dti_gpu_req_async_m_rsp_porting_m_rsp_tgtid                              ,
-	input                                                   soc_dti_gpu_req_async_m_rsp_porting_m_rsp_threshold                          ,
-	output                                                  soc_dti_gpu_req_async_m_rsp_porting_m_rsp_valid                              ,
-	input                                                   soc_dti_gpu_rsp_async_s_req_porting_s_req_last                               ,
-	input  [89:0]                                           soc_dti_gpu_rsp_async_s_req_porting_s_req_payload                            ,
-	input                                                   soc_dti_gpu_rsp_async_s_req_porting_s_req_qos                                ,
-	output                                                  soc_dti_gpu_rsp_async_s_req_porting_s_req_ready                              ,
-	input  [5:0]                                            soc_dti_gpu_rsp_async_s_req_porting_s_req_srcid                              ,
-	input  [5:0]                                            soc_dti_gpu_rsp_async_s_req_porting_s_req_tgtid                              ,
-	output                                                  soc_dti_gpu_rsp_async_s_req_porting_s_req_threshold                          ,
-	input                                                   soc_dti_gpu_rsp_async_s_req_porting_s_req_valid                              ,
-	output                                                  soc_dti_gpu_rsp_async_m_req_porting_m_req_last                               ,
-	output [89:0]                                           soc_dti_gpu_rsp_async_m_req_porting_m_req_payload                            ,
-	output                                                  soc_dti_gpu_rsp_async_m_req_porting_m_req_qos                                ,
-	input                                                   soc_dti_gpu_rsp_async_m_req_porting_m_req_ready                              ,
-	output [5:0]                                            soc_dti_gpu_rsp_async_m_req_porting_m_req_srcid                              ,
-	output [5:0]                                            soc_dti_gpu_rsp_async_m_req_porting_m_req_tgtid                              ,
-	input                                                   soc_dti_gpu_rsp_async_m_req_porting_m_req_threshold                          ,
-	output                                                  soc_dti_gpu_rsp_async_m_req_porting_m_req_valid                              ,
-	input                                                   soc_dti_gpu_rsp_buf_s_req_porting_s_req_last                                 ,
-	input  [89:0]                                           soc_dti_gpu_rsp_buf_s_req_porting_s_req_payload                              ,
-	input                                                   soc_dti_gpu_rsp_buf_s_req_porting_s_req_qos                                  ,
-	output                                                  soc_dti_gpu_rsp_buf_s_req_porting_s_req_ready                                ,
-	input  [5:0]                                            soc_dti_gpu_rsp_buf_s_req_porting_s_req_srcid                                ,
-	input  [5:0]                                            soc_dti_gpu_rsp_buf_s_req_porting_s_req_tgtid                                ,
-	output                                                  soc_dti_gpu_rsp_buf_s_req_porting_s_req_threshold                            ,
-	input                                                   soc_dti_gpu_rsp_buf_s_req_porting_s_req_valid                                ,
-	output                                                  soc_dti_gpu_rsp_buf_m_req_porting_m_req_last                                 ,
-	output [89:0]                                           soc_dti_gpu_rsp_buf_m_req_porting_m_req_payload                              ,
-	output                                                  soc_dti_gpu_rsp_buf_m_req_porting_m_req_qos                                  ,
-	input                                                   soc_dti_gpu_rsp_buf_m_req_porting_m_req_ready                                ,
-	output [5:0]                                            soc_dti_gpu_rsp_buf_m_req_porting_m_req_srcid                                ,
-	output [5:0]                                            soc_dti_gpu_rsp_buf_m_req_porting_m_req_tgtid                                ,
-	input                                                   soc_dti_gpu_rsp_buf_m_req_porting_m_req_threshold                            ,
-	output                                                  soc_dti_gpu_rsp_buf_m_req_porting_m_req_valid                                ,
 	input                                                   sys_tcu_tniu_node_clk_sys_porting_clk_sys_clk_sys_clk                        ,
 	input                                                   sys_tcu_tniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n                ,
 	output [79:0]                                           sys_tcu_tniu_node_dti_req_porting_dti_req_dti_req_req_tdata                  ,
@@ -421,41 +357,6 @@ module soc_dti_logic_topo
 
 	//Wire define for this module.
 
-	//Flattened LP boundary typedef bridge.
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t dsp_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t dsp_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t dsp_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t dsp_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t dsp_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t dsp_ss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-	lwnoc_lp_define_package::lwnoc_pchannel_state_t display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed;
-
-	assign sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign dsp_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(dsp_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign dsp_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(dsp_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign dsp_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(dsp_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign dsp_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(dsp_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign dsp_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(dsp_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign dsp_ss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(dsp_ss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-	assign display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed = lwnoc_lp_define_package::lwnoc_pchannel_state_t'(display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate);
-
 	//Wire define for sub module.
 	wire        dsp_ss0_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_valid       ;
 	wire [89:0] dsp_ss0_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_payload     ;
@@ -593,14 +494,14 @@ module soc_dti_logic_topo
 	wire        display_ss_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_last     ;
 	wire        display_ss_iniu_TO_sw_gpu4_SIG_top_rsp_top_rsp_rsp_ready    ;
 	wire        display_ss_iniu_TO_sw_gpu4_SIG_top_rsp_top_rsp_rsp_threshold;
-	wire        gpu_req_buf_TO_sw_gpu4_SIG_s_req_ready                      ;
-	wire        gpu_req_buf_TO_sw_gpu4_SIG_s_req_threshold                  ;
-	wire        gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_valid                      ;
-	wire [89:0] gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_payload                    ;
-	wire [5:0]  gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_srcid                      ;
-	wire [5:0]  gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_tgtid                      ;
-	wire        gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_qos                        ;
-	wire        gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_last                       ;
+	wire        sw_right_TO_sw_gpu4_SIG_iniu1_req_ready                     ;
+	wire        sw_right_TO_sw_gpu4_SIG_iniu1_req_threshold                 ;
+	wire        sw_right_TO_sw_gpu4_SIG_iniu1_rsp_valid                     ;
+	wire [89:0] sw_right_TO_sw_gpu4_SIG_iniu1_rsp_payload                   ;
+	wire [5:0]  sw_right_TO_sw_gpu4_SIG_iniu1_rsp_srcid                     ;
+	wire [5:0]  sw_right_TO_sw_gpu4_SIG_iniu1_rsp_tgtid                     ;
+	wire        sw_right_TO_sw_gpu4_SIG_iniu1_rsp_qos                       ;
+	wire        sw_right_TO_sw_gpu4_SIG_iniu1_rsp_last                      ;
 	wire        sw_io5_TO_sw_right_SIG_tniu_req_valid                       ;
 	wire [89:0] sw_io5_TO_sw_right_SIG_tniu_req_payload                     ;
 	wire [5:0]  sw_io5_TO_sw_right_SIG_tniu_req_srcid                       ;
@@ -609,14 +510,14 @@ module soc_dti_logic_topo
 	wire        sw_io5_TO_sw_right_SIG_tniu_req_last                        ;
 	wire        sw_io5_TO_sw_right_SIG_tniu_rsp_ready                       ;
 	wire        sw_io5_TO_sw_right_SIG_tniu_rsp_threshold                   ;
-	wire        gpu_req_async_TO_sw_right_SIG_m_req_valid                   ;
-	wire [89:0] gpu_req_async_TO_sw_right_SIG_m_req_payload                 ;
-	wire [5:0]  gpu_req_async_TO_sw_right_SIG_m_req_srcid                   ;
-	wire [5:0]  gpu_req_async_TO_sw_right_SIG_m_req_tgtid                   ;
-	wire        gpu_req_async_TO_sw_right_SIG_m_req_qos                     ;
-	wire        gpu_req_async_TO_sw_right_SIG_m_req_last                    ;
-	wire        gpu_rsp_async_TO_sw_right_SIG_s_rsp_ready                   ;
-	wire        gpu_rsp_async_TO_sw_right_SIG_s_rsp_threshold               ;
+	wire        sw_gpu4_TO_sw_right_SIG_tniu_req_valid                      ;
+	wire [89:0] sw_gpu4_TO_sw_right_SIG_tniu_req_payload                    ;
+	wire [5:0]  sw_gpu4_TO_sw_right_SIG_tniu_req_srcid                      ;
+	wire [5:0]  sw_gpu4_TO_sw_right_SIG_tniu_req_tgtid                      ;
+	wire        sw_gpu4_TO_sw_right_SIG_tniu_req_qos                        ;
+	wire        sw_gpu4_TO_sw_right_SIG_tniu_req_last                       ;
+	wire        sw_gpu4_TO_sw_right_SIG_tniu_rsp_ready                      ;
+	wire        sw_gpu4_TO_sw_right_SIG_tniu_rsp_threshold                  ;
 	wire        sw_root_TO_sw_right_SIG_iniu1_req_ready                     ;
 	wire        sw_root_TO_sw_right_SIG_iniu1_req_threshold                 ;
 	wire        sw_root_TO_sw_right_SIG_iniu1_rsp_valid                     ;
@@ -649,38 +550,6 @@ module soc_dti_logic_topo
 	wire [5:0]  sys_tcu_tniu_TO_sw_root_SIG_top_rsp_top_rsp_rsp_tgtid       ;
 	wire        sys_tcu_tniu_TO_sw_root_SIG_top_rsp_top_rsp_rsp_qos         ;
 	wire        sys_tcu_tniu_TO_sw_root_SIG_top_rsp_top_rsp_rsp_last        ;
-	wire        sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_valid                   ;
-	wire [89:0] sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_payload                 ;
-	wire        sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_last                    ;
-	wire [5:0]  sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_srcid                   ;
-	wire [5:0]  sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_tgtid                   ;
-	wire        sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_qos                     ;
-	wire        gpu_req_async_TO_gpu_req_buf_SIG_s_req_threshold            ;
-	wire        gpu_req_async_TO_gpu_req_buf_SIG_s_req_ready                ;
-	wire        gpu_req_buf_TO_gpu_req_async_SIG_m_req_valid                ;
-	wire [89:0] gpu_req_buf_TO_gpu_req_async_SIG_m_req_payload              ;
-	wire        gpu_req_buf_TO_gpu_req_async_SIG_m_req_last                 ;
-	wire [5:0]  gpu_req_buf_TO_gpu_req_async_SIG_m_req_srcid                ;
-	wire [5:0]  gpu_req_buf_TO_gpu_req_async_SIG_m_req_tgtid                ;
-	wire        gpu_req_buf_TO_gpu_req_async_SIG_m_req_qos                  ;
-	wire        sw_right_TO_gpu_req_async_SIG_iniu1_req_threshold           ;
-	wire        sw_right_TO_gpu_req_async_SIG_iniu1_req_ready               ;
-	wire        sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_valid               ;
-	wire [89:0] sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_payload             ;
-	wire        sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_last                ;
-	wire [5:0]  sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_srcid               ;
-	wire [5:0]  sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_tgtid               ;
-	wire        sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_qos                 ;
-	wire        gpu_rsp_buf_TO_gpu_rsp_async_SIG_s_rsp_threshold            ;
-	wire        gpu_rsp_buf_TO_gpu_rsp_async_SIG_s_rsp_ready                ;
-	wire        gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_valid                ;
-	wire [89:0] gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_payload              ;
-	wire        gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_last                 ;
-	wire [5:0]  gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_srcid                ;
-	wire [5:0]  gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_tgtid                ;
-	wire        gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_qos                  ;
-	wire        sw_gpu4_TO_gpu_rsp_buf_SIG_tniu_rsp_threshold               ;
-	wire        sw_gpu4_TO_gpu_rsp_buf_SIG_tniu_rsp_ready                   ;
 	wire        sw_root_TO_sys_tcu_tniu_SIG_tniu_req_last                   ;
 	wire [89:0] sw_root_TO_sys_tcu_tniu_SIG_tniu_req_payload                ;
 	wire        sw_root_TO_sys_tcu_tniu_SIG_tniu_req_qos                    ;
@@ -1098,22 +967,22 @@ module soc_dti_logic_topo
 		.iniu3_rsp_qos(sw_gpu4_TO_display_ss_iniu_SIG_iniu3_rsp_qos),
 		.iniu3_rsp_last(sw_gpu4_TO_display_ss_iniu_SIG_iniu3_rsp_last),
 		.iniu3_rsp_threshold(display_ss_iniu_TO_sw_gpu4_SIG_top_rsp_top_rsp_rsp_threshold),
-		.tniu_req_valid(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_valid),
-		.tniu_req_ready(gpu_req_buf_TO_sw_gpu4_SIG_s_req_ready),
-		.tniu_req_payload(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_payload),
-		.tniu_req_srcid(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_srcid),
-		.tniu_req_tgtid(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_tgtid),
-		.tniu_req_qos(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_qos),
-		.tniu_req_last(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_last),
-		.tniu_req_threshold(gpu_req_buf_TO_sw_gpu4_SIG_s_req_threshold),
-		.tniu_rsp_valid(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_valid),
-		.tniu_rsp_ready(sw_gpu4_TO_gpu_rsp_buf_SIG_tniu_rsp_ready),
-		.tniu_rsp_payload(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_payload),
-		.tniu_rsp_srcid(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_srcid),
-		.tniu_rsp_tgtid(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_tgtid),
-		.tniu_rsp_qos(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_qos),
-		.tniu_rsp_last(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_last),
-		.tniu_rsp_threshold(sw_gpu4_TO_gpu_rsp_buf_SIG_tniu_rsp_threshold));
+		.tniu_req_valid(sw_gpu4_TO_sw_right_SIG_tniu_req_valid),
+		.tniu_req_ready(sw_right_TO_sw_gpu4_SIG_iniu1_req_ready),
+		.tniu_req_payload(sw_gpu4_TO_sw_right_SIG_tniu_req_payload),
+		.tniu_req_srcid(sw_gpu4_TO_sw_right_SIG_tniu_req_srcid),
+		.tniu_req_tgtid(sw_gpu4_TO_sw_right_SIG_tniu_req_tgtid),
+		.tniu_req_qos(sw_gpu4_TO_sw_right_SIG_tniu_req_qos),
+		.tniu_req_last(sw_gpu4_TO_sw_right_SIG_tniu_req_last),
+		.tniu_req_threshold(sw_right_TO_sw_gpu4_SIG_iniu1_req_threshold),
+		.tniu_rsp_valid(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_valid),
+		.tniu_rsp_ready(sw_gpu4_TO_sw_right_SIG_tniu_rsp_ready),
+		.tniu_rsp_payload(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_payload),
+		.tniu_rsp_srcid(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_srcid),
+		.tniu_rsp_tgtid(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_tgtid),
+		.tniu_rsp_qos(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_qos),
+		.tniu_rsp_last(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_last),
+		.tniu_rsp_threshold(sw_gpu4_TO_sw_right_SIG_tniu_rsp_threshold));
 	soc_dti_sw_right_dti_switch_2i1o_wrap sw_right (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
@@ -1133,22 +1002,22 @@ module soc_dti_logic_topo
 		.iniu0_rsp_qos(sw_right_TO_sw_io5_SIG_iniu0_rsp_qos),
 		.iniu0_rsp_last(sw_right_TO_sw_io5_SIG_iniu0_rsp_last),
 		.iniu0_rsp_threshold(sw_io5_TO_sw_right_SIG_tniu_rsp_threshold),
-		.iniu1_req_valid(gpu_req_async_TO_sw_right_SIG_m_req_valid),
-		.iniu1_req_ready(sw_right_TO_gpu_req_async_SIG_iniu1_req_ready),
-		.iniu1_req_payload(gpu_req_async_TO_sw_right_SIG_m_req_payload),
-		.iniu1_req_srcid(gpu_req_async_TO_sw_right_SIG_m_req_srcid),
-		.iniu1_req_tgtid(gpu_req_async_TO_sw_right_SIG_m_req_tgtid),
-		.iniu1_req_qos(gpu_req_async_TO_sw_right_SIG_m_req_qos),
-		.iniu1_req_last(gpu_req_async_TO_sw_right_SIG_m_req_last),
-		.iniu1_req_threshold(sw_right_TO_gpu_req_async_SIG_iniu1_req_threshold),
-		.iniu1_rsp_valid(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_valid),
-		.iniu1_rsp_ready(gpu_rsp_async_TO_sw_right_SIG_s_rsp_ready),
-		.iniu1_rsp_payload(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_payload),
-		.iniu1_rsp_srcid(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_srcid),
-		.iniu1_rsp_tgtid(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_tgtid),
-		.iniu1_rsp_qos(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_qos),
-		.iniu1_rsp_last(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_last),
-		.iniu1_rsp_threshold(gpu_rsp_async_TO_sw_right_SIG_s_rsp_threshold),
+		.iniu1_req_valid(sw_gpu4_TO_sw_right_SIG_tniu_req_valid),
+		.iniu1_req_ready(sw_right_TO_sw_gpu4_SIG_iniu1_req_ready),
+		.iniu1_req_payload(sw_gpu4_TO_sw_right_SIG_tniu_req_payload),
+		.iniu1_req_srcid(sw_gpu4_TO_sw_right_SIG_tniu_req_srcid),
+		.iniu1_req_tgtid(sw_gpu4_TO_sw_right_SIG_tniu_req_tgtid),
+		.iniu1_req_qos(sw_gpu4_TO_sw_right_SIG_tniu_req_qos),
+		.iniu1_req_last(sw_gpu4_TO_sw_right_SIG_tniu_req_last),
+		.iniu1_req_threshold(sw_right_TO_sw_gpu4_SIG_iniu1_req_threshold),
+		.iniu1_rsp_valid(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_valid),
+		.iniu1_rsp_ready(sw_gpu4_TO_sw_right_SIG_tniu_rsp_ready),
+		.iniu1_rsp_payload(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_payload),
+		.iniu1_rsp_srcid(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_srcid),
+		.iniu1_rsp_tgtid(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_tgtid),
+		.iniu1_rsp_qos(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_qos),
+		.iniu1_rsp_last(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_last),
+		.iniu1_rsp_threshold(sw_gpu4_TO_sw_right_SIG_tniu_rsp_threshold),
 		.tniu_req_valid(sw_right_TO_sw_root_SIG_tniu_req_valid),
 		.tniu_req_ready(sw_root_TO_sw_right_SIG_iniu1_req_ready),
 		.tniu_req_payload(sw_right_TO_sw_root_SIG_tniu_req_payload),
@@ -1216,146 +1085,6 @@ module soc_dti_logic_topo
 		.tniu_rsp_qos(sys_tcu_tniu_TO_sw_root_SIG_top_rsp_top_rsp_rsp_qos),
 		.tniu_rsp_last(sys_tcu_tniu_TO_sw_root_SIG_top_rsp_top_rsp_rsp_last),
 		.tniu_rsp_threshold(sw_root_TO_sys_tcu_tniu_SIG_tniu_rsp_threshold));
-	ReqRspPathComponent gpu_req_buf (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
-		.s_req_valid(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_valid),
-		.s_req_payload(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_payload),
-		.s_req_last(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_last),
-		.s_req_srcid(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_srcid),
-		.s_req_tgtid(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_tgtid),
-		.s_req_qos(sw_gpu4_TO_gpu_req_buf_SIG_tniu_req_qos),
-		.s_req_threshold(gpu_req_buf_TO_sw_gpu4_SIG_s_req_threshold),
-		.s_req_ready(gpu_req_buf_TO_sw_gpu4_SIG_s_req_ready),
-		.m_req_valid(gpu_req_buf_TO_gpu_req_async_SIG_m_req_valid),
-		.m_req_payload(gpu_req_buf_TO_gpu_req_async_SIG_m_req_payload),
-		.m_req_last(gpu_req_buf_TO_gpu_req_async_SIG_m_req_last),
-		.m_req_srcid(gpu_req_buf_TO_gpu_req_async_SIG_m_req_srcid),
-		.m_req_tgtid(gpu_req_buf_TO_gpu_req_async_SIG_m_req_tgtid),
-		.m_req_qos(gpu_req_buf_TO_gpu_req_async_SIG_m_req_qos),
-		.m_req_threshold(gpu_req_async_TO_gpu_req_buf_SIG_s_req_threshold),
-		.m_req_ready(gpu_req_async_TO_gpu_req_buf_SIG_s_req_ready),
-		.s_rsp_valid(soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_valid),
-		.s_rsp_payload(soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_payload),
-		.s_rsp_last(soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_last),
-		.s_rsp_srcid(soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_srcid),
-		.s_rsp_tgtid(soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_tgtid),
-		.s_rsp_qos(soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_qos),
-		.s_rsp_threshold(soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_threshold),
-		.s_rsp_ready(soc_dti_gpu_req_buf_s_rsp_porting_s_rsp_ready),
-		.m_rsp_valid(soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_valid),
-		.m_rsp_payload(soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_payload),
-		.m_rsp_last(soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_last),
-		.m_rsp_srcid(soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_srcid),
-		.m_rsp_tgtid(soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_tgtid),
-		.m_rsp_qos(soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_qos),
-		.m_rsp_threshold(soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_threshold),
-		.m_rsp_ready(soc_dti_gpu_req_buf_m_rsp_porting_m_rsp_ready));
-	ReqRspPathComponent gpu_req_async (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
-		.s_req_valid(gpu_req_buf_TO_gpu_req_async_SIG_m_req_valid),
-		.s_req_payload(gpu_req_buf_TO_gpu_req_async_SIG_m_req_payload),
-		.s_req_last(gpu_req_buf_TO_gpu_req_async_SIG_m_req_last),
-		.s_req_srcid(gpu_req_buf_TO_gpu_req_async_SIG_m_req_srcid),
-		.s_req_tgtid(gpu_req_buf_TO_gpu_req_async_SIG_m_req_tgtid),
-		.s_req_qos(gpu_req_buf_TO_gpu_req_async_SIG_m_req_qos),
-		.s_req_threshold(gpu_req_async_TO_gpu_req_buf_SIG_s_req_threshold),
-		.s_req_ready(gpu_req_async_TO_gpu_req_buf_SIG_s_req_ready),
-		.m_req_valid(gpu_req_async_TO_sw_right_SIG_m_req_valid),
-		.m_req_payload(gpu_req_async_TO_sw_right_SIG_m_req_payload),
-		.m_req_last(gpu_req_async_TO_sw_right_SIG_m_req_last),
-		.m_req_srcid(gpu_req_async_TO_sw_right_SIG_m_req_srcid),
-		.m_req_tgtid(gpu_req_async_TO_sw_right_SIG_m_req_tgtid),
-		.m_req_qos(gpu_req_async_TO_sw_right_SIG_m_req_qos),
-		.m_req_threshold(sw_right_TO_gpu_req_async_SIG_iniu1_req_threshold),
-		.m_req_ready(sw_right_TO_gpu_req_async_SIG_iniu1_req_ready),
-		.s_rsp_valid(soc_dti_gpu_req_async_s_rsp_porting_s_rsp_valid),
-		.s_rsp_payload(soc_dti_gpu_req_async_s_rsp_porting_s_rsp_payload),
-		.s_rsp_last(soc_dti_gpu_req_async_s_rsp_porting_s_rsp_last),
-		.s_rsp_srcid(soc_dti_gpu_req_async_s_rsp_porting_s_rsp_srcid),
-		.s_rsp_tgtid(soc_dti_gpu_req_async_s_rsp_porting_s_rsp_tgtid),
-		.s_rsp_qos(soc_dti_gpu_req_async_s_rsp_porting_s_rsp_qos),
-		.s_rsp_threshold(soc_dti_gpu_req_async_s_rsp_porting_s_rsp_threshold),
-		.s_rsp_ready(soc_dti_gpu_req_async_s_rsp_porting_s_rsp_ready),
-		.m_rsp_valid(soc_dti_gpu_req_async_m_rsp_porting_m_rsp_valid),
-		.m_rsp_payload(soc_dti_gpu_req_async_m_rsp_porting_m_rsp_payload),
-		.m_rsp_last(soc_dti_gpu_req_async_m_rsp_porting_m_rsp_last),
-		.m_rsp_srcid(soc_dti_gpu_req_async_m_rsp_porting_m_rsp_srcid),
-		.m_rsp_tgtid(soc_dti_gpu_req_async_m_rsp_porting_m_rsp_tgtid),
-		.m_rsp_qos(soc_dti_gpu_req_async_m_rsp_porting_m_rsp_qos),
-		.m_rsp_threshold(soc_dti_gpu_req_async_m_rsp_porting_m_rsp_threshold),
-		.m_rsp_ready(soc_dti_gpu_req_async_m_rsp_porting_m_rsp_ready));
-	ReqRspPathComponent gpu_rsp_async (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
-		.s_req_valid(soc_dti_gpu_rsp_async_s_req_porting_s_req_valid),
-		.s_req_payload(soc_dti_gpu_rsp_async_s_req_porting_s_req_payload),
-		.s_req_last(soc_dti_gpu_rsp_async_s_req_porting_s_req_last),
-		.s_req_srcid(soc_dti_gpu_rsp_async_s_req_porting_s_req_srcid),
-		.s_req_tgtid(soc_dti_gpu_rsp_async_s_req_porting_s_req_tgtid),
-		.s_req_qos(soc_dti_gpu_rsp_async_s_req_porting_s_req_qos),
-		.s_req_threshold(soc_dti_gpu_rsp_async_s_req_porting_s_req_threshold),
-		.s_req_ready(soc_dti_gpu_rsp_async_s_req_porting_s_req_ready),
-		.m_req_valid(soc_dti_gpu_rsp_async_m_req_porting_m_req_valid),
-		.m_req_payload(soc_dti_gpu_rsp_async_m_req_porting_m_req_payload),
-		.m_req_last(soc_dti_gpu_rsp_async_m_req_porting_m_req_last),
-		.m_req_srcid(soc_dti_gpu_rsp_async_m_req_porting_m_req_srcid),
-		.m_req_tgtid(soc_dti_gpu_rsp_async_m_req_porting_m_req_tgtid),
-		.m_req_qos(soc_dti_gpu_rsp_async_m_req_porting_m_req_qos),
-		.m_req_threshold(soc_dti_gpu_rsp_async_m_req_porting_m_req_threshold),
-		.m_req_ready(soc_dti_gpu_rsp_async_m_req_porting_m_req_ready),
-		.s_rsp_valid(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_valid),
-		.s_rsp_payload(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_payload),
-		.s_rsp_last(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_last),
-		.s_rsp_srcid(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_srcid),
-		.s_rsp_tgtid(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_tgtid),
-		.s_rsp_qos(sw_right_TO_gpu_rsp_async_SIG_iniu1_rsp_qos),
-		.s_rsp_threshold(gpu_rsp_async_TO_sw_right_SIG_s_rsp_threshold),
-		.s_rsp_ready(gpu_rsp_async_TO_sw_right_SIG_s_rsp_ready),
-		.m_rsp_valid(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_valid),
-		.m_rsp_payload(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_payload),
-		.m_rsp_last(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_last),
-		.m_rsp_srcid(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_srcid),
-		.m_rsp_tgtid(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_tgtid),
-		.m_rsp_qos(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_qos),
-		.m_rsp_threshold(gpu_rsp_buf_TO_gpu_rsp_async_SIG_s_rsp_threshold),
-		.m_rsp_ready(gpu_rsp_buf_TO_gpu_rsp_async_SIG_s_rsp_ready));
-	ReqRspPathComponent gpu_rsp_buf (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
-		.s_req_valid(soc_dti_gpu_rsp_buf_s_req_porting_s_req_valid),
-		.s_req_payload(soc_dti_gpu_rsp_buf_s_req_porting_s_req_payload),
-		.s_req_last(soc_dti_gpu_rsp_buf_s_req_porting_s_req_last),
-		.s_req_srcid(soc_dti_gpu_rsp_buf_s_req_porting_s_req_srcid),
-		.s_req_tgtid(soc_dti_gpu_rsp_buf_s_req_porting_s_req_tgtid),
-		.s_req_qos(soc_dti_gpu_rsp_buf_s_req_porting_s_req_qos),
-		.s_req_threshold(soc_dti_gpu_rsp_buf_s_req_porting_s_req_threshold),
-		.s_req_ready(soc_dti_gpu_rsp_buf_s_req_porting_s_req_ready),
-		.m_req_valid(soc_dti_gpu_rsp_buf_m_req_porting_m_req_valid),
-		.m_req_payload(soc_dti_gpu_rsp_buf_m_req_porting_m_req_payload),
-		.m_req_last(soc_dti_gpu_rsp_buf_m_req_porting_m_req_last),
-		.m_req_srcid(soc_dti_gpu_rsp_buf_m_req_porting_m_req_srcid),
-		.m_req_tgtid(soc_dti_gpu_rsp_buf_m_req_porting_m_req_tgtid),
-		.m_req_qos(soc_dti_gpu_rsp_buf_m_req_porting_m_req_qos),
-		.m_req_threshold(soc_dti_gpu_rsp_buf_m_req_porting_m_req_threshold),
-		.m_req_ready(soc_dti_gpu_rsp_buf_m_req_porting_m_req_ready),
-		.s_rsp_valid(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_valid),
-		.s_rsp_payload(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_payload),
-		.s_rsp_last(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_last),
-		.s_rsp_srcid(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_srcid),
-		.s_rsp_tgtid(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_tgtid),
-		.s_rsp_qos(gpu_rsp_async_TO_gpu_rsp_buf_SIG_m_rsp_qos),
-		.s_rsp_threshold(gpu_rsp_buf_TO_gpu_rsp_async_SIG_s_rsp_threshold),
-		.s_rsp_ready(gpu_rsp_buf_TO_gpu_rsp_async_SIG_s_rsp_ready),
-		.m_rsp_valid(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_valid),
-		.m_rsp_payload(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_payload),
-		.m_rsp_last(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_last),
-		.m_rsp_srcid(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_srcid),
-		.m_rsp_tgtid(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_tgtid),
-		.m_rsp_qos(gpu_rsp_buf_TO_sw_gpu4_SIG_m_rsp_qos),
-		.m_rsp_threshold(sw_gpu4_TO_gpu_rsp_buf_SIG_tniu_rsp_threshold),
-		.m_rsp_ready(sw_gpu4_TO_gpu_rsp_buf_SIG_tniu_rsp_ready));
 	sys_tcu_tniu_node sys_tcu_tniu (
 		.clk_sys_clk_sys_clk(sys_tcu_tniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(sys_tcu_tniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
@@ -1379,7 +1108,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(sys_tcu_tniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(sw_root_TO_sys_tcu_tniu_SIG_tniu_req_last),
 		.top_req_top_req_req_payload(sw_root_TO_sys_tcu_tniu_SIG_tniu_req_payload),
 		.top_req_top_req_req_qos(sw_root_TO_sys_tcu_tniu_SIG_tniu_req_qos),
@@ -1420,7 +1149,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(dsp_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(dsp_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(dsp_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(dsp_ss0_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(dsp_ss0_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(dsp_ss0_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_qos),
@@ -1461,7 +1190,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(dsp_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(dsp_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(dsp_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(dsp_ss1_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(dsp_ss1_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(dsp_ss1_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_qos),
@@ -1502,7 +1231,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(dsp_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(dsp_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(dsp_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(dsp_ss2_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(dsp_ss2_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(dsp_ss2_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_qos),
@@ -1543,7 +1272,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(dsp_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(dsp_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(dsp_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(dsp_ss3_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(dsp_ss3_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(dsp_ss3_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_qos),
@@ -1584,7 +1313,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(dsp_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(dsp_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(dsp_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(dsp_ss4_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(dsp_ss4_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(dsp_ss4_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_qos),
@@ -1625,7 +1354,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(dsp_ss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(dsp_ss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(dsp_ss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(dsp_ss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(dsp_ss5_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(dsp_ss5_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(dsp_ss5_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_qos),
@@ -1666,7 +1395,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(vpu_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(vpu_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(vpu_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_qos),
@@ -1707,7 +1436,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_qos),
@@ -1748,7 +1477,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(ufs_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(ufs_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(ufs_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_qos),
@@ -1789,7 +1518,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(camera_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(camera_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(camera_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_qos),
@@ -1830,7 +1559,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(mipi_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(mipi_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(mipi_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_qos),
@@ -1871,7 +1600,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(gpu_ss0_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(gpu_ss0_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(gpu_ss0_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_qos),
@@ -1912,7 +1641,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(gpu_ss1_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(gpu_ss1_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(gpu_ss1_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_qos),
@@ -1953,7 +1682,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(dp_ss_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(dp_ss_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(dp_ss_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_qos),
@@ -1994,7 +1723,7 @@ module soc_dti_logic_topo
 		.pchnl_ctrl_pchnl_ctrl_pactive(display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
 		.pchnl_ctrl_pchnl_ctrl_pdeny(display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
 		.pchnl_ctrl_pchnl_ctrl_preq(display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate__typed),
+		.pchnl_ctrl_pchnl_ctrl_pstate(display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
 		.top_req_top_req_req_last(display_ss_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_last),
 		.top_req_top_req_req_payload(display_ss_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_payload),
 		.top_req_top_req_req_qos(display_ss_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_qos),
@@ -2013,5 +1742,5 @@ module soc_dti_logic_topo
 		.top_rsp_top_rsp_rsp_valid(sw_gpu4_TO_display_ss_iniu_SIG_iniu3_rsp_valid));
 
 endmodule
-//[UHDL]Content End [md5:c6651509ddc1fc93201ac8a2adee9045]
+//[UHDL]Content End [md5:94a052acf116cf49c3d900c3079806dd]
 

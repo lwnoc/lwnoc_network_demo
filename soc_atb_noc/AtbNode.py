@@ -224,11 +224,7 @@ class AtbNode:
                 "payload_bridge": {
                     "fabric_valid_wire": "noc_atvalid",
                     "fabric_data_wire": "noc_atdata",
-                    "tieoffs": [
-                        _sv_binding("noc_atready", "1'b1"),
-                        _sv_binding("noc_afvalid", "1'b0"),
-                        _sv_binding("noc_syncreq", "1'b0"),
-                    ],
+                    "tieoffs": [],
                 },
             }
 
@@ -303,8 +299,6 @@ class AtbNode:
                     "fabric_valid_wire": "noc_atvalid",
                     "fabric_data_wire": "noc_atdata",
                     "defaults": [
-                        _sv_binding("noc_atbytes", "4'hf"),
-                        _sv_binding("noc_atid", "7'h0"),
                         _sv_binding("noc_afready", "1'b1"),
                         _sv_binding("noc_atwakeup", "1'b0"),
                     ],
@@ -361,17 +355,22 @@ class AtbNode:
                 ],
             }
         if self.kind == "atb_funnel":
-            # Funnels are combinational (no clock/reset)
-            # Declare all input channels based on num_inputs
+            # Funnels with full ATB protocol support
+            # Inputs are indexed arrays of ATB protocol signals
+            # Outputs are single consolidated ATB protocol signals
             ports_dict = {}
             top_in = []
             for i in range(self.num_inputs):
-                top_in.append(InterfacePort(name=f"in{i}_valid", direction="input", width=1))
-                top_in.append(InterfacePort(name=f"in{i}_data", direction="input", width=self.fabric_data_w))
+                top_in.append(InterfacePort(name=f"atvalids[{i}]", direction="input", width=1))
+                top_in.append(InterfacePort(name=f"atbytess[{i}]", direction="input", width=4))
+                top_in.append(InterfacePort(name=f"atdatas[{i}]", direction="input", width=self.fabric_data_w))
+                top_in.append(InterfacePort(name=f"atids[{i}]", direction="input", width=7))
+                top_in.append(InterfacePort(name=f"afreadys[{i}]", direction="output", width=1))
             ports_dict["top_in"] = top_in
             ports_dict["top_out"] = [
-                InterfacePort(name="out_valid", direction="output", width=1),
-                InterfacePort(name="out_data", direction="output", width=self.fabric_data_w),
+                InterfacePort(name="atreadym", direction="output", width=1),
+                InterfacePort(name="afvalidm", direction="output", width=1),
+                InterfacePort(name="syncreqm", direction="output", width=1),
             ]
             return ports_dict
         if self.kind == "atb_async_bridge_slv":
@@ -382,12 +381,26 @@ class AtbNode:
                     InterfacePort(name="rst_n", direction="input", width=1),
                 ],
                 "top_in": [
-                    InterfacePort(name="in_valid", direction="input", width=1),
-                    InterfacePort(name="in_data", direction="input", width=self.fabric_data_w),
+                    InterfacePort(name="s_atvalid", direction="input", width=1),
+                    InterfacePort(name="s_atready", direction="output", width=1),
+                    InterfacePort(name="s_atbytes", direction="input", width=4),
+                    InterfacePort(name="s_atdata", direction="input", width=self.fabric_data_w),
+                    InterfacePort(name="s_atid", direction="input", width=7),
+                    InterfacePort(name="s_afvalid", direction="output", width=1),
+                    InterfacePort(name="s_afready", direction="input", width=1),
+                    InterfacePort(name="s_syncreq", direction="output", width=1),
+                    InterfacePort(name="s_atwakeup", direction="input", width=1),
                 ],
                 "async_out": [
-                    InterfacePort(name="out_valid", direction="output", width=1),
-                    InterfacePort(name="out_data", direction="output", width=self.fabric_data_w),
+                    InterfacePort(name="m_atvalid", direction="output", width=1),
+                    InterfacePort(name="m_atready", direction="input", width=1),
+                    InterfacePort(name="m_atbytes", direction="output", width=4),
+                    InterfacePort(name="m_atdata", direction="output", width=self.fabric_data_w),
+                    InterfacePort(name="m_atid", direction="output", width=7),
+                    InterfacePort(name="m_afvalid", direction="input", width=1),
+                    InterfacePort(name="m_afready", direction="output", width=1),
+                    InterfacePort(name="m_syncreq", direction="input", width=1),
+                    InterfacePort(name="m_atwakeup", direction="output", width=1),
                 ],
             }
         if self.kind == "atb_async_bridge_mst":
@@ -398,12 +411,26 @@ class AtbNode:
                     InterfacePort(name="rst_n", direction="input", width=1),
                 ],
                 "async_in": [
-                    InterfacePort(name="in_valid", direction="input", width=1),
-                    InterfacePort(name="in_data", direction="input", width=self.fabric_data_w),
+                    InterfacePort(name="s_atvalid", direction="input", width=1),
+                    InterfacePort(name="s_atready", direction="output", width=1),
+                    InterfacePort(name="s_atbytes", direction="input", width=4),
+                    InterfacePort(name="s_atdata", direction="input", width=self.fabric_data_w),
+                    InterfacePort(name="s_atid", direction="input", width=7),
+                    InterfacePort(name="s_afvalid", direction="output", width=1),
+                    InterfacePort(name="s_afready", direction="input", width=1),
+                    InterfacePort(name="s_syncreq", direction="output", width=1),
+                    InterfacePort(name="s_atwakeup", direction="input", width=1),
                 ],
                 "top_out": [
-                    InterfacePort(name="out_valid", direction="output", width=1),
-                    InterfacePort(name="out_data", direction="output", width=self.fabric_data_w),
+                    InterfacePort(name="m_atvalid", direction="output", width=1),
+                    InterfacePort(name="m_atready", direction="input", width=1),
+                    InterfacePort(name="m_atbytes", direction="output", width=4),
+                    InterfacePort(name="m_atdata", direction="output", width=self.fabric_data_w),
+                    InterfacePort(name="m_atid", direction="output", width=7),
+                    InterfacePort(name="m_afvalid", direction="input", width=1),
+                    InterfacePort(name="m_afready", direction="output", width=1),
+                    InterfacePort(name="m_syncreq", direction="input", width=1),
+                    InterfacePort(name="m_atwakeup", direction="output", width=1),
                 ],
             }
         return {}

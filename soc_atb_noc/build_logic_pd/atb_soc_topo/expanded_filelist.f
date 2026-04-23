@@ -1,4 +1,11 @@
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/atb_primitives.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/atb_network_compat.sv
+/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/atb_if.sv
+/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/atb_funnel_reg_blk.sv
+/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/atb_funnel_arbiter.sv
+/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/atb_funnel.sv
+/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/network_atb_slv.sv
+/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/network_atb_mst.sv
+/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/atb_async_bridge_top.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/atb_network_layer.v
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/dsp_ss0_atb_iniu_noc.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/dsp_ss1_atb_iniu_noc.sv

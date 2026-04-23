@@ -1,0 +1,1156 @@
+
+Warning-[LINX_KRNL] Unsupported Linux kernel
+  Linux kernel '5.15.133.1-microsoft-standard-WSL2' is not supported.
+  Supported versions are 2.4* or 2.6*.
+
+Command: vcs -full64 -sverilog -timescale=1ns/1ps +v2k +notimingcheck +lint=TFIPC-L \
++error+OPD -f /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/sim/build_iverilog/soc_intr_ring_top_pd.live.flat.f \
+-top soc_intr_ring_top_pd -Mdir=/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/sim/build_vcs_live/pd/csrc \
+-o /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/sim/build_vcs_live/pd/simv \
+-l /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/sim/build_vcs_live/pd/compile.log \
+
+                         Chronologic VCS (TM)
+         Version L-2016.06_Full64 -- Fri Apr 24 04:04:41 2026
+               Copyright (c) 1991-2016 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_arb_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_arb_vrp.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_fix_arb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_grant_gen_fp.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_grant_gen_rr.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_mtx_gen_age.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_mtx_gen_plru_tree.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_tree_plru_comb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_arb_vr_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_age_matrix_list.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_age_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/arbiter/fcip_arb_vrp_matrix.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_apb_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo_doub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo_mst_doub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_bin2onehot.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_lead_one.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_lead_one_msb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_lead_one_rev.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_lfsr4.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_list_lead_one.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_list_lead_one_rev.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_list_lead_zero.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_onehot2bin.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_real_mux_onehot.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_rob_id_dec.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_rob_prealloc.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_onehot_demux.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/basic/fcip_onehot_mux_pld.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/memory/mem_fake_2p_sram/fcip_mem_fake_find_new_bit.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/memory/mem_fake_2p_sram/fcip_mem_fake_write_buffer.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/memory/mem_fake_2p_sram/fcip_mem_fake_2p_mem.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/memory/fcip_mem_ctrl_wrap/fcip_mem_ctrl_wrap.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/regslice/fcip_reg_slice.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/regslice/fcip_reg_slice_full_set.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_marker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_clk_marker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_data_pipe.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_sync_arst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_sync_aset.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/stdcell_wrap/fcip_sync_cell.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_rob.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_ptr_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sync_fifo_spram.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/handshake/fcip_hs_fanout.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/mem_model/fcip_dpram_model.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/fcip/ip/mem_model/fcip_spram_model.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lwnoc_lp_define_package.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lwnoc_lp_struct_package.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_endpoint.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_nest.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_slv_adapter.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_slv_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lp_fsm/lwnoc_lp_stg2_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lp_fsm/lwnoc_lp_stg1_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_common/lp_fsm/lwnoc_lp_niu_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_subhub.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_3terminal.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_tiny_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_small_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_large_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_hub/lwnoc_lp_hub_wrapper.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_async_bridge.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_func_tniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_func_iniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_dummy_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_tniu/lwnoc_lp_tniu_stall_logic.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_iniu/lwnoc_lp_pchn_niu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/lwnoc_lowpower_component/src/rtl/lp_iniu/lwnoc_lp_iniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/intr_iniu_top_macros.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/soc_intr_niu_ring_noc_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/interrupt_iniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/interrupt_iniu_pkg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/interrupt_iniu_event_recorder.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/interrupt_iniu_lut.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/interrupt_iniu_reg_bank.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/interrupt_iniu_arb.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/interrupt_iniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_4096x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_2048x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_1024x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_512x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_256x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_128x20.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/interrupt_iniu_async_top_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/intr_tniu_top_macros.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/soc_intr_niu_ring_noc_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu_pkg.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu_mem_reg_bank.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/Regbank_regbank_tniu_internal_intr.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu_generate_reg_bank.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu_event_conflict_check.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu_context.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu_context_entry.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu_event_repeater.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu_event_merge.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu_xbar_internal.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_4096x20.sv'
+
+Warning-[OPD] Override previous declaration
+  "/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_4096x20.sv",
+  1
+  Source info: module spram_4096x20 (
+  Previously declared 
+  at:"/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_4096x20.sv",
+  1
+  This module will be overridden by the last declaration.
+  
+
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_2048x20.sv'
+
+Warning-[OPD] Override previous declaration
+  "/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_2048x20.sv",
+  1
+  Source info: module spram_2048x20 (
+  Previously declared 
+  at:"/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_2048x20.sv",
+  1
+  This module will be overridden by the last declaration.
+  
+
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_1024x20.sv'
+
+Warning-[OPD] Override previous declaration
+  "/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_1024x20.sv",
+  1
+  Source info: module spram_1024x20 (
+  Previously declared 
+  at:"/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_1024x20.sv",
+  1
+  This module will be overridden by the last declaration.
+  
+
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_512x20.sv'
+
+Warning-[OPD] Override previous declaration
+  "/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_512x20.sv",
+  1
+  Source info: module spram_512x20 (
+  Previously declared 
+  at:"/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_512x20.sv",
+  1
+  This module will be overridden by the last declaration.
+  
+
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_256x20.sv'
+
+Warning-[OPD] Override previous declaration
+  "/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_256x20.sv",
+  1
+  Source info: module spram_256x20 (
+  Previously declared 
+  at:"/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_256x20.sv",
+  1
+  This module will be overridden by the last declaration.
+  
+
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_128x20.sv'
+
+Warning-[OPD] Override previous declaration
+  "/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/spram_128x20.sv",
+  1
+  Source info: module spram_128x20 (
+  Previously declared 
+  at:"/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_iniu_top_side/spram_128x20.sv",
+  1
+  This module will be overridden by the last declaration.
+  
+
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_tniu_top_side/interrupt_tniu_async_top_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/intr_ring_network_macros.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/soc_intr_network_ring_noc_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwmnoc_flow_ctrl_buf.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwmnoc_flow_ctrl_chk.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwmnoc_rob_pingpong_prealloc.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_ring_async_bridge.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_ring_async_bridge_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_ring_async_bridge_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_intr_default_tgtid_sink.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_intr_dummy_endpoint.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_ring_buf.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_ring_sp.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_ring_station.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_sfifo.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_station_buffer.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_sync_cell.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_vcbuf.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/intr_station_temp_mem_model.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/intr_ring_buf_wrap.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_intr_ring_async_bridge_wrap_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_intr_ring_async_bridge_wrap_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/intr_ring_network/lwnoc_intr_ring_sp_wrap.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/aon_ss_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/aon_ss_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/aon_ss_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/aon_ss_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/audio_ss_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/audio_ss_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/camera_ss_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/camera_ss_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/camera_ss_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/camera_ss_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/cpu_ss_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/cpu_ss_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/cpu_ss_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/cpu_ss_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr0_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr0_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr10_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr10_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr11_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr11_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr1_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr1_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr2_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr2_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr3_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr3_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr4_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr4_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr5_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr5_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr6_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr6_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr7_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr7_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr8_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr8_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr9_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ddr9_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/debug_ss_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/debug_ss_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/display_ss_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/display_ss_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dp_ss_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dp_ss_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss0_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss0_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss1_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss1_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss2_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss2_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss3_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss3_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss4_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss4_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss5_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/dspss5_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/gpu_ss0_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/gpu_ss0_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/gpu_ss1_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/gpu_ss1_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/mipi_ss_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/mipi_ss_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/pcie_eth_ss_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/pcie_eth_ss_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/peri_ss_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/peri_ss_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ucie_ss0_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ucie_ss0_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ucie_ss0_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ucie_ss0_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ucie_ss1_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ucie_ss1_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ucie_ss1_tniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ucie_ss1_tniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ufs_ss_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/ufs_ss_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/vpu_ss_iniu.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/vpu_ss_iniu_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top/soc_intr_ring_top.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ucie_ss0_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ucie_ss0_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ucie_ss0_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ucie_ss0_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/cpu_ss_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/cpu_ss_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/cpu_ss_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/cpu_ss_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/audio_ss_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/audio_ss_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/peri_ss_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/peri_ss_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/gpu_ss1_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/gpu_ss1_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/gpu_ss0_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/gpu_ss0_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/display_ss_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/display_ss_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/dp_ss_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/dp_ss_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr6_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr6_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr7_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr7_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr8_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr8_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr9_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr9_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr10_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr10_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr11_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr11_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/soc_intr_ring_noc_up_harden_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/mipi_ss_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/mipi_ss_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ufs_ss_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ufs_ss_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/camera_ss_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/camera_ss_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/camera_ss_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/camera_ss_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/pcie_eth_ss_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/pcie_eth_ss_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/debug_ss_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/debug_ss_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/aon_ss_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/aon_ss_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/aon_ss_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/aon_ss_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ucie_ss1_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ucie_ss1_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ucie_ss1_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ucie_ss1_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss5_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss5_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/default_tgtid_sink_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/default_tgtid_sink.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/vpu_ss_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/vpu_ss_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss4_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss4_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss3_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss3_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss2_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss2_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss1_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss1_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss0_tniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss0_tniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr0_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr0_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr1_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr1_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr2_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr2_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr3_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr3_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr4_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr4_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr5_iniu_noc_side_ring.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr5_iniu_noc_side.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/soc_intr_ring_noc_dn_harden_wrap.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_xbar_routing_lut_w5_c1/soc_intr_xbar_routing_lut_w5_c1.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top_pd/ring_async_cut_up_to_dn.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top_pd/ring_async_cut_dn_to_up.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_top_pd/soc_intr_ring_top_pd.v'
+Top Level Modules:
+       soc_intr_ring_top_pd
+TimeScale is 1 ns / 1 ps
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ucie_ss0_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ucie_ss0_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ucie_ss0_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/cpu_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/cpu_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/cpu_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/audio_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/audio_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/audio_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/gpu_ss1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/gpu_ss1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/gpu_ss1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/dp_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/dp_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/dp_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr6_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr6_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr6_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr7_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr7_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr7_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr8_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr8_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr8_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr9_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr9_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr9_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr10_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr10_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_up_harden_wrap/ddr10_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/mipi_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/mipi_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/mipi_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ufs_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ufs_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ufs_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/camera_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/camera_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/camera_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/pcie_eth_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/pcie_eth_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/pcie_eth_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/debug_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/debug_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/debug_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/aon_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/aon_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/aon_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ucie_ss1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ucie_ss1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ucie_ss1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss5_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss5_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss5_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/vpu_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/vpu_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/vpu_ss_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss3_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss3_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss3_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/dspss1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr0_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr0_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr0_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr1_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr2_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr2_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr2_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr3_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr3_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr3_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr4_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr4_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr4_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr5_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "wptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_wptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr5_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_async" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_async
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/build_logic/soc_intr_ring_noc_dn_harden_wrap/ddr5_iniu_noc_side.v, 72
+"interrupt_iniu_async_top_side iniu_top( .clk (clk_top_func),  .rst_n (rst_top_func_n),  .wptr_async (async_fifo_wptr_async),  .rptr_async (async_fifo_rptr_async),  .rptr_sync (async_fifo_rptr_sync),  .pld_sync (async_fifo_pld_sync),  .m_async_master_hub_rx_req (lp_async_m_async_master_hub_rx_req),  .m_async_master_hub_tx_req (lp_async_m_async_master_hub_tx_req),  .req_valid (iniu_top_TO_ring_wrap_SIG_req_valid),  .req_ready (ring_wrap_TO_iniu_top_SIG_local_tx_local_tx_ready),  .req_payload (iniu_top_TO_ring_wrap_SIG_req_payload),  .req_srcid (iniu_top_TO_ring_wrap_SIG_req_srcid),  .req_tgtid (iniu_top_TO_ring_wrap_SIG_req_tgtid),  .req_qos (iniu_top_TO_ring_wrap_SIG_req_qos),  .req_last (iniu_top_TO_ring_wrap_SIG_req_last));"
+  The following 16-bit expression is connected to 10-bit port "rptr_sync" of 
+  module "interrupt_iniu_async_top_side", instance "iniu_top".
+  Expression: async_fifo_rptr_sync
+  	use +lint=PCWM for more details
+
+Starting vcs inline pass...
+
+27 unique modules to generate
+27 modules and 0 UDP read. 
+	However, due to incremental compilation, no re-compilation is necessary.
+All of 0 modules done
+rm -f _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+ld -shared  -o .//../simv.daidir//_csrc0.so objs/amcQw_d.o 
+rm -f _csrc0.so
+if [ -x /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/sim/build_vcs_live/pd/simv \
+]; then chmod -x /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/sim/build_vcs_live/pd/simv; \
+fi
+g++  -o /home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/sim/build_vcs_live/pd/simv \
+-Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ -Wl,-rpath=./simv.daidir/ -Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir \
+-L/usr/lib/x86_64-linux-gnu -L/lib/x86_64-linux-gnu -Wl,--no-as-needed -rdynamic \
+amcQwB.o  _prev_archive_1.so _csrc0.so  SIM_l.o  _csrc0.so     rmapats_mop.o rmapats.o \
+rmar.o  rmar_llvm_0_1.o rmar_llvm_0_0.o          /home/lgzhu/software/vcs2016/linux64/lib/libzerosoft_rt_stubs.so \
+/home/lgzhu/software/vcs2016/linux64/lib/libvirsim.so /home/lgzhu/software/vcs2016/linux64/lib/liberrorinf.so \
+/home/lgzhu/software/vcs2016/linux64/lib/libsnpsmalloc.so    /home/lgzhu/software/vcs2016/linux64/lib/libvcsnew.so \
+/home/lgzhu/software/vcs2016/linux64/lib/libsimprofile.so /home/lgzhu/software/vcs2016/linux64/lib/libuclinative.so \
+-Wl,-whole-archive /home/lgzhu/software/vcs2016/linux64/lib/libvcsucli.so -Wl,-no-whole-archive \
+/home/lgzhu/software/vcs2016/linux64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread \
+-ldl 
+/usr/bin/ld: /home/lgzhu/software/vcs2016/linux64/lib/vcs_save_restore_new.o: relocation \
+R_X86_64_32S against symbol `_sigintr' can not be used when making a PIE object; \
+recompile with -fPIE
+/usr/bin/ld: failed to set dynamic section sizes: bad value
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:105: product_timestamp] Error 1
+Make exited with status 2
+CPU time: 5.534 seconds to compile + .261 seconds to elab + .346 seconds to link

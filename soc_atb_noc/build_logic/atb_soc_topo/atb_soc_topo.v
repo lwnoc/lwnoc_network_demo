@@ -136,6 +136,7 @@ module atb_soc_topo (
   logic [127:0] w_dsp_ss0_sys_data;
   logic w_dsp_ss0_noc_valid;
   logic [127:0] w_dsp_ss0_noc_data;
+  logic [138:0] w_dsp_ss0_noc_payload;
   logic w_dsp_ss0_noc_atvalid;
   logic w_dsp_ss0_noc_atready;
   logic [3:0] w_dsp_ss0_noc_atbytes;
@@ -149,6 +150,7 @@ module atb_soc_topo (
   logic [127:0] w_dsp_ss1_sys_data;
   logic w_dsp_ss1_noc_valid;
   logic [127:0] w_dsp_ss1_noc_data;
+  logic [138:0] w_dsp_ss1_noc_payload;
   logic w_dsp_ss1_noc_atvalid;
   logic w_dsp_ss1_noc_atready;
   logic [3:0] w_dsp_ss1_noc_atbytes;
@@ -162,6 +164,7 @@ module atb_soc_topo (
   logic [127:0] w_dsp_ss2_sys_data;
   logic w_dsp_ss2_noc_valid;
   logic [127:0] w_dsp_ss2_noc_data;
+  logic [138:0] w_dsp_ss2_noc_payload;
   logic w_dsp_ss2_noc_atvalid;
   logic w_dsp_ss2_noc_atready;
   logic [3:0] w_dsp_ss2_noc_atbytes;
@@ -175,6 +178,7 @@ module atb_soc_topo (
   logic [127:0] w_dsp_ss3_sys_data;
   logic w_dsp_ss3_noc_valid;
   logic [127:0] w_dsp_ss3_noc_data;
+  logic [138:0] w_dsp_ss3_noc_payload;
   logic w_dsp_ss3_noc_atvalid;
   logic w_dsp_ss3_noc_atready;
   logic [3:0] w_dsp_ss3_noc_atbytes;
@@ -188,6 +192,7 @@ module atb_soc_topo (
   logic [127:0] w_dsp_ss4_sys_data;
   logic w_dsp_ss4_noc_valid;
   logic [127:0] w_dsp_ss4_noc_data;
+  logic [138:0] w_dsp_ss4_noc_payload;
   logic w_dsp_ss4_noc_atvalid;
   logic w_dsp_ss4_noc_atready;
   logic [3:0] w_dsp_ss4_noc_atbytes;
@@ -201,6 +206,7 @@ module atb_soc_topo (
   logic [127:0] w_dsp_ss5_sys_data;
   logic w_dsp_ss5_noc_valid;
   logic [127:0] w_dsp_ss5_noc_data;
+  logic [138:0] w_dsp_ss5_noc_payload;
   logic w_dsp_ss5_noc_atvalid;
   logic w_dsp_ss5_noc_atready;
   logic [3:0] w_dsp_ss5_noc_atbytes;
@@ -214,6 +220,7 @@ module atb_soc_topo (
   logic [127:0] w_camera_ss_sys_data;
   logic w_camera_ss_noc_valid;
   logic [127:0] w_camera_ss_noc_data;
+  logic [138:0] w_camera_ss_noc_payload;
   logic w_camera_ss_noc_atvalid;
   logic w_camera_ss_noc_atready;
   logic [3:0] w_camera_ss_noc_atbytes;
@@ -227,6 +234,7 @@ module atb_soc_topo (
   logic [127:0] w_mipi_ss_sys_data;
   logic w_mipi_ss_noc_valid;
   logic [127:0] w_mipi_ss_noc_data;
+  logic [138:0] w_mipi_ss_noc_payload;
   logic w_mipi_ss_noc_atvalid;
   logic w_mipi_ss_noc_atready;
   logic [3:0] w_mipi_ss_noc_atbytes;
@@ -238,6 +246,7 @@ module atb_soc_topo (
   logic w_mipi_ss_noc_atwakeup;
   logic w_debug_tniu_ss_noc_valid;
   logic [127:0] w_debug_tniu_ss_noc_data;
+  logic [138:0] w_debug_tniu_ss_noc_payload;
   logic w_debug_tniu_ss_sys_valid;
   logic [127:0] w_debug_tniu_ss_sys_data;
   logic w_debug_tniu_ss_noc_atvalid;
@@ -288,10 +297,7 @@ module atb_soc_topo (
     .noc_atwakeup(w_dsp_ss0_noc_atwakeup)
   );
   assign w_dsp_ss0_noc_valid = w_dsp_ss0_noc_atvalid;
-  assign w_dsp_ss0_noc_data = w_dsp_ss0_noc_atdata;
-  assign w_dsp_ss0_noc_atready = 1'b1;
-  assign w_dsp_ss0_noc_afvalid = 1'b0;
-  assign w_dsp_ss0_noc_syncreq = 1'b0;
+  assign w_dsp_ss0_noc_payload = {w_dsp_ss0_noc_atbytes, w_dsp_ss0_noc_atid, w_dsp_ss0_noc_atdata};
 
   dsp_ss1_iniu_sys_side #(.DATA_W(128)) u_dsp_ss1_sys_side (
     .clk(clk_core),
@@ -321,10 +327,7 @@ module atb_soc_topo (
     .noc_atwakeup(w_dsp_ss1_noc_atwakeup)
   );
   assign w_dsp_ss1_noc_valid = w_dsp_ss1_noc_atvalid;
-  assign w_dsp_ss1_noc_data = w_dsp_ss1_noc_atdata;
-  assign w_dsp_ss1_noc_atready = 1'b1;
-  assign w_dsp_ss1_noc_afvalid = 1'b0;
-  assign w_dsp_ss1_noc_syncreq = 1'b0;
+  assign w_dsp_ss1_noc_payload = {w_dsp_ss1_noc_atbytes, w_dsp_ss1_noc_atid, w_dsp_ss1_noc_atdata};
 
   dsp_ss2_iniu_sys_side #(.DATA_W(128)) u_dsp_ss2_sys_side (
     .clk(clk_core),
@@ -354,10 +357,7 @@ module atb_soc_topo (
     .noc_atwakeup(w_dsp_ss2_noc_atwakeup)
   );
   assign w_dsp_ss2_noc_valid = w_dsp_ss2_noc_atvalid;
-  assign w_dsp_ss2_noc_data = w_dsp_ss2_noc_atdata;
-  assign w_dsp_ss2_noc_atready = 1'b1;
-  assign w_dsp_ss2_noc_afvalid = 1'b0;
-  assign w_dsp_ss2_noc_syncreq = 1'b0;
+  assign w_dsp_ss2_noc_payload = {w_dsp_ss2_noc_atbytes, w_dsp_ss2_noc_atid, w_dsp_ss2_noc_atdata};
 
   dsp_ss3_iniu_sys_side #(.DATA_W(128)) u_dsp_ss3_sys_side (
     .clk(clk_core),
@@ -387,10 +387,7 @@ module atb_soc_topo (
     .noc_atwakeup(w_dsp_ss3_noc_atwakeup)
   );
   assign w_dsp_ss3_noc_valid = w_dsp_ss3_noc_atvalid;
-  assign w_dsp_ss3_noc_data = w_dsp_ss3_noc_atdata;
-  assign w_dsp_ss3_noc_atready = 1'b1;
-  assign w_dsp_ss3_noc_afvalid = 1'b0;
-  assign w_dsp_ss3_noc_syncreq = 1'b0;
+  assign w_dsp_ss3_noc_payload = {w_dsp_ss3_noc_atbytes, w_dsp_ss3_noc_atid, w_dsp_ss3_noc_atdata};
 
   dsp_ss4_iniu_sys_side #(.DATA_W(128)) u_dsp_ss4_sys_side (
     .clk(clk_core),
@@ -420,10 +417,7 @@ module atb_soc_topo (
     .noc_atwakeup(w_dsp_ss4_noc_atwakeup)
   );
   assign w_dsp_ss4_noc_valid = w_dsp_ss4_noc_atvalid;
-  assign w_dsp_ss4_noc_data = w_dsp_ss4_noc_atdata;
-  assign w_dsp_ss4_noc_atready = 1'b1;
-  assign w_dsp_ss4_noc_afvalid = 1'b0;
-  assign w_dsp_ss4_noc_syncreq = 1'b0;
+  assign w_dsp_ss4_noc_payload = {w_dsp_ss4_noc_atbytes, w_dsp_ss4_noc_atid, w_dsp_ss4_noc_atdata};
 
   dsp_ss5_iniu_sys_side #(.DATA_W(128)) u_dsp_ss5_sys_side (
     .clk(clk_core),
@@ -453,10 +447,7 @@ module atb_soc_topo (
     .noc_atwakeup(w_dsp_ss5_noc_atwakeup)
   );
   assign w_dsp_ss5_noc_valid = w_dsp_ss5_noc_atvalid;
-  assign w_dsp_ss5_noc_data = w_dsp_ss5_noc_atdata;
-  assign w_dsp_ss5_noc_atready = 1'b1;
-  assign w_dsp_ss5_noc_afvalid = 1'b0;
-  assign w_dsp_ss5_noc_syncreq = 1'b0;
+  assign w_dsp_ss5_noc_payload = {w_dsp_ss5_noc_atbytes, w_dsp_ss5_noc_atid, w_dsp_ss5_noc_atdata};
 
   camera_ss_iniu_sys_side #(.DATA_W(128)) u_camera_ss_sys_side (
     .clk(clk_core),
@@ -486,10 +477,7 @@ module atb_soc_topo (
     .noc_atwakeup(w_camera_ss_noc_atwakeup)
   );
   assign w_camera_ss_noc_valid = w_camera_ss_noc_atvalid;
-  assign w_camera_ss_noc_data = w_camera_ss_noc_atdata;
-  assign w_camera_ss_noc_atready = 1'b1;
-  assign w_camera_ss_noc_afvalid = 1'b0;
-  assign w_camera_ss_noc_syncreq = 1'b0;
+  assign w_camera_ss_noc_payload = {w_camera_ss_noc_atbytes, w_camera_ss_noc_atid, w_camera_ss_noc_atdata};
 
   mipi_ss_iniu_sys_side #(.DATA_W(128)) u_mipi_ss_sys_side (
     .clk(clk_core),
@@ -519,15 +507,10 @@ module atb_soc_topo (
     .noc_atwakeup(w_mipi_ss_noc_atwakeup)
   );
   assign w_mipi_ss_noc_valid = w_mipi_ss_noc_atvalid;
-  assign w_mipi_ss_noc_data = w_mipi_ss_noc_atdata;
-  assign w_mipi_ss_noc_atready = 1'b1;
-  assign w_mipi_ss_noc_afvalid = 1'b0;
-  assign w_mipi_ss_noc_syncreq = 1'b0;
+  assign w_mipi_ss_noc_payload = {w_mipi_ss_noc_atbytes, w_mipi_ss_noc_atid, w_mipi_ss_noc_atdata};
 
   assign w_debug_tniu_ss_noc_atvalid = w_debug_tniu_ss_noc_valid;
-  assign w_debug_tniu_ss_noc_atdata = w_debug_tniu_ss_noc_data;
-  assign w_debug_tniu_ss_noc_atbytes = 4'hf;
-  assign w_debug_tniu_ss_noc_atid = 7'h0;
+  assign {w_debug_tniu_ss_noc_atbytes, w_debug_tniu_ss_noc_atid, w_debug_tniu_ss_noc_atdata} = w_debug_tniu_ss_noc_payload;
   assign w_debug_tniu_ss_noc_afready = 1'b1;
   assign w_debug_tniu_ss_noc_atwakeup = 1'b0;
   debug_tniu_ss_tniu_noc_side #(.DATA_W(128)) u_debug_tniu_ss_noc_side (
@@ -584,27 +567,52 @@ module atb_soc_topo (
     .timeout_val(10'd0)
   );
 
+  assign w_dsp_ss0_noc_atready = w_debug_tniu_ss_noc_atready;
+  assign w_dsp_ss0_noc_afvalid = w_debug_tniu_ss_noc_afvalid;
+  assign w_dsp_ss0_noc_syncreq = w_debug_tniu_ss_noc_syncreq;
+  assign w_dsp_ss1_noc_atready = w_debug_tniu_ss_noc_atready;
+  assign w_dsp_ss1_noc_afvalid = w_debug_tniu_ss_noc_afvalid;
+  assign w_dsp_ss1_noc_syncreq = w_debug_tniu_ss_noc_syncreq;
+  assign w_dsp_ss2_noc_atready = w_debug_tniu_ss_noc_atready;
+  assign w_dsp_ss2_noc_afvalid = w_debug_tniu_ss_noc_afvalid;
+  assign w_dsp_ss2_noc_syncreq = w_debug_tniu_ss_noc_syncreq;
+  assign w_dsp_ss3_noc_atready = w_debug_tniu_ss_noc_atready;
+  assign w_dsp_ss3_noc_afvalid = w_debug_tniu_ss_noc_afvalid;
+  assign w_dsp_ss3_noc_syncreq = w_debug_tniu_ss_noc_syncreq;
+  assign w_dsp_ss4_noc_atready = w_debug_tniu_ss_noc_atready;
+  assign w_dsp_ss4_noc_afvalid = w_debug_tniu_ss_noc_afvalid;
+  assign w_dsp_ss4_noc_syncreq = w_debug_tniu_ss_noc_syncreq;
+  assign w_dsp_ss5_noc_atready = w_debug_tniu_ss_noc_atready;
+  assign w_dsp_ss5_noc_afvalid = w_debug_tniu_ss_noc_afvalid;
+  assign w_dsp_ss5_noc_syncreq = w_debug_tniu_ss_noc_syncreq;
+  assign w_camera_ss_noc_atready = w_debug_tniu_ss_noc_atready;
+  assign w_camera_ss_noc_afvalid = w_debug_tniu_ss_noc_afvalid;
+  assign w_camera_ss_noc_syncreq = w_debug_tniu_ss_noc_syncreq;
+  assign w_mipi_ss_noc_atready = w_debug_tniu_ss_noc_atready;
+  assign w_mipi_ss_noc_afvalid = w_debug_tniu_ss_noc_afvalid;
+  assign w_mipi_ss_noc_syncreq = w_debug_tniu_ss_noc_syncreq;
+
   atb_network_layer u_atb_network_layer (
     .clk_core(clk_core),
     .clk_async(clk_async),
     .rst_n(rst_n),
     .dsp_ss0_in_valid(w_dsp_ss0_noc_valid),
-    .dsp_ss0_in_data(w_dsp_ss0_noc_data),
+    .dsp_ss0_in_data(w_dsp_ss0_noc_payload),
     .dsp_ss1_in_valid(w_dsp_ss1_noc_valid),
-    .dsp_ss1_in_data(w_dsp_ss1_noc_data),
+    .dsp_ss1_in_data(w_dsp_ss1_noc_payload),
     .dsp_ss2_in_valid(w_dsp_ss2_noc_valid),
-    .dsp_ss2_in_data(w_dsp_ss2_noc_data),
+    .dsp_ss2_in_data(w_dsp_ss2_noc_payload),
     .dsp_ss3_in_valid(w_dsp_ss3_noc_valid),
-    .dsp_ss3_in_data(w_dsp_ss3_noc_data),
+    .dsp_ss3_in_data(w_dsp_ss3_noc_payload),
     .dsp_ss4_in_valid(w_dsp_ss4_noc_valid),
-    .dsp_ss4_in_data(w_dsp_ss4_noc_data),
+    .dsp_ss4_in_data(w_dsp_ss4_noc_payload),
     .dsp_ss5_in_valid(w_dsp_ss5_noc_valid),
-    .dsp_ss5_in_data(w_dsp_ss5_noc_data),
+    .dsp_ss5_in_data(w_dsp_ss5_noc_payload),
     .camera_ss_in_valid(w_camera_ss_noc_valid),
-    .camera_ss_in_data(w_camera_ss_noc_data),
+    .camera_ss_in_data(w_camera_ss_noc_payload),
     .mipi_ss_in_valid(w_mipi_ss_noc_valid),
-    .mipi_ss_in_data(w_mipi_ss_noc_data),
+    .mipi_ss_in_data(w_mipi_ss_noc_payload),
     .debug_tniu_ss_out_valid(w_debug_tniu_ss_noc_valid),
-    .debug_tniu_ss_out_data(w_debug_tniu_ss_noc_data)
+    .debug_tniu_ss_out_data(w_debug_tniu_ss_noc_payload)
   );
 endmodule

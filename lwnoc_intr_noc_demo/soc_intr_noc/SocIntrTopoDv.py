@@ -17,6 +17,9 @@ from SocIntrNode import make_iniu_node, make_ring_async_node, make_ring_sink_nod
 from SocIntrTopoConfig import INIU_COUNT, RING_PLAN, TNIU_COUNT, TOPO_ID
 
 
+FULL_TOPO_ID = TOPO_ID
+
+
 class SocIntrLogicTopo(UhdlWrapperNode):
     """Perimeter-ordered SoC interrupt ring demo for DV generation."""
 
@@ -93,3 +96,6 @@ class SocIntrLogicTopo(UhdlWrapperNode):
             connect(self.ring_nodes[nxt].nring_out_if, self.ring_nodes[index].nring_in_if)
 
         self.expose_unconnected_interfaces()
+
+
+SocIntrFullLogicTopo = SocIntrLogicTopo

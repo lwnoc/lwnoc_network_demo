@@ -1,0 +1,23 @@
+soc dti topo
+dsp ss0 iniu -> sw0 ch0
+dsp ss1 iniu -> sw0 ch1
+dsp ss2 iniu -> sw0 ch2
+dsp ss3 iniu -> sw0 ch3
+dsp ss4 iniu -> sw0 ch4
+dsp ss5 iniu -> sw0 ch5
+cpu ss iniu -> sw1 ch0
+pcie_eth_ss -> sw1 ch1
+ufs_ss iniu -> sw1 ch2
+camera_ss iniu -> sw1 ch3
+mipi_ss iniu -> sw1 ch4
+gpu_ss0 iniu -> sw2 ch0
+gpu_ss1 iniu -> sw2 ch1
+dp_ss iniu -> sw2 ch2
+display_ss iniu -> sw2 ch3
+sw2 -> dti buffer
+dti buffer -> dti async bridge slv
+dti async bridge mst -> sw3 ch2
+sw0 -> sw3 ch0
+sw1 -> sw3 ch1
+sw3 -> tcu tniu
+

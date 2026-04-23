@@ -1,3 +1,0 @@
-$SOC_DTI_LOGIC_TOPO_DIR/dti_iniu_top_dti_pr_iniu_define.sv
-$SOC_DTI_LOGIC_TOPO_DIR/dti_iniu_top_dti_iniu_pack.sv
-$SOC_DTI_LOGIC_TOPO_DIR/dti_iniu_top_dti_pr_iniu_async_top_side.sv

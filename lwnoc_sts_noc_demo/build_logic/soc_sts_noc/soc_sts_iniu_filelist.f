@@ -1,0 +1,3 @@
+$SOC_STS_NOC_DIR/soc_sts_iniu_sts_iniu_noc.sv
+$SOC_STS_NOC_DIR/soc_sts_iniu_sts_iniu_top.sv
+$SOC_STS_NOC_DIR/soc_sts_iniu_soc_sts_iniu_wrap.sv
