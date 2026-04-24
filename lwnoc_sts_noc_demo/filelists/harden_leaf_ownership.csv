@@ -1,9 +1,0 @@
-leaf_name,owner_branch,pd_harden_partition
-vpu_ss,harden_dn,harden_dn
-camera_ss,harden_dn,harden_dn
-dspss0,harden_up,harden_up
-dspss1,harden_up,harden_up
-dspss2,harden_up,harden_up
-dspss3,harden_up,harden_up
-dspss4,harden_up,harden_up
-dspss5,harden_up,harden_up

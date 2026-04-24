@@ -1,1 +1,0 @@
--f /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/compile_filelist.f

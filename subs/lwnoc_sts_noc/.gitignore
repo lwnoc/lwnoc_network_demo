@@ -1,0 +1,32 @@
+# VCS compilation intermediates
+work/
+csrc/
+*.daidir/
+*.vdb/
+simv
+simv_*
+vc_hdrs.h
+
+# Simulation logs & outputs
+log/
+cov/
+cm.log
+tr_db.log
+ucli.key
+debug.vcd
+UHDL.log
+elab.log
+cov_analysis_output.txt
+chat.json
+
+# Verdi waveform & session files
+*.fsdb
+novas.conf
+novas.rc
+novas_dump.log
+verdiLog/
+
+# Editor & misc
+.vscode/
+__pycache__/
+*.pyc

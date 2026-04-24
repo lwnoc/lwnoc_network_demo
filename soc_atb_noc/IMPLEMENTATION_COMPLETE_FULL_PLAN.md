@@ -107,7 +107,7 @@ Successfully executed complete 9-step plan for ATB Node IO Audit and Direct Bind
 #### Step 8: Regenerate and Validate ✅
 **Actions**:
 1. Regenerate DV topology: ✅ `python3 gen_soc_atb_topo.py`
-2. Regenerate PD topology: ✅ `python3 gen_soc_atb_topo_pd.py`
+2. Regenerate PD topology: ✅ `python3 test_atb_noc_gen.py`
 
 **Generated Artifacts** (Fresh):
 - **DV Flow**:

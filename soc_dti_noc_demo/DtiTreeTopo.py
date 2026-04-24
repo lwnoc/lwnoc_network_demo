@@ -21,8 +21,9 @@ from DtiTemplate import (
     dti_sw_right_noc0_config,
     dti_sw_root_config,
 )
-from DtiTreeNode import DtiSwitchNode
 from DtiNode import (
+    DtiSwitchNode,
+    (
     make_pcie_eth_iniu_node,
     make_vpu_iniu_node,
     make_dsp2_iniu_node,

@@ -693,9 +693,10 @@ def generate(flow: str = "dv"):
     if flow == "dv":
         _patch_async_fifo_depths(build_dir, iniu_depth=16, tniu_depth=10)
         _rename_generated_lwmnoc_define_shims(build_dir)
-        _patch_missing_read_req_declarations(build_dir)
-        _patch_sva_for_verilator(build_dir)
-        _patch_verilator_generate_loops(build_dir)
+    # Verilator-specific patches — commented out pending revisit.
+    #   _patch_missing_read_req_declarations(build_dir)
+    #   _patch_sva_for_verilator(build_dir)
+    #   _patch_verilator_generate_loops(build_dir)
     _localize_generated_prefix_defines(build_dir)
     _tieoff_unused_input_ports(build_dir / (FULL_TOPO_ID if flow == "dv" else combined_dir))
     _cast_flattened_pstate_inputs(build_dir / (FULL_TOPO_ID if flow == "dv" else combined_dir))

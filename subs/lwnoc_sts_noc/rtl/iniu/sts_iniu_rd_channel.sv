@@ -76,9 +76,13 @@ logic [AXI_ARID_WIDTH-1:0]              check_id;
 logic [AXI_ARID_WIDTH-1:0]              alloc_id;
 logic                                    alloc_vld;
 logic                                    alloc_rdy;
-logic                                    check_ack;
+logic                                    complete_rdy;
+logic                                    retire_vld;
+logic                                    retire_rdy;
 logic [$clog2(STS_INIU_OT_TOTAL)-1:0]   rd_id_alloc;
-logic [$clog2(STS_INIU_OT_TOTAL)-1:0]   check_idx;
+logic [$clog2(STS_INIU_OT_TOTAL)-1:0]   complete_idx;
+logic [$bits(sts_rsp_typ)-1:0]          retire_rsp_pld_flat;
+sts_rsp_typ                             retire_rsp_pld;
 
 assign ar_in_sel_pld  = ar_in_hold_vld ? ar_in_hold_pld : upstrm_ar_pld;
 assign fifo_in_ar_vld = ar_in_hold_vld || upstrm_ar_vld;
@@ -144,31 +148,39 @@ cmn_vrp_reg_fifo #(
     .out_pld(upstrm_r_pld)
 );
 
-assign fifo_in_rsp_vld = in_rsp_vld;
-assign in_rsp_rdy = fifo_in_rsp_rdy;
+assign retire_rsp_pld = sts_rsp_typ'(retire_rsp_pld_flat);
+assign fifo_in_rsp_vld = retire_vld;
+assign retire_rdy      = fifo_in_rsp_rdy;
+assign in_rsp_rdy      = complete_rdy;
 
 always_comb begin
     fifo_in_rsp_pld = 'b0;
     fifo_in_rsp_pld.rid    = check_id;
-    fifo_in_rsp_pld.rdata  = in_rsp_pld.rsp.data;
-    fifo_in_rsp_pld.rresp  = in_rsp_pld.rsp.resp;
-    fifo_in_rsp_pld.rlast  = in_rsp_pld.rsp.last;
+    fifo_in_rsp_pld.rdata  = retire_rsp_pld.rsp.data;
+    fifo_in_rsp_pld.rresp  = retire_rsp_pld.rsp.resp;
+    fifo_in_rsp_pld.rlast  = retire_rsp_pld.rsp.last;
 end
 
 
 lwring_id_remap #(
-    .DEPTH   (STS_INIU_OT_TOTAL),
-    .ID_WIDTH(AXI_ARID_WIDTH)
+    .DEPTH    (STS_INIU_OT_TOTAL),
+    .ID_WIDTH (AXI_ARID_WIDTH),
+    .PLD_WIDTH($bits(sts_rsp_typ))
 ) u_r_id_remap (
-    .clk           (clk         ),
-    .rst_n         (rst_n       ),
-    .alloc_vld     (alloc_vld   ),
-    .alloc_rdy     (alloc_rdy   ),
-    .alloc_id      (alloc_id    ),//the original txn id from req pkt
-    .alloc_remap_id(rd_id_alloc ),//the txn id remapped
-    .check_ack     (check_ack   ),//end of rsp pkt
-    .check_idx     (check_idx   ),//txn id from rsp pkt
-    .check_id      (check_id    ) //the responde id concevt by check_idx
+    .clk           (clk               ),
+    .rst_n         (rst_n             ),
+    .alloc_vld     (alloc_vld         ),
+    .alloc_rdy     (alloc_rdy         ),
+    .alloc_id      (alloc_id          ),
+    .alloc_remap_id(rd_id_alloc       ),
+    .complete_vld  (in_rsp_vld        ),
+    .complete_rdy  (complete_rdy      ),
+    .complete_idx  (complete_idx      ),
+    .complete_pld  (in_rsp_pld        ),
+    .retire_vld    (retire_vld        ),
+    .retire_rdy    (retire_rdy        ),
+    .retire_id     (check_id          ),
+    .retire_pld    (retire_rsp_pld_flat)
 );
 
 assign alloc_vld = ar_hold_vld && out_req_rdy && alloc_rdy;
@@ -176,8 +188,7 @@ assign alloc_id  = ar_hold_pld.cmn.txn_id;
 
 assign fifo_out_ar_rdy = fifo_out_ar_vld && ar_stage_seen && ~ar_hold_vld;
 
-assign check_idx = in_rsp_pld.cmn.txn_id;
-assign check_ack = in_rsp_vld && in_rsp_rdy && in_rsp_pld.rsp.last;
+assign complete_idx = in_rsp_pld.cmn.txn_id;
 
 assign out_req_vld = ar_hold_vld && alloc_rdy;
 

@@ -3,11 +3,15 @@ aonss iniu->dec0
 dec0->vpuss tniu
 dec0->dec1 
 dec1->camerass tniu
-dec1->async bridge
-async bridge->dec2
+dec1->async bridge slv
+async bridge mst->dec2
 dec2->dspss0
 dec2->dspss1
 dec2->dspss2
 dec2->dspss3
 dec2->dspss4
 dec2->dspss5
+
+so there are two hardens:
+from aonss to async bridge slv,all node on top(means except sys side) are one hardens
+from async bridge mst to all dspss, all node on top are in another harden

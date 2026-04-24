@@ -12,7 +12,7 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
 from topo_core.utils.networkHierOpt import connect
 
-from DtiTreeNode import DtiSwitchNode
+from DtiNode import DtiSwitchNode
 from SocDtiNode import (
     make_iniu_node,
     make_iniu_top_wrap_node,

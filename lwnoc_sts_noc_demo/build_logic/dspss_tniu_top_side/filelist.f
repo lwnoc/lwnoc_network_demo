@@ -1,0 +1,12 @@
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_define.sv
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/pulse_async_bridge_receiver_qactive.sv
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/pulse_async_bridge_transmitter_qactive.sv
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/cti_handle.sv
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/RegSpaceBase_cfg_reg_bank_table.v
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/apb2apb_async_bridge_qual.sv
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_apb.sv
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_noc_dec2.sv
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_noc.sv
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_sys.sv
+$DSPSS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_top.sv

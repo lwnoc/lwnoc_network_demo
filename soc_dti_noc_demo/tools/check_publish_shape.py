@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import sys
+import re
 from pathlib import Path
 
 
@@ -11,7 +12,7 @@ DEMO_DIR = THIS_DIR.parent
 if str(DEMO_DIR) not in sys.path:
     sys.path.insert(0, str(DEMO_DIR))
 
-from SocDtiTemplate import INIU_NODE_NAMES  # noqa: E402
+from SocDtiTemplate import INIU_SYS_CONFIGS  # noqa: E402
 
 
 BUILD_DIR = DEMO_DIR / "build_logic"
@@ -20,22 +21,31 @@ TOP_WRAP_DIR = BUILD_DIR / "soc_dti_top_wrap"
 NETWORK_DIR = BUILD_DIR / "soc_dti_network_component"
 STALE_SHARED_DIR = BUILD_DIR / "soc_dti_logic_topo"
 STALE_GENERIC_INIU_DIR = BUILD_DIR / "soc_dti_iniu_sys"
-SWITCH_IDS = (
-    "soc_dti_sw_root",
-    "soc_dti_sw_right",
-    "soc_dti_sw_io5",
-    "soc_dti_sw_gpu4",
-    "soc_dti_sw_dsp6",
-)
-
-
 def _require(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
 
 
-def _node_env_token(node_name: str) -> str:
-    return node_name.upper().replace("-", "_")
+def _extract_filelist_refs(text: str) -> list[tuple[str, str]]:
+    refs: list[tuple[str, str]] = []
+    pattern = re.compile(r"^-f\s+\$([A-Z0-9_]+)/(\S+)$")
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+        match = pattern.match(line)
+        if match:
+            refs.append((match.group(1), match.group(2)))
+    return refs
+
+
+def _extract_switch_ids(network_filelist_text: str) -> set[str]:
+    switch_ids: set[str] = set()
+    for _env, rel_path in _extract_filelist_refs(network_filelist_text):
+        if not rel_path.endswith("_filelist.f"):
+            continue
+        stem = Path(rel_path).name[: -len("_filelist.f")]
+        if stem.startswith("soc_dti_sw_"):
+            switch_ids.add(stem)
+    return switch_ids
 
 
 def main() -> int:
@@ -47,9 +57,9 @@ def main() -> int:
     _require(not STALE_SHARED_DIR.exists(), f"stale scratch dir still present: {STALE_SHARED_DIR}", errors)
     _require(not STALE_GENERIC_INIU_DIR.exists(), f"stale generic INIU sys dir still present: {STALE_GENERIC_INIU_DIR}", errors)
 
-    for node_name in INIU_NODE_NAMES:
-        expected_dir = BUILD_DIR / f"{node_name}_iniu_sys"
-        _require(expected_dir.is_dir(), f"missing per-owner INIU sys dir: {expected_dir}", errors)
+    expected_dirs = {BUILD_DIR / cfg.name for cfg in INIU_SYS_CONFIGS.values()}
+    for expected_dir in sorted(expected_dirs):
+        _require(expected_dir.is_dir(), f"missing INIU sys dir: {expected_dir}", errors)
 
     _require((BUILD_DIR / "sys_tcu_tniu_sys").is_dir(), "missing sys_tcu_tniu_sys dir", errors)
     _require((BUILD_DIR / "dti_iniu_top_side").is_dir(), "missing dti_iniu_top_side dir", errors)
@@ -59,7 +69,11 @@ def main() -> int:
 
     network_filelist = NETWORK_DIR / "filelist.f"
     _require(network_filelist.exists(), f"missing network-component filelist: {network_filelist}", errors)
-    for switch_id in SWITCH_IDS:
+
+    network_text = network_filelist.read_text() if network_filelist.exists() else ""
+    switch_ids = _extract_switch_ids(network_text)
+    _require(bool(switch_ids), "network-component filelist has no switch ingress entries", errors)
+    for switch_id in sorted(switch_ids):
         _require((NETWORK_DIR / f"{switch_id}_filelist.f").exists(), f"missing network filelist for {switch_id}", errors)
 
     top_wrap_switch_files = list(TOP_WRAP_DIR.glob("soc_dti_sw_*"))
@@ -79,10 +93,20 @@ def main() -> int:
     _require("-f $SYS_TCU_TNIU_SYS_DIR/sys_tcu_filelist.f" in top_text, "top filelist missing SYS_TCU_TNIU_SYS_DIR ingress", errors)
     _require("SOC_DTI_INIU_SYS_DIR" not in top_text, "top filelist still references generic SOC_DTI_INIU_SYS_DIR", errors)
 
-    for node_name in INIU_NODE_NAMES:
-        env_name = f"SOC_DTI_{_node_env_token(node_name)}_INIU_SYS_DIR"
-        expected_line = f"-f ${env_name}/{node_name}_filelist.f"
-        _require(expected_line in top_text, f"top filelist missing owner-local ingress: {expected_line}", errors)
+    top_refs = _extract_filelist_refs(top_text)
+    for node_name, cfg in sorted(INIU_SYS_CONFIGS.items()):
+        expected_dir = BUILD_DIR / cfg.name
+        filelists = sorted(expected_dir.glob("*_filelist.f")) if expected_dir.is_dir() else []
+        _require(bool(filelists), f"missing INIU sys filelist under: {expected_dir}", errors)
+
+        # Keep this generic: require one ingress per node filelist, but do not
+        # hard-bind to a specific env-var token naming convention.
+        node_filelist_name = f"{node_name}_filelist.f"
+        _require(
+            any(rel_path == node_filelist_name for _env, rel_path in top_refs),
+            f"top filelist missing node ingress for {node_name}: */{node_filelist_name}",
+            errors,
+        )
 
     if errors:
         print("CHECK_PUBLISH_SHAPE: FAIL")

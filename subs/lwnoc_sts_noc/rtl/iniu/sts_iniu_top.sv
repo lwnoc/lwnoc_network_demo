@@ -27,8 +27,6 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     input logic rstn_dst,
 
     input   logic [SRC_ID_WIDTH-1:0]          node_id,
-    input   logic [NODE_NUM-1:0]              flow_ctrl_busy,
-    output  logic                             flow_ctrl_update,
 
     //============================================================
     // interface with initial axi 
@@ -146,8 +144,8 @@ logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_out_ack;
     // .rstn_dbg_timer(rstn_dbg_timer),
 
     .node_id(node_id),
-    .flow_ctrl_busy(flow_ctrl_busy),
-    .flow_ctrl_update(flow_ctrl_update),
+    // .flow_ctrl_busy(flow_ctrl_busy),
+    // .flow_ctrl_update(flow_ctrl_update),
 
     .s_awvalid(sts_iniu_s_awvalid),
     .s_awready(sts_iniu_s_awready),

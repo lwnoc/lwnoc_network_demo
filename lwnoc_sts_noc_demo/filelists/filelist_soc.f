@@ -1,5 +1,0 @@
--f $STS_NOC_DEMO_DIR/filelists/sts_common_dep.f
--f $STS_NOC_DEMO_DIR/build_logic/aon_ss_iniu_sys/aon_ss_iniu_filelist.f
--f $STS_NOC_DEMO_DIR/build_logic/camera_ss_tniu_sys/camera_ss_tniu_filelist.f
--f $STS_NOC_DEMO_DIR/build_logic/dspss_tniu_sys/dspss_tniu_filelist.f
--f $STS_NOC_DEMO_DIR/build_logic/vpu_ss_tniu_sys/vpu_ss_tniu_filelist.f

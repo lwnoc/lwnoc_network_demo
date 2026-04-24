@@ -601,3 +601,21 @@ def make_noc_tbu0_iniu_node(id: str = "noc_tbu0_iniu_node") -> DtiIniuNode:
 
 def make_tcu_tniu_node(id: str = "tcu_tniu_node") -> DtiTniuNode:
     return DtiTniuNode(id=id, node_name="sys_tcu_tniu")
+
+
+# ── Switch nodes (moved from DtiTreeNode.py) ────────────────────────────────
+
+class DtiSwitchNode(UhdlComponentNode):
+    def __init__(self, id: str, cfg, top: str, input_count: int):
+        params = getattr(cfg, 'param_overrides', {})
+        comp = TemplateComponent(config=cfg, top=top, **params)
+        super().__init__(id=id, impl=comp)
+
+        self.add_interface("clk", r"^clk$")
+        self.add_interface("rst_n", r"^rst_n$")
+        self.add_interface("tniu_req", r"^tniu_req_.*")
+        self.add_interface("tniu_rsp", r"^tniu_rsp_.*")
+
+        for idx in range(input_count):
+            self.add_interface(f"iniu{idx}_req", rf"^iniu{idx}_req_.*")
+            self.add_interface(f"iniu{idx}_rsp", rf"^iniu{idx}_rsp_.*")

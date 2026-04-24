@@ -1,5 +1,4 @@
 $RTL_PATH/rtl/tniu/sts_tniu_define.sv
--f $RTL_PATH/vc/cmn_filelist.f
 $RTL_PATH/rtl/common/lwnoc_sts_pack.sv
 $RTL_PATH/rtl/common/pulse_async_bridge_receiver_qactive.sv
 $RTL_PATH/rtl/common/pulse_async_bridge_transmitter_qactive.sv

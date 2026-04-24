@@ -32,8 +32,7 @@ This directory provides a standalone ATB network generation flow that does not m
 
 ```bash
 source setup_env.sh
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/.venv/bin/python gen_soc_atb_topo_dv.py
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/.venv/bin/python gen_soc_atb_topo_pd.py
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/.venv/bin/python test_atb_noc_gen.py
 
 # iverilog is useful for quick local checks but may fail on FCIP syntax in external deps.
 # Use VCS as live closure frontend in this flow:

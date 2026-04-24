@@ -1,3 +1,4 @@
+$RTL_PATH/rtl/tniu/sts_tniu_define.sv
 $STS_TNIU/rtl/tniu/sts_tniu_noc_dec2.sv
 $STS_TNIU/rtl/tniu/sts_tniu_noc.sv
 $STS_TNIU/rtl/tniu/sts_tniu_top.sv

@@ -1,1 +1,0 @@
--f $DTI_TEST_DIR/filelists/soc_dti_logic_topo.f

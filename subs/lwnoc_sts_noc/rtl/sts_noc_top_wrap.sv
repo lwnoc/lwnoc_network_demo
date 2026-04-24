@@ -52,8 +52,6 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     // INIU system side — AXI4 slave (trace / coherency initiator)
     // -----------------------------------------------------------------
     input  logic [SRC_ID_WIDTH-1:0]         node_id             ,
-    input  logic [NODE_NUM-1:0]             flow_ctrl_busy      ,
-    output logic                            flow_ctrl_update    ,
 
     input  logic                            s_awvalid           ,
     output logic                            s_awready           ,
@@ -120,13 +118,6 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     output logic                            noc_out_rsp_vld     ,
     input  logic                            noc_out_rsp_rdy     ,
     output sts_rsp_typ                      noc_out_rsp_pld     ,
-
-    // -----------------------------------------------------------------
-    // TNIU NOC → tniu_noc write stall/clear/status
-    // -----------------------------------------------------------------
-    input  logic                            write_stall         ,
-    input  logic                            write_clear         ,
-    output logic                            write_full_zero     ,
 
     // -----------------------------------------------------------------
     // TNIU system side — APB master array (tniu_noc) 
@@ -224,8 +215,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .rstn_dst           (rstn_noc           ),
         // NOC topology
         .node_id            (node_id            ),
-        .flow_ctrl_busy     (flow_ctrl_busy     ),
-        .flow_ctrl_update   (flow_ctrl_update   ),
+        // .flow_ctrl_busy     (flow_ctrl_busy     ),
+        // .flow_ctrl_update   (flow_ctrl_update   ),
         // AXI slave
         .s_awvalid          (s_awvalid          ),
         .s_awready          (s_awready          ),
@@ -382,10 +373,6 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .rsp_rptr_async     (tniu_rsp_rptr_async),
         .rsp_rptr_sync      (tniu_rsp_rptr_sync ),
         .rsp_pld_sync       (tniu_rsp_pld_sync  ),
-        // Write stall/clear
-        .write_stall        (write_stall        ),
-        .write_clear        (write_clear        ),
-        .write_full_zero    (write_full_zero    ),
         // APB master (downstream from tniu_noc regbank)
         .psel               (tniu_noc_psel      ),
         .penable            (tniu_noc_penable   ),

@@ -1,32 +1,32 @@
 package `_PREFIX_(lwnoc_sts_pack);
 
-localparam integer unsigned SRC_ID_WIDTH  = 8;
-localparam integer unsigned TGT_ID_WIDTH  = 8;
-localparam integer unsigned TXN_ID_WIDTH  = 8;
+localparam integer unsigned SRC_ID_WIDTH  = `STS_SRC_ID_WIDTH;
+localparam integer unsigned TGT_ID_WIDTH  = `STS_TGT_ID_WIDTH;
+localparam integer unsigned TXN_ID_WIDTH  = `STS_TXN_ID_WIDTH;
 
-localparam integer unsigned AXI_AWID_WIDTH = 8;
-localparam integer unsigned AXI_BID_WIDTH  = AXI_AWID_WIDTH;
-localparam integer unsigned AXI_ARID_WIDTH = 8;
-localparam integer unsigned AXI_RID_WIDTH  = AXI_ARID_WIDTH;
-localparam integer unsigned AXI_ADDR_WIDTH = 32;
-localparam integer unsigned AXI_USER_WIDTH = 8;
-localparam integer unsigned AXI_DATA_WIDTH = 32;
-localparam integer unsigned AXI_STRB_WIDTH = AXI_DATA_WIDTH/8;
-localparam integer unsigned AXI_SIZE_WIDTH = $clog2(AXI_DATA_WIDTH/8);
-localparam integer unsigned AXI_AWLEN_WIDTH =8;
-localparam integer unsigned AXI_ARLEN_WIDTH =8;
+localparam integer unsigned AXI_AWID_WIDTH = `STS_AXI_AWID_WIDTH;
+localparam integer unsigned AXI_BID_WIDTH  = `STS_AXI_BID_WIDTH;
+localparam integer unsigned AXI_ARID_WIDTH = `STS_AXI_ARID_WIDTH;
+localparam integer unsigned AXI_RID_WIDTH  = `STS_AXI_RID_WIDTH;
+localparam integer unsigned AXI_ADDR_WIDTH = `STS_AXI_ADDR_WIDTH;
+localparam integer unsigned AXI_USER_WIDTH = `STS_AXI_USER_WIDTH;
+localparam integer unsigned AXI_DATA_WIDTH = `STS_AXI_DATA_WIDTH;
+localparam integer unsigned AXI_STRB_WIDTH = `STS_AXI_STRB_WIDTH;
+localparam integer unsigned AXI_SIZE_WIDTH = `STS_AXI_SIZE_WIDTH;
+localparam integer unsigned AXI_AWLEN_WIDTH = `STS_AXI_AWLEN_WIDTH;
+localparam integer unsigned AXI_ARLEN_WIDTH = `STS_AXI_ARLEN_WIDTH;
 
-localparam integer unsigned CTI_EVENT_WIDTH = 8;
-localparam integer unsigned CTI_CHANNEL_WIDTH = 8;
+localparam integer unsigned CTI_EVENT_WIDTH = `STS_CTI_EVENT_WIDTH;
+localparam integer unsigned CTI_CHANNEL_WIDTH = `STS_CTI_CHANNEL_WIDTH;
 
-localparam integer unsigned STS_INIU_REQ_FIFO_DEPTH = 16;
-localparam integer unsigned STS_INIU_RSP_FIFO_DEPTH = 16;
-localparam integer unsigned STS_TNIU_REQ_FIFO_DEPTH = 16;
-localparam integer unsigned STS_TNIU_RSP_FIFO_DEPTH = 16;
+localparam integer unsigned STS_INIU_REQ_FIFO_DEPTH = `STS_INIU_REQ_FIFO_DEPTH;
+localparam integer unsigned STS_INIU_RSP_FIFO_DEPTH = `STS_INIU_RSP_FIFO_DEPTH;
+localparam integer unsigned STS_TNIU_REQ_FIFO_DEPTH = `STS_TNIU_REQ_FIFO_DEPTH;
+localparam integer unsigned STS_TNIU_RSP_FIFO_DEPTH = `STS_TNIU_RSP_FIFO_DEPTH;
 
-localparam integer unsigned STS_INIU_SINGLE_OT = 8;
-localparam integer unsigned STS_INIU_NUM = 16;
-localparam integer unsigned STS_INIU_OT_TOTAL = STS_INIU_SINGLE_OT*STS_INIU_NUM;
+localparam integer unsigned STS_INIU_SINGLE_OT = `STS_INIU_SINGLE_OT;
+localparam integer unsigned STS_INIU_NUM = `STS_INIU_NUM;
+localparam integer unsigned STS_INIU_OT_TOTAL = `STS_INIU_OT_TOTAL;
 
 typedef enum logic [1:0] {
     cfgOpcode_RdReq = 2'b00,

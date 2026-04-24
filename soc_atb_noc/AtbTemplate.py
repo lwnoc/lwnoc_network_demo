@@ -1,82 +1,121 @@
-from dataclasses import dataclass, asdict
-from typing import List
+import os
+from pathlib import Path
+from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
+
+THIS_DIR = Path(__file__).resolve().parent
+ATB_ROOT = Path(os.environ.get("ATB_SUBIP_ROOT", "/home/lgzhu/dev/noc_work/lwnoc_atb_noc"))
+
+_work_dir = ATB_ROOT / "work"
 
 
-@dataclass(frozen=True)
-class AtbNodeParam:
-    module: str
-    data_width: int
-    comment: str = ""
-    tie_off: bool = False
-
-    def to_dict(self):
-        return asdict(self)
-
-
-@dataclass(frozen=True)
-class AtbEndpointTemplate:
-    node_id: str
-    kind: str
-    role: str
-    sys_data_w: int = 128
-    fabric_data_w: int = 128
+def _resolve_f(path: str) -> str:
+    p = ATB_ROOT / path
+    if p.exists():
+        return str(p)
+    wpath = _work_dir / path
+    if wpath.exists():
+        return str(wpath)
+    return str(p)
 
 
-# Template-driven endpoint registration. Keep endpoint ownership and widths here,
-# and let AtbNode.py consume this table to build concrete node objects.
-ATB_ENDPOINT_TEMPLATES: List[AtbEndpointTemplate] = [
-    *(AtbEndpointTemplate(node_id=f"dsp_ss{i}", kind="atb_iniu", role="initiator") for i in range(6)),
-    AtbEndpointTemplate(node_id="camera_ss", kind="atb_iniu", role="initiator"),
-    AtbEndpointTemplate(node_id="mipi_ss", kind="atb_iniu", role="initiator"),
-    AtbEndpointTemplate(node_id="debug_tniu_ss", kind="atb_tniu", role="target"),
-]
+# ── Base component configs (shared across all SS of same type) ───────────
+# These define the RTL building blocks. Multiple SS types may share the same
+# component-level config if they use identical RTL. Each SS type still gets
+# its own TemplateIPConfig for publish folder naming.
+
+_atb_iniu_sys_cfg = TemplateIPConfig(
+    name="atb_iniu_sys",
+    prefix="",
+    filelist=_resolve_f("work/iniu_sys_comp/filelist.f"),
+    env_var="ATB_INIU_SYS_DIR",
+)
+
+_atb_iniu_noc_cfg = TemplateIPConfig(
+    name="atb_iniu_noc",
+    prefix="",
+    filelist=_resolve_f("work/iniu_noc_comp/filelist.f"),
+    env_var="ATB_INIU_NOC_DIR",
+)
+
+_atb_tniu_sys_cfg = TemplateIPConfig(
+    name="atb_tniu_sys",
+    prefix="",
+    filelist=_resolve_f("work/tniu_sys_comp/filelist.f"),
+    env_var="ATB_TNIU_SYS_DIR",
+)
+
+_atb_tniu_noc_cfg = TemplateIPConfig(
+    name="atb_tniu_noc",
+    prefix="",
+    filelist=_resolve_f("work/tniu_noc_comp/filelist.f"),
+    env_var="ATB_TNIU_NOC_DIR",
+)
+
+# ── Network component configs ────────────────────────────────────────────
+atb_funnel_config = TemplateIPConfig(
+    name="atb_funnel",
+    prefix="",
+    filelist=str(THIS_DIR / "filelist" / "atb_funnel.f"),
+    env_var="ATB_FUNNEL_DIR",
+)
+
+atb_async_bridge_config = TemplateIPConfig(
+    name="atb_async_bridge",
+    prefix="",
+    filelist=str(THIS_DIR / "filelist" / "atb_async_bridge.f"),
+    env_var="ATB_ASYNC_BRIDGE_DIR",
+)
+
+atb_cmn_config = TemplateIPConfig(
+    name="atb_cmn",
+    prefix="",
+    filelist=_resolve_f("work/cmn_comp/filelist.f"),
+    env_var="ATB_CMN_DIR",
+)
+
+atb_top_wrap_config = TemplateIPConfig(
+    name="atb_top_wrap",
+    prefix="",
+    filelist=_resolve_f("work/top_wrap_comp/filelist.f"),
+    env_var="ATB_TOP_WRAP_DIR",
+)
 
 
-ATB_PARAMS = {
-    # INIU: system-side receives ATB from source SS; top-side drives ATB fabric.
-    # sys_data_width = data width on the SS side; top_data_width = fabric width.
-    "atb_iniu": AtbNodeParam(
-        module="atb_iniu_sys_side",
-        data_width=128,
-        comment="ATB INIU sys-side payload wrapper (delivery-facing role-local module)",
-    ),
-    # Buffer: transparent pass-through or FIFO stub between INIU top-side and funnel.
-    "atb_buffer": AtbNodeParam(
-        module="atb_buffer_stub",
-        data_width=128,
-        comment="Legacy-only ATB buffer leaf; no longer instantiated in the active ATB topology",
-    ),
-    # Upsizer: retained only for backward-compatible metadata; active topology is already 128-bit.
-    "atb_upsizer": AtbNodeParam(
-        module="atb_upsizer_stub",
-        data_width=128,
-        comment="Legacy-only ATB upsizer leaf; no longer instantiated in the active ATB topology",
-        tie_off=True,
-    ),
-    # Funnel: N-to-1 priority mux aggregating multiple ATB streams.
-    "atb_funnel": AtbNodeParam(
-        module="atb_funnel3",  # funnel3 / funnel6 chosen per instance fanin
-        data_width=128,
-        comment="ATB funnel node — priority mux of multiple ATB streams",
-    ),
-    # Async bridge slave: receives from ATB fabric on source clock domain.
-    # Replacement: insert real clock-domain-crossing FIFO slave here.
-    "atb_async_bridge_slv": AtbNodeParam(
-        module="atb_async_bridge_slv",
-        data_width=128,
-        comment="ATB async bridge slave stage — CDC from core/fabric domain into async bridge domain",
-    ),
-    # Async bridge master: drives to ATB fabric on destination clock domain.
-    # Replacement: insert real clock-domain-crossing FIFO master here.
-    "atb_async_bridge_mst": AtbNodeParam(
-        module="atb_async_bridge_mst",
-        data_width=128,
-        comment="ATB async bridge master stage — CDC from async bridge domain back to core/debug domain",
-    ),
-    # TNIU: top-side receives aggregated ATB from fabric; sys-side delivers to debug SS.
-    "atb_tniu": AtbNodeParam(
-        module="atb_tniu_sys_side",
-        data_width=128,
-        comment="ATB TNIU sys-side payload wrapper (delivery-facing role-local module)",
-    ),
-}
+# ── Per-SS-type TemplateIPConfigs (name → publish folder) ────────────────
+# Memnoc pattern: each SS type gets its own cfg with semantic name/env_var.
+# Identical SS IDs (dsp_ss0~5) share one cfg → one publish folder.
+
+dsp_iniu_cfg = TemplateIPConfig(
+    name="dsp_iniu_sys",
+    prefix="",
+    filelist=_resolve_f("work/iniu_sys_comp/filelist.f"),
+    env_var="DSP_INIU_SYS_DIR",
+)
+
+camera_iniu_cfg = TemplateIPConfig(
+    name="camera_iniu_sys",
+    prefix="",
+    filelist=_resolve_f("work/iniu_sys_comp/filelist.f"),
+    env_var="CAMERA_INIU_SYS_DIR",
+)
+
+mipi_iniu_cfg = TemplateIPConfig(
+    name="mipi_iniu_sys",
+    prefix="",
+    filelist=_resolve_f("work/iniu_sys_comp/filelist.f"),
+    env_var="MIPI_INIU_SYS_DIR",
+)
+
+debug_tniu_cfg = TemplateIPConfig(
+    name="debug_tniu_sys",
+    prefix="",
+    filelist=_resolve_f("work/tniu_sys_comp/filelist.f"),
+    env_var="DEBUG_TNIU_SYS_DIR",
+)
+
+
+# ── Public aliases for node-level consumers (point to same component cfgs) ──
+atb_iniu_sys_config = _atb_iniu_sys_cfg
+atb_iniu_noc_config = _atb_iniu_noc_cfg
+atb_tniu_sys_config = _atb_tniu_sys_cfg
+atb_tniu_noc_config = _atb_tniu_noc_cfg

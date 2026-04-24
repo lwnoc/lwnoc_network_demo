@@ -63,10 +63,6 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     output  logic [31:0]                         m_pwdata    ,
     output  logic [3:0]                          m_pstrb     ,
 
-    input   logic                  write_stall,
-    input   logic                  write_clear,
-    output  logic                  write_full_zero,
-
     input   logic [DBG_DATA_WIDTH-1:0]       dbg_data_in,
     output  logic [DBG_DATA_WIDTH-1:0]       dbg_data_out,
 
@@ -143,9 +139,6 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .rsp_rptr_async     (tmp_rsp_rptr_async),
         .rsp_rptr_sync      (tmp_rsp_rptr_sync),
         .rsp_pld_sync       (tmp_rsp_pld_sync),
-        .write_stall        (write_stall),
-        .write_clear        (write_clear),
-        .write_full_zero    (write_full_zero),
         .psel               (pmc_psel),
         .penable            (pmc_penable),
         .paddr              (pmc_paddr),

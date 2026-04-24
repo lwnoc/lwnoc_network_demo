@@ -1,0 +1,6 @@
+[submodule "fcip"]
+	path = fcip
+	url = git@github.com:fliibs/fcip.git
+[submodule "fexpand"]
+	path = fexpand
+	url = git@github.com:YuunqiLiu/fexpand.git
