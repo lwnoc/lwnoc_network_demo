@@ -22,6 +22,17 @@ export STS_TNIU0_SYS_OUT_DIR          := $(DEMO_DIR)/build_logic/tniu0_sys
 export STS_TNIU1_SYS_OUT_DIR          := $(DEMO_DIR)/build_logic/tniu1_sys
 export STS_TNIU2_SYS_OUT_DIR          := $(DEMO_DIR)/build_logic/tniu2_sys
 export STS_TNIU3_SYS_OUT_DIR          := $(DEMO_DIR)/build_logic/tniu3_sys
+export STS_SOC_AON_SS_INIU_OUT_DIR    := $(DEMO_DIR)/build_logic/soc_sts_noc
+export STS_SOC_VPU_SS_TNIU_OUT_DIR    := $(DEMO_DIR)/build_logic/soc_sts_noc
+export STS_SOC_CAMERA_SS_TNIU_OUT_DIR := $(DEMO_DIR)/build_logic/soc_sts_noc
+export STS_SOC_DSPSS0_TNIU_OUT_DIR    := $(DEMO_DIR)/build_logic/soc_sts_noc
+export STS_SOC_DSPSS1_TNIU_OUT_DIR    := $(DEMO_DIR)/build_logic/soc_sts_noc
+export STS_SOC_DSPSS2_TNIU_OUT_DIR    := $(DEMO_DIR)/build_logic/soc_sts_noc
+export STS_SOC_DSPSS3_TNIU_OUT_DIR    := $(DEMO_DIR)/build_logic/soc_sts_noc
+export STS_SOC_DSPSS4_TNIU_OUT_DIR    := $(DEMO_DIR)/build_logic/soc_sts_noc
+export STS_SOC_DSPSS5_TNIU_OUT_DIR    := $(DEMO_DIR)/build_logic/soc_sts_noc
+export STS_SOC_STS_DEC4_OUT_DIR       := $(DEMO_DIR)/build_logic/soc_sts_noc
+export STS_SOC_STS_NOC_OUT_DIR        := $(DEMO_DIR)/build_logic/soc_sts_noc
 export FCIP_DIR
 
 BUILD_DIR    := $(SIM_DIR)/build

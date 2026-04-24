@@ -1,4 +1,8 @@
-soc dti topo
+from lwnoc_topo.topo_core.node import node
+from lwnoc_topo.uhdl.test.test_simplified_integration import top
+
+
+soc dti topo:
 dsp ss0 iniu -> sw0 ch0
 dsp ss1 iniu -> sw0 ch1
 dsp ss2 iniu -> sw0 ch2
@@ -21,3 +25,6 @@ sw0 -> sw3 ch0
 sw1 -> sw3 ch1
 sw3 -> tcu tniu
 
+top harden(top rtl contain iniu/tniu top side and network node) cut:
+node until dti async bridge slv are in one harden and  in one top clk domain
+node from dti async bridge mst are in another harden and in anther top clk domain

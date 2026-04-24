@@ -10,7 +10,7 @@ Scope:
 Image-derived INIU/TID plan:
 - `dsp_ss0` .. `dsp_ss5` -> TIDs `0..5`
 - `vpu_ss` -> `6`
-- `pcie_rtg_ss` -> `7`
+- `pcie_eth_ss` -> `7`
 - `ufs_ss` -> `8`
 - `camera_ss` -> `9`
 - `mipi_ss` -> `10`
@@ -21,7 +21,7 @@ Image-derived INIU/TID plan:
 
 Topology shape:
 - `dsp_ss0..5` merge through a left DSP subtree
-- `vpu/pcie_rtg/ufs/camera` merge through a right IO subtree
+- `vpu/pcie_eth/ufs/camera` merge through a right IO subtree
 - `mipi/gpu_ss0/gpu_ss1/dp/display` merge through a display-side subtree
 - The two major branches merge at `soc_dti_sw_root` and terminate at `sys_tcu`
 

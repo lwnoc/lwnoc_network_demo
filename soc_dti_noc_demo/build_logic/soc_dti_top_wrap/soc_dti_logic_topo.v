@@ -1,8 +1,10 @@
-//[UHDL]Content Start [md5:94a052acf116cf49c3d900c3079806dd]
+//[UHDL]Content Start [md5:3ed8a66e3953af1aae34b3d2636f0216]
 module soc_dti_logic_topo
 	(
-	input                                                   clk_noc                                                                      ,
-	input                                                   rst_noc_n                                                                    ,
+	input                                                   clk_noc_up                                                                   ,
+	input                                                   rst_noc_up_n                                                                 ,
+	input                                                   clk_noc_dn                                                                   ,
+	input                                                   rst_noc_dn_n                                                                 ,
 	input                                                   sys_tcu_tniu_node_clk_sys_porting_clk_sys_clk_sys_clk                        ,
 	input                                                   sys_tcu_tniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n                ,
 	output [79:0]                                           sys_tcu_tniu_node_dti_req_porting_dti_req_dti_req_req_tdata                  ,
@@ -178,28 +180,28 @@ module soc_dti_logic_topo
 	output                                                  vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny              ,
 	input                                                   vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq               ,
 	input logic [2-1:0]  vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate             ,
-	input                                                   pcie_rtg_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk                    ,
-	input                                                   pcie_rtg_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n            ,
-	input  [79:0]                                           pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata              ,
-	input  [9:0]                                            pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep              ,
-	input                                                   pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast              ,
-	output                                                  pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready             ,
-	input  [5:0]                                            pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid               ,
-	input                                                   pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid             ,
-	output [79:0]                                           pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata              ,
-	output [9:0]                                            pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep              ,
-	output                                                  pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast              ,
-	input                                                   pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready             ,
-	output [5:0]                                            pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid               ,
-	output                                                  pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid             ,
-	input                                                   pcie_rtg_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup,
-	output                                                  pcie_rtg_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup,
-	input  [9:0]                                            pcie_rtg_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val,
-	output                                                  pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept       ,
-	output logic [2-1:0] pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive       ,
-	output                                                  pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny         ,
-	input                                                   pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq          ,
-	input logic [2-1:0]  pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate        ,
+	input                                                   pcie_eth_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk                    ,
+	input                                                   pcie_eth_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n            ,
+	input  [79:0]                                           pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata              ,
+	input  [9:0]                                            pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep              ,
+	input                                                   pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast              ,
+	output                                                  pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready             ,
+	input  [5:0]                                            pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid               ,
+	input                                                   pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid             ,
+	output [79:0]                                           pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata              ,
+	output [9:0]                                            pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep              ,
+	output                                                  pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast              ,
+	input                                                   pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready             ,
+	output [5:0]                                            pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid               ,
+	output                                                  pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid             ,
+	input                                                   pcie_eth_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup,
+	output                                                  pcie_eth_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup,
+	input  [9:0]                                            pcie_eth_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val,
+	output                                                  pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept       ,
+	output logic [2-1:0] pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive       ,
+	output                                                  pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny         ,
+	input                                                   pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq          ,
+	input logic [2-1:0]  pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate        ,
 	input                                                   ufs_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk                         ,
 	input                                                   ufs_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n                 ,
 	input  [79:0]                                           ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata                   ,
@@ -422,14 +424,14 @@ module soc_dti_logic_topo
 	wire        vpu_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last          ;
 	wire        vpu_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_ready         ;
 	wire        vpu_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_threshold     ;
-	wire        pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_valid    ;
-	wire [89:0] pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload  ;
-	wire [5:0]  pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_srcid    ;
-	wire [5:0]  pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_tgtid    ;
-	wire        pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_qos      ;
-	wire        pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last     ;
-	wire        pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_ready    ;
-	wire        pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_threshold;
+	wire        pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_valid    ;
+	wire [89:0] pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload  ;
+	wire [5:0]  pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_srcid    ;
+	wire [5:0]  pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_tgtid    ;
+	wire        pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_qos      ;
+	wire        pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last     ;
+	wire        pcie_eth_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_ready    ;
+	wire        pcie_eth_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_threshold;
 	wire        ufs_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_valid         ;
 	wire [89:0] ufs_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload       ;
 	wire [5:0]  ufs_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_srcid         ;
@@ -614,14 +616,14 @@ module soc_dti_logic_topo
 	wire [5:0]  sw_io5_TO_vpu_ss_iniu_SIG_iniu0_rsp_srcid                   ;
 	wire [5:0]  sw_io5_TO_vpu_ss_iniu_SIG_iniu0_rsp_tgtid                   ;
 	wire        sw_io5_TO_vpu_ss_iniu_SIG_iniu0_rsp_valid                   ;
-	wire        sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_req_ready              ;
-	wire        sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_req_threshold          ;
-	wire        sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_last               ;
-	wire [89:0] sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_payload            ;
-	wire        sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_qos                ;
-	wire [5:0]  sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_srcid              ;
-	wire [5:0]  sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_tgtid              ;
-	wire        sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_valid              ;
+	wire        sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_req_ready              ;
+	wire        sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_req_threshold          ;
+	wire        sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_last               ;
+	wire [89:0] sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_payload            ;
+	wire        sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_qos                ;
+	wire [5:0]  sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_srcid              ;
+	wire [5:0]  sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_tgtid              ;
+	wire        sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_valid              ;
 	wire        sw_io5_TO_ufs_ss_iniu_SIG_iniu2_req_ready                   ;
 	wire        sw_io5_TO_ufs_ss_iniu_SIG_iniu2_req_threshold               ;
 	wire        sw_io5_TO_ufs_ss_iniu_SIG_iniu2_rsp_last                    ;
@@ -687,8 +689,8 @@ module soc_dti_logic_topo
 
 	//module inst.
 	soc_dti_sw_dsp6_dti_switch_6i1o_wrap sw_dsp6 (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
+		.clk(clk_noc_dn),
+		.rst_n(rst_noc_dn_n),
 		.iniu0_req_valid(dsp_ss0_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_valid),
 		.iniu0_req_ready(sw_dsp6_TO_dsp_ss0_iniu_SIG_iniu0_req_ready),
 		.iniu0_req_payload(dsp_ss0_iniu_TO_sw_dsp6_SIG_top_req_top_req_req_payload),
@@ -802,8 +804,8 @@ module soc_dti_logic_topo
 		.tniu_rsp_last(sw_root_TO_sw_dsp6_SIG_iniu0_rsp_last),
 		.tniu_rsp_threshold(sw_dsp6_TO_sw_root_SIG_tniu_rsp_threshold));
 	soc_dti_sw_io5_dti_switch_5i1o_wrap sw_io5 (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
+		.clk(clk_noc_dn),
+		.rst_n(rst_noc_dn_n),
 		.iniu0_req_valid(vpu_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_valid),
 		.iniu0_req_ready(sw_io5_TO_vpu_ss_iniu_SIG_iniu0_req_ready),
 		.iniu0_req_payload(vpu_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload),
@@ -820,22 +822,22 @@ module soc_dti_logic_topo
 		.iniu0_rsp_qos(sw_io5_TO_vpu_ss_iniu_SIG_iniu0_rsp_qos),
 		.iniu0_rsp_last(sw_io5_TO_vpu_ss_iniu_SIG_iniu0_rsp_last),
 		.iniu0_rsp_threshold(vpu_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_threshold),
-		.iniu1_req_valid(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_valid),
-		.iniu1_req_ready(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_req_ready),
-		.iniu1_req_payload(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload),
-		.iniu1_req_srcid(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_srcid),
-		.iniu1_req_tgtid(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_tgtid),
-		.iniu1_req_qos(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_qos),
-		.iniu1_req_last(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last),
-		.iniu1_req_threshold(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_req_threshold),
-		.iniu1_rsp_valid(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_valid),
-		.iniu1_rsp_ready(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_ready),
-		.iniu1_rsp_payload(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_payload),
-		.iniu1_rsp_srcid(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_srcid),
-		.iniu1_rsp_tgtid(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_tgtid),
-		.iniu1_rsp_qos(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_qos),
-		.iniu1_rsp_last(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_last),
-		.iniu1_rsp_threshold(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_threshold),
+		.iniu1_req_valid(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_valid),
+		.iniu1_req_ready(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_req_ready),
+		.iniu1_req_payload(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload),
+		.iniu1_req_srcid(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_srcid),
+		.iniu1_req_tgtid(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_tgtid),
+		.iniu1_req_qos(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_qos),
+		.iniu1_req_last(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last),
+		.iniu1_req_threshold(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_req_threshold),
+		.iniu1_rsp_valid(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_valid),
+		.iniu1_rsp_ready(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_ready),
+		.iniu1_rsp_payload(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_payload),
+		.iniu1_rsp_srcid(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_srcid),
+		.iniu1_rsp_tgtid(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_tgtid),
+		.iniu1_rsp_qos(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_qos),
+		.iniu1_rsp_last(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_last),
+		.iniu1_rsp_threshold(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_threshold),
 		.iniu2_req_valid(ufs_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_valid),
 		.iniu2_req_ready(sw_io5_TO_ufs_ss_iniu_SIG_iniu2_req_ready),
 		.iniu2_req_payload(ufs_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload),
@@ -901,8 +903,8 @@ module soc_dti_logic_topo
 		.tniu_rsp_last(sw_right_TO_sw_io5_SIG_iniu0_rsp_last),
 		.tniu_rsp_threshold(sw_io5_TO_sw_right_SIG_tniu_rsp_threshold));
 	soc_dti_sw_gpu4_dti_switch_4i1o_wrap sw_gpu4 (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
+		.clk(clk_noc_up),
+		.rst_n(rst_noc_up_n),
 		.iniu0_req_valid(gpu_ss0_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_valid),
 		.iniu0_req_ready(sw_gpu4_TO_gpu_ss0_iniu_SIG_iniu0_req_ready),
 		.iniu0_req_payload(gpu_ss0_iniu_TO_sw_gpu4_SIG_top_req_top_req_req_payload),
@@ -984,8 +986,8 @@ module soc_dti_logic_topo
 		.tniu_rsp_last(sw_right_TO_sw_gpu4_SIG_iniu1_rsp_last),
 		.tniu_rsp_threshold(sw_gpu4_TO_sw_right_SIG_tniu_rsp_threshold));
 	soc_dti_sw_right_dti_switch_2i1o_wrap sw_right (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
+		.clk(clk_noc_dn),
+		.rst_n(rst_noc_dn_n),
 		.iniu0_req_valid(sw_io5_TO_sw_right_SIG_tniu_req_valid),
 		.iniu0_req_ready(sw_right_TO_sw_io5_SIG_iniu0_req_ready),
 		.iniu0_req_payload(sw_io5_TO_sw_right_SIG_tniu_req_payload),
@@ -1035,8 +1037,8 @@ module soc_dti_logic_topo
 		.tniu_rsp_last(sw_root_TO_sw_right_SIG_iniu1_rsp_last),
 		.tniu_rsp_threshold(sw_right_TO_sw_root_SIG_tniu_rsp_threshold));
 	soc_dti_sw_root_dti_switch_2i1o_wrap sw_root (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
+		.clk(clk_noc_dn),
+		.rst_n(rst_noc_dn_n),
 		.iniu0_req_valid(sw_dsp6_TO_sw_root_SIG_tniu_req_valid),
 		.iniu0_req_ready(sw_root_TO_sw_dsp6_SIG_iniu0_req_ready),
 		.iniu0_req_payload(sw_dsp6_TO_sw_root_SIG_tniu_req_payload),
@@ -1088,8 +1090,8 @@ module soc_dti_logic_topo
 	sys_tcu_tniu_node sys_tcu_tniu (
 		.clk_sys_clk_sys_clk(sys_tcu_tniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(sys_tcu_tniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.dti_req_dti_req_req_tdata(sys_tcu_tniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(sys_tcu_tniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(sys_tcu_tniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1128,8 +1130,8 @@ module soc_dti_logic_topo
 	dsp_ss0_iniu_node dsp_ss0_iniu (
 		.clk_sys_clk_sys_clk(dsp_ss0_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(dsp_ss0_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.dti_req_dti_req_req_tdata(dsp_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(dsp_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(dsp_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1169,8 +1171,8 @@ module soc_dti_logic_topo
 	dsp_ss1_iniu_node dsp_ss1_iniu (
 		.clk_sys_clk_sys_clk(dsp_ss1_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(dsp_ss1_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.dti_req_dti_req_req_tdata(dsp_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(dsp_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(dsp_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1210,8 +1212,8 @@ module soc_dti_logic_topo
 	dsp_ss2_iniu_node dsp_ss2_iniu (
 		.clk_sys_clk_sys_clk(dsp_ss2_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(dsp_ss2_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.dti_req_dti_req_req_tdata(dsp_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(dsp_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(dsp_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1251,8 +1253,8 @@ module soc_dti_logic_topo
 	dsp_ss3_iniu_node dsp_ss3_iniu (
 		.clk_sys_clk_sys_clk(dsp_ss3_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(dsp_ss3_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.dti_req_dti_req_req_tdata(dsp_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(dsp_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(dsp_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1292,8 +1294,8 @@ module soc_dti_logic_topo
 	dsp_ss4_iniu_node dsp_ss4_iniu (
 		.clk_sys_clk_sys_clk(dsp_ss4_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(dsp_ss4_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.dti_req_dti_req_req_tdata(dsp_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(dsp_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(dsp_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1333,8 +1335,8 @@ module soc_dti_logic_topo
 	dsp_ss5_iniu_node dsp_ss5_iniu (
 		.clk_sys_clk_sys_clk(dsp_ss5_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(dsp_ss5_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.dti_req_dti_req_req_tdata(dsp_ss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(dsp_ss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(dsp_ss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1374,8 +1376,8 @@ module soc_dti_logic_topo
 	vpu_ss_iniu_node vpu_ss_iniu (
 		.clk_sys_clk_sys_clk(vpu_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(vpu_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.dti_req_dti_req_req_tdata(vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1412,52 +1414,52 @@ module soc_dti_logic_topo
 		.top_rsp_top_rsp_rsp_tgtid(sw_io5_TO_vpu_ss_iniu_SIG_iniu0_rsp_tgtid),
 		.top_rsp_top_rsp_rsp_threshold(vpu_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_threshold),
 		.top_rsp_top_rsp_rsp_valid(sw_io5_TO_vpu_ss_iniu_SIG_iniu0_rsp_valid));
-	pcie_rtg_ss_iniu_node pcie_rtg_ss_iniu (
-		.clk_sys_clk_sys_clk(pcie_rtg_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
-		.rst_sys_n_rst_sys_n_rst_n(pcie_rtg_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
-		.dti_req_dti_req_req_tdata(pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
-		.dti_req_dti_req_req_tkeep(pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
-		.dti_req_dti_req_req_tlast(pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
-		.dti_req_dti_req_req_tready(pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready),
-		.dti_req_dti_req_req_ttid(pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid),
-		.dti_req_dti_req_req_tvalid(pcie_rtg_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid),
-		.dti_rsp_dti_rsp_rsp_tdata(pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata),
-		.dti_rsp_dti_rsp_rsp_tkeep(pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep),
-		.dti_rsp_dti_rsp_rsp_tlast(pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast),
-		.dti_rsp_dti_rsp_rsp_tready(pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready),
-		.dti_rsp_dti_rsp_rsp_ttid(pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid),
-		.dti_rsp_dti_rsp_rsp_tvalid(pcie_rtg_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid),
-		.req_twakeup_req_twakeup_req_twakeup(pcie_rtg_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup),
-		.rsp_twakeup_rsp_twakeup_rsp_twakeup(pcie_rtg_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup),
-		.timeout_val_timeout_val_timeout_val(pcie_rtg_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val),
-		.pchnl_ctrl_pchnl_ctrl_paccept(pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept),
-		.pchnl_ctrl_pchnl_ctrl_pactive(pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
-		.pchnl_ctrl_pchnl_ctrl_pdeny(pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
-		.pchnl_ctrl_pchnl_ctrl_preq(pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
-		.pchnl_ctrl_pchnl_ctrl_pstate(pcie_rtg_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
-		.top_req_top_req_req_last(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last),
-		.top_req_top_req_req_payload(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload),
-		.top_req_top_req_req_qos(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_qos),
-		.top_req_top_req_req_ready(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_req_ready),
-		.top_req_top_req_req_srcid(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_srcid),
-		.top_req_top_req_req_tgtid(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_tgtid),
-		.top_req_top_req_req_threshold(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_req_threshold),
-		.top_req_top_req_req_valid(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_valid),
-		.top_rsp_top_rsp_rsp_last(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_last),
-		.top_rsp_top_rsp_rsp_payload(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_payload),
-		.top_rsp_top_rsp_rsp_qos(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_qos),
-		.top_rsp_top_rsp_rsp_ready(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_ready),
-		.top_rsp_top_rsp_rsp_srcid(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_srcid),
-		.top_rsp_top_rsp_rsp_tgtid(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_tgtid),
-		.top_rsp_top_rsp_rsp_threshold(pcie_rtg_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_threshold),
-		.top_rsp_top_rsp_rsp_valid(sw_io5_TO_pcie_rtg_ss_iniu_SIG_iniu1_rsp_valid));
+	pcie_eth_ss_iniu_node pcie_eth_ss_iniu (
+		.clk_sys_clk_sys_clk(pcie_eth_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
+		.rst_sys_n_rst_sys_n_rst_n(pcie_eth_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
+		.dti_req_dti_req_req_tdata(pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
+		.dti_req_dti_req_req_tkeep(pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
+		.dti_req_dti_req_req_tlast(pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
+		.dti_req_dti_req_req_tready(pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready),
+		.dti_req_dti_req_req_ttid(pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid),
+		.dti_req_dti_req_req_tvalid(pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid),
+		.dti_rsp_dti_rsp_rsp_tdata(pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata),
+		.dti_rsp_dti_rsp_rsp_tkeep(pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep),
+		.dti_rsp_dti_rsp_rsp_tlast(pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast),
+		.dti_rsp_dti_rsp_rsp_tready(pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready),
+		.dti_rsp_dti_rsp_rsp_ttid(pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid),
+		.dti_rsp_dti_rsp_rsp_tvalid(pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid),
+		.req_twakeup_req_twakeup_req_twakeup(pcie_eth_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup),
+		.rsp_twakeup_rsp_twakeup_rsp_twakeup(pcie_eth_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup),
+		.timeout_val_timeout_val_timeout_val(pcie_eth_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val),
+		.pchnl_ctrl_pchnl_ctrl_paccept(pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept),
+		.pchnl_ctrl_pchnl_ctrl_pactive(pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive),
+		.pchnl_ctrl_pchnl_ctrl_pdeny(pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny),
+		.pchnl_ctrl_pchnl_ctrl_preq(pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq),
+		.pchnl_ctrl_pchnl_ctrl_pstate(pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate),
+		.top_req_top_req_req_last(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_last),
+		.top_req_top_req_req_payload(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_payload),
+		.top_req_top_req_req_qos(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_qos),
+		.top_req_top_req_req_ready(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_req_ready),
+		.top_req_top_req_req_srcid(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_srcid),
+		.top_req_top_req_req_tgtid(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_tgtid),
+		.top_req_top_req_req_threshold(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_req_threshold),
+		.top_req_top_req_req_valid(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_req_top_req_req_valid),
+		.top_rsp_top_rsp_rsp_last(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_last),
+		.top_rsp_top_rsp_rsp_payload(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_payload),
+		.top_rsp_top_rsp_rsp_qos(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_qos),
+		.top_rsp_top_rsp_rsp_ready(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_ready),
+		.top_rsp_top_rsp_rsp_srcid(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_srcid),
+		.top_rsp_top_rsp_rsp_tgtid(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_tgtid),
+		.top_rsp_top_rsp_rsp_threshold(pcie_eth_ss_iniu_TO_sw_io5_SIG_top_rsp_top_rsp_rsp_threshold),
+		.top_rsp_top_rsp_rsp_valid(sw_io5_TO_pcie_eth_ss_iniu_SIG_iniu1_rsp_valid));
 	ufs_ss_iniu_node ufs_ss_iniu (
 		.clk_sys_clk_sys_clk(ufs_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(ufs_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.dti_req_dti_req_req_tdata(ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1497,8 +1499,8 @@ module soc_dti_logic_topo
 	camera_ss_iniu_node camera_ss_iniu (
 		.clk_sys_clk_sys_clk(camera_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(camera_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.dti_req_dti_req_req_tdata(camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1538,8 +1540,8 @@ module soc_dti_logic_topo
 	mipi_ss_iniu_node mipi_ss_iniu (
 		.clk_sys_clk_sys_clk(mipi_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(mipi_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.dti_req_dti_req_req_tdata(mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1579,8 +1581,8 @@ module soc_dti_logic_topo
 	gpu_ss0_iniu_node gpu_ss0_iniu (
 		.clk_sys_clk_sys_clk(gpu_ss0_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(gpu_ss0_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_up),
+		.rst_top_n(rst_noc_up_n),
 		.dti_req_dti_req_req_tdata(gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1620,8 +1622,8 @@ module soc_dti_logic_topo
 	gpu_ss1_iniu_node gpu_ss1_iniu (
 		.clk_sys_clk_sys_clk(gpu_ss1_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(gpu_ss1_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_up),
+		.rst_top_n(rst_noc_up_n),
 		.dti_req_dti_req_req_tdata(gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1661,8 +1663,8 @@ module soc_dti_logic_topo
 	dp_ss_iniu_node dp_ss_iniu (
 		.clk_sys_clk_sys_clk(dp_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(dp_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_up),
+		.rst_top_n(rst_noc_up_n),
 		.dti_req_dti_req_req_tdata(dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1702,8 +1704,8 @@ module soc_dti_logic_topo
 	display_ss_iniu_node display_ss_iniu (
 		.clk_sys_clk_sys_clk(display_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk),
 		.rst_sys_n_rst_sys_n_rst_n(display_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n),
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_up),
+		.rst_top_n(rst_noc_up_n),
 		.dti_req_dti_req_req_tdata(display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata),
 		.dti_req_dti_req_req_tkeep(display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep),
 		.dti_req_dti_req_req_tlast(display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast),
@@ -1742,5 +1744,5 @@ module soc_dti_logic_topo
 		.top_rsp_top_rsp_rsp_valid(sw_gpu4_TO_display_ss_iniu_SIG_iniu3_rsp_valid));
 
 endmodule
-//[UHDL]Content End [md5:94a052acf116cf49c3d900c3079806dd]
+//[UHDL]Content End [md5:3ed8a66e3953af1aae34b3d2636f0216]
 

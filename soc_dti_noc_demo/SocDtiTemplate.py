@@ -34,7 +34,7 @@ INIU_NODE_NAMES = [
     "dsp_ss4",
     "dsp_ss5",
     "vpu_ss",
-    "pcie_rtg_ss",
+    "pcie_eth_ss",
     "ufs_ss",
     "camera_ss",
     "mipi_ss",
@@ -95,7 +95,7 @@ soc_dti_sw_dsp6_config.param_overrides = {
     "DTI_TNIU_MAX": 5,
 }
 
-# sw_io5: VPU(6), PCIE_RTG(7), UFS(8), Camera(9), MIPI(10) -> 5-input switch
+# sw_io5: VPU(6), PCIE_ETH(7), UFS(8), Camera(9), MIPI(10) -> 5-input switch
 soc_dti_sw_io5_config = _new_cfg(
     name="soc_dti_sw_io5",
     prefix="soc_dti_sw_io5_",

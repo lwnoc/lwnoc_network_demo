@@ -71,6 +71,151 @@
     ]
   },
   "nodes": {
+    "soc_sts_noc.aon_ss_iniu": {
+      "type": "atomic",
+      "node_name": "aon_ss_iniu",
+      "attrs": {},
+      "interfaces": {
+        "clk_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "node_id": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "axi": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "soc_sts_noc",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "soc_sts_noc.harden_up_async_bridge_mst": {
+      "type": "atomic",
+      "node_name": "harden_up_async_bridge_mst",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "m_chan": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sync": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "soc_sts_noc",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "soc_sts_noc.dspss0_tniu": {
+      "type": "atomic",
+      "node_name": "dspss0_tniu",
+      "attrs": {},
+      "interfaces": {
+        "clk_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "clk_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_src": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dst": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rstn_dbg_timer": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "pmc_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_apb": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_data": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "dbg_timestamp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_event": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "sys_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "noc_cti_channel": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "soc_sts_noc",
+        "__global_virtual_wrapper__"
+      ]
+    },
     "soc_sts_noc": {
       "type": "wrapper",
       "node_name": "soc_sts_noc",
@@ -81,14 +226,6 @@
           "is_global": true
         },
         "rst_sys_n": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "clk_noc": {
-          "is_exposed_port": false,
-          "is_global": true
-        },
-        "rst_noc_n": {
           "is_exposed_port": false,
           "is_global": true
         },
@@ -121,46 +258,6 @@
           "is_global": false
         },
         "aon_ss_iniu.axi_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dec0.slv2_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dec0.slv2_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dec0.slv3_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dec0.slv3_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dec1.slv2_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dec1.slv2_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dec1.slv3_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dec1.slv3_rsp_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dec2_ext.slv3_req_porting": {
-          "is_exposed_port": true,
-          "is_global": false
-        },
-        "dec2_ext.slv3_rsp_porting": {
           "is_exposed_port": true,
           "is_global": false
         },
@@ -442,68 +539,9 @@
         "soc_sts_noc.dspss5_tniu"
       ]
     },
-    "soc_sts_noc.dec2": {
+    "soc_sts_noc.dspss4_tniu": {
       "type": "atomic",
-      "node_name": "dec2",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "soc_sts_noc",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "soc_sts_noc.dspss5_tniu": {
-      "type": "atomic",
-      "node_name": "dspss5_tniu",
+      "node_name": "dspss4_tniu",
       "attrs": {},
       "interfaces": {
         "clk_src": {
@@ -651,9 +689,9 @@
         "__global_virtual_wrapper__"
       ]
     },
-    "soc_sts_noc.dec2_ext": {
+    "soc_sts_noc.dec2": {
       "type": "atomic",
-      "node_name": "dec2_ext",
+      "node_name": "dec2",
       "attrs": {},
       "interfaces": {
         "clk": {
@@ -710,72 +748,67 @@
         "__global_virtual_wrapper__"
       ]
     },
-    "soc_sts_noc.dspss0_tniu": {
+    "soc_sts_noc.dec1": {
       "type": "atomic",
-      "node_name": "dspss0_tniu",
+      "node_name": "dec1",
       "attrs": {},
       "interfaces": {
-        "clk_src": {
+        "clk": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "clk_dst": {
+        "rst_n": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "clk_dbg_timer": {
+        "mst_req": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "rstn_src": {
+        "mst_rsp": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "rstn_dst": {
+        "slv0_req": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "rstn_dbg_timer": {
+        "slv0_rsp": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "req": {
+        "slv1_req": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "rsp": {
+        "slv1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "soc_sts_noc",
+        "__global_virtual_wrapper__"
+      ]
+    },
+    "soc_sts_noc.harden_dn_async_bridge_slv": {
+      "type": "atomic",
+      "node_name": "harden_dn_async_bridge_slv",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "pmc_apb": {
+        "rst_n": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "sys_apb": {
+        "s_chan": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "dbg_data": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "dbg_timestamp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sys_cti_event": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "noc_cti_event": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sys_cti_channel": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "noc_cti_channel": {
+        "sync": {
           "is_exposed_port": false,
           "is_global": false
         }
@@ -860,6 +893,49 @@
         "__global_virtual_wrapper__"
       ]
     },
+    "soc_sts_noc.dec0": {
+      "type": "atomic",
+      "node_name": "dec0",
+      "attrs": {},
+      "interfaces": {
+        "clk": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "rst_n": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "mst_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "mst_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv0_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv0_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv1_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        }
+      },
+      "parents": [
+        "soc_sts_noc",
+        "__global_virtual_wrapper__"
+      ]
+    },
     "soc_sts_noc.dspss3_tniu": {
       "type": "atomic",
       "node_name": "dspss3_tniu",
@@ -926,92 +1002,6 @@
           "is_global": false
         },
         "noc_cti_channel": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "soc_sts_noc",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "soc_sts_noc.harden_up_async_bridge_mst": {
-      "type": "atomic",
-      "node_name": "harden_up_async_bridge_mst",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "m_chan": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sync": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "soc_sts_noc",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "soc_sts_noc.dec0": {
-      "type": "atomic",
-      "node_name": "dec0",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_rsp": {
           "is_exposed_port": false,
           "is_global": false
         }
@@ -1096,9 +1086,9 @@
         "__global_virtual_wrapper__"
       ]
     },
-    "soc_sts_noc.dspss4_tniu": {
+    "soc_sts_noc.dspss5_tniu": {
       "type": "atomic",
-      "node_name": "dspss4_tniu",
+      "node_name": "dspss5_tniu",
       "attrs": {},
       "interfaces": {
         "clk_src": {
@@ -1162,92 +1152,6 @@
           "is_global": false
         },
         "noc_cti_channel": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "soc_sts_noc",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "soc_sts_noc.dec1": {
-      "type": "atomic",
-      "node_name": "dec1",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "mst_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv0_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv1_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv2_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_req": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "slv3_rsp": {
-          "is_exposed_port": false,
-          "is_global": false
-        }
-      },
-      "parents": [
-        "soc_sts_noc",
-        "__global_virtual_wrapper__"
-      ]
-    },
-    "soc_sts_noc.harden_dn_async_bridge_slv": {
-      "type": "atomic",
-      "node_name": "harden_dn_async_bridge_slv",
-      "attrs": {},
-      "interfaces": {
-        "clk": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "rst_n": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "s_chan": {
-          "is_exposed_port": false,
-          "is_global": false
-        },
-        "sync": {
           "is_exposed_port": false,
           "is_global": false
         }
@@ -1332,40 +1236,48 @@
         "__global_virtual_wrapper__"
       ]
     },
-    "soc_sts_noc.aon_ss_iniu": {
+    "soc_sts_noc.dec2_ext": {
       "type": "atomic",
-      "node_name": "aon_ss_iniu",
+      "node_name": "dec2_ext",
       "attrs": {},
       "interfaces": {
-        "clk_src": {
+        "clk": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "clk_dst": {
+        "rst_n": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "rstn_src": {
+        "mst_req": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "rstn_dst": {
+        "mst_rsp": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "node_id": {
+        "slv0_req": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "axi": {
+        "slv0_rsp": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "req": {
+        "slv1_req": {
           "is_exposed_port": false,
           "is_global": false
         },
-        "rsp": {
+        "slv1_rsp": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv2_req": {
+          "is_exposed_port": false,
+          "is_global": false
+        },
+        "slv2_rsp": {
           "is_exposed_port": false,
           "is_global": false
         }
@@ -1383,43 +1295,43 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss2_tniu",
-            "interface_id": "clk_src"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dspss3_tniu",
-            "interface_id": "clk_src"
-          }
-        },
-        {
-          "endpoint3": {
             "node_id": "soc_sts_noc.dspss4_tniu",
             "interface_id": "clk_src"
           }
         },
         {
+          "endpoint2": {
+            "node_id": "soc_sts_noc.dspss5_tniu",
+            "interface_id": "clk_src"
+          }
+        },
+        {
+          "endpoint3": {
+            "node_id": "soc_sts_noc.dspss2_tniu",
+            "interface_id": "clk_src"
+          }
+        },
+        {
           "endpoint4": {
-            "node_id": "soc_sts_noc.aon_ss_iniu",
+            "node_id": "soc_sts_noc.dspss3_tniu",
             "interface_id": "clk_src"
           }
         },
         {
           "endpoint5": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "clk_sys"
+          }
+        },
+        {
+          "endpoint6": {
             "node_id": "soc_sts_noc.camera_ss_tniu",
             "interface_id": "clk_src"
           }
         },
         {
-          "endpoint6": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "clk_src"
-          }
-        },
-        {
           "endpoint7": {
-            "node_id": "soc_sts_noc.vpu_ss_tniu",
+            "node_id": "soc_sts_noc.aon_ss_iniu",
             "interface_id": "clk_src"
           }
         },
@@ -1431,13 +1343,13 @@
         },
         {
           "endpoint9": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "clk_sys"
+            "node_id": "soc_sts_noc.vpu_ss_tniu",
+            "interface_id": "clk_src"
           }
         },
         {
           "endpoint10": {
-            "node_id": "soc_sts_noc.dspss5_tniu",
+            "node_id": "soc_sts_noc.dspss0_tniu",
             "interface_id": "clk_src"
           }
         }
@@ -1455,49 +1367,49 @@
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
+            "node_id": "soc_sts_noc.dspss1_tniu",
             "interface_id": "rstn_src"
           }
         },
         {
           "endpoint3": {
-            "node_id": "soc_sts_noc.vpu_ss_tniu",
-            "interface_id": "rstn_src"
-          }
-        },
-        {
-          "endpoint4": {
-            "node_id": "soc_sts_noc.dspss5_tniu",
-            "interface_id": "rstn_src"
-          }
-        },
-        {
-          "endpoint5": {
             "node_id": "soc_sts_noc.aon_ss_iniu",
             "interface_id": "rstn_src"
           }
         },
         {
-          "endpoint6": {
-            "node_id": "soc_sts_noc.dspss2_tniu",
+          "endpoint4": {
+            "node_id": "soc_sts_noc.vpu_ss_tniu",
             "interface_id": "rstn_src"
           }
         },
         {
-          "endpoint7": {
-            "node_id": "soc_sts_noc.dspss3_tniu",
-            "interface_id": "rstn_src"
-          }
-        },
-        {
-          "endpoint8": {
+          "endpoint5": {
             "node_id": "soc_sts_noc.dspss4_tniu",
             "interface_id": "rstn_src"
           }
         },
         {
+          "endpoint6": {
+            "node_id": "soc_sts_noc.dspss5_tniu",
+            "interface_id": "rstn_src"
+          }
+        },
+        {
+          "endpoint7": {
+            "node_id": "soc_sts_noc.dspss2_tniu",
+            "interface_id": "rstn_src"
+          }
+        },
+        {
+          "endpoint8": {
+            "node_id": "soc_sts_noc.dspss0_tniu",
+            "interface_id": "rstn_src"
+          }
+        },
+        {
           "endpoint9": {
-            "node_id": "soc_sts_noc.dspss1_tniu",
+            "node_id": "soc_sts_noc.dspss3_tniu",
             "interface_id": "rstn_src"
           }
         },
@@ -1515,43 +1427,43 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.vpu_ss_tniu",
-            "interface_id": "clk_dst"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.aon_ss_iniu",
-            "interface_id": "clk_dst"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "soc_sts_noc.camera_ss_tniu",
-            "interface_id": "clk_dst"
-          }
-        },
-        {
-          "endpoint4": {
-            "node_id": "soc_sts_noc.harden_dn_async_bridge_slv",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint5": {
             "node_id": "soc_sts_noc.dec0",
             "interface_id": "clk"
           }
         },
         {
-          "endpoint6": {
+          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "clk_harden_dn_func"
           }
         },
         {
-          "endpoint7": {
+          "endpoint3": {
+            "node_id": "soc_sts_noc.vpu_ss_tniu",
+            "interface_id": "clk_dst"
+          }
+        },
+        {
+          "endpoint4": {
+            "node_id": "soc_sts_noc.camera_ss_tniu",
+            "interface_id": "clk_dst"
+          }
+        },
+        {
+          "endpoint5": {
+            "node_id": "soc_sts_noc.aon_ss_iniu",
+            "interface_id": "clk_dst"
+          }
+        },
+        {
+          "endpoint6": {
             "node_id": "soc_sts_noc.dec1",
+            "interface_id": "clk"
+          }
+        },
+        {
+          "endpoint7": {
+            "node_id": "soc_sts_noc.harden_dn_async_bridge_slv",
             "interface_id": "clk"
           }
         }
@@ -1563,7 +1475,7 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.camera_ss_tniu",
+            "node_id": "soc_sts_noc.vpu_ss_tniu",
             "interface_id": "rstn_dst"
           }
         },
@@ -1575,32 +1487,32 @@
         },
         {
           "endpoint3": {
-            "node_id": "soc_sts_noc.dec1",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint4": {
-            "node_id": "soc_sts_noc.vpu_ss_tniu",
+            "node_id": "soc_sts_noc.camera_ss_tniu",
             "interface_id": "rstn_dst"
           }
         },
         {
-          "endpoint5": {
+          "endpoint4": {
             "node_id": "soc_sts_noc.aon_ss_iniu",
             "interface_id": "rstn_dst"
           }
         },
         {
+          "endpoint5": {
+            "node_id": "soc_sts_noc.harden_dn_async_bridge_slv",
+            "interface_id": "rst_n"
+          }
+        },
+        {
           "endpoint6": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "rst_harden_dn_func_n"
+            "node_id": "soc_sts_noc.dec1",
+            "interface_id": "rst_n"
           }
         },
         {
           "endpoint7": {
-            "node_id": "soc_sts_noc.harden_dn_async_bridge_slv",
-            "interface_id": "rst_n"
+            "node_id": "soc_sts_noc",
+            "interface_id": "rst_harden_dn_func_n"
           }
         }
       ]
@@ -1611,19 +1523,19 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss5_tniu",
-            "interface_id": "clk_dst"
+            "node_id": "soc_sts_noc.dec2",
+            "interface_id": "clk"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "clk_harden_up_func"
+            "node_id": "soc_sts_noc.dspss4_tniu",
+            "interface_id": "clk_dst"
           }
         },
         {
           "endpoint3": {
-            "node_id": "soc_sts_noc.dspss1_tniu",
+            "node_id": "soc_sts_noc.dspss5_tniu",
             "interface_id": "clk_dst"
           }
         },
@@ -1635,38 +1547,38 @@
         },
         {
           "endpoint5": {
-            "node_id": "soc_sts_noc.harden_up_async_bridge_mst",
-            "interface_id": "clk"
-          }
-        },
-        {
-          "endpoint6": {
             "node_id": "soc_sts_noc.dspss3_tniu",
             "interface_id": "clk_dst"
           }
         },
         {
-          "endpoint7": {
-            "node_id": "soc_sts_noc.dspss4_tniu",
-            "interface_id": "clk_dst"
-          }
-        },
-        {
-          "endpoint8": {
+          "endpoint6": {
             "node_id": "soc_sts_noc.dspss0_tniu",
             "interface_id": "clk_dst"
           }
         },
         {
+          "endpoint7": {
+            "node_id": "soc_sts_noc.dspss1_tniu",
+            "interface_id": "clk_dst"
+          }
+        },
+        {
+          "endpoint8": {
+            "node_id": "soc_sts_noc.harden_up_async_bridge_mst",
+            "interface_id": "clk"
+          }
+        },
+        {
           "endpoint9": {
-            "node_id": "soc_sts_noc.dec2",
+            "node_id": "soc_sts_noc.dec2_ext",
             "interface_id": "clk"
           }
         },
         {
           "endpoint10": {
-            "node_id": "soc_sts_noc.dec2_ext",
-            "interface_id": "clk"
+            "node_id": "soc_sts_noc",
+            "interface_id": "clk_harden_up_func"
           }
         }
       ]
@@ -1677,56 +1589,56 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "rstn_dst"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dspss1_tniu",
-            "interface_id": "rstn_dst"
-          }
-        },
-        {
-          "endpoint3": {
-            "node_id": "soc_sts_noc.dec2_ext",
-            "interface_id": "rst_n"
-          }
-        },
-        {
-          "endpoint4": {
-            "node_id": "soc_sts_noc.dspss2_tniu",
-            "interface_id": "rstn_dst"
-          }
-        },
-        {
-          "endpoint5": {
             "node_id": "soc_sts_noc.dspss3_tniu",
             "interface_id": "rstn_dst"
           }
         },
         {
-          "endpoint6": {
-            "node_id": "soc_sts_noc.dspss5_tniu",
+          "endpoint2": {
+            "node_id": "soc_sts_noc.dspss0_tniu",
             "interface_id": "rstn_dst"
           }
         },
         {
-          "endpoint7": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "rst_harden_up_func_n"
-          }
-        },
-        {
-          "endpoint8": {
+          "endpoint3": {
             "node_id": "soc_sts_noc.dspss4_tniu",
             "interface_id": "rstn_dst"
           }
         },
         {
-          "endpoint9": {
+          "endpoint4": {
+            "node_id": "soc_sts_noc.dspss5_tniu",
+            "interface_id": "rstn_dst"
+          }
+        },
+        {
+          "endpoint5": {
+            "node_id": "soc_sts_noc.dspss1_tniu",
+            "interface_id": "rstn_dst"
+          }
+        },
+        {
+          "endpoint6": {
+            "node_id": "soc_sts_noc.dec2_ext",
+            "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint7": {
+            "node_id": "soc_sts_noc.dspss2_tniu",
+            "interface_id": "rstn_dst"
+          }
+        },
+        {
+          "endpoint8": {
             "node_id": "soc_sts_noc.dec2",
             "interface_id": "rst_n"
+          }
+        },
+        {
+          "endpoint9": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "rst_harden_up_func_n"
           }
         },
         {
@@ -1743,13 +1655,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.harden_up_async_bridge_mst",
+            "node_id": "soc_sts_noc.harden_dn_async_bridge_slv",
             "interface_id": "sync"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.harden_dn_async_bridge_slv",
+            "node_id": "soc_sts_noc.harden_up_async_bridge_mst",
             "interface_id": "sync"
           }
         }
@@ -1767,31 +1679,31 @@
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc",
+            "node_id": "soc_sts_noc.dspss2_tniu",
             "interface_id": "clk_dbg_timer"
           }
         },
         {
           "endpoint3": {
-            "node_id": "soc_sts_noc.dspss1_tniu",
+            "node_id": "soc_sts_noc",
             "interface_id": "clk_dbg_timer"
           }
         },
         {
           "endpoint4": {
-            "node_id": "soc_sts_noc.dspss5_tniu",
+            "node_id": "soc_sts_noc.dspss4_tniu",
             "interface_id": "clk_dbg_timer"
           }
         },
         {
           "endpoint5": {
-            "node_id": "soc_sts_noc.camera_ss_tniu",
+            "node_id": "soc_sts_noc.dspss5_tniu",
             "interface_id": "clk_dbg_timer"
           }
         },
         {
           "endpoint6": {
-            "node_id": "soc_sts_noc.dspss2_tniu",
+            "node_id": "soc_sts_noc.camera_ss_tniu",
             "interface_id": "clk_dbg_timer"
           }
         },
@@ -1803,13 +1715,13 @@
         },
         {
           "endpoint8": {
-            "node_id": "soc_sts_noc.dspss3_tniu",
+            "node_id": "soc_sts_noc.dspss1_tniu",
             "interface_id": "clk_dbg_timer"
           }
         },
         {
           "endpoint9": {
-            "node_id": "soc_sts_noc.dspss4_tniu",
+            "node_id": "soc_sts_noc.dspss3_tniu",
             "interface_id": "clk_dbg_timer"
           }
         }
@@ -1821,13 +1733,13 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "rst_dbg_timer_n"
+            "node_id": "soc_sts_noc.camera_ss_tniu",
+            "interface_id": "rstn_dbg_timer"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss4_tniu",
+            "node_id": "soc_sts_noc.dspss3_tniu",
             "interface_id": "rstn_dbg_timer"
           }
         },
@@ -1839,7 +1751,7 @@
         },
         {
           "endpoint4": {
-            "node_id": "soc_sts_noc.camera_ss_tniu",
+            "node_id": "soc_sts_noc.dspss4_tniu",
             "interface_id": "rstn_dbg_timer"
           }
         },
@@ -1857,13 +1769,13 @@
         },
         {
           "endpoint7": {
-            "node_id": "soc_sts_noc.dspss2_tniu",
-            "interface_id": "rstn_dbg_timer"
+            "node_id": "soc_sts_noc",
+            "interface_id": "rst_dbg_timer_n"
           }
         },
         {
           "endpoint8": {
-            "node_id": "soc_sts_noc.dspss3_tniu",
+            "node_id": "soc_sts_noc.dspss2_tniu",
             "interface_id": "rstn_dbg_timer"
           }
         },
@@ -1881,14 +1793,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dec0",
-            "interface_id": "mst_req"
+            "node_id": "soc_sts_noc.aon_ss_iniu",
+            "interface_id": "req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.aon_ss_iniu",
-            "interface_id": "req"
+            "node_id": "soc_sts_noc.dec0",
+            "interface_id": "mst_req"
           }
         }
       ]
@@ -1899,14 +1811,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.aon_ss_iniu",
-            "interface_id": "rsp"
+            "node_id": "soc_sts_noc.dec0",
+            "interface_id": "mst_rsp"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dec0",
-            "interface_id": "mst_rsp"
+            "node_id": "soc_sts_noc.aon_ss_iniu",
+            "interface_id": "rsp"
           }
         }
       ]
@@ -1935,14 +1847,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dec0",
-            "interface_id": "slv0_rsp"
+            "node_id": "soc_sts_noc.vpu_ss_tniu",
+            "interface_id": "rsp"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.vpu_ss_tniu",
-            "interface_id": "rsp"
+            "node_id": "soc_sts_noc.dec0",
+            "interface_id": "slv0_rsp"
           }
         }
       ]
@@ -1989,14 +1901,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dec1",
-            "interface_id": "slv0_req"
+            "node_id": "soc_sts_noc.camera_ss_tniu",
+            "interface_id": "req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.camera_ss_tniu",
-            "interface_id": "req"
+            "node_id": "soc_sts_noc.dec1",
+            "interface_id": "slv0_req"
           }
         }
       ]
@@ -2007,14 +1919,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dec1",
-            "interface_id": "slv0_rsp"
+            "node_id": "soc_sts_noc.camera_ss_tniu",
+            "interface_id": "rsp"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.camera_ss_tniu",
-            "interface_id": "rsp"
+            "node_id": "soc_sts_noc.dec1",
+            "interface_id": "slv0_rsp"
           }
         }
       ]
@@ -2043,14 +1955,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.harden_up_async_bridge_mst",
-            "interface_id": "m_chan"
+            "node_id": "soc_sts_noc.dec2",
+            "interface_id": "mst_req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dec2",
-            "interface_id": "mst_req"
+            "node_id": "soc_sts_noc.harden_up_async_bridge_mst",
+            "interface_id": "m_chan"
           }
         }
       ]
@@ -2061,14 +1973,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dec2",
-            "interface_id": "mst_rsp"
+            "node_id": "soc_sts_noc.dec1",
+            "interface_id": "slv1_rsp"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dec1",
-            "interface_id": "slv1_rsp"
+            "node_id": "soc_sts_noc.dec2",
+            "interface_id": "mst_rsp"
           }
         }
       ]
@@ -2079,14 +1991,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dec2",
-            "interface_id": "slv0_req"
+            "node_id": "soc_sts_noc.dspss0_tniu",
+            "interface_id": "req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "req"
+            "node_id": "soc_sts_noc.dec2",
+            "interface_id": "slv0_req"
           }
         }
       ]
@@ -2097,14 +2009,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "rsp"
+            "node_id": "soc_sts_noc.dec2",
+            "interface_id": "slv0_rsp"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dec2",
-            "interface_id": "slv0_rsp"
+            "node_id": "soc_sts_noc.dspss0_tniu",
+            "interface_id": "rsp"
           }
         }
       ]
@@ -2115,14 +2027,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dec2",
-            "interface_id": "slv1_req"
+            "node_id": "soc_sts_noc.dspss1_tniu",
+            "interface_id": "req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss1_tniu",
-            "interface_id": "req"
+            "node_id": "soc_sts_noc.dec2",
+            "interface_id": "slv1_req"
           }
         }
       ]
@@ -2133,14 +2045,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dec2",
-            "interface_id": "slv1_rsp"
+            "node_id": "soc_sts_noc.dspss1_tniu",
+            "interface_id": "rsp"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss1_tniu",
-            "interface_id": "rsp"
+            "node_id": "soc_sts_noc.dec2",
+            "interface_id": "slv1_rsp"
           }
         }
       ]
@@ -2169,14 +2081,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss2_tniu",
-            "interface_id": "rsp"
+            "node_id": "soc_sts_noc.dec2",
+            "interface_id": "slv2_rsp"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dec2",
-            "interface_id": "slv2_rsp"
+            "node_id": "soc_sts_noc.dspss2_tniu",
+            "interface_id": "rsp"
           }
         }
       ]
@@ -2223,14 +2135,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dec2_ext",
-            "interface_id": "slv0_req"
+            "node_id": "soc_sts_noc.dspss3_tniu",
+            "interface_id": "req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss3_tniu",
-            "interface_id": "req"
+            "node_id": "soc_sts_noc.dec2_ext",
+            "interface_id": "slv0_req"
           }
         }
       ]
@@ -2259,14 +2171,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss4_tniu",
-            "interface_id": "req"
+            "node_id": "soc_sts_noc.dec2_ext",
+            "interface_id": "slv1_req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dec2_ext",
-            "interface_id": "slv1_req"
+            "node_id": "soc_sts_noc.dspss4_tniu",
+            "interface_id": "req"
           }
         }
       ]
@@ -2295,14 +2207,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dec2_ext",
-            "interface_id": "slv2_req"
+            "node_id": "soc_sts_noc.dspss5_tniu",
+            "interface_id": "req"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss5_tniu",
-            "interface_id": "req"
+            "node_id": "soc_sts_noc.dec2_ext",
+            "interface_id": "slv2_req"
           }
         }
       ]
@@ -2331,14 +2243,14 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.aon_ss_iniu",
-            "interface_id": "node_id"
+            "node_id": "soc_sts_noc",
+            "interface_id": "aon_ss_iniu.node_id_porting"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "aon_ss_iniu.node_id_porting"
+            "node_id": "soc_sts_noc.aon_ss_iniu",
+            "interface_id": "node_id"
           }
         }
       ]
@@ -2349,200 +2261,20 @@
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "aon_ss_iniu.axi_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc.aon_ss_iniu",
             "interface_id": "axi"
           }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dec0_dec0.slv2_req_porting_slv2_req_37@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc.dec0",
-            "interface_id": "slv2_req"
-          }
         },
         {
           "endpoint2": {
             "node_id": "soc_sts_noc",
-            "interface_id": "dec0.slv2_req_porting"
+            "interface_id": "aon_ss_iniu.axi_porting"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dec0_dec0.slv2_rsp_porting_slv2_rsp_38@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc.dec0",
-            "interface_id": "slv2_rsp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dec0.slv2_rsp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dec0_dec0.slv3_req_porting_slv3_req_39@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dec0.slv3_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dec0",
-            "interface_id": "slv3_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dec0_dec0.slv3_rsp_porting_slv3_rsp_40@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dec0.slv3_rsp_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dec0",
-            "interface_id": "slv3_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dec1_dec1.slv2_req_porting_slv2_req_41@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc.dec1",
-            "interface_id": "slv2_req"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dec1.slv2_req_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dec1_dec1.slv2_rsp_porting_slv2_rsp_42@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dec1.slv2_rsp_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dec1",
-            "interface_id": "slv2_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dec1_dec1.slv3_req_porting_slv3_req_43@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc.dec1",
-            "interface_id": "slv3_req"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dec1.slv3_req_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dec1_dec1.slv3_rsp_porting_slv3_rsp_44@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dec1.slv3_rsp_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dec1",
-            "interface_id": "slv3_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dec2_ext_dec2_ext.slv3_req_porting_slv3_req_45@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dec2_ext.slv3_req_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dec2_ext",
-            "interface_id": "slv3_req"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dec2_ext_dec2_ext.slv3_rsp_porting_slv3_rsp_46@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dec2_ext.slv3_rsp_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dec2_ext",
-            "interface_id": "slv3_rsp"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.pmc_apb_porting_pmc_apb_47@soc_sts_noc",
+      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.pmc_apb_porting_pmc_apb_37@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -2560,25 +2292,25 @@
       ]
     },
     {
-      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.sys_apb_porting_sys_apb_48@soc_sts_noc",
+      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.sys_apb_porting_sys_apb_38@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "vpu_ss_tniu.sys_apb_porting"
+            "node_id": "soc_sts_noc.vpu_ss_tniu",
+            "interface_id": "sys_apb"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.vpu_ss_tniu",
-            "interface_id": "sys_apb"
+            "node_id": "soc_sts_noc",
+            "interface_id": "vpu_ss_tniu.sys_apb_porting"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.dbg_data_porting_dbg_data_49@soc_sts_noc",
+      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.dbg_data_porting_dbg_data_39@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -2596,61 +2328,61 @@
       ]
     },
     {
-      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.dbg_timestamp_porting_dbg_timestamp_50@soc_sts_noc",
+      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.dbg_timestamp_porting_dbg_timestamp_40@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "vpu_ss_tniu.dbg_timestamp_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc.vpu_ss_tniu",
             "interface_id": "dbg_timestamp"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "vpu_ss_tniu.dbg_timestamp_porting"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.sys_cti_event_porting_sys_cti_event_51@soc_sts_noc",
+      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.sys_cti_event_porting_sys_cti_event_41@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.vpu_ss_tniu",
-            "interface_id": "sys_cti_event"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "vpu_ss_tniu.sys_cti_event_porting"
           }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.noc_cti_event_porting_noc_cti_event_52@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "vpu_ss_tniu.noc_cti_event_porting"
-          }
         },
         {
           "endpoint2": {
             "node_id": "soc_sts_noc.vpu_ss_tniu",
-            "interface_id": "noc_cti_event"
+            "interface_id": "sys_cti_event"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.sys_cti_channel_porting_sys_cti_channel_53@soc_sts_noc",
+      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.noc_cti_event_porting_noc_cti_event_42@soc_sts_noc",
+      "scope": "soc_sts_noc",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "soc_sts_noc.vpu_ss_tniu",
+            "interface_id": "noc_cti_event"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "vpu_ss_tniu.noc_cti_event_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.sys_cti_channel_porting_sys_cti_channel_43@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -2668,97 +2400,97 @@
       ]
     },
     {
-      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.noc_cti_channel_porting_noc_cti_channel_54@soc_sts_noc",
+      "id": "soc_sts_noc_vpu_ss_tniu_vpu_ss_tniu.noc_cti_channel_porting_noc_cti_channel_44@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "vpu_ss_tniu.noc_cti_channel_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc.vpu_ss_tniu",
             "interface_id": "noc_cti_channel"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "vpu_ss_tniu.noc_cti_channel_porting"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.pmc_apb_porting_pmc_apb_55@soc_sts_noc",
+      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.pmc_apb_porting_pmc_apb_45@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.camera_ss_tniu",
-            "interface_id": "pmc_apb"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "camera_ss_tniu.pmc_apb_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc.camera_ss_tniu",
+            "interface_id": "pmc_apb"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.sys_apb_porting_sys_apb_56@soc_sts_noc",
+      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.sys_apb_porting_sys_apb_46@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "camera_ss_tniu.sys_apb_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc.camera_ss_tniu",
             "interface_id": "sys_apb"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "camera_ss_tniu.sys_apb_porting"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.dbg_data_porting_dbg_data_57@soc_sts_noc",
+      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.dbg_data_porting_dbg_data_47@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.camera_ss_tniu",
-            "interface_id": "dbg_data"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "camera_ss_tniu.dbg_data_porting"
           }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.dbg_timestamp_porting_dbg_timestamp_58@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "camera_ss_tniu.dbg_timestamp_porting"
-          }
         },
         {
           "endpoint2": {
             "node_id": "soc_sts_noc.camera_ss_tniu",
-            "interface_id": "dbg_timestamp"
+            "interface_id": "dbg_data"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.sys_cti_event_porting_sys_cti_event_59@soc_sts_noc",
+      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.dbg_timestamp_porting_dbg_timestamp_48@soc_sts_noc",
+      "scope": "soc_sts_noc",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "soc_sts_noc.camera_ss_tniu",
+            "interface_id": "dbg_timestamp"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "camera_ss_tniu.dbg_timestamp_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.sys_cti_event_porting_sys_cti_event_49@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -2776,25 +2508,25 @@
       ]
     },
     {
-      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.noc_cti_event_porting_noc_cti_event_60@soc_sts_noc",
+      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.noc_cti_event_porting_noc_cti_event_50@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "camera_ss_tniu.noc_cti_event_porting"
+            "node_id": "soc_sts_noc.camera_ss_tniu",
+            "interface_id": "noc_cti_event"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.camera_ss_tniu",
-            "interface_id": "noc_cti_event"
+            "node_id": "soc_sts_noc",
+            "interface_id": "camera_ss_tniu.noc_cti_event_porting"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.sys_cti_channel_porting_sys_cti_channel_61@soc_sts_noc",
+      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.sys_cti_channel_porting_sys_cti_channel_51@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -2812,7 +2544,7 @@
       ]
     },
     {
-      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.noc_cti_channel_porting_noc_cti_channel_62@soc_sts_noc",
+      "id": "soc_sts_noc_camera_ss_tniu_camera_ss_tniu.noc_cti_channel_porting_noc_cti_channel_52@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -2830,169 +2562,169 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.pmc_apb_porting_pmc_apb_63@soc_sts_noc",
+      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.pmc_apb_porting_pmc_apb_53@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "pmc_apb"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "dspss0_tniu.pmc_apb_porting"
           }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.sys_apb_porting_sys_apb_64@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss0_tniu.sys_apb_porting"
-          }
         },
         {
           "endpoint2": {
             "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "sys_apb"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.dbg_data_porting_dbg_data_65@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss0_tniu.dbg_data_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "dbg_data"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.dbg_timestamp_porting_dbg_timestamp_66@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "dbg_timestamp"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss0_tniu.dbg_timestamp_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.sys_cti_event_porting_sys_cti_event_67@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "sys_cti_event"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss0_tniu.sys_cti_event_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.noc_cti_event_porting_noc_cti_event_68@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss0_tniu.noc_cti_event_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "noc_cti_event"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.sys_cti_channel_porting_sys_cti_channel_69@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss0_tniu.sys_cti_channel_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "sys_cti_channel"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.noc_cti_channel_porting_noc_cti_channel_70@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc.dspss0_tniu",
-            "interface_id": "noc_cti_channel"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss0_tniu.noc_cti_channel_porting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.pmc_apb_porting_pmc_apb_71@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss1_tniu.pmc_apb_porting"
-          }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dspss1_tniu",
             "interface_id": "pmc_apb"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.sys_apb_porting_sys_apb_72@soc_sts_noc",
+      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.sys_apb_porting_sys_apb_54@soc_sts_noc",
+      "scope": "soc_sts_noc",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "soc_sts_noc.dspss0_tniu",
+            "interface_id": "sys_apb"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss0_tniu.sys_apb_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.dbg_data_porting_dbg_data_55@soc_sts_noc",
+      "scope": "soc_sts_noc",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "soc_sts_noc.dspss0_tniu",
+            "interface_id": "dbg_data"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss0_tniu.dbg_data_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.dbg_timestamp_porting_dbg_timestamp_56@soc_sts_noc",
+      "scope": "soc_sts_noc",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss0_tniu.dbg_timestamp_porting"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc.dspss0_tniu",
+            "interface_id": "dbg_timestamp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.sys_cti_event_porting_sys_cti_event_57@soc_sts_noc",
+      "scope": "soc_sts_noc",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss0_tniu.sys_cti_event_porting"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc.dspss0_tniu",
+            "interface_id": "sys_cti_event"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.noc_cti_event_porting_noc_cti_event_58@soc_sts_noc",
+      "scope": "soc_sts_noc",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "soc_sts_noc.dspss0_tniu",
+            "interface_id": "noc_cti_event"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss0_tniu.noc_cti_event_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.sys_cti_channel_porting_sys_cti_channel_59@soc_sts_noc",
+      "scope": "soc_sts_noc",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "soc_sts_noc.dspss0_tniu",
+            "interface_id": "sys_cti_channel"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss0_tniu.sys_cti_channel_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soc_sts_noc_dspss0_tniu_dspss0_tniu.noc_cti_channel_porting_noc_cti_channel_60@soc_sts_noc",
+      "scope": "soc_sts_noc",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss0_tniu.noc_cti_channel_porting"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc.dspss0_tniu",
+            "interface_id": "noc_cti_channel"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.pmc_apb_porting_pmc_apb_61@soc_sts_noc",
+      "scope": "soc_sts_noc",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "soc_sts_noc.dspss1_tniu",
+            "interface_id": "pmc_apb"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss1_tniu.pmc_apb_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.sys_apb_porting_sys_apb_62@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3010,7 +2742,7 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.dbg_data_porting_dbg_data_73@soc_sts_noc",
+      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.dbg_data_porting_dbg_data_63@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3028,43 +2760,43 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.dbg_timestamp_porting_dbg_timestamp_74@soc_sts_noc",
+      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.dbg_timestamp_porting_dbg_timestamp_64@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss1_tniu.dbg_timestamp_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc.dspss1_tniu",
             "interface_id": "dbg_timestamp"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss1_tniu.dbg_timestamp_porting"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.sys_cti_event_porting_sys_cti_event_75@soc_sts_noc",
+      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.sys_cti_event_porting_sys_cti_event_65@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss1_tniu.sys_cti_event_porting"
+            "node_id": "soc_sts_noc.dspss1_tniu",
+            "interface_id": "sys_cti_event"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss1_tniu",
-            "interface_id": "sys_cti_event"
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss1_tniu.sys_cti_event_porting"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.noc_cti_event_porting_noc_cti_event_76@soc_sts_noc",
+      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.noc_cti_event_porting_noc_cti_event_66@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3082,7 +2814,7 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.sys_cti_channel_porting_sys_cti_channel_77@soc_sts_noc",
+      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.sys_cti_channel_porting_sys_cti_channel_67@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3100,7 +2832,7 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.noc_cti_channel_porting_noc_cti_channel_78@soc_sts_noc",
+      "id": "soc_sts_noc_dspss1_tniu_dspss1_tniu.noc_cti_channel_porting_noc_cti_channel_68@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3118,25 +2850,25 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.pmc_apb_porting_pmc_apb_79@soc_sts_noc",
+      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.pmc_apb_porting_pmc_apb_69@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss2_tniu.pmc_apb_porting"
+            "node_id": "soc_sts_noc.dspss2_tniu",
+            "interface_id": "pmc_apb"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss2_tniu",
-            "interface_id": "pmc_apb"
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss2_tniu.pmc_apb_porting"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.sys_apb_porting_sys_apb_80@soc_sts_noc",
+      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.sys_apb_porting_sys_apb_70@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3154,7 +2886,7 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.dbg_data_porting_dbg_data_81@soc_sts_noc",
+      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.dbg_data_porting_dbg_data_71@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3172,43 +2904,43 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.dbg_timestamp_porting_dbg_timestamp_82@soc_sts_noc",
+      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.dbg_timestamp_porting_dbg_timestamp_72@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss2_tniu.dbg_timestamp_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc.dspss2_tniu",
             "interface_id": "dbg_timestamp"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss2_tniu.dbg_timestamp_porting"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.sys_cti_event_porting_sys_cti_event_83@soc_sts_noc",
+      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.sys_cti_event_porting_sys_cti_event_73@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss2_tniu.sys_cti_event_porting"
+            "node_id": "soc_sts_noc.dspss2_tniu",
+            "interface_id": "sys_cti_event"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss2_tniu",
-            "interface_id": "sys_cti_event"
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss2_tniu.sys_cti_event_porting"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.noc_cti_event_porting_noc_cti_event_84@soc_sts_noc",
+      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.noc_cti_event_porting_noc_cti_event_74@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3226,7 +2958,7 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.sys_cti_channel_porting_sys_cti_channel_85@soc_sts_noc",
+      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.sys_cti_channel_porting_sys_cti_channel_75@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3244,25 +2976,25 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.noc_cti_channel_porting_noc_cti_channel_86@soc_sts_noc",
+      "id": "soc_sts_noc_dspss2_tniu_dspss2_tniu.noc_cti_channel_porting_noc_cti_channel_76@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss2_tniu.noc_cti_channel_porting"
+            "node_id": "soc_sts_noc.dspss2_tniu",
+            "interface_id": "noc_cti_channel"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss2_tniu",
-            "interface_id": "noc_cti_channel"
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss2_tniu.noc_cti_channel_porting"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.pmc_apb_porting_pmc_apb_87@soc_sts_noc",
+      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.pmc_apb_porting_pmc_apb_77@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3280,7 +3012,7 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.sys_apb_porting_sys_apb_88@soc_sts_noc",
+      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.sys_apb_porting_sys_apb_78@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3298,25 +3030,25 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.dbg_data_porting_dbg_data_89@soc_sts_noc",
+      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.dbg_data_porting_dbg_data_79@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss3_tniu.dbg_data_porting"
+            "node_id": "soc_sts_noc.dspss3_tniu",
+            "interface_id": "dbg_data"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss3_tniu",
-            "interface_id": "dbg_data"
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss3_tniu.dbg_data_porting"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.dbg_timestamp_porting_dbg_timestamp_90@soc_sts_noc",
+      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.dbg_timestamp_porting_dbg_timestamp_80@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3334,7 +3066,7 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.sys_cti_event_porting_sys_cti_event_91@soc_sts_noc",
+      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.sys_cti_event_porting_sys_cti_event_81@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3352,7 +3084,7 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.noc_cti_event_porting_noc_cti_event_92@soc_sts_noc",
+      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.noc_cti_event_porting_noc_cti_event_82@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3370,43 +3102,43 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.sys_cti_channel_porting_sys_cti_channel_93@soc_sts_noc",
+      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.sys_cti_channel_porting_sys_cti_channel_83@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss3_tniu.sys_cti_channel_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc.dspss3_tniu",
             "interface_id": "sys_cti_channel"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss3_tniu.sys_cti_channel_porting"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.noc_cti_channel_porting_noc_cti_channel_94@soc_sts_noc",
+      "id": "soc_sts_noc_dspss3_tniu_dspss3_tniu.noc_cti_channel_porting_noc_cti_channel_84@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss3_tniu.noc_cti_channel_porting"
+            "node_id": "soc_sts_noc.dspss3_tniu",
+            "interface_id": "noc_cti_channel"
           }
         },
         {
           "endpoint2": {
-            "node_id": "soc_sts_noc.dspss3_tniu",
-            "interface_id": "noc_cti_channel"
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss3_tniu.noc_cti_channel_porting"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.pmc_apb_porting_pmc_apb_95@soc_sts_noc",
+      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.pmc_apb_porting_pmc_apb_85@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
@@ -3424,259 +3156,259 @@
       ]
     },
     {
-      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.sys_apb_porting_sys_apb_96@soc_sts_noc",
+      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.sys_apb_porting_sys_apb_86@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss4_tniu",
-            "interface_id": "sys_apb"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "dspss4_tniu.sys_apb_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc.dspss4_tniu",
+            "interface_id": "sys_apb"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.dbg_data_porting_dbg_data_97@soc_sts_noc",
+      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.dbg_data_porting_dbg_data_87@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
+            "node_id": "soc_sts_noc.dspss4_tniu",
+            "interface_id": "dbg_data"
+          }
+        },
+        {
+          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "dspss4_tniu.dbg_data_porting"
           }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dspss4_tniu",
-            "interface_id": "dbg_data"
-          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.dbg_timestamp_porting_dbg_timestamp_98@soc_sts_noc",
+      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.dbg_timestamp_porting_dbg_timestamp_88@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss4_tniu",
-            "interface_id": "dbg_timestamp"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "dspss4_tniu.dbg_timestamp_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc.dspss4_tniu",
+            "interface_id": "dbg_timestamp"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.sys_cti_event_porting_sys_cti_event_99@soc_sts_noc",
+      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.sys_cti_event_porting_sys_cti_event_89@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
+            "node_id": "soc_sts_noc.dspss4_tniu",
+            "interface_id": "sys_cti_event"
+          }
+        },
+        {
+          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "dspss4_tniu.sys_cti_event_porting"
           }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dspss4_tniu",
-            "interface_id": "sys_cti_event"
-          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.noc_cti_event_porting_noc_cti_event_100@soc_sts_noc",
+      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.noc_cti_event_porting_noc_cti_event_90@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss4_tniu",
-            "interface_id": "noc_cti_event"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "dspss4_tniu.noc_cti_event_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc.dspss4_tniu",
+            "interface_id": "noc_cti_event"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.sys_cti_channel_porting_sys_cti_channel_101@soc_sts_noc",
+      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.sys_cti_channel_porting_sys_cti_channel_91@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
+            "node_id": "soc_sts_noc.dspss4_tniu",
+            "interface_id": "sys_cti_channel"
+          }
+        },
+        {
+          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "dspss4_tniu.sys_cti_channel_porting"
           }
-        },
-        {
-          "endpoint2": {
-            "node_id": "soc_sts_noc.dspss4_tniu",
-            "interface_id": "sys_cti_channel"
-          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.noc_cti_channel_porting_noc_cti_channel_102@soc_sts_noc",
+      "id": "soc_sts_noc_dspss4_tniu_dspss4_tniu.noc_cti_channel_porting_noc_cti_channel_92@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss4_tniu",
-            "interface_id": "noc_cti_channel"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "dspss4_tniu.noc_cti_channel_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc.dspss4_tniu",
+            "interface_id": "noc_cti_channel"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.pmc_apb_porting_pmc_apb_103@soc_sts_noc",
+      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.pmc_apb_porting_pmc_apb_93@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss5_tniu.pmc_apb_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc.dspss5_tniu",
             "interface_id": "pmc_apb"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss5_tniu.pmc_apb_porting"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.sys_apb_porting_sys_apb_104@soc_sts_noc",
+      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.sys_apb_porting_sys_apb_94@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss5_tniu",
-            "interface_id": "sys_apb"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "dspss5_tniu.sys_apb_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc.dspss5_tniu",
+            "interface_id": "sys_apb"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.dbg_data_porting_dbg_data_105@soc_sts_noc",
+      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.dbg_data_porting_dbg_data_95@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss5_tniu.dbg_data_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc.dspss5_tniu",
             "interface_id": "dbg_data"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss5_tniu.dbg_data_porting"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.dbg_timestamp_porting_dbg_timestamp_106@soc_sts_noc",
+      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.dbg_timestamp_porting_dbg_timestamp_96@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss5_tniu",
-            "interface_id": "dbg_timestamp"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "dspss5_tniu.dbg_timestamp_porting"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc.dspss5_tniu",
+            "interface_id": "dbg_timestamp"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.sys_cti_event_porting_sys_cti_event_107@soc_sts_noc",
+      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.sys_cti_event_porting_sys_cti_event_97@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss5_tniu.sys_cti_event_porting"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc.dspss5_tniu",
             "interface_id": "sys_cti_event"
           }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss5_tniu.sys_cti_event_porting"
+          }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.noc_cti_event_porting_noc_cti_event_108@soc_sts_noc",
+      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.noc_cti_event_porting_noc_cti_event_98@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {
           "endpoint1": {
-            "node_id": "soc_sts_noc.dspss5_tniu",
-            "interface_id": "noc_cti_event"
-          }
-        },
-        {
-          "endpoint2": {
             "node_id": "soc_sts_noc",
             "interface_id": "dspss5_tniu.noc_cti_event_porting"
           }
-        }
-      ]
-    },
-    {
-      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.sys_cti_channel_porting_sys_cti_channel_109@soc_sts_noc",
-      "scope": "soc_sts_noc",
-      "endpoints": [
-        {
-          "endpoint1": {
-            "node_id": "soc_sts_noc",
-            "interface_id": "dspss5_tniu.sys_cti_channel_porting"
-          }
         },
         {
           "endpoint2": {
             "node_id": "soc_sts_noc.dspss5_tniu",
-            "interface_id": "sys_cti_channel"
+            "interface_id": "noc_cti_event"
           }
         }
       ]
     },
     {
-      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.noc_cti_channel_porting_noc_cti_channel_110@soc_sts_noc",
+      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.sys_cti_channel_porting_sys_cti_channel_99@soc_sts_noc",
+      "scope": "soc_sts_noc",
+      "endpoints": [
+        {
+          "endpoint1": {
+            "node_id": "soc_sts_noc.dspss5_tniu",
+            "interface_id": "sys_cti_channel"
+          }
+        },
+        {
+          "endpoint2": {
+            "node_id": "soc_sts_noc",
+            "interface_id": "dspss5_tniu.sys_cti_channel_porting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soc_sts_noc_dspss5_tniu_dspss5_tniu.noc_cti_channel_porting_noc_cti_channel_100@soc_sts_noc",
       "scope": "soc_sts_noc",
       "endpoints": [
         {

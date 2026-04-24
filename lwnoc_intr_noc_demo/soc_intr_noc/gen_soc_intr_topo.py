@@ -184,6 +184,7 @@ SOC_INTR_NETWORK_FILELIST = "network_filelist.f"
 
 SOC_INTR_DV_WRAP_DIR = "soc_intr_noc_wrap"
 SOC_INTR_PD_WRAP_DIR = "soc_intr_noc_wrap_pd"
+SOC_INTR_DV_FULL_DIR = "soc_intr_noc_topo"
 
 SOC_INTR_NIU_WRAPPER_FILELISTS = (
     "intr_iniu_sys.f",
@@ -697,14 +698,25 @@ def generate(flow: str = "dv"):
         _patch_verilator_generate_loops(build_dir)
     _localize_generated_prefix_defines(build_dir)
     _tieoff_unused_input_ports(build_dir / (FULL_TOPO_ID if flow == "dv" else combined_dir))
+    _cast_flattened_pstate_inputs(build_dir / (FULL_TOPO_ID if flow == "dv" else combined_dir))
     if flow == "dv":
-        _publish_top_filelist(
-            build_dir / combined_dir / "filelist.f",
-            publish_dst,
-            build_dir_name,
-            combined_dir,
-            wrapper_inner_dir_name=FULL_TOPO_ID,
+        _move_generated_dir(build_dir, combined_dir, SOC_INTR_DV_FULL_DIR)
+        _rewrite_dv_logic_filelist(
+            build_dir,
+            SOC_INTR_DV_FULL_DIR,
+            include_sys_refs=False,
             extra_rtl_tokens=xbar_lut_tokens,
+        )
+        _publish_dv_ring_top_dir(
+            build_dir,
+            SOC_INTR_DV_FULL_DIR,
+            TOPO_ID,
+            extra_rtl_tokens=xbar_lut_tokens,
+        )
+        _publish_named_top_wrapper(build_dir, TOPO_ID, SOC_INTR_DV_WRAP_DIR)
+        _write_filelist(
+            publish_dst,
+            [f"-f $INTR_NOC_DEMO_DIR/{build_dir_name}/{SOC_INTR_DV_WRAP_DIR}/filelist.f"],
         )
     else:
         _publish_partitioned_harden_outputs(
@@ -714,7 +726,7 @@ def generate(flow: str = "dv"):
             extra_rtl_tokens=xbar_lut_tokens,
         )
     _run_top_io_boundary_check(
-        build_dir / ((FULL_TOPO_ID if flow == "dv" else combined_dir)) / f"{FULL_TOPO_ID if flow == 'dv' else combined_dir}.v"
+        build_dir / ((TOPO_ID if flow == "dv" else combined_dir)) / f"{TOPO_ID if flow == 'dv' else combined_dir}.v"
     )
 
     print(f"[{flow}] Topology JSON written to {topology_json}")
@@ -1357,10 +1369,6 @@ def _tieoff_unused_input_ports(ring_dir: Path) -> None:
         updated = text
         updated = updated.replace(".req_threshold());", ".req_threshold(1'b0));")
         updated = updated.replace(".preq(),", ".preq(1'b0),")
-        updated = updated.replace(
-            ".pstate(pchannel_pstate),",
-            ".pstate(lwnoc_lp_define_package::lwnoc_pchannel_state_t'(pchannel_pstate)),",
-        )
         updated = updated.replace(".pstate(),", ".pstate('0),")
         if updated != text:
             fpath.write_text(updated)
@@ -1372,14 +1380,41 @@ def _tieoff_unused_input_ports(ring_dir: Path) -> None:
         text = fpath.read_text()
         updated = text
         updated = updated.replace(".preq(),", ".preq(1'b0),")
-        updated = updated.replace(
-            ".pstate(pchannel_pstate),",
-            ".pstate(lwnoc_lp_define_package::lwnoc_pchannel_state_t'(pchannel_pstate)),",
-        )
         updated = updated.replace(".pstate(),", ".pstate('0),")
         if updated != text:
             fpath.write_text(updated)
             print(f"  [tieoff] {fpath.name}: tied off preq/pstate inputs")
+
+
+_PSTATE_INPUT_RE = re.compile(
+    r"(?P<prefix>\.pstate\()(?P<signal>[A-Za-z_][A-Za-z0-9_]*)(?P<suffix>\),)"
+)
+
+
+def _cast_flattened_pstate_inputs_in_file(path: Path) -> bool:
+    text = path.read_text()
+
+    def _replace(match: re.Match[str]) -> str:
+        signal_name = match.group("signal")
+        return (
+            f"{match.group('prefix')}"
+            f"lwnoc_lp_define_package::lwnoc_pchannel_state_t'({signal_name})"
+            f"{match.group('suffix')}"
+        )
+
+    updated = _PSTATE_INPUT_RE.sub(_replace, text)
+    if updated == text:
+        return False
+    path.write_text(updated)
+    return True
+
+
+def _cast_flattened_pstate_inputs(build_dir: Path) -> None:
+    for path in sorted(build_dir.glob("**/*_iniu.v")) + sorted(build_dir.glob("**/*_tniu.v")):
+        if path.stem.endswith("_ring"):
+            continue
+        if _cast_flattened_pstate_inputs_in_file(path):
+            print(f"  [lp_pstate_cast] patched {path.relative_to(build_dir)}")
 
 
 def _normalize_boundary_import_style(build_dir: Path) -> None:
@@ -1555,19 +1590,100 @@ def _publish_named_top_wrapper(
         wrapper_lines.append(f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}")
 
     inner_filelist = inner_dir / "filelist.f"
-    if inner_filelist.exists():
-        seen_lines = set(wrapper_lines)
-        for raw_line in inner_filelist.read_text().splitlines():
-            line = raw_line.strip()
-            if not line or line in seen_lines:
-                continue
-            wrapper_lines.append(line)
-            seen_lines.add(line)
-    else:
-        wrapper_lines.append(f"-f $INTR_NOC_DEMO_DIR/{_SHARED_BUILD_DIR_NAME}/{inner_dir_name}/filelist.f")
+    if not inner_filelist.exists():
+        raise RuntimeError(f"Missing generated inner filelist for wrapper publish: {inner_filelist}")
+    wrapper_lines.append(f"-f $INTR_NOC_DEMO_DIR/{_SHARED_BUILD_DIR_NAME}/{inner_dir_name}/filelist.f")
 
     wrapper_lines.append(f"$INTR_NOC_DEMO_DIR/{_SHARED_BUILD_DIR_NAME}/{wrapper_dir_name}/{wrapper_dir_name}.v")
     _write_filelist(wrapper_dir / "filelist.f", wrapper_lines)
+
+
+def _move_generated_dir(build_dir: Path, source_dir_name: str, target_dir_name: str) -> None:
+    if source_dir_name == target_dir_name:
+        return
+
+    source_dir = build_dir / source_dir_name
+    if not source_dir.exists():
+        raise RuntimeError(f"Missing generated directory for publish move: {source_dir}")
+
+    target_dir = build_dir / target_dir_name
+    if target_dir.exists():
+        shutil.rmtree(target_dir)
+    shutil.move(str(source_dir), str(target_dir))
+    print(f"  [publish] moved {source_dir_name}/ -> {target_dir_name}/")
+
+
+def _is_dv_wrapper_publish_leaf(filename: str) -> bool:
+    if not filename.endswith(".v"):
+        return False
+    if filename == f"{TOPO_ID}.v":
+        return True
+    if filename.endswith("_ring.v"):
+        return False
+    if filename == "default_tgtid_sink.v":
+        return False
+    return True
+
+
+def _dv_wrapper_publish_name(filename: str) -> str:
+    if filename == f"{TOPO_ID}.v":
+        return filename
+    if re.match(r"^.+_(?:iniu|tniu)\.v$", filename):
+        return filename[:-2] + "_top_wrap.v"
+    return filename
+
+
+def _publish_dv_ring_top_dir(
+    build_dir: Path,
+    inner_dir_name: str,
+    publish_dir_name: str,
+    *,
+    extra_rtl_tokens: tuple[str, ...] = (),
+) -> None:
+    inner_dir = build_dir / inner_dir_name
+    if not inner_dir.exists():
+        raise RuntimeError(f"Missing generated full-top directory for DV publish: {inner_dir}")
+
+    publish_dir = build_dir / publish_dir_name
+    if publish_dir.exists():
+        shutil.rmtree(publish_dir)
+    publish_dir.mkdir(parents=True, exist_ok=True)
+
+    out_lines: list[str] = []
+    seen_lines: set[str] = set()
+
+    def _append_line(line: str) -> None:
+        if line in seen_lines:
+            return
+        seen_lines.add(line)
+        out_lines.append(line)
+
+    _append_line(f"-f $INTR_NOC_DEMO_DIR/filelist/{SOC_INTR_COMMON_DEP_FILELIST}")
+    for line in _iter_sys_filelist_refs(build_dir):
+        _append_line(line)
+    for line in _iter_generated_component_filelist_refs(build_dir):
+        _append_line(line)
+    for token in extra_rtl_tokens:
+        _append_line(token)
+
+    top_filename = f"{TOPO_ID}.v"
+    for path in sorted(inner_dir.glob("*.v")):
+        if path.name == top_filename:
+            continue
+        if _is_dv_wrapper_publish_leaf(path.name):
+            publish_name = _dv_wrapper_publish_name(path.name)
+            shutil.copyfile(path, publish_dir / publish_name)
+            _append_line(_as_demo_token(publish_dir / publish_name))
+        else:
+            _append_line(_as_demo_token(path))
+
+    top_path = inner_dir / top_filename
+    if top_path.exists():
+        shutil.copyfile(top_path, publish_dir / top_filename)
+        _append_line(_as_demo_token(publish_dir / top_filename))
+
+    _write_filelist(publish_dir / "filelist.f", out_lines)
+    print(f"  [publish] rebuilt {publish_dir_name}/ as wrapper-style DV publish dir")
 
 
 def _as_demo_token(path: Path) -> str:
@@ -1704,12 +1820,21 @@ def _iter_dv_combined_core_entries(source_dir: Path):
     yield from _iter_localized_filelist_entries(source_dir / "filelist.f", source_dir)
 
 
-def _iter_dv_leaf_filenames(source_dir: Path):
+def _iter_dv_leaf_filenames(source_dir: Path, exclude_names: set[str] | None = None):
     top_filename = f"{source_dir.name}.v"
+    exclude_names = exclude_names or set()
     for path in sorted(source_dir.glob("*.v")):
-        if path.name == top_filename:
+        if path.name == top_filename or path.name in exclude_names:
             continue
         yield path.name
+
+
+def _sys_dir_leaf_filenames(build_dir: Path) -> set[str]:
+    leaf_names: set[str] = set()
+    for sys_dir in sorted(build_dir.glob("*_sys")):
+        for path in sorted(sys_dir.glob("*.v")):
+            leaf_names.add(path.name)
+    return leaf_names
 
 
 def _rewrite_dv_logic_filelist(
@@ -1740,7 +1865,12 @@ def _rewrite_dv_logic_filelist(
         _append_line(line)
     for token in extra_rtl_tokens:
         _append_line(token)
-    for filename in _iter_dv_leaf_filenames(source_dir):
+
+    excluded_sys_leaves: set[str] = set()
+    if include_sys_refs and combined_dir_name == TOPO_ID:
+        excluded_sys_leaves = _sys_dir_leaf_filenames(build_dir)
+
+    for filename in _iter_dv_leaf_filenames(source_dir, exclude_names=excluded_sys_leaves):
         _append_line(_as_demo_token(source_dir / filename))
 
     top_path = source_dir / f"{combined_dir_name}.v"

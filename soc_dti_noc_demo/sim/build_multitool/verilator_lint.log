@@ -1,0 +1,354 @@
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv.sv:106:14: Cell pin connected by name with empty reference: 's_rdy'
+  106 |             .s_rdy          (),    
+      |              ^~~~~
+                          ... Use "/* verilator lint_off PINCONNECTEMPTY */" and lint_on around source to disable this message.
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_mst.sv:289:6: Cell pin connected by name with empty reference: 'almost_empty'
+  289 |     .almost_empty  (),
+      |      ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_mst.sv:322:6: Cell pin connected by name with empty reference: 'almost_empty'
+  322 |     .almost_empty  (),
+      |      ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_mst.sv:353:6: Cell pin connected by name with empty reference: 'almost_full'
+  353 |     .almost_full   (),
+      |      ^~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_mst.sv:386:6: Cell pin connected by name with empty reference: 'almost_empty'
+  386 |     .almost_empty  (),
+      |      ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_mst.sv:417:6: Cell pin connected by name with empty reference: 'almost_full'
+  417 |     .almost_full   (),
+      |      ^~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_slv.sv:299:6: Cell pin connected by name with empty reference: 'almost_full'
+  299 |     .almost_full   (),
+      |      ^~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_slv.sv:332:6: Cell pin connected by name with empty reference: 'almost_full'
+  332 |     .almost_full   (),
+      |      ^~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_slv.sv:367:6: Cell pin connected by name with empty reference: 'almost_empty'
+  367 |     .almost_empty  (),
+      |      ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_slv.sv:400:6: Cell pin connected by name with empty reference: 'almost_full'
+  400 |     .almost_full   (),
+      |      ^~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_slv.sv:435:6: Cell pin connected by name with empty reference: 'almost_empty'
+  435 |     .almost_empty  (),
+      |      ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_mst.sv:63:6: Cell pin connected by name with empty reference: 'full_zero'
+   63 |     .full_zero      (),
+      |      ^~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_mst.sv:64:6: Cell pin connected by name with empty reference: 'idle'
+   64 |     .idle           (),
+      |      ^~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_mst.sv:70:6: Cell pin connected by name with empty reference: 'almost_empty'
+   70 |     .almost_empty   (),
+      |      ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_mst.sv:98:6: Cell pin connected by name with empty reference: 'full_zero'
+   98 |     .full_zero      (),
+      |      ^~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_mst.sv:104:6: Cell pin connected by name with empty reference: 'almost_full'
+  104 |     .almost_full    (),
+      |      ^~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_slv.sv:81:6: Cell pin connected by name with empty reference: 'almost_full'
+   81 |     .almost_full    (),
+      |      ^~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_slv.sv:105:6: Cell pin connected by name with empty reference: 'idle'
+  105 |     .idle           (),
+      |      ^~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_slv.sv:111:6: Cell pin connected by name with empty reference: 'almost_empty'
+  111 |     .almost_empty   (),
+      |      ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:109:14: Cell pin connected by name with empty reference: 's_rdy'
+  109 |             .s_rdy          (),    
+      |              ^~~~~
+%Warning-DECLFILENAME: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_booth_wallace_mul.sv:87:7: Filename 'fcip_booth_wallace_mul' does not match NOTFOUNDMODULE name: 'DW02_tree'
+   87 |     ) u_tree (
+      |       ^~~~~~
+%Warning-DECLFILENAME: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_slv.sv:147:6: Filename 'fcip_req_rsp_afifo_slv' does not match NOTFOUNDMODULE name: 'fcip_reg_slice'
+  147 |     )u_rsp_buffer(
+      |      ^~~~~~~~~~~~
+%Warning-MULTITOP: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:1:8: Multiple top level modules
+                                                                                                                         : ... Suggest see manual; fix the duplicates, or use --top-module to select top.
+                                                                                                                         : ... Top module 'fcip_booth_wallace_mul'
+    1 | module fcip_booth_wallace_mul #(
+      |        ^~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_ip_mimo_queue'
+    1 | module fcip_ip_mimo_queue #(
+      |        ^~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_lead_one_msb'
+    1 | module fcip_lead_one_msb #(
+      |        ^~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_lead_one_rev'
+    1 | module fcip_lead_one_rev #(
+      |        ^~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_lfsr4'
+    1 | module fcip_lfsr4 (
+      |        ^~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_list_lead_one'
+    1 | module fcip_list_lead_one #(
+      |        ^~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_list_lead_one_rev'
+    1 | module fcip_list_lead_one_rev #(
+      |        ^~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_list_lead_zero'
+    1 | module fcip_list_lead_zero #(
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_rob_id_dec'
+    1 | module fcip_rob_id_dec#(
+      |        ^~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_rob_prealloc'
+    1 | module fcip_rob_prealloc #(
+      |        ^~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_onehot_demux'
+    1 | module fcip_onehot_demux #(
+      |        ^~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_onehot_mux_pld'
+    1 | module fcip_onehot_mux_pld #(
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_afifo'
+    1 | module fcip_afifo #(
+      |        ^~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_axi_afifo'
+    1 | module fcip_axi_afifo #(
+      |        ^~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_req_rsp_afifo'
+    1 | module fcip_req_rsp_afifo #(
+      |        ^~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_afifo_doub'
+    1 | module fcip_afifo_doub #(
+      |        ^~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_arb_vrp'
+    1 | module fcip_arb_vrp #(
+      |        ^~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_tree_plru_comb'
+    1 | module fcip_tree_plru_comb #(
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_arb_vr_matrix'
+    1 | module fcip_arb_vr_matrix #(
+      |        ^~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_age_matrix_list'
+    1 | module fcip_age_matrix_list #(
+      |        ^~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_age_matrix'
+    1 | module fcip_age_matrix #(
+      |        ^~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_arb_vrp_matrix'
+    1 | module fcip_arb_vrp_matrix #(
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_data_pipe'
+    1 | module fcip_data_pipe #(
+      |        ^~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'lwnoc_lp_tniu_func_tniu'
+   16 | module lwnoc_lp_tniu_func_tniu
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'lwnoc_lp_tniu_dummy_mst'
+   16 | module lwnoc_lp_tniu_dummy_mst
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'lwnoc_lp_tniu_default_slv'
+   16 | module lwnoc_lp_tniu_default_slv
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'lwnoc_lp_tniu_stall_logic'
+   16 | module lwnoc_lp_tniu_stall_logic
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'tb_soc_dti_logic_topo_tree'
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_bin2onehot.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_booth_wallace_mul.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_lead_one.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_lead_one_msb.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_lead_one_rev.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_lfsr4.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_list_lead_one.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_list_lead_one_rev.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_list_lead_zero.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_onehot2bin.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_rob_id_dec.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_rob_prealloc.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_onehot_demux.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_onehot_mux_pld.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_mst.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_mst.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo_slv.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_axi_afifo/fcip_axi_afifo.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_mst.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_slv.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_doub.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_mst_doub.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_arb_matrix.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_arb_vrp.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_fix_arb.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_grant_gen_fp.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_grant_gen_rr.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_mtx_gen_age.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_mtx_gen_plru_tree.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_tree_plru_comb.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_arb_vr_matrix.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_age_matrix_list.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_age_matrix.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_arb_vrp_matrix.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_marker.sv:3:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_clk_marker.sv:3:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_data_pipe.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_sync_arst.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_sync_aset.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/stdcell_wrap/fcip_sync_cell.sv:1:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lwnoc_lp_define_package.sv:5:9: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lwnoc_lp_struct_package.sv:5:9: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_endpoint.sv:16:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error-TIMESCALEMOD: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/lwnoc_lowpower_component/src/rtl/lp_common/lwnoc_lp_nest.sv:17:8: Timescale missing on this module as other modules have it (IEEE 1800-2017 3.14.2.2)
+                     tb_soc_dti_logic_topo_tree.sv:3:8: ... Location of module with timescale
+    3 | module tb_soc_dti_logic_topo_tree;
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: Exiting due to too many errors encountered; --error-limit=50

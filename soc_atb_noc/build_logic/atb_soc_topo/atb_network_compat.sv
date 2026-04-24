@@ -48,8 +48,6 @@ module atb_async_bridge_slv #(
         .s_afready(1'b1),
         .s_syncreq(),
         .s_atwakeup(1'b0),
-        .slv_flush_req(1'b0),
-        .slv_syncreq_level(1'b0),
         .slv_full_zero(),
         .clk_atb_m(clk_async),
         .rstn_atb_m(rst_n),
@@ -62,8 +60,6 @@ module atb_async_bridge_slv #(
         .m_afready(),
         .m_syncreq(1'b0),
         .m_atwakeup(),
-        .mst_syncreq_level(),
-        .mst_flush_req_level(),
         .mst_full_zero(),
         .mst_read_idle()
     );
@@ -112,8 +108,6 @@ module atb_async_bridge_mst #(
         .s_afready(1'b1),
         .s_syncreq(),
         .s_atwakeup(1'b0),
-        .slv_flush_req(1'b0),
-        .slv_syncreq_level(1'b0),
         .slv_full_zero(),
         .clk_atb_m(clk),
         .rstn_atb_m(rst_n),
@@ -126,8 +120,6 @@ module atb_async_bridge_mst #(
         .m_afready(),
         .m_syncreq(1'b0),
         .m_atwakeup(),
-        .mst_syncreq_level(),
-        .mst_flush_req_level(),
         .mst_full_zero(),
         .mst_read_idle()
     );

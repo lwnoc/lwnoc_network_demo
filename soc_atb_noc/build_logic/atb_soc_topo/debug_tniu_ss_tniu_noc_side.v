@@ -12,6 +12,7 @@ module debug_tniu_ss_tniu_noc_side #(
   input logic noc_afready,
   output logic noc_syncreq,
   input logic noc_atwakeup,
+  input logic [9:0] timeout_val,
   input logic syncreq_level,
   input logic flush_req_level,
   input logic [8:0] lp_sys_to_noc,
@@ -57,6 +58,6 @@ module debug_tniu_ss_tniu_noc_side #(
     .lw_tx_req(lp_noc_to_sys),
     .afifo_slv_rx_req(lp_afifo_sys_to_noc),
     .afifo_slv_tx_req(lp_afifo_noc_to_sys),
-    .timeout_val(10'd0)
+    .timeout_val(timeout_val)
   );
 endmodule

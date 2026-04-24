@@ -45,18 +45,55 @@ def _fmt_logic_width(width: int) -> str:
     return "" if width == 1 else f" [{width-1}:0]"
 
 
-def _collect_boundary_ports():
-    ports = [("input", "clk_core", 1), ("input", "clk_async", 1), ("input", "rst_n", 1)]
+def _funnel_debug_ports(nodes) -> list[tuple[str, str, int]]:
+    ports: list[tuple[str, str, int]] = []
+    for node in nodes:
+        if node["kind"] != "atb_funnel":
+            continue
+        nid = node["node_id"]
+        ports.extend([
+            ("input", f"{nid}_pclkendbg", 1),
+            ("input", f"{nid}_pseldbg", 1),
+            ("input", f"{nid}_penabledbg", 1),
+            ("input", f"{nid}_pwritedbg", 1),
+            ("input", f"{nid}_paddrdbg31", 1),
+            ("input", f"{nid}_paddrdbg", 10),
+            ("input", f"{nid}_pwdatadbg", 32),
+            ("output", f"{nid}_preadydbg", 1),
+            ("output", f"{nid}_pslverrdbg", 1),
+            ("output", f"{nid}_prdatadbg", 32),
+        ])
+    return ports
+
+
+def _collect_boundary_ports(topo_nodes=None):
+    ports = [
+        ("input", "clk_core", 1),
+        ("input", "clk_async", 1),
+        ("input", "rst_core_n", 1),
+        ("input", "rst_async_n", 1),
+    ]
     boundary_nodes = [*DSP_SOURCES, CAMERA_SOURCE, MIPI_SOURCE, DEBUG_TNIU]
     for node in boundary_nodes:
+        ports.append(("input", f"{node.node_id}_clk_sys", 1))
+        ports.append(("input", f"{node.node_id}_rst_sys_n", 1))
         for port in node.sys_interface_ports():
             ports.append((port.direction, port.name, port.width))
+    if topo_nodes is not None:
+        ports.extend(_funnel_debug_ports(topo_nodes))
     return ports
 
 
 def _collect_boundary_ports_for_node_dicts(nodes) -> list[tuple[str, str, int]]:
-    ports = [("input", "clk_core", 1), ("input", "clk_async", 1), ("input", "rst_n", 1)]
+    ports = [
+        ("input", "clk_core", 1),
+        ("input", "clk_async", 1),
+        ("input", "rst_core_n", 1),
+        ("input", "rst_async_n", 1),
+    ]
     for node in nodes:
+        ports.append(("input", f"{node['node_id']}_clk_sys", 1))
+        ports.append(("input", f"{node['node_id']}_rst_sys_n", 1))
         iface_name = "sys_in" if node["kind"] == "atb_iniu" else "sys_out"
         for port in node["interfaces"][iface_name]:
             ports.append((port["direction"], port["name"], int(port["width"])))
@@ -125,6 +162,19 @@ def _contract_bindings(entries: list[dict]) -> list[tuple[str, str]]:
     return [(entry["port"], entry["signal"]) for entry in entries]
 
 
+_PSTATE_ENUM_TYPE = "lwnoc_lp_define_package::lwnoc_pchannel_state_t"
+
+
+def _cast_pstate_bindings(bindings: list[tuple[str, str]]) -> list[tuple[str, str]]:
+    """Wrap pstate signal in enum cast to suppress ENUMASSIGN lint warning."""
+    result = []
+    for port_name, sig_name in bindings:
+        if port_name == "pstate":
+            sig_name = f"{_PSTATE_ENUM_TYPE}'({sig_name})"
+        result.append((port_name, sig_name))
+    return result
+
+
 def _contract_wire_specs(entries: list[dict]) -> list[tuple[str, str | None]]:
     return [(entry["name"], entry["value"] or None) for entry in entries]
 
@@ -162,10 +212,9 @@ def _emit_iniu_payload_bridge(lines, node):
 def _emit_tniu_payload_defaults(lines, node):
     bridge = _wrapper_contract(node)["payload_bridge"]
     lines.append(f"  assign {_noc_bundle_wire(node, bridge['fabric_valid_wire'])} = w_{node['node_id']}_noc_valid;")
-    lines.append(
-        f"  assign {{{_noc_bundle_wire(node, 'noc_atbytes')}, {_noc_bundle_wire(node, 'noc_atid')}, "
-        f"{_noc_bundle_wire(node, bridge['fabric_data_wire'])}}} = w_{node['node_id']}_noc_payload;"
-    )
+    lines.append(f"  assign {_noc_bundle_wire(node, bridge['fabric_data_wire'])} = w_{node['node_id']}_noc_data;")
+    lines.append(f"  assign {_noc_bundle_wire(node, 'noc_atbytes')} = '0;")
+    lines.append(f"  assign {_noc_bundle_wire(node, 'noc_atid')} = '0;")
     for binding in bridge.get("defaults", []):
         lines.append(f"  assign {_noc_bundle_wire(node, binding['port'])} = {binding['signal']};")
 
@@ -252,7 +301,7 @@ def _gen_real_iniu_sys_wrapper(node) -> str:
             module_name=iniu_sys_mod,
             inst_name="u_real_iniu_sys",
             params=_contract_name_values(contract["instances"]["sys"]["params"]),
-            ports=_contract_bindings(contract["instances"]["sys"]["ports"]),
+            ports=_cast_pstate_bindings(_contract_bindings(contract["instances"]["sys"]["ports"])),
         )
     )
     body.append("")
@@ -437,8 +486,8 @@ def _materialize_prefixed_sys_payload(
     return copied
 
 
-def _emit_port_list_lines():
-    return _emit_port_list_lines_from_ports(_collect_boundary_ports())
+def _emit_port_list_lines(topo_nodes=None):
+    return _emit_port_list_lines_from_ports(_collect_boundary_ports(topo_nodes))
 
 
 def _emit_port_list_lines_from_ports(ports):
@@ -455,6 +504,64 @@ def _wire_valid(edge) -> str:
 
 def _wire_data(edge) -> str:
     return f"w_{edge['src']}_to_{edge['dst']}_data"
+
+
+def _wire_atvalid(edge) -> str:
+    return f"w_{edge['src']}_to_{edge['dst']}_atvalid"
+
+
+def _wire_atready(edge) -> str:
+    return f"w_{edge['src']}_to_{edge['dst']}_atready"
+
+
+def _wire_atbytes(edge) -> str:
+    return f"w_{edge['src']}_to_{edge['dst']}_atbytes"
+
+
+def _wire_atdata(edge) -> str:
+    return f"w_{edge['src']}_to_{edge['dst']}_atdata"
+
+
+def _wire_atid(edge) -> str:
+    return f"w_{edge['src']}_to_{edge['dst']}_atid"
+
+
+def _wire_afvalid(edge) -> str:
+    return f"w_{edge['src']}_to_{edge['dst']}_afvalid"
+
+
+def _wire_afready(edge) -> str:
+    return f"w_{edge['src']}_to_{edge['dst']}_afready"
+
+
+def _wire_syncreq(edge) -> str:
+    return f"w_{edge['src']}_to_{edge['dst']}_syncreq"
+
+
+def _wire_atwakeup(edge) -> str:
+    return f"w_{edge['src']}_to_{edge['dst']}_atwakeup"
+
+
+def _is_harden_dn_node(node_id: str) -> bool:
+    # Per soc_atb_topo partition note:
+    # harden-up: dsp_ss* -> left_funnel -> async_bridge_slv
+    # harden-dn: async_bridge_mst -> right_funnel -> debug_tniu_ss + camera/mipi paths
+    return node_id in {
+        "camera_ss",
+        "mipi_ss",
+        "camera_funnel",
+        "async_bridge_mst",
+        "right_funnel",
+        "debug_tniu_ss",
+    }
+
+
+def _node_clk_sig(node_id: str) -> str:
+    return "clk_async" if _is_harden_dn_node(node_id) else "clk_core"
+
+
+def _node_rst_sig(node_id: str) -> str:
+    return "rst_async_n" if _is_harden_dn_node(node_id) else "rst_core_n"
 
 
 def _node_index(nodes):
@@ -476,6 +583,18 @@ def _emit_wire_decl(lines, edge):
     lines.append(f"  logic{_fmt_logic_width(width)} {_wire_data(edge)};")
 
 
+def _emit_atb_edge_decl(lines, edge, data_w: int, id_w: int, bytes_w: int):
+    lines.append(f"  logic {_wire_atvalid(edge)};")
+    lines.append(f"  logic {_wire_atready(edge)};")
+    lines.append(f"  logic [{bytes_w-1}:0] {_wire_atbytes(edge)};")
+    lines.append(f"  logic [{data_w-1}:0] {_wire_atdata(edge)};")
+    lines.append(f"  logic [{id_w-1}:0] {_wire_atid(edge)};")
+    lines.append(f"  logic {_wire_afvalid(edge)};")
+    lines.append(f"  logic {_wire_afready(edge)};")
+    lines.append(f"  logic {_wire_syncreq(edge)};")
+    lines.append(f"  logic {_wire_atwakeup(edge)};")
+
+
 def _emit_single_stage_inst(lines, inst_name: str, node, in_edge, out_edge):
     module = node["param"]["module"]
     if node["kind"] == "atb_buffer":
@@ -486,7 +605,7 @@ def _emit_single_stage_inst(lines, inst_name: str, node, in_edge, out_edge):
     else:
         lines.append(f"  {module} #(.DATA_W({in_edge['width']})) {inst_name} (")
     lines.append("    .clk(clk_core),")
-    lines.append("    .rst_n(rst_n),")
+    lines.append("    .rst_n(rst_core_n),")
     lines.append("    .in_valid(in_valid),")
     lines.append("    .in_data(in_data),")
     lines.append("    .out_valid(out_valid),")
@@ -516,69 +635,99 @@ def _emit_funnel_inst(lines, inst_name: str, in_edges, out_edge):
 def _emit_top_node_inst(lines, node, in_edges, out_edges):
     node_id = node["node_id"]
     kind = node["kind"]
-    if kind == "atb_iniu":
-        edge = out_edges[0]
-        module = node["param"]["module"]
-        lines.append(f"  // {node_id}: delivery-facing INIU boundary, published through role-local INIU sys payload module.")
-        lines.append(f"  {module} #(.DATA_W({edge['width']})) u_{node_id} (")
-        lines.append("    .clk(clk_core),")
-        lines.append("    .rst_n(rst_n),")
-        lines.append(f"    .sys_valid({node_id}_valid),")
-        lines.append(f"    .sys_data({node_id}_data),")
-        lines.append(f"    .fabric_valid({_wire_valid(edge)}),")
-        lines.append(f"    .fabric_data({_wire_data(edge)})")
-        lines.append("  );")
-    elif kind == "atb_tniu":
-        edge = in_edges[0]
-        module = node["param"]["module"]
-        lines.append(f"  // {node_id}: delivery-facing TNIU boundary, published through role-local TNIU sys payload module.")
-        lines.append(f"  {module} #(.DATA_W({edge['width']})) u_{node_id} (")
-        lines.append("    .clk(clk_core),")
-        lines.append("    .rst_n(rst_n),")
-        lines.append(f"    .fabric_valid({_wire_valid(edge)}),")
-        lines.append(f"    .fabric_data({_wire_data(edge)}),")
-        lines.append(f"    .sys_valid({node_id}_valid),")
-        lines.append(f"    .sys_data({node_id}_data)")
-        lines.append("  );")
-    elif kind == "atb_funnel":
-        lines.append(f"  // {node_id}: internal topology helper; no standalone published ATB leaf directory.")
+    if kind == "atb_funnel":
+        lines.append(f"  // {node_id}: direct upstream atb_funnel; exposes full ATB protocol.")
         input_num = len(in_edges)
-        if input_num <= 3:
-            module = "atb_funnel3"
-            total_ports = 3
-        else:
-            module = "atb_funnel6"
-            total_ports = 6
-        lines.append(f"  {module} #(.DATA_W({out_edges[0]['width']})) u_{node_id} (")
-        for idx in range(total_ports):
-            if idx < input_num:
-                edge = in_edges[idx]
-                lines.append(f"    .in{idx}_valid({_wire_valid(edge)}),")
-                lines.append(f"    .in{idx}_data({_wire_data(edge)}),")
-            else:
-                lines.append(f"    .in{idx}_valid(1'b0),")
-                lines.append(f"    .in{idx}_data({out_edges[0]['width']}'b0),")
-        lines.append(f"    .out_valid({_wire_valid(out_edges[0])}),")
-        lines.append(f"    .out_data({_wire_data(out_edges[0])})")
+        id_w = 7
+        bytes_w = 4
+        data_w = 128
+        lines.append(f"  logic [{input_num-1}:0] w_{node_id}_atvalids;")
+        lines.append(f"  logic [{input_num-1}:0] w_{node_id}_afreadys;")
+        lines.append(f"  logic [{input_num-1}:0][{id_w-1}:0] w_{node_id}_atids;")
+        lines.append(f"  logic [{input_num-1}:0][{data_w-1}:0] w_{node_id}_atdatas;")
+        lines.append(f"  logic [{input_num-1}:0][{bytes_w-1}:0] w_{node_id}_atbytess;")
+        lines.append(f"  logic [{input_num-1}:0] w_{node_id}_atreadys;")
+        lines.append(f"  logic [{input_num-1}:0] w_{node_id}_afvalids;")
+        lines.append(f"  logic [{input_num-1}:0] w_{node_id}_syncreqs;")
+        for idx, edge in enumerate(in_edges):
+            lines.append(f"  assign w_{node_id}_atvalids[{idx}] = {_wire_atvalid(edge)};")
+            lines.append(f"  assign w_{node_id}_afreadys[{idx}] = {_wire_afready(edge)};")
+            lines.append(f"  assign w_{node_id}_atids[{idx}] = {_wire_atid(edge)};")
+            lines.append(f"  assign w_{node_id}_atdatas[{idx}] = {_wire_atdata(edge)};")
+            lines.append(f"  assign w_{node_id}_atbytess[{idx}] = {_wire_atbytes(edge)};")
+            lines.append(f"  assign {_wire_atready(edge)} = w_{node_id}_atreadys[{idx}];")
+            lines.append(f"  assign {_wire_afvalid(edge)} = w_{node_id}_afvalids[{idx}];")
+            lines.append(f"  assign {_wire_syncreq(edge)} = w_{node_id}_syncreqs[{idx}];")
+        lines.append(f"  atb_funnel #(.ATB_DATA_WIDTH({data_w}), .ATB_ID_WIDTH({id_w}), .N_ATB({input_num})) u_{node_id} (")
+        lines.append(f"    .clk({_node_clk_sig(node_id)}),")
+        lines.append(f"    .resetn({_node_rst_sig(node_id)}),")
+        lines.append(f"    .pclkendbg({node_id}_pclkendbg),")
+        lines.append(f"    .pseldbg({node_id}_pseldbg),")
+        lines.append(f"    .penabledbg({node_id}_penabledbg),")
+        lines.append(f"    .pwritedbg({node_id}_pwritedbg),")
+        lines.append(f"    .paddrdbg31({node_id}_paddrdbg31),")
+        lines.append(f"    .paddrdbg({node_id}_paddrdbg),")
+        lines.append(f"    .pwdatadbg({node_id}_pwdatadbg),")
+        lines.append(f"    .atvalids(w_{node_id}_atvalids),")
+        lines.append(f"    .afreadys(w_{node_id}_afreadys),")
+        lines.append(f"    .atids(w_{node_id}_atids),")
+        lines.append(f"    .atdatas(w_{node_id}_atdatas),")
+        lines.append(f"    .atbytess(w_{node_id}_atbytess),")
+        lines.append(f"    .atreadym({_wire_atready(out_edges[0])}),")
+        lines.append(f"    .afvalidm({_wire_afvalid(out_edges[0])}),")
+        lines.append(f"    .syncreqm({_wire_syncreq(out_edges[0])}),")
+        lines.append(f"    .atvalidm({_wire_atvalid(out_edges[0])}),")
+        lines.append(f"    .afreadym({_wire_afready(out_edges[0])}),")
+        lines.append(f"    .atidm({_wire_atid(out_edges[0])}),")
+        lines.append(f"    .atdatam({_wire_atdata(out_edges[0])}),")
+        lines.append(f"    .atbytesm({_wire_atbytes(out_edges[0])}),")
+        lines.append(f"    .atreadys(w_{node_id}_atreadys),")
+        lines.append(f"    .afvalids(w_{node_id}_afvalids),")
+        lines.append(f"    .syncreqs(w_{node_id}_syncreqs),")
+        lines.append(f"    .preadydbg({node_id}_preadydbg),")
+        lines.append(f"    .pslverrdbg({node_id}_pslverrdbg),")
+        lines.append(f"    .prdatadbg({node_id}_prdatadbg)")
         lines.append("  );")
-    else:
-        lines.append(f"  // {node_id}: internal topology helper; no standalone published ATB leaf directory.")
-        module = node["param"]["module"]
-        if node["kind"] == "atb_buffer":
-            tie_off = "1'b1" if node["param"].get("tie_off") else "1'b0"
-            lines.append(f"  {module} #(.DATA_W({in_edges[0]['width']}), .TIE_OFF({tie_off})) u_{node_id} (")
-        elif node["kind"] == "atb_upsizer":
-            lines.append(f"  {module} #(.IN_W({in_edges[0]['width']}), .OUT_W({out_edges[0]['width']})) u_{node_id} (")
+    elif kind in {"atb_async_bridge_slv", "atb_async_bridge_mst"}:
+        lines.append(f"  // {node_id}: direct upstream atb_async_bridge_top; exposes full ATB protocol.")
+        id_w = 7
+        bytes_w = 4
+        data_w = 128
+        if node_id == "async_bridge_mst":
+            s_clk = "clk_async"
+            m_clk = "clk_async"
         else:
-            lines.append(f"  {module} #(.DATA_W({in_edges[0]['width']})) u_{node_id} (")
-        lines.append("    .clk(clk_core),")
-        if node["kind"] in {"atb_async_bridge_slv", "atb_async_bridge_mst"}:
-            lines.append("    .clk_async(clk_async),")
-        lines.append("    .rst_n(rst_n),")
-        lines.append(f"    .in_valid({_wire_valid(in_edges[0])}),")
-        lines.append(f"    .in_data({_wire_data(in_edges[0])}),")
-        lines.append(f"    .out_valid({_wire_valid(out_edges[0])}),")
-        lines.append(f"    .out_data({_wire_data(out_edges[0])})")
+            s_clk = "clk_core"
+            m_clk = "clk_async"
+        s_rst = "rst_async_n" if node_id == "async_bridge_mst" else "rst_core_n"
+        lines.append(f"  atb_async_bridge_top #(.ATB_DATA_WIDTH({data_w}), .ATB_ID_WIDTH({id_w})) u_{node_id} (")
+        lines.append(f"    .clk_atb_s({s_clk}),")
+        lines.append(f"    .rstn_atb_s({s_rst}),")
+        in_edge = in_edges[0]
+        lines.append(f"    .s_atvalid({_wire_atvalid(in_edge)}),")
+        lines.append(f"    .s_atready({_wire_atready(in_edge)}),")
+        lines.append(f"    .s_atbytes({_wire_atbytes(in_edge)}),")
+        lines.append(f"    .s_atdata({_wire_atdata(in_edge)}),")
+        lines.append(f"    .s_atid({_wire_atid(in_edge)}),")
+        lines.append(f"    .s_afvalid({_wire_afvalid(in_edge)}),")
+        lines.append(f"    .s_afready({_wire_afready(in_edge)}),")
+        lines.append(f"    .s_syncreq({_wire_syncreq(in_edge)}),")
+        lines.append(f"    .s_atwakeup({_wire_atwakeup(in_edge)}),")
+        lines.append("    .slv_full_zero(),")
+        lines.append(f"    .clk_atb_m({m_clk}),")
+        lines.append("    .rstn_atb_m(rst_async_n),")
+        out_edge = out_edges[0]
+        lines.append(f"    .m_atvalid({_wire_atvalid(out_edge)}),")
+        lines.append(f"    .m_atready({_wire_atready(out_edge)}),")
+        lines.append(f"    .m_atbytes({_wire_atbytes(out_edge)}),")
+        lines.append(f"    .m_atdata({_wire_atdata(out_edge)}),")
+        lines.append(f"    .m_atid({_wire_atid(out_edge)}),")
+        lines.append(f"    .m_afvalid({_wire_afvalid(out_edge)}),")
+        lines.append(f"    .m_afready({_wire_afready(out_edge)}),")
+        lines.append(f"    .m_syncreq({_wire_syncreq(out_edge)}),")
+        lines.append(f"    .m_atwakeup({_wire_atwakeup(out_edge)}),")
+        lines.append("    .mst_full_zero(),")
+        lines.append("    .mst_read_idle()")
         lines.append("  );")
     lines.append("")
 
@@ -602,36 +751,99 @@ def _gen_network_layer_sv(topo) -> str:
     in_edges, out_edges = _edge_index(edges)
     iniu_nodes = _boundary_nodes(nodes, "atb_iniu")
     tniu_nodes = _boundary_nodes(nodes, "atb_tniu")
+    funnel_nodes = _boundary_nodes(nodes, "atb_funnel")
+
+    data_w = 128
+    id_w = 7
+    bytes_w = 4
 
     lines = []
     lines.append("// ATB network layer assembly for noc-top publication.")
     lines.append(f"module {NETWORK_LAYER_ID} (")
-    port_lines = ["  input logic clk_core,", "  input logic clk_async,", "  input logic rst_n,"]
+    port_lines = [
+        "  input logic clk_core,",
+        "  input logic clk_async,",
+        "  input logic rst_core_n,",
+        "  input logic rst_async_n,",
+    ]
     for node in iniu_nodes:
-        edge_w = int(out_edges[node["node_id"]][0]["width"])
-        port_lines.append(f"  input logic {_network_port_valid(node, 'in')},")
-        port_lines.append(f"  input logic{_fmt_logic_width(edge_w)} {_network_port_data(node, 'in')},")
+        nid = node["node_id"]
+        port_lines += [
+            f"  input  logic          {nid}_in_atvalid,",
+            f"  input  logic [{bytes_w-1}:0]   {nid}_in_atbytes,",
+            f"  input  logic [{data_w-1}:0] {nid}_in_atdata,",
+            f"  input  logic [{id_w-1}:0]   {nid}_in_atid,",
+            f"  input  logic          {nid}_in_afready,",
+            f"  input  logic          {nid}_in_atwakeup,",
+            f"  output logic          {nid}_out_atready,",
+            f"  output logic          {nid}_out_afvalid,",
+            f"  output logic          {nid}_out_syncreq,",
+        ]
     for idx, node in enumerate(tniu_nodes):
-        edge_w = int(in_edges[node["node_id"]][0]["width"])
-        comma = "," if idx < len(tniu_nodes) - 1 else ""
-        port_lines.append(f"  output logic {_network_port_valid(node, 'out')},{''}")
-        port_lines.append(f"  output logic{_fmt_logic_width(edge_w)} {_network_port_data(node, 'out')}{comma}")
+        nid = node["node_id"]
+        has_following_funnel_ports = len(funnel_nodes) > 0
+        needs_comma = (idx < len(tniu_nodes) - 1) or has_following_funnel_ports
+        port_lines += [
+            f"  output logic          {nid}_out_atvalid,",
+            f"  output logic [{bytes_w-1}:0]   {nid}_out_atbytes,",
+            f"  output logic [{data_w-1}:0] {nid}_out_atdata,",
+            f"  output logic [{id_w-1}:0]   {nid}_out_atid,",
+            f"  output logic          {nid}_out_afready,",
+            f"  output logic          {nid}_out_atwakeup,",
+            f"  input  logic          {nid}_in_atready,",
+            f"  input  logic          {nid}_in_afvalid,",
+            f"  input  logic          {nid}_in_syncreq{',' if needs_comma else ''}",
+        ]
+    for idx, node in enumerate(funnel_nodes):
+        nid = node["node_id"]
+        last = (idx == len(funnel_nodes) - 1)
+        port_lines += [
+            f"  input  logic          {nid}_pclkendbg,",
+            f"  input  logic          {nid}_pseldbg,",
+            f"  input  logic          {nid}_penabledbg,",
+            f"  input  logic          {nid}_pwritedbg,",
+            f"  input  logic          {nid}_paddrdbg31,",
+            f"  input  logic [9:0]    {nid}_paddrdbg,",
+            f"  input  logic [31:0]   {nid}_pwdatadbg,",
+            f"  output logic          {nid}_preadydbg,",
+            f"  output logic          {nid}_pslverrdbg,",
+            f"  output logic [31:0]   {nid}_prdatadbg{'  ' if last else ','}",
+        ]
     lines.extend(port_lines)
     lines.append(");")
     lines.append("")
-    lines.append("  // Topology edge wires")
+    lines.append("  // Topology edge wires: full ATB protocol per source-to-destination connection.")
     for edge in edges:
-        _emit_wire_decl(lines, edge)
+        _emit_atb_edge_decl(lines, edge, data_w=data_w, id_w=id_w, bytes_w=bytes_w)
     lines.append("")
 
+    # INIU boundary: source-side ATB signals enter the network layer directly.
     for node in iniu_nodes:
+        nid = node["node_id"]
         edge = out_edges[node["node_id"]][0]
-        lines.append(f"  assign {_wire_valid(edge)} = {_network_port_valid(node, 'in')};")
-        lines.append(f"  assign {_wire_data(edge)} = {_network_port_data(node, 'in')};")
+        lines.append(f"  assign {_wire_atvalid(edge)} = {nid}_in_atvalid;")
+        lines.append(f"  assign {_wire_atbytes(edge)} = {nid}_in_atbytes;")
+        lines.append(f"  assign {_wire_atdata(edge)} = {nid}_in_atdata;")
+        lines.append(f"  assign {_wire_atid(edge)} = {nid}_in_atid;")
+        lines.append(f"  assign {_wire_afready(edge)} = {nid}_in_afready;")
+        lines.append(f"  assign {_wire_atwakeup(edge)} = {nid}_in_atwakeup;")
+        lines.append(f"  assign {nid}_out_atready = {_wire_atready(edge)};")
+        lines.append(f"  assign {nid}_out_afvalid = {_wire_afvalid(edge)};")
+        lines.append(f"  assign {nid}_out_syncreq = {_wire_syncreq(edge)};")
+
+    # TNIU boundary: sink-side ATB signals leave the network layer directly.
     for node in tniu_nodes:
+        nid = node["node_id"]
         edge = in_edges[node["node_id"]][0]
-        lines.append(f"  assign {_network_port_valid(node, 'out')} = {_wire_valid(edge)};")
-        lines.append(f"  assign {_network_port_data(node, 'out')} = {_wire_data(edge)};")
+        lines.append(f"  assign {nid}_out_atvalid = {_wire_atvalid(edge)};")
+        lines.append(f"  assign {nid}_out_atbytes = {_wire_atbytes(edge)};")
+        lines.append(f"  assign {nid}_out_atdata = {_wire_atdata(edge)};")
+        lines.append(f"  assign {nid}_out_atid = {_wire_atid(edge)};")
+        lines.append(f"  assign {nid}_out_afready = {_wire_afready(edge)};")
+        lines.append(f"  assign {nid}_out_atwakeup = {_wire_atwakeup(edge)};")
+        lines.append(f"  assign {_wire_atready(edge)} = {nid}_in_atready;")
+        lines.append(f"  assign {_wire_afvalid(edge)} = {nid}_in_afvalid;")
+        lines.append(f"  assign {_wire_syncreq(edge)} = {nid}_in_syncreq;")
     lines.append("")
 
     lines.append("  // Generated topology instances")
@@ -722,8 +934,6 @@ module atb_async_bridge_slv #(
         .s_afready(1'b1),
         .s_syncreq(),
         .s_atwakeup(1'b0),
-        .slv_flush_req(1'b0),
-        .slv_syncreq_level(1'b0),
         .slv_full_zero(),
         .clk_atb_m(clk_async),
         .rstn_atb_m(rst_n),
@@ -736,8 +946,6 @@ module atb_async_bridge_slv #(
         .m_afready(),
         .m_syncreq(1'b0),
         .m_atwakeup(),
-        .mst_syncreq_level(),
-        .mst_flush_req_level(),
         .mst_full_zero(),
         .mst_read_idle()
     );
@@ -786,8 +994,6 @@ module atb_async_bridge_mst #(
         .s_afready(1'b1),
         .s_syncreq(),
         .s_atwakeup(1'b0),
-        .slv_flush_req(1'b0),
-        .slv_syncreq_level(1'b0),
         .slv_full_zero(),
         .clk_atb_m(clk),
         .rstn_atb_m(rst_n),
@@ -800,8 +1006,6 @@ module atb_async_bridge_mst #(
         .m_afready(),
         .m_syncreq(1'b0),
         .m_atwakeup(),
-        .mst_syncreq_level(),
-        .mst_flush_req_level(),
         .mst_full_zero(),
         .mst_read_idle()
     );
@@ -964,28 +1168,23 @@ def _gen_top_sv(topo) -> str:
     nodes = topo["nodes"]
     iniu_nodes = _boundary_nodes(nodes, "atb_iniu")
     tniu_nodes = _boundary_nodes(nodes, "atb_tniu")
+    funnel_nodes = _boundary_nodes(nodes, "atb_funnel")
 
     lines = []
     lines.append("// ATB SoC top-level publish wrapper.")
-    lines.append("// Per-SS sys-side payload is separated from noc-top assembly payload.")
     lines.append("module atb_soc_topo (")
-    lines.extend(_emit_port_list_lines())
+    # Boundary ports + timeout_val appended before closing paren
+    boundary_ports = _collect_boundary_ports(nodes)
+    for direction, name, width in boundary_ports:
+        lines.append(f"  {direction} logic{_fmt_logic_width(width)} {name},")
+    lines.append("  input  logic [9:0] timeout_val")
     lines.append(");")
     lines.append("")
 
+    # Wire declarations: NOC aux wires (individual ATB signals per INIU/TNIU)
     for node in iniu_nodes:
-        lines.append(f"  logic w_{node['node_id']}_sys_valid;")
-        lines.append(f"  logic{_fmt_logic_width(node['sys_data_w'])} w_{node['node_id']}_sys_data;")
-        lines.append(f"  logic w_{node['node_id']}_noc_valid;")
-        lines.append(f"  logic{_fmt_logic_width(node['fabric_data_w'])} w_{node['node_id']}_noc_data;")
-        lines.append(f"  logic [{node['fabric_data_w'] + 4 + 7 - 1}:0] w_{node['node_id']}_noc_payload;")
         lines.extend(_emit_noc_aux_wire_decls(node))
     for node in tniu_nodes:
-        lines.append(f"  logic w_{node['node_id']}_noc_valid;")
-        lines.append(f"  logic{_fmt_logic_width(node['fabric_data_w'])} w_{node['node_id']}_noc_data;")
-        lines.append(f"  logic [{node['fabric_data_w'] + 4 + 7 - 1}:0] w_{node['node_id']}_noc_payload;")
-        lines.append(f"  logic w_{node['node_id']}_sys_valid;")
-        lines.append(f"  logic{_fmt_logic_width(node['sys_data_w'])} w_{node['node_id']}_sys_data;")
         lines.extend(_emit_noc_aux_wire_decls(node))
         lines.append(f"  logic w_{node['node_id']}_syncreq_level;")
         lines.append(f"  logic w_{node['node_id']}_flush_req_level;")
@@ -999,11 +1198,14 @@ def _gen_top_sv(topo) -> str:
         lines.append(f"  logic [142:0] w_{node['node_id']}_pld_sync;")
     lines.append("")
 
+    # INIU sys-side instances — no payload packing, just pass individual ATB signals through
     for node in iniu_nodes:
         module_name = _sys_module_name(node)
+        sys_clk = f"{node['node_id']}_clk_sys"
+        sys_rst = f"{node['node_id']}_rst_sys_n"
         inst_ports = [
-            ("clk", "clk_core"),
-            ("rst_n", "rst_n"),
+            ("clk", sys_clk),
+            ("rst_n", sys_rst),
             ("sys_atvalid", _sys_sig(node, "atvalid")),
             ("sys_atready", _sys_sig(node, "atready")),
             ("sys_atbytes", _sys_sig(node, "atbytes")),
@@ -1018,6 +1220,7 @@ def _gen_top_sv(topo) -> str:
             ("sys_pactive", _sys_sig(node, "pactive")),
             ("sys_paccept", _sys_sig(node, "paccept")),
             ("sys_pdeny", _sys_sig(node, "pdeny")),
+            ("timeout_val", "timeout_val"),
             *_wrapper_noc_bindings(node),
         ]
         lines.extend(
@@ -1028,39 +1231,44 @@ def _gen_top_sv(topo) -> str:
                 ports=inst_ports,
             )
         )
-        _emit_iniu_payload_bridge(lines, node)
         lines.append("")
 
+    # TNIU noc-side and sys-side instances — no payload unpacking in top
     for node in tniu_nodes:
-        _emit_tniu_payload_defaults(lines, node)
+        nid = node["node_id"]
+        tniu_noc_clk = _node_clk_sig(nid)
+        tniu_noc_rst = _node_rst_sig(nid)
+        tniu_sys_clk = f"{nid}_clk_sys"
+        tniu_sys_rst = f"{nid}_rst_sys_n"
         noc_inst_ports = [
-            ("clk", "clk_core"),
-            ("rst_n", "rst_n"),
+            ("clk", tniu_noc_clk),
+            ("rst_n", tniu_noc_rst),
             *_wrapper_noc_bindings(node),
-            ("syncreq_level", f"w_{node['node_id']}_syncreq_level"),
-            ("flush_req_level", f"w_{node['node_id']}_flush_req_level"),
-            ("lp_sys_to_noc", f"w_{node['node_id']}_lp_sys_to_noc"),
-            ("lp_noc_to_sys", f"w_{node['node_id']}_lp_noc_to_sys"),
-            ("lp_afifo_sys_to_noc", f"w_{node['node_id']}_lp_afifo_sys_to_noc"),
-            ("lp_afifo_noc_to_sys", f"w_{node['node_id']}_lp_afifo_noc_to_sys"),
-            ("wptr_async", f"w_{node['node_id']}_wptr_async"),
-            ("rptr_async", f"w_{node['node_id']}_rptr_async"),
-            ("rptr_sync", f"w_{node['node_id']}_rptr_sync"),
-            ("pld_sync", f"w_{node['node_id']}_pld_sync"),
+            ("timeout_val", "timeout_val"),
+            ("syncreq_level", f"w_{nid}_syncreq_level"),
+            ("flush_req_level", f"w_{nid}_flush_req_level"),
+            ("lp_sys_to_noc", f"w_{nid}_lp_sys_to_noc"),
+            ("lp_noc_to_sys", f"w_{nid}_lp_noc_to_sys"),
+            ("lp_afifo_sys_to_noc", f"w_{nid}_lp_afifo_sys_to_noc"),
+            ("lp_afifo_noc_to_sys", f"w_{nid}_lp_afifo_noc_to_sys"),
+            ("wptr_async", f"w_{nid}_wptr_async"),
+            ("rptr_async", f"w_{nid}_rptr_async"),
+            ("rptr_sync", f"w_{nid}_rptr_sync"),
+            ("pld_sync", f"w_{nid}_pld_sync"),
         ]
         lines.extend(
             _sv_render_instance(
                 module_name=_tniu_noc_module_name(node),
-                inst_name=f"u_{node['node_id']}_noc_side",
+                inst_name=f"u_{nid}_noc_side",
                 params=[("DATA_W", str(node["fabric_data_w"]))],
                 ports=noc_inst_ports,
             )
         )
         lines.append("")
 
-        lines.append(f"  {node['node_id']}_atb_tniu_sys #(.FIFO_DEPTH(16)) u_{node['node_id']}_sys_side (")
-        lines.append("    .clk_atb_m(clk_core),")
-        lines.append("    .rstn_atb_m(rst_n),")
+        lines.append(f"  {nid}_atb_tniu_sys #(.FIFO_DEPTH(16)) u_{nid}_sys_side (")
+        lines.append(f"    .clk_atb_m({tniu_sys_clk}),")
+        lines.append(f"    .rstn_atb_m({tniu_sys_rst}),")
         lines.append(f"    .m_atvalid({_sys_sig(node, 'atvalid')}),")
         lines.append(f"    .m_atready({_sys_sig(node, 'atready')}),")
         lines.append(f"    .m_atbytes({_sys_sig(node, 'atbytes')}),")
@@ -1071,40 +1279,76 @@ def _gen_top_sv(topo) -> str:
         lines.append(f"    .m_syncreq({_sys_sig(node, 'syncreq')}),")
         lines.append(f"    .m_atwakeup({_sys_sig(node, 'atwakeup')}),")
         lines.append(f"    .preq({_sys_sig(node, 'preq')}),")
-        lines.append(f"    .pstate({_sys_sig(node, 'pstate')}),")
+        lines.append(f"    .pstate({_PSTATE_ENUM_TYPE}'({_sys_sig(node, 'pstate')})),")
         lines.append(f"    .pactive({_sys_sig(node, 'pactive')}),")
         lines.append(f"    .paccept({_sys_sig(node, 'paccept')}),")
         lines.append(f"    .pdeny({_sys_sig(node, 'pdeny')}),")
-        lines.append(f"    .syncreq_level(w_{node['node_id']}_syncreq_level),")
-        lines.append(f"    .flush_req_level(w_{node['node_id']}_flush_req_level),")
-        lines.append(f"    .lw_rx_req(w_{node['node_id']}_lp_noc_to_sys),")
-        lines.append(f"    .lw_tx_req(w_{node['node_id']}_lp_sys_to_noc),")
-        lines.append(f"    .afifo_slv_rx_req(w_{node['node_id']}_lp_afifo_noc_to_sys),")
-        lines.append(f"    .afifo_slv_tx_req(w_{node['node_id']}_lp_afifo_sys_to_noc),")
-        lines.append(f"    .wptr_async(w_{node['node_id']}_wptr_async),")
-        lines.append(f"    .rptr_async(w_{node['node_id']}_rptr_async),")
-        lines.append(f"    .rptr_sync(w_{node['node_id']}_rptr_sync),")
-        lines.append(f"    .pld_sync(w_{node['node_id']}_pld_sync),")
-        lines.append("    .timeout_val(10'd0)")
+        lines.append(f"    .syncreq_level(w_{nid}_syncreq_level),")
+        lines.append(f"    .flush_req_level(w_{nid}_flush_req_level),")
+        lines.append(f"    .lw_rx_req(w_{nid}_lp_noc_to_sys),")
+        lines.append(f"    .lw_tx_req(w_{nid}_lp_sys_to_noc),")
+        lines.append(f"    .afifo_slv_rx_req(w_{nid}_lp_afifo_noc_to_sys),")
+        lines.append(f"    .afifo_slv_tx_req(w_{nid}_lp_afifo_sys_to_noc),")
+        lines.append(f"    .wptr_async(w_{nid}_wptr_async),")
+        lines.append(f"    .rptr_async(w_{nid}_rptr_async),")
+        lines.append(f"    .rptr_sync(w_{nid}_rptr_sync),")
+        lines.append(f"    .pld_sync(w_{nid}_pld_sync),")
+        lines.append("    .timeout_val(timeout_val)")
         lines.append("  );")
         lines.append("")
 
-    _emit_iniu_reverse_control(lines, iniu_nodes, tniu_nodes)
-    lines.append("")
-
+    # Network layer — no packing/unpacking in top; individual ATB signals pass through.
+    # Reverse signals (atready/afvalid/syncreq) flow through network layer, not fan-out here.
     lines.append(f"  {NETWORK_LAYER_ID} u_{NETWORK_LAYER_ID} (")
     lines.append("    .clk_core(clk_core),")
     lines.append("    .clk_async(clk_async),")
-    lines.append("    .rst_n(rst_n),")
-    port_lines = []
+    lines.append("    .rst_core_n(rst_core_n),")
+    lines.append("    .rst_async_n(rst_async_n),")
+    nl_ports = []
     for node in iniu_nodes:
-        port_lines.append(f"    .{_network_port_valid(node, 'in')}(w_{node['node_id']}_noc_valid),")
-        port_lines.append(f"    .{_network_port_data(node, 'in')}(w_{node['node_id']}_noc_payload),")
+        nid = node["node_id"]
+        nl_ports += [
+            f"    .{nid}_in_atvalid(w_{nid}_noc_atvalid),",
+            f"    .{nid}_in_atbytes(w_{nid}_noc_atbytes),",
+            f"    .{nid}_in_atdata(w_{nid}_noc_atdata),",
+            f"    .{nid}_in_atid(w_{nid}_noc_atid),",
+            f"    .{nid}_in_afready(w_{nid}_noc_afready),",
+            f"    .{nid}_in_atwakeup(w_{nid}_noc_atwakeup),",
+            f"    .{nid}_out_atready(w_{nid}_noc_atready),",
+            f"    .{nid}_out_afvalid(w_{nid}_noc_afvalid),",
+            f"    .{nid}_out_syncreq(w_{nid}_noc_syncreq),",
+        ]
     for idx, node in enumerate(tniu_nodes):
-        tail = "," if idx < len(tniu_nodes) - 1 else ""
-        port_lines.append(f"    .{_network_port_valid(node, 'out')}(w_{node['node_id']}_noc_valid),")
-        port_lines.append(f"    .{_network_port_data(node, 'out')}(w_{node['node_id']}_noc_payload){tail}")
-    lines.extend(port_lines)
+        nid = node["node_id"]
+        has_following_funnel_ports = len(funnel_nodes) > 0
+        needs_comma = (idx < len(tniu_nodes) - 1) or has_following_funnel_ports
+        nl_ports += [
+            f"    .{nid}_out_atvalid(w_{nid}_noc_atvalid),",
+            f"    .{nid}_out_atbytes(w_{nid}_noc_atbytes),",
+            f"    .{nid}_out_atdata(w_{nid}_noc_atdata),",
+            f"    .{nid}_out_atid(w_{nid}_noc_atid),",
+            f"    .{nid}_out_afready(w_{nid}_noc_afready),",
+            f"    .{nid}_out_atwakeup(w_{nid}_noc_atwakeup),",
+            f"    .{nid}_in_atready(w_{nid}_noc_atready),",
+            f"    .{nid}_in_afvalid(w_{nid}_noc_afvalid),",
+            f"    .{nid}_in_syncreq(w_{nid}_noc_syncreq){',' if needs_comma else '  '}",
+        ]
+    for idx, node in enumerate(funnel_nodes):
+        nid = node["node_id"]
+        last = (idx == len(funnel_nodes) - 1)
+        nl_ports += [
+            f"    .{nid}_pclkendbg({nid}_pclkendbg),",
+            f"    .{nid}_pseldbg({nid}_pseldbg),",
+            f"    .{nid}_penabledbg({nid}_penabledbg),",
+            f"    .{nid}_pwritedbg({nid}_pwritedbg),",
+            f"    .{nid}_paddrdbg31({nid}_paddrdbg31),",
+            f"    .{nid}_paddrdbg({nid}_paddrdbg),",
+            f"    .{nid}_pwdatadbg({nid}_pwdatadbg),",
+            f"    .{nid}_preadydbg({nid}_preadydbg),",
+            f"    .{nid}_pslverrdbg({nid}_pslverrdbg),",
+            f"    .{nid}_prdatadbg({nid}_prdatadbg){'  ' if last else ','}",
+        ]
+    lines.extend(nl_ports)
     lines.append("  );")
     lines.append("endmodule")
     lines.append("")
@@ -1115,12 +1359,14 @@ def _gen_harden_wrap_sv(wrapper_name: str, child_name: str, topo) -> str:
     lines = []
     lines.append(f"module {wrapper_name} (")
     lines.extend(_emit_port_list_lines())
+    lines.append("  input  logic [9:0] timeout_val")
     lines.append(");")
     lines.append(f"  {child_name} u_{child_name} (")
-    ports = _collect_boundary_ports()
+    ports = _collect_boundary_ports(topo["nodes"])
     for idx, (_, name, _) in enumerate(ports):
-        comma = "," if idx < len(ports) - 1 else ""
+        comma = ","
         lines.append(f"    .{name}({name}){comma}")
+    lines.append("    .timeout_val(timeout_val)")
     lines.append("  );")
     lines.append("endmodule")
     lines.append("")
@@ -1136,6 +1382,7 @@ def _gen_pd_harden_dn_wrap_sv(topo) -> str:
     ports.extend([
         ("input", "harden_up_valid", 1),
         ("input", "harden_up_data", bridge_width),
+        ("input", "timeout_val", 10),
     ])
 
     lines = []
@@ -1174,9 +1421,11 @@ def _gen_pd_harden_dn_wrap_sv(topo) -> str:
 
     for node in down_iniu_nodes:
         module_name = _sys_module_name(node)
+        node_clk = f"{node['node_id']}_clk_sys"
+        node_rst = f"{node['node_id']}_rst_sys_n"
         inst_ports = [
-            ("clk", "clk_core"),
-            ("rst_n", "rst_n"),
+            ("clk", node_clk),
+            ("rst_n", node_rst),
             ("sys_atvalid", _sys_sig(node, "atvalid")),
             ("sys_atready", _sys_sig(node, "atready")),
             ("sys_atbytes", _sys_sig(node, "atbytes")),
@@ -1191,6 +1440,7 @@ def _gen_pd_harden_dn_wrap_sv(topo) -> str:
             ("sys_pactive", _sys_sig(node, "pactive")),
             ("sys_paccept", _sys_sig(node, "paccept")),
             ("sys_pdeny", _sys_sig(node, "pdeny")),
+            ("timeout_val", "timeout_val"),
             *_wrapper_noc_bindings(node),
         ]
         lines.extend(
@@ -1205,9 +1455,9 @@ def _gen_pd_harden_dn_wrap_sv(topo) -> str:
         lines.append("")
 
     lines.append(f"  atb_async_bridge_mst #(.DATA_W({bridge_width})) u_async_bridge_mst (")
-    lines.append("    .clk(clk_core),")
+    lines.append("    .clk(clk_async),")
     lines.append("    .clk_async(clk_async),")
-    lines.append("    .rst_n(rst_n),")
+    lines.append("    .rst_n(rst_async_n),")
     lines.append("    .in_valid(harden_up_valid),")
     lines.append("    .in_data(harden_up_data),")
     lines.append("    .out_valid(w_async_bridge_mst_valid),")
@@ -1240,9 +1490,10 @@ def _gen_pd_harden_dn_wrap_sv(topo) -> str:
             inst_name=f"u_{tniu_node['node_id']}_noc_side",
             params=[("DATA_W", str(tniu_node["fabric_data_w"]))],
             ports=[
-                ("clk", "clk_core"),
-                ("rst_n", "rst_n"),
+                ("clk", _node_clk_sig(tniu_node["node_id"])),
+                ("rst_n", _node_rst_sig(tniu_node["node_id"])),
                 *_wrapper_noc_bindings(tniu_node),
+                ("timeout_val", "timeout_val"),
                 ("syncreq_level", f"w_{tniu_node['node_id']}_syncreq_level"),
                 ("flush_req_level", f"w_{tniu_node['node_id']}_flush_req_level"),
                 ("lp_sys_to_noc", f"w_{tniu_node['node_id']}_lp_sys_to_noc"),
@@ -1259,8 +1510,8 @@ def _gen_pd_harden_dn_wrap_sv(topo) -> str:
     lines.append("")
 
     lines.append(f"  {tniu_node['node_id']}_atb_tniu_sys #(.FIFO_DEPTH(16)) u_{tniu_node['node_id']}_sys_side (")
-    lines.append("    .clk_atb_m(clk_core),")
-    lines.append("    .rstn_atb_m(rst_n),")
+    lines.append(f"    .clk_atb_m({tniu_node['node_id']}_clk_sys),")
+    lines.append(f"    .rstn_atb_m({tniu_node['node_id']}_rst_sys_n),")
     lines.append(f"    .m_atvalid({_sys_sig(tniu_node, 'atvalid')}),")
     lines.append(f"    .m_atready({_sys_sig(tniu_node, 'atready')}),")
     lines.append(f"    .m_atbytes({_sys_sig(tniu_node, 'atbytes')}),")
@@ -1271,7 +1522,7 @@ def _gen_pd_harden_dn_wrap_sv(topo) -> str:
     lines.append(f"    .m_syncreq({_sys_sig(tniu_node, 'syncreq')}),")
     lines.append(f"    .m_atwakeup({_sys_sig(tniu_node, 'atwakeup')}),")
     lines.append(f"    .preq({_sys_sig(tniu_node, 'preq')}),")
-    lines.append(f"    .pstate({_sys_sig(tniu_node, 'pstate')}),")
+    lines.append(f"    .pstate({_PSTATE_ENUM_TYPE}'({_sys_sig(tniu_node, 'pstate')})),")
     lines.append(f"    .pactive({_sys_sig(tniu_node, 'pactive')}),")
     lines.append(f"    .paccept({_sys_sig(tniu_node, 'paccept')}),")
     lines.append(f"    .pdeny({_sys_sig(tniu_node, 'pdeny')}),")
@@ -1285,7 +1536,7 @@ def _gen_pd_harden_dn_wrap_sv(topo) -> str:
     lines.append(f"    .rptr_async(w_{tniu_node['node_id']}_rptr_async),")
     lines.append(f"    .rptr_sync(w_{tniu_node['node_id']}_rptr_sync),")
     lines.append(f"    .pld_sync(w_{tniu_node['node_id']}_pld_sync),")
-    lines.append("    .timeout_val(10'd0)")
+    lines.append("    .timeout_val(timeout_val)")
     lines.append("  );")
     lines.append("endmodule")
     lines.append("")
@@ -1303,7 +1554,11 @@ def _gen_pd_harden_up_wrap_sv(topo) -> str:
     lines = []
     lines.append("// PD harden-up partition: DSP INIU delivery, left funnel, async bridge slv, and handoff into harden-down.")
     lines.append("module atb_soc_harden_up_wrap (")
-    lines.extend(_emit_port_list_lines())
+    port_lines = _emit_port_list_lines(topo["nodes"])
+    if port_lines:
+        port_lines[-1] = f"{port_lines[-1]},"
+    lines.extend(port_lines)
+    lines.append("  input  logic [9:0] timeout_val")
     lines.append(");")
     lines.append("")
 
@@ -1321,9 +1576,11 @@ def _gen_pd_harden_up_wrap_sv(topo) -> str:
 
     for node in dsp_nodes:
         module_name = _sys_module_name(node)
+        node_clk = f"{node['node_id']}_clk_sys"
+        node_rst = f"{node['node_id']}_rst_sys_n"
         inst_ports = [
-            ("clk", "clk_core"),
-            ("rst_n", "rst_n"),
+            ("clk", node_clk),
+            ("rst_n", node_rst),
             ("sys_atvalid", _sys_sig(node, "atvalid")),
             ("sys_atready", _sys_sig(node, "atready")),
             ("sys_atbytes", _sys_sig(node, "atbytes")),
@@ -1338,6 +1595,7 @@ def _gen_pd_harden_up_wrap_sv(topo) -> str:
             ("sys_pactive", _sys_sig(node, "pactive")),
             ("sys_paccept", _sys_sig(node, "paccept")),
             ("sys_pdeny", _sys_sig(node, "pdeny")),
+            ("timeout_val", "timeout_val"),
             *_wrapper_noc_bindings(node),
         ]
         lines.extend(
@@ -1366,7 +1624,7 @@ def _gen_pd_harden_up_wrap_sv(topo) -> str:
     lines.append(f"  atb_async_bridge_slv #(.DATA_W({bridge_width})) u_async_bridge_slv (")
     lines.append("    .clk(clk_core),")
     lines.append("    .clk_async(clk_async),")
-    lines.append("    .rst_n(rst_n),")
+    lines.append("    .rst_n(rst_core_n),")
     lines.append("    .in_valid(w_left_funnel_valid),")
     lines.append("    .in_data(w_left_funnel_data),")
     lines.append("    .out_valid(w_harden_up_valid),")
@@ -1377,11 +1635,15 @@ def _gen_pd_harden_up_wrap_sv(topo) -> str:
     lines.append("  atb_soc_harden_dn_wrap u_atb_soc_harden_dn_wrap (")
     lines.append("    .clk_core(clk_core),")
     lines.append("    .clk_async(clk_async),")
-    lines.append("    .rst_n(rst_n),")
+    lines.append("    .rst_core_n(rst_core_n),")
+    lines.append("    .rst_async_n(rst_async_n),")
     for node in down_nodes:
+        lines.append(f"    .{node['node_id']}_clk_sys({node['node_id']}_clk_sys),")
+        lines.append(f"    .{node['node_id']}_rst_sys_n({node['node_id']}_rst_sys_n),")
         iface_name = "sys_in" if node["kind"] == "atb_iniu" else "sys_out"
         for port in node["interfaces"][iface_name]:
             lines.append(f"    .{port['name']}({port['name']}),")
+    lines.append("    .timeout_val(timeout_val),")
     lines.append("    .harden_up_valid(w_harden_up_valid),")
     lines.append("    .harden_up_data(w_harden_up_data)")
     lines.append("  );")
@@ -1406,6 +1668,7 @@ def _publish_filelists(build_root: Path, build_top_dir: Path, topo, flow: str):
         harden_dn_sv = (build_top_dir / "atb_soc_harden_dn_wrap.v").resolve()
         harden_up_sv = (build_top_dir / "atb_soc_harden_up_wrap.v").resolve()
 
+    # Keep compat wrappers for helper cells used by PD wrappers (atb_funnel3/6, atb_async_bridge_*).
     compat_dst.write_text(_gen_network_compat_sv())
     external_network_units = _external_network_unit_files()
 

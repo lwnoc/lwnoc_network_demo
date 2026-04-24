@@ -1,0 +1,14 @@
+
+Warning-[LINX_KRNL] Unsupported Linux kernel
+  Linux kernel '5.15.133.1-microsoft-standard-WSL2' is not supported.
+  Supported versions are 2.4* or 2.6*.
+
+Command: vcs -LDFLAGS -no-pie -f ../filelists/filelist.f -full64 -sverilog -timescale=1ns/1ps \
+-l build_check/vcs_enumfix.log
+
+Error-[P1ARGS-CANTOPN-F] Cannot open file
+  Unable to open '$DTI_TEST_DIR/filelists/soc_dti_logic_topo.f' due to 'No 
+  such file or directory'.
+  Please fix the reason mentioned above and continue.
+
+CPU time: .502 seconds to compile

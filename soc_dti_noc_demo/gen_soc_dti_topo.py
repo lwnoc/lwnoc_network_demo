@@ -253,6 +253,35 @@ def _is_top_side_payload(name: str) -> bool:
     return name.startswith("dti_iniu_top_") or name.startswith("dti_tniu_top_")
 
 
+def _is_iniu_sys_payload(name: str) -> bool:
+    return name.endswith("_iniu_sys_wrap.v") or name.endswith("_tniu_sys_wrap.v")
+
+
+def _is_iniu_node_payload(name: str) -> bool:
+    return name.endswith("_iniu_node.v") or name.endswith("_tniu_node.v")
+
+
+def _is_top_wrap_excluded_payload(name: str) -> bool:
+    return (
+        _is_switch_payload(name)
+        or _is_top_side_payload(name)
+        or _is_iniu_sys_payload(name)
+        or _is_iniu_node_payload(name)
+    )
+
+
+def _is_top_wrap_excluded_line(line: str) -> bool:
+    if line.startswith(f"${_SHARED_ENV}/"):
+        return _is_top_wrap_excluded_payload(line.split("/")[-1])
+    return False
+
+
+def _is_harden_partition_filelist_line(line: str) -> bool:
+    if not line.startswith("-f "):
+        return False
+    return bool(re.match(rf"-f \$DTI_TEST_DIR/build_logic/{_HARDEN_PREFIX}[^/]+/filelist\.f$", line))
+
+
 def _write_filelist(dst_path: Path, lines: list[str]) -> None:
     dst_path.parent.mkdir(parents=True, exist_ok=True)
     dst_path.write_text("\n".join(lines) + "\n")
@@ -402,6 +431,35 @@ def _flatten_lp_boundary_ports_in_file(path: Path) -> bool:
         return False
     path.write_text(updated)
     return True
+
+
+_PSTATE_INPUT_RE = re.compile(
+    r"(?P<prefix>\.pstate\()(?P<signal>[A-Za-z_][A-Za-z0-9_]*)(?P<suffix>\),)"
+)
+
+
+def _cast_flattened_pstate_inputs_in_file(path: Path) -> bool:
+    text = path.read_text()
+
+    def _replace(match: re.Match[str]) -> str:
+        signal_name = match.group("signal")
+        return (
+            f"{match.group('prefix')}"
+            f"lwnoc_lp_define_package::lwnoc_pchannel_state_t'({signal_name})"
+            f"{match.group('suffix')}"
+        )
+
+    updated = _PSTATE_INPUT_RE.sub(_replace, text)
+    if updated == text:
+        return False
+    path.write_text(updated)
+    return True
+
+
+def _cast_flattened_pstate_inputs(build_dir: Path) -> None:
+    for path in sorted(build_dir.glob("**/*.v")):
+        if _cast_flattened_pstate_inputs_in_file(path):
+            print(f"  [lp_pstate_cast] patched {path.relative_to(build_dir)}")
 
 
 def _patch_generated_tieoff_components(build_dir: Path) -> None:
@@ -600,6 +658,7 @@ def _publish_top_wrap_dir(build_dir: Path) -> None:
     source_dir = build_dir / _COMBINED_DIR
     target_dir = build_dir / _TOP_WRAP_DIR
     network_filelist = f"-f {_LOCAL_BUILD_ROOT}/{_NETWORK_COMPONENT_DIR}/filelist.f"
+    local_prefix = f"{TOPO_ID}/"
 
     if target_dir.exists():
         shutil.rmtree(target_dir)
@@ -608,7 +667,7 @@ def _publish_top_wrap_dir(build_dir: Path) -> None:
     for src_path in sorted(source_dir.iterdir()):
         if not src_path.is_file():
             continue
-        if _is_switch_payload(src_path.name) or _is_top_side_payload(src_path.name):
+        if _is_top_wrap_excluded_payload(src_path.name):
             continue
         shutil.copyfile(src_path, target_dir / src_path.name)
 
@@ -625,15 +684,29 @@ def _publish_top_wrap_dir(build_dir: Path) -> None:
         if not line:
             continue
 
+        if line.startswith("-f "):
+            nested = line[3:]
+            if nested.startswith(local_prefix):
+                line = f"-f ${_SHARED_ENV}/{nested[len(local_prefix):]}"
+        elif line.startswith(local_prefix):
+            line = f"${_SHARED_ENV}/{line[len(local_prefix):]}"
+
         line = _rewrite_role_filelist_env(line)
+
+        if _is_harden_partition_filelist_line(line):
+            continue
+
         if line.startswith(f"-f ${_SHARED_ENV}/"):
             nested_name = line[len(f"-f ${_SHARED_ENV}/") :]
-            if _is_switch_payload(nested_name) or _is_top_side_payload(nested_name):
+            if _is_top_wrap_excluded_payload(nested_name):
                 continue
         elif line.startswith(f"${_SHARED_ENV}/"):
             local_name = line[len(f"${_SHARED_ENV}/") :]
-            if _is_switch_payload(local_name) or _is_top_side_payload(local_name):
+            if _is_top_wrap_excluded_payload(local_name):
                 continue
+
+        if _is_top_wrap_excluded_line(line):
+            continue
 
         if line in seen_lines:
             continue
@@ -675,6 +748,60 @@ def _cleanup_internal_combined_dir(build_dir: Path) -> None:
 
     shutil.rmtree(scratch_dir)
     print(f"  [cleanup] removed scratch {_COMBINED_DIR}/")
+
+
+def _publish_sys_payload_modules(build_dir: Path) -> None:
+    source_dir = build_dir / _COMBINED_DIR
+    sys_filelist_re = re.compile(r"^-f \$(?P<env>[A-Z0-9_]+)/(?P<filelist>[A-Za-z0-9_]+\.f)$")
+    published_count = 0
+
+    for node_path in sorted(source_dir.glob("*_node.v")):
+        node_id = node_path.stem
+        try:
+            sys_entry = _sys_filelist_entry(node_id)
+        except ValueError:
+            continue
+
+        match = sys_filelist_re.match(sys_entry)
+        if not match:
+            continue
+
+        env_name = match.group("env")
+        filelist_name = match.group("filelist")
+        sys_filelist_candidates = sorted(build_dir.glob(f"**/{filelist_name}"))
+        if not sys_filelist_candidates:
+            print(f"  [sys_publish] WARNING: target filelist missing for {node_id}: {filelist_name}")
+            continue
+
+        sys_filelist_path = sys_filelist_candidates[0]
+        sys_dir = sys_filelist_path.parent
+
+        role = "tniu" if node_id.endswith("_tniu_node") else "iniu"
+        base_name = node_id[: -len(f"_{role}_node")]
+        sys_wrap_name = f"{base_name}_{role}_sys_wrap.v"
+        node_name = f"{base_name}_{role}_node.v"
+
+        copied_names: list[str] = []
+        for filename in (sys_wrap_name, node_name):
+            src_path = source_dir / filename
+            if not src_path.exists():
+                continue
+            shutil.copyfile(src_path, sys_dir / filename)
+            copied_names.append(filename)
+
+        if not copied_names:
+            continue
+
+        existing_lines = [line.strip() for line in sys_filelist_path.read_text().splitlines() if line.strip()]
+        for filename in copied_names:
+            line = f"${env_name}/{filename}"
+            if line not in existing_lines:
+                existing_lines.append(line)
+
+        _write_filelist(sys_filelist_path, existing_lines)
+        published_count += 1
+
+    print(f"  [sys_publish] updated system payloads for {published_count} node wrappers")
 
 
 def _sys_filelist_entry(node_id: str) -> str:
@@ -866,8 +993,11 @@ def _publish_partitioned_harden_outputs(build_dir: Path) -> None:
             partition_id,
             member_ids,
         )
-
-    _rewrite_harden_top_filelist(source_dir, list(harden_specs.keys()))
+    # Keep partition filelists as standalone publish artifacts only.
+    # Do not inject them into the DV top assembly filelist, otherwise
+    # shared package/module files are parsed repeatedly and trigger
+    # SV-PPD/OPD duplicate-declaration diagnostics.
+    print("  [harden_publish] skip rewriting top assembly filelist for DV ingress")
 
 
 def _publish_top_filelist(src_path: Path, dst_path: Path) -> None:
@@ -910,11 +1040,14 @@ def main() -> None:
     # Align with soc_intr_noc_wrap: flatten LP typedef ports to vectors
     # without creating per-port __typed cast bridges.
     _flatten_lp_boundary_typedef_ports(build_dir)
+    _cast_flattened_pstate_inputs(build_dir)
     _patch_generated_tieoff_components(build_dir)
     _publish_partitioned_harden_outputs(build_dir)
     _publish_role_payload_dirs(build_dir)
+    _publish_sys_payload_modules(build_dir)
     _publish_network_component_dir(build_dir)
     _publish_top_wrap_dir(build_dir)
+    _cast_flattened_pstate_inputs(build_dir)
     _cleanup_internal_combined_dir(build_dir)
     _publish_top_filelist(
         build_dir / _TOP_WRAP_DIR / "filelist.f",

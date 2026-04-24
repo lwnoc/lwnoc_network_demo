@@ -1,5 +1,0 @@
--f $STS_NOC_DEMO_DIR/filelists/sts_common_dep.f
-$STS_NOC_DEMO_DIR/build_logic/iniu0_sys/iniu0_iniu_filelist.f
-$STS_NOC_DEMO_DIR/build_logic/tniu0_sys/tniu0_tniu_filelist.f
-$STS_NOC_DEMO_DIR/build_logic/tniu1_sys/tniu1_tniu_filelist.f
-$STS_NOC_DEMO_DIR/build_logic/sts_soc_harden_dn_wrap/sts_soc_harden_dn_wrap.v

@@ -1,8 +1,8 @@
-//[UHDL]Content Start [md5:02fd3bbbfdbe79e424c5528f799089a8]
+//[UHDL]Content Start [md5:7f572346e50378e532c8b70cfbd37c33]
 module soc_dti_harden_dn
 	(
-	input                                                 clk_noc                                                               ,
-	input                                                 rst_noc_n                                                             ,
+	input                                                 clk_noc_dn                                                            ,
+	input                                                 rst_noc_dn_n                                                          ,
 	input                                                 link_req_iniu1_req_last                                               ,
 	input  [89:0]                                         link_req_iniu1_req_payload                                            ,
 	input                                                 link_req_iniu1_req_qos                                                ,
@@ -99,16 +99,16 @@ module soc_dti_harden_dn
 	output [15:0]                                         vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async     ,
 	output logic [9-1:0] vpu_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req        ,
 	input logic [9-1:0] vpu_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req        ,
-	input  [104:0]                                        pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync  ,
-	output [15:0]                                         pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async,
-	output [15:0]                                         pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync ,
-	input  [15:0]                                         pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_wptr_async,
-	output [104:0]                                        pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_pld_sync  ,
-	input  [15:0]                                         pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async,
-	input  [15:0]                                         pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync ,
-	output [15:0]                                         pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async,
-	output logic [9-1:0] pcie_rtg_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req   ,
-	input logic [9-1:0] pcie_rtg_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req   ,
+	input  [104:0]                                        pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync  ,
+	output [15:0]                                         pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async,
+	output [15:0]                                         pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync ,
+	input  [15:0]                                         pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_wptr_async,
+	output [104:0]                                        pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_pld_sync  ,
+	input  [15:0]                                         pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async,
+	input  [15:0]                                         pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync ,
+	output [15:0]                                         pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async,
+	output logic [9-1:0] pcie_eth_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req   ,
+	input logic [9-1:0] pcie_eth_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req   ,
 	input  [104:0]                                        ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync       ,
 	output [15:0]                                         ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async     ,
 	output [15:0]                                         ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync      ,
@@ -207,14 +207,14 @@ module soc_dti_harden_dn
 	wire        vpu_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last          ;
 	wire        vpu_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_ready         ;
 	wire        vpu_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_threshold     ;
-	wire        pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_valid    ;
-	wire [89:0] pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload  ;
-	wire [5:0]  pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_srcid    ;
-	wire [5:0]  pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_tgtid    ;
-	wire        pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_qos      ;
-	wire        pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last     ;
-	wire        pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_ready    ;
-	wire        pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_threshold;
+	wire        pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_valid    ;
+	wire [89:0] pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload  ;
+	wire [5:0]  pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_srcid    ;
+	wire [5:0]  pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_tgtid    ;
+	wire        pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_qos      ;
+	wire        pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last     ;
+	wire        pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_ready    ;
+	wire        pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_threshold;
 	wire        ufs_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_valid         ;
 	wire [89:0] ufs_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload       ;
 	wire [5:0]  ufs_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_srcid         ;
@@ -351,14 +351,14 @@ module soc_dti_harden_dn
 	wire [5:0]  sw_io5_TO_vpu_ss_iniu_top_wrap_SIG_iniu0_rsp_srcid           ;
 	wire [5:0]  sw_io5_TO_vpu_ss_iniu_top_wrap_SIG_iniu0_rsp_tgtid           ;
 	wire        sw_io5_TO_vpu_ss_iniu_top_wrap_SIG_iniu0_rsp_valid           ;
-	wire        sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_req_ready      ;
-	wire        sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_req_threshold  ;
-	wire        sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_last       ;
-	wire [89:0] sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_payload    ;
-	wire        sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_qos        ;
-	wire [5:0]  sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_srcid      ;
-	wire [5:0]  sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_tgtid      ;
-	wire        sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_valid      ;
+	wire        sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_req_ready      ;
+	wire        sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_req_threshold  ;
+	wire        sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_last       ;
+	wire [89:0] sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_payload    ;
+	wire        sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_qos        ;
+	wire [5:0]  sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_srcid      ;
+	wire [5:0]  sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_tgtid      ;
+	wire        sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_valid      ;
 	wire        sw_io5_TO_ufs_ss_iniu_top_wrap_SIG_iniu2_req_ready           ;
 	wire        sw_io5_TO_ufs_ss_iniu_top_wrap_SIG_iniu2_req_threshold       ;
 	wire        sw_io5_TO_ufs_ss_iniu_top_wrap_SIG_iniu2_rsp_last            ;
@@ -392,8 +392,8 @@ module soc_dti_harden_dn
 
 	//module inst.
 	soc_dti_sw_dsp6_dti_switch_6i1o_wrap sw_dsp6 (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
+		.clk(clk_noc_dn),
+		.rst_n(rst_noc_dn_n),
 		.iniu0_req_valid(dsp_ss0_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_valid),
 		.iniu0_req_ready(sw_dsp6_TO_dsp_ss0_iniu_top_wrap_SIG_iniu0_req_ready),
 		.iniu0_req_payload(dsp_ss0_iniu_top_wrap_TO_sw_dsp6_SIG_top_req_req_payload),
@@ -507,8 +507,8 @@ module soc_dti_harden_dn
 		.tniu_rsp_last(sw_root_TO_sw_dsp6_SIG_iniu0_rsp_last),
 		.tniu_rsp_threshold(sw_dsp6_TO_sw_root_SIG_tniu_rsp_threshold));
 	soc_dti_sw_io5_dti_switch_5i1o_wrap sw_io5 (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
+		.clk(clk_noc_dn),
+		.rst_n(rst_noc_dn_n),
 		.iniu0_req_valid(vpu_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_valid),
 		.iniu0_req_ready(sw_io5_TO_vpu_ss_iniu_top_wrap_SIG_iniu0_req_ready),
 		.iniu0_req_payload(vpu_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload),
@@ -525,22 +525,22 @@ module soc_dti_harden_dn
 		.iniu0_rsp_qos(sw_io5_TO_vpu_ss_iniu_top_wrap_SIG_iniu0_rsp_qos),
 		.iniu0_rsp_last(sw_io5_TO_vpu_ss_iniu_top_wrap_SIG_iniu0_rsp_last),
 		.iniu0_rsp_threshold(vpu_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_threshold),
-		.iniu1_req_valid(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_valid),
-		.iniu1_req_ready(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_req_ready),
-		.iniu1_req_payload(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload),
-		.iniu1_req_srcid(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_srcid),
-		.iniu1_req_tgtid(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_tgtid),
-		.iniu1_req_qos(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_qos),
-		.iniu1_req_last(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last),
-		.iniu1_req_threshold(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_req_threshold),
-		.iniu1_rsp_valid(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_valid),
-		.iniu1_rsp_ready(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_ready),
-		.iniu1_rsp_payload(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_payload),
-		.iniu1_rsp_srcid(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_srcid),
-		.iniu1_rsp_tgtid(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_tgtid),
-		.iniu1_rsp_qos(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_qos),
-		.iniu1_rsp_last(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_last),
-		.iniu1_rsp_threshold(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_threshold),
+		.iniu1_req_valid(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_valid),
+		.iniu1_req_ready(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_req_ready),
+		.iniu1_req_payload(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload),
+		.iniu1_req_srcid(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_srcid),
+		.iniu1_req_tgtid(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_tgtid),
+		.iniu1_req_qos(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_qos),
+		.iniu1_req_last(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last),
+		.iniu1_req_threshold(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_req_threshold),
+		.iniu1_rsp_valid(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_valid),
+		.iniu1_rsp_ready(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_ready),
+		.iniu1_rsp_payload(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_payload),
+		.iniu1_rsp_srcid(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_srcid),
+		.iniu1_rsp_tgtid(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_tgtid),
+		.iniu1_rsp_qos(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_qos),
+		.iniu1_rsp_last(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_last),
+		.iniu1_rsp_threshold(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_threshold),
 		.iniu2_req_valid(ufs_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_valid),
 		.iniu2_req_ready(sw_io5_TO_ufs_ss_iniu_top_wrap_SIG_iniu2_req_ready),
 		.iniu2_req_payload(ufs_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload),
@@ -606,8 +606,8 @@ module soc_dti_harden_dn
 		.tniu_rsp_last(sw_right_TO_sw_io5_SIG_iniu0_rsp_last),
 		.tniu_rsp_threshold(sw_io5_TO_sw_right_SIG_tniu_rsp_threshold));
 	soc_dti_sw_right_dti_switch_2i1o_wrap sw_right (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
+		.clk(clk_noc_dn),
+		.rst_n(rst_noc_dn_n),
 		.iniu0_req_valid(sw_io5_TO_sw_right_SIG_tniu_req_valid),
 		.iniu0_req_ready(sw_right_TO_sw_io5_SIG_iniu0_req_ready),
 		.iniu0_req_payload(sw_io5_TO_sw_right_SIG_tniu_req_payload),
@@ -657,8 +657,8 @@ module soc_dti_harden_dn
 		.tniu_rsp_last(sw_root_TO_sw_right_SIG_iniu1_rsp_last),
 		.tniu_rsp_threshold(sw_right_TO_sw_root_SIG_tniu_rsp_threshold));
 	soc_dti_sw_root_dti_switch_2i1o_wrap sw_root (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
+		.clk(clk_noc_dn),
+		.rst_n(rst_noc_dn_n),
 		.iniu0_req_valid(sw_dsp6_TO_sw_root_SIG_tniu_req_valid),
 		.iniu0_req_ready(sw_root_TO_sw_dsp6_SIG_iniu0_req_ready),
 		.iniu0_req_payload(sw_dsp6_TO_sw_root_SIG_tniu_req_payload),
@@ -708,8 +708,8 @@ module soc_dti_harden_dn
 		.tniu_rsp_last(sys_tcu_tniu_top_wrap_TO_sw_root_SIG_top_rsp_rsp_last),
 		.tniu_rsp_threshold(sw_root_TO_sys_tcu_tniu_top_wrap_SIG_tniu_rsp_threshold));
 	sys_tcu_tniu_top_wrap sys_tcu_tniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.async_fifo_req_pld_sync(sys_tcu_tniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(sys_tcu_tniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(sys_tcu_tniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -737,8 +737,8 @@ module soc_dti_harden_dn
 		.top_rsp_rsp_threshold(sw_root_TO_sys_tcu_tniu_top_wrap_SIG_tniu_rsp_threshold),
 		.top_rsp_rsp_valid(sys_tcu_tniu_top_wrap_TO_sw_root_SIG_top_rsp_rsp_valid));
 	dsp_ss0_iniu_top_wrap dsp_ss0_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.async_fifo_req_pld_sync(dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(dsp_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -766,8 +766,8 @@ module soc_dti_harden_dn
 		.top_rsp_rsp_threshold(dsp_ss0_iniu_top_wrap_TO_sw_dsp6_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_dsp6_TO_dsp_ss0_iniu_top_wrap_SIG_iniu0_rsp_valid));
 	dsp_ss1_iniu_top_wrap dsp_ss1_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.async_fifo_req_pld_sync(dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(dsp_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -795,8 +795,8 @@ module soc_dti_harden_dn
 		.top_rsp_rsp_threshold(dsp_ss1_iniu_top_wrap_TO_sw_dsp6_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_dsp6_TO_dsp_ss1_iniu_top_wrap_SIG_iniu1_rsp_valid));
 	dsp_ss2_iniu_top_wrap dsp_ss2_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.async_fifo_req_pld_sync(dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(dsp_ss2_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -824,8 +824,8 @@ module soc_dti_harden_dn
 		.top_rsp_rsp_threshold(dsp_ss2_iniu_top_wrap_TO_sw_dsp6_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_dsp6_TO_dsp_ss2_iniu_top_wrap_SIG_iniu2_rsp_valid));
 	dsp_ss3_iniu_top_wrap dsp_ss3_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.async_fifo_req_pld_sync(dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(dsp_ss3_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -853,8 +853,8 @@ module soc_dti_harden_dn
 		.top_rsp_rsp_threshold(dsp_ss3_iniu_top_wrap_TO_sw_dsp6_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_dsp6_TO_dsp_ss3_iniu_top_wrap_SIG_iniu3_rsp_valid));
 	dsp_ss4_iniu_top_wrap dsp_ss4_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.async_fifo_req_pld_sync(dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(dsp_ss4_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -882,8 +882,8 @@ module soc_dti_harden_dn
 		.top_rsp_rsp_threshold(dsp_ss4_iniu_top_wrap_TO_sw_dsp6_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_dsp6_TO_dsp_ss4_iniu_top_wrap_SIG_iniu4_rsp_valid));
 	dsp_ss5_iniu_top_wrap dsp_ss5_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.async_fifo_req_pld_sync(dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(dsp_ss5_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -911,8 +911,8 @@ module soc_dti_harden_dn
 		.top_rsp_rsp_threshold(dsp_ss5_iniu_top_wrap_TO_sw_dsp6_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_dsp6_TO_dsp_ss5_iniu_top_wrap_SIG_iniu5_rsp_valid));
 	vpu_ss_iniu_top_wrap vpu_ss_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.async_fifo_req_pld_sync(vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(vpu_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -939,38 +939,38 @@ module soc_dti_harden_dn
 		.top_rsp_rsp_tgtid(sw_io5_TO_vpu_ss_iniu_top_wrap_SIG_iniu0_rsp_tgtid),
 		.top_rsp_rsp_threshold(vpu_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_io5_TO_vpu_ss_iniu_top_wrap_SIG_iniu0_rsp_valid));
-	pcie_rtg_ss_iniu_top_wrap pcie_rtg_ss_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
-		.async_fifo_req_pld_sync(pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
-		.async_fifo_req_rptr_async(pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
-		.async_fifo_req_rptr_sync(pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
-		.async_fifo_req_wptr_async(pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_wptr_async),
-		.async_fifo_rsp_pld_sync(pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_pld_sync),
-		.async_fifo_rsp_rptr_async(pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
-		.async_fifo_rsp_rptr_sync(pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
-		.async_fifo_rsp_wptr_async(pcie_rtg_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
-		.lp_top_tx_lp_hub_tx_req(pcie_rtg_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
-		.lp_top_rx_lp_hub_rx_req(pcie_rtg_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
-		.top_req_req_last(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last),
-		.top_req_req_payload(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload),
-		.top_req_req_qos(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_qos),
-		.top_req_req_ready(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_req_ready),
-		.top_req_req_srcid(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_srcid),
-		.top_req_req_tgtid(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_tgtid),
-		.top_req_req_threshold(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_req_threshold),
-		.top_req_req_valid(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_valid),
-		.top_rsp_rsp_last(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_last),
-		.top_rsp_rsp_payload(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_payload),
-		.top_rsp_rsp_qos(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_qos),
-		.top_rsp_rsp_ready(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_ready),
-		.top_rsp_rsp_srcid(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_srcid),
-		.top_rsp_rsp_tgtid(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_tgtid),
-		.top_rsp_rsp_threshold(pcie_rtg_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_threshold),
-		.top_rsp_rsp_valid(sw_io5_TO_pcie_rtg_ss_iniu_top_wrap_SIG_iniu1_rsp_valid));
+	pcie_eth_ss_iniu_top_wrap pcie_eth_ss_iniu_top_wrap (
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
+		.async_fifo_req_pld_sync(pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
+		.async_fifo_req_rptr_async(pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
+		.async_fifo_req_rptr_sync(pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
+		.async_fifo_req_wptr_async(pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_wptr_async),
+		.async_fifo_rsp_pld_sync(pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_pld_sync),
+		.async_fifo_rsp_rptr_async(pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_async),
+		.async_fifo_rsp_rptr_sync(pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_rptr_sync),
+		.async_fifo_rsp_wptr_async(pcie_eth_ss_iniu_top_wrap_async_fifo_porting_async_fifo_rsp_wptr_async),
+		.lp_top_tx_lp_hub_tx_req(pcie_eth_ss_iniu_top_wrap_lp_top_tx_porting_lp_top_tx_lp_hub_tx_req),
+		.lp_top_rx_lp_hub_rx_req(pcie_eth_ss_iniu_top_wrap_lp_top_rx_porting_lp_top_rx_lp_hub_rx_req),
+		.top_req_req_last(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_last),
+		.top_req_req_payload(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_payload),
+		.top_req_req_qos(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_qos),
+		.top_req_req_ready(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_req_ready),
+		.top_req_req_srcid(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_srcid),
+		.top_req_req_tgtid(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_tgtid),
+		.top_req_req_threshold(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_req_threshold),
+		.top_req_req_valid(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_req_req_valid),
+		.top_rsp_rsp_last(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_last),
+		.top_rsp_rsp_payload(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_payload),
+		.top_rsp_rsp_qos(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_qos),
+		.top_rsp_rsp_ready(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_ready),
+		.top_rsp_rsp_srcid(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_srcid),
+		.top_rsp_rsp_tgtid(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_tgtid),
+		.top_rsp_rsp_threshold(pcie_eth_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_threshold),
+		.top_rsp_rsp_valid(sw_io5_TO_pcie_eth_ss_iniu_top_wrap_SIG_iniu1_rsp_valid));
 	ufs_ss_iniu_top_wrap ufs_ss_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.async_fifo_req_pld_sync(ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(ufs_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -998,8 +998,8 @@ module soc_dti_harden_dn
 		.top_rsp_rsp_threshold(ufs_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_io5_TO_ufs_ss_iniu_top_wrap_SIG_iniu2_rsp_valid));
 	camera_ss_iniu_top_wrap camera_ss_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.async_fifo_req_pld_sync(camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(camera_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -1027,8 +1027,8 @@ module soc_dti_harden_dn
 		.top_rsp_rsp_threshold(camera_ss_iniu_top_wrap_TO_sw_io5_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_io5_TO_camera_ss_iniu_top_wrap_SIG_iniu3_rsp_valid));
 	mipi_ss_iniu_top_wrap mipi_ss_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_dn),
+		.rst_top_n(rst_noc_dn_n),
 		.async_fifo_req_pld_sync(mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(mipi_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -1057,5 +1057,5 @@ module soc_dti_harden_dn
 		.top_rsp_rsp_valid(sw_io5_TO_mipi_ss_iniu_top_wrap_SIG_iniu4_rsp_valid));
 
 endmodule
-//[UHDL]Content End [md5:02fd3bbbfdbe79e424c5528f799089a8]
+//[UHDL]Content End [md5:7f572346e50378e532c8b70cfbd37c33]
 

@@ -283,7 +283,7 @@ module tb_soc_dti_logic_topo_tree;
         leaf_name[4] = "dsp_ss4";
         leaf_name[5] = "dsp_ss5";
         leaf_name[6] = "vpu_ss";
-        leaf_name[7] = "pcie_rtg_ss";
+        leaf_name[7] = "pcie_eth_ss";
         leaf_name[8] = "ufs_ss";
         leaf_name[9] = "camera_ss";
         leaf_name[10] = "mipi_ss";
@@ -331,8 +331,10 @@ module tb_soc_dti_logic_topo_tree;
     end
 
     soc_dti_logic_topo dut (
-        .clk_noc(clk_noc),
-        .rst_noc_n(rst_noc_n),
+        .clk_noc_up(clk_noc),
+        .rst_noc_up_n(rst_noc_n),
+        .clk_noc_dn(clk_noc),
+        .rst_noc_dn_n(rst_noc_n),
         `SOC_DTI_INIU_PORTS(dsp_ss0, 0),
         `SOC_DTI_INIU_PORTS(dsp_ss1, 1),
         `SOC_DTI_INIU_PORTS(dsp_ss2, 2),
@@ -340,7 +342,7 @@ module tb_soc_dti_logic_topo_tree;
         `SOC_DTI_INIU_PORTS(dsp_ss4, 4),
         `SOC_DTI_INIU_PORTS(dsp_ss5, 5),
         `SOC_DTI_INIU_PORTS(vpu_ss, 6),
-        `SOC_DTI_INIU_PORTS(pcie_rtg_ss, 7),
+        `SOC_DTI_INIU_PORTS(pcie_eth_ss, 7),
         `SOC_DTI_INIU_PORTS(ufs_ss, 8),
         `SOC_DTI_INIU_PORTS(camera_ss, 9),
         `SOC_DTI_INIU_PORTS(mipi_ss, 10),

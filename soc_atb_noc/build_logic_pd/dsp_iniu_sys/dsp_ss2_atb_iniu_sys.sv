@@ -205,6 +205,8 @@ import lwnoc_lp_struct_package::*;
     lwnoc_lp_hub_wrapper #(
         .NUM_TERMINAL(5)
     ) u_lp_local_hub (
+        .clk     (clk_atb_s           ),
+        .rst_n   (rstn_atb_s          ),
         .v_rx_req(v_lp_local_hub_rx_req),
         .v_tx_req(v_lp_local_hub_tx_req)
     );
@@ -221,6 +223,8 @@ import lwnoc_lp_struct_package::*;
     lwnoc_lp_hub_wrapper #(
         .NUM_TERMINAL(3)
     ) u_lp_sub_hub (
+        .clk     (clk_atb_s           ),
+        .rst_n   (rstn_atb_s          ),
         .v_rx_req(v_lp_sub_hub_rx_req),
         .v_tx_req(v_lp_sub_hub_tx_req)
     );

@@ -4,3 +4,5 @@ $SOC_DTI_DP_SS_INIU_SYS_DIR/dp_ss_dti_pr_rob_state_entry.sv
 $SOC_DTI_DP_SS_INIU_SYS_DIR/dp_ss_dti_pr.sv
 $SOC_DTI_DP_SS_INIU_SYS_DIR/dp_ss_dti_to_gnpd_conv.sv
 $SOC_DTI_DP_SS_INIU_SYS_DIR/dp_ss_dti_pr_iniu_async_sys_side.sv
+$SOC_DTI_DP_SS_INIU_SYS_DIR/dp_ss_iniu_sys_wrap.v
+$SOC_DTI_DP_SS_INIU_SYS_DIR/dp_ss_iniu_node.v

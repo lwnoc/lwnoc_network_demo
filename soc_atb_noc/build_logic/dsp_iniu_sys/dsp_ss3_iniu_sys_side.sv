@@ -17,6 +17,7 @@ module dsp_ss3_iniu_sys_side #(
   output logic [1:0] sys_pactive,
   output logic sys_paccept,
   output logic sys_pdeny,
+  input logic [9:0] timeout_val,
   output logic noc_atvalid,
   input logic noc_atready,
   output logic [3:0] noc_atbytes,
@@ -66,7 +67,7 @@ module dsp_ss3_iniu_sys_side #(
     .pld_sync(pld_sync),
     .syncreq_level(syncreq_level),
     .preq(sys_preq),
-    .pstate(sys_pstate),
+    .pstate(lwnoc_lp_define_package::lwnoc_pchannel_state_t'(sys_pstate)),
     .pactive(sys_pactive),
     .paccept(sys_paccept),
     .pdeny(sys_pdeny),
@@ -74,7 +75,7 @@ module dsp_ss3_iniu_sys_side #(
     .lwnoc_tx_req(lp_sys_to_noc),
     .afifo_slv_rx_req(lp_afifo_noc_to_sys),
     .afifo_slv_tx_req(lp_afifo_sys_to_noc),
-    .timeout_val(10'd0)
+    .timeout_val(timeout_val)
   );
 
   dsp_ss3_atb_iniu_noc #(.FIFO_DEPTH(FIFO_DEPTH)) u_real_iniu_noc (
@@ -99,6 +100,6 @@ module dsp_ss3_iniu_sys_side #(
     .pld_sync(pld_sync),
     .lw_rx_req(lp_sys_to_noc),
     .lw_tx_req(lp_noc_to_sys),
-    .timeout_val(10'd0)
+    .timeout_val(timeout_val)
   );
 endmodule

@@ -4,7 +4,7 @@ module interrupt_iniu_async_top_side
     import lwnoc_lp_struct_package::*;
     import interrupt_iniu_pkg::*;
 #(
-    parameter integer unsigned ASYNC_FIFO_DEPTH = 10
+    parameter integer unsigned ASYNC_FIFO_DEPTH = 16
 
 )(
     input  logic                                    clk                             ,

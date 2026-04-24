@@ -25,464 +25,510 @@ module tb_soc_intr_noc_sanity;
     logic rst_noc_up_n;
     logic clk_noc_dn;
     logic rst_noc_dn_n;
-    logic cpu_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic cpu_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] cpu_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] cpu_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] cpu_ss_iniu_apb_porting_apb_apb_p_addr;
-    logic cpu_ss_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] cpu_ss_iniu_apb_porting_apb_apb_p_rdata;
-    logic cpu_ss_iniu_apb_porting_apb_apb_p_ready;
-    logic cpu_ss_iniu_apb_porting_apb_apb_p_sel;
-    logic cpu_ss_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] cpu_ss_iniu_apb_porting_apb_apb_p_wdata;
-    logic cpu_ss_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] cpu_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic cpu_ss_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] cpu_ss_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic cpu_ss_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic cpu_ss_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] cpu_ss_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic cpu_ss_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic cpu_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] cpu_ss_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] cpu_ss_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] cpu_ss_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] cpu_ss_tniu_apb_porting_apb_apb_p_addr;
-    logic cpu_ss_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] cpu_ss_tniu_apb_porting_apb_apb_p_rdata;
-    logic cpu_ss_tniu_apb_porting_apb_apb_p_ready;
-    logic cpu_ss_tniu_apb_porting_apb_apb_p_sel;
-    logic cpu_ss_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] cpu_ss_tniu_apb_porting_apb_apb_p_wdata;
-    logic cpu_ss_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] cpu_ss_tniu_timeout_val_porting;
-    logic cpu_ss_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] cpu_ss_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic cpu_ss_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic cpu_ss_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] cpu_ss_tniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic audio_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic audio_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] audio_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] audio_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] audio_ss_iniu_apb_porting_apb_apb_p_addr;
-    logic audio_ss_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] audio_ss_iniu_apb_porting_apb_apb_p_rdata;
-    logic audio_ss_iniu_apb_porting_apb_apb_p_ready;
-    logic audio_ss_iniu_apb_porting_apb_apb_p_sel;
-    logic audio_ss_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] audio_ss_iniu_apb_porting_apb_apb_p_wdata;
-    logic audio_ss_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] audio_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic audio_ss_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] audio_ss_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic audio_ss_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic audio_ss_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] audio_ss_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic peri_ss_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic peri_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] peri_ss_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] peri_ss_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] peri_ss_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] peri_ss_tniu_apb_porting_apb_apb_p_addr;
-    logic peri_ss_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] peri_ss_tniu_apb_porting_apb_apb_p_rdata;
-    logic peri_ss_tniu_apb_porting_apb_apb_p_ready;
-    logic peri_ss_tniu_apb_porting_apb_apb_p_sel;
-    logic peri_ss_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] peri_ss_tniu_apb_porting_apb_apb_p_wdata;
-    logic peri_ss_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] peri_ss_tniu_timeout_val_porting;
-    logic peri_ss_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] peri_ss_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic peri_ss_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic peri_ss_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] peri_ss_tniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic gpu_ss1_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic gpu_ss1_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] gpu_ss1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] gpu_ss1_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] gpu_ss1_iniu_apb_porting_apb_apb_p_addr;
-    logic gpu_ss1_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] gpu_ss1_iniu_apb_porting_apb_apb_p_rdata;
-    logic gpu_ss1_iniu_apb_porting_apb_apb_p_ready;
-    logic gpu_ss1_iniu_apb_porting_apb_apb_p_sel;
-    logic gpu_ss1_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] gpu_ss1_iniu_apb_porting_apb_apb_p_wdata;
-    logic gpu_ss1_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] gpu_ss1_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic gpu_ss1_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] gpu_ss1_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic gpu_ss1_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic gpu_ss1_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] gpu_ss1_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic gpu_ss0_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic gpu_ss0_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] gpu_ss0_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] gpu_ss0_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] gpu_ss0_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] gpu_ss0_tniu_apb_porting_apb_apb_p_addr;
-    logic gpu_ss0_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] gpu_ss0_tniu_apb_porting_apb_apb_p_rdata;
-    logic gpu_ss0_tniu_apb_porting_apb_apb_p_ready;
-    logic gpu_ss0_tniu_apb_porting_apb_apb_p_sel;
-    logic gpu_ss0_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] gpu_ss0_tniu_apb_porting_apb_apb_p_wdata;
-    logic gpu_ss0_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] gpu_ss0_tniu_timeout_val_porting;
-    logic gpu_ss0_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] gpu_ss0_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic gpu_ss0_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic gpu_ss0_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] gpu_ss0_tniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic display_ss_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic display_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] display_ss_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] display_ss_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] display_ss_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] display_ss_tniu_apb_porting_apb_apb_p_addr;
-    logic display_ss_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] display_ss_tniu_apb_porting_apb_apb_p_rdata;
-    logic display_ss_tniu_apb_porting_apb_apb_p_ready;
-    logic display_ss_tniu_apb_porting_apb_apb_p_sel;
-    logic display_ss_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] display_ss_tniu_apb_porting_apb_apb_p_wdata;
-    logic display_ss_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] display_ss_tniu_timeout_val_porting;
-    logic display_ss_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] display_ss_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic display_ss_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic display_ss_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] display_ss_tniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic dp_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic dp_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] dp_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] dp_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] dp_ss_iniu_apb_porting_apb_apb_p_addr;
-    logic dp_ss_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] dp_ss_iniu_apb_porting_apb_apb_p_rdata;
-    logic dp_ss_iniu_apb_porting_apb_apb_p_ready;
-    logic dp_ss_iniu_apb_porting_apb_apb_p_sel;
-    logic dp_ss_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] dp_ss_iniu_apb_porting_apb_apb_p_wdata;
-    logic dp_ss_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] dp_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic dp_ss_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] dp_ss_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic dp_ss_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic dp_ss_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] dp_ss_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr6_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr6_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ddr6_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ddr6_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ddr6_iniu_apb_porting_apb_apb_p_addr;
-    logic ddr6_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr6_iniu_apb_porting_apb_apb_p_rdata;
-    logic ddr6_iniu_apb_porting_apb_apb_p_ready;
-    logic ddr6_iniu_apb_porting_apb_apb_p_sel;
-    logic ddr6_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr6_iniu_apb_porting_apb_apb_p_wdata;
-    logic ddr6_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr6_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ddr6_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr6_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr6_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr6_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr6_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr7_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr7_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ddr7_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ddr7_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ddr7_iniu_apb_porting_apb_apb_p_addr;
-    logic ddr7_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr7_iniu_apb_porting_apb_apb_p_rdata;
-    logic ddr7_iniu_apb_porting_apb_apb_p_ready;
-    logic ddr7_iniu_apb_porting_apb_apb_p_sel;
-    logic ddr7_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr7_iniu_apb_porting_apb_apb_p_wdata;
-    logic ddr7_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr7_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ddr7_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr7_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr7_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr7_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr7_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr8_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr8_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ddr8_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ddr8_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ddr8_iniu_apb_porting_apb_apb_p_addr;
-    logic ddr8_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr8_iniu_apb_porting_apb_apb_p_rdata;
-    logic ddr8_iniu_apb_porting_apb_apb_p_ready;
-    logic ddr8_iniu_apb_porting_apb_apb_p_sel;
-    logic ddr8_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr8_iniu_apb_porting_apb_apb_p_wdata;
-    logic ddr8_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr8_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ddr8_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr8_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr8_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr8_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr8_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr9_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr9_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ddr9_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ddr9_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ddr9_iniu_apb_porting_apb_apb_p_addr;
-    logic ddr9_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr9_iniu_apb_porting_apb_apb_p_rdata;
-    logic ddr9_iniu_apb_porting_apb_apb_p_ready;
-    logic ddr9_iniu_apb_porting_apb_apb_p_sel;
-    logic ddr9_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr9_iniu_apb_porting_apb_apb_p_wdata;
-    logic ddr9_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr9_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ddr9_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr9_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr9_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr9_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr9_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr10_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr10_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ddr10_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ddr10_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ddr10_iniu_apb_porting_apb_apb_p_addr;
-    logic ddr10_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr10_iniu_apb_porting_apb_apb_p_rdata;
-    logic ddr10_iniu_apb_porting_apb_apb_p_ready;
-    logic ddr10_iniu_apb_porting_apb_apb_p_sel;
-    logic ddr10_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr10_iniu_apb_porting_apb_apb_p_wdata;
-    logic ddr10_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr10_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ddr10_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr10_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr10_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr10_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr10_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr11_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr11_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] ddr11_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] ddr11_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] ddr11_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] ddr11_tniu_apb_porting_apb_apb_p_addr;
-    logic ddr11_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr11_tniu_apb_porting_apb_apb_p_rdata;
-    logic ddr11_tniu_apb_porting_apb_apb_p_ready;
-    logic ddr11_tniu_apb_porting_apb_apb_p_sel;
-    logic ddr11_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr11_tniu_apb_porting_apb_apb_p_wdata;
-    logic ddr11_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr11_tniu_timeout_val_porting;
-    logic ddr11_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr11_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr11_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr11_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr11_tniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic mipi_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic mipi_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] mipi_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] mipi_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] mipi_ss_iniu_apb_porting_apb_apb_p_addr;
-    logic mipi_ss_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] mipi_ss_iniu_apb_porting_apb_apb_p_rdata;
-    logic mipi_ss_iniu_apb_porting_apb_apb_p_ready;
-    logic mipi_ss_iniu_apb_porting_apb_apb_p_sel;
-    logic mipi_ss_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] mipi_ss_iniu_apb_porting_apb_apb_p_wdata;
-    logic mipi_ss_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] mipi_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic mipi_ss_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] mipi_ss_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic mipi_ss_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic mipi_ss_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] mipi_ss_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ufs_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ufs_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ufs_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ufs_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ufs_ss_iniu_apb_porting_apb_apb_p_addr;
-    logic ufs_ss_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ufs_ss_iniu_apb_porting_apb_apb_p_rdata;
-    logic ufs_ss_iniu_apb_porting_apb_apb_p_ready;
-    logic ufs_ss_iniu_apb_porting_apb_apb_p_sel;
-    logic ufs_ss_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ufs_ss_iniu_apb_porting_apb_apb_p_wdata;
-    logic ufs_ss_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ufs_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ufs_ss_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ufs_ss_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ufs_ss_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ufs_ss_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ufs_ss_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic camera_ss_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic camera_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] camera_ss_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] camera_ss_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] camera_ss_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] camera_ss_tniu_apb_porting_apb_apb_p_addr;
-    logic camera_ss_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] camera_ss_tniu_apb_porting_apb_apb_p_rdata;
-    logic camera_ss_tniu_apb_porting_apb_apb_p_ready;
-    logic camera_ss_tniu_apb_porting_apb_apb_p_sel;
-    logic camera_ss_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] camera_ss_tniu_apb_porting_apb_apb_p_wdata;
-    logic camera_ss_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] camera_ss_tniu_timeout_val_porting;
-    logic camera_ss_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] camera_ss_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic camera_ss_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic camera_ss_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] camera_ss_tniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic camera_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic camera_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] camera_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] camera_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] camera_ss_iniu_apb_porting_apb_apb_p_addr;
-    logic camera_ss_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] camera_ss_iniu_apb_porting_apb_apb_p_rdata;
-    logic camera_ss_iniu_apb_porting_apb_apb_p_ready;
-    logic camera_ss_iniu_apb_porting_apb_apb_p_sel;
-    logic camera_ss_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] camera_ss_iniu_apb_porting_apb_apb_p_wdata;
-    logic camera_ss_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] camera_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic camera_ss_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] camera_ss_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic camera_ss_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic camera_ss_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] camera_ss_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic pcie_eth_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic pcie_eth_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] pcie_eth_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] pcie_eth_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] pcie_eth_ss_iniu_apb_porting_apb_apb_p_addr;
-    logic pcie_eth_ss_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] pcie_eth_ss_iniu_apb_porting_apb_apb_p_rdata;
-    logic pcie_eth_ss_iniu_apb_porting_apb_apb_p_ready;
-    logic pcie_eth_ss_iniu_apb_porting_apb_apb_p_sel;
-    logic pcie_eth_ss_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] pcie_eth_ss_iniu_apb_porting_apb_apb_p_wdata;
-    logic pcie_eth_ss_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] pcie_eth_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic pcie_eth_ss_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] pcie_eth_ss_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic pcie_eth_ss_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic pcie_eth_ss_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] pcie_eth_ss_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic debug_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic debug_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] debug_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] debug_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] debug_ss_iniu_apb_porting_apb_apb_p_addr;
-    logic debug_ss_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] debug_ss_iniu_apb_porting_apb_apb_p_rdata;
-    logic debug_ss_iniu_apb_porting_apb_apb_p_ready;
-    logic debug_ss_iniu_apb_porting_apb_apb_p_sel;
-    logic debug_ss_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] debug_ss_iniu_apb_porting_apb_apb_p_wdata;
-    logic debug_ss_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] debug_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic debug_ss_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] debug_ss_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic debug_ss_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic debug_ss_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] debug_ss_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic aon_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic aon_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] aon_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] aon_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] aon_ss_iniu_apb_porting_apb_apb_p_addr;
-    logic aon_ss_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] aon_ss_iniu_apb_porting_apb_apb_p_rdata;
-    logic aon_ss_iniu_apb_porting_apb_apb_p_ready;
-    logic aon_ss_iniu_apb_porting_apb_apb_p_sel;
-    logic aon_ss_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] aon_ss_iniu_apb_porting_apb_apb_p_wdata;
-    logic aon_ss_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] aon_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic aon_ss_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] aon_ss_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic aon_ss_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic aon_ss_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] aon_ss_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic aon_ss_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic aon_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] aon_ss_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] aon_ss_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] aon_ss_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] aon_ss_tniu_apb_porting_apb_apb_p_addr;
-    logic aon_ss_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] aon_ss_tniu_apb_porting_apb_apb_p_rdata;
-    logic aon_ss_tniu_apb_porting_apb_apb_p_ready;
-    logic aon_ss_tniu_apb_porting_apb_apb_p_sel;
-    logic aon_ss_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] aon_ss_tniu_apb_porting_apb_apb_p_wdata;
-    logic aon_ss_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] aon_ss_tniu_timeout_val_porting;
-    logic aon_ss_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] aon_ss_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic aon_ss_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic aon_ss_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] aon_ss_tniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ucie_ss1_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ucie_ss1_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ucie_ss1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ucie_ss1_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ucie_ss1_iniu_apb_porting_apb_apb_p_addr;
-    logic ucie_ss1_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ucie_ss1_iniu_apb_porting_apb_apb_p_rdata;
-    logic ucie_ss1_iniu_apb_porting_apb_apb_p_ready;
-    logic ucie_ss1_iniu_apb_porting_apb_apb_p_sel;
-    logic ucie_ss1_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ucie_ss1_iniu_apb_porting_apb_apb_p_wdata;
-    logic ucie_ss1_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ucie_ss1_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ucie_ss1_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ucie_ss1_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ucie_ss1_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ucie_ss1_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ucie_ss1_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ucie_ss1_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ucie_ss1_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] ucie_ss1_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] ucie_ss1_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] ucie_ss1_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] ucie_ss1_tniu_apb_porting_apb_apb_p_addr;
-    logic ucie_ss1_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ucie_ss1_tniu_apb_porting_apb_apb_p_rdata;
-    logic ucie_ss1_tniu_apb_porting_apb_apb_p_ready;
-    logic ucie_ss1_tniu_apb_porting_apb_apb_p_sel;
-    logic ucie_ss1_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ucie_ss1_tniu_apb_porting_apb_apb_p_wdata;
-    logic ucie_ss1_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ucie_ss1_tniu_timeout_val_porting;
-    logic ucie_ss1_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ucie_ss1_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ucie_ss1_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ucie_ss1_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ucie_ss1_tniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic dspss5_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic dspss5_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] dspss5_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] dspss5_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] dspss5_iniu_apb_porting_apb_apb_p_addr;
-    logic dspss5_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] dspss5_iniu_apb_porting_apb_apb_p_rdata;
-    logic dspss5_iniu_apb_porting_apb_apb_p_ready;
-    logic dspss5_iniu_apb_porting_apb_apb_p_sel;
-    logic dspss5_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] dspss5_iniu_apb_porting_apb_apb_p_wdata;
-    logic dspss5_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] dspss5_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic dspss5_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] dspss5_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic dspss5_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic dspss5_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] dspss5_iniu_pchannel_porting_pchannel_pchannel_pstate;
+    logic ucie_ss0_iniu_clk_sys_porting_clk_sys_clk;
+    logic ucie_ss0_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ucie_ss0_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ucie_ss0_iniu_pchannel_porting_pchannel_pactive;
+    logic ucie_ss0_iniu_pchannel_porting_pchannel_pdeny;
+    logic ucie_ss0_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ucie_ss0_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ucie_ss0_iniu_ucie_ss0_iniu_sys_v_interrupt_porting_ucie_ss0_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ucie_ss0_iniu_ucie_ss0_iniu_sys_iniu_src_id_porting_ucie_ss0_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_addr;
+    logic ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_rdata;
+    logic ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_ready;
+    logic ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_sel;
+    logic ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_wdata;
+    logic ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_write;
+    logic [9:0] ucie_ss0_iniu_ucie_ss0_iniu_sys_timeout_val_porting_ucie_ss0_iniu_sys_timeout_val_porting_timeout_val;
+    logic ucie_ss0_tniu_clk_sys_porting_clk_sys_clk;
+    logic ucie_ss0_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ucie_ss0_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ucie_ss0_tniu_pchannel_porting_pchannel_pactive;
+    logic ucie_ss0_tniu_pchannel_porting_pchannel_pdeny;
+    logic ucie_ss0_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ucie_ss0_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] ucie_ss0_tniu_ucie_ss0_tniu_sys_tniu_tgt_id_porting_ucie_ss0_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] ucie_ss0_tniu_ucie_ss0_tniu_sys_v_interrupt_porting_ucie_ss0_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] ucie_ss0_tniu_ucie_ss0_tniu_sys_v_merge_interrupt_porting_ucie_ss0_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_addr;
+    logic ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_enable;
+    logic [31:0] ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_rdata;
+    logic ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_ready;
+    logic ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_sel;
+    logic ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_wdata;
+    logic ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_write;
+    logic [9:0] ucie_ss0_tniu_ucie_ss0_tniu_sys_timeout_val_porting_ucie_ss0_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] ucie_ss0_tniu_ucie_ss0_tniu_top_timeout_val_porting_ucie_ss0_tniu_top_timeout_val_porting_timeout_val;
+    logic cpu_ss_iniu_clk_sys_porting_clk_sys_clk;
+    logic cpu_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic cpu_ss_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] cpu_ss_iniu_pchannel_porting_pchannel_pactive;
+    logic cpu_ss_iniu_pchannel_porting_pchannel_pdeny;
+    logic cpu_ss_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] cpu_ss_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] cpu_ss_iniu_cpu_ss_iniu_sys_v_interrupt_porting_cpu_ss_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] cpu_ss_iniu_cpu_ss_iniu_sys_iniu_src_id_porting_cpu_ss_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_addr;
+    logic cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_enable;
+    logic [31:0] cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_rdata;
+    logic cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_ready;
+    logic cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_sel;
+    logic cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_wdata;
+    logic cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_write;
+    logic [9:0] cpu_ss_iniu_cpu_ss_iniu_sys_timeout_val_porting_cpu_ss_iniu_sys_timeout_val_porting_timeout_val;
+    logic cpu_ss_tniu_clk_sys_porting_clk_sys_clk;
+    logic cpu_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic cpu_ss_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] cpu_ss_tniu_pchannel_porting_pchannel_pactive;
+    logic cpu_ss_tniu_pchannel_porting_pchannel_pdeny;
+    logic cpu_ss_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] cpu_ss_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] cpu_ss_tniu_cpu_ss_tniu_sys_tniu_tgt_id_porting_cpu_ss_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] cpu_ss_tniu_cpu_ss_tniu_sys_v_interrupt_porting_cpu_ss_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] cpu_ss_tniu_cpu_ss_tniu_sys_v_merge_interrupt_porting_cpu_ss_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_addr;
+    logic cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_enable;
+    logic [31:0] cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_rdata;
+    logic cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_ready;
+    logic cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_sel;
+    logic cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_wdata;
+    logic cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_write;
+    logic [9:0] cpu_ss_tniu_cpu_ss_tniu_sys_timeout_val_porting_cpu_ss_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] cpu_ss_tniu_cpu_ss_tniu_top_timeout_val_porting_cpu_ss_tniu_top_timeout_val_porting_timeout_val;
+    logic audio_ss_iniu_clk_sys_porting_clk_sys_clk;
+    logic audio_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic audio_ss_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] audio_ss_iniu_pchannel_porting_pchannel_pactive;
+    logic audio_ss_iniu_pchannel_porting_pchannel_pdeny;
+    logic audio_ss_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] audio_ss_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] audio_ss_iniu_audio_ss_iniu_sys_v_interrupt_porting_audio_ss_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] audio_ss_iniu_audio_ss_iniu_sys_iniu_src_id_porting_audio_ss_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_addr;
+    logic audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_enable;
+    logic [31:0] audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_rdata;
+    logic audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_ready;
+    logic audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_sel;
+    logic audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_wdata;
+    logic audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_write;
+    logic [9:0] audio_ss_iniu_audio_ss_iniu_sys_timeout_val_porting_audio_ss_iniu_sys_timeout_val_porting_timeout_val;
+    logic peri_ss_tniu_clk_sys_porting_clk_sys_clk;
+    logic peri_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic peri_ss_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] peri_ss_tniu_pchannel_porting_pchannel_pactive;
+    logic peri_ss_tniu_pchannel_porting_pchannel_pdeny;
+    logic peri_ss_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] peri_ss_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] peri_ss_tniu_peri_ss_tniu_sys_tniu_tgt_id_porting_peri_ss_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] peri_ss_tniu_peri_ss_tniu_sys_v_interrupt_porting_peri_ss_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] peri_ss_tniu_peri_ss_tniu_sys_v_merge_interrupt_porting_peri_ss_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_addr;
+    logic peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_enable;
+    logic [31:0] peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_rdata;
+    logic peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_ready;
+    logic peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_sel;
+    logic peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_wdata;
+    logic peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_write;
+    logic [9:0] peri_ss_tniu_peri_ss_tniu_sys_timeout_val_porting_peri_ss_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] peri_ss_tniu_peri_ss_tniu_top_timeout_val_porting_peri_ss_tniu_top_timeout_val_porting_timeout_val;
+    logic gpu_ss1_iniu_clk_sys_porting_clk_sys_clk;
+    logic gpu_ss1_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic gpu_ss1_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] gpu_ss1_iniu_pchannel_porting_pchannel_pactive;
+    logic gpu_ss1_iniu_pchannel_porting_pchannel_pdeny;
+    logic gpu_ss1_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] gpu_ss1_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] gpu_ss1_iniu_gpu_ss1_iniu_sys_v_interrupt_porting_gpu_ss1_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] gpu_ss1_iniu_gpu_ss1_iniu_sys_iniu_src_id_porting_gpu_ss1_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_addr;
+    logic gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_enable;
+    logic [31:0] gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_rdata;
+    logic gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_ready;
+    logic gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_sel;
+    logic gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_wdata;
+    logic gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_write;
+    logic [9:0] gpu_ss1_iniu_gpu_ss1_iniu_sys_timeout_val_porting_gpu_ss1_iniu_sys_timeout_val_porting_timeout_val;
+    logic gpu_ss0_tniu_clk_sys_porting_clk_sys_clk;
+    logic gpu_ss0_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic gpu_ss0_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] gpu_ss0_tniu_pchannel_porting_pchannel_pactive;
+    logic gpu_ss0_tniu_pchannel_porting_pchannel_pdeny;
+    logic gpu_ss0_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] gpu_ss0_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] gpu_ss0_tniu_gpu_ss0_tniu_sys_tniu_tgt_id_porting_gpu_ss0_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] gpu_ss0_tniu_gpu_ss0_tniu_sys_v_interrupt_porting_gpu_ss0_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] gpu_ss0_tniu_gpu_ss0_tniu_sys_v_merge_interrupt_porting_gpu_ss0_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_addr;
+    logic gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_enable;
+    logic [31:0] gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_rdata;
+    logic gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_ready;
+    logic gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_sel;
+    logic gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_wdata;
+    logic gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_write;
+    logic [9:0] gpu_ss0_tniu_gpu_ss0_tniu_sys_timeout_val_porting_gpu_ss0_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] gpu_ss0_tniu_gpu_ss0_tniu_top_timeout_val_porting_gpu_ss0_tniu_top_timeout_val_porting_timeout_val;
+    logic display_ss_tniu_clk_sys_porting_clk_sys_clk;
+    logic display_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic display_ss_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] display_ss_tniu_pchannel_porting_pchannel_pactive;
+    logic display_ss_tniu_pchannel_porting_pchannel_pdeny;
+    logic display_ss_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] display_ss_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] display_ss_tniu_display_ss_tniu_sys_tniu_tgt_id_porting_display_ss_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] display_ss_tniu_display_ss_tniu_sys_v_interrupt_porting_display_ss_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] display_ss_tniu_display_ss_tniu_sys_v_merge_interrupt_porting_display_ss_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_addr;
+    logic display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_enable;
+    logic [31:0] display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_rdata;
+    logic display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_ready;
+    logic display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_sel;
+    logic display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_wdata;
+    logic display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_write;
+    logic [9:0] display_ss_tniu_display_ss_tniu_sys_timeout_val_porting_display_ss_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] display_ss_tniu_display_ss_tniu_top_timeout_val_porting_display_ss_tniu_top_timeout_val_porting_timeout_val;
+    logic dp_ss_iniu_clk_sys_porting_clk_sys_clk;
+    logic dp_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic dp_ss_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] dp_ss_iniu_pchannel_porting_pchannel_pactive;
+    logic dp_ss_iniu_pchannel_porting_pchannel_pdeny;
+    logic dp_ss_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] dp_ss_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] dp_ss_iniu_dp_ss_iniu_sys_v_interrupt_porting_dp_ss_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] dp_ss_iniu_dp_ss_iniu_sys_iniu_src_id_porting_dp_ss_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_addr;
+    logic dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_enable;
+    logic [31:0] dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_rdata;
+    logic dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_ready;
+    logic dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_sel;
+    logic dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_wdata;
+    logic dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_write;
+    logic [9:0] dp_ss_iniu_dp_ss_iniu_sys_timeout_val_porting_dp_ss_iniu_sys_timeout_val_porting_timeout_val;
+    logic ddr6_iniu_clk_sys_porting_clk_sys_clk;
+    logic ddr6_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr6_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr6_iniu_pchannel_porting_pchannel_pactive;
+    logic ddr6_iniu_pchannel_porting_pchannel_pdeny;
+    logic ddr6_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr6_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ddr6_iniu_ddr6_iniu_sys_v_interrupt_porting_ddr6_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ddr6_iniu_ddr6_iniu_sys_iniu_src_id_porting_ddr6_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_addr;
+    logic ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_rdata;
+    logic ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_ready;
+    logic ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_sel;
+    logic ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_wdata;
+    logic ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_write;
+    logic [9:0] ddr6_iniu_ddr6_iniu_sys_timeout_val_porting_ddr6_iniu_sys_timeout_val_porting_timeout_val;
+    logic ddr7_iniu_clk_sys_porting_clk_sys_clk;
+    logic ddr7_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr7_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr7_iniu_pchannel_porting_pchannel_pactive;
+    logic ddr7_iniu_pchannel_porting_pchannel_pdeny;
+    logic ddr7_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr7_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ddr7_iniu_ddr7_iniu_sys_v_interrupt_porting_ddr7_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ddr7_iniu_ddr7_iniu_sys_iniu_src_id_porting_ddr7_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_addr;
+    logic ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_rdata;
+    logic ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_ready;
+    logic ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_sel;
+    logic ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_wdata;
+    logic ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_write;
+    logic [9:0] ddr7_iniu_ddr7_iniu_sys_timeout_val_porting_ddr7_iniu_sys_timeout_val_porting_timeout_val;
+    logic ddr8_iniu_clk_sys_porting_clk_sys_clk;
+    logic ddr8_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr8_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr8_iniu_pchannel_porting_pchannel_pactive;
+    logic ddr8_iniu_pchannel_porting_pchannel_pdeny;
+    logic ddr8_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr8_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ddr8_iniu_ddr8_iniu_sys_v_interrupt_porting_ddr8_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ddr8_iniu_ddr8_iniu_sys_iniu_src_id_porting_ddr8_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_addr;
+    logic ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_rdata;
+    logic ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_ready;
+    logic ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_sel;
+    logic ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_wdata;
+    logic ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_write;
+    logic [9:0] ddr8_iniu_ddr8_iniu_sys_timeout_val_porting_ddr8_iniu_sys_timeout_val_porting_timeout_val;
+    logic ddr9_iniu_clk_sys_porting_clk_sys_clk;
+    logic ddr9_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr9_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr9_iniu_pchannel_porting_pchannel_pactive;
+    logic ddr9_iniu_pchannel_porting_pchannel_pdeny;
+    logic ddr9_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr9_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ddr9_iniu_ddr9_iniu_sys_v_interrupt_porting_ddr9_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ddr9_iniu_ddr9_iniu_sys_iniu_src_id_porting_ddr9_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_addr;
+    logic ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_rdata;
+    logic ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_ready;
+    logic ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_sel;
+    logic ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_wdata;
+    logic ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_write;
+    logic [9:0] ddr9_iniu_ddr9_iniu_sys_timeout_val_porting_ddr9_iniu_sys_timeout_val_porting_timeout_val;
+    logic ddr10_iniu_clk_sys_porting_clk_sys_clk;
+    logic ddr10_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr10_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr10_iniu_pchannel_porting_pchannel_pactive;
+    logic ddr10_iniu_pchannel_porting_pchannel_pdeny;
+    logic ddr10_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr10_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ddr10_iniu_ddr10_iniu_sys_v_interrupt_porting_ddr10_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ddr10_iniu_ddr10_iniu_sys_iniu_src_id_porting_ddr10_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_addr;
+    logic ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_rdata;
+    logic ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_ready;
+    logic ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_sel;
+    logic ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_wdata;
+    logic ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_write;
+    logic [9:0] ddr10_iniu_ddr10_iniu_sys_timeout_val_porting_ddr10_iniu_sys_timeout_val_porting_timeout_val;
+    logic ddr11_tniu_clk_sys_porting_clk_sys_clk;
+    logic ddr11_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr11_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr11_tniu_pchannel_porting_pchannel_pactive;
+    logic ddr11_tniu_pchannel_porting_pchannel_pdeny;
+    logic ddr11_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr11_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] ddr11_tniu_ddr11_tniu_sys_tniu_tgt_id_porting_ddr11_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] ddr11_tniu_ddr11_tniu_sys_v_interrupt_porting_ddr11_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] ddr11_tniu_ddr11_tniu_sys_v_merge_interrupt_porting_ddr11_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_addr;
+    logic ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_rdata;
+    logic ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_ready;
+    logic ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_sel;
+    logic ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_wdata;
+    logic ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_write;
+    logic [9:0] ddr11_tniu_ddr11_tniu_sys_timeout_val_porting_ddr11_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] ddr11_tniu_ddr11_tniu_top_timeout_val_porting_ddr11_tniu_top_timeout_val_porting_timeout_val;
+    logic mipi_ss_iniu_clk_sys_porting_clk_sys_clk;
+    logic mipi_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic mipi_ss_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] mipi_ss_iniu_pchannel_porting_pchannel_pactive;
+    logic mipi_ss_iniu_pchannel_porting_pchannel_pdeny;
+    logic mipi_ss_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] mipi_ss_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] mipi_ss_iniu_mipi_ss_iniu_sys_v_interrupt_porting_mipi_ss_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] mipi_ss_iniu_mipi_ss_iniu_sys_iniu_src_id_porting_mipi_ss_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_addr;
+    logic mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_enable;
+    logic [31:0] mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_rdata;
+    logic mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_ready;
+    logic mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_sel;
+    logic mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_wdata;
+    logic mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_write;
+    logic [9:0] mipi_ss_iniu_mipi_ss_iniu_sys_timeout_val_porting_mipi_ss_iniu_sys_timeout_val_porting_timeout_val;
+    logic ufs_ss_iniu_clk_sys_porting_clk_sys_clk;
+    logic ufs_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ufs_ss_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ufs_ss_iniu_pchannel_porting_pchannel_pactive;
+    logic ufs_ss_iniu_pchannel_porting_pchannel_pdeny;
+    logic ufs_ss_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ufs_ss_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ufs_ss_iniu_ufs_ss_iniu_sys_v_interrupt_porting_ufs_ss_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ufs_ss_iniu_ufs_ss_iniu_sys_iniu_src_id_porting_ufs_ss_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_addr;
+    logic ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_rdata;
+    logic ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_ready;
+    logic ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_sel;
+    logic ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_wdata;
+    logic ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_write;
+    logic [9:0] ufs_ss_iniu_ufs_ss_iniu_sys_timeout_val_porting_ufs_ss_iniu_sys_timeout_val_porting_timeout_val;
+    logic camera_ss_tniu_clk_sys_porting_clk_sys_clk;
+    logic camera_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic camera_ss_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] camera_ss_tniu_pchannel_porting_pchannel_pactive;
+    logic camera_ss_tniu_pchannel_porting_pchannel_pdeny;
+    logic camera_ss_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] camera_ss_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] camera_ss_tniu_camera_ss_tniu_sys_tniu_tgt_id_porting_camera_ss_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] camera_ss_tniu_camera_ss_tniu_sys_v_interrupt_porting_camera_ss_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] camera_ss_tniu_camera_ss_tniu_sys_v_merge_interrupt_porting_camera_ss_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_addr;
+    logic camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_enable;
+    logic [31:0] camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_rdata;
+    logic camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_ready;
+    logic camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_sel;
+    logic camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_wdata;
+    logic camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_write;
+    logic [9:0] camera_ss_tniu_camera_ss_tniu_sys_timeout_val_porting_camera_ss_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] camera_ss_tniu_camera_ss_tniu_top_timeout_val_porting_camera_ss_tniu_top_timeout_val_porting_timeout_val;
+    logic camera_ss_iniu_clk_sys_porting_clk_sys_clk;
+    logic camera_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic camera_ss_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] camera_ss_iniu_pchannel_porting_pchannel_pactive;
+    logic camera_ss_iniu_pchannel_porting_pchannel_pdeny;
+    logic camera_ss_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] camera_ss_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] camera_ss_iniu_camera_ss_iniu_sys_v_interrupt_porting_camera_ss_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] camera_ss_iniu_camera_ss_iniu_sys_iniu_src_id_porting_camera_ss_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_addr;
+    logic camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_enable;
+    logic [31:0] camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_rdata;
+    logic camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_ready;
+    logic camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_sel;
+    logic camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_wdata;
+    logic camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_write;
+    logic [9:0] camera_ss_iniu_camera_ss_iniu_sys_timeout_val_porting_camera_ss_iniu_sys_timeout_val_porting_timeout_val;
+    logic pcie_eth_ss_iniu_clk_sys_porting_clk_sys_clk;
+    logic pcie_eth_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic pcie_eth_ss_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] pcie_eth_ss_iniu_pchannel_porting_pchannel_pactive;
+    logic pcie_eth_ss_iniu_pchannel_porting_pchannel_pdeny;
+    logic pcie_eth_ss_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] pcie_eth_ss_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_v_interrupt_porting_pcie_eth_ss_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_iniu_src_id_porting_pcie_eth_ss_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_addr;
+    logic pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_enable;
+    logic [31:0] pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_rdata;
+    logic pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_ready;
+    logic pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_sel;
+    logic pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_wdata;
+    logic pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_write;
+    logic [9:0] pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_timeout_val_porting_pcie_eth_ss_iniu_sys_timeout_val_porting_timeout_val;
+    logic debug_ss_iniu_clk_sys_porting_clk_sys_clk;
+    logic debug_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic debug_ss_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] debug_ss_iniu_pchannel_porting_pchannel_pactive;
+    logic debug_ss_iniu_pchannel_porting_pchannel_pdeny;
+    logic debug_ss_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] debug_ss_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] debug_ss_iniu_debug_ss_iniu_sys_v_interrupt_porting_debug_ss_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] debug_ss_iniu_debug_ss_iniu_sys_iniu_src_id_porting_debug_ss_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_addr;
+    logic debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_enable;
+    logic [31:0] debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_rdata;
+    logic debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_ready;
+    logic debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_sel;
+    logic debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_wdata;
+    logic debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_write;
+    logic [9:0] debug_ss_iniu_debug_ss_iniu_sys_timeout_val_porting_debug_ss_iniu_sys_timeout_val_porting_timeout_val;
+    logic aon_ss_iniu_clk_sys_porting_clk_sys_clk;
+    logic aon_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic aon_ss_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] aon_ss_iniu_pchannel_porting_pchannel_pactive;
+    logic aon_ss_iniu_pchannel_porting_pchannel_pdeny;
+    logic aon_ss_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] aon_ss_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] aon_ss_iniu_aon_ss_iniu_sys_v_interrupt_porting_aon_ss_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] aon_ss_iniu_aon_ss_iniu_sys_iniu_src_id_porting_aon_ss_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_addr;
+    logic aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_enable;
+    logic [31:0] aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_rdata;
+    logic aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_ready;
+    logic aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_sel;
+    logic aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_wdata;
+    logic aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_write;
+    logic [9:0] aon_ss_iniu_aon_ss_iniu_sys_timeout_val_porting_aon_ss_iniu_sys_timeout_val_porting_timeout_val;
+    logic aon_ss_tniu_clk_sys_porting_clk_sys_clk;
+    logic aon_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic aon_ss_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] aon_ss_tniu_pchannel_porting_pchannel_pactive;
+    logic aon_ss_tniu_pchannel_porting_pchannel_pdeny;
+    logic aon_ss_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] aon_ss_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] aon_ss_tniu_aon_ss_tniu_sys_tniu_tgt_id_porting_aon_ss_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] aon_ss_tniu_aon_ss_tniu_sys_v_interrupt_porting_aon_ss_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] aon_ss_tniu_aon_ss_tniu_sys_v_merge_interrupt_porting_aon_ss_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_addr;
+    logic aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_enable;
+    logic [31:0] aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_rdata;
+    logic aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_ready;
+    logic aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_sel;
+    logic aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_wdata;
+    logic aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_write;
+    logic [9:0] aon_ss_tniu_aon_ss_tniu_sys_timeout_val_porting_aon_ss_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] aon_ss_tniu_aon_ss_tniu_top_timeout_val_porting_aon_ss_tniu_top_timeout_val_porting_timeout_val;
+    logic ucie_ss1_iniu_clk_sys_porting_clk_sys_clk;
+    logic ucie_ss1_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ucie_ss1_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ucie_ss1_iniu_pchannel_porting_pchannel_pactive;
+    logic ucie_ss1_iniu_pchannel_porting_pchannel_pdeny;
+    logic ucie_ss1_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ucie_ss1_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ucie_ss1_iniu_ucie_ss1_iniu_sys_v_interrupt_porting_ucie_ss1_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ucie_ss1_iniu_ucie_ss1_iniu_sys_iniu_src_id_porting_ucie_ss1_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_addr;
+    logic ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_rdata;
+    logic ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_ready;
+    logic ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_sel;
+    logic ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_wdata;
+    logic ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_write;
+    logic [9:0] ucie_ss1_iniu_ucie_ss1_iniu_sys_timeout_val_porting_ucie_ss1_iniu_sys_timeout_val_porting_timeout_val;
+    logic ucie_ss1_tniu_clk_sys_porting_clk_sys_clk;
+    logic ucie_ss1_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ucie_ss1_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ucie_ss1_tniu_pchannel_porting_pchannel_pactive;
+    logic ucie_ss1_tniu_pchannel_porting_pchannel_pdeny;
+    logic ucie_ss1_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ucie_ss1_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] ucie_ss1_tniu_ucie_ss1_tniu_sys_tniu_tgt_id_porting_ucie_ss1_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] ucie_ss1_tniu_ucie_ss1_tniu_sys_v_interrupt_porting_ucie_ss1_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] ucie_ss1_tniu_ucie_ss1_tniu_sys_v_merge_interrupt_porting_ucie_ss1_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_addr;
+    logic ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_enable;
+    logic [31:0] ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_rdata;
+    logic ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_ready;
+    logic ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_sel;
+    logic ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_wdata;
+    logic ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_write;
+    logic [9:0] ucie_ss1_tniu_ucie_ss1_tniu_sys_timeout_val_porting_ucie_ss1_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] ucie_ss1_tniu_ucie_ss1_tniu_top_timeout_val_porting_ucie_ss1_tniu_top_timeout_val_porting_timeout_val;
+    logic dspss5_iniu_clk_sys_porting_clk_sys_clk;
+    logic dspss5_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic dspss5_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] dspss5_iniu_pchannel_porting_pchannel_pactive;
+    logic dspss5_iniu_pchannel_porting_pchannel_pdeny;
+    logic dspss5_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] dspss5_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] dspss5_iniu_dspss5_iniu_sys_v_interrupt_porting_dspss5_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] dspss5_iniu_dspss5_iniu_sys_iniu_src_id_porting_dspss5_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_addr;
+    logic dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_enable;
+    logic [31:0] dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_rdata;
+    logic dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_ready;
+    logic dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_sel;
+    logic dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_wdata;
+    logic dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_write;
+    logic [9:0] dspss5_iniu_dspss5_iniu_sys_timeout_val_porting_dspss5_iniu_sys_timeout_val_porting_timeout_val;
     logic default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_last;
     logic [39:0] default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_payload;
     logic [3:0] default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_qos;
@@ -490,262 +536,228 @@ module tb_soc_intr_noc_sanity;
     logic [7:0] default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_srcid;
     logic [7:0] default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_tgtid;
     logic default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_valid;
-    logic vpu_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic vpu_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] vpu_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] vpu_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] vpu_ss_iniu_apb_porting_apb_apb_p_addr;
-    logic vpu_ss_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] vpu_ss_iniu_apb_porting_apb_apb_p_rdata;
-    logic vpu_ss_iniu_apb_porting_apb_apb_p_ready;
-    logic vpu_ss_iniu_apb_porting_apb_apb_p_sel;
-    logic vpu_ss_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] vpu_ss_iniu_apb_porting_apb_apb_p_wdata;
-    logic vpu_ss_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] vpu_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic vpu_ss_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] vpu_ss_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic vpu_ss_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic vpu_ss_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] vpu_ss_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic dspss4_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic dspss4_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] dspss4_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] dspss4_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] dspss4_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] dspss4_tniu_apb_porting_apb_apb_p_addr;
-    logic dspss4_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] dspss4_tniu_apb_porting_apb_apb_p_rdata;
-    logic dspss4_tniu_apb_porting_apb_apb_p_ready;
-    logic dspss4_tniu_apb_porting_apb_apb_p_sel;
-    logic dspss4_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] dspss4_tniu_apb_porting_apb_apb_p_wdata;
-    logic dspss4_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] dspss4_tniu_timeout_val_porting;
-    logic dspss4_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] dspss4_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic dspss4_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic dspss4_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] dspss4_tniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic dspss3_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic dspss3_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] dspss3_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] dspss3_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] dspss3_iniu_apb_porting_apb_apb_p_addr;
-    logic dspss3_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] dspss3_iniu_apb_porting_apb_apb_p_rdata;
-    logic dspss3_iniu_apb_porting_apb_apb_p_ready;
-    logic dspss3_iniu_apb_porting_apb_apb_p_sel;
-    logic dspss3_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] dspss3_iniu_apb_porting_apb_apb_p_wdata;
-    logic dspss3_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] dspss3_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic dspss3_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] dspss3_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic dspss3_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic dspss3_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] dspss3_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic dspss2_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic dspss2_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] dspss2_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] dspss2_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] dspss2_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] dspss2_tniu_apb_porting_apb_apb_p_addr;
-    logic dspss2_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] dspss2_tniu_apb_porting_apb_apb_p_rdata;
-    logic dspss2_tniu_apb_porting_apb_apb_p_ready;
-    logic dspss2_tniu_apb_porting_apb_apb_p_sel;
-    logic dspss2_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] dspss2_tniu_apb_porting_apb_apb_p_wdata;
-    logic dspss2_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] dspss2_tniu_timeout_val_porting;
-    logic dspss2_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] dspss2_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic dspss2_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic dspss2_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] dspss2_tniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic dspss1_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic dspss1_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] dspss1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] dspss1_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] dspss1_iniu_apb_porting_apb_apb_p_addr;
-    logic dspss1_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] dspss1_iniu_apb_porting_apb_apb_p_rdata;
-    logic dspss1_iniu_apb_porting_apb_apb_p_ready;
-    logic dspss1_iniu_apb_porting_apb_apb_p_sel;
-    logic dspss1_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] dspss1_iniu_apb_porting_apb_apb_p_wdata;
-    logic dspss1_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] dspss1_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic dspss1_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] dspss1_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic dspss1_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic dspss1_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] dspss1_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic dspss0_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic dspss0_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] dspss0_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] dspss0_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] dspss0_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] dspss0_tniu_apb_porting_apb_apb_p_addr;
-    logic dspss0_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] dspss0_tniu_apb_porting_apb_apb_p_rdata;
-    logic dspss0_tniu_apb_porting_apb_apb_p_ready;
-    logic dspss0_tniu_apb_porting_apb_apb_p_sel;
-    logic dspss0_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] dspss0_tniu_apb_porting_apb_apb_p_wdata;
-    logic dspss0_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] dspss0_tniu_timeout_val_porting;
-    logic dspss0_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] dspss0_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic dspss0_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic dspss0_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] dspss0_tniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr0_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr0_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ddr0_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ddr0_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ddr0_iniu_apb_porting_apb_apb_p_addr;
-    logic ddr0_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr0_iniu_apb_porting_apb_apb_p_rdata;
-    logic ddr0_iniu_apb_porting_apb_apb_p_ready;
-    logic ddr0_iniu_apb_porting_apb_apb_p_sel;
-    logic ddr0_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr0_iniu_apb_porting_apb_apb_p_wdata;
-    logic ddr0_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr0_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ddr0_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr0_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr0_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr0_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr0_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr1_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr1_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ddr1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ddr1_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ddr1_iniu_apb_porting_apb_apb_p_addr;
-    logic ddr1_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr1_iniu_apb_porting_apb_apb_p_rdata;
-    logic ddr1_iniu_apb_porting_apb_apb_p_ready;
-    logic ddr1_iniu_apb_porting_apb_apb_p_sel;
-    logic ddr1_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr1_iniu_apb_porting_apb_apb_p_wdata;
-    logic ddr1_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr1_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ddr1_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr1_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr1_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr1_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr1_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr2_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr2_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ddr2_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ddr2_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ddr2_iniu_apb_porting_apb_apb_p_addr;
-    logic ddr2_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr2_iniu_apb_porting_apb_apb_p_rdata;
-    logic ddr2_iniu_apb_porting_apb_apb_p_ready;
-    logic ddr2_iniu_apb_porting_apb_apb_p_sel;
-    logic ddr2_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr2_iniu_apb_porting_apb_apb_p_wdata;
-    logic ddr2_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr2_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ddr2_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr2_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr2_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr2_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr2_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr3_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr3_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ddr3_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ddr3_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ddr3_iniu_apb_porting_apb_apb_p_addr;
-    logic ddr3_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr3_iniu_apb_porting_apb_apb_p_rdata;
-    logic ddr3_iniu_apb_porting_apb_apb_p_ready;
-    logic ddr3_iniu_apb_porting_apb_apb_p_sel;
-    logic ddr3_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr3_iniu_apb_porting_apb_apb_p_wdata;
-    logic ddr3_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr3_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ddr3_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr3_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr3_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr3_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr3_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr4_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr4_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ddr4_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ddr4_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ddr4_iniu_apb_porting_apb_apb_p_addr;
-    logic ddr4_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr4_iniu_apb_porting_apb_apb_p_rdata;
-    logic ddr4_iniu_apb_porting_apb_apb_p_ready;
-    logic ddr4_iniu_apb_porting_apb_apb_p_sel;
-    logic ddr4_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr4_iniu_apb_porting_apb_apb_p_wdata;
-    logic ddr4_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr4_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ddr4_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr4_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr4_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr4_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr4_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ddr5_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ddr5_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ddr5_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ddr5_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ddr5_iniu_apb_porting_apb_apb_p_addr;
-    logic ddr5_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ddr5_iniu_apb_porting_apb_apb_p_rdata;
-    logic ddr5_iniu_apb_porting_apb_apb_p_ready;
-    logic ddr5_iniu_apb_porting_apb_apb_p_sel;
-    logic ddr5_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ddr5_iniu_apb_porting_apb_apb_p_wdata;
-    logic ddr5_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ddr5_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ddr5_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ddr5_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ddr5_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ddr5_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ddr5_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ucie_ss0_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ucie_ss0_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [4095:0] ucie_ss0_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [7:0] ucie_ss0_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id;
-    logic [31:0] ucie_ss0_iniu_apb_porting_apb_apb_p_addr;
-    logic ucie_ss0_iniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ucie_ss0_iniu_apb_porting_apb_apb_p_rdata;
-    logic ucie_ss0_iniu_apb_porting_apb_apb_p_ready;
-    logic ucie_ss0_iniu_apb_porting_apb_apb_p_sel;
-    logic ucie_ss0_iniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ucie_ss0_iniu_apb_porting_apb_apb_p_wdata;
-    logic ucie_ss0_iniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ucie_ss0_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val;
-    logic ucie_ss0_iniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ucie_ss0_iniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ucie_ss0_iniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ucie_ss0_iniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ucie_ss0_iniu_pchannel_porting_pchannel_pchannel_pstate;
-    logic ucie_ss0_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk;
-    logic ucie_ss0_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n;
-    logic [7:0] ucie_ss0_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id;
-    logic [4095:0] ucie_ss0_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt;
-    logic [127:0] ucie_ss0_tniu_v_merge_interrupt_porting_v_merge_interrupt_v_merge_interrupt_v_merge_interrupt;
-    logic [31:0] ucie_ss0_tniu_apb_porting_apb_apb_p_addr;
-    logic ucie_ss0_tniu_apb_porting_apb_apb_p_enable;
-    logic [31:0] ucie_ss0_tniu_apb_porting_apb_apb_p_rdata;
-    logic ucie_ss0_tniu_apb_porting_apb_apb_p_ready;
-    logic ucie_ss0_tniu_apb_porting_apb_apb_p_sel;
-    logic ucie_ss0_tniu_apb_porting_apb_apb_p_slverr;
-    logic [31:0] ucie_ss0_tniu_apb_porting_apb_apb_p_wdata;
-    logic ucie_ss0_tniu_apb_porting_apb_apb_p_write;
-    logic [9:0] ucie_ss0_tniu_timeout_val_porting;
-    logic ucie_ss0_tniu_pchannel_porting_pchannel_pchannel_paccept;
-    logic [1:0] ucie_ss0_tniu_pchannel_porting_pchannel_pchannel_pactive;
-    logic ucie_ss0_tniu_pchannel_porting_pchannel_pchannel_pdeny;
-    logic ucie_ss0_tniu_pchannel_porting_pchannel_pchannel_preq;
-    logic [1:0] ucie_ss0_tniu_pchannel_porting_pchannel_pchannel_pstate;
+    logic vpu_ss_iniu_clk_sys_porting_clk_sys_clk;
+    logic vpu_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic vpu_ss_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] vpu_ss_iniu_pchannel_porting_pchannel_pactive;
+    logic vpu_ss_iniu_pchannel_porting_pchannel_pdeny;
+    logic vpu_ss_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] vpu_ss_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] vpu_ss_iniu_vpu_ss_iniu_sys_v_interrupt_porting_vpu_ss_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] vpu_ss_iniu_vpu_ss_iniu_sys_iniu_src_id_porting_vpu_ss_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_addr;
+    logic vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_enable;
+    logic [31:0] vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_rdata;
+    logic vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_ready;
+    logic vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_sel;
+    logic vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_wdata;
+    logic vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_write;
+    logic [9:0] vpu_ss_iniu_vpu_ss_iniu_sys_timeout_val_porting_vpu_ss_iniu_sys_timeout_val_porting_timeout_val;
+    logic dspss4_tniu_clk_sys_porting_clk_sys_clk;
+    logic dspss4_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic dspss4_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] dspss4_tniu_pchannel_porting_pchannel_pactive;
+    logic dspss4_tniu_pchannel_porting_pchannel_pdeny;
+    logic dspss4_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] dspss4_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] dspss4_tniu_dspss4_tniu_sys_tniu_tgt_id_porting_dspss4_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] dspss4_tniu_dspss4_tniu_sys_v_interrupt_porting_dspss4_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] dspss4_tniu_dspss4_tniu_sys_v_merge_interrupt_porting_dspss4_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_addr;
+    logic dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_enable;
+    logic [31:0] dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_rdata;
+    logic dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_ready;
+    logic dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_sel;
+    logic dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_wdata;
+    logic dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_write;
+    logic [9:0] dspss4_tniu_dspss4_tniu_sys_timeout_val_porting_dspss4_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] dspss4_tniu_dspss4_tniu_top_timeout_val_porting_dspss4_tniu_top_timeout_val_porting_timeout_val;
+    logic dspss3_iniu_clk_sys_porting_clk_sys_clk;
+    logic dspss3_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic dspss3_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] dspss3_iniu_pchannel_porting_pchannel_pactive;
+    logic dspss3_iniu_pchannel_porting_pchannel_pdeny;
+    logic dspss3_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] dspss3_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] dspss3_iniu_dspss3_iniu_sys_v_interrupt_porting_dspss3_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] dspss3_iniu_dspss3_iniu_sys_iniu_src_id_porting_dspss3_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_addr;
+    logic dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_enable;
+    logic [31:0] dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_rdata;
+    logic dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_ready;
+    logic dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_sel;
+    logic dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_wdata;
+    logic dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_write;
+    logic [9:0] dspss3_iniu_dspss3_iniu_sys_timeout_val_porting_dspss3_iniu_sys_timeout_val_porting_timeout_val;
+    logic dspss2_tniu_clk_sys_porting_clk_sys_clk;
+    logic dspss2_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic dspss2_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] dspss2_tniu_pchannel_porting_pchannel_pactive;
+    logic dspss2_tniu_pchannel_porting_pchannel_pdeny;
+    logic dspss2_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] dspss2_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] dspss2_tniu_dspss2_tniu_sys_tniu_tgt_id_porting_dspss2_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] dspss2_tniu_dspss2_tniu_sys_v_interrupt_porting_dspss2_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] dspss2_tniu_dspss2_tniu_sys_v_merge_interrupt_porting_dspss2_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_addr;
+    logic dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_enable;
+    logic [31:0] dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_rdata;
+    logic dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_ready;
+    logic dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_sel;
+    logic dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_wdata;
+    logic dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_write;
+    logic [9:0] dspss2_tniu_dspss2_tniu_sys_timeout_val_porting_dspss2_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] dspss2_tniu_dspss2_tniu_top_timeout_val_porting_dspss2_tniu_top_timeout_val_porting_timeout_val;
+    logic dspss1_iniu_clk_sys_porting_clk_sys_clk;
+    logic dspss1_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic dspss1_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] dspss1_iniu_pchannel_porting_pchannel_pactive;
+    logic dspss1_iniu_pchannel_porting_pchannel_pdeny;
+    logic dspss1_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] dspss1_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] dspss1_iniu_dspss1_iniu_sys_v_interrupt_porting_dspss1_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] dspss1_iniu_dspss1_iniu_sys_iniu_src_id_porting_dspss1_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_addr;
+    logic dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_enable;
+    logic [31:0] dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_rdata;
+    logic dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_ready;
+    logic dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_sel;
+    logic dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_wdata;
+    logic dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_write;
+    logic [9:0] dspss1_iniu_dspss1_iniu_sys_timeout_val_porting_dspss1_iniu_sys_timeout_val_porting_timeout_val;
+    logic dspss0_tniu_clk_sys_porting_clk_sys_clk;
+    logic dspss0_tniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic dspss0_tniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] dspss0_tniu_pchannel_porting_pchannel_pactive;
+    logic dspss0_tniu_pchannel_porting_pchannel_pdeny;
+    logic dspss0_tniu_pchannel_porting_pchannel_preq;
+    logic [1:0] dspss0_tniu_pchannel_porting_pchannel_pstate;
+    logic [7:0] dspss0_tniu_dspss0_tniu_sys_tniu_tgt_id_porting_dspss0_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id;
+    logic [4095:0] dspss0_tniu_dspss0_tniu_sys_v_interrupt_porting_dspss0_tniu_sys_v_interrupt_porting_v_interrupt;
+    logic [127:0] dspss0_tniu_dspss0_tniu_sys_v_merge_interrupt_porting_dspss0_tniu_sys_v_merge_interrupt_porting_v_merge_interrupt;
+    logic [31:0] dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_addr;
+    logic dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_enable;
+    logic [31:0] dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_rdata;
+    logic dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_ready;
+    logic dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_sel;
+    logic dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_slverr;
+    logic [31:0] dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_wdata;
+    logic dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_write;
+    logic [9:0] dspss0_tniu_dspss0_tniu_sys_timeout_val_porting_dspss0_tniu_sys_timeout_val_porting_timeout_val;
+    logic [9:0] dspss0_tniu_dspss0_tniu_top_timeout_val_porting_dspss0_tniu_top_timeout_val_porting_timeout_val;
+    logic ddr0_iniu_clk_sys_porting_clk_sys_clk;
+    logic ddr0_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr0_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr0_iniu_pchannel_porting_pchannel_pactive;
+    logic ddr0_iniu_pchannel_porting_pchannel_pdeny;
+    logic ddr0_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr0_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ddr0_iniu_ddr0_iniu_sys_v_interrupt_porting_ddr0_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ddr0_iniu_ddr0_iniu_sys_iniu_src_id_porting_ddr0_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_addr;
+    logic ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_rdata;
+    logic ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_ready;
+    logic ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_sel;
+    logic ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_wdata;
+    logic ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_write;
+    logic [9:0] ddr0_iniu_ddr0_iniu_sys_timeout_val_porting_ddr0_iniu_sys_timeout_val_porting_timeout_val;
+    logic ddr1_iniu_clk_sys_porting_clk_sys_clk;
+    logic ddr1_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr1_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr1_iniu_pchannel_porting_pchannel_pactive;
+    logic ddr1_iniu_pchannel_porting_pchannel_pdeny;
+    logic ddr1_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr1_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ddr1_iniu_ddr1_iniu_sys_v_interrupt_porting_ddr1_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ddr1_iniu_ddr1_iniu_sys_iniu_src_id_porting_ddr1_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_addr;
+    logic ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_rdata;
+    logic ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_ready;
+    logic ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_sel;
+    logic ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_wdata;
+    logic ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_write;
+    logic [9:0] ddr1_iniu_ddr1_iniu_sys_timeout_val_porting_ddr1_iniu_sys_timeout_val_porting_timeout_val;
+    logic ddr2_iniu_clk_sys_porting_clk_sys_clk;
+    logic ddr2_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr2_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr2_iniu_pchannel_porting_pchannel_pactive;
+    logic ddr2_iniu_pchannel_porting_pchannel_pdeny;
+    logic ddr2_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr2_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ddr2_iniu_ddr2_iniu_sys_v_interrupt_porting_ddr2_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ddr2_iniu_ddr2_iniu_sys_iniu_src_id_porting_ddr2_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_addr;
+    logic ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_rdata;
+    logic ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_ready;
+    logic ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_sel;
+    logic ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_wdata;
+    logic ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_write;
+    logic [9:0] ddr2_iniu_ddr2_iniu_sys_timeout_val_porting_ddr2_iniu_sys_timeout_val_porting_timeout_val;
+    logic ddr3_iniu_clk_sys_porting_clk_sys_clk;
+    logic ddr3_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr3_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr3_iniu_pchannel_porting_pchannel_pactive;
+    logic ddr3_iniu_pchannel_porting_pchannel_pdeny;
+    logic ddr3_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr3_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ddr3_iniu_ddr3_iniu_sys_v_interrupt_porting_ddr3_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ddr3_iniu_ddr3_iniu_sys_iniu_src_id_porting_ddr3_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_addr;
+    logic ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_rdata;
+    logic ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_ready;
+    logic ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_sel;
+    logic ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_wdata;
+    logic ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_write;
+    logic [9:0] ddr3_iniu_ddr3_iniu_sys_timeout_val_porting_ddr3_iniu_sys_timeout_val_porting_timeout_val;
+    logic ddr4_iniu_clk_sys_porting_clk_sys_clk;
+    logic ddr4_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr4_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr4_iniu_pchannel_porting_pchannel_pactive;
+    logic ddr4_iniu_pchannel_porting_pchannel_pdeny;
+    logic ddr4_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr4_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ddr4_iniu_ddr4_iniu_sys_v_interrupt_porting_ddr4_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ddr4_iniu_ddr4_iniu_sys_iniu_src_id_porting_ddr4_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_addr;
+    logic ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_rdata;
+    logic ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_ready;
+    logic ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_sel;
+    logic ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_wdata;
+    logic ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_write;
+    logic [9:0] ddr4_iniu_ddr4_iniu_sys_timeout_val_porting_ddr4_iniu_sys_timeout_val_porting_timeout_val;
+    logic ddr5_iniu_clk_sys_porting_clk_sys_clk;
+    logic ddr5_iniu_rst_sys_n_porting_rst_sys_n_rst_n;
+    logic ddr5_iniu_pchannel_porting_pchannel_paccept;
+    logic [1:0] ddr5_iniu_pchannel_porting_pchannel_pactive;
+    logic ddr5_iniu_pchannel_porting_pchannel_pdeny;
+    logic ddr5_iniu_pchannel_porting_pchannel_preq;
+    logic [1:0] ddr5_iniu_pchannel_porting_pchannel_pstate;
+    logic [4095:0] ddr5_iniu_ddr5_iniu_sys_v_interrupt_porting_ddr5_iniu_sys_v_interrupt_porting_v_interrupt;
+    logic [7:0] ddr5_iniu_ddr5_iniu_sys_iniu_src_id_porting_ddr5_iniu_sys_iniu_src_id_porting_iniu_src_id;
+    logic [31:0] ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_addr;
+    logic ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_enable;
+    logic [31:0] ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_rdata;
+    logic ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_ready;
+    logic ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_sel;
+    logic ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_slverr;
+    logic [31:0] ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_wdata;
+    logic ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_write;
+    logic [9:0] ddr5_iniu_ddr5_iniu_sys_timeout_val_porting_ddr5_iniu_sys_timeout_val_porting_timeout_val;
 
     always #5  clk_sys = ~clk_sys;
     always #7  clk_noc_up = ~clk_noc_up;
@@ -756,474 +768,486 @@ module tb_soc_intr_noc_sanity;
         clk_noc_dn = 1'b0;
         rst_noc_up_n = 1'b0;
         rst_noc_dn_n = 1'b0;
-        cpu_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        cpu_ss_iniu_apb_porting_apb_apb_p_addr = '0;
-        cpu_ss_iniu_apb_porting_apb_apb_p_enable = '0;
-        cpu_ss_iniu_apb_porting_apb_apb_p_sel = '0;
-        cpu_ss_iniu_apb_porting_apb_apb_p_wdata = '0;
-        cpu_ss_iniu_apb_porting_apb_apb_p_write = '0;
-        cpu_ss_tniu_apb_porting_apb_apb_p_addr = '0;
-        cpu_ss_tniu_apb_porting_apb_apb_p_enable = '0;
-        cpu_ss_tniu_apb_porting_apb_apb_p_sel = '0;
-        cpu_ss_tniu_apb_porting_apb_apb_p_wdata = '0;
-        cpu_ss_tniu_apb_porting_apb_apb_p_write = '0;
-        audio_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        audio_ss_iniu_apb_porting_apb_apb_p_addr = '0;
-        audio_ss_iniu_apb_porting_apb_apb_p_enable = '0;
-        audio_ss_iniu_apb_porting_apb_apb_p_sel = '0;
-        audio_ss_iniu_apb_porting_apb_apb_p_wdata = '0;
-        audio_ss_iniu_apb_porting_apb_apb_p_write = '0;
-        peri_ss_tniu_apb_porting_apb_apb_p_addr = '0;
-        peri_ss_tniu_apb_porting_apb_apb_p_enable = '0;
-        peri_ss_tniu_apb_porting_apb_apb_p_sel = '0;
-        peri_ss_tniu_apb_porting_apb_apb_p_wdata = '0;
-        peri_ss_tniu_apb_porting_apb_apb_p_write = '0;
-        gpu_ss1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        gpu_ss1_iniu_apb_porting_apb_apb_p_addr = '0;
-        gpu_ss1_iniu_apb_porting_apb_apb_p_enable = '0;
-        gpu_ss1_iniu_apb_porting_apb_apb_p_sel = '0;
-        gpu_ss1_iniu_apb_porting_apb_apb_p_wdata = '0;
-        gpu_ss1_iniu_apb_porting_apb_apb_p_write = '0;
-        gpu_ss0_tniu_apb_porting_apb_apb_p_addr = '0;
-        gpu_ss0_tniu_apb_porting_apb_apb_p_enable = '0;
-        gpu_ss0_tniu_apb_porting_apb_apb_p_sel = '0;
-        gpu_ss0_tniu_apb_porting_apb_apb_p_wdata = '0;
-        gpu_ss0_tniu_apb_porting_apb_apb_p_write = '0;
-        display_ss_tniu_apb_porting_apb_apb_p_addr = '0;
-        display_ss_tniu_apb_porting_apb_apb_p_enable = '0;
-        display_ss_tniu_apb_porting_apb_apb_p_sel = '0;
-        display_ss_tniu_apb_porting_apb_apb_p_wdata = '0;
-        display_ss_tniu_apb_porting_apb_apb_p_write = '0;
-        dp_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        dp_ss_iniu_apb_porting_apb_apb_p_addr = '0;
-        dp_ss_iniu_apb_porting_apb_apb_p_enable = '0;
-        dp_ss_iniu_apb_porting_apb_apb_p_sel = '0;
-        dp_ss_iniu_apb_porting_apb_apb_p_wdata = '0;
-        dp_ss_iniu_apb_porting_apb_apb_p_write = '0;
-        ddr6_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ddr6_iniu_apb_porting_apb_apb_p_addr = '0;
-        ddr6_iniu_apb_porting_apb_apb_p_enable = '0;
-        ddr6_iniu_apb_porting_apb_apb_p_sel = '0;
-        ddr6_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr6_iniu_apb_porting_apb_apb_p_write = '0;
-        ddr7_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ddr7_iniu_apb_porting_apb_apb_p_addr = '0;
-        ddr7_iniu_apb_porting_apb_apb_p_enable = '0;
-        ddr7_iniu_apb_porting_apb_apb_p_sel = '0;
-        ddr7_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr7_iniu_apb_porting_apb_apb_p_write = '0;
-        ddr8_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ddr8_iniu_apb_porting_apb_apb_p_addr = '0;
-        ddr8_iniu_apb_porting_apb_apb_p_enable = '0;
-        ddr8_iniu_apb_porting_apb_apb_p_sel = '0;
-        ddr8_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr8_iniu_apb_porting_apb_apb_p_write = '0;
-        ddr9_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ddr9_iniu_apb_porting_apb_apb_p_addr = '0;
-        ddr9_iniu_apb_porting_apb_apb_p_enable = '0;
-        ddr9_iniu_apb_porting_apb_apb_p_sel = '0;
-        ddr9_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr9_iniu_apb_porting_apb_apb_p_write = '0;
-        ddr10_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ddr10_iniu_apb_porting_apb_apb_p_addr = '0;
-        ddr10_iniu_apb_porting_apb_apb_p_enable = '0;
-        ddr10_iniu_apb_porting_apb_apb_p_sel = '0;
-        ddr10_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr10_iniu_apb_porting_apb_apb_p_write = '0;
-        ddr11_tniu_apb_porting_apb_apb_p_addr = '0;
-        ddr11_tniu_apb_porting_apb_apb_p_enable = '0;
-        ddr11_tniu_apb_porting_apb_apb_p_sel = '0;
-        ddr11_tniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr11_tniu_apb_porting_apb_apb_p_write = '0;
-        mipi_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        mipi_ss_iniu_apb_porting_apb_apb_p_addr = '0;
-        mipi_ss_iniu_apb_porting_apb_apb_p_enable = '0;
-        mipi_ss_iniu_apb_porting_apb_apb_p_sel = '0;
-        mipi_ss_iniu_apb_porting_apb_apb_p_wdata = '0;
-        mipi_ss_iniu_apb_porting_apb_apb_p_write = '0;
-        ufs_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ufs_ss_iniu_apb_porting_apb_apb_p_addr = '0;
-        ufs_ss_iniu_apb_porting_apb_apb_p_enable = '0;
-        ufs_ss_iniu_apb_porting_apb_apb_p_sel = '0;
-        ufs_ss_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ufs_ss_iniu_apb_porting_apb_apb_p_write = '0;
-        camera_ss_tniu_apb_porting_apb_apb_p_addr = '0;
-        camera_ss_tniu_apb_porting_apb_apb_p_enable = '0;
-        camera_ss_tniu_apb_porting_apb_apb_p_sel = '0;
-        camera_ss_tniu_apb_porting_apb_apb_p_wdata = '0;
-        camera_ss_tniu_apb_porting_apb_apb_p_write = '0;
-        camera_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        camera_ss_iniu_apb_porting_apb_apb_p_addr = '0;
-        camera_ss_iniu_apb_porting_apb_apb_p_enable = '0;
-        camera_ss_iniu_apb_porting_apb_apb_p_sel = '0;
-        camera_ss_iniu_apb_porting_apb_apb_p_wdata = '0;
-        camera_ss_iniu_apb_porting_apb_apb_p_write = '0;
-        pcie_eth_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        pcie_eth_ss_iniu_apb_porting_apb_apb_p_addr = '0;
-        pcie_eth_ss_iniu_apb_porting_apb_apb_p_enable = '0;
-        pcie_eth_ss_iniu_apb_porting_apb_apb_p_sel = '0;
-        pcie_eth_ss_iniu_apb_porting_apb_apb_p_wdata = '0;
-        pcie_eth_ss_iniu_apb_porting_apb_apb_p_write = '0;
-        debug_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        debug_ss_iniu_apb_porting_apb_apb_p_addr = '0;
-        debug_ss_iniu_apb_porting_apb_apb_p_enable = '0;
-        debug_ss_iniu_apb_porting_apb_apb_p_sel = '0;
-        debug_ss_iniu_apb_porting_apb_apb_p_wdata = '0;
-        debug_ss_iniu_apb_porting_apb_apb_p_write = '0;
-        aon_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        aon_ss_iniu_apb_porting_apb_apb_p_addr = '0;
-        aon_ss_iniu_apb_porting_apb_apb_p_enable = '0;
-        aon_ss_iniu_apb_porting_apb_apb_p_sel = '0;
-        aon_ss_iniu_apb_porting_apb_apb_p_wdata = '0;
-        aon_ss_iniu_apb_porting_apb_apb_p_write = '0;
-        aon_ss_tniu_apb_porting_apb_apb_p_addr = '0;
-        aon_ss_tniu_apb_porting_apb_apb_p_enable = '0;
-        aon_ss_tniu_apb_porting_apb_apb_p_sel = '0;
-        aon_ss_tniu_apb_porting_apb_apb_p_wdata = '0;
-        aon_ss_tniu_apb_porting_apb_apb_p_write = '0;
-        ucie_ss1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ucie_ss1_iniu_apb_porting_apb_apb_p_addr = '0;
-        ucie_ss1_iniu_apb_porting_apb_apb_p_enable = '0;
-        ucie_ss1_iniu_apb_porting_apb_apb_p_sel = '0;
-        ucie_ss1_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ucie_ss1_iniu_apb_porting_apb_apb_p_write = '0;
-        ucie_ss1_tniu_apb_porting_apb_apb_p_addr = '0;
-        ucie_ss1_tniu_apb_porting_apb_apb_p_enable = '0;
-        ucie_ss1_tniu_apb_porting_apb_apb_p_sel = '0;
-        ucie_ss1_tniu_apb_porting_apb_apb_p_wdata = '0;
-        ucie_ss1_tniu_apb_porting_apb_apb_p_write = '0;
-        dspss5_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        dspss5_iniu_apb_porting_apb_apb_p_addr = '0;
-        dspss5_iniu_apb_porting_apb_apb_p_enable = '0;
-        dspss5_iniu_apb_porting_apb_apb_p_sel = '0;
-        dspss5_iniu_apb_porting_apb_apb_p_wdata = '0;
-        dspss5_iniu_apb_porting_apb_apb_p_write = '0;
-        vpu_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        vpu_ss_iniu_apb_porting_apb_apb_p_addr = '0;
-        vpu_ss_iniu_apb_porting_apb_apb_p_enable = '0;
-        vpu_ss_iniu_apb_porting_apb_apb_p_sel = '0;
-        vpu_ss_iniu_apb_porting_apb_apb_p_wdata = '0;
-        vpu_ss_iniu_apb_porting_apb_apb_p_write = '0;
-        dspss4_tniu_apb_porting_apb_apb_p_addr = '0;
-        dspss4_tniu_apb_porting_apb_apb_p_enable = '0;
-        dspss4_tniu_apb_porting_apb_apb_p_sel = '0;
-        dspss4_tniu_apb_porting_apb_apb_p_wdata = '0;
-        dspss4_tniu_apb_porting_apb_apb_p_write = '0;
-        dspss3_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        dspss3_iniu_apb_porting_apb_apb_p_addr = '0;
-        dspss3_iniu_apb_porting_apb_apb_p_enable = '0;
-        dspss3_iniu_apb_porting_apb_apb_p_sel = '0;
-        dspss3_iniu_apb_porting_apb_apb_p_wdata = '0;
-        dspss3_iniu_apb_porting_apb_apb_p_write = '0;
-        dspss2_tniu_apb_porting_apb_apb_p_addr = '0;
-        dspss2_tniu_apb_porting_apb_apb_p_enable = '0;
-        dspss2_tniu_apb_porting_apb_apb_p_sel = '0;
-        dspss2_tniu_apb_porting_apb_apb_p_wdata = '0;
-        dspss2_tniu_apb_porting_apb_apb_p_write = '0;
-        dspss1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        dspss1_iniu_apb_porting_apb_apb_p_addr = '0;
-        dspss1_iniu_apb_porting_apb_apb_p_enable = '0;
-        dspss1_iniu_apb_porting_apb_apb_p_sel = '0;
-        dspss1_iniu_apb_porting_apb_apb_p_wdata = '0;
-        dspss1_iniu_apb_porting_apb_apb_p_write = '0;
-        dspss0_tniu_apb_porting_apb_apb_p_addr = '0;
-        dspss0_tniu_apb_porting_apb_apb_p_enable = '0;
-        dspss0_tniu_apb_porting_apb_apb_p_sel = '0;
-        dspss0_tniu_apb_porting_apb_apb_p_wdata = '0;
-        dspss0_tniu_apb_porting_apb_apb_p_write = '0;
-        ddr0_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ddr0_iniu_apb_porting_apb_apb_p_addr = '0;
-        ddr0_iniu_apb_porting_apb_apb_p_enable = '0;
-        ddr0_iniu_apb_porting_apb_apb_p_sel = '0;
-        ddr0_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr0_iniu_apb_porting_apb_apb_p_write = '0;
-        ddr1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ddr1_iniu_apb_porting_apb_apb_p_addr = '0;
-        ddr1_iniu_apb_porting_apb_apb_p_enable = '0;
-        ddr1_iniu_apb_porting_apb_apb_p_sel = '0;
-        ddr1_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr1_iniu_apb_porting_apb_apb_p_write = '0;
-        ddr2_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ddr2_iniu_apb_porting_apb_apb_p_addr = '0;
-        ddr2_iniu_apb_porting_apb_apb_p_enable = '0;
-        ddr2_iniu_apb_porting_apb_apb_p_sel = '0;
-        ddr2_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr2_iniu_apb_porting_apb_apb_p_write = '0;
-        ddr3_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ddr3_iniu_apb_porting_apb_apb_p_addr = '0;
-        ddr3_iniu_apb_porting_apb_apb_p_enable = '0;
-        ddr3_iniu_apb_porting_apb_apb_p_sel = '0;
-        ddr3_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr3_iniu_apb_porting_apb_apb_p_write = '0;
-        ddr4_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ddr4_iniu_apb_porting_apb_apb_p_addr = '0;
-        ddr4_iniu_apb_porting_apb_apb_p_enable = '0;
-        ddr4_iniu_apb_porting_apb_apb_p_sel = '0;
-        ddr4_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr4_iniu_apb_porting_apb_apb_p_write = '0;
-        ddr5_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ddr5_iniu_apb_porting_apb_apb_p_addr = '0;
-        ddr5_iniu_apb_porting_apb_apb_p_enable = '0;
-        ddr5_iniu_apb_porting_apb_apb_p_sel = '0;
-        ddr5_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ddr5_iniu_apb_porting_apb_apb_p_write = '0;
-        ucie_ss0_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt = '0;
-        ucie_ss0_iniu_apb_porting_apb_apb_p_addr = '0;
-        ucie_ss0_iniu_apb_porting_apb_apb_p_enable = '0;
-        ucie_ss0_iniu_apb_porting_apb_apb_p_sel = '0;
-        ucie_ss0_iniu_apb_porting_apb_apb_p_wdata = '0;
-        ucie_ss0_iniu_apb_porting_apb_apb_p_write = '0;
-        ucie_ss0_tniu_apb_porting_apb_apb_p_addr = '0;
-        ucie_ss0_tniu_apb_porting_apb_apb_p_enable = '0;
-        ucie_ss0_tniu_apb_porting_apb_apb_p_sel = '0;
-        ucie_ss0_tniu_apb_porting_apb_apb_p_wdata = '0;
-        ucie_ss0_tniu_apb_porting_apb_apb_p_write = '0;
+        ucie_ss0_iniu_ucie_ss0_iniu_sys_v_interrupt_porting_ucie_ss0_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_addr = '0;
+        ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_enable = '0;
+        ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_sel = '0;
+        ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_wdata = '0;
+        ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_write = '0;
+        ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_addr = '0;
+        ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_enable = '0;
+        ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_sel = '0;
+        ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_wdata = '0;
+        ucie_ss0_tniu_ucie_ss0_tniu_sys_apb_porting_ucie_ss0_tniu_sys_apb_porting_p_write = '0;
+        cpu_ss_iniu_cpu_ss_iniu_sys_v_interrupt_porting_cpu_ss_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_addr = '0;
+        cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_enable = '0;
+        cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_sel = '0;
+        cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_wdata = '0;
+        cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_write = '0;
+        cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_addr = '0;
+        cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_enable = '0;
+        cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_sel = '0;
+        cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_wdata = '0;
+        cpu_ss_tniu_cpu_ss_tniu_sys_apb_porting_cpu_ss_tniu_sys_apb_porting_p_write = '0;
+        audio_ss_iniu_audio_ss_iniu_sys_v_interrupt_porting_audio_ss_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_addr = '0;
+        audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_enable = '0;
+        audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_sel = '0;
+        audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_wdata = '0;
+        audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_write = '0;
+        peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_addr = '0;
+        peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_enable = '0;
+        peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_sel = '0;
+        peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_wdata = '0;
+        peri_ss_tniu_peri_ss_tniu_sys_apb_porting_peri_ss_tniu_sys_apb_porting_p_write = '0;
+        gpu_ss1_iniu_gpu_ss1_iniu_sys_v_interrupt_porting_gpu_ss1_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_addr = '0;
+        gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_enable = '0;
+        gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_sel = '0;
+        gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_wdata = '0;
+        gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_write = '0;
+        gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_addr = '0;
+        gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_enable = '0;
+        gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_sel = '0;
+        gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_wdata = '0;
+        gpu_ss0_tniu_gpu_ss0_tniu_sys_apb_porting_gpu_ss0_tniu_sys_apb_porting_p_write = '0;
+        display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_addr = '0;
+        display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_enable = '0;
+        display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_sel = '0;
+        display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_wdata = '0;
+        display_ss_tniu_display_ss_tniu_sys_apb_porting_display_ss_tniu_sys_apb_porting_p_write = '0;
+        dp_ss_iniu_dp_ss_iniu_sys_v_interrupt_porting_dp_ss_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_addr = '0;
+        dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_enable = '0;
+        dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_sel = '0;
+        dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_wdata = '0;
+        dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_write = '0;
+        ddr6_iniu_ddr6_iniu_sys_v_interrupt_porting_ddr6_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_addr = '0;
+        ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_enable = '0;
+        ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_sel = '0;
+        ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_wdata = '0;
+        ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_write = '0;
+        ddr7_iniu_ddr7_iniu_sys_v_interrupt_porting_ddr7_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_addr = '0;
+        ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_enable = '0;
+        ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_sel = '0;
+        ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_wdata = '0;
+        ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_write = '0;
+        ddr8_iniu_ddr8_iniu_sys_v_interrupt_porting_ddr8_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_addr = '0;
+        ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_enable = '0;
+        ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_sel = '0;
+        ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_wdata = '0;
+        ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_write = '0;
+        ddr9_iniu_ddr9_iniu_sys_v_interrupt_porting_ddr9_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_addr = '0;
+        ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_enable = '0;
+        ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_sel = '0;
+        ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_wdata = '0;
+        ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_write = '0;
+        ddr10_iniu_ddr10_iniu_sys_v_interrupt_porting_ddr10_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_addr = '0;
+        ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_enable = '0;
+        ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_sel = '0;
+        ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_wdata = '0;
+        ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_write = '0;
+        ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_addr = '0;
+        ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_enable = '0;
+        ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_sel = '0;
+        ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_wdata = '0;
+        ddr11_tniu_ddr11_tniu_sys_apb_porting_ddr11_tniu_sys_apb_porting_p_write = '0;
+        mipi_ss_iniu_mipi_ss_iniu_sys_v_interrupt_porting_mipi_ss_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_addr = '0;
+        mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_enable = '0;
+        mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_sel = '0;
+        mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_wdata = '0;
+        mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_write = '0;
+        ufs_ss_iniu_ufs_ss_iniu_sys_v_interrupt_porting_ufs_ss_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_addr = '0;
+        ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_enable = '0;
+        ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_sel = '0;
+        ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_wdata = '0;
+        ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_write = '0;
+        camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_addr = '0;
+        camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_enable = '0;
+        camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_sel = '0;
+        camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_wdata = '0;
+        camera_ss_tniu_camera_ss_tniu_sys_apb_porting_camera_ss_tniu_sys_apb_porting_p_write = '0;
+        camera_ss_iniu_camera_ss_iniu_sys_v_interrupt_porting_camera_ss_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_addr = '0;
+        camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_enable = '0;
+        camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_sel = '0;
+        camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_wdata = '0;
+        camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_write = '0;
+        pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_v_interrupt_porting_pcie_eth_ss_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_addr = '0;
+        pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_enable = '0;
+        pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_sel = '0;
+        pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_wdata = '0;
+        pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_write = '0;
+        debug_ss_iniu_debug_ss_iniu_sys_v_interrupt_porting_debug_ss_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_addr = '0;
+        debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_enable = '0;
+        debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_sel = '0;
+        debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_wdata = '0;
+        debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_write = '0;
+        aon_ss_iniu_aon_ss_iniu_sys_v_interrupt_porting_aon_ss_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_addr = '0;
+        aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_enable = '0;
+        aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_sel = '0;
+        aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_wdata = '0;
+        aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_write = '0;
+        aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_addr = '0;
+        aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_enable = '0;
+        aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_sel = '0;
+        aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_wdata = '0;
+        aon_ss_tniu_aon_ss_tniu_sys_apb_porting_aon_ss_tniu_sys_apb_porting_p_write = '0;
+        ucie_ss1_iniu_ucie_ss1_iniu_sys_v_interrupt_porting_ucie_ss1_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_addr = '0;
+        ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_enable = '0;
+        ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_sel = '0;
+        ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_wdata = '0;
+        ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_write = '0;
+        ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_addr = '0;
+        ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_enable = '0;
+        ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_sel = '0;
+        ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_wdata = '0;
+        ucie_ss1_tniu_ucie_ss1_tniu_sys_apb_porting_ucie_ss1_tniu_sys_apb_porting_p_write = '0;
+        dspss5_iniu_dspss5_iniu_sys_v_interrupt_porting_dspss5_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_addr = '0;
+        dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_enable = '0;
+        dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_sel = '0;
+        dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_wdata = '0;
+        dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_write = '0;
+        vpu_ss_iniu_vpu_ss_iniu_sys_v_interrupt_porting_vpu_ss_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_addr = '0;
+        vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_enable = '0;
+        vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_sel = '0;
+        vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_wdata = '0;
+        vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_write = '0;
+        dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_addr = '0;
+        dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_enable = '0;
+        dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_sel = '0;
+        dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_wdata = '0;
+        dspss4_tniu_dspss4_tniu_sys_apb_porting_dspss4_tniu_sys_apb_porting_p_write = '0;
+        dspss3_iniu_dspss3_iniu_sys_v_interrupt_porting_dspss3_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_addr = '0;
+        dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_enable = '0;
+        dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_sel = '0;
+        dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_wdata = '0;
+        dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_write = '0;
+        dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_addr = '0;
+        dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_enable = '0;
+        dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_sel = '0;
+        dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_wdata = '0;
+        dspss2_tniu_dspss2_tniu_sys_apb_porting_dspss2_tniu_sys_apb_porting_p_write = '0;
+        dspss1_iniu_dspss1_iniu_sys_v_interrupt_porting_dspss1_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_addr = '0;
+        dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_enable = '0;
+        dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_sel = '0;
+        dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_wdata = '0;
+        dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_write = '0;
+        dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_addr = '0;
+        dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_enable = '0;
+        dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_sel = '0;
+        dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_wdata = '0;
+        dspss0_tniu_dspss0_tniu_sys_apb_porting_dspss0_tniu_sys_apb_porting_p_write = '0;
+        ddr0_iniu_ddr0_iniu_sys_v_interrupt_porting_ddr0_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_addr = '0;
+        ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_enable = '0;
+        ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_sel = '0;
+        ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_wdata = '0;
+        ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_write = '0;
+        ddr1_iniu_ddr1_iniu_sys_v_interrupt_porting_ddr1_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_addr = '0;
+        ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_enable = '0;
+        ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_sel = '0;
+        ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_wdata = '0;
+        ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_write = '0;
+        ddr2_iniu_ddr2_iniu_sys_v_interrupt_porting_ddr2_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_addr = '0;
+        ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_enable = '0;
+        ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_sel = '0;
+        ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_wdata = '0;
+        ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_write = '0;
+        ddr3_iniu_ddr3_iniu_sys_v_interrupt_porting_ddr3_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_addr = '0;
+        ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_enable = '0;
+        ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_sel = '0;
+        ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_wdata = '0;
+        ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_write = '0;
+        ddr4_iniu_ddr4_iniu_sys_v_interrupt_porting_ddr4_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_addr = '0;
+        ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_enable = '0;
+        ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_sel = '0;
+        ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_wdata = '0;
+        ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_write = '0;
+        ddr5_iniu_ddr5_iniu_sys_v_interrupt_porting_ddr5_iniu_sys_v_interrupt_porting_v_interrupt = '0;
+        ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_addr = '0;
+        ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_enable = '0;
+        ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_sel = '0;
+        ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_wdata = '0;
+        ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_write = '0;
         #100;
         rstn_sys = 1'b1;
         rst_noc_up_n = 1'b1;
         rst_noc_dn_n = 1'b1;
     end
 
-    assign cpu_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign cpu_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign cpu_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign cpu_ss_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign cpu_ss_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign cpu_ss_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign cpu_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign cpu_ss_tniu_timeout_val_porting = 10'd16;
-    assign cpu_ss_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign cpu_ss_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign audio_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign audio_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign audio_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign audio_ss_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign audio_ss_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign peri_ss_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign peri_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign peri_ss_tniu_timeout_val_porting = 10'd16;
-    assign peri_ss_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign peri_ss_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign gpu_ss1_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign gpu_ss1_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign gpu_ss1_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign gpu_ss1_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign gpu_ss1_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign gpu_ss0_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign gpu_ss0_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign gpu_ss0_tniu_timeout_val_porting = 10'd16;
-    assign gpu_ss0_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign gpu_ss0_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign display_ss_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign display_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign display_ss_tniu_timeout_val_porting = 10'd16;
-    assign display_ss_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign display_ss_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign dp_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign dp_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign dp_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign dp_ss_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign dp_ss_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr6_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr6_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr6_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ddr6_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr6_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr7_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr7_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr7_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ddr7_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr7_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr8_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr8_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr8_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ddr8_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr8_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr9_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr9_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr9_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ddr9_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr9_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr10_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr10_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr10_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ddr10_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr10_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr11_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr11_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr11_tniu_timeout_val_porting = 10'd16;
-    assign ddr11_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr11_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign mipi_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign mipi_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign mipi_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign mipi_ss_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign mipi_ss_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ufs_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ufs_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ufs_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ufs_ss_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ufs_ss_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign camera_ss_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign camera_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign camera_ss_tniu_timeout_val_porting = 10'd16;
-    assign camera_ss_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign camera_ss_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign camera_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign camera_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign camera_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign camera_ss_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign camera_ss_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign pcie_eth_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign pcie_eth_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign pcie_eth_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign pcie_eth_ss_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign pcie_eth_ss_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign debug_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign debug_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign debug_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign debug_ss_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign debug_ss_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign aon_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign aon_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign aon_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign aon_ss_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign aon_ss_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign aon_ss_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign aon_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign aon_ss_tniu_timeout_val_porting = 10'd16;
-    assign aon_ss_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign aon_ss_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ucie_ss1_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ucie_ss1_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ucie_ss1_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ucie_ss1_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ucie_ss1_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ucie_ss1_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ucie_ss1_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ucie_ss1_tniu_timeout_val_porting = 10'd16;
-    assign ucie_ss1_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ucie_ss1_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign dspss5_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign dspss5_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign dspss5_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign dspss5_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign dspss5_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
+    assign ucie_ss0_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ucie_ss0_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ucie_ss0_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ucie_ss0_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ucie_ss0_iniu_ucie_ss0_iniu_sys_timeout_val_porting_ucie_ss0_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ucie_ss0_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ucie_ss0_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ucie_ss0_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ucie_ss0_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ucie_ss0_tniu_ucie_ss0_tniu_sys_timeout_val_porting_ucie_ss0_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ucie_ss0_tniu_ucie_ss0_tniu_top_timeout_val_porting_ucie_ss0_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign cpu_ss_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign cpu_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign cpu_ss_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign cpu_ss_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign cpu_ss_iniu_cpu_ss_iniu_sys_timeout_val_porting_cpu_ss_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign cpu_ss_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign cpu_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign cpu_ss_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign cpu_ss_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign cpu_ss_tniu_cpu_ss_tniu_sys_timeout_val_porting_cpu_ss_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign cpu_ss_tniu_cpu_ss_tniu_top_timeout_val_porting_cpu_ss_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign audio_ss_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign audio_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign audio_ss_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign audio_ss_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign audio_ss_iniu_audio_ss_iniu_sys_timeout_val_porting_audio_ss_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign peri_ss_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign peri_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign peri_ss_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign peri_ss_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign peri_ss_tniu_peri_ss_tniu_sys_timeout_val_porting_peri_ss_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign peri_ss_tniu_peri_ss_tniu_top_timeout_val_porting_peri_ss_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign gpu_ss1_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign gpu_ss1_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign gpu_ss1_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign gpu_ss1_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign gpu_ss1_iniu_gpu_ss1_iniu_sys_timeout_val_porting_gpu_ss1_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign gpu_ss0_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign gpu_ss0_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign gpu_ss0_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign gpu_ss0_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign gpu_ss0_tniu_gpu_ss0_tniu_sys_timeout_val_porting_gpu_ss0_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign gpu_ss0_tniu_gpu_ss0_tniu_top_timeout_val_porting_gpu_ss0_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign display_ss_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign display_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign display_ss_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign display_ss_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign display_ss_tniu_display_ss_tniu_sys_timeout_val_porting_display_ss_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign display_ss_tniu_display_ss_tniu_top_timeout_val_porting_display_ss_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign dp_ss_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign dp_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign dp_ss_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign dp_ss_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign dp_ss_iniu_dp_ss_iniu_sys_timeout_val_porting_dp_ss_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr6_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr6_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr6_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr6_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr6_iniu_ddr6_iniu_sys_timeout_val_porting_ddr6_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr7_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr7_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr7_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr7_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr7_iniu_ddr7_iniu_sys_timeout_val_porting_ddr7_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr8_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr8_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr8_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr8_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr8_iniu_ddr8_iniu_sys_timeout_val_porting_ddr8_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr9_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr9_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr9_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr9_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr9_iniu_ddr9_iniu_sys_timeout_val_porting_ddr9_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr10_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr10_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr10_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr10_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr10_iniu_ddr10_iniu_sys_timeout_val_porting_ddr10_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr11_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr11_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr11_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr11_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr11_tniu_ddr11_tniu_sys_timeout_val_porting_ddr11_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr11_tniu_ddr11_tniu_top_timeout_val_porting_ddr11_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign mipi_ss_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign mipi_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign mipi_ss_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign mipi_ss_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign mipi_ss_iniu_mipi_ss_iniu_sys_timeout_val_porting_mipi_ss_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ufs_ss_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ufs_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ufs_ss_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ufs_ss_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ufs_ss_iniu_ufs_ss_iniu_sys_timeout_val_porting_ufs_ss_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign camera_ss_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign camera_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign camera_ss_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign camera_ss_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign camera_ss_tniu_camera_ss_tniu_sys_timeout_val_porting_camera_ss_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign camera_ss_tniu_camera_ss_tniu_top_timeout_val_porting_camera_ss_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign camera_ss_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign camera_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign camera_ss_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign camera_ss_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign camera_ss_iniu_camera_ss_iniu_sys_timeout_val_porting_camera_ss_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign pcie_eth_ss_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign pcie_eth_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign pcie_eth_ss_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign pcie_eth_ss_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_timeout_val_porting_pcie_eth_ss_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign debug_ss_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign debug_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign debug_ss_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign debug_ss_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign debug_ss_iniu_debug_ss_iniu_sys_timeout_val_porting_debug_ss_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign aon_ss_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign aon_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign aon_ss_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign aon_ss_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign aon_ss_iniu_aon_ss_iniu_sys_timeout_val_porting_aon_ss_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign aon_ss_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign aon_ss_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign aon_ss_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign aon_ss_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign aon_ss_tniu_aon_ss_tniu_sys_timeout_val_porting_aon_ss_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign aon_ss_tniu_aon_ss_tniu_top_timeout_val_porting_aon_ss_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign ucie_ss1_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ucie_ss1_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ucie_ss1_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ucie_ss1_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ucie_ss1_iniu_ucie_ss1_iniu_sys_timeout_val_porting_ucie_ss1_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ucie_ss1_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ucie_ss1_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ucie_ss1_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ucie_ss1_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ucie_ss1_tniu_ucie_ss1_tniu_sys_timeout_val_porting_ucie_ss1_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ucie_ss1_tniu_ucie_ss1_tniu_top_timeout_val_porting_ucie_ss1_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign dspss5_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign dspss5_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign dspss5_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign dspss5_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign dspss5_iniu_dspss5_iniu_sys_timeout_val_porting_dspss5_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
     assign default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_last = '0;
     assign default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_payload = '0;
     assign default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_qos = '0;
     assign default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_srcid = '0;
     assign default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_tgtid = '0;
     assign default_tgtid_sink_default_tgtid_sink_ring_local_tx_porting_default_tgtid_sink_ring_local_tx_porting_local_tx_local_tx_valid = '0;
-    assign vpu_ss_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign vpu_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign vpu_ss_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign vpu_ss_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign vpu_ss_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign dspss4_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign dspss4_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign dspss4_tniu_timeout_val_porting = 10'd16;
-    assign dspss4_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign dspss4_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign dspss3_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign dspss3_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign dspss3_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign dspss3_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign dspss3_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign dspss2_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign dspss2_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign dspss2_tniu_timeout_val_porting = 10'd16;
-    assign dspss2_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign dspss2_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign dspss1_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign dspss1_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign dspss1_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign dspss1_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign dspss1_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign dspss0_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign dspss0_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign dspss0_tniu_timeout_val_porting = 10'd16;
-    assign dspss0_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign dspss0_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr0_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr0_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr0_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ddr0_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr0_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr1_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr1_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr1_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ddr1_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr1_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr2_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr2_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr2_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ddr2_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr2_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr3_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr3_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr3_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ddr3_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr3_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr4_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr4_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr4_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ddr4_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr4_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ddr5_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ddr5_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ddr5_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ddr5_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ddr5_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ucie_ss0_iniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ucie_ss0_iniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ucie_ss0_iniu_timeout_val_porting_timeout_val_timeout_val_timeout_val = 10'd16;
-    assign ucie_ss0_iniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ucie_ss0_iniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign ucie_ss0_tniu_clk_sys_porting_clk_sys_clk_sys_func_clk = clk_sys;
-    assign ucie_ss0_tniu_rst_sys_n_porting_rst_sys_n_rst_sys_func_n_rst_n = rstn_sys;
-    assign ucie_ss0_tniu_timeout_val_porting = 10'd16;
-    assign ucie_ss0_tniu_pchannel_porting_pchannel_pchannel_preq = 1'b1;
-    assign ucie_ss0_tniu_pchannel_porting_pchannel_pchannel_pstate = 2'd0;
-    assign cpu_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd0;
-    assign audio_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd2;
-    assign gpu_ss1_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd4;
-    assign dp_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd7;
-    assign ddr6_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd8;
-    assign ddr7_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd9;
-    assign ddr8_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd10;
-    assign ddr9_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd11;
-    assign ddr10_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd12;
-    assign mipi_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd14;
-    assign ufs_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd15;
-    assign camera_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd17;
-    assign vpu_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd18;
-    assign pcie_eth_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd19;
-    assign debug_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd20;
-    assign aon_ss_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd21;
-    assign ucie_ss1_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd23;
-    assign dspss5_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd25;
-    assign dspss3_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd27;
-    assign dspss1_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd29;
-    assign ddr0_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd31;
-    assign ddr1_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd32;
-    assign ddr2_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd33;
-    assign ddr3_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd34;
-    assign ddr4_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd35;
-    assign ddr5_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd36;
-    assign ucie_ss0_iniu_iniu_src_id_porting_iniu_src_id_iniu_src_id_iniu_src_id = 8'd37;
-    assign cpu_ss_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd1;
-    assign peri_ss_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd3;
-    assign gpu_ss0_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd5;
-    assign display_ss_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd6;
-    assign ddr11_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd13;
-    assign camera_ss_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd16;
-    assign aon_ss_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd22;
-    assign ucie_ss1_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd24;
-    assign dspss4_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd26;
-    assign dspss2_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd28;
-    assign dspss0_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd30;
-    assign ucie_ss0_tniu_tniu_tgt_id_porting_tniu_tgt_id_tniu_tgt_id_tniu_tgt_id = 8'd38;
+    assign vpu_ss_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign vpu_ss_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign vpu_ss_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign vpu_ss_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign vpu_ss_iniu_vpu_ss_iniu_sys_timeout_val_porting_vpu_ss_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign dspss4_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign dspss4_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign dspss4_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign dspss4_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign dspss4_tniu_dspss4_tniu_sys_timeout_val_porting_dspss4_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign dspss4_tniu_dspss4_tniu_top_timeout_val_porting_dspss4_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign dspss3_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign dspss3_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign dspss3_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign dspss3_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign dspss3_iniu_dspss3_iniu_sys_timeout_val_porting_dspss3_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign dspss2_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign dspss2_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign dspss2_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign dspss2_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign dspss2_tniu_dspss2_tniu_sys_timeout_val_porting_dspss2_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign dspss2_tniu_dspss2_tniu_top_timeout_val_porting_dspss2_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign dspss1_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign dspss1_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign dspss1_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign dspss1_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign dspss1_iniu_dspss1_iniu_sys_timeout_val_porting_dspss1_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign dspss0_tniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign dspss0_tniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign dspss0_tniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign dspss0_tniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign dspss0_tniu_dspss0_tniu_sys_timeout_val_porting_dspss0_tniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign dspss0_tniu_dspss0_tniu_top_timeout_val_porting_dspss0_tniu_top_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr0_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr0_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr0_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr0_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr0_iniu_ddr0_iniu_sys_timeout_val_porting_ddr0_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr1_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr1_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr1_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr1_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr1_iniu_ddr1_iniu_sys_timeout_val_porting_ddr1_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr2_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr2_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr2_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr2_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr2_iniu_ddr2_iniu_sys_timeout_val_porting_ddr2_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr3_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr3_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr3_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr3_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr3_iniu_ddr3_iniu_sys_timeout_val_porting_ddr3_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr4_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr4_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr4_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr4_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr4_iniu_ddr4_iniu_sys_timeout_val_porting_ddr4_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign ddr5_iniu_clk_sys_porting_clk_sys_clk = clk_sys;
+    assign ddr5_iniu_rst_sys_n_porting_rst_sys_n_rst_n = rstn_sys;
+    assign ddr5_iniu_pchannel_porting_pchannel_preq = 1'b1;
+    assign ddr5_iniu_pchannel_porting_pchannel_pstate = 2'd0;
+    assign ddr5_iniu_ddr5_iniu_sys_timeout_val_porting_ddr5_iniu_sys_timeout_val_porting_timeout_val = 10'd16;
+    assign cpu_ss_iniu_cpu_ss_iniu_sys_iniu_src_id_porting_cpu_ss_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd0;
+    assign audio_ss_iniu_audio_ss_iniu_sys_iniu_src_id_porting_audio_ss_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd2;
+    assign gpu_ss1_iniu_gpu_ss1_iniu_sys_iniu_src_id_porting_gpu_ss1_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd4;
+    assign dp_ss_iniu_dp_ss_iniu_sys_iniu_src_id_porting_dp_ss_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd7;
+    assign ddr6_iniu_ddr6_iniu_sys_iniu_src_id_porting_ddr6_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd8;
+    assign ddr7_iniu_ddr7_iniu_sys_iniu_src_id_porting_ddr7_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd9;
+    assign ddr8_iniu_ddr8_iniu_sys_iniu_src_id_porting_ddr8_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd10;
+    assign ddr9_iniu_ddr9_iniu_sys_iniu_src_id_porting_ddr9_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd11;
+    assign ddr10_iniu_ddr10_iniu_sys_iniu_src_id_porting_ddr10_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd12;
+    assign mipi_ss_iniu_mipi_ss_iniu_sys_iniu_src_id_porting_mipi_ss_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd14;
+    assign ufs_ss_iniu_ufs_ss_iniu_sys_iniu_src_id_porting_ufs_ss_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd15;
+    assign camera_ss_iniu_camera_ss_iniu_sys_iniu_src_id_porting_camera_ss_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd17;
+    assign vpu_ss_iniu_vpu_ss_iniu_sys_iniu_src_id_porting_vpu_ss_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd18;
+    assign pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_iniu_src_id_porting_pcie_eth_ss_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd19;
+    assign debug_ss_iniu_debug_ss_iniu_sys_iniu_src_id_porting_debug_ss_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd20;
+    assign aon_ss_iniu_aon_ss_iniu_sys_iniu_src_id_porting_aon_ss_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd21;
+    assign ucie_ss1_iniu_ucie_ss1_iniu_sys_iniu_src_id_porting_ucie_ss1_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd23;
+    assign dspss5_iniu_dspss5_iniu_sys_iniu_src_id_porting_dspss5_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd25;
+    assign dspss3_iniu_dspss3_iniu_sys_iniu_src_id_porting_dspss3_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd27;
+    assign dspss1_iniu_dspss1_iniu_sys_iniu_src_id_porting_dspss1_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd29;
+    assign ddr0_iniu_ddr0_iniu_sys_iniu_src_id_porting_ddr0_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd31;
+    assign ddr1_iniu_ddr1_iniu_sys_iniu_src_id_porting_ddr1_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd32;
+    assign ddr2_iniu_ddr2_iniu_sys_iniu_src_id_porting_ddr2_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd33;
+    assign ddr3_iniu_ddr3_iniu_sys_iniu_src_id_porting_ddr3_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd34;
+    assign ddr4_iniu_ddr4_iniu_sys_iniu_src_id_porting_ddr4_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd35;
+    assign ddr5_iniu_ddr5_iniu_sys_iniu_src_id_porting_ddr5_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd36;
+    assign ucie_ss0_iniu_ucie_ss0_iniu_sys_iniu_src_id_porting_ucie_ss0_iniu_sys_iniu_src_id_porting_iniu_src_id = 8'd37;
+    assign cpu_ss_tniu_cpu_ss_tniu_sys_tniu_tgt_id_porting_cpu_ss_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd1;
+    assign peri_ss_tniu_peri_ss_tniu_sys_tniu_tgt_id_porting_peri_ss_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd3;
+    assign gpu_ss0_tniu_gpu_ss0_tniu_sys_tniu_tgt_id_porting_gpu_ss0_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd5;
+    assign display_ss_tniu_display_ss_tniu_sys_tniu_tgt_id_porting_display_ss_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd6;
+    assign ddr11_tniu_ddr11_tniu_sys_tniu_tgt_id_porting_ddr11_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd13;
+    assign camera_ss_tniu_camera_ss_tniu_sys_tniu_tgt_id_porting_camera_ss_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd16;
+    assign aon_ss_tniu_aon_ss_tniu_sys_tniu_tgt_id_porting_aon_ss_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd22;
+    assign ucie_ss1_tniu_ucie_ss1_tniu_sys_tniu_tgt_id_porting_ucie_ss1_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd24;
+    assign dspss4_tniu_dspss4_tniu_sys_tniu_tgt_id_porting_dspss4_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd26;
+    assign dspss2_tniu_dspss2_tniu_sys_tniu_tgt_id_porting_dspss2_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd28;
+    assign dspss0_tniu_dspss0_tniu_sys_tniu_tgt_id_porting_dspss0_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd30;
+    assign ucie_ss0_tniu_ucie_ss0_tniu_sys_tniu_tgt_id_porting_ucie_ss0_tniu_sys_tniu_tgt_id_porting_tniu_tgt_id = 8'd38;
 
     soc_intr_noc_wrap dut (.*);
 
@@ -1260,441 +1284,441 @@ module tb_soc_intr_noc_sanity;
             @(negedge clk_sys);
             case (iniu_idx)
             0: begin
-                cpu_ss_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                cpu_ss_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                cpu_ss_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                cpu_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                cpu_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_addr <= addr_i;
+                cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_wdata <= data_i;
+                cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_write <= 1'b1;
+                cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_sel <= 1'b1;
+                cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             1: begin
-                audio_ss_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                audio_ss_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                audio_ss_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                audio_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                audio_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_addr <= addr_i;
+                audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_wdata <= data_i;
+                audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_write <= 1'b1;
+                audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_sel <= 1'b1;
+                audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             2: begin
-                gpu_ss1_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                gpu_ss1_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                gpu_ss1_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                gpu_ss1_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                gpu_ss1_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_addr <= addr_i;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_wdata <= data_i;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_write <= 1'b1;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_sel <= 1'b1;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             3: begin
-                dp_ss_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                dp_ss_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                dp_ss_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                dp_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                dp_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_addr <= addr_i;
+                dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_wdata <= data_i;
+                dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_write <= 1'b1;
+                dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_sel <= 1'b1;
+                dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             4: begin
-                ddr6_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ddr6_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ddr6_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ddr6_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ddr6_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_addr <= addr_i;
+                ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_wdata <= data_i;
+                ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_write <= 1'b1;
+                ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             5: begin
-                ddr7_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ddr7_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ddr7_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ddr7_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ddr7_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_addr <= addr_i;
+                ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_wdata <= data_i;
+                ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_write <= 1'b1;
+                ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             6: begin
-                ddr8_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ddr8_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ddr8_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ddr8_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ddr8_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_addr <= addr_i;
+                ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_wdata <= data_i;
+                ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_write <= 1'b1;
+                ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             7: begin
-                ddr9_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ddr9_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ddr9_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ddr9_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ddr9_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_addr <= addr_i;
+                ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_wdata <= data_i;
+                ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_write <= 1'b1;
+                ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             8: begin
-                ddr10_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ddr10_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ddr10_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ddr10_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ddr10_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_addr <= addr_i;
+                ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_wdata <= data_i;
+                ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_write <= 1'b1;
+                ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             9: begin
-                mipi_ss_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                mipi_ss_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                mipi_ss_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                mipi_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                mipi_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_addr <= addr_i;
+                mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_wdata <= data_i;
+                mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_write <= 1'b1;
+                mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_sel <= 1'b1;
+                mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             10: begin
-                ufs_ss_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ufs_ss_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ufs_ss_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ufs_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ufs_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_addr <= addr_i;
+                ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_wdata <= data_i;
+                ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_write <= 1'b1;
+                ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             11: begin
-                camera_ss_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                camera_ss_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                camera_ss_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                camera_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                camera_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_addr <= addr_i;
+                camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_wdata <= data_i;
+                camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_write <= 1'b1;
+                camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_sel <= 1'b1;
+                camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             12: begin
-                vpu_ss_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                vpu_ss_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                vpu_ss_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                vpu_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                vpu_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_addr <= addr_i;
+                vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_wdata <= data_i;
+                vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_write <= 1'b1;
+                vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_sel <= 1'b1;
+                vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             13: begin
-                pcie_eth_ss_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                pcie_eth_ss_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                pcie_eth_ss_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                pcie_eth_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                pcie_eth_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_addr <= addr_i;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_wdata <= data_i;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_write <= 1'b1;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_sel <= 1'b1;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             14: begin
-                debug_ss_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                debug_ss_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                debug_ss_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                debug_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                debug_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_addr <= addr_i;
+                debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_wdata <= data_i;
+                debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_write <= 1'b1;
+                debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_sel <= 1'b1;
+                debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             15: begin
-                aon_ss_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                aon_ss_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                aon_ss_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                aon_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                aon_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_addr <= addr_i;
+                aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_wdata <= data_i;
+                aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_write <= 1'b1;
+                aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_sel <= 1'b1;
+                aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             16: begin
-                ucie_ss1_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ucie_ss1_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ucie_ss1_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ucie_ss1_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ucie_ss1_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_addr <= addr_i;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_wdata <= data_i;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_write <= 1'b1;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             17: begin
-                dspss5_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                dspss5_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                dspss5_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                dspss5_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                dspss5_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_addr <= addr_i;
+                dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_wdata <= data_i;
+                dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_write <= 1'b1;
+                dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_sel <= 1'b1;
+                dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             18: begin
-                dspss3_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                dspss3_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                dspss3_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                dspss3_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                dspss3_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_addr <= addr_i;
+                dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_wdata <= data_i;
+                dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_write <= 1'b1;
+                dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_sel <= 1'b1;
+                dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             19: begin
-                dspss1_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                dspss1_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                dspss1_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                dspss1_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                dspss1_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_addr <= addr_i;
+                dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_wdata <= data_i;
+                dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_write <= 1'b1;
+                dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_sel <= 1'b1;
+                dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             20: begin
-                ddr0_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ddr0_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ddr0_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ddr0_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ddr0_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_addr <= addr_i;
+                ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_wdata <= data_i;
+                ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_write <= 1'b1;
+                ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             21: begin
-                ddr1_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ddr1_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ddr1_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ddr1_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ddr1_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_addr <= addr_i;
+                ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_wdata <= data_i;
+                ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_write <= 1'b1;
+                ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             22: begin
-                ddr2_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ddr2_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ddr2_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ddr2_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ddr2_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_addr <= addr_i;
+                ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_wdata <= data_i;
+                ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_write <= 1'b1;
+                ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             23: begin
-                ddr3_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ddr3_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ddr3_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ddr3_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ddr3_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_addr <= addr_i;
+                ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_wdata <= data_i;
+                ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_write <= 1'b1;
+                ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             24: begin
-                ddr4_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ddr4_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ddr4_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ddr4_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ddr4_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_addr <= addr_i;
+                ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_wdata <= data_i;
+                ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_write <= 1'b1;
+                ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             25: begin
-                ddr5_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ddr5_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ddr5_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ddr5_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ddr5_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_addr <= addr_i;
+                ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_wdata <= data_i;
+                ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_write <= 1'b1;
+                ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             26: begin
-                ucie_ss0_iniu_apb_porting_apb_apb_p_addr <= addr_i;
-                ucie_ss0_iniu_apb_porting_apb_apb_p_wdata <= data_i;
-                ucie_ss0_iniu_apb_porting_apb_apb_p_write <= 1'b1;
-                ucie_ss0_iniu_apb_porting_apb_apb_p_sel <= 1'b1;
-                ucie_ss0_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_addr <= addr_i;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_wdata <= data_i;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_write <= 1'b1;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_sel <= 1'b1;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
                 default: $fatal(1, "[TB] invalid INIU index %0d", iniu_idx);
             endcase
             @(negedge clk_sys);
             case (iniu_idx)
             0: begin
-                cpu_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             1: begin
-                audio_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             2: begin
-                gpu_ss1_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             3: begin
-                dp_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             4: begin
-                ddr6_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             5: begin
-                ddr7_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             6: begin
-                ddr8_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             7: begin
-                ddr9_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             8: begin
-                ddr10_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             9: begin
-                mipi_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             10: begin
-                ufs_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             11: begin
-                camera_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             12: begin
-                vpu_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             13: begin
-                pcie_eth_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             14: begin
-                debug_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             15: begin
-                aon_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             16: begin
-                ucie_ss1_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             17: begin
-                dspss5_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             18: begin
-                dspss3_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             19: begin
-                dspss1_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             20: begin
-                ddr0_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             21: begin
-                ddr1_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             22: begin
-                ddr2_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             23: begin
-                ddr3_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             24: begin
-                ddr4_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             25: begin
-                ddr5_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
             26: begin
-                ucie_ss0_iniu_apb_porting_apb_apb_p_enable <= 1'b1;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_enable <= 1'b1;
             end
                 default: $fatal(1, "[TB] invalid INIU index %0d", iniu_idx);
             endcase
             timeout = 0;
             case (iniu_idx)
             0: begin
-                while ((cpu_ss_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             1: begin
-                while ((audio_ss_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             2: begin
-                while ((gpu_ss1_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             3: begin
-                while ((dp_ss_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             4: begin
-                while ((ddr6_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             5: begin
-                while ((ddr7_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             6: begin
-                while ((ddr8_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             7: begin
-                while ((ddr9_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             8: begin
-                while ((ddr10_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             9: begin
-                while ((mipi_ss_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             10: begin
-                while ((ufs_ss_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             11: begin
-                while ((camera_ss_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             12: begin
-                while ((vpu_ss_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             13: begin
-                while ((pcie_eth_ss_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             14: begin
-                while ((debug_ss_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             15: begin
-                while ((aon_ss_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             16: begin
-                while ((ucie_ss1_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             17: begin
-                while ((dspss5_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             18: begin
-                while ((dspss3_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             19: begin
-                while ((dspss1_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             20: begin
-                while ((ddr0_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             21: begin
-                while ((ddr1_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             22: begin
-                while ((ddr2_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             23: begin
-                while ((ddr3_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             24: begin
-                while ((ddr4_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             25: begin
-                while ((ddr5_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
             end
             26: begin
-                while ((ucie_ss0_iniu_apb_porting_apb_apb_p_ready !== 1'b1) && timeout < 40) begin
+                while ((ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
@@ -1704,193 +1728,193 @@ module tb_soc_intr_noc_sanity;
             @(negedge clk_sys);
             case (iniu_idx)
             0: begin
-                cpu_ss_iniu_apb_porting_apb_apb_p_addr <= '0;
-                cpu_ss_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                cpu_ss_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                cpu_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                cpu_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_addr <= '0;
+                cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_wdata <= '0;
+                cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_write <= 1'b0;
+                cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_sel <= 1'b0;
+                cpu_ss_iniu_cpu_ss_iniu_sys_apb_porting_cpu_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             1: begin
-                audio_ss_iniu_apb_porting_apb_apb_p_addr <= '0;
-                audio_ss_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                audio_ss_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                audio_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                audio_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_addr <= '0;
+                audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_wdata <= '0;
+                audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_write <= 1'b0;
+                audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_sel <= 1'b0;
+                audio_ss_iniu_audio_ss_iniu_sys_apb_porting_audio_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             2: begin
-                gpu_ss1_iniu_apb_porting_apb_apb_p_addr <= '0;
-                gpu_ss1_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                gpu_ss1_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                gpu_ss1_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                gpu_ss1_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_addr <= '0;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_wdata <= '0;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_write <= 1'b0;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_sel <= 1'b0;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_apb_porting_gpu_ss1_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             3: begin
-                dp_ss_iniu_apb_porting_apb_apb_p_addr <= '0;
-                dp_ss_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                dp_ss_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                dp_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                dp_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_addr <= '0;
+                dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_wdata <= '0;
+                dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_write <= 1'b0;
+                dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_sel <= 1'b0;
+                dp_ss_iniu_dp_ss_iniu_sys_apb_porting_dp_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             4: begin
-                ddr6_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ddr6_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ddr6_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ddr6_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ddr6_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_addr <= '0;
+                ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_wdata <= '0;
+                ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_write <= 1'b0;
+                ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ddr6_iniu_ddr6_iniu_sys_apb_porting_ddr6_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             5: begin
-                ddr7_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ddr7_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ddr7_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ddr7_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ddr7_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_addr <= '0;
+                ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_wdata <= '0;
+                ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_write <= 1'b0;
+                ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ddr7_iniu_ddr7_iniu_sys_apb_porting_ddr7_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             6: begin
-                ddr8_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ddr8_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ddr8_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ddr8_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ddr8_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_addr <= '0;
+                ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_wdata <= '0;
+                ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_write <= 1'b0;
+                ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ddr8_iniu_ddr8_iniu_sys_apb_porting_ddr8_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             7: begin
-                ddr9_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ddr9_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ddr9_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ddr9_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ddr9_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_addr <= '0;
+                ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_wdata <= '0;
+                ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_write <= 1'b0;
+                ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ddr9_iniu_ddr9_iniu_sys_apb_porting_ddr9_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             8: begin
-                ddr10_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ddr10_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ddr10_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ddr10_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ddr10_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_addr <= '0;
+                ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_wdata <= '0;
+                ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_write <= 1'b0;
+                ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ddr10_iniu_ddr10_iniu_sys_apb_porting_ddr10_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             9: begin
-                mipi_ss_iniu_apb_porting_apb_apb_p_addr <= '0;
-                mipi_ss_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                mipi_ss_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                mipi_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                mipi_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_addr <= '0;
+                mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_wdata <= '0;
+                mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_write <= 1'b0;
+                mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_sel <= 1'b0;
+                mipi_ss_iniu_mipi_ss_iniu_sys_apb_porting_mipi_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             10: begin
-                ufs_ss_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ufs_ss_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ufs_ss_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ufs_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ufs_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_addr <= '0;
+                ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_wdata <= '0;
+                ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_write <= 1'b0;
+                ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ufs_ss_iniu_ufs_ss_iniu_sys_apb_porting_ufs_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             11: begin
-                camera_ss_iniu_apb_porting_apb_apb_p_addr <= '0;
-                camera_ss_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                camera_ss_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                camera_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                camera_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_addr <= '0;
+                camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_wdata <= '0;
+                camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_write <= 1'b0;
+                camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_sel <= 1'b0;
+                camera_ss_iniu_camera_ss_iniu_sys_apb_porting_camera_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             12: begin
-                vpu_ss_iniu_apb_porting_apb_apb_p_addr <= '0;
-                vpu_ss_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                vpu_ss_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                vpu_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                vpu_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_addr <= '0;
+                vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_wdata <= '0;
+                vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_write <= 1'b0;
+                vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_sel <= 1'b0;
+                vpu_ss_iniu_vpu_ss_iniu_sys_apb_porting_vpu_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             13: begin
-                pcie_eth_ss_iniu_apb_porting_apb_apb_p_addr <= '0;
-                pcie_eth_ss_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                pcie_eth_ss_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                pcie_eth_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                pcie_eth_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_addr <= '0;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_wdata <= '0;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_write <= 1'b0;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_sel <= 1'b0;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_apb_porting_pcie_eth_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             14: begin
-                debug_ss_iniu_apb_porting_apb_apb_p_addr <= '0;
-                debug_ss_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                debug_ss_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                debug_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                debug_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_addr <= '0;
+                debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_wdata <= '0;
+                debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_write <= 1'b0;
+                debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_sel <= 1'b0;
+                debug_ss_iniu_debug_ss_iniu_sys_apb_porting_debug_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             15: begin
-                aon_ss_iniu_apb_porting_apb_apb_p_addr <= '0;
-                aon_ss_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                aon_ss_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                aon_ss_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                aon_ss_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_addr <= '0;
+                aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_wdata <= '0;
+                aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_write <= 1'b0;
+                aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_sel <= 1'b0;
+                aon_ss_iniu_aon_ss_iniu_sys_apb_porting_aon_ss_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             16: begin
-                ucie_ss1_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ucie_ss1_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ucie_ss1_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ucie_ss1_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ucie_ss1_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_addr <= '0;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_wdata <= '0;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_write <= 1'b0;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_apb_porting_ucie_ss1_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             17: begin
-                dspss5_iniu_apb_porting_apb_apb_p_addr <= '0;
-                dspss5_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                dspss5_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                dspss5_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                dspss5_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_addr <= '0;
+                dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_wdata <= '0;
+                dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_write <= 1'b0;
+                dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_sel <= 1'b0;
+                dspss5_iniu_dspss5_iniu_sys_apb_porting_dspss5_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             18: begin
-                dspss3_iniu_apb_porting_apb_apb_p_addr <= '0;
-                dspss3_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                dspss3_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                dspss3_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                dspss3_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_addr <= '0;
+                dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_wdata <= '0;
+                dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_write <= 1'b0;
+                dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_sel <= 1'b0;
+                dspss3_iniu_dspss3_iniu_sys_apb_porting_dspss3_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             19: begin
-                dspss1_iniu_apb_porting_apb_apb_p_addr <= '0;
-                dspss1_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                dspss1_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                dspss1_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                dspss1_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_addr <= '0;
+                dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_wdata <= '0;
+                dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_write <= 1'b0;
+                dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_sel <= 1'b0;
+                dspss1_iniu_dspss1_iniu_sys_apb_porting_dspss1_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             20: begin
-                ddr0_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ddr0_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ddr0_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ddr0_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ddr0_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_addr <= '0;
+                ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_wdata <= '0;
+                ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_write <= 1'b0;
+                ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ddr0_iniu_ddr0_iniu_sys_apb_porting_ddr0_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             21: begin
-                ddr1_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ddr1_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ddr1_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ddr1_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ddr1_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_addr <= '0;
+                ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_wdata <= '0;
+                ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_write <= 1'b0;
+                ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ddr1_iniu_ddr1_iniu_sys_apb_porting_ddr1_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             22: begin
-                ddr2_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ddr2_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ddr2_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ddr2_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ddr2_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_addr <= '0;
+                ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_wdata <= '0;
+                ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_write <= 1'b0;
+                ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ddr2_iniu_ddr2_iniu_sys_apb_porting_ddr2_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             23: begin
-                ddr3_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ddr3_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ddr3_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ddr3_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ddr3_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_addr <= '0;
+                ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_wdata <= '0;
+                ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_write <= 1'b0;
+                ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ddr3_iniu_ddr3_iniu_sys_apb_porting_ddr3_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             24: begin
-                ddr4_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ddr4_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ddr4_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ddr4_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ddr4_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_addr <= '0;
+                ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_wdata <= '0;
+                ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_write <= 1'b0;
+                ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ddr4_iniu_ddr4_iniu_sys_apb_porting_ddr4_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             25: begin
-                ddr5_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ddr5_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ddr5_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ddr5_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ddr5_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_addr <= '0;
+                ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_wdata <= '0;
+                ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_write <= 1'b0;
+                ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ddr5_iniu_ddr5_iniu_sys_apb_porting_ddr5_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
             26: begin
-                ucie_ss0_iniu_apb_porting_apb_apb_p_addr <= '0;
-                ucie_ss0_iniu_apb_porting_apb_apb_p_wdata <= '0;
-                ucie_ss0_iniu_apb_porting_apb_apb_p_write <= 1'b0;
-                ucie_ss0_iniu_apb_porting_apb_apb_p_sel <= 1'b0;
-                ucie_ss0_iniu_apb_porting_apb_apb_p_enable <= 1'b0;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_addr <= '0;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_wdata <= '0;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_write <= 1'b0;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_sel <= 1'b0;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_apb_porting_ucie_ss0_iniu_sys_apb_porting_p_enable <= 1'b0;
             end
                 default: $fatal(1, "[TB] invalid INIU index %0d", iniu_idx);
             endcase
@@ -1925,85 +1949,85 @@ module tb_soc_intr_noc_sanity;
             @(negedge clk_sys);
             case (iniu_idx)
             0: begin
-                cpu_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                cpu_ss_iniu_cpu_ss_iniu_sys_v_interrupt_porting_cpu_ss_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             1: begin
-                audio_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                audio_ss_iniu_audio_ss_iniu_sys_v_interrupt_porting_audio_ss_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             2: begin
-                gpu_ss1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                gpu_ss1_iniu_gpu_ss1_iniu_sys_v_interrupt_porting_gpu_ss1_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             3: begin
-                dp_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                dp_ss_iniu_dp_ss_iniu_sys_v_interrupt_porting_dp_ss_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             4: begin
-                ddr6_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ddr6_iniu_ddr6_iniu_sys_v_interrupt_porting_ddr6_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             5: begin
-                ddr7_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ddr7_iniu_ddr7_iniu_sys_v_interrupt_porting_ddr7_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             6: begin
-                ddr8_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ddr8_iniu_ddr8_iniu_sys_v_interrupt_porting_ddr8_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             7: begin
-                ddr9_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ddr9_iniu_ddr9_iniu_sys_v_interrupt_porting_ddr9_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             8: begin
-                ddr10_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ddr10_iniu_ddr10_iniu_sys_v_interrupt_porting_ddr10_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             9: begin
-                mipi_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                mipi_ss_iniu_mipi_ss_iniu_sys_v_interrupt_porting_mipi_ss_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             10: begin
-                ufs_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ufs_ss_iniu_ufs_ss_iniu_sys_v_interrupt_porting_ufs_ss_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             11: begin
-                camera_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                camera_ss_iniu_camera_ss_iniu_sys_v_interrupt_porting_camera_ss_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             12: begin
-                vpu_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                vpu_ss_iniu_vpu_ss_iniu_sys_v_interrupt_porting_vpu_ss_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             13: begin
-                pcie_eth_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                pcie_eth_ss_iniu_pcie_eth_ss_iniu_sys_v_interrupt_porting_pcie_eth_ss_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             14: begin
-                debug_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                debug_ss_iniu_debug_ss_iniu_sys_v_interrupt_porting_debug_ss_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             15: begin
-                aon_ss_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                aon_ss_iniu_aon_ss_iniu_sys_v_interrupt_porting_aon_ss_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             16: begin
-                ucie_ss1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ucie_ss1_iniu_ucie_ss1_iniu_sys_v_interrupt_porting_ucie_ss1_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             17: begin
-                dspss5_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                dspss5_iniu_dspss5_iniu_sys_v_interrupt_porting_dspss5_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             18: begin
-                dspss3_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                dspss3_iniu_dspss3_iniu_sys_v_interrupt_porting_dspss3_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             19: begin
-                dspss1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                dspss1_iniu_dspss1_iniu_sys_v_interrupt_porting_dspss1_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             20: begin
-                ddr0_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ddr0_iniu_ddr0_iniu_sys_v_interrupt_porting_ddr0_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             21: begin
-                ddr1_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ddr1_iniu_ddr1_iniu_sys_v_interrupt_porting_ddr1_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             22: begin
-                ddr2_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ddr2_iniu_ddr2_iniu_sys_v_interrupt_porting_ddr2_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             23: begin
-                ddr3_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ddr3_iniu_ddr3_iniu_sys_v_interrupt_porting_ddr3_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             24: begin
-                ddr4_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ddr4_iniu_ddr4_iniu_sys_v_interrupt_porting_ddr4_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             25: begin
-                ddr5_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ddr5_iniu_ddr5_iniu_sys_v_interrupt_porting_ddr5_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
             26: begin
-                ucie_ss0_iniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx] <= level_i;
+                ucie_ss0_iniu_ucie_ss0_iniu_sys_v_interrupt_porting_ucie_ss0_iniu_sys_v_interrupt_porting_v_interrupt[bit_idx] <= level_i;
             end
                 default: $fatal(1, "[TB] invalid INIU index %0d", iniu_idx);
             endcase
@@ -2019,40 +2043,40 @@ module tb_soc_intr_noc_sanity;
         begin
             case (tniu_idx)
             0: begin
-                expect_bit(msg, cpu_ss_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, cpu_ss_tniu_cpu_ss_tniu_sys_v_interrupt_porting_cpu_ss_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
             1: begin
-                expect_bit(msg, peri_ss_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, peri_ss_tniu_peri_ss_tniu_sys_v_interrupt_porting_peri_ss_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
             2: begin
-                expect_bit(msg, gpu_ss0_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, gpu_ss0_tniu_gpu_ss0_tniu_sys_v_interrupt_porting_gpu_ss0_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
             3: begin
-                expect_bit(msg, display_ss_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, display_ss_tniu_display_ss_tniu_sys_v_interrupt_porting_display_ss_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
             4: begin
-                expect_bit(msg, ddr11_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, ddr11_tniu_ddr11_tniu_sys_v_interrupt_porting_ddr11_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
             5: begin
-                expect_bit(msg, camera_ss_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, camera_ss_tniu_camera_ss_tniu_sys_v_interrupt_porting_camera_ss_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
             6: begin
-                expect_bit(msg, aon_ss_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, aon_ss_tniu_aon_ss_tniu_sys_v_interrupt_porting_aon_ss_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
             7: begin
-                expect_bit(msg, ucie_ss1_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, ucie_ss1_tniu_ucie_ss1_tniu_sys_v_interrupt_porting_ucie_ss1_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
             8: begin
-                expect_bit(msg, dspss4_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, dspss4_tniu_dspss4_tniu_sys_v_interrupt_porting_dspss4_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
             9: begin
-                expect_bit(msg, dspss2_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, dspss2_tniu_dspss2_tniu_sys_v_interrupt_porting_dspss2_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
             10: begin
-                expect_bit(msg, dspss0_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, dspss0_tniu_dspss0_tniu_sys_v_interrupt_porting_dspss0_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
             11: begin
-                expect_bit(msg, ucie_ss0_tniu_v_interrupt_porting_v_interrupt_v_interrupt_v_interrupt[bit_idx], expected);
+                expect_bit(msg, ucie_ss0_tniu_ucie_ss0_tniu_sys_v_interrupt_porting_ucie_ss0_tniu_sys_v_interrupt_porting_v_interrupt[bit_idx], expected);
             end
                 default: $fatal(1, "[TB] invalid TNIU index %0d", tniu_idx);
             endcase

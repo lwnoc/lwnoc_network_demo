@@ -3,10 +3,12 @@ Warning-[LINX_KRNL] Unsupported Linux kernel
   Linux kernel '5.15.133.1-microsoft-standard-WSL2' is not supported.
   Supported versions are 2.4* or 2.6*.
 
-Command: vcs -LDFLAGS -no-pie -f filelist_pd/filelist.f -top atb_soc_harden_up_wrap \
--full64 -sverilog -timescale=1ns/1ps -l sim/pd_compile.log
+Command: vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed -LDFLAGS \
+-no-pie -f filelist_pd/filelist.f -top atb_soc_harden_up_wrap -full64 -sverilog -timescale=1ns/1ps \
+-l sim/pd_compile.log
+*** Using c compiler gcc-4.8 instead of cc ...
                          Chronologic VCS (TM)
-         Version L-2016.06_Full64 -- Thu Apr 23 19:18:47 2026
+         Version L-2016.06_Full64 -- Fri Apr 24 09:58:03 2026
                Copyright (c) 1991-2016 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -115,7 +117,108 @@ Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/atb_iniu_sys.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/atb_iniu_noc.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/atb_tniu_sys.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/atb_tniu_noc.sv'
-Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_iniu_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_iniu_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_iniu_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_iniu_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_iniu_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_iniu_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_iniu_sys_side.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_atb_niu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_lw_atb_noc_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_trig_ctrl_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_trig_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_flag_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_flush_partial_reset.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_flush_sync_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_trace_data_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_trace_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_atb_niu_unpacker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_atb_niu_packer.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_flush_dummy_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_flush_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_niu_atb_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_niu_atb_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss0_atb_iniu_sys.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_atb_niu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_lw_atb_noc_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_trig_ctrl_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_trig_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_flag_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_flush_partial_reset.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_flush_sync_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_trace_data_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_trace_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_atb_niu_unpacker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_atb_niu_packer.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_flush_dummy_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_flush_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_niu_atb_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_niu_atb_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss1_atb_iniu_sys.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_atb_niu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_lw_atb_noc_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_trig_ctrl_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_trig_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_flag_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_flush_partial_reset.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_flush_sync_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_trace_data_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_trace_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_atb_niu_unpacker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_atb_niu_packer.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_flush_dummy_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_flush_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_niu_atb_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_niu_atb_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss2_atb_iniu_sys.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_atb_niu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_lw_atb_noc_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_trig_ctrl_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_trig_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_flag_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_flush_partial_reset.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_flush_sync_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_trace_data_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_trace_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_atb_niu_unpacker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_atb_niu_packer.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_flush_dummy_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_flush_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_niu_atb_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_niu_atb_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss3_atb_iniu_sys.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_atb_niu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_lw_atb_noc_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_trig_ctrl_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_trig_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_flag_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_flush_partial_reset.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_flush_sync_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_trace_data_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_trace_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_atb_niu_unpacker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_atb_niu_packer.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_flush_dummy_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_flush_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_niu_atb_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_niu_atb_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss4_atb_iniu_sys.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_atb_niu_define.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_lw_atb_noc_pack.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_trig_ctrl_fsm.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_trig_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_flag_ctrl.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_flush_partial_reset.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_flush_sync_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_trace_data_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_trace_stall.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_atb_niu_unpacker.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_atb_niu_packer.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_flush_dummy_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_flush_default_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_niu_atb_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_niu_atb_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_ss5_atb_iniu_sys.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/camera_ss_iniu_sys/camera_ss_iniu_sys_side.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/camera_ss_iniu_sys/camera_ss_atb_niu_define.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/camera_ss_iniu_sys/camera_ss_lw_atb_noc_pack.sv'
@@ -133,7 +236,6 @@ Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/bui
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/camera_ss_iniu_sys/camera_ss_niu_atb_slv.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/camera_ss_iniu_sys/camera_ss_niu_atb_mst.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/camera_ss_iniu_sys/camera_ss_atb_iniu_sys.sv'
-Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/camera_ss_iniu_sys/camera_ss_atb_iniu_noc.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/mipi_ss_iniu_sys/mipi_ss_iniu_sys_side.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/mipi_ss_iniu_sys/mipi_ss_atb_niu_define.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/mipi_ss_iniu_sys/mipi_ss_lw_atb_noc_pack.sv'
@@ -151,8 +253,6 @@ Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/bui
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/mipi_ss_iniu_sys/mipi_ss_niu_atb_slv.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/mipi_ss_iniu_sys/mipi_ss_niu_atb_mst.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/mipi_ss_iniu_sys/mipi_ss_atb_iniu_sys.sv'
-Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/mipi_ss_iniu_sys/mipi_ss_atb_iniu_noc.sv'
-Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/debug_tniu_ss_tniu_sys_side.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/debug_tniu_ss_atb_niu_define.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/debug_tniu_ss_lw_atb_noc_pack.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/debug_tniu_ss_trig_ctrl_fsm.sv'
@@ -169,8 +269,23 @@ Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/bui
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/debug_tniu_ss_niu_atb_slv.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/debug_tniu_ss_niu_atb_mst.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/debug_tniu_ss_atb_tniu_sys.sv'
-Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/atb_primitives.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/atb_network_compat.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/atb_if.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/atb_funnel_reg_blk.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/atb_funnel_arbiter.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/atb_funnel.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/network_atb_slv.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/network_atb_mst.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/atb_async_bridge_top.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/atb_network_layer.v'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/dsp_ss0_atb_iniu_noc.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/dsp_ss1_atb_iniu_noc.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/dsp_ss2_atb_iniu_noc.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/dsp_ss3_atb_iniu_noc.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/dsp_ss4_atb_iniu_noc.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/dsp_ss5_atb_iniu_noc.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/camera_ss_atb_iniu_noc.sv'
+Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/mipi_ss_atb_iniu_noc.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/debug_tniu_ss_atb_tniu_noc.sv'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/debug_tniu_ss_tniu_noc_side.v'
 Parsing design file '/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/atb_soc_topo.v'
@@ -180,169 +295,100 @@ Top Level Modules:
        atb_soc_harden_up_wrap
 TimeScale is 1 ns / 1 ps
 
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/atb_iniu_sys.sv, 207
-"lwnoc_lp_hub_wrapper #(.NUM_TERMINAL(5)) u_lp_local_hub( .v_rx_req (v_lp_local_hub_rx_req),  .v_tx_req (v_lp_local_hub_tx_req));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/atb_network_compat.sv, 167
+"atb_funnel #(ATB_DATA_W, , ATB_ID_W, N_ATB, 1'b1, 4'b0011, , ) u_atb_funnel( .clk (1'b0),  .resetn (1'b1),  .pclkendbg (1'b0),  .pseldbg (1'b0),  .penabledbg (1'b0),  .pwritedbg (1'b0),  .paddrdbg31 (1'b0),  .paddrdbg ('0),  .pwdatadbg ('0),  .atvalids (atvalids),  .afreadys (afreadys),  .atids (atids),  .atdatas (atdatas),  .atbytess (atbytess),  .atreadym (1'b1),  .afvalidm (1'b0),  .syncreqm (1'b0),  .atvalidm (atvalidm),  .atidm (atidm),  .atdatam (atdatam),  .atbytesm (atbytesm),  .atreadys (atreadys),  .afvalids (afvalids),  .syncreqs (syncreqs));"
+  The following 12-bit expression is connected to 9-bit port "atbytess" of 
+  module "atb_funnel", instance "u_atb_funnel".
+  Expression: atbytess
+  	use +lint=PCWM for more details
 
 
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/atb_iniu_sys.sv, 223
-"lwnoc_lp_hub_wrapper #(.NUM_TERMINAL(3)) u_lp_sub_hub( .v_rx_req (v_lp_sub_hub_rx_req),  .v_tx_req (v_lp_sub_hub_tx_req));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/atb_network_compat.sv, 167
+"atb_funnel #(ATB_DATA_W, , ATB_ID_W, N_ATB, 1'b1, 4'b0011, , ) u_atb_funnel( .clk (1'b0),  .resetn (1'b1),  .pclkendbg (1'b0),  .pseldbg (1'b0),  .penabledbg (1'b0),  .pwritedbg (1'b0),  .paddrdbg31 (1'b0),  .paddrdbg ('0),  .pwdatadbg ('0),  .atvalids (atvalids),  .afreadys (afreadys),  .atids (atids),  .atdatas (atdatas),  .atbytess (atbytess),  .atreadym (1'b1),  .afvalidm (1'b0),  .syncreqm (1'b0),  .atvalidm (atvalidm),  .atidm (atidm),  .atdatam (atdatam),  .atbytesm (atbytesm),  .atreadys (atreadys),  .afvalids (afvalids),  .syncreqs (syncreqs));"
+  The following 4-bit expression is connected to 3-bit port "atbytesm" of 
+  module "atb_funnel", instance "u_atb_funnel".
+  Expression: atbytesm
+  	use +lint=PCWM for more details
 
 
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/common/niu_atb_mst.sv, 56
-"fcip_afifo_mst #(.FIFO_DEPTH(FIFO_DEPTH), .DATA_WIDTH(NPU_lw_atb_noc_pack::ATB_PLD_WIDTH), .AUTO_CLEAR_EN(AUTO_CLEAR_EN), .SYNC_STAGE(SYNC_STAGE)) u_afifo_mst( .clk (clk_atb_m),  .rst_n (rstn_atb_m),  .stall (afifo_mst_stall),  .clear (afifo_mst_clear),  .full_zero (afifo_mst_full_zero),  .idle (afifo_mst_read_idle),  .m_vld (atb_vld),  .m_pld (atb_pld),  .m_rdy (atb_rdy),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sync));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/atb_network_compat.sv, 247
+"atb_funnel #(ATB_DATA_W, , ATB_ID_W, N_ATB, 1'b1, 4'b0011, , ) u_atb_funnel( .clk (1'b0),  .resetn (1'b1),  .pclkendbg (1'b0),  .pseldbg (1'b0),  .penabledbg (1'b0),  .pwritedbg (1'b0),  .paddrdbg31 (1'b0),  .paddrdbg ('0),  .pwdatadbg ('0),  .atvalids (atvalids),  .afreadys (afreadys),  .atids (atids),  .atdatas (atdatas),  .atbytess (atbytess),  .atreadym (1'b1),  .afvalidm (1'b0),  .syncreqm (1'b0),  .atvalidm (atvalidm),  .atidm (atidm),  .atdatam (atdatam),  .atbytesm (atbytesm),  .atreadys (atreadys),  .afvalids (afvalids),  .syncreqs (syncreqs));"
+  The following 24-bit expression is connected to 18-bit port "atbytess" of 
+  module "atb_funnel", instance "u_atb_funnel".
+  Expression: atbytess
+  	use +lint=PCWM for more details
 
 
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/camera_ss_iniu_sys/camera_ss_atb_iniu_sys.sv, 207
-"lwnoc_lp_hub_wrapper #(.NUM_TERMINAL(5)) u_lp_local_hub( .v_rx_req (v_lp_local_hub_rx_req),  .v_tx_req (v_lp_local_hub_tx_req));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/atb_soc_topo/atb_network_compat.sv, 247
+"atb_funnel #(ATB_DATA_W, , ATB_ID_W, N_ATB, 1'b1, 4'b0011, , ) u_atb_funnel( .clk (1'b0),  .resetn (1'b1),  .pclkendbg (1'b0),  .pseldbg (1'b0),  .penabledbg (1'b0),  .pwritedbg (1'b0),  .paddrdbg31 (1'b0),  .paddrdbg ('0),  .pwdatadbg ('0),  .atvalids (atvalids),  .afreadys (afreadys),  .atids (atids),  .atdatas (atdatas),  .atbytess (atbytess),  .atreadym (1'b1),  .afvalidm (1'b0),  .syncreqm (1'b0),  .atvalidm (atvalidm),  .atidm (atidm),  .atdatam (atdatam),  .atbytesm (atbytesm),  .atreadys (atreadys),  .afvalids (afvalids),  .syncreqs (syncreqs));"
+  The following 4-bit expression is connected to 3-bit port "atbytesm" of 
+  module "atb_funnel", instance "u_atb_funnel".
+  Expression: atbytesm
+  	use +lint=PCWM for more details
 
 
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/camera_ss_iniu_sys/camera_ss_atb_iniu_sys.sv, 223
-"lwnoc_lp_hub_wrapper #(.NUM_TERMINAL(3)) u_lp_sub_hub( .v_rx_req (v_lp_sub_hub_rx_req),  .v_tx_req (v_lp_sub_hub_tx_req));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/network_atb_slv.sv, 37
+"NPU_niu_atb_slv #(FIFO_DEPTH, AUTO_CLEAR_EN, SYNC_STAGE, , , , , ) u_niu_atb_slv( .clk_atb_s (clk_atb_s),  .rstn_atb_s (rstn_atb_s),  .s_atvalid (s_atvalid),  .s_atready (s_atready),  .s_atbytes (s_atbytes),  .s_atdata (s_atdata),  .s_atid (s_atid),  .s_afvalid (s_afvalid),  .s_afready (s_afready),  .s_syncreq (s_syncreq),  .s_atwakeup (s_atwakeup),  .flush_req (flush_req),  .afifo_slv_stall (1'b0),  .afifo_slv_clear (1'b0),  .afifo_slv_full_zero (afifo_slv_full_zero),  .sync_buf_stall (1'b0),  .sync_buf_clear (1'b0),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sync),  .syncreq_level (syncreq_level));"
+  The following 117-bit expression is connected to 128-bit port "s_atdata" of 
+  module "NPU_niu_atb_slv", instance "u_niu_atb_slv".
+  Expression: s_atdata
+  	use +lint=PCWM for more details
 
 
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/camera_ss_iniu_sys/camera_ss_niu_atb_mst.sv, 56
-"fcip_afifo_mst #(.FIFO_DEPTH(FIFO_DEPTH), .DATA_WIDTH(camera_ss_lw_atb_noc_pack::ATB_PLD_WIDTH), .AUTO_CLEAR_EN(AUTO_CLEAR_EN), .SYNC_STAGE(SYNC_STAGE)) u_afifo_mst( .clk (clk_atb_m),  .rst_n (rstn_atb_m),  .stall (afifo_mst_stall),  .clear (afifo_mst_clear),  .full_zero (afifo_mst_full_zero),  .idle (afifo_mst_read_idle),  .m_vld (atb_vld),  .m_pld (atb_pld),  .m_rdy (atb_rdy),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sync));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/network_atb_slv.sv, 37
+"NPU_niu_atb_slv #(FIFO_DEPTH, AUTO_CLEAR_EN, SYNC_STAGE, , , , , ) u_niu_atb_slv( .clk_atb_s (clk_atb_s),  .rstn_atb_s (rstn_atb_s),  .s_atvalid (s_atvalid),  .s_atready (s_atready),  .s_atbytes (s_atbytes),  .s_atdata (s_atdata),  .s_atid (s_atid),  .s_afvalid (s_afvalid),  .s_afready (s_afready),  .s_syncreq (s_syncreq),  .s_atwakeup (s_atwakeup),  .flush_req (flush_req),  .afifo_slv_stall (1'b0),  .afifo_slv_clear (1'b0),  .afifo_slv_full_zero (afifo_slv_full_zero),  .sync_buf_stall (1'b0),  .sync_buf_clear (1'b0),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sync),  .syncreq_level (syncreq_level));"
+  The following 132-bit expression is connected to 143-bit port "pld_sync" of 
+  module "NPU_niu_atb_slv", instance "u_niu_atb_slv".
+  Expression: pld_sync
+  	use +lint=PCWM for more details
 
 
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/mipi_ss_iniu_sys/mipi_ss_atb_iniu_sys.sv, 207
-"lwnoc_lp_hub_wrapper #(.NUM_TERMINAL(5)) u_lp_local_hub( .v_rx_req (v_lp_local_hub_rx_req),  .v_tx_req (v_lp_local_hub_tx_req));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/network_atb_mst.sv, 38
+"NPU_niu_atb_mst #(FIFO_DEPTH, AUTO_CLEAR_EN, SYNC_STAGE, ) u_niu_atb_mst( .clk_atb_m (clk_atb_m),  .rstn_atb_m (rstn_atb_m),  .m_atvalid (m_atvalid),  .m_atready (m_atready),  .m_atbytes (m_atbytes),  .m_atdata (m_atdata),  .m_atid (m_atid),  .m_afvalid (m_afvalid),  .m_afready (m_afready),  .m_syncreq (m_syncreq),  .m_atwakeup (m_atwakeup),  .syncreq_level (syncreq_level),  .flush_req_level (flush_req_level),  .afifo_mst_stall (1'b0),  .afifo_mst_clear (1'b0),  .afifo_mst_full_zero (afifo_mst_full_zero),  .afifo_mst_read_idle (afifo_mst_read_idle),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sync));"
+  The following 117-bit expression is connected to 128-bit port "m_atdata" of 
+  module "NPU_niu_atb_mst", instance "u_niu_atb_mst".
+  Expression: m_atdata
+  	use +lint=PCWM for more details
 
 
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/mipi_ss_iniu_sys/mipi_ss_atb_iniu_sys.sv, 223
-"lwnoc_lp_hub_wrapper #(.NUM_TERMINAL(3)) u_lp_sub_hub( .v_rx_req (v_lp_sub_hub_rx_req),  .v_tx_req (v_lp_sub_hub_tx_req));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
-
-
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/mipi_ss_iniu_sys/mipi_ss_niu_atb_mst.sv, 56
-"fcip_afifo_mst #(.FIFO_DEPTH(FIFO_DEPTH), .DATA_WIDTH(mipi_ss_lw_atb_noc_pack::ATB_PLD_WIDTH), .AUTO_CLEAR_EN(AUTO_CLEAR_EN), .SYNC_STAGE(SYNC_STAGE)) u_afifo_mst( .clk (clk_atb_m),  .rst_n (rstn_atb_m),  .stall (afifo_mst_stall),  .clear (afifo_mst_clear),  .full_zero (afifo_mst_full_zero),  .idle (afifo_mst_read_idle),  .m_vld (atb_vld),  .m_pld (atb_pld),  .m_rdy (atb_rdy),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sync));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
-
-
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/debug_tniu_ss_niu_atb_mst.sv, 56
-"fcip_afifo_mst #(.FIFO_DEPTH(FIFO_DEPTH), .DATA_WIDTH(debug_tniu_ss_lw_atb_noc_pack::ATB_PLD_WIDTH), .AUTO_CLEAR_EN(AUTO_CLEAR_EN), .SYNC_STAGE(SYNC_STAGE)) u_afifo_mst( .clk (clk_atb_m),  .rst_n (rstn_atb_m),  .stall (afifo_mst_stall),  .clear (afifo_mst_clear),  .full_zero (afifo_mst_full_zero),  .idle (afifo_mst_read_idle),  .m_vld (atb_vld),  .m_pld (atb_pld),  .m_rdy (atb_rdy),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sync));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
-
-
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/debug_tniu_ss_atb_tniu_sys.sv, 194
-"lwnoc_lp_hub_wrapper #(.NUM_TERMINAL(4)) u_lp_local_hub( .v_rx_req (v_lp_local_hub_rx_req),  .v_tx_req (v_lp_local_hub_tx_req));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
-
-
-Warning-[TFIPC] Too few instance port connections
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/debug_tniu_ss_atb_tniu_sys.sv, 210
-"lwnoc_lp_hub_wrapper #(.NUM_TERMINAL(3)) u_lp_sub_hub( .v_rx_req (v_lp_sub_hub_rx_req),  .v_tx_req (v_lp_sub_hub_tx_req));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
-
-
-Warning-[ENUMASSIGN] Illegal assignment to enum variable
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/dsp_iniu_sys/dsp_iniu_sys_side.sv, 46
-"NPU_atb_iniu_sys #(FIFO_DEPTH, , , , ) u_real_iniu_sys( .clk_atb_s (clk),  .rstn_atb_s (rst_n),  .s_atvalid (sys_atvalid),  .s_atready (sys_atready),  .s_atbytes (sys_atbytes),  .s_atdata (sys_atdata),  .s_atid (sys_atid),  .s_afvalid (sys_afvalid),  .s_afready (sys_afready),  .s_syncreq (sys_syncreq),  .s_atwakeup (sys_atwakeup),  .flush_req (flush_req_level),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sync),  .syncreq_level (syncreq_level),  .preq (sys_preq),  .pstate (sys_pstate),  .pactive (sys_pactive),  .paccept (sys_paccept),  .pdeny (sys_pdeny),  .lwnoc_rx_req (lp_noc_to_sys),  .lwnoc_tx_req (lp_sys_to_noc),  .afifo_slv_rx_req (lp_afifo_noc_to_sys),  .afifo_slv_tx_req (lp_afifo_sys_to_noc),  .t ... "
-  Only expressions of the enum type can be assigned to an enum variable. 
-  The type logic [1:0] is incompatible with the enum 'lwnoc_pchannel_state_t'
-  Expression: sys_pstate
-  Use the static cast operator to convert the expression to enum type.
-
-
-Warning-[ENUMASSIGN] Illegal assignment to enum variable
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/camera_ss_iniu_sys/camera_ss_iniu_sys_side.sv, 46
-"camera_ss_atb_iniu_sys #(FIFO_DEPTH, , , , ) u_real_iniu_sys( .clk_atb_s (clk),  .rstn_atb_s (rst_n),  .s_atvalid (sys_atvalid),  .s_atready (sys_atready),  .s_atbytes (sys_atbytes),  .s_atdata (sys_atdata),  .s_atid (sys_atid),  .s_afvalid (sys_afvalid),  .s_afready (sys_afready),  .s_syncreq (sys_syncreq),  .s_atwakeup (sys_atwakeup),  .flush_req (flush_req_level),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sync),  .syncreq_level (syncreq_level),  .preq (sys_preq),  .pstate (sys_pstate),  .pactive (sys_pactive),  .paccept (sys_paccept),  .pdeny (sys_pdeny),  .lwnoc_rx_req (lp_noc_to_sys),  .lwnoc_tx_req (lp_sys_to_noc),  .afifo_slv_rx_req (lp_afifo_noc_to_sys),  .afifo_slv_tx_req (lp_afifo_sys_to_noc ... "
-  Only expressions of the enum type can be assigned to an enum variable. 
-  The type logic [1:0] is incompatible with the enum 'lwnoc_pchannel_state_t'
-  Expression: sys_pstate
-  Use the static cast operator to convert the expression to enum type.
-
-
-Warning-[ENUMASSIGN] Illegal assignment to enum variable
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/mipi_ss_iniu_sys/mipi_ss_iniu_sys_side.sv, 46
-"mipi_ss_atb_iniu_sys #(FIFO_DEPTH, , , , ) u_real_iniu_sys( .clk_atb_s (clk),  .rstn_atb_s (rst_n),  .s_atvalid (sys_atvalid),  .s_atready (sys_atready),  .s_atbytes (sys_atbytes),  .s_atdata (sys_atdata),  .s_atid (sys_atid),  .s_afvalid (sys_afvalid),  .s_afready (sys_afready),  .s_syncreq (sys_syncreq),  .s_atwakeup (sys_atwakeup),  .flush_req (flush_req_level),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sync),  .syncreq_level (syncreq_level),  .preq (sys_preq),  .pstate (sys_pstate),  .pactive (sys_pactive),  .paccept (sys_paccept),  .pdeny (sys_pdeny),  .lwnoc_rx_req (lp_noc_to_sys),  .lwnoc_tx_req (lp_sys_to_noc),  .afifo_slv_rx_req (lp_afifo_noc_to_sys),  .afifo_slv_tx_req (lp_afifo_sys_to_noc), ... "
-  Only expressions of the enum type can be assigned to an enum variable. 
-  The type logic [1:0] is incompatible with the enum 'lwnoc_pchannel_state_t'
-  Expression: sys_pstate
-  Use the static cast operator to convert the expression to enum type.
-
-
-Warning-[ENUMASSIGN] Illegal assignment to enum variable
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic_pd/debug_tniu_ss_tniu_sys/debug_tniu_ss_tniu_sys_side.sv, 38
-"debug_tniu_ss_atb_tniu_sys #(FIFO_DEPTH, , , ) u_real_tniu_sys( .clk_atb_m (clk),  .rstn_atb_m (rst_n),  .m_atvalid (sys_atvalid),  .m_atready (sys_atready),  .m_atbytes (sys_atbytes),  .m_atdata (sys_atdata),  .m_atid (sys_atid),  .m_afvalid (sys_afvalid),  .m_afready (sys_afready),  .m_syncreq (sys_syncreq),  .m_atwakeup (sys_atwakeup),  .preq (sys_preq),  .pstate (sys_pstate),  .pactive (sys_pactive),  .paccept (sys_paccept),  .pdeny (sys_pdeny),  .syncreq_level (syncreq_level),  .flush_req_level (flush_req_level),  .lw_rx_req (lp_noc_to_sys),  .lw_tx_req (lp_sys_to_noc),  .afifo_slv_rx_req (lp_afifo_noc_to_sys),  .afifo_slv_tx_req (lp_afifo_sys_to_noc),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sy ... "
-  Only expressions of the enum type can be assigned to an enum variable. 
-  The type logic [1:0] is incompatible with the enum 'lwnoc_pchannel_state_t'
-  Expression: sys_pstate
-  Use the static cast operator to convert the expression to enum type.
+Warning-[PCWM-W] Port connection width mismatch
+/home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/network/network_atb_mst.sv, 38
+"NPU_niu_atb_mst #(FIFO_DEPTH, AUTO_CLEAR_EN, SYNC_STAGE, ) u_niu_atb_mst( .clk_atb_m (clk_atb_m),  .rstn_atb_m (rstn_atb_m),  .m_atvalid (m_atvalid),  .m_atready (m_atready),  .m_atbytes (m_atbytes),  .m_atdata (m_atdata),  .m_atid (m_atid),  .m_afvalid (m_afvalid),  .m_afready (m_afready),  .m_syncreq (m_syncreq),  .m_atwakeup (m_atwakeup),  .syncreq_level (syncreq_level),  .flush_req_level (flush_req_level),  .afifo_mst_stall (1'b0),  .afifo_mst_clear (1'b0),  .afifo_mst_full_zero (afifo_mst_full_zero),  .afifo_mst_read_idle (afifo_mst_read_idle),  .wptr_async (wptr_async),  .rptr_async (rptr_async),  .rptr_sync (rptr_sync),  .pld_sync (pld_sync));"
+  The following 132-bit expression is connected to 143-bit port "pld_sync" of 
+  module "NPU_niu_atb_mst", instance "u_niu_atb_mst".
+  Expression: pld_sync
+  	use +lint=PCWM for more details
 
 Starting vcs inline pass...
 
-29 unique modules to generate
-29 modules and 0 UDP read. 
-	However, due to incremental compilation, only 14 modules need to be compiled. 
-recompiling module fcip_afifo_mst
-recompiling module fcip_afifo_slv
-recompiling module fcip_sync_cell
-recompiling module lwnoc_lp_niu_fsm
-recompiling module lwnoc_lp_hub_3terminal
-recompiling module lwnoc_lp_hub_tiny_wrapper
-recompiling module lwnoc_lp_hub_small_wrapper
-recompiling module lwnoc_lp_hub_large_wrapper
-recompiling module lwnoc_lp_hub_wrapper
-recompiling module dsp_iniu_sys_side
-recompiling package camera_ss_lw_atb_noc_pack
-recompiling package mipi_ss_lw_atb_noc_pack
-recompiling package debug_tniu_ss_lw_atb_noc_pack
+43 unique modules to generate
+43 modules and 0 UDP read. 
+	However, due to incremental compilation, only 1 module needs to be compiled. 
 recompiling module atb_soc_harden_up_wrap
-All of 14 modules done
+All of 1 modules done
 rm -f _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+ld -shared  -o .//../simv.daidir//_csrc0.so objs/amcQw_d.o 
+rm -f _csrc0.so
 if [ -x ../simv ]; then chmod -x ../simv; fi
-g++  -o ../simv   -Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ -Wl,-rpath=./simv.daidir/ \
+g++-4.8  -o ../simv   -Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ -Wl,-rpath=./simv.daidir/ \
 -Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir  -L/usr/lib/x86_64-linux-gnu -L/lib/x86_64-linux-gnu \
--Wl,--no-as-needed -no-pie -rdynamic   amcQwB.o objs/amcQw_d.o  _837350_archive_1.so \
-_prev_archive_1.so  SIM_l.o       rmapats_mop.o rmapats.o rmar.o  rmar_llvm_0_1.o \
-rmar_llvm_0_0.o          /home/lgzhu/software/vcs2016/linux64/lib/libzerosoft_rt_stubs.so \
+-Wl,--no-as-needed -Wl,--no-as-needed -no-pie -rdynamic   amcQwB.o  _809617_archive_1.so \
+_prev_archive_1.so _csrc0.so  SIM_l.o  _csrc0.so     rmapats_mop.o rmapats.o rmar.o \
+rmar_llvm_0_1.o rmar_llvm_0_0.o          /home/lgzhu/software/vcs2016/linux64/lib/libzerosoft_rt_stubs.so \
 /home/lgzhu/software/vcs2016/linux64/lib/libvirsim.so /home/lgzhu/software/vcs2016/linux64/lib/liberrorinf.so \
 /home/lgzhu/software/vcs2016/linux64/lib/libsnpsmalloc.so    /home/lgzhu/software/vcs2016/linux64/lib/libvcsnew.so \
 /home/lgzhu/software/vcs2016/linux64/lib/libsimprofile.so /home/lgzhu/software/vcs2016/linux64/lib/libuclinative.so \
 -Wl,-whole-archive /home/lgzhu/software/vcs2016/linux64/lib/libvcsucli.so -Wl,-no-whole-archive \
 /home/lgzhu/software/vcs2016/linux64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread \
 -ldl 
-../simv up to date
-CPU time: 1.544 seconds to compile + .216 seconds to elab + .169 seconds to link
+g++-4.8: error: unrecognized command line option '-no-pie'
+make: *** [Makefile:105: product_timestamp] Error 1
+Make exited with status 2
+CPU time: 1.195 seconds to compile + .231 seconds to elab + .046 seconds to link

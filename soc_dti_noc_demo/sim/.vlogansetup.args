@@ -1,0 +1,8 @@
+tb_soc_dti_logic_topo_tree.sv 
+-full64 -sverilog +v2k +define+ASIC_SIM -timescale=1ns/1ps +lint=TFIPC-L -f ../filelists/dti_common_dep.f -f ../filelists/soc_dti_logic_topo.f tb_soc_dti_logic_topo_tree.sv -l build/vlogan_compile.log
+   /home/lgzhu/software/vcs2016/linux64/bin/vcs1 -Mcc=gcc -Mcplusplus=g++ -Masflags= -Mcfl=' -pipe -O -I/home/lgzhu/software/vcs2016/include ' -Mldflags=" -Wl,-E,-rpath /home/lgzhu/software/vcs2016/linux64/lib " -Mout=simv -Mamsrun="" -Mvcsaceobjs="" -Mobjects=" " -Msaverestoreobj= -Mcrt0="" -Mcrtn="" -Mcsrc="" -Msyslibs="-lncurses -L/usr/X11R6/lib64 -lX11 -ldl -ldl "
+-l build/vlogan_compile.log  -Xvlogan=0x1 -full64 -sverilog +v2k +define+ASIC_SIM -timescale=1ns/1ps +lint=TFIPC-L  -f ../filelists/dti_common_dep.f  -f ../filelists/soc_dti_logic_topo.f  "tb_soc_dti_logic_topo_tree.sv"  +mixedhdl2    
+tb_soc_dti_logic_topo_tree.sv 
+-full64 -sverilog +v2k +define+ASIC_SIM -timescale=1ns/1ps +lint=TFIPC-L -f ../filelists/dti_common_dep.f -f ../filelists/soc_dti_logic_topo.f tb_soc_dti_logic_topo_tree.sv -l build/vlogan_compile.log
+   /home/lgzhu/software/vcs2016/linux64/bin/vcs1 -Mcc=gcc -Mcplusplus=g++ -Masflags= -Mcfl=' -pipe -O -I/home/lgzhu/software/vcs2016/include ' -Mldflags=" -Wl,-E,-rpath /home/lgzhu/software/vcs2016/linux64/lib " -Mout=simv -Mamsrun="" -Mvcsaceobjs="" -Mobjects=" " -Msaverestoreobj= -Mcrt0="" -Mcrtn="" -Mcsrc="" -Msyslibs="-lncurses -L/usr/X11R6/lib64 -lX11 -ldl -ldl "
+-l build/vlogan_compile.log  -Xvlogan=0x1 -full64 -sverilog +v2k +define+ASIC_SIM -timescale=1ns/1ps +lint=TFIPC-L  -f ../filelists/dti_common_dep.f  -f ../filelists/soc_dti_logic_topo.f  "tb_soc_dti_logic_topo_tree.sv"  +mixedhdl2    

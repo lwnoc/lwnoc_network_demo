@@ -192,6 +192,8 @@ lwnoc_lp_iniu u_lp_iniu (
 lwnoc_lp_hub_wrapper #(
     .NUM_TERMINAL(4)
 ) u_lp_local_hub (
+    .clk     (clk_atb_m           ),
+    .rst_n   (rstn_atb_m          ),
     .v_rx_req(v_lp_local_hub_rx_req),
     .v_tx_req(v_lp_local_hub_tx_req)
 );
@@ -208,6 +210,8 @@ lwnoc_lp_nest u_lp_nest (
 lwnoc_lp_hub_wrapper #(
     .NUM_TERMINAL(3)
 ) u_lp_sub_hub (
+    .clk     (clk_atb_m           ),
+    .rst_n   (rstn_atb_m          ),
     .v_rx_req(v_lp_sub_hub_rx_req),
     .v_tx_req(v_lp_sub_hub_tx_req)
 );

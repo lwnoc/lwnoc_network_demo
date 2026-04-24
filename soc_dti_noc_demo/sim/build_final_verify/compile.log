@@ -1,0 +1,15 @@
+
+Warning-[LINX_KRNL] Unsupported Linux kernel
+  Linux kernel '5.15.133.1-microsoft-standard-WSL2' is not supported.
+  Supported versions are 2.4* or 2.6*.
+
+Command: vcs -full64 -sverilog +v2k +notimingcheck +lint=TFIPC-L +lint=PCWM-L -f \
+filelists/soc_dti_logic_topo.f -top soc_dti_logic_topo -l sim/build_final_verify/compile.log \
+
+
+Error-[P1ARGS-CANTOPN-F] Cannot open file
+  Unable to open '$DTI_INIU_TOP_DIR/dti_iniu_top_filelist.f' due to 'No such 
+  file or directory'.
+  Please fix the reason mentioned above and continue.
+
+CPU time: .502 seconds to compile

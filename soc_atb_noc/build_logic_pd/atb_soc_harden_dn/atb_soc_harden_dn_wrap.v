@@ -2,7 +2,10 @@
 module atb_soc_harden_dn_wrap (
   input logic clk_core,
   input logic clk_async,
-  input logic rst_n,
+  input logic rst_core_n,
+  input logic rst_async_n,
+  input logic camera_ss_clk_sys,
+  input logic camera_ss_rst_sys_n,
   input logic camera_ss_atvalid,
   output logic camera_ss_atready,
   input logic [3:0] camera_ss_atbytes,
@@ -17,6 +20,8 @@ module atb_soc_harden_dn_wrap (
   output logic [1:0] camera_ss_pactive,
   output logic camera_ss_paccept,
   output logic camera_ss_pdeny,
+  input logic mipi_ss_clk_sys,
+  input logic mipi_ss_rst_sys_n,
   input logic mipi_ss_atvalid,
   output logic mipi_ss_atready,
   input logic [3:0] mipi_ss_atbytes,
@@ -31,6 +36,8 @@ module atb_soc_harden_dn_wrap (
   output logic [1:0] mipi_ss_pactive,
   output logic mipi_ss_paccept,
   output logic mipi_ss_pdeny,
+  input logic debug_tniu_ss_clk_sys,
+  input logic debug_tniu_ss_rst_sys_n,
   output logic debug_tniu_ss_atvalid,
   input logic debug_tniu_ss_atready,
   output logic [3:0] debug_tniu_ss_atbytes,
@@ -46,7 +53,8 @@ module atb_soc_harden_dn_wrap (
   output logic debug_tniu_ss_paccept,
   output logic debug_tniu_ss_pdeny,
   input logic harden_up_valid,
-  input logic [127:0] harden_up_data
+  input logic [127:0] harden_up_data,
+  input logic [9:0] timeout_val
 );
 
   logic w_camera_ss_sys_valid;
@@ -104,8 +112,8 @@ module atb_soc_harden_dn_wrap (
   logic [127:0] w_async_bridge_mst_data;
 
   camera_ss_iniu_sys_side #(.DATA_W(128)) u_camera_ss_sys_side (
-    .clk(clk_core),
-    .rst_n(rst_n),
+    .clk(camera_ss_clk_sys),
+    .rst_n(camera_ss_rst_sys_n),
     .sys_atvalid(camera_ss_atvalid),
     .sys_atready(camera_ss_atready),
     .sys_atbytes(camera_ss_atbytes),
@@ -120,6 +128,7 @@ module atb_soc_harden_dn_wrap (
     .sys_pactive(camera_ss_pactive),
     .sys_paccept(camera_ss_paccept),
     .sys_pdeny(camera_ss_pdeny),
+    .timeout_val(timeout_val),
     .noc_atvalid(w_camera_ss_noc_atvalid),
     .noc_atready(w_camera_ss_noc_atready),
     .noc_atbytes(w_camera_ss_noc_atbytes),
@@ -134,8 +143,8 @@ module atb_soc_harden_dn_wrap (
   assign w_camera_ss_noc_payload = {w_camera_ss_noc_atbytes, w_camera_ss_noc_atid, w_camera_ss_noc_atdata};
 
   mipi_ss_iniu_sys_side #(.DATA_W(128)) u_mipi_ss_sys_side (
-    .clk(clk_core),
-    .rst_n(rst_n),
+    .clk(mipi_ss_clk_sys),
+    .rst_n(mipi_ss_rst_sys_n),
     .sys_atvalid(mipi_ss_atvalid),
     .sys_atready(mipi_ss_atready),
     .sys_atbytes(mipi_ss_atbytes),
@@ -150,6 +159,7 @@ module atb_soc_harden_dn_wrap (
     .sys_pactive(mipi_ss_pactive),
     .sys_paccept(mipi_ss_paccept),
     .sys_pdeny(mipi_ss_pdeny),
+    .timeout_val(timeout_val),
     .noc_atvalid(w_mipi_ss_noc_atvalid),
     .noc_atready(w_mipi_ss_noc_atready),
     .noc_atbytes(w_mipi_ss_noc_atbytes),
@@ -164,9 +174,9 @@ module atb_soc_harden_dn_wrap (
   assign w_mipi_ss_noc_payload = {w_mipi_ss_noc_atbytes, w_mipi_ss_noc_atid, w_mipi_ss_noc_atdata};
 
   atb_async_bridge_mst #(.DATA_W(128)) u_async_bridge_mst (
-    .clk(clk_core),
+    .clk(clk_async),
     .clk_async(clk_async),
-    .rst_n(rst_n),
+    .rst_n(rst_async_n),
     .in_valid(harden_up_valid),
     .in_data(harden_up_data),
     .out_valid(w_async_bridge_mst_valid),
@@ -190,12 +200,14 @@ module atb_soc_harden_dn_wrap (
   );
 
   assign w_debug_tniu_ss_noc_atvalid = w_debug_tniu_ss_noc_valid;
-  assign {w_debug_tniu_ss_noc_atbytes, w_debug_tniu_ss_noc_atid, w_debug_tniu_ss_noc_atdata} = w_debug_tniu_ss_noc_payload;
+  assign w_debug_tniu_ss_noc_atdata = w_debug_tniu_ss_noc_data;
+  assign w_debug_tniu_ss_noc_atbytes = '0;
+  assign w_debug_tniu_ss_noc_atid = '0;
   assign w_debug_tniu_ss_noc_afready = 1'b1;
   assign w_debug_tniu_ss_noc_atwakeup = 1'b0;
   debug_tniu_ss_tniu_noc_side #(.DATA_W(128)) u_debug_tniu_ss_noc_side (
-    .clk(clk_core),
-    .rst_n(rst_n),
+    .clk(clk_async),
+    .rst_n(rst_async_n),
     .noc_atvalid(w_debug_tniu_ss_noc_atvalid),
     .noc_atready(w_debug_tniu_ss_noc_atready),
     .noc_atbytes(w_debug_tniu_ss_noc_atbytes),
@@ -205,6 +217,7 @@ module atb_soc_harden_dn_wrap (
     .noc_afready(w_debug_tniu_ss_noc_afready),
     .noc_syncreq(w_debug_tniu_ss_noc_syncreq),
     .noc_atwakeup(w_debug_tniu_ss_noc_atwakeup),
+    .timeout_val(timeout_val),
     .syncreq_level(w_debug_tniu_ss_syncreq_level),
     .flush_req_level(w_debug_tniu_ss_flush_req_level),
     .lp_sys_to_noc(w_debug_tniu_ss_lp_sys_to_noc),
@@ -218,8 +231,8 @@ module atb_soc_harden_dn_wrap (
   );
 
   debug_tniu_ss_atb_tniu_sys #(.FIFO_DEPTH(16)) u_debug_tniu_ss_sys_side (
-    .clk_atb_m(clk_core),
-    .rstn_atb_m(rst_n),
+    .clk_atb_m(debug_tniu_ss_clk_sys),
+    .rstn_atb_m(debug_tniu_ss_rst_sys_n),
     .m_atvalid(debug_tniu_ss_atvalid),
     .m_atready(debug_tniu_ss_atready),
     .m_atbytes(debug_tniu_ss_atbytes),
@@ -230,7 +243,7 @@ module atb_soc_harden_dn_wrap (
     .m_syncreq(debug_tniu_ss_syncreq),
     .m_atwakeup(debug_tniu_ss_atwakeup),
     .preq(debug_tniu_ss_preq),
-    .pstate(debug_tniu_ss_pstate),
+    .pstate(lwnoc_lp_define_package::lwnoc_pchannel_state_t'(debug_tniu_ss_pstate)),
     .pactive(debug_tniu_ss_pactive),
     .paccept(debug_tniu_ss_paccept),
     .pdeny(debug_tniu_ss_pdeny),
@@ -244,6 +257,6 @@ module atb_soc_harden_dn_wrap (
     .rptr_async(w_debug_tniu_ss_rptr_async),
     .rptr_sync(w_debug_tniu_ss_rptr_sync),
     .pld_sync(w_debug_tniu_ss_pld_sync),
-    .timeout_val(10'd0)
+    .timeout_val(timeout_val)
   );
 endmodule

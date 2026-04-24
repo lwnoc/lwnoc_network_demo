@@ -66,6 +66,8 @@ fcip_afifo_mst #(
     .m_pld      (atb_pld),
     .m_rdy      (atb_rdy),
 
+    .almost_empty (                  ),
+
     .wptr_async (wptr_async),
     .rptr_async (rptr_async),
     .rptr_sync  (rptr_sync),

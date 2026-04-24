@@ -207,6 +207,12 @@
             "width_expr": null
           },
           {
+            "direction": "input",
+            "name": "timeout_val",
+            "width": 10,
+            "width_expr": "9:0"
+          },
+          {
             "direction": "output",
             "name": "noc_atvalid",
             "width": 1,
@@ -448,7 +454,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           },
@@ -546,7 +552,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           }
@@ -763,6 +769,12 @@
             "width_expr": null
           },
           {
+            "direction": "input",
+            "name": "timeout_val",
+            "width": 10,
+            "width_expr": "9:0"
+          },
+          {
             "direction": "output",
             "name": "noc_atvalid",
             "width": 1,
@@ -1004,7 +1016,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           },
@@ -1102,7 +1114,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           }
@@ -1319,6 +1331,12 @@
             "width_expr": null
           },
           {
+            "direction": "input",
+            "name": "timeout_val",
+            "width": 10,
+            "width_expr": "9:0"
+          },
+          {
             "direction": "output",
             "name": "noc_atvalid",
             "width": 1,
@@ -1560,7 +1578,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           },
@@ -1658,7 +1676,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           }
@@ -1875,6 +1893,12 @@
             "width_expr": null
           },
           {
+            "direction": "input",
+            "name": "timeout_val",
+            "width": 10,
+            "width_expr": "9:0"
+          },
+          {
             "direction": "output",
             "name": "noc_atvalid",
             "width": 1,
@@ -2116,7 +2140,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           },
@@ -2214,7 +2238,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           }
@@ -2431,6 +2455,12 @@
             "width_expr": null
           },
           {
+            "direction": "input",
+            "name": "timeout_val",
+            "width": 10,
+            "width_expr": "9:0"
+          },
+          {
             "direction": "output",
             "name": "noc_atvalid",
             "width": 1,
@@ -2672,7 +2702,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           },
@@ -2770,7 +2800,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           }
@@ -2987,6 +3017,12 @@
             "width_expr": null
           },
           {
+            "direction": "input",
+            "name": "timeout_val",
+            "width": 10,
+            "width_expr": "9:0"
+          },
+          {
             "direction": "output",
             "name": "noc_atvalid",
             "width": 1,
@@ -3228,7 +3264,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           },
@@ -3326,7 +3362,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           }
@@ -3543,6 +3579,12 @@
             "width_expr": null
           },
           {
+            "direction": "input",
+            "name": "timeout_val",
+            "width": 10,
+            "width_expr": "9:0"
+          },
+          {
             "direction": "output",
             "name": "noc_atvalid",
             "width": 1,
@@ -3784,7 +3826,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           },
@@ -3882,7 +3924,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           }
@@ -4099,6 +4141,12 @@
             "width_expr": null
           },
           {
+            "direction": "input",
+            "name": "timeout_val",
+            "width": 10,
+            "width_expr": "9:0"
+          },
+          {
             "direction": "output",
             "name": "noc_atvalid",
             "width": 1,
@@ -4340,7 +4388,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           },
@@ -4438,7 +4486,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           }
@@ -5320,6 +5368,12 @@
           },
           {
             "direction": "input",
+            "name": "timeout_val",
+            "width": 10,
+            "width_expr": "9:0"
+          },
+          {
+            "direction": "input",
             "name": "syncreq_level",
             "width": 1,
             "width_expr": null
@@ -5514,7 +5568,7 @@
               },
               {
                 "port": "timeout_val",
-                "signal": "10'd0"
+                "signal": "timeout_val"
               }
             ]
           }

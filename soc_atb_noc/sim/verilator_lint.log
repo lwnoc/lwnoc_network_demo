@@ -1,0 +1,1672 @@
+%Warning-MULTITOP: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:1:8: Multiple top level modules
+                                                                                                                         : ... Suggest see manual; fix the duplicates, or use --top-module to select top.
+                   ... Use "/* verilator lint_off MULTITOP */" and lint_on around source to disable this message.
+                                                                                                                         : ... Top module 'fcip_booth_wallace_mul'
+    1 | module fcip_booth_wallace_mul #(
+      |        ^~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_ip_mimo_queue'
+    1 | module fcip_ip_mimo_queue #(
+      |        ^~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_lead_one_rev'
+    1 | module fcip_lead_one_rev #(
+      |        ^~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_lfsr4'
+    1 | module fcip_lfsr4 (
+      |        ^~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_list_lead_one'
+    1 | module fcip_list_lead_one #(
+      |        ^~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_list_lead_one_rev'
+    1 | module fcip_list_lead_one_rev #(
+      |        ^~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_list_lead_zero'
+    1 | module fcip_list_lead_zero #(
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_rob_id_dec'
+    1 | module fcip_rob_id_dec#(
+      |        ^~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_rob_prealloc'
+    1 | module fcip_rob_prealloc #(
+      |        ^~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_onehot_demux'
+    1 | module fcip_onehot_demux #(
+      |        ^~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_onehot_mux_pld'
+    1 | module fcip_onehot_mux_pld #(
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_reg_slice_full_set'
+    1 | module fcip_reg_slice_full_set #(
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_arb_vrp'
+    1 | module fcip_arb_vrp #(
+      |        ^~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_tree_plru_comb'
+    1 | module fcip_tree_plru_comb #(
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_arb_vr_matrix'
+    1 | module fcip_arb_vr_matrix #(
+      |        ^~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_age_matrix_list'
+    1 | module fcip_age_matrix_list #(
+      |        ^~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_age_matrix'
+    1 | module fcip_age_matrix #(
+      |        ^~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_arb_vrp_matrix'
+    1 | module fcip_arb_vrp_matrix #(
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_sync_fifo_reg_mimo'
+    1 | module fcip_sync_fifo_reg_mimo #(
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_sync_fifo_spram'
+    1 | module fcip_sync_fifo_spram #(
+      |        ^~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_afifo'
+    1 | module fcip_afifo #(
+      |        ^~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_axi_afifo'
+    1 | module fcip_axi_afifo #(
+      |        ^~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_req_rsp_afifo'
+    1 | module fcip_req_rsp_afifo #(
+      |        ^~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_afifo_doub'
+    1 | module fcip_afifo_doub #(
+      |        ^~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'fcip_mem_fake_2p_mem'
+    1 | module fcip_mem_fake_2p_mem 
+      |        ^~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'lwnoc_lp_tniu_func_iniu'
+   16 | module lwnoc_lp_tniu_func_iniu
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'NPU_trace_stall'
+    1 | module NPU_trace_stall
+      |        ^~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'NPU_atb_iniu_sys'
+    1 | module NPU_atb_iniu_sys
+      |        ^~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'NPU_atb_iniu_noc'
+    1 | module NPU_atb_iniu_noc
+      |        ^~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'NPU_atb_tniu_sys'
+    1 | module NPU_atb_tniu_sys
+      |        ^~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'NPU_atb_tniu_noc'
+    1 | module NPU_atb_tniu_noc
+      |        ^~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss0_flush_sync_stall'
+    2 | module dsp_ss0_flush_sync_stall
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss0_trace_data_default_slv'
+    3 | module dsp_ss0_trace_data_default_slv
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss0_trace_stall'
+    1 | module dsp_ss0_trace_stall
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss1_flush_sync_stall'
+    2 | module dsp_ss1_flush_sync_stall
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss1_trace_data_default_slv'
+    3 | module dsp_ss1_trace_data_default_slv
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss1_trace_stall'
+    1 | module dsp_ss1_trace_stall
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss2_flush_sync_stall'
+    2 | module dsp_ss2_flush_sync_stall
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss2_trace_data_default_slv'
+    3 | module dsp_ss2_trace_data_default_slv
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss2_trace_stall'
+    1 | module dsp_ss2_trace_stall
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss3_flush_sync_stall'
+    2 | module dsp_ss3_flush_sync_stall
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss3_trace_data_default_slv'
+    3 | module dsp_ss3_trace_data_default_slv
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss3_trace_stall'
+    1 | module dsp_ss3_trace_stall
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss4_flush_sync_stall'
+    2 | module dsp_ss4_flush_sync_stall
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss4_trace_data_default_slv'
+    3 | module dsp_ss4_trace_data_default_slv
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss4_trace_stall'
+    1 | module dsp_ss4_trace_stall
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss5_flush_sync_stall'
+    2 | module dsp_ss5_flush_sync_stall
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss5_trace_data_default_slv'
+    3 | module dsp_ss5_trace_data_default_slv
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'dsp_ss5_trace_stall'
+    1 | module dsp_ss5_trace_stall
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'camera_ss_flush_sync_stall'
+    2 | module camera_ss_flush_sync_stall
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'camera_ss_trace_data_default_slv'
+    3 | module camera_ss_trace_data_default_slv
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'camera_ss_trace_stall'
+    1 | module camera_ss_trace_stall
+      |        ^~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'mipi_ss_flush_sync_stall'
+    2 | module mipi_ss_flush_sync_stall
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'mipi_ss_trace_data_default_slv'
+    3 | module mipi_ss_trace_data_default_slv
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'mipi_ss_trace_stall'
+    1 | module mipi_ss_trace_stall
+      |        ^~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'debug_tniu_ss_flush_partial_reset'
+    1 | module debug_tniu_ss_flush_partial_reset
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'debug_tniu_ss_trace_stall'
+    1 | module debug_tniu_ss_trace_stall
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'debug_tniu_ss_flush_default_slv'
+    1 | module debug_tniu_ss_flush_default_slv
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'atb_async_bridge_slv'
+    8 | module atb_async_bridge_slv #(
+      |        ^~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'atb_async_bridge_mst'
+   68 | module atb_async_bridge_mst #(
+      |        ^~~~~~~~~~~~~~~~~~~~
+                                                                                                                         : ... Top module 'atb_funnel3'
+  128 | module atb_funnel3 #(
+      |        ^~~~~~~~~~~
+                                                                                                                         : ... Top module 'atb_funnel6'
+  199 | module atb_funnel6 #(
+      |        ^~~~~~~~~~~
+                                                                                                                         : ... Top module 'atb_soc_topo'
+    2 | module atb_soc_topo (
+      |        ^~~~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/common/atb_niu_packer.sv:85:30: Signal definition not found, creating implicitly: 'flush_done'
+   85 |         .flush_done         (flush_done         )  
+      |                              ^~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/debug_tniu_ss_tniu_sys/debug_tniu_ss_atb_niu_packer.sv:85:30: Signal definition not found, creating implicitly: 'flush_done'
+   85 |         .flush_done         (flush_done         )  
+      |                              ^~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/mipi_ss_iniu_sys/mipi_ss_atb_niu_packer.sv:85:30: Signal definition not found, creating implicitly: 'flush_done'
+   85 |         .flush_done         (flush_done         )  
+      |                              ^~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/camera_ss_iniu_sys/camera_ss_atb_niu_packer.sv:85:30: Signal definition not found, creating implicitly: 'flush_done'
+   85 |         .flush_done         (flush_done         )  
+      |                              ^~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss5_atb_niu_packer.sv:85:30: Signal definition not found, creating implicitly: 'flush_done'
+   85 |         .flush_done         (flush_done         )  
+      |                              ^~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss4_atb_niu_packer.sv:85:30: Signal definition not found, creating implicitly: 'flush_done'
+   85 |         .flush_done         (flush_done         )  
+      |                              ^~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss3_atb_niu_packer.sv:85:30: Signal definition not found, creating implicitly: 'flush_done'
+   85 |         .flush_done         (flush_done         )  
+      |                              ^~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss2_atb_niu_packer.sv:85:30: Signal definition not found, creating implicitly: 'flush_done'
+   85 |         .flush_done         (flush_done         )  
+      |                              ^~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss1_atb_niu_packer.sv:85:30: Signal definition not found, creating implicitly: 'flush_done'
+   85 |         .flush_done         (flush_done         )  
+      |                              ^~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss0_atb_niu_packer.sv:85:30: Signal definition not found, creating implicitly: 'flush_done'
+   85 |         .flush_done         (flush_done         )  
+      |                              ^~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:322:12: Signal definition not found, creating implicitly: 'pld_sync_marker_0'
+                                                                                                                                  : ... Suggested alternative: 'pld_sync_marker'
+  322 |     assign pld_sync_marker_0 = pld_mux_select_0;
+      |            ^~~~~~~~~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:333:12: Signal definition not found, creating implicitly: 'rptr_sync_marker_shift'
+                                                                                                                                  : ... Suggested alternative: 'rptr_sync_marker'
+  333 |     assign rptr_sync_marker_shift = {rptr_sync_marker[FIFO_DEPTH-2:0],rptr_sync_marker[FIFO_DEPTH-1]};
+      |            ^~~~~~~~~~~~~~~~~~~~~~
+%Warning-IMPLICIT: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:356:12: Signal definition not found, creating implicitly: 'pld_sync_marker_1'
+                                                                                                                                  : ... Suggested alternative: 'pld_sync_marker_0'
+  356 |     assign pld_sync_marker_1 = pld_mux_select_1;
+      |            ^~~~~~~~~~~~~~~~~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:45:5: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'FORWARD_EN' generates 32 bits.
+                                                                                                                           : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_ctrl.u_sfifo_spram_lut
+   45 |     if(FORWARD_EN) begin
+      |     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv.sv:91:5: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'AUTO_CLEAR_EN' generates 32 bits.
+                                                                                                                        : ... In instance fcip_afifo.u_afifo_slv
+   91 |     if(AUTO_CLEAR_EN)begin:AUTO_CLEAR_EN_OPEN
+      |     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv.sv:229:5: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'THRESHOLD_EN' generates 32 bits.
+                                                                                                                         : ... In instance fcip_afifo.u_afifo_slv
+  229 |     if(THRESHOLD_EN) begin:THRESHOLD_EN_OPEN
+      |     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_mst.sv:186:5: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'THRESHOLD_EN' generates 32 bits.
+                                                                                                                         : ... In instance fcip_afifo.u_afifo_mst
+  186 |     if(THRESHOLD_EN) begin:THRESHOLD_EN_OPEN
+      |     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_req_rsp_afifo_slv.sv:159:9: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'AUTO_CLEAR_EN' generates 32 bits.
+                                                                                                                                 : ... In instance fcip_req_rsp_afifo.u_fcip_req_rsp_afifo_slv
+  159 |         if(AUTO_CLEAR_EN) begin
+      |         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:94:5: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'AUTO_CLEAR_EN' generates 32 bits.
+                                                                                                                             : ... In instance fcip_afifo_doub.u_afifo_slv_doub
+   94 |     if(AUTO_CLEAR_EN)begin:AUTO_CLEAR_EN_OPEN
+      |     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:232:5: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'THRESHOLD_EN' generates 32 bits.
+                                                                                                                              : ... In instance fcip_afifo_doub.u_afifo_slv_doub
+  232 |     if(THRESHOLD_EN) begin:THRESHOLD_EN_OPEN
+      |     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_mst_doub.sv:244:5: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'THRESHOLD_EN' generates 32 bits.
+                                                                                                                              : ... In instance fcip_afifo_doub.u_afifo_mst_doub
+  244 |     if(THRESHOLD_EN) begin:THRESHOLD_EN_OPEN
+      |     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/memory/mem_fake_2p_sram/fcip_mem_fake_2p_mem.sv:291:5: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'READ_FORWARD_EN' generates 32 bits.
+                                                                                                                                            : ... In instance fcip_mem_fake_2p_mem
+  291 |     if(READ_FORWARD_EN)begin
+      |     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/memory/mem_fake_2p_sram/fcip_mem_fake_write_buffer.sv:180:5: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'WRITE_BIT_MASK_EN' generates 32 bits.
+                                                                                                                                                  : ... In instance fcip_mem_fake_2p_mem.genblk2.u_mem_fake_write_buffer
+  180 |     if(WRITE_BIT_MASK_EN)begin:WRITE_BIT_MASK
+      |     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/common/niu_atb_slv.sv:104:9: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                      : ... In instance NPU_atb_iniu_sys.u_niu_atb_slv
+  104 |         if (SYNC_BUF_EN) begin : g_sync_buf
+      |         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss0_niu_atb_slv.sv:104:9: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss0_sys_side.u_real_iniu_sys.u_niu_atb_slv
+  104 |         if (SYNC_BUF_EN) begin : g_sync_buf
+      |         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss1_niu_atb_slv.sv:104:9: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss1_sys_side.u_real_iniu_sys.u_niu_atb_slv
+  104 |         if (SYNC_BUF_EN) begin : g_sync_buf
+      |         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss2_niu_atb_slv.sv:104:9: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss2_sys_side.u_real_iniu_sys.u_niu_atb_slv
+  104 |         if (SYNC_BUF_EN) begin : g_sync_buf
+      |         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss3_niu_atb_slv.sv:104:9: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss3_sys_side.u_real_iniu_sys.u_niu_atb_slv
+  104 |         if (SYNC_BUF_EN) begin : g_sync_buf
+      |         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss4_niu_atb_slv.sv:104:9: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss4_sys_side.u_real_iniu_sys.u_niu_atb_slv
+  104 |         if (SYNC_BUF_EN) begin : g_sync_buf
+      |         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss5_niu_atb_slv.sv:104:9: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss5_sys_side.u_real_iniu_sys.u_niu_atb_slv
+  104 |         if (SYNC_BUF_EN) begin : g_sync_buf
+      |         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/camera_ss_iniu_sys/camera_ss_niu_atb_slv.sv:104:9: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                                     : ... In instance atb_soc_topo.u_camera_ss_sys_side.u_real_iniu_sys.u_niu_atb_slv
+  104 |         if (SYNC_BUF_EN) begin : g_sync_buf
+      |         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/mipi_ss_iniu_sys/mipi_ss_niu_atb_slv.sv:104:9: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                                 : ... In instance atb_soc_topo.u_mipi_ss_sys_side.u_real_iniu_sys.u_niu_atb_slv
+  104 |         if (SYNC_BUF_EN) begin : g_sync_buf
+      |         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/debug_tniu_ss_tniu_sys/debug_tniu_ss_niu_atb_slv.sv:104:9: Logical Operator GENIF expects 1 bit on the If, but If's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                                             : ... In instance atb_soc_topo.u_debug_tniu_ss_noc_side.u_real_tniu_noc.u_niu_atb_slv
+  104 |         if (SYNC_BUF_EN) begin : g_sync_buf
+      |         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:108:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 8 bits.
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_ctrl.u_sfifo_spram_lut
+  108 |     else if( (ptr_cnt == (ALMOST_FULL_THRESHOLD-1)) && winc && ~rinc)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:106:22: Operator GTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 8 bits.
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_ctrl.u_sfifo_spram_lut
+  106 |     else if( ptr_cnt >= ALMOST_FULL_THRESHOLD)
+      |                      ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:119:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 8 bits.
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_ctrl.u_sfifo_spram_lut
+  119 |     else if( (ptr_cnt == (ALMOST_EMPTY_THRESHOLD-1)) && rinc && ~winc)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:117:21: Operator LTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 8 bits.
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_ctrl.u_sfifo_spram_lut
+  117 |     else if(ptr_cnt <= ALMOST_EMPTY_THRESHOLD)
+      |                     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:134:22: Operator LTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 8 bits.
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_ctrl.u_sfifo_spram_lut
+  134 |     else if( ptr_cnt <= (FIFO_DEPTH-1) )
+      |                      ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:132:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 8 bits.
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_ctrl.u_sfifo_spram_lut
+  132 |     else if( (ptr_cnt == (FIFO_DEPTH-1)) && winc && ~rinc)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:108:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 3 bits.
+                                                                                                                             : ... In instance fcip_mem_fake_2p_mem.u_sync_fifo
+  108 |     else if( (ptr_cnt == (ALMOST_FULL_THRESHOLD-1)) && winc && ~rinc)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:106:22: Operator GTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 3 bits.
+                                                                                                                             : ... In instance fcip_mem_fake_2p_mem.u_sync_fifo
+  106 |     else if( ptr_cnt >= ALMOST_FULL_THRESHOLD)
+      |                      ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:119:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 3 bits.
+                                                                                                                             : ... In instance fcip_mem_fake_2p_mem.u_sync_fifo
+  119 |     else if( (ptr_cnt == (ALMOST_EMPTY_THRESHOLD-1)) && rinc && ~winc)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:117:21: Operator LTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 3 bits.
+                                                                                                                             : ... In instance fcip_mem_fake_2p_mem.u_sync_fifo
+  117 |     else if(ptr_cnt <= ALMOST_EMPTY_THRESHOLD)
+      |                     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:134:22: Operator LTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 3 bits.
+                                                                                                                             : ... In instance fcip_mem_fake_2p_mem.u_sync_fifo
+  134 |     else if( ptr_cnt <= (FIFO_DEPTH-1) )
+      |                      ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:132:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 3 bits.
+                                                                                                                             : ... In instance fcip_mem_fake_2p_mem.u_sync_fifo
+  132 |     else if( (ptr_cnt == (FIFO_DEPTH-1)) && winc && ~rinc)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:108:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 2 bits.
+                                                                                                                             : ... In instance NPU_atb_iniu_sys.u_niu_atb_slv.g_sync_buf.u_sync_buf
+  108 |     else if( (ptr_cnt == (ALMOST_FULL_THRESHOLD-1)) && winc && ~rinc)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:106:22: Operator GTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 2 bits.
+                                                                                                                             : ... In instance NPU_atb_iniu_sys.u_niu_atb_slv.g_sync_buf.u_sync_buf
+  106 |     else if( ptr_cnt >= ALMOST_FULL_THRESHOLD)
+      |                      ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:119:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 2 bits.
+                                                                                                                             : ... In instance NPU_atb_iniu_sys.u_niu_atb_slv.g_sync_buf.u_sync_buf
+  119 |     else if( (ptr_cnt == (ALMOST_EMPTY_THRESHOLD-1)) && rinc && ~winc)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:117:21: Operator LTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 2 bits.
+                                                                                                                             : ... In instance NPU_atb_iniu_sys.u_niu_atb_slv.g_sync_buf.u_sync_buf
+  117 |     else if(ptr_cnt <= ALMOST_EMPTY_THRESHOLD)
+      |                     ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:134:22: Operator LTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 2 bits.
+                                                                                                                             : ... In instance NPU_atb_iniu_sys.u_niu_atb_slv.g_sync_buf.u_sync_buf
+  134 |     else if( ptr_cnt <= (FIFO_DEPTH-1) )
+      |                      ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg.sv:132:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 2 bits.
+                                                                                                                             : ... In instance NPU_atb_iniu_sys.u_niu_atb_slv.g_sync_buf.u_sync_buf
+  132 |     else if( (ptr_cnt == (FIFO_DEPTH-1)) && winc && ~rinc)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_atb_noc/rtl/common/niu_atb_slv.sv:70:25: Logical Operator LOGAND expects 1 bit on the LHS, but LHS's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                      : ... In instance NPU_atb_iniu_sys.u_niu_atb_slv
+   70 |         if (SYNC_BUF_EN && (SYNC_BUF_DEPTH < 2)) begin
+      |                         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/debug_tniu_ss_tniu_sys/debug_tniu_ss_niu_atb_slv.sv:70:25: Logical Operator LOGAND expects 1 bit on the LHS, but LHS's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                                             : ... In instance atb_soc_topo.u_debug_tniu_ss_noc_side.u_real_tniu_noc.u_niu_atb_slv
+   70 |         if (SYNC_BUF_EN && (SYNC_BUF_DEPTH < 2)) begin
+      |                         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/mipi_ss_iniu_sys/mipi_ss_niu_atb_slv.sv:70:25: Logical Operator LOGAND expects 1 bit on the LHS, but LHS's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                                 : ... In instance atb_soc_topo.u_mipi_ss_sys_side.u_real_iniu_sys.u_niu_atb_slv
+   70 |         if (SYNC_BUF_EN && (SYNC_BUF_DEPTH < 2)) begin
+      |                         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/camera_ss_iniu_sys/camera_ss_niu_atb_slv.sv:70:25: Logical Operator LOGAND expects 1 bit on the LHS, but LHS's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                                     : ... In instance atb_soc_topo.u_camera_ss_sys_side.u_real_iniu_sys.u_niu_atb_slv
+   70 |         if (SYNC_BUF_EN && (SYNC_BUF_DEPTH < 2)) begin
+      |                         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss5_niu_atb_slv.sv:70:25: Logical Operator LOGAND expects 1 bit on the LHS, but LHS's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss5_sys_side.u_real_iniu_sys.u_niu_atb_slv
+   70 |         if (SYNC_BUF_EN && (SYNC_BUF_DEPTH < 2)) begin
+      |                         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss4_niu_atb_slv.sv:70:25: Logical Operator LOGAND expects 1 bit on the LHS, but LHS's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss4_sys_side.u_real_iniu_sys.u_niu_atb_slv
+   70 |         if (SYNC_BUF_EN && (SYNC_BUF_DEPTH < 2)) begin
+      |                         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss3_niu_atb_slv.sv:70:25: Logical Operator LOGAND expects 1 bit on the LHS, but LHS's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss3_sys_side.u_real_iniu_sys.u_niu_atb_slv
+   70 |         if (SYNC_BUF_EN && (SYNC_BUF_DEPTH < 2)) begin
+      |                         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss2_niu_atb_slv.sv:70:25: Logical Operator LOGAND expects 1 bit on the LHS, but LHS's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss2_sys_side.u_real_iniu_sys.u_niu_atb_slv
+   70 |         if (SYNC_BUF_EN && (SYNC_BUF_DEPTH < 2)) begin
+      |                         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss1_niu_atb_slv.sv:70:25: Logical Operator LOGAND expects 1 bit on the LHS, but LHS's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss1_sys_side.u_real_iniu_sys.u_niu_atb_slv
+   70 |         if (SYNC_BUF_EN && (SYNC_BUF_DEPTH < 2)) begin
+      |                         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/soc_atb_noc/build_logic/dsp_iniu_sys/dsp_ss0_niu_atb_slv.sv:70:25: Logical Operator LOGAND expects 1 bit on the LHS, but LHS's VARREF 'SYNC_BUF_EN' generates 32 bits.
+                                                                                                                             : ... In instance atb_soc_topo.u_dsp_ss0_sys_side.u_real_iniu_sys.u_niu_atb_slv
+   70 |         if (SYNC_BUF_EN && (SYNC_BUF_DEPTH < 2)) begin
+      |                         ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/memory/mem_fake_2p_sram/fcip_mem_fake_find_new_bit.sv:40:69: Operator SUB expects 32 bits on the LHS, but LHS's VARREF 'wr_ptr' generates 2 bits.
+                                                                                                                                                  : ... In instance fcip_mem_fake_2p_mem.genblk2.u_mem_fake_write_buffer.WRITE_BIT_MASK.u_mem_fake_find_new_bit
+   40 |         assign mask_en[i]           = (i<=(WRITE_BUFFER_SIZE'(wr_ptr-1))); 
+      |                                                                     ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_ptr_ctrl.sv:91:33: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 7 bits.
+                                                                                                                                                        : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_ctrl.SRAM_GRP_PTR_CTRL[0].u_spram_ptr_ctrl
+   91 | assign ram_ctrl_full  = (ptr_cnt==FIFO_DEPTH_PER_GROUP);
+      |                                 ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:33:36: Logical Operator COND expects 1 bit on the Conditional Test, but Conditional Test's VARREF 'DOUBLE_DATA_WIRE' generates 32 bits.
+                                                                                                                              : ... In instance fcip_afifo_doub.u_afifo_slv_doub
+   33 |     output logic [(DOUBLE_DATA_WIRE? (DATA_WIDTH*2+1) : DATA_WIDTH):0]     pld_sync   
+      |                                    ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:65:25: Logical Operator COND expects 1 bit on the Conditional Test, but Conditional Test's VARREF 'DOUBLE_DATA_WIRE' generates 32 bits.
+                                                                                                                              : ... In instance fcip_afifo_doub.u_afifo_slv_doub
+   65 | logic [(DOUBLE_DATA_WIRE? (DATA_WIDTH*2+1) : DATA_WIDTH):0]    pld_sync_marker;
+      |                         ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:322:30: Operator ASSIGNW expects 1 bits on the Assign RHS, but Assign RHS's VARREF 'pld_mux_select_0' generates 17 bits.
+                                                                                                                               : ... In instance fcip_afifo_doub.u_afifo_slv_doub
+  322 |     assign pld_sync_marker_0 = pld_mux_select_0;
+      |                              ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:333:35: Operator ASSIGNW expects 1 bits on the Assign RHS, but Assign RHS's REPLICATE generates 16 bits.
+                                                                                                                               : ... In instance fcip_afifo_doub.u_afifo_slv_doub
+  333 |     assign rptr_sync_marker_shift = {rptr_sync_marker[FIFO_DEPTH-2:0],rptr_sync_marker[FIFO_DEPTH-1]};
+      |                                   ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:334:35: Operator ASSIGNW expects 16 bits on the Assign RHS, but Assign RHS's VARREF 'rptr_sync_marker_shift' generates 1 bits.
+                                                                                                                               : ... In instance fcip_afifo_doub.u_afifo_slv_doub
+  334 |     assign select_onehot_1        = rptr_sync_marker_shift;
+      |                                   ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:356:30: Operator ASSIGNW expects 1 bits on the Assign RHS, but Assign RHS's VARREF 'pld_mux_select_1' generates 17 bits.
+                                                                                                                               : ... In instance fcip_afifo_doub.u_afifo_slv_doub
+  356 |     assign pld_sync_marker_1 = pld_mux_select_1;
+      |                              ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_slv_doub.sv:361:32: Operator ASSIGNW expects 34 bits on the Assign RHS, but Assign RHS's REPLICATE generates 2 bits.
+                                                                                                                               : ... In instance fcip_afifo_doub.u_afifo_slv_doub
+  361 |         assign pld_sync_marker = {pld_sync_marker_1,pld_sync_marker_0};
+      |                                ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_mst_doub.sv:31:36: Logical Operator COND expects 1 bit on the Conditional Test, but Conditional Test's VARREF 'DOUBLE_DATA_WIRE' generates 32 bits.
+                                                                                                                              : ... In instance fcip_afifo_doub.u_afifo_mst_doub
+   31 |     input  logic [(DOUBLE_DATA_WIRE? (DATA_WIDTH*2+1) : DATA_WIDTH):0]     pld_sync   
+      |                                    ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_rob.sv:140:22: Operator LTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 5 bits.
+                                                                                                                                                    : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_rob
+  140 |     else if( ptr_cnt <= (ROB_DEPTH-1) )
+      |                      ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_rob.sv:138:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 5 bits.
+                                                                                                                                                    : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_rob
+  138 |     else if( (ptr_cnt == (ROB_DEPTH-1)) && winc_incr && ~rinc)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_rob.sv:161:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 5 bits.
+                                                                                                                                                    : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_rob
+  161 |     else if( (ptr_cnt == (ALMOST_FULL_THRESHOLD-1)) && winc_incr && ~rinc)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_rob.sv:159:22: Operator GTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 5 bits.
+                                                                                                                                                    : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_rob
+  159 |     else if( ptr_cnt >= ALMOST_FULL_THRESHOLD)
+      |                      ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_rob.sv:172:23: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 5 bits.
+                                                                                                                                                    : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_rob
+  172 |     else if( (ptr_cnt == (ALMOST_EMPTY_THRESHOLD-1)) && rinc && ~winc_incr)
+      |                       ^~
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_spram/fcip_sfifo_spram_rob.sv:170:21: Operator LTE expects 32 bits on the LHS, but LHS's VARREF 'ptr_cnt' generates 5 bits.
+                                                                                                                                                    : ... In instance fcip_sync_fifo_spram.u_sfifo_spram_rob
+  170 |     else if(ptr_cnt <= ALMOST_EMPTY_THRESHOLD)
+      |                     ^~
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 16 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 16:16 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 17 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 17:17 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 18 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 18:18 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 19 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 19:19 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 20 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 20:20 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 21 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 21:21 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 22 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 22:22 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 23 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 23:23 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 24 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 24:24 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 25 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 25:25 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 26 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 26:26 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 27 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 27:27 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 28 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 28:28 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 29 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 29:29 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 30 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 30:30 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 31 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 31:31 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:32: Selection index out of range: 2:2 outside 1:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:43: Selection index out of range: 2 outside 1:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                           ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:32: Selection index out of range: 3:3 outside 1:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:43: Selection index out of range: 3 outside 1:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                           ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 16 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 16 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 17 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 17 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 18 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 18 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 19 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 19 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 20 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 20 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 21 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 21 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 22 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 22 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 23 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 23 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 24 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 24 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 25 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 25 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 26 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 26 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 27 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 27 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 28 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 28 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 29 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 29 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 30 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 30 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 31 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 31 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 16:16 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 16 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 17:17 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 17 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 18:18 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 18 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 19:19 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 19 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 20:20 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 20 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 21:21 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 21 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 22:22 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 22 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 23:23 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 23 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 24:24 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 24 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 25:25 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 25 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 26:26 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 26 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 27:27 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 27 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 28:28 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 28 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 29:29 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 29 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 30:30 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 30 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 31:31 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 31 outside 15:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_data_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 4 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 4:4 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 5 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 5:5 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 6 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 6:6 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 7 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 7:7 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 8 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 8:8 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 9 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 9:9 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 10 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 10:10 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 11 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 11:11 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 12 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 12:12 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 13 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 13:13 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 14 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 14:14 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 15 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 15:15 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 16 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 16:16 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 17 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 17:17 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 18 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 18:18 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 19 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 19:19 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 20 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 20:20 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 21 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 21:21 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 22 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 22:22 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 23 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 23:23 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 24 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 24:24 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 25 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 25:25 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 26 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 26:26 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 27 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 27:27 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 28 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 28:28 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 29 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 29:29 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 30 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 30:30 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:29: Selection index out of range: 31 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                             ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:18:46: Selection index out of range: 31:31 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   18 |             assign v_pld_rev[j][i] = v_pld[i][j];
+      |                                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 4 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 4 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 5 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 5 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 6 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 6 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 7 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 7 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 8 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 8 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 9 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 9 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 10 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 10 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 11 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 11 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 12 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 12 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 13 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 13 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 14 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 14 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 15 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 15 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 16 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 16 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 17 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 17 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 18 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 18 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 19 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 19 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 20 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 20 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 21 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 21 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 22 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 22 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 23 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 23 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 24 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 24 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 25 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 25 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 26 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 26 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 27 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 27 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 28 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 28 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 29 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 29 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 30 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 30 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:32: Selection index out of range: 31 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:26:47: Selection index out of range: 31 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   26 |         assign v_pld_rev_select[k] = v_pld_rev[k] & select_onehot;
+      |                                               ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 4:4 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 4 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 5:5 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 5 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 6:6 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 6 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 7:7 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 7 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 8:8 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 8 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 9:9 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 9 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 10:10 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 10 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 11:11 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 11 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 12:12 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 12 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 13:13 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 13 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 14:14 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 14 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 15:15 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 15 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 16:16 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 16 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 17:17 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 17 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 18:18 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 18 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 19:19 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 19 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 20:20 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 20 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 21:21 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 21 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 22:22 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 22 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 23:23 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 23 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 24:24 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 24 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 25:25 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 25 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 26:26 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 26 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 27:27 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 27 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 28:28 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 28 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 29:29 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 29 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 30:30 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 30 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:30: Selection index out of range: 31:31 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                              ^
+%Warning-SELRANGE: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_real_mux_onehot.sv:33:53: Selection index out of range: 31 outside 3:0
+                                                                                                                             : ... In instance fcip_sync_fifo_spram.u_sram_sideband_mux
+   33 |         assign pld_rev_select[l] = |v_pld_rev_select[l];
+      |                                                     ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/async_fifo/fcip_afifo_doub.sv:46:26: Logical Operator COND expects 1 bit on the Conditional Test, but Conditional Test's VARREF 'DOUBLE_DATA_WIRE' generates 32 bits.
+                                                                                                                          : ... In instance fcip_afifo_doub
+   46 | logic [(DOUBLE_DATA_WIRE ? (DATA_WIDTH*2+1) : DATA_WIDTH):0]     pld_sync;
+      |                          ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/arbiter/fcip_arb_vrp.sv:51:48: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'h0' generates 1 bits.
+                                                                                                                    : ... In instance fcip_arb_vrp
+   51 |             if(~rst_n)                pld_m_r  <= 1'b0;
+      |                                                ^~
+%Error: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_booth_wallace_mul.sv:84:1: Cannot find file containing module: 'DW02_tree'
+   84 | DW02_tree #(
+      | ^~~~~~~~~
+%Error: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_booth_wallace_mul.sv:84:1: This may be because there's no search path specified with -I<dir>.
+   84 | DW02_tree #(
+      | ^~~~~~~~~
+        ... Looked in:
+             DW02_tree
+             DW02_tree.v
+             DW02_tree.sv
+             obj_dir/DW02_tree
+             obj_dir/DW02_tree.v
+             obj_dir/DW02_tree.sv
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv:84:97: Operator ADD expects 3 bits on the LHS, but LHS's LOGAND generates 1 bits.
+                                                                                                                                 : ... In instance fcip_sync_fifo_reg_mimo
+   84 |             else        assign v_write_num_acc[i] = WRITE_NUM_WIDTH'((v_s_vld[i] && v_s_rdy[i]) + v_write_num_acc[i-1]);
+      |                                                                                                 ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv:92:95: Operator ADD expects 3 bits on the LHS, but LHS's LOGAND generates 1 bits.
+                                                                                                                                 : ... In instance fcip_sync_fifo_reg_mimo
+   92 |             else        assign v_read_num_acc[i] = READ_NUM_WIDTH'((v_m_vld[i] && v_m_rdy[i]) + v_read_num_acc[i-1]);
+      |                                                                                               ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv:102:49: Operator SUB expects 32 bits on the RHS, but RHS's VARREF 'crdt_cnt' generates 8 bits.
+                                                                                                                                  : ... In instance fcip_sync_fifo_reg_mimo
+  102 |     assign crdt_residue = CRDT_CNT_WIDTH'(DEPTH - crdt_cnt);
+      |                                                 ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv:103:55: Operator AND expects 8 bits on the LHS, but LHS's ARRAYSEL generates 3 bits.
+                                                                                                                                  : ... In instance fcip_sync_fifo_reg_mimo
+  103 |     assign crdt_add     = v_write_num_acc[WR_WIDTH-1] & {WRITE_NUM_WIDTH{wren}};
+      |                                                       ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv:103:55: Operator AND expects 8 bits on the RHS, but RHS's REPLICATE generates 3 bits.
+                                                                                                                                  : ... In instance fcip_sync_fifo_reg_mimo
+  103 |     assign crdt_add     = v_write_num_acc[WR_WIDTH-1] & {WRITE_NUM_WIDTH{wren}};
+      |                                                       ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv:104:54: Operator AND expects 8 bits on the LHS, but LHS's ARRAYSEL generates 3 bits.
+                                                                                                                                  : ... In instance fcip_sync_fifo_reg_mimo
+  104 |     assign crdt_sub     = v_read_num_acc[RD_WIDTH-1] & {READ_NUM_WIDTH{rden}};
+      |                                                      ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv:104:54: Operator AND expects 8 bits on the RHS, but RHS's REPLICATE generates 3 bits.
+                                                                                                                                  : ... In instance fcip_sync_fifo_reg_mimo
+  104 |     assign crdt_sub     = v_read_num_acc[RD_WIDTH-1] & {READ_NUM_WIDTH{rden}};
+      |                                                      ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv:121:57: Operator ADD expects 8 bits on the RHS, but RHS's ARRAYSEL generates 3 bits.
+                                                                                                                                  : ... In instance fcip_sync_fifo_reg_mimo
+  121 |         else if(wren)       wr_ptr <= PTR_WIDTH'(wr_ptr + v_write_num_acc[WR_WIDTH-1]);
+      |                                                         ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv:126:57: Operator ADD expects 8 bits on the RHS, but RHS's ARRAYSEL generates 3 bits.
+                                                                                                                                  : ... In instance fcip_sync_fifo_reg_mimo
+  126 |         else if(rden)       rd_ptr <= PTR_WIDTH'(rd_ptr + v_read_num_acc[RD_WIDTH-1]);
+      |                                                         ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv:132:61: Operator ADD expects 32 bits on the LHS, but LHS's VARREF 'rd_ptr' generates 8 bits.
+                                                                                                                                  : ... In instance fcip_sync_fifo_reg_mimo
+  132 |             assign v_rd_add_ptr[i]      = PTR_WIDTH'(rd_ptr + i);
+      |                                                             ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/sync_fifo/fcip_sync_fifo_reg_mimo.sv:140:56: Operator ADD expects 32 bits on the LHS, but LHS's VARREF 'wr_ptr' generates 8 bits.
+                                                                                                                                  : ... In instance fcip_sync_fifo_reg_mimo
+  140 |             assign v_wr_add_ptr[i] = PTR_WIDTH'(wr_ptr + i);
+      |                                                        ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:85:101: Operator ADD expects 3 bits on the LHS, but LHS's LOGAND generates 1 bits.
+                                                                                                                         : ... In instance fcip_ip_mimo_queue
+   85 |             else        assign v_write_num_acc[i] = WRITE_NUM_WIDTH'((v_req_vld[i] && v_req_rdy[i]) + v_write_num_acc[i-1]);
+      |                                                                                                     ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:93:99: Operator ADD expects 3 bits on the LHS, but LHS's LOGAND generates 1 bits.
+                                                                                                                        : ... In instance fcip_ip_mimo_queue
+   93 |             else        assign v_read_num_acc[i] = READ_NUM_WIDTH'((v_ack_vld[i] && v_ack_rdy[i]) + v_read_num_acc[i-1]);
+      |                                                                                                   ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:103:49: Operator SUB expects 32 bits on the RHS, but RHS's VARREF 'crdt_cnt' generates 8 bits.
+                                                                                                                         : ... In instance fcip_ip_mimo_queue
+  103 |     assign crdt_residue = CRDT_CNT_WIDTH'(DEPTH - crdt_cnt);
+      |                                                 ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:104:55: Operator AND expects 8 bits on the LHS, but LHS's ARRAYSEL generates 3 bits.
+                                                                                                                         : ... In instance fcip_ip_mimo_queue
+  104 |     assign crdt_add     = v_write_num_acc[WR_WIDTH-1] & {WRITE_NUM_WIDTH{wren}};
+      |                                                       ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:104:55: Operator AND expects 8 bits on the RHS, but RHS's REPLICATE generates 3 bits.
+                                                                                                                         : ... In instance fcip_ip_mimo_queue
+  104 |     assign crdt_add     = v_write_num_acc[WR_WIDTH-1] & {WRITE_NUM_WIDTH{wren}};
+      |                                                       ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:105:54: Operator AND expects 8 bits on the LHS, but LHS's ARRAYSEL generates 3 bits.
+                                                                                                                         : ... In instance fcip_ip_mimo_queue
+  105 |     assign crdt_sub     = v_read_num_acc[RD_WIDTH-1] & {READ_NUM_WIDTH{rden}};
+      |                                                      ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:105:54: Operator AND expects 8 bits on the RHS, but RHS's REPLICATE generates 3 bits.
+                                                                                                                         : ... In instance fcip_ip_mimo_queue
+  105 |     assign crdt_sub     = v_read_num_acc[RD_WIDTH-1] & {READ_NUM_WIDTH{rden}};
+      |                                                      ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:122:57: Operator ADD expects 8 bits on the RHS, but RHS's ARRAYSEL generates 3 bits.
+                                                                                                                         : ... In instance fcip_ip_mimo_queue
+  122 |         else if(wren)       wr_ptr <= PTR_WIDTH'(wr_ptr + v_write_num_acc[WR_WIDTH-1]);
+      |                                                         ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:127:57: Operator ADD expects 8 bits on the RHS, but RHS's ARRAYSEL generates 3 bits.
+                                                                                                                         : ... In instance fcip_ip_mimo_queue
+  127 |         else if(rden)       rd_ptr <= PTR_WIDTH'(rd_ptr + v_read_num_acc[RD_WIDTH-1]);
+      |                                                         ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:133:61: Operator ADD expects 32 bits on the LHS, but LHS's VARREF 'rd_ptr' generates 8 bits.
+                                                                                                                         : ... In instance fcip_ip_mimo_queue
+  133 |             assign v_rd_add_ptr[i]      = PTR_WIDTH'(rd_ptr + i);
+      |                                                             ^
+%Warning-WIDTH: /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/fcip/ip/basic/fcip_ip_mimo_queue.sv:141:56: Operator ADD expects 32 bits on the LHS, but LHS's VARREF 'wr_ptr' generates 8 bits.
+                                                                                                                         : ... In instance fcip_ip_mimo_queue
+  141 |             assign v_wr_add_ptr[i] = PTR_WIDTH'(wr_ptr + i);
+      |                                                        ^
+%Error: Exiting due to 2 error(s), 370 warning(s)

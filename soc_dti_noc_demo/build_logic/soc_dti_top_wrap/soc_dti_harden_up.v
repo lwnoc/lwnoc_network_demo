@@ -1,8 +1,8 @@
-//[UHDL]Content Start [md5:0c2f585e3a543ef5431a080fcbbc91f3]
+//[UHDL]Content Start [md5:0ad72a4ffa860a31d542662dd5e34a46]
 module soc_dti_harden_up
 	(
-	input                                                 clk_noc                                                              ,
-	input                                                 rst_noc_n                                                            ,
+	input                                                 clk_noc_up                                                           ,
+	input                                                 rst_noc_up_n                                                         ,
 	output                                                link_req_tniu_req_last                                               ,
 	output [89:0]                                         link_req_tniu_req_payload                                            ,
 	output                                                link_req_tniu_req_qos                                                ,
@@ -136,8 +136,8 @@ module soc_dti_harden_up
 
 	//module inst.
 	soc_dti_sw_gpu4_dti_switch_4i1o_wrap sw_gpu4 (
-		.clk(clk_noc),
-		.rst_n(rst_noc_n),
+		.clk(clk_noc_up),
+		.rst_n(rst_noc_up_n),
 		.iniu0_req_valid(gpu_ss0_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_valid),
 		.iniu0_req_ready(sw_gpu4_TO_gpu_ss0_iniu_top_wrap_SIG_iniu0_req_ready),
 		.iniu0_req_payload(gpu_ss0_iniu_top_wrap_TO_sw_gpu4_SIG_top_req_req_payload),
@@ -219,8 +219,8 @@ module soc_dti_harden_up
 		.tniu_rsp_last(link_rsp_tniu_rsp_last),
 		.tniu_rsp_threshold(link_rsp_tniu_rsp_threshold));
 	gpu_ss0_iniu_top_wrap gpu_ss0_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_up),
+		.rst_top_n(rst_noc_up_n),
 		.async_fifo_req_pld_sync(gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(gpu_ss0_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -248,8 +248,8 @@ module soc_dti_harden_up
 		.top_rsp_rsp_threshold(gpu_ss0_iniu_top_wrap_TO_sw_gpu4_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_gpu4_TO_gpu_ss0_iniu_top_wrap_SIG_iniu0_rsp_valid));
 	gpu_ss1_iniu_top_wrap gpu_ss1_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_up),
+		.rst_top_n(rst_noc_up_n),
 		.async_fifo_req_pld_sync(gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(gpu_ss1_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -277,8 +277,8 @@ module soc_dti_harden_up
 		.top_rsp_rsp_threshold(gpu_ss1_iniu_top_wrap_TO_sw_gpu4_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_gpu4_TO_gpu_ss1_iniu_top_wrap_SIG_iniu1_rsp_valid));
 	dp_ss_iniu_top_wrap dp_ss_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_up),
+		.rst_top_n(rst_noc_up_n),
 		.async_fifo_req_pld_sync(dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(dp_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -306,8 +306,8 @@ module soc_dti_harden_up
 		.top_rsp_rsp_threshold(dp_ss_iniu_top_wrap_TO_sw_gpu4_SIG_top_rsp_rsp_threshold),
 		.top_rsp_rsp_valid(sw_gpu4_TO_dp_ss_iniu_top_wrap_SIG_iniu2_rsp_valid));
 	display_ss_iniu_top_wrap display_ss_iniu_top_wrap (
-		.clk_top(clk_noc),
-		.rst_top_n(rst_noc_n),
+		.clk_top(clk_noc_up),
+		.rst_top_n(rst_noc_up_n),
 		.async_fifo_req_pld_sync(display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_pld_sync),
 		.async_fifo_req_rptr_async(display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_async),
 		.async_fifo_req_rptr_sync(display_ss_iniu_top_wrap_async_fifo_porting_async_fifo_req_rptr_sync),
@@ -336,5 +336,5 @@ module soc_dti_harden_up
 		.top_rsp_rsp_valid(sw_gpu4_TO_display_ss_iniu_top_wrap_SIG_iniu3_rsp_valid));
 
 endmodule
-//[UHDL]Content End [md5:0c2f585e3a543ef5431a080fcbbc91f3]
+//[UHDL]Content End [md5:0ad72a4ffa860a31d542662dd5e34a46]
 

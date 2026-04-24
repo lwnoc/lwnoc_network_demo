@@ -1,7 +1,7 @@
 soc sts noc topo:
-aonss iniu->dec0
+aonss iniu->dec0 
 dec0->vpuss tniu
-dec0->dec1
+dec0->dec1 
 dec1->camerass tniu
 dec1->async bridge
 async bridge->dec2

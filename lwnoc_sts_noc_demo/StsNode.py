@@ -14,6 +14,7 @@ from uhdl.uhdl.core.TemplateIP import TemplateComponent, TemplateIPConfig
 from uhdl.uhdl.core.VComponent import VComponent
 
 from StsTemplate import (
+    TGT_ID_WIDTH,
     sts_demo_dec4_config,
     sts_demo_iniu_top_side_config,
     sts_demo_link_buf_config,
@@ -31,6 +32,19 @@ sts_demo_req_rsp_async_raw_config = TemplateIPConfig(
     filelist=sts_demo_req_rsp_async_config.filelist,
     prefix="",
 )
+
+
+def _pack_int(width: int, values: list[int]) -> int:
+    result = 0
+    mask = (1 << width) - 1
+    for value in values:
+        result = (result << width) | (value & mask)
+    return result
+
+
+def _sv_param(total_bits: int, value: int) -> str:
+    hex_digits = max(1, (total_bits + 3) // 4)
+    return f"{total_bits}'h{value:0{hex_digits}X}"
 
 
 class StsTopSideTemplateComponent(TemplateComponent):
@@ -214,8 +228,25 @@ class StsIniuNode(UhdlComponentNode):
 
 
 class StsDec4Node(UhdlComponentNode):
-    def __init__(self, id: str = "noc_dec"):
-        params = getattr(sts_demo_dec4_config, 'param_overrides', {})
+    def __init__(self, id: str = "noc_dec", slave_num: int = 4):
+        if slave_num < 1 or slave_num > 4:
+            raise ValueError(f"slave_num must be in [1, 4], got {slave_num}")
+
+        params = dict(getattr(sts_demo_dec4_config, 'param_overrides', {}))
+        # Keep decode policy consistent with existing 4-way table while allowing
+        # fewer active slave channels for leaf-count-matched dec instances.
+        route_base_values = [0x30, 0x20, 0x10, 0x00][-slave_num:]
+        route_mask_values = [0xB0] * slave_num
+        route_base_int = _pack_int(TGT_ID_WIDTH, route_base_values)
+        route_mask_int = _pack_int(TGT_ID_WIDTH, route_mask_values)
+        params.update(
+            {
+                "STS_DEMO_DEC_SLAVE_NUM": slave_num,
+                "STS_DEMO_ROUTE_BASE": _sv_param(slave_num * TGT_ID_WIDTH, route_base_int),
+                "STS_DEMO_ROUTE_MASK": _sv_param(slave_num * TGT_ID_WIDTH, route_mask_int),
+            }
+        )
+
         comp = TemplateComponent(config=sts_demo_dec4_config, top="sts_demo_dec4_wrap", struct_mode="packed", **params)
         super().__init__(id=id, impl=comp)
 
@@ -223,14 +254,18 @@ class StsDec4Node(UhdlComponentNode):
         self.add_interface("rst_n", r"^rst_n$")
         self.add_interface("mst_req", r"^mst_req_.*")
         self.add_interface("mst_rsp", r"^mst_rsp_.*")
-        self.add_interface("slv0_req", r"^slv0_req_.*")
-        self.add_interface("slv0_rsp", r"^slv0_rsp_.*")
-        self.add_interface("slv1_req", r"^slv1_req_.*")
-        self.add_interface("slv1_rsp", r"^slv1_rsp_.*")
-        self.add_interface("slv2_req", r"^slv2_req_.*")
-        self.add_interface("slv2_rsp", r"^slv2_rsp_.*")
-        self.add_interface("slv3_req", r"^slv3_req_.*")
-        self.add_interface("slv3_rsp", r"^slv3_rsp_.*")
+        if slave_num >= 1:
+            self.add_interface("slv0_req", r"^slv0_req_.*")
+            self.add_interface("slv0_rsp", r"^slv0_rsp_.*")
+        if slave_num >= 2:
+            self.add_interface("slv1_req", r"^slv1_req_.*")
+            self.add_interface("slv1_rsp", r"^slv1_rsp_.*")
+        if slave_num >= 3:
+            self.add_interface("slv2_req", r"^slv2_req_.*")
+            self.add_interface("slv2_rsp", r"^slv2_rsp_.*")
+        if slave_num >= 4:
+            self.add_interface("slv3_req", r"^slv3_req_.*")
+            self.add_interface("slv3_rsp", r"^slv3_rsp_.*")
 
 
 class _BaseStsTniuNode(UhdlComponentNode):
