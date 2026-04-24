@@ -1,5 +1,4 @@
 import sys
-import tempfile
 from pathlib import Path
 
 
@@ -9,29 +8,12 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
     sys.path.insert(0, str(LWNOC_TOPO_ROOT))
 
 from topo_core.node.uhdlComponentNode import UhdlComponentNode
+from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
+from topo_core.utils.networkHierOpt import connect
 from uhdl.uhdl.core import BitXor, Component, Input, Output, UInt
 from uhdl.uhdl.core.TemplateIP import TemplateComponent, TemplateIPConfig
-from uhdl.uhdl.core.VComponent import VComponent
 
-from StsTemplate import (
-    TGT_ID_WIDTH,
-    sts_demo_dec4_config,
-    sts_demo_iniu_top_side_config,
-    sts_demo_link_buf_config,
-    sts_demo_link_pipe_config,
-    sts_demo_req_rsp_async_config,
-    sts_demo_tniu0_config,
-    sts_demo_tniu1_config,
-    sts_demo_tniu2_config,
-    sts_demo_tniu3_config,
-)
-
-
-sts_demo_req_rsp_async_raw_config = TemplateIPConfig(
-    name="sts_req_rsp_async_raw",
-    filelist=sts_demo_req_rsp_async_config.filelist,
-    prefix="",
-)
+from StsTemplate import *
 
 
 def _pack_int(width: int, values: list[int]) -> int:
@@ -46,75 +28,6 @@ def _sv_param(total_bits: int, value: int) -> str:
     hex_digits = max(1, (total_bits + 3) // 4)
     return f"{total_bits}'h{value:0{hex_digits}X}"
 
-
-class StsTopSideTemplateComponent(TemplateComponent):
-    _pending_init: dict | None = None
-
-    @classmethod
-    def build(cls, config: TemplateIPConfig, top: str, instance: str | None = None, **kwargs):
-        cls._pending_init = {
-            "config": config,
-            "top": top,
-            "instance": instance,
-            "kwargs": kwargs,
-        }
-        try:
-            return cls()
-        finally:
-            cls._pending_init = None
-
-    def __init__(self):
-        pending = self.__class__._pending_init
-        if pending is None:
-            raise RuntimeError("StsTopSideTemplateComponent.build() must be used")
-
-        config: TemplateIPConfig = pending["config"]
-        top: str = pending["top"]
-        instance: str | None = pending["instance"]
-        kwargs = dict(pending["kwargs"])
-
-        self._parent_template = config.get_or_create_ip()
-        self._parent_template.temp_build()
-
-        if instance is None:
-            instance = top
-
-        unity_wrapper_path = self._build_parse_unity_wrapper(config=config, top=top)
-        prefixed_top = config.prefix + top
-
-        VComponent.__init__(
-            self,
-            file=unity_wrapper_path,
-            top=prefixed_top,
-            instance=instance,
-            struct_mode="packed",
-            **kwargs,
-        )
-
-    def _build_parse_unity_wrapper(self, config: TemplateIPConfig, top: str) -> str:
-        top_side_dir = Path(self._parent_template.temp_output_dir)
-        wrapper_file = top_side_dir / f"{config.prefix}{top}.sv"
-
-        top_side_name = config.name
-        pack_dir_name = top_side_name.removesuffix("_top_side")
-        pack_dir = top_side_dir.parent / pack_dir_name
-        pack_file = pack_dir / f"{config.prefix}lwnoc_sts_pack.sv"
-
-        if not wrapper_file.exists() or not pack_file.exists():
-            return self._parent_template.get_unity_wrapper()
-
-        scratch_dir = Path(tempfile.mkdtemp(prefix=f"{config.name}_parse_"))
-        unity_wrapper = scratch_dir / f"{config.prefix}manual_unity_wrapper.sv"
-        unity_wrapper.write_text(
-            "\n".join(
-                [
-                    f'`include "{pack_file}"',
-                    f'`include "{wrapper_file}"',
-                    "",
-                ]
-            )
-        )
-        return str(unity_wrapper)
 
 
 class StsReqSinkComponent(Component):
@@ -159,10 +72,8 @@ class StsReqZeroSourceNode(UhdlComponentNode):
 
 
 class StsReqRspAsyncBridgeSlvNode(UhdlComponentNode):
-    def __init__(self, id: str = "sts_req_rsp_async_slv"):
-        comp = TemplateComponent(
-            config=sts_demo_req_rsp_async_raw_config,
-            top="sts_async_bridge_slv",
+    def __init__(self, id: str = "sts_req_rsp_async_slv", cfg=soc_sts_req_rsp_async_raw_config):
+        comp = TemplateComponent(config=cfg, top="sts_async_bridge_slv",
             DATA_WIDTH=119,
         )
         super().__init__(id=id, impl=comp)
@@ -174,10 +85,8 @@ class StsReqRspAsyncBridgeSlvNode(UhdlComponentNode):
 
 
 class StsReqRspAsyncBridgeMstNode(UhdlComponentNode):
-    def __init__(self, id: str = "sts_req_rsp_async_mst"):
-        comp = TemplateComponent(
-            config=sts_demo_req_rsp_async_raw_config,
-            top="sts_async_bridge_mst",
+    def __init__(self, id: str = "sts_req_rsp_async_mst", cfg=soc_sts_req_rsp_async_raw_config):
+        comp = TemplateComponent(config=cfg, top="sts_async_bridge_mst",
             DATA_WIDTH=119,
         )
         super().__init__(id=id, impl=comp)
@@ -188,9 +97,32 @@ class StsReqRspAsyncBridgeMstNode(UhdlComponentNode):
         self.add_interface("sync", r"^(wptr_async|rptr_async|rptr_sync|pld_sync)$")
 
 
+class StsReqRspAsyncBridgeNode(UhdlWrapperNode):
+    def __init__(self, id: str = "sts_async_bridge"):
+        super().__init__(id=id)
+        self.add_interface("clk_src")
+        self.add_interface("rst_src_n")
+        self.add_interface("clk_dst")
+        self.add_interface("rst_dst_n")
+        self.add_interface("s_chan")
+        self.add_interface("m_chan")
+
+        self.slv_side = StsReqRspAsyncBridgeSlvNode(id=f"{id}_slv")
+        self.mst_side = StsReqRspAsyncBridgeMstNode(id=f"{id}_mst")
+
+        connect(self.slv_side.clk, self.clk_src)
+        connect(self.slv_side.rst_n, self.rst_src_n)
+        connect(self.mst_side.clk, self.clk_dst)
+        connect(self.mst_side.rst_n, self.rst_dst_n)
+        connect(self.slv_side.s_chan, self.s_chan)
+        connect(self.mst_side.m_chan, self.m_chan)
+        connect(self.slv_side.sync, self.mst_side.sync)
+        self.expose_unconnected_interfaces()
+
+
 class StsLinkPipeNode(UhdlComponentNode):
-    def __init__(self, id: str = "sts_link_pipe"):
-        comp = TemplateComponent(config=sts_demo_link_pipe_config, top="sts_link_pipe")
+    def __init__(self, id: str = "sts_link_pipe", cfg=soc_sts_link_pipe_config):
+        comp = TemplateComponent(config=cfg, top="sts_link_pipe")
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", r"^clk$")
@@ -200,8 +132,8 @@ class StsLinkPipeNode(UhdlComponentNode):
 
 
 class StsLinkBufNode(UhdlComponentNode):
-    def __init__(self, id: str = "sts_link_buf"):
-        comp = TemplateComponent(config=sts_demo_link_buf_config, top="sts_link_buf")
+    def __init__(self, id: str = "sts_link_buf", cfg=soc_sts_link_buf_config):
+        comp = TemplateComponent(config=cfg, top="sts_link_buf")
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", r"^clk$")
@@ -212,9 +144,9 @@ class StsLinkBufNode(UhdlComponentNode):
 
 
 class StsIniuNode(UhdlComponentNode):
-    def __init__(self, id: str = "iniu0"):
-        params = getattr(sts_demo_iniu_top_side_config, 'param_overrides', {})
-        comp = StsTopSideTemplateComponent.build(config=sts_demo_iniu_top_side_config, top="sts_demo_iniu_wrap", **params)
+    def __init__(self, id: str = "iniu0", cfg=aon_ss_iniu_top_side_config, top: str = "sts_iniu_top"):
+        params = getattr(cfg, 'param_overrides', {})
+        comp = TemplateComponent(config=cfg, top=top, struct_mode="packed", **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk_src", r"^clk_src$")
@@ -227,16 +159,24 @@ class StsIniuNode(UhdlComponentNode):
         self.add_interface("rsp", r"^in_rsp_.*")
 
 
-class StsDec4Node(UhdlComponentNode):
-    def __init__(self, id: str = "noc_dec", slave_num: int = 4):
+# CONSTRAINT: Node class names must NOT encode specific config parameters.
+# Naming convention: StsDecNode (not StsDec4Node), because the decoder topology
+# is generic — slave count, route policy, etc. are driven by TemplateIPConfig
+# and constructor arguments, not by a hardcoded numeric suffix in the class name.
+# This keeps the node class reusable across different decoder configurations.
+# CONSTRAINT: Route table values MUST come from cfg, not hardcoded in the node.
+# See soc_sts_dec4_config._route_base_table / _route_mask_val in StsTemplate.py.
+class StsDecNode(UhdlComponentNode):
+    def __init__(self, id: str = "noc_dec", slave_num: int = 4, cfg=soc_sts_dec4_config):
         if slave_num < 1 or slave_num > 4:
             raise ValueError(f"slave_num must be in [1, 4], got {slave_num}")
 
-        params = dict(getattr(sts_demo_dec4_config, 'param_overrides', {}))
-        # Keep decode policy consistent with existing 4-way table while allowing
-        # fewer active slave channels for leaf-count-matched dec instances.
-        route_base_values = [0x30, 0x20, 0x10, 0x00][-slave_num:]
-        route_mask_values = [0xB0] * slave_num
+        params = dict(getattr(cfg, 'param_overrides', {}))
+        # Route table driven by cfg, not hardcoded in node
+        route_table = getattr(cfg, '_route_base_table', [0x30, 0x20, 0x10, 0x00])
+        route_mask = getattr(cfg, '_route_mask_val', 0xB0)
+        route_base_values = route_table[-slave_num:]
+        route_mask_values = [route_mask] * slave_num
         route_base_int = _pack_int(TGT_ID_WIDTH, route_base_values)
         route_mask_int = _pack_int(TGT_ID_WIDTH, route_mask_values)
         params.update(
@@ -247,7 +187,7 @@ class StsDec4Node(UhdlComponentNode):
             }
         )
 
-        comp = TemplateComponent(config=sts_demo_dec4_config, top="sts_demo_dec4_wrap", struct_mode="packed", **params)
+        comp = TemplateComponent(config=cfg, top="sts_noc_dec_node", struct_mode="packed", **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", r"^clk$")
@@ -268,10 +208,11 @@ class StsDec4Node(UhdlComponentNode):
             self.add_interface("slv3_rsp", r"^slv3_rsp_.*")
 
 
-class _BaseStsTniuNode(UhdlComponentNode):
-    def __init__(self, id: str, cfg, top: str):
+class StsTniuTopNode(UhdlComponentNode):
+    """TNIU top-side node — wraps end-point access via top-side config."""
+    def __init__(self, id: str, cfg: TemplateIPConfig, top: str):
         params = getattr(cfg, 'param_overrides', {})
-        comp = StsTopSideTemplateComponent.build(config=cfg, top=top, **params)
+        comp = TemplateComponent(config=cfg, top=top, **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk_src", r"^clk_src$")
@@ -292,34 +233,61 @@ class _BaseStsTniuNode(UhdlComponentNode):
         self.add_interface("noc_cti_channel", r"^noc_cti_channel_.*")
 
 
-class StsTniu0Node(_BaseStsTniuNode):
-    def __init__(self, id: str = "tniu0"):
-        super().__init__(id=id, cfg=sts_demo_tniu0_config, top="sts_demo_tniu0_wrap")
+class StsTniuSysNode(UhdlComponentNode):
+    """TNIU system-side leaf — hierarchical inside sts_tniu_top."""
+    def __init__(self, id: str, cfg: TemplateIPConfig):
+        comp = TemplateComponent(config=cfg, top="sts_tniu_sys", struct_mode="packed")
+        super().__init__(id=id, impl=comp)
+        self.add_interface("clk", r"^clk$")
+        self.add_interface("rst_n", r"^rst_n$")
+        # Add remaining sys-side interfaces from RTL contract as needed
 
 
-class StsTniu1Node(_BaseStsTniuNode):
-    def __init__(self, id: str = "tniu1"):
-        super().__init__(id=id, cfg=sts_demo_tniu1_config, top="sts_demo_tniu1_wrap")
+class StsTniuWrapNode(UhdlWrapperNode):
+    """TNIU composite: sys + top sides, exposed via unwrapped interfaces."""
+    def __init__(self, id: str, sys_cfg: TemplateIPConfig, top_cfg: TemplateIPConfig, top_wrap: str = "sts_tniu_top"):
+        super().__init__(id=id)
+        # Expose integration-facing clock/reset interfaces
+        self.add_interface("clk_src")  # sys-side source
+        self.add_interface("rstn_src")
+        self.add_interface("clk_dst")  # top-side/target
+        self.add_interface("rstn_dst")
+        self.add_interface("clk_dbg_timer", is_global=True)
+        self.add_interface("rstn_dbg_timer", is_global=True)
+        self.add_interface("req")
+        self.add_interface("rsp")
+        self.add_interface("pmc_apb")
+        self.add_interface("sys_apb")
+        self.add_interface("dbg_data")
+        self.add_interface("dbg_timestamp")
+        self.add_interface("sys_cti_event")
+        self.add_interface("noc_cti_event")
+        self.add_interface("sys_cti_channel")
+        self.add_interface("noc_cti_channel")
 
+        self.sys_side = StsTniuSysNode(id=f"{id}_sys", cfg=sys_cfg)
+        self.top_side = StsTniuTopNode(id=f"{id}_top", cfg=top_cfg, top=top_wrap)
 
-class StsTniu2Node(_BaseStsTniuNode):
-    def __init__(self, id: str = "tniu2"):
-        super().__init__(id=id, cfg=sts_demo_tniu2_config, top="sts_demo_tniu2_wrap")
+        # Connect sys↔top clock crossing — async bridge handles the crossing
+        connect(self.sys_side.clk, self.clk_src)
+        connect(self.sys_side.rst_n, self.rstn_src)
 
+        # Top-side clock/reset
+        connect(self.top_side.clk_src, self.clk_src)
+        connect(self.top_side.rstn_src, self.rstn_src)
+        connect(self.top_side.clk_dst, self.clk_dst)
+        connect(self.top_side.rstn_dst, self.rstn_dst)
+        connect(self.top_side.clk_dbg_timer, self.clk_dbg_timer)
+        connect(self.top_side.rstn_dbg_timer, self.rstn_dbg_timer)
+        connect(self.top_side.req, self.req)
+        connect(self.top_side.rsp, self.rsp)
+        connect(self.top_side.pmc_apb, self.pmc_apb)
+        connect(self.top_side.sys_apb, self.sys_apb)
+        connect(self.top_side.dbg_data, self.dbg_data)
+        connect(self.top_side.dbg_timestamp, self.dbg_timestamp)
+        connect(self.top_side.sys_cti_event, self.sys_cti_event)
+        connect(self.top_side.noc_cti_event, self.noc_cti_event)
+        connect(self.top_side.sys_cti_channel, self.sys_cti_channel)
+        connect(self.top_side.noc_cti_channel, self.noc_cti_channel)
 
-class StsTniu3Node(_BaseStsTniuNode):
-    def __init__(self, id: str = "tniu3"):
-        super().__init__(id=id, cfg=sts_demo_tniu3_config, top="sts_demo_tniu3_wrap")
-
-
-STS_TNIU_NODE_TYPES = (
-    StsTniu0Node,
-    StsTniu1Node,
-    StsTniu2Node,
-    StsTniu3Node,
-)
-
-
-def make_sts_tniu_node(tniu_idx: int, id: str | None = None) -> _BaseStsTniuNode:
-    node_type = STS_TNIU_NODE_TYPES[tniu_idx]
-    return node_type(id=id or f"tniu{tniu_idx}")
+        self.expose_unconnected_interfaces()

@@ -14,11 +14,19 @@ from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
 from topo_core.utils.networkHierOpt import connect
 
 from StsNode import (
-    StsDec4Node,
+    StsDecNode,
     StsIniuNode,
     StsReqRspAsyncBridgeMstNode,
     StsReqRspAsyncBridgeSlvNode,
-    make_sts_tniu_node,
+    StsTniuWrapNode,
+)
+from StsTemplate import (
+    camera_ss_tniu_sys_config,
+    camera_ss_tniu_top_side_config,
+    dspss_tniu_sys_config,
+    dspss_tniu_top_side_config,
+    vpu_ss_tniu_sys_config,
+    vpu_ss_tniu_top_side_config,
 )
 
 
@@ -47,10 +55,10 @@ class StsSocLogicTopo(UhdlWrapperNode):
         connect(self.aon_ss_iniu.clk_dst, self.clk_harden_dn_func)
         connect(self.aon_ss_iniu.rstn_dst, self.rst_harden_dn_func_n)
 
-        self.dec0 = StsDec4Node(id="dec0", slave_num=2)
-        self.dec1 = StsDec4Node(id="dec1", slave_num=2)
-        self.dec2 = StsDec4Node(id="dec2")
-        self.dec2_ext = StsDec4Node(id="dec2_ext", slave_num=3)
+        self.dec0 = StsDecNode(id="dec0", slave_num=2)
+        self.dec1 = StsDecNode(id="dec1", slave_num=2)
+        self.dec2 = StsDecNode(id="dec2")
+        self.dec2_ext = StsDecNode(id="dec2_ext", slave_num=3)
 
         self.harden_dn_async_bridge_slv = StsReqRspAsyncBridgeSlvNode(
             id="harden_dn_async_bridge_slv"
@@ -92,8 +100,35 @@ class StsSocLogicTopo(UhdlWrapperNode):
         self.harden_up_leaf_names = tuple(sorted(harden_up_leaf_names))
 
         self.tniu_nodes = {}
-        for idx, name in enumerate(leaf_names):
-            node = make_sts_tniu_node(idx % 4, id=f"{name}_tniu")
+        for name in leaf_names:
+            # Dispatch sys/top configs by SS type
+            if name == "vpu_ss":
+                top_cfg = vpu_ss_tniu_top_side_config
+                top_wrap = vpu_ss_tniu_top_side_config.top_wrap if hasattr(vpu_ss_tniu_top_side_config, 'top_wrap') else "sts_tniu_top"
+                node = StsTniuWrapNode(
+                    id=f"{name}_tniu",
+                    sys_cfg=vpu_ss_tniu_sys_config,
+                    top_cfg=top_cfg,
+                    top_wrap=top_wrap,
+                )
+            elif name == "camera_ss":
+                top_cfg = camera_ss_tniu_top_side_config
+                top_wrap = top_cfg.top_wrap if hasattr(top_cfg, 'top_wrap') else "sts_tniu_top"
+                node = StsTniuWrapNode(
+                    id=f"{name}_tniu",
+                    sys_cfg=camera_ss_tniu_sys_config,
+                    top_cfg=top_cfg,
+                    top_wrap=top_wrap,
+                )
+            else:
+                top_cfg = dspss_tniu_top_side_config
+                top_wrap = top_cfg.top_wrap if hasattr(top_cfg, 'top_wrap') else "sts_tniu_top"
+                node = StsTniuWrapNode(
+                    id=f"{name}_tniu",
+                    sys_cfg=dspss_tniu_sys_config,
+                    top_cfg=top_cfg,
+                    top_wrap=top_wrap,
+                )
             setattr(self, f"{name}_tniu", node)
             self.tniu_nodes[name] = node
             connect(node.clk_src, self.clk_sys)
@@ -107,12 +142,12 @@ class StsSocLogicTopo(UhdlWrapperNode):
             connect(node.clk_dbg_timer, self.clk_dbg_timer)
             connect(node.rstn_dbg_timer, self.rst_dbg_timer_n)
 
-        def connect_leaf(dec: StsDec4Node, slot: int, leaf_name: str):
+        def connect_leaf(dec: StsDecNode, slot: int, leaf_name: str):
             leaf = self.tniu_nodes[leaf_name]
             connect(getattr(dec, f"slv{slot}_req"), leaf.req)
             connect(getattr(dec, f"slv{slot}_rsp"), leaf.rsp)
 
-        def connect_dec(parent: StsDec4Node, slot: int, child: StsDec4Node):
+        def connect_dec(parent: StsDecNode, slot: int, child: StsDecNode):
             connect(getattr(parent, f"slv{slot}_req"), child.mst_req)
             connect(getattr(parent, f"slv{slot}_rsp"), child.mst_rsp)
 

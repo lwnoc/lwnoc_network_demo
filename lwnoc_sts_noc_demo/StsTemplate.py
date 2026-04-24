@@ -99,24 +99,14 @@ def _tniu_params(tniu_idx: int) -> dict[str, object]:
     }
 
 
-def _new_cfg(name: str, prefix: str, filelist_name: str, env_var: str) -> TemplateIPConfig:
-    return TemplateIPConfig(
-        name=name,
-        prefix=prefix,
-        filelist=str(FILELIST_DIR / filelist_name),
-        env_var=env_var,
-    )
+# ── INIU configs ────────────────────────────────────────────────────────────
 
-
-sts_demo_iniu_sys_config = _new_cfg(
-    name="iniu0_sys",
-    prefix="sts_demo_iniu_",
-    filelist_name="sts_demo_iniu_sys.f",   # sys-side RTL (all except sts_iniu_top.sv + wrap)
-    env_var="STS_INIU0_SYS_OUT_DIR",
+aon_ss_iniu_sys_config = TemplateIPConfig(
+    name="aon_ss_iniu_sys",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "iniu_filelist.f"),
+    env_var="AON_SS_INIU_SYS_OUT_DIR",
 )
-
-# Semantic aliases for SoC-level generators.
-aon_ss_iniu_sys_config = sts_demo_iniu_sys_config
 
 _iniu_params = {
     "STS_DEMO_NODE_NUM": STS_DEMO_NODE_NUM,
@@ -127,21 +117,29 @@ _iniu_params = {
     "STS_DEMO_ADDR_MAP_DEFAULT_TGT_ID": STS_DEMO_ADDR_MAP_DEFAULT_TGT_ID,
 }
 
-sts_demo_iniu_top_side_config = _new_cfg(
-    name="sts_demo_iniu_top_side",
-    prefix="sts_demo_iniu_",
-    filelist_name="sts_demo_iniu.f",
-    env_var="STS_DEMO_INIU_TOP_SIDE_OUT_DIR",
+aon_ss_iniu_top_side_config = TemplateIPConfig(
+    name="aon_ss_iniu_top_side",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "iniu_filelist.f"),
+    env_var="AON_SS_INIU_TOP_SIDE_OUT_DIR",
 )
-sts_demo_iniu_top_side_config.param_overrides = _iniu_params
+aon_ss_iniu_top_side_config.param_overrides = _iniu_params
+aon_ss_iniu_top_side_config.top_wrap = "sts_iniu_top"
 
-sts_demo_dec4_config = _new_cfg(
-    name="sts_demo_dec4",
-    prefix="sts_demo_dec4_",
-    filelist_name="sts_demo_dec4.f",
-    env_var="STS_DEMO_DEC4_OUT_DIR",
+# ── Decoder config ──────────────────────────────────────────────────────────
+
+soc_sts_dec4_config = TemplateIPConfig(
+    name="soc_sts_dec4",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
+    env_var="SOC_STS_DEC4_OUT_DIR",
 )
-sts_demo_dec4_config.param_overrides = {
+# Route table: MSB-first slot IDs for each slave port.
+# For a 4-input decoder these are [0x30, 0x20, 0x10, 0x00] (SoC address offsets).
+# The node slices from the right based on slave_num.
+soc_sts_dec4_config._route_base_table = [0x30, 0x20, 0x10, 0x00]
+soc_sts_dec4_config._route_mask_val = 0xB0
+soc_sts_dec4_config.param_overrides = {
     "STS_DEMO_DEC_SLAVE_NUM": STS_DEMO_DEC_SLAVE_NUM,
     "STS_DEMO_ROUTE_BASE": _sv_param(STS_DEMO_DEC_SLAVE_NUM * TGT_ID_WIDTH, STS_DEMO_ROUTE_BASE_INT),
     "STS_DEMO_ROUTE_MASK": _sv_param(STS_DEMO_DEC_SLAVE_NUM * TGT_ID_WIDTH, STS_DEMO_ROUTE_MASK_INT),
@@ -149,91 +147,85 @@ sts_demo_dec4_config.param_overrides = {
     "STS_DEMO_DBG_DATA_WIDTH": STS_DEMO_DBG_DATA_WIDTH,
 }
 
-# TNIU sys-side: one directory per consumer instance (hierarchical — sts_tniu_top instantiates sts_tniu_sys)
-sts_demo_tniu0_sys_config = _new_cfg(
-    name="tniu0_sys",
-    prefix="sts_demo_tniu0_",      # same prefix as top_side (hierarchical RTL)
-    filelist_name="sts_demo_tniu_sys.f",
-    env_var="STS_TNIU0_SYS_OUT_DIR",
+# ── TNIU sys-side configs (one per TNIU type, per soc_sts_noc_topo) ─────────
+# sts_tniu_top instantiates sts_tniu_sys hierarchically.
+
+vpu_ss_tniu_sys_config = TemplateIPConfig(
+    name="vpu_ss_tniu_sys",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    env_var="VPU_SS_TNIU_SYS_OUT_DIR",
 )
 
-vpu_ss_tniu_sys_config = sts_demo_tniu0_sys_config
-
-sts_demo_tniu1_sys_config = _new_cfg(
-    name="tniu1_sys",
-    prefix="sts_demo_tniu1_",
-    filelist_name="sts_demo_tniu_sys.f",
-    env_var="STS_TNIU1_SYS_OUT_DIR",
+camera_ss_tniu_sys_config = TemplateIPConfig(
+    name="camera_ss_tniu_sys",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    env_var="CAMERA_SS_TNIU_SYS_OUT_DIR",
 )
 
-camera_ss_tniu_sys_config = sts_demo_tniu1_sys_config
-
-sts_demo_tniu2_sys_config = _new_cfg(
-    name="tniu2_sys",
-    prefix="sts_demo_tniu2_",
-    filelist_name="sts_demo_tniu_sys.f",
-    env_var="STS_TNIU2_SYS_OUT_DIR",
+dspss_tniu_sys_config = TemplateIPConfig(
+    name="dspss_tniu_sys",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    env_var="DSPSS_TNIU_SYS_OUT_DIR",
 )
 
-dspss_tniu_sys_config = sts_demo_tniu2_sys_config
+# ── TNIU top-side configs ───────────────────────────────────────────────────
 
-sts_demo_tniu3_sys_config = _new_cfg(
-    name="tniu3_sys",
-    prefix="sts_demo_tniu3_",
-    filelist_name="sts_demo_tniu_sys.f",
-    env_var="STS_TNIU3_SYS_OUT_DIR",
+vpu_ss_tniu_top_side_config = TemplateIPConfig(
+    name="vpu_ss_tniu_top_side",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    env_var="VPU_SS_TNIU_TOP_SIDE_OUT_DIR",
 )
+vpu_ss_tniu_top_side_config.param_overrides = _tniu_params(0)
+vpu_ss_tniu_top_side_config.top_wrap = "sts_tniu_top"
 
-# TNIU top-side: one directory per consumer instance (build_logic dir = sts_demo_tniu<N>_top_side)
-sts_demo_tniu0_config = _new_cfg(
-    name="sts_demo_tniu0_top_side",
-    prefix="sts_demo_tniu0_",
-    filelist_name="sts_demo_tniu0.f",
-    env_var="STS_DEMO_TNIU0_OUT_DIR",
+camera_ss_tniu_top_side_config = TemplateIPConfig(
+    name="camera_ss_tniu_top_side",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    env_var="CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR",
 )
-sts_demo_tniu0_config.param_overrides = _tniu_params(0)
+camera_ss_tniu_top_side_config.param_overrides = _tniu_params(1)
+camera_ss_tniu_top_side_config.top_wrap = "sts_tniu_top"
 
-sts_demo_tniu1_config = _new_cfg(
-    name="sts_demo_tniu1_top_side",
-    prefix="sts_demo_tniu1_",
-    filelist_name="sts_demo_tniu1.f",
-    env_var="STS_DEMO_TNIU1_OUT_DIR",
+dspss_tniu_top_side_config = TemplateIPConfig(
+    name="dspss_tniu_top_side",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    env_var="DSPSS_TNIU_TOP_SIDE_OUT_DIR",
 )
-sts_demo_tniu1_config.param_overrides = _tniu_params(1)
+dspss_tniu_top_side_config.param_overrides = _tniu_params(2)
+dspss_tniu_top_side_config.top_wrap = "sts_tniu_top"
 
-sts_demo_tniu2_config = _new_cfg(
-    name="sts_demo_tniu2_top_side",
-    prefix="sts_demo_tniu2_",
-    filelist_name="sts_demo_tniu2.f",
-    env_var="STS_DEMO_TNIU2_OUT_DIR",
-)
-sts_demo_tniu2_config.param_overrides = _tniu_params(2)
+# ── Utility configs ─────────────────────────────────────────────────────────
 
-sts_demo_tniu3_config = _new_cfg(
-    name="sts_demo_tniu3_top_side",
-    prefix="sts_demo_tniu3_",
-    filelist_name="sts_demo_tniu3.f",
-    env_var="STS_DEMO_TNIU3_OUT_DIR",
-)
-sts_demo_tniu3_config.param_overrides = _tniu_params(3)
-
-sts_demo_req_rsp_async_config = _new_cfg(
-    name="sts_req_rsp_async",
-    prefix="sts_demo_req_rsp_async_",
-    filelist_name="sts_demo_req_rsp_async.f",
+soc_sts_req_rsp_async_config = TemplateIPConfig(
+    name="soc_sts_req_rsp_async",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
     env_var="STS_REQ_RSP_ASYNC_OUT_DIR",
 )
 
-sts_demo_link_pipe_config = _new_cfg(
-    name="sts_demo_link_pipe",
-    prefix="sts_demo_link_pipe_",
-    filelist_name="sts_demo_link_pipe.f",
-    env_var="STS_DEMO_LINK_PIPE_OUT_DIR",
+soc_sts_link_pipe_config = TemplateIPConfig(
+    name="soc_sts_link_pipe",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
+    env_var="SOC_STS_LINK_PIPE_OUT_DIR",
 )
 
-sts_demo_link_buf_config = _new_cfg(
-    name="sts_demo_link_buf",
-    prefix="sts_demo_link_buf_",
-    filelist_name="sts_demo_link_buf.f",
-    env_var="STS_DEMO_LINK_BUF_OUT_DIR",
+soc_sts_link_buf_config = TemplateIPConfig(
+    name="soc_sts_link_buf",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
+    env_var="SOC_STS_LINK_BUF_OUT_DIR",
+)
+
+# Raw async config used by StsReqRspAsyncBridgeSlvNode / StsReqRspAsyncBridgeMstNode
+soc_sts_req_rsp_async_raw_config = TemplateIPConfig(
+    name="soc_sts_req_rsp_async_raw",
+    filelist=soc_sts_req_rsp_async_config.filelist,
+    prefix="",
 )
