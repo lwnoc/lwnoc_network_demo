@@ -44,5 +44,5 @@ novas.*
 # OS
 .DS_Store
 Thumbs.db
-lwnoc_topo
+lwnoc_topo/
 run_logs/
