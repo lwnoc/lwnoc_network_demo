@@ -1,4 +1,0 @@
-$CAMERA_INIU_SYS_DIR/camera_dti_pr_iniu_define.sv
-$CAMERA_INIU_SYS_DIR/camera_dti_iniu_pack.sv
-$CAMERA_INIU_SYS_DIR/camera_dti_pr_iniu_async_sys_side.sv
-$CAMERA_INIU_SYS_DIR/camera_dti_pr_iniu_undef.sv

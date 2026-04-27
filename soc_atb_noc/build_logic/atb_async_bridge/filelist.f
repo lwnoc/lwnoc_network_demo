@@ -1,3 +1,0 @@
-$ATB_ASYNC_BRIDGE_DIR/network_atb_slv.sv
-$ATB_ASYNC_BRIDGE_DIR/network_atb_mst.sv
-$ATB_ASYNC_BRIDGE_DIR/atb_async_bridge_top.sv

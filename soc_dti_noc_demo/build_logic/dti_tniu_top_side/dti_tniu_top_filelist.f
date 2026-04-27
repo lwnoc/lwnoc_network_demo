@@ -1,4 +1,0 @@
-$DTI_TNIU_TOP_DIR/dti_tniu_top_dti_tniu_define.sv
-$DTI_TNIU_TOP_DIR/dti_tniu_top_dti_tniu_pack.sv
-$DTI_TNIU_TOP_DIR/dti_tniu_top_dti_tniu_async_top_side.sv
-$DTI_TNIU_TOP_DIR/dti_tniu_top_dti_tniu_undef.sv

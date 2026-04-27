@@ -1,4 +1,0 @@
-$USB_UFS_INIU_SYS_DIR/usb_ufs_dti_pr_iniu_define.sv
-$USB_UFS_INIU_SYS_DIR/usb_ufs_dti_iniu_pack.sv
-$USB_UFS_INIU_SYS_DIR/usb_ufs_dti_pr_iniu_async_sys_side.sv
-$USB_UFS_INIU_SYS_DIR/usb_ufs_dti_pr_iniu_undef.sv

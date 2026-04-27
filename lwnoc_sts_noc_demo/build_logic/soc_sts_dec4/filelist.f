@@ -1,7 +1,0 @@
-$SOC_STS_DEC4_OUT_DIR/sts_iniu_define.sv
-$SOC_STS_DEC4_OUT_DIR/lwnoc_sts_pack.sv
-$SOC_STS_DEC4_OUT_DIR/sts_async_bridge_slv.sv
-$SOC_STS_DEC4_OUT_DIR/sts_async_bridge_mst.sv
-$SOC_STS_DEC4_OUT_DIR/sts_link_pipe.sv
-$SOC_STS_DEC4_OUT_DIR/sts_link_buf.sv
-$SOC_STS_DEC4_OUT_DIR/sts_noc_dec_node.sv

@@ -1,1 +1,0 @@
-`define intr_iniu_top_ASYNC_FIFO_DEPTH 16

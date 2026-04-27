@@ -1,4 +1,0 @@
-$DTI_REQ_RSP_ASYNC_OUT_DIR/dti_pr_iniu_define.sv
-$DTI_REQ_RSP_ASYNC_OUT_DIR/dti_async_bridge_slv.sv
-$DTI_REQ_RSP_ASYNC_OUT_DIR/dti_async_bridge_mst.sv
-$DTI_REQ_RSP_ASYNC_OUT_DIR/dti_pr_iniu_undef.sv

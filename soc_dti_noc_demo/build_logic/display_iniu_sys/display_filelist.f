@@ -1,4 +1,0 @@
-$DISPLAY_INIU_SYS_DIR/display_dti_pr_iniu_define.sv
-$DISPLAY_INIU_SYS_DIR/display_dti_iniu_pack.sv
-$DISPLAY_INIU_SYS_DIR/display_dti_pr_iniu_async_sys_side.sv
-$DISPLAY_INIU_SYS_DIR/display_dti_pr_iniu_undef.sv

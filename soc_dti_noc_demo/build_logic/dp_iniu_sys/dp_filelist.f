@@ -1,4 +1,0 @@
-$DP_INIU_SYS_DIR/dp_dti_pr_iniu_define.sv
-$DP_INIU_SYS_DIR/dp_dti_iniu_pack.sv
-$DP_INIU_SYS_DIR/dp_dti_pr_iniu_async_sys_side.sv
-$DP_INIU_SYS_DIR/dp_dti_pr_iniu_undef.sv

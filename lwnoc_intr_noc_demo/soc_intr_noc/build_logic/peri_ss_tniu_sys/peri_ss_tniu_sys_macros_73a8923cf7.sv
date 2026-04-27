@@ -1,1 +1,0 @@
-`define peri_ss_tniu_ASYNC_FIFO_DEPTH 10

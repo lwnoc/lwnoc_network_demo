@@ -1,4 +1,0 @@
-$GPU_INIU_SYS_DIR/gpu_dti_pr_iniu_define.sv
-$GPU_INIU_SYS_DIR/gpu_dti_iniu_pack.sv
-$GPU_INIU_SYS_DIR/gpu_dti_pr_iniu_async_sys_side.sv
-$GPU_INIU_SYS_DIR/gpu_dti_pr_iniu_undef.sv
