@@ -45,5 +45,7 @@ novas.*
 .DS_Store
 Thumbs.db
 lwnoc_topo/
-**/build_logic/
 run_logs/
+
+# Generated build artifacts (keep only scripts + environment)
+**/build_logic/
