@@ -58,7 +58,6 @@ module debug_ss_iniu_interrupt_iniu_lut
     logic [INTERRUPT_NUM_WIDTH-1        :0] read_req_addr;
     logic [$bits(event_apb_arb_pkg)-1   :0] read_req_sideband_vec;
     logic [$bits(event_apb_arb_pkg)-1   :0] read_resp_sideband_vec;
-    logic                                   read_req_vld;
 
     event_apb_arb_pkg                       read_resp_sideband;
     event_apb_arb_pkg                       event_arb_pld;

@@ -7,7 +7,7 @@ module display_ss_tniu_interrupt_tniu_async_sys_side
     parameter integer unsigned  INTERRUPT_NUM       = 4096,
     localparam integer unsigned INTERRUPT_NUM_WIDTH = $clog2(INTERRUPT_NUM),
     parameter integer unsigned  TIME_OUT_WIDTH      = 10,
-    parameter integer unsigned  ASYNC_FIFO_DEPTH    = 10
+    parameter integer unsigned  ASYNC_FIFO_DEPTH    = 16
 
 )(
     input  logic                                    clk                             ,

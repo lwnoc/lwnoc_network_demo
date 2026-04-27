@@ -1,0 +1,567 @@
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'atb_soc_topo' (14 subnodes, 137 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'dsp_ss0_node' (2 subnodes, 12 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'sys_side' in wrapper 'dsp_ss0_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'top_side' in wrapper 'dsp_ss0_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_sys_clk_atb_s' for interface 'clk_sys'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_sys_n_rstn_atb_s' for interface 'rst_sys_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_noc' for interface 'clk_noc'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_noc_n' for interface 'rst_noc_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_s_chan_porting_s_afready' for interface 'dsp_ss0_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_s_chan_porting_s_afvalid' for interface 'dsp_ss0_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_s_chan_porting_s_atbytes' for interface 'dsp_ss0_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_s_chan_porting_s_atdata' for interface 'dsp_ss0_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_s_chan_porting_s_atid' for interface 'dsp_ss0_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_s_chan_porting_s_atready' for interface 'dsp_ss0_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_s_chan_porting_s_atvalid' for interface 'dsp_ss0_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_s_chan_porting_s_atwakeup' for interface 'dsp_ss0_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_s_chan_porting_s_syncreq' for interface 'dsp_ss0_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_flush_req_porting_flush_req' for interface 'dsp_ss0_sys_node.flush_req_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_pchnl_ctrl_porting_paccept' for interface 'dsp_ss0_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_pchnl_ctrl_porting_pactive' for interface 'dsp_ss0_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_pchnl_ctrl_porting_pdeny' for interface 'dsp_ss0_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_pchnl_ctrl_porting_preq' for interface 'dsp_ss0_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_pchnl_ctrl_porting_pstate' for interface 'dsp_ss0_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_syncreq_level_porting_syncreq_level' for interface 'dsp_ss0_sys_node.syncreq_level_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_sys_node_timeout_val_porting_timeout_val' for interface 'dsp_ss0_sys_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_m_chan_porting_m_afready' for interface 'dsp_ss0_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_m_chan_porting_m_afvalid' for interface 'dsp_ss0_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_m_chan_porting_m_atbytes' for interface 'dsp_ss0_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_m_chan_porting_m_atdata' for interface 'dsp_ss0_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_m_chan_porting_m_atid' for interface 'dsp_ss0_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_m_chan_porting_m_atready' for interface 'dsp_ss0_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_m_chan_porting_m_atvalid' for interface 'dsp_ss0_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_m_chan_porting_m_atwakeup' for interface 'dsp_ss0_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_m_chan_porting_m_syncreq' for interface 'dsp_ss0_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_sync_ctrl_porting_flush_req_level' for interface 'dsp_ss0_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_sync_ctrl_porting_syncreq_level' for interface 'dsp_ss0_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss0_top_node_timeout_val_porting_timeout_val' for interface 'dsp_ss0_top_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss0_sys_node_dsp_ss0_top_node_async_fifo_async_fifo_5' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss0_sys_node_dsp_ss0_top_node_async_fifo_async_fifo_5' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.async_fifo: IO=pld_sync, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.async_fifo: IO=pld_sync, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss0_sys_node_dsp_ss0_top_node_lp_rx_lp_tx_7' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss0_sys_node_dsp_ss0_top_node_lp_rx_lp_tx_7' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_tx: IO=lw_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_rx: IO=lwnoc_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss0_sys_node_dsp_ss0_top_node_lp_tx_lp_rx_6' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss0_sys_node_dsp_ss0_top_node_lp_tx_lp_rx_6' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_tx: IO=lwnoc_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_rx: IO=lw_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss0_sys_node_dsp_ss0_top_node_lp_afifo_rx_lp_afifo_tx_9' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss0_sys_node_dsp_ss0_top_node_lp_afifo_rx_lp_afifo_tx_9' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_tx: IO=afifo_mst_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_rx: IO=afifo_slv_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss0_sys_node_dsp_ss0_top_node_lp_afifo_tx_lp_afifo_rx_8' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss0_sys_node_dsp_ss0_top_node_lp_afifo_tx_lp_afifo_rx_8' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_rx: IO=afifo_mst_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_tx: IO=afifo_slv_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Completed UHDL build for wrapper 'dsp_ss0_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'dsp_ss0_node' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'dsp_ss1_node' (2 subnodes, 12 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'sys_side' in wrapper 'dsp_ss1_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'top_side' in wrapper 'dsp_ss1_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_sys_clk_atb_s' for interface 'clk_sys'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_sys_n_rstn_atb_s' for interface 'rst_sys_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_noc' for interface 'clk_noc'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_noc_n' for interface 'rst_noc_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_s_chan_porting_s_afready' for interface 'dsp_ss1_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_s_chan_porting_s_afvalid' for interface 'dsp_ss1_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_s_chan_porting_s_atbytes' for interface 'dsp_ss1_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_s_chan_porting_s_atdata' for interface 'dsp_ss1_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_s_chan_porting_s_atid' for interface 'dsp_ss1_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_s_chan_porting_s_atready' for interface 'dsp_ss1_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_s_chan_porting_s_atvalid' for interface 'dsp_ss1_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_s_chan_porting_s_atwakeup' for interface 'dsp_ss1_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_s_chan_porting_s_syncreq' for interface 'dsp_ss1_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_flush_req_porting_flush_req' for interface 'dsp_ss1_sys_node.flush_req_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_pchnl_ctrl_porting_paccept' for interface 'dsp_ss1_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_pchnl_ctrl_porting_pactive' for interface 'dsp_ss1_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_pchnl_ctrl_porting_pdeny' for interface 'dsp_ss1_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_pchnl_ctrl_porting_preq' for interface 'dsp_ss1_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_pchnl_ctrl_porting_pstate' for interface 'dsp_ss1_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_syncreq_level_porting_syncreq_level' for interface 'dsp_ss1_sys_node.syncreq_level_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_sys_node_timeout_val_porting_timeout_val' for interface 'dsp_ss1_sys_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_m_chan_porting_m_afready' for interface 'dsp_ss1_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_m_chan_porting_m_afvalid' for interface 'dsp_ss1_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_m_chan_porting_m_atbytes' for interface 'dsp_ss1_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_m_chan_porting_m_atdata' for interface 'dsp_ss1_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_m_chan_porting_m_atid' for interface 'dsp_ss1_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_m_chan_porting_m_atready' for interface 'dsp_ss1_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_m_chan_porting_m_atvalid' for interface 'dsp_ss1_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_m_chan_porting_m_atwakeup' for interface 'dsp_ss1_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_m_chan_porting_m_syncreq' for interface 'dsp_ss1_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_sync_ctrl_porting_flush_req_level' for interface 'dsp_ss1_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_sync_ctrl_porting_syncreq_level' for interface 'dsp_ss1_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss1_top_node_timeout_val_porting_timeout_val' for interface 'dsp_ss1_top_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss1_sys_node_dsp_ss1_top_node_async_fifo_async_fifo_22' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss1_sys_node_dsp_ss1_top_node_async_fifo_async_fifo_22' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.async_fifo: IO=pld_sync, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.async_fifo: IO=pld_sync, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss1_sys_node_dsp_ss1_top_node_lp_rx_lp_tx_24' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss1_sys_node_dsp_ss1_top_node_lp_rx_lp_tx_24' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_tx: IO=lw_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_rx: IO=lwnoc_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss1_sys_node_dsp_ss1_top_node_lp_tx_lp_rx_23' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss1_sys_node_dsp_ss1_top_node_lp_tx_lp_rx_23' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_tx: IO=lwnoc_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_rx: IO=lw_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss1_sys_node_dsp_ss1_top_node_lp_afifo_rx_lp_afifo_tx_26' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss1_sys_node_dsp_ss1_top_node_lp_afifo_rx_lp_afifo_tx_26' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_rx: IO=afifo_slv_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_tx: IO=afifo_mst_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss1_sys_node_dsp_ss1_top_node_lp_afifo_tx_lp_afifo_rx_25' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss1_sys_node_dsp_ss1_top_node_lp_afifo_tx_lp_afifo_rx_25' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_rx: IO=afifo_mst_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_tx: IO=afifo_slv_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Completed UHDL build for wrapper 'dsp_ss1_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'dsp_ss1_node' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'dsp_ss2_node' (2 subnodes, 12 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'sys_side' in wrapper 'dsp_ss2_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'top_side' in wrapper 'dsp_ss2_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_sys_clk_atb_s' for interface 'clk_sys'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_sys_n_rstn_atb_s' for interface 'rst_sys_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_noc' for interface 'clk_noc'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_noc_n' for interface 'rst_noc_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_s_chan_porting_s_afready' for interface 'dsp_ss2_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_s_chan_porting_s_afvalid' for interface 'dsp_ss2_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_s_chan_porting_s_atbytes' for interface 'dsp_ss2_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_s_chan_porting_s_atdata' for interface 'dsp_ss2_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_s_chan_porting_s_atid' for interface 'dsp_ss2_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_s_chan_porting_s_atready' for interface 'dsp_ss2_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_s_chan_porting_s_atvalid' for interface 'dsp_ss2_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_s_chan_porting_s_atwakeup' for interface 'dsp_ss2_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_s_chan_porting_s_syncreq' for interface 'dsp_ss2_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_flush_req_porting_flush_req' for interface 'dsp_ss2_sys_node.flush_req_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_pchnl_ctrl_porting_paccept' for interface 'dsp_ss2_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_pchnl_ctrl_porting_pactive' for interface 'dsp_ss2_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_pchnl_ctrl_porting_pdeny' for interface 'dsp_ss2_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_pchnl_ctrl_porting_preq' for interface 'dsp_ss2_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_pchnl_ctrl_porting_pstate' for interface 'dsp_ss2_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_syncreq_level_porting_syncreq_level' for interface 'dsp_ss2_sys_node.syncreq_level_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_sys_node_timeout_val_porting_timeout_val' for interface 'dsp_ss2_sys_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_m_chan_porting_m_afready' for interface 'dsp_ss2_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_m_chan_porting_m_afvalid' for interface 'dsp_ss2_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_m_chan_porting_m_atbytes' for interface 'dsp_ss2_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_m_chan_porting_m_atdata' for interface 'dsp_ss2_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_m_chan_porting_m_atid' for interface 'dsp_ss2_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_m_chan_porting_m_atready' for interface 'dsp_ss2_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_m_chan_porting_m_atvalid' for interface 'dsp_ss2_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_m_chan_porting_m_atwakeup' for interface 'dsp_ss2_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_m_chan_porting_m_syncreq' for interface 'dsp_ss2_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_sync_ctrl_porting_flush_req_level' for interface 'dsp_ss2_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_sync_ctrl_porting_syncreq_level' for interface 'dsp_ss2_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss2_top_node_timeout_val_porting_timeout_val' for interface 'dsp_ss2_top_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss2_sys_node_dsp_ss2_top_node_async_fifo_async_fifo_39' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss2_sys_node_dsp_ss2_top_node_async_fifo_async_fifo_39' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.async_fifo: IO=pld_sync, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.async_fifo: IO=pld_sync, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss2_sys_node_dsp_ss2_top_node_lp_rx_lp_tx_41' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss2_sys_node_dsp_ss2_top_node_lp_rx_lp_tx_41' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_rx: IO=lwnoc_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_tx: IO=lw_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss2_sys_node_dsp_ss2_top_node_lp_tx_lp_rx_40' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss2_sys_node_dsp_ss2_top_node_lp_tx_lp_rx_40' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_tx: IO=lwnoc_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_rx: IO=lw_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss2_sys_node_dsp_ss2_top_node_lp_afifo_rx_lp_afifo_tx_43' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss2_sys_node_dsp_ss2_top_node_lp_afifo_rx_lp_afifo_tx_43' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_tx: IO=afifo_mst_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_rx: IO=afifo_slv_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss2_sys_node_dsp_ss2_top_node_lp_afifo_tx_lp_afifo_rx_42' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss2_sys_node_dsp_ss2_top_node_lp_afifo_tx_lp_afifo_rx_42' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_tx: IO=afifo_slv_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_rx: IO=afifo_mst_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Completed UHDL build for wrapper 'dsp_ss2_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'dsp_ss2_node' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'dsp_ss3_node' (2 subnodes, 12 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'sys_side' in wrapper 'dsp_ss3_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'top_side' in wrapper 'dsp_ss3_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_sys_clk_atb_s' for interface 'clk_sys'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_sys_n_rstn_atb_s' for interface 'rst_sys_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_noc' for interface 'clk_noc'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_noc_n' for interface 'rst_noc_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_s_chan_porting_s_afready' for interface 'dsp_ss3_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_s_chan_porting_s_afvalid' for interface 'dsp_ss3_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_s_chan_porting_s_atbytes' for interface 'dsp_ss3_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_s_chan_porting_s_atdata' for interface 'dsp_ss3_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_s_chan_porting_s_atid' for interface 'dsp_ss3_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_s_chan_porting_s_atready' for interface 'dsp_ss3_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_s_chan_porting_s_atvalid' for interface 'dsp_ss3_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_s_chan_porting_s_atwakeup' for interface 'dsp_ss3_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_s_chan_porting_s_syncreq' for interface 'dsp_ss3_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_flush_req_porting_flush_req' for interface 'dsp_ss3_sys_node.flush_req_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_pchnl_ctrl_porting_paccept' for interface 'dsp_ss3_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_pchnl_ctrl_porting_pactive' for interface 'dsp_ss3_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_pchnl_ctrl_porting_pdeny' for interface 'dsp_ss3_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_pchnl_ctrl_porting_preq' for interface 'dsp_ss3_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_pchnl_ctrl_porting_pstate' for interface 'dsp_ss3_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_syncreq_level_porting_syncreq_level' for interface 'dsp_ss3_sys_node.syncreq_level_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_sys_node_timeout_val_porting_timeout_val' for interface 'dsp_ss3_sys_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_m_chan_porting_m_afready' for interface 'dsp_ss3_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_m_chan_porting_m_afvalid' for interface 'dsp_ss3_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_m_chan_porting_m_atbytes' for interface 'dsp_ss3_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_m_chan_porting_m_atdata' for interface 'dsp_ss3_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_m_chan_porting_m_atid' for interface 'dsp_ss3_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_m_chan_porting_m_atready' for interface 'dsp_ss3_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_m_chan_porting_m_atvalid' for interface 'dsp_ss3_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_m_chan_porting_m_atwakeup' for interface 'dsp_ss3_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_m_chan_porting_m_syncreq' for interface 'dsp_ss3_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_sync_ctrl_porting_flush_req_level' for interface 'dsp_ss3_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_sync_ctrl_porting_syncreq_level' for interface 'dsp_ss3_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss3_top_node_timeout_val_porting_timeout_val' for interface 'dsp_ss3_top_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss3_sys_node_dsp_ss3_top_node_async_fifo_async_fifo_56' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss3_sys_node_dsp_ss3_top_node_async_fifo_async_fifo_56' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.async_fifo: IO=pld_sync, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.async_fifo: IO=pld_sync, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss3_sys_node_dsp_ss3_top_node_lp_rx_lp_tx_58' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss3_sys_node_dsp_ss3_top_node_lp_rx_lp_tx_58' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_tx: IO=lw_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_rx: IO=lwnoc_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss3_sys_node_dsp_ss3_top_node_lp_tx_lp_rx_57' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss3_sys_node_dsp_ss3_top_node_lp_tx_lp_rx_57' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_tx: IO=lwnoc_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_rx: IO=lw_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss3_sys_node_dsp_ss3_top_node_lp_afifo_rx_lp_afifo_tx_60' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss3_sys_node_dsp_ss3_top_node_lp_afifo_rx_lp_afifo_tx_60' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_rx: IO=afifo_slv_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_tx: IO=afifo_mst_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss3_sys_node_dsp_ss3_top_node_lp_afifo_tx_lp_afifo_rx_59' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss3_sys_node_dsp_ss3_top_node_lp_afifo_tx_lp_afifo_rx_59' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_rx: IO=afifo_mst_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_tx: IO=afifo_slv_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Completed UHDL build for wrapper 'dsp_ss3_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'dsp_ss3_node' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'dsp_ss4_node' (2 subnodes, 12 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'sys_side' in wrapper 'dsp_ss4_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'top_side' in wrapper 'dsp_ss4_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_sys_clk_atb_s' for interface 'clk_sys'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_sys_n_rstn_atb_s' for interface 'rst_sys_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_noc' for interface 'clk_noc'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_noc_n' for interface 'rst_noc_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_s_chan_porting_s_afready' for interface 'dsp_ss4_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_s_chan_porting_s_afvalid' for interface 'dsp_ss4_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_s_chan_porting_s_atbytes' for interface 'dsp_ss4_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_s_chan_porting_s_atdata' for interface 'dsp_ss4_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_s_chan_porting_s_atid' for interface 'dsp_ss4_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_s_chan_porting_s_atready' for interface 'dsp_ss4_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_s_chan_porting_s_atvalid' for interface 'dsp_ss4_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_s_chan_porting_s_atwakeup' for interface 'dsp_ss4_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_s_chan_porting_s_syncreq' for interface 'dsp_ss4_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_flush_req_porting_flush_req' for interface 'dsp_ss4_sys_node.flush_req_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_pchnl_ctrl_porting_paccept' for interface 'dsp_ss4_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_pchnl_ctrl_porting_pactive' for interface 'dsp_ss4_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_pchnl_ctrl_porting_pdeny' for interface 'dsp_ss4_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_pchnl_ctrl_porting_preq' for interface 'dsp_ss4_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_pchnl_ctrl_porting_pstate' for interface 'dsp_ss4_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_syncreq_level_porting_syncreq_level' for interface 'dsp_ss4_sys_node.syncreq_level_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_sys_node_timeout_val_porting_timeout_val' for interface 'dsp_ss4_sys_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_m_chan_porting_m_afready' for interface 'dsp_ss4_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_m_chan_porting_m_afvalid' for interface 'dsp_ss4_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_m_chan_porting_m_atbytes' for interface 'dsp_ss4_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_m_chan_porting_m_atdata' for interface 'dsp_ss4_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_m_chan_porting_m_atid' for interface 'dsp_ss4_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_m_chan_porting_m_atready' for interface 'dsp_ss4_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_m_chan_porting_m_atvalid' for interface 'dsp_ss4_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_m_chan_porting_m_atwakeup' for interface 'dsp_ss4_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_m_chan_porting_m_syncreq' for interface 'dsp_ss4_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_sync_ctrl_porting_flush_req_level' for interface 'dsp_ss4_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_sync_ctrl_porting_syncreq_level' for interface 'dsp_ss4_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss4_top_node_timeout_val_porting_timeout_val' for interface 'dsp_ss4_top_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss4_sys_node_dsp_ss4_top_node_async_fifo_async_fifo_73' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss4_sys_node_dsp_ss4_top_node_async_fifo_async_fifo_73' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.async_fifo: IO=pld_sync, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.async_fifo: IO=pld_sync, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss4_sys_node_dsp_ss4_top_node_lp_rx_lp_tx_75' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss4_sys_node_dsp_ss4_top_node_lp_rx_lp_tx_75' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_rx: IO=lwnoc_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_tx: IO=lw_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss4_sys_node_dsp_ss4_top_node_lp_tx_lp_rx_74' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss4_sys_node_dsp_ss4_top_node_lp_tx_lp_rx_74' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_tx: IO=lwnoc_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_rx: IO=lw_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss4_sys_node_dsp_ss4_top_node_lp_afifo_rx_lp_afifo_tx_77' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss4_sys_node_dsp_ss4_top_node_lp_afifo_rx_lp_afifo_tx_77' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_tx: IO=afifo_mst_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_rx: IO=afifo_slv_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss4_sys_node_dsp_ss4_top_node_lp_afifo_tx_lp_afifo_rx_76' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss4_sys_node_dsp_ss4_top_node_lp_afifo_tx_lp_afifo_rx_76' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_tx: IO=afifo_slv_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_rx: IO=afifo_mst_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Completed UHDL build for wrapper 'dsp_ss4_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'dsp_ss4_node' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'dsp_ss5_node' (2 subnodes, 12 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'sys_side' in wrapper 'dsp_ss5_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'top_side' in wrapper 'dsp_ss5_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_sys_clk_atb_s' for interface 'clk_sys'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_sys_n_rstn_atb_s' for interface 'rst_sys_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_noc' for interface 'clk_noc'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_noc_n' for interface 'rst_noc_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_s_chan_porting_s_afready' for interface 'dsp_ss5_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_s_chan_porting_s_afvalid' for interface 'dsp_ss5_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_s_chan_porting_s_atbytes' for interface 'dsp_ss5_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_s_chan_porting_s_atdata' for interface 'dsp_ss5_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_s_chan_porting_s_atid' for interface 'dsp_ss5_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_s_chan_porting_s_atready' for interface 'dsp_ss5_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_s_chan_porting_s_atvalid' for interface 'dsp_ss5_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_s_chan_porting_s_atwakeup' for interface 'dsp_ss5_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_s_chan_porting_s_syncreq' for interface 'dsp_ss5_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_flush_req_porting_flush_req' for interface 'dsp_ss5_sys_node.flush_req_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_pchnl_ctrl_porting_paccept' for interface 'dsp_ss5_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_pchnl_ctrl_porting_pactive' for interface 'dsp_ss5_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_pchnl_ctrl_porting_pdeny' for interface 'dsp_ss5_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_pchnl_ctrl_porting_preq' for interface 'dsp_ss5_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_pchnl_ctrl_porting_pstate' for interface 'dsp_ss5_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_syncreq_level_porting_syncreq_level' for interface 'dsp_ss5_sys_node.syncreq_level_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_sys_node_timeout_val_porting_timeout_val' for interface 'dsp_ss5_sys_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_m_chan_porting_m_afready' for interface 'dsp_ss5_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_m_chan_porting_m_afvalid' for interface 'dsp_ss5_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_m_chan_porting_m_atbytes' for interface 'dsp_ss5_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_m_chan_porting_m_atdata' for interface 'dsp_ss5_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_m_chan_porting_m_atid' for interface 'dsp_ss5_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_m_chan_porting_m_atready' for interface 'dsp_ss5_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_m_chan_porting_m_atvalid' for interface 'dsp_ss5_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_m_chan_porting_m_atwakeup' for interface 'dsp_ss5_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_m_chan_porting_m_syncreq' for interface 'dsp_ss5_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_sync_ctrl_porting_flush_req_level' for interface 'dsp_ss5_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_sync_ctrl_porting_syncreq_level' for interface 'dsp_ss5_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'dsp_ss5_top_node_timeout_val_porting_timeout_val' for interface 'dsp_ss5_top_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss5_sys_node_dsp_ss5_top_node_async_fifo_async_fifo_90' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss5_sys_node_dsp_ss5_top_node_async_fifo_async_fifo_90' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.async_fifo: IO=pld_sync, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.async_fifo: IO=pld_sync, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss5_sys_node_dsp_ss5_top_node_lp_rx_lp_tx_92' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss5_sys_node_dsp_ss5_top_node_lp_rx_lp_tx_92' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_rx: IO=lwnoc_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_tx: IO=lw_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss5_sys_node_dsp_ss5_top_node_lp_tx_lp_rx_91' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss5_sys_node_dsp_ss5_top_node_lp_tx_lp_rx_91' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_tx: IO=lwnoc_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_rx: IO=lw_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss5_sys_node_dsp_ss5_top_node_lp_afifo_rx_lp_afifo_tx_94' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss5_sys_node_dsp_ss5_top_node_lp_afifo_rx_lp_afifo_tx_94' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_rx: IO=afifo_slv_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_tx: IO=afifo_mst_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'dsp_ss5_sys_node_dsp_ss5_top_node_lp_afifo_tx_lp_afifo_rx_93' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'dsp_ss5_sys_node_dsp_ss5_top_node_lp_afifo_tx_lp_afifo_rx_93' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_rx: IO=afifo_mst_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_tx: IO=afifo_slv_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Completed UHDL build for wrapper 'dsp_ss5_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'dsp_ss5_node' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'camera_ss_node' (2 subnodes, 12 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'sys_side' in wrapper 'camera_ss_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'top_side' in wrapper 'camera_ss_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_sys_clk_atb_s' for interface 'clk_sys'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_sys_n_rstn_atb_s' for interface 'rst_sys_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_noc' for interface 'clk_noc'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_noc_n' for interface 'rst_noc_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_s_chan_porting_s_afready' for interface 'camera_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_s_chan_porting_s_afvalid' for interface 'camera_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_s_chan_porting_s_atbytes' for interface 'camera_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_s_chan_porting_s_atdata' for interface 'camera_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_s_chan_porting_s_atid' for interface 'camera_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_s_chan_porting_s_atready' for interface 'camera_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_s_chan_porting_s_atvalid' for interface 'camera_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_s_chan_porting_s_atwakeup' for interface 'camera_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_s_chan_porting_s_syncreq' for interface 'camera_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_flush_req_porting_flush_req' for interface 'camera_ss_sys_node.flush_req_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_pchnl_ctrl_porting_paccept' for interface 'camera_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_pchnl_ctrl_porting_pactive' for interface 'camera_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_pchnl_ctrl_porting_pdeny' for interface 'camera_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_pchnl_ctrl_porting_preq' for interface 'camera_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_pchnl_ctrl_porting_pstate' for interface 'camera_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_syncreq_level_porting_syncreq_level' for interface 'camera_ss_sys_node.syncreq_level_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_sys_node_timeout_val_porting_timeout_val' for interface 'camera_ss_sys_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_m_chan_porting_m_afready' for interface 'camera_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_m_chan_porting_m_afvalid' for interface 'camera_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_m_chan_porting_m_atbytes' for interface 'camera_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_m_chan_porting_m_atdata' for interface 'camera_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_m_chan_porting_m_atid' for interface 'camera_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_m_chan_porting_m_atready' for interface 'camera_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_m_chan_porting_m_atvalid' for interface 'camera_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_m_chan_porting_m_atwakeup' for interface 'camera_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_m_chan_porting_m_syncreq' for interface 'camera_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_sync_ctrl_porting_flush_req_level' for interface 'camera_ss_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_sync_ctrl_porting_syncreq_level' for interface 'camera_ss_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'camera_ss_top_node_timeout_val_porting_timeout_val' for interface 'camera_ss_top_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'camera_ss_sys_node_camera_ss_top_node_async_fifo_async_fifo_107' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'camera_ss_sys_node_camera_ss_top_node_async_fifo_async_fifo_107' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.async_fifo: IO=pld_sync, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.async_fifo: IO=pld_sync, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'camera_ss_sys_node_camera_ss_top_node_lp_rx_lp_tx_109' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'camera_ss_sys_node_camera_ss_top_node_lp_rx_lp_tx_109' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_rx: IO=lwnoc_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_tx: IO=lw_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'camera_ss_sys_node_camera_ss_top_node_lp_tx_lp_rx_108' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'camera_ss_sys_node_camera_ss_top_node_lp_tx_lp_rx_108' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_rx: IO=lw_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_tx: IO=lwnoc_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'camera_ss_sys_node_camera_ss_top_node_lp_afifo_rx_lp_afifo_tx_111' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'camera_ss_sys_node_camera_ss_top_node_lp_afifo_rx_lp_afifo_tx_111' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_rx: IO=afifo_slv_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_tx: IO=afifo_mst_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'camera_ss_sys_node_camera_ss_top_node_lp_afifo_tx_lp_afifo_rx_110' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'camera_ss_sys_node_camera_ss_top_node_lp_afifo_tx_lp_afifo_rx_110' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_rx: IO=afifo_mst_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_tx: IO=afifo_slv_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Completed UHDL build for wrapper 'camera_ss_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'camera_node' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'mipi_ss_node' (2 subnodes, 12 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'sys_side' in wrapper 'mipi_ss_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'top_side' in wrapper 'mipi_ss_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_sys_clk_atb_s' for interface 'clk_sys'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_sys_n_rstn_atb_s' for interface 'rst_sys_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_noc' for interface 'clk_noc'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_noc_n' for interface 'rst_noc_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_s_chan_porting_s_afready' for interface 'mipi_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_s_chan_porting_s_afvalid' for interface 'mipi_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_s_chan_porting_s_atbytes' for interface 'mipi_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_s_chan_porting_s_atdata' for interface 'mipi_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_s_chan_porting_s_atid' for interface 'mipi_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_s_chan_porting_s_atready' for interface 'mipi_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_s_chan_porting_s_atvalid' for interface 'mipi_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_s_chan_porting_s_atwakeup' for interface 'mipi_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_s_chan_porting_s_syncreq' for interface 'mipi_ss_sys_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_flush_req_porting_flush_req' for interface 'mipi_ss_sys_node.flush_req_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_pchnl_ctrl_porting_paccept' for interface 'mipi_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_pchnl_ctrl_porting_pactive' for interface 'mipi_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_pchnl_ctrl_porting_pdeny' for interface 'mipi_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_pchnl_ctrl_porting_preq' for interface 'mipi_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_pchnl_ctrl_porting_pstate' for interface 'mipi_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_syncreq_level_porting_syncreq_level' for interface 'mipi_ss_sys_node.syncreq_level_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_sys_node_timeout_val_porting_timeout_val' for interface 'mipi_ss_sys_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_m_chan_porting_m_afready' for interface 'mipi_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_m_chan_porting_m_afvalid' for interface 'mipi_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_m_chan_porting_m_atbytes' for interface 'mipi_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_m_chan_porting_m_atdata' for interface 'mipi_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_m_chan_porting_m_atid' for interface 'mipi_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_m_chan_porting_m_atready' for interface 'mipi_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_m_chan_porting_m_atvalid' for interface 'mipi_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_m_chan_porting_m_atwakeup' for interface 'mipi_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_m_chan_porting_m_syncreq' for interface 'mipi_ss_top_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_sync_ctrl_porting_flush_req_level' for interface 'mipi_ss_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_sync_ctrl_porting_syncreq_level' for interface 'mipi_ss_top_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'mipi_ss_top_node_timeout_val_porting_timeout_val' for interface 'mipi_ss_top_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'mipi_ss_sys_node_mipi_ss_top_node_async_fifo_async_fifo_124' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'mipi_ss_sys_node_mipi_ss_top_node_async_fifo_async_fifo_124' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.async_fifo: IO=pld_sync, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.async_fifo: IO=pld_sync, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'mipi_ss_sys_node_mipi_ss_top_node_lp_rx_lp_tx_126' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'mipi_ss_sys_node_mipi_ss_top_node_lp_rx_lp_tx_126' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_tx: IO=lw_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_rx: IO=lwnoc_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'mipi_ss_sys_node_mipi_ss_top_node_lp_tx_lp_rx_125' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'mipi_ss_sys_node_mipi_ss_top_node_lp_tx_lp_rx_125' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_rx: IO=lw_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_tx: IO=lwnoc_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'mipi_ss_sys_node_mipi_ss_top_node_lp_afifo_rx_lp_afifo_tx_128' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'mipi_ss_sys_node_mipi_ss_top_node_lp_afifo_rx_lp_afifo_tx_128' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_rx: IO=afifo_slv_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_tx: IO=afifo_mst_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'mipi_ss_sys_node_mipi_ss_top_node_lp_afifo_tx_lp_afifo_rx_127' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'mipi_ss_sys_node_mipi_ss_top_node_lp_afifo_tx_lp_afifo_rx_127' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.lp_afifo_rx: IO=afifo_mst_rx_req, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.lp_afifo_tx: IO=afifo_slv_tx_req, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Completed UHDL build for wrapper 'mipi_ss_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'mipi_node' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'debug_tniu_ss_node' (2 subnodes, 16 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'top_side' in wrapper 'debug_tniu_ss_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'sys_side' in wrapper 'debug_tniu_ss_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_sys_clk_atb_m' for interface 'clk_sys'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_sys_n_rstn_atb_m' for interface 'rst_sys_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'clk_noc' for interface 'clk_noc'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'rst_noc_n' for interface 'rst_noc_n'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_s_chan_porting_s_afready' for interface 'debug_tniu_ss_top_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_s_chan_porting_s_afvalid' for interface 'debug_tniu_ss_top_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_s_chan_porting_s_atbytes' for interface 'debug_tniu_ss_top_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_s_chan_porting_s_atdata' for interface 'debug_tniu_ss_top_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_s_chan_porting_s_atid' for interface 'debug_tniu_ss_top_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_s_chan_porting_s_atready' for interface 'debug_tniu_ss_top_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_s_chan_porting_s_atvalid' for interface 'debug_tniu_ss_top_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_s_chan_porting_s_atwakeup' for interface 'debug_tniu_ss_top_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_s_chan_porting_s_syncreq' for interface 'debug_tniu_ss_top_node.s_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_flush_req_porting_flush_req' for interface 'debug_tniu_ss_top_node.flush_req_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_syncreq_level_porting_syncreq_level' for interface 'debug_tniu_ss_top_node.syncreq_level_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_lp_lw_porting_lw_rx_req' for interface 'debug_tniu_ss_top_node.lp_lw_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_lp_lw_porting_lw_tx_req' for interface 'debug_tniu_ss_top_node.lp_lw_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_lp_afifo_porting_afifo_slv_rx_req' for interface 'debug_tniu_ss_top_node.lp_afifo_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_lp_afifo_porting_afifo_slv_tx_req' for interface 'debug_tniu_ss_top_node.lp_afifo_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_top_node_timeout_val_porting_timeout_val' for interface 'debug_tniu_ss_top_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_m_chan_porting_m_afready' for interface 'debug_tniu_ss_sys_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_m_chan_porting_m_afvalid' for interface 'debug_tniu_ss_sys_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_m_chan_porting_m_atbytes' for interface 'debug_tniu_ss_sys_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_m_chan_porting_m_atdata' for interface 'debug_tniu_ss_sys_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_m_chan_porting_m_atid' for interface 'debug_tniu_ss_sys_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_m_chan_porting_m_atready' for interface 'debug_tniu_ss_sys_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_m_chan_porting_m_atvalid' for interface 'debug_tniu_ss_sys_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_m_chan_porting_m_atwakeup' for interface 'debug_tniu_ss_sys_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_m_chan_porting_m_syncreq' for interface 'debug_tniu_ss_sys_node.m_chan_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_pchnl_ctrl_porting_paccept' for interface 'debug_tniu_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_pchnl_ctrl_porting_pactive' for interface 'debug_tniu_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_pchnl_ctrl_porting_pdeny' for interface 'debug_tniu_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_pchnl_ctrl_porting_preq' for interface 'debug_tniu_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_pchnl_ctrl_porting_pstate' for interface 'debug_tniu_ss_sys_node.pchnl_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_sync_ctrl_porting_flush_req_level' for interface 'debug_tniu_ss_sys_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_sync_ctrl_porting_syncreq_level' for interface 'debug_tniu_ss_sys_node.sync_ctrl_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_lp_lw_porting_lw_rx_req' for interface 'debug_tniu_ss_sys_node.lp_lw_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_lp_lw_porting_lw_tx_req' for interface 'debug_tniu_ss_sys_node.lp_lw_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_lp_afifo_porting_afifo_slv_rx_req' for interface 'debug_tniu_ss_sys_node.lp_afifo_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_lp_afifo_porting_afifo_slv_tx_req' for interface 'debug_tniu_ss_sys_node.lp_afifo_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Created wrapper IO 'debug_tniu_ss_sys_node_timeout_val_porting_timeout_val' for interface 'debug_tniu_ss_sys_node.timeout_val_porting'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Processing internal edge 'debug_tniu_ss_top_node_debug_tniu_ss_sys_node_async_fifo_async_fifo_141' between subnodes
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Analyzing edge 'debug_tniu_ss_top_node_debug_tniu_ss_sys_node_async_fifo_async_fifo_141' with 2 valid endpoints
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint top_side.async_fifo: IO=pld_sync, type=Output
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:       Endpoint sys_side.async_fifo: IO=pld_sync, type=Input
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:     Found 1 drivers, 1 receivers
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Completed UHDL build for wrapper 'debug_tniu_ss_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'debug_node' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'left_funnel' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'right_funnel' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'left_agg_agg_node' (0 subnodes, 22 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Completed UHDL build for wrapper 'left_agg_agg_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'left_agg' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'right_agg_agg_node' (0 subnodes, 19 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Completed UHDL build for wrapper 'right_agg_agg_node'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'right_agg' in wrapper 'atb_soc_topo'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core: Building UHDL for wrapper 'async_bridge' (2 subnodes, 6 interfaces)
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'slv_side' in wrapper 'async_bridge'
+2026-04-26 00:24:10 [TOPO INFO] lwnoc_topo.topo_core:   Instantiated subnode 'mst_side' in wrapper 'async_bridge'

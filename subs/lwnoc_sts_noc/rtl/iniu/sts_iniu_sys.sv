@@ -16,8 +16,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     parameter integer unsigned             ADDR_MAP_LINEAR_STRIDE_LOG2 = 0,
     parameter logic [TGT_ID_WIDTH-1:0]     ADDR_MAP_LINEAR_TGT_BASE   = '0,
     parameter logic [TGT_ID_WIDTH-1:0]                      ADDR_MAP_DEFAULT_TGT_ID = '0,
-    localparam int REQ_PLD_AFIFO_WIDTH = $bits(sts_req_typ),
-    localparam int RSP_PLD_AFIFO_WIDTH = $bits(sts_rsp_typ)
+    localparam int REQ_PLD_AFIFO_WIDTH = STS_REQ_WIDTH,
+    localparam int RSP_PLD_AFIFO_WIDTH = STS_RSP_WIDTH
 ) (
     input logic clk_src ,
     input logic clk_dst ,

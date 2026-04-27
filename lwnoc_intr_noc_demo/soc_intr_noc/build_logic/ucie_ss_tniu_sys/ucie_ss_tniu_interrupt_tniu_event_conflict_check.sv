@@ -64,8 +64,6 @@ module ucie_ss_tniu_interrupt_tniu_event_conflict_check
     logic [INTERRUPT_NUM-1              :0] event_sram_en;
     logic [NIU_ID_WIDTH+INTR_ID_WIDTH-1 :0] read_resp_data;
     logic [INTERRUPT_NUM_WIDTH-1        :0] read_req_addr;
-    logic                                   read_req_vld;
-    logic                                   read_req_rdy;
 
     event_apb_arb_pkg                       event_arb_pld;
     event_apb_arb_pkg                       event_rs_pld;

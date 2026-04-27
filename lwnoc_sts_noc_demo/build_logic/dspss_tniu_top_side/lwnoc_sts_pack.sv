@@ -115,6 +115,10 @@ typedef struct packed {
     sts_rsp_ext_typ rsp;
 } sts_rsp_typ;
 
+localparam int STS_REQ_WIDTH = 119;
+localparam int STS_RSP_WIDTH = 65;
+//localparam int STS_RSP_WIDTH = $bits(sts_rsp_typ);
+
 // DEPRECATED: replaced by parameterized module sts_iniu_addr_map.
 // Kept temporarily for reference; remove after full migration.
 function automatic logic [TGT_ID_WIDTH-1:0] sts_iniu_sam(input logic [AXI_ADDR_WIDTH-1:0] in_addr);

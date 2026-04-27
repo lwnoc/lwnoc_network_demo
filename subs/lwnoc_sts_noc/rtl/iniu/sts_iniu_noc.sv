@@ -5,8 +5,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     parameter integer unsigned DBG_DATA_WIDTH      = 32,
     parameter integer unsigned FIFO_DEPTH          = 4,
     parameter integer unsigned SYNC_STAGE          = 2,
-    localparam int REQ_PLD_WIDTH = $bits(sts_req_typ),
-    localparam int RSP_PLD_WIDTH = $bits(sts_rsp_typ)
+    localparam int REQ_PLD_WIDTH = STS_REQ_WIDTH,
+    localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH
 ) (
     input   logic  clk_dst,
     input   logic  rst_n_dst,

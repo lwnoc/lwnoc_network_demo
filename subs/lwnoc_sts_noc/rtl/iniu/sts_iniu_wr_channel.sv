@@ -70,7 +70,7 @@ logic [$clog2(STS_INIU_OT_TOTAL)-1:0]       complete_idx;
 logic [$clog2(STS_INIU_OT_TOTAL)-1:0]       wr_id_alloc;
 
 logic [AXI_AWID_WIDTH-1:0]                  check_id;
-logic [$bits(sts_rsp_typ)-1:0]              retire_rsp_pld_flat;
+logic [STS_RSP_WIDTH-1:0]              retire_rsp_pld_flat;
 sts_rsp_typ                                 retire_rsp_pld;
 
 logic                   fifo_in_rsp_vld;
@@ -190,7 +190,7 @@ fcip_reg_slice #(
 lwring_id_remap #(
     .DEPTH    (STS_INIU_OT_TOTAL),
     .ID_WIDTH (AXI_ARID_WIDTH),
-    .PLD_WIDTH($bits(sts_rsp_typ))
+    .PLD_WIDTH(STS_RSP_WIDTH)
 ) u_r_id_remap (
     .clk           (clk                ),
     .rst_n         (rst_n              ),

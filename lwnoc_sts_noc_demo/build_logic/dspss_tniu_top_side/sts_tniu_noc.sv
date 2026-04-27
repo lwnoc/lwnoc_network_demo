@@ -11,8 +11,8 @@ import lwnoc_sts_pack::*;
     parameter logic [TGT_TYPE_WIDTH-1:0] LOCAL_APB_TGT_TYPE = 2'b01,
     parameter logic [TGT_ID_WIDTH-1:0]   LOCAL_RSC_TGT_ID = '0,
     parameter logic [TGT_ID_WIDTH-1:0]   LOCAL_REGBANK_TGT_ID = 'd1,
-    localparam int REQ_PLD_WIDTH = $bits(sts_req_typ),
-    localparam int RSP_PLD_WIDTH = $bits(sts_rsp_typ)
+    localparam int REQ_PLD_WIDTH = STS_REQ_WIDTH,
+    localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH
 ) (
     input   logic   clk_src ,
     input   logic   clk_dst ,

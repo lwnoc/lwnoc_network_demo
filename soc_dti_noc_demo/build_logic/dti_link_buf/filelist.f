@@ -1,0 +1,4 @@
+$DTI_LINK_BUF_OUT_DIR/dti_async_bridge_slv.sv
+$DTI_LINK_BUF_OUT_DIR/dti_async_bridge_mst.sv
+$DTI_LINK_BUF_OUT_DIR/dti_link_pipe.sv
+$DTI_LINK_BUF_OUT_DIR/dti_link_buf.sv

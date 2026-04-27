@@ -1,0 +1,4 @@
+$PCIE_ETH_INIU_SYS_DIR/pcie_eth_dti_pr_iniu_define.sv
+$PCIE_ETH_INIU_SYS_DIR/pcie_eth_dti_iniu_pack.sv
+$PCIE_ETH_INIU_SYS_DIR/pcie_eth_dti_pr_iniu_async_sys_side.sv
+$PCIE_ETH_INIU_SYS_DIR/pcie_eth_dti_pr_iniu_undef.sv

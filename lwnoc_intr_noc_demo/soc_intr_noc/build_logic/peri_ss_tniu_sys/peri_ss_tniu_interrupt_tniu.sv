@@ -505,7 +505,6 @@ module peri_ss_tniu_interrupt_tniu
     //===========================================================================
     // glue logic
     //===========================================================================
-`ifndef VERILATOR
     generate
         for(genvar i=0; i<INTERRUPT_NUM/32; i=i+1) begin : GEN_INTR_MERGE
 
@@ -561,7 +560,6 @@ module peri_ss_tniu_interrupt_tniu
         end
 
     endgenerate
-`endif
 
     assign v_interrupt = intr_raw_status;
 

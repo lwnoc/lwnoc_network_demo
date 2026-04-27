@@ -9,8 +9,8 @@ import lwnoc_sts_pack::*;
     parameter integer unsigned SYS_APB_MASTER_NUM   = 2,
     parameter logic [SYS_APB_MASTER_NUM*TGT_ID_WIDTH-1:0] SYS_APB_ROUTE_BASE = '0,
     parameter logic [SYS_APB_MASTER_NUM*TGT_ID_WIDTH-1:0] SYS_APB_ROUTE_MASK = '0,
-    localparam int REQ_PLD_WIDTH = $bits(sts_req_typ),
-    localparam int RSP_PLD_WIDTH = $bits(sts_rsp_typ)
+    localparam int REQ_PLD_WIDTH = STS_REQ_WIDTH,
+    localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH
 ) (
     input   logic   clk_src ,
     input   logic   clk_dst ,

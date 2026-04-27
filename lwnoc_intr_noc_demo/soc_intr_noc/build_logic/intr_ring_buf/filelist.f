@@ -1,5 +1,4 @@
-$INTR_RING_BUF_OUT_DIR/intr_ring_buf_macros.sv
-$INTR_RING_BUF_OUT_DIR/soc_intr_network_ring_noc_define.sv
+$INTR_RING_BUF_OUT_DIR/intr_ring_buf_macros_6e0f3ea0b7.sv
 $INTR_RING_BUF_OUT_DIR/lwmnoc_flow_ctrl_buf.sv
 $INTR_RING_BUF_OUT_DIR/lwmnoc_flow_ctrl_chk.sv
 $INTR_RING_BUF_OUT_DIR/lwmnoc_rob_pingpong_prealloc.sv

@@ -1,11 +1,11 @@
 atb soc noc topo:
-dsp ss0 to ss5(6 sys) -> dsp_funnel_6ch
-dsp_funnel_6ch -> async bridge slv
-async bridge slv -> async bridge mst
-async bridge mst -> right funnel
-camera ss -> right funnel
-mipi ss -> right funnel
-right funnel -> debug ss
+dsp ss0 to ss5(6 sys) iniu noc side connect to dsp_funnel_6ch input
+dsp_funnel_6ch output connect to async bridge slv
+async bridge slv output to async bridge mst
+async bridge mst output to one input channel of right funnel(3 atb input channels)
+camera ss connect to one channel of right funnel
+mipi ss connect to last channel right funnel
+right funnel output to debug ss
 
 top(only contain iniu/tniu top side + network layer) harden partition cut:
 node from dsp ss0 to ss5 to async bridge slv are all in one harden,use one top clk

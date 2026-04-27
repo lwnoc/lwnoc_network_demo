@@ -115,6 +115,11 @@ typedef struct packed {
     sts_rsp_ext_typ rsp;
 } sts_rsp_typ;
 
+// Package-level width constants (memnoc pattern: $bits() at package scope).
+// Module-local $bits(struct) cannot be resolved by pyslang and causes [-1:0].
+localparam int STS_REQ_WIDTH = 119;
+localparam int STS_RSP_WIDTH = 65;
+
 // DEPRECATED: replaced by parameterized module sts_iniu_addr_map.
 // Kept temporarily for reference; remove after full migration.
 function automatic logic [TGT_ID_WIDTH-1:0] sts_iniu_sam(input logic [AXI_ADDR_WIDTH-1:0] in_addr);

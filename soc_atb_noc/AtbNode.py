@@ -11,15 +11,12 @@ from topo_core.node.uhdlWrapperNode import UhdlWrapperNode  # pyright: ignore[re
 from topo_core.utils.networkHierOpt import connect  # pyright: ignore[reportMissingImports]
 from uhdl.uhdl.core.TemplateIP import TemplateComponent  # pyright: ignore[reportMissingImports]
 
-from AtbTemplate import *
-
-
 # ── INIU nodes ──────────────────────────────────────────────────────────
 
 class AtbIniuSysNode(UhdlComponentNode):
     """INIU system-side — receives ATB from source SS."""
-    def __init__(self, node_id: str, cfg=dsp_iniu_cfg):
-        comp = TemplateComponent(config=cfg, top="atb_iniu_sys")
+    def __init__(self, node_id: str, cfg):
+        comp = TemplateComponent(config=cfg, top="atb_iniu_sys", struct_mode="packed")
         super().__init__(id=f"{node_id}_sys_node", impl=comp)
 
         self.add_interface("clk",   r"^clk_atb_s$")
@@ -38,8 +35,8 @@ class AtbIniuSysNode(UhdlComponentNode):
 
 class AtbIniuTopNode(UhdlComponentNode):
     """INIU top/noc-side — drives ATB fabric."""
-    def __init__(self, node_id: str, cfg=atb_iniu_noc_config):
-        comp = TemplateComponent(config=cfg, top="atb_iniu_noc")
+    def __init__(self, node_id: str, cfg):
+        comp = TemplateComponent(config=cfg, top="atb_iniu_noc", struct_mode="packed")
         super().__init__(id=f"{node_id}_top_node", impl=comp)
 
         self.add_interface("clk",   r"^clk_atb_m$")
@@ -56,7 +53,7 @@ class AtbIniuTopNode(UhdlComponentNode):
 
 class AtbIniuNode(UhdlWrapperNode):
     """INIU composite: sys + noc (top) sides connected via async_fifo + LP."""
-    def __init__(self, node_id: str, cfg=dsp_iniu_cfg):
+    def __init__(self, node_id: str, cfg, cfg_top):
         super().__init__(id=f"{node_id}_node")
         self.add_interface("clk_sys")
         self.add_interface("rst_sys_n")
@@ -64,7 +61,7 @@ class AtbIniuNode(UhdlWrapperNode):
         self.add_interface("rst_noc_n", is_global=True)
 
         self.sys_side = AtbIniuSysNode(node_id=node_id, cfg=cfg)
-        self.top_side = AtbIniuTopNode(node_id=node_id)
+        self.top_side = AtbIniuTopNode(node_id=node_id, cfg=cfg_top)
 
         connect(self.sys_side.clk,   self.clk_sys)
         connect(self.sys_side.rst_n, self.rst_sys_n)
@@ -82,8 +79,8 @@ class AtbIniuNode(UhdlWrapperNode):
 
 class AtbTniuSysNode(UhdlComponentNode):
     """TNIU system-side — delivers ATB to debug SS."""
-    def __init__(self, node_id: str, cfg=debug_tniu_cfg):
-        comp = TemplateComponent(config=cfg, top="atb_tniu_sys")
+    def __init__(self, node_id: str, cfg):
+        comp = TemplateComponent(config=cfg, top="atb_tniu_sys", struct_mode="packed")
         super().__init__(id=f"{node_id}_sys_node", impl=comp)
 
         self.add_interface("clk",   r"^clk_atb_m$")
@@ -99,8 +96,8 @@ class AtbTniuSysNode(UhdlComponentNode):
 
 class AtbTniuTopNode(UhdlComponentNode):
     """TNIU top/noc-side — receives aggregated ATB from fabric."""
-    def __init__(self, node_id: str, cfg=atb_tniu_noc_config):
-        comp = TemplateComponent(config=cfg, top="atb_tniu_noc")
+    def __init__(self, node_id: str, cfg):
+        comp = TemplateComponent(config=cfg, top="atb_tniu_noc", struct_mode="packed")
         super().__init__(id=f"{node_id}_top_node", impl=comp)
 
         self.add_interface("clk",   r"^clk_atb_s$")
@@ -116,14 +113,14 @@ class AtbTniuTopNode(UhdlComponentNode):
 
 class AtbTniuNode(UhdlWrapperNode):
     """TNIU composite: top + sys sides connected via async_fifo + LP."""
-    def __init__(self, node_id: str, cfg=debug_tniu_cfg):
+    def __init__(self, node_id: str, cfg, cfg_top):
         super().__init__(id=f"{node_id}_node")
         self.add_interface("clk_sys")
         self.add_interface("rst_sys_n")
         self.add_interface("clk_noc", is_global=True)
         self.add_interface("rst_noc_n", is_global=True)
 
-        self.top_side = AtbTniuTopNode(node_id=node_id)
+        self.top_side = AtbTniuTopNode(node_id=node_id, cfg=cfg_top)
         self.sys_side = AtbTniuSysNode(node_id=node_id, cfg=cfg)
 
         connect(self.top_side.clk,   self.clk_noc)
@@ -138,7 +135,7 @@ class AtbTniuNode(UhdlWrapperNode):
 
 class AtbFunnelNode(UhdlComponentNode):
     """N-to-1 priority mux aggregating multiple ATB streams."""
-    def __init__(self, node_id: str, num_inputs: int = 2, data_width: int = 128, cfg=atb_funnel_config):
+    def __init__(self, node_id: str, num_inputs: int, data_width: int, cfg):
         comp = TemplateComponent(config=cfg, top="atb_funnel",
                                  N_ATB=num_inputs, ATB_DATA_WIDTH=data_width)
         super().__init__(id=f"{node_id}_node", impl=comp)
@@ -174,40 +171,86 @@ class AtbFunnelNode(UhdlComponentNode):
         self.add_interface("prdatadbg", r"^prdatadbg$")
 
 
+# ── Async Bridge nodes (memnoc-like split) ────────────────────────────
+
 class AtbAsyncBridgeSlvNode(UhdlComponentNode):
-    """Async bridge slave — source clock domain side of CDC."""
-    def __init__(self, node_id: str, cfg=atb_async_bridge_config):
-        comp = TemplateComponent(config=cfg, top="atb_async_bridge_top")
+    """Async bridge slave-side — source clock domain half of CDC.
+    Maps network_atb_slv RTL module."""
+    def __init__(self, node_id: str, cfg):
+        comp = TemplateComponent(config=cfg, top="network_atb_slv", struct_mode="packed")
         super().__init__(id=f"{node_id}_slv_node", impl=comp)
-        self.add_interface("clk",   r"^clk_atb_s$")
-        self.add_interface("rst_n", r"^rstn_atb_s$")
+        self.add_interface("slv_clk",   r"^clk_atb_s$")
+        self.add_interface("slv_rst_n", r"^rstn_atb_s$")
         self.add_interface("s_chan", r"^s_(atvalid|atready|atbytes|atdata|atid|afvalid|afready|syncreq|atwakeup)$")
+        # Sync interface — matching signals only (wptr_async, rptr_async, rptr_sync, pld_sync, syncreq_level)
+        self.add_interface("sync", r"^(wptr_async|rptr_async|rptr_sync|pld_sync|syncreq_level)$")
+        # Status and control — side signals (exposed as separate at wrapper level)
+        self.add_interface("afifo_slv_full_zero", r"^afifo_slv_full_zero$")
+        self.add_interface("flush_req", r"^flush_req$")
 
 
 class AtbAsyncBridgeMstNode(UhdlComponentNode):
-    """Async bridge master — destination clock domain side of CDC."""
-    def __init__(self, node_id: str, cfg=atb_async_bridge_config):
-        comp = TemplateComponent(config=cfg, top="atb_async_bridge_top")
+    """Async bridge master-side — destination clock domain half of CDC.
+    Maps network_atb_mst RTL module."""
+    def __init__(self, node_id: str, cfg):
+        comp = TemplateComponent(config=cfg, top="network_atb_mst", struct_mode="packed")
         super().__init__(id=f"{node_id}_mst_node", impl=comp)
-        self.add_interface("clk",   r"^clk_atb_m$")
-        self.add_interface("rst_n", r"^rstn_atb_m$")
+        self.add_interface("mst_clk",   r"^clk_atb_m$")
+        self.add_interface("mst_rst_n", r"^rstn_atb_m$")
         self.add_interface("m_chan", r"^m_(atvalid|atready|atbytes|atdata|atid|afvalid|afready|syncreq|atwakeup)$")
+        # Sync interface — matching signals only (wptr_async, rptr_async, rptr_sync, pld_sync, syncreq_level)
+        self.add_interface("sync", r"^(wptr_async|rptr_async|rptr_sync|pld_sync|syncreq_level)$")
+        # Status and control — side signals (exposed as separate at wrapper level)
+        self.add_interface("afifo_mst_full_zero", r"^afifo_mst_full_zero$")
+        self.add_interface("afifo_mst_read_idle", r"^afifo_mst_read_idle$")
+        self.add_interface("flush_req_level", r"^flush_req_level$")
 
 
 class AtbAsyncBridgeNode(UhdlWrapperNode):
-    """Async bridge composite: slv + mst with separate clock domains."""
-    def __init__(self, id: str = "async_bridge"):
+    """Async bridge composite wrapper.
+
+    Internally instantiates slv_side + mst_side and connects cross-domain sync.
+    Does NOT instantiate atb_async_bridge_top — the split memnoc-like pattern.
+
+    Exposes:
+      - s_chan (to left/downstream funnel)
+      - m_chan (to right/upstream funnel)
+      - slv_clk/rst (source clock domain)
+      - mst_clk/rst (destination clock domain)
+      - sync (cross-domain FIFO interface: wptr_async, rptr_async, rptr_sync, pld_sync, syncreq_level)
+      - afifo_slv_full_zero, flush_req (slv status/control)
+      - afifo_mst_full_zero, afifo_mst_read_idle, flush_req_level (mst status/control)
+    """
+
+    def __init__(self, id: str = "async_bridge", cfg=None):
         super().__init__(id=id)
-        self.add_interface("clk_src",  is_global=True)
-        self.add_interface("rst_src_n", is_global=True)
-        self.add_interface("clk_dst",  is_global=True)
-        self.add_interface("rst_dst_n", is_global=True)
 
-        self.slv_side = AtbAsyncBridgeSlvNode(id)
-        self.mst_side = AtbAsyncBridgeMstNode(id)
+        self.slv_side = AtbAsyncBridgeSlvNode(id, cfg=cfg)
+        self.mst_side = AtbAsyncBridgeMstNode(id, cfg=cfg)
 
-        connect(self.slv_side.clk,   self.clk_src)
-        connect(self.slv_side.rst_n, self.rst_src_n)
-        connect(self.mst_side.clk,   self.clk_dst)
-        connect(self.mst_side.rst_n, self.rst_dst_n)
+        # Cross-domain sync: slv ↔ mst (wptr_async, rptr_async, rptr_sync, pld_sync, syncreq_level)
+        connect(self.slv_side.sync, self.mst_side.sync)
         self.expose_unconnected_interfaces()
+
+
+# ── Funnel ingress aggregator ─────────────────────────────────────────
+
+class AtbFunnelIngressAggNode(UhdlComponentNode):
+    """Per-channel aggregator: N scalar ATB m_chan → packed funnel vectors.
+
+    Uses pre-built RTL modules: atb_funnel_ingress_aggregator_{N}to1.
+    """
+    def __init__(self, node_id: str, num_inputs: int, data_width: int, id_width: int, cfg):
+        top = f"atb_funnel_ingress_aggregator_{num_inputs}to1"
+        comp = TemplateComponent(config=cfg, top=top,
+                                 ATB_DATA_WIDTH=data_width,
+                                 ATB_ID_WIDTH=id_width)
+        super().__init__(id=f"{node_id}_agg_node", impl=comp)
+
+        for i in range(num_inputs):
+            self.add_interface(f"ch{i}_chan",
+                rf"^ch{i}_(m_(atvalid|atready|afvalid|afready|syncreq|atwakeup)"
+                rf"|m_(atbytes|atdata|atid))$")
+        for port_name in ["atvalids", "afreadys", "atids", "atdatas", "atbytess",
+                          "atreadys", "afvalids", "syncreqs"]:
+            self.add_interface(port_name, rf"^{port_name}$")

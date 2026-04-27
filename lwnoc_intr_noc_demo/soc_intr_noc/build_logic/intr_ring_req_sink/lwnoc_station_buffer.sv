@@ -193,7 +193,7 @@ fcip_age_matrix #(
 
 fcip_arb_vrp_matrix #(
     .WIDTH (2),
-    .PLD_WIDTH (SRAM_ADDR_WIDTH)
+    .PLD_TYPE (logic [SRAM_ADDR_WIDTH-1:0])
 ) u_vrp_arb (
     .clk       (clk             ),
     .rst_n     (rst_n           ),

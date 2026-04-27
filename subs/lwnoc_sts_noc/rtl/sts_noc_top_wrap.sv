@@ -35,8 +35,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     parameter logic [AXI_ADDR_WIDTH-1:0] ADDR_MAP_MASK_TABLE = '0,
     parameter logic [TGT_ID_WIDTH-1:0]   ADDR_MAP_TGT_ID_TABLE = '0,
     parameter logic [TGT_ID_WIDTH-1:0]   ADDR_MAP_DEFAULT_TGT_ID = '0,
-    localparam int REQ_PLD_WIDTH = $bits(sts_req_typ),
-    localparam int RSP_PLD_WIDTH = $bits(sts_rsp_typ)
+    localparam int REQ_PLD_WIDTH = STS_REQ_WIDTH,
+    localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH
 )(
     // -----------------------------------------------------------------
     // Clocks and resets

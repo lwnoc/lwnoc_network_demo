@@ -73,7 +73,6 @@ module lwnoc_intr_dummy_endpoint #(
         end
     end
 
-`ifndef VERILATOR
     // Contract check: no packet source is allowed through this tieoff endpoint.
     property p_dummy_tieoff_never_source;
         @(posedge clk) disable iff(!rst_n)
@@ -82,9 +81,7 @@ module lwnoc_intr_dummy_endpoint #(
 
     assert property(p_dummy_tieoff_never_source)
         else $error("[lwnoc_intr_dummy_endpoint] tieoff contract violated: merge_tx_valid must stay low");
-`endif
 
-`ifndef VERILATOR
     property p_dummy_tieoff_real_input_low;
         @(posedge clk) disable iff(!rst_n)
         !real_tx_valid;
@@ -92,7 +89,6 @@ module lwnoc_intr_dummy_endpoint #(
 
     assert property(p_dummy_tieoff_real_input_low)
         else $error("[lwnoc_intr_dummy_endpoint] unexpected real_tx_valid at tieoff endpoint");
-`endif
 
     initial begin
         if (DUMMY_TGTID >= ID_WIDTH'(NODE_NUM)) begin

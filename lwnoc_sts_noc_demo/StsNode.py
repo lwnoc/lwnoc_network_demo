@@ -143,10 +143,11 @@ class StsLinkBufNode(UhdlComponentNode):
         self.add_interface("ctrl", r"^(stall|clear|idle|almost_full|almost_empty|empty|full)$")
 
 
-class StsIniuNode(UhdlComponentNode):
-    def __init__(self, id: str = "iniu0", cfg=aon_ss_iniu_top_side_config, top: str = "sts_iniu_top"):
-        params = getattr(cfg, 'param_overrides', {})
-        comp = TemplateComponent(config=cfg, top=top, struct_mode="packed", **params)
+class StsIniuSysNode(UhdlComponentNode):
+    """INIU system-side — AXI slave + async FIFO + CTI/debug."""
+    def __init__(self, id: str, cfg):
+        params = dict(getattr(cfg, 'param_overrides', {}))
+        comp = TemplateComponent(config=cfg, top="sts_iniu_sys", **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk_src", r"^clk_src$")
@@ -155,8 +156,77 @@ class StsIniuNode(UhdlComponentNode):
         self.add_interface("rstn_dst", r"^rstn_dst$")
         self.add_interface("node_id", r"^node_id$")
         self.add_interface("axi", r"^s_.*")
+        self.add_interface("req_async", r"^req_(wptr|rptr|pld)_.*")
+        self.add_interface("rsp_async", r"^rsp_(wptr|rptr|pld)_.*")
+        self.add_interface("cti_event", r"^cti_event_.*")
+        self.add_interface("cti_channel", r"^cti_channel_.*")
+        self.add_interface("dbg_timestamp", r"^dbg_timestamp_.*")
+        self.add_interface("dbg_data", r"^dbg_data_.*")
+
+
+class StsIniuTopNode(UhdlComponentNode):
+    """INIU top-side — NoC-facing: AXI + req/rsp + CTI/debug (includes sys internally)."""
+    def __init__(self, id: str, cfg):
+        params = dict(getattr(cfg, 'param_overrides', {}))
+        comp = TemplateComponent(config=cfg, top="sts_iniu_top", **params)
+        super().__init__(id=id, impl=comp)
+
+        self.add_interface("clk_src", r"^clk_src$")
+        self.add_interface("clk_dst", r"^clk_dst$")
+        self.add_interface("rstn_src", r"^rstn_src$")
+        self.add_interface("rstn_dst", r"^rstn_dst$")
+        self.add_interface("node_id", r"^node_id$")
+        self.add_interface("axi", r"^sts_iniu_s_.*")
         self.add_interface("req", r"^out_req_.*")
         self.add_interface("rsp", r"^in_rsp_.*")
+        self.add_interface("cti_event", r"^(sys|noc)_cti_event_.*")
+        self.add_interface("cti_channel", r"^(sys|noc)_cti_channel_.*")
+        self.add_interface("dbg_timestamp", r"^dbg_timestamp_.*")
+        self.add_interface("dbg_data", r"^dbg_data_.*")
+
+
+class StsIniuNode(UhdlWrapperNode):
+    """INIU wrapper — composes StsIniuTopNode, exposes integration-facing interfaces."""
+    def __init__(self, id: str, sys_cfg, top_cfg):
+        super().__init__(id=id)
+
+        self.add_interface("clk_src", is_global=True)
+        self.add_interface("rstn_src", is_global=True)
+        self.add_interface("clk_dst", is_global=True)
+        self.add_interface("rstn_dst", is_global=True)
+        self.add_interface("node_id")
+        self.add_interface("axi")
+        self.add_interface("req")
+        self.add_interface("rsp")
+        self.add_interface("cti_event")
+        self.add_interface("cti_channel")
+        self.add_interface("dbg_timestamp")
+        self.add_interface("dbg_data")
+
+        self.iniu_sys_side = StsIniuSysNode(id=f"{id}_sys_side", cfg=sys_cfg)
+        self.iniu_top_side = StsIniuTopNode(id=f"{id}_top_side", cfg=top_cfg)
+
+        connect(self.iniu_sys_side.clk_src, self.clk_src)
+        connect(self.iniu_sys_side.rstn_src, self.rstn_src)
+        connect(self.iniu_sys_side.clk_dst, self.clk_dst)
+        connect(self.iniu_sys_side.rstn_dst, self.rstn_dst)
+        connect(self.iniu_top_side.clk_src, self.clk_src)
+        connect(self.iniu_top_side.rstn_src, self.rstn_src)
+        connect(self.iniu_top_side.clk_dst, self.clk_dst)
+        connect(self.iniu_top_side.rstn_dst, self.rstn_dst)
+        connect(self.iniu_top_side.axi, self.axi)
+        connect(self.iniu_top_side.node_id, self.node_id)
+        connect(self.iniu_top_side.req, self.req)
+        connect(self.iniu_top_side.rsp, self.rsp)
+        connect(self.iniu_top_side.cti_event, self.cti_event)
+        connect(self.iniu_top_side.cti_channel, self.cti_channel)
+        connect(self.iniu_top_side.dbg_timestamp, self.dbg_timestamp)
+        connect(self.iniu_top_side.dbg_data, self.dbg_data)
+        self.expose_unconnected_interfaces()
+
+    @property
+    def top_side(self):
+        return self.iniu_top_side
 
 
 # CONSTRAINT: Node class names must NOT encode specific config parameters.
@@ -187,7 +257,7 @@ class StsDecNode(UhdlComponentNode):
             }
         )
 
-        comp = TemplateComponent(config=cfg, top="sts_noc_dec_node", struct_mode="packed", **params)
+        comp = TemplateComponent(config=cfg, top="sts_noc_dec_node", **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", r"^clk$")
@@ -236,7 +306,7 @@ class StsTniuTopNode(UhdlComponentNode):
 class StsTniuSysNode(UhdlComponentNode):
     """TNIU system-side leaf — hierarchical inside sts_tniu_top."""
     def __init__(self, id: str, cfg: TemplateIPConfig):
-        comp = TemplateComponent(config=cfg, top="sts_tniu_sys", struct_mode="packed")
+        comp = TemplateComponent(config=cfg, top="sts_tniu_sys")
         super().__init__(id=id, impl=comp)
         self.add_interface("clk", r"^clk$")
         self.add_interface("rst_n", r"^rst_n$")

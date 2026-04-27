@@ -1,0 +1,12 @@
+$DTI_SW1_OUT_DIR/dti_sw1_dti_pr_iniu_define.sv
+$DTI_SW1_OUT_DIR/dti_sw1_dti_noc_switch.sv
+$DTI_SW1_OUT_DIR/dti_sw1_dti_noc_switch_2to1_wrap.sv
+$DTI_SW1_OUT_DIR/dti_sw1_dti_noc_switch_3to1_wrap.sv
+$DTI_SW1_OUT_DIR/dti_sw1_dti_noc_switch_4to1_wrap.sv
+$DTI_SW1_OUT_DIR/dti_sw1_dti_noc_switch_5to1_wrap.sv
+$DTI_SW1_OUT_DIR/dti_sw1_dti_noc_switch_6to1_wrap.sv
+$DTI_SW1_OUT_DIR/dti_sw1_dti_noc_switch_7to1_wrap.sv
+$DTI_SW1_OUT_DIR/dti_sw1_dti_noc_switch_8to1_wrap.sv
+$DTI_SW1_OUT_DIR/dti_sw1_dti_noc_switch_9to1_wrap.sv
+$DTI_SW1_OUT_DIR/dti_sw1_dti_noc_switch_10to1_wrap.sv
+$DTI_SW1_OUT_DIR/dti_sw1_dti_pr_iniu_undef.sv

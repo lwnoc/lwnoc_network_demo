@@ -1,33 +1,33 @@
 package pcie_eth_ss_iniu_interrupt_iniu_pkg;
 
     //===========================================================================
-    // user defined parameters
+    // user defined parameters — driven by INTR_INIU_* macros from interrupt_iniu_define.sv
     //===========================================================================
-    localparam integer unsigned OVERFLOW_TGT_ID         = 0;
-    localparam integer unsigned OVERFLOW_TGT_INTR_ID    = 0;
+    localparam integer unsigned OVERFLOW_TGT_ID         = `pcie_eth_ss_iniu_INTR_INIU_OVERFLOW_TGT_ID;
+    localparam integer unsigned OVERFLOW_TGT_INTR_ID    = `pcie_eth_ss_iniu_INTR_INIU_OVERFLOW_TGT_INTR_ID;
 
     //===========================================================================
     // event recorder parameters
     //===========================================================================
-    localparam integer unsigned INTERRUPT_MAX_NUM       = 4096;
+    localparam integer unsigned INTERRUPT_MAX_NUM       = `pcie_eth_ss_iniu_INTR_INIU_INTERRUPT_MAX_NUM;
     localparam integer unsigned INTERRUPT_MAXNUM_WIDTH  = $clog2(INTERRUPT_MAX_NUM);
 
-    localparam integer unsigned NIU_ID_WIDTH        = 8;
-    localparam integer unsigned INTR_ID_WIDTH       = 12;
-    localparam integer unsigned INTR_LUT_BASE_ADDR       = 32'h4000;
-    localparam integer unsigned INTR_PULSE_MODE_BASE_ADDR = 32'h8000;
+    localparam integer unsigned NIU_ID_WIDTH             = `pcie_eth_ss_iniu_INTR_INIU_NIU_ID_WIDTH;
+    localparam integer unsigned INTR_ID_WIDTH            = `pcie_eth_ss_iniu_INTR_INIU_INTR_ID_WIDTH;
+    localparam integer unsigned INTR_LUT_BASE_ADDR       = `pcie_eth_ss_iniu_INTR_INIU_LUT_BASE_ADDR;
+    localparam integer unsigned INTR_PULSE_MODE_BASE_ADDR = `pcie_eth_ss_iniu_INTR_INIU_PULSE_MODE_BASE_ADDR;
 
-    localparam integer unsigned EVENT_COUNT_MAX     = 16;
+    localparam integer unsigned EVENT_COUNT_MAX     = `pcie_eth_ss_iniu_INTR_INIU_EVENT_COUNT_MAX;
     localparam integer unsigned EVENT_COUNT_WIDTH   = $clog2(EVENT_COUNT_MAX + 1);
 
-    localparam integer unsigned ARB_LEVEL_0         = 16;       //16
-    localparam integer unsigned ARB_LEVEL_1         = 512;      //32
-    localparam integer unsigned ARB_LEVEL_2         = 4096;     //8
+    localparam integer unsigned ARB_LEVEL_0         = `pcie_eth_ss_iniu_INTR_INIU_ARB_LEVEL_0;    //16
+    localparam integer unsigned ARB_LEVEL_1         = `pcie_eth_ss_iniu_INTR_INIU_ARB_LEVEL_1;    //512
+    localparam integer unsigned ARB_LEVEL_2         = `pcie_eth_ss_iniu_INTR_INIU_ARB_LEVEL_2;    //4096
 
-    localparam integer unsigned IDLE_DELAY_MAX      = 8;
+    localparam integer unsigned IDLE_DELAY_MAX      = `pcie_eth_ss_iniu_INTR_INIU_IDLE_DELAY_MAX;
 
-    localparam integer unsigned EVENT_REQ     = 0;
-    localparam integer unsigned APB_REQ       = 1;
+    localparam integer unsigned EVENT_REQ     = `pcie_eth_ss_iniu_INTR_INIU_EVENT_REQ;
+    localparam integer unsigned APB_REQ       = `pcie_eth_ss_iniu_INTR_INIU_APB_REQ;
     typedef struct packed{
         logic                               toggle_flag;
         logic                               overflow;

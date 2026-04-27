@@ -21,10 +21,14 @@ from StsNode import (
     StsTniuWrapNode,
 )
 from StsTemplate import (
+    aon_ss_iniu_sys_config,
+    aon_ss_iniu_top_side_config,
     camera_ss_tniu_sys_config,
     camera_ss_tniu_top_side_config,
     dspss_tniu_sys_config,
     dspss_tniu_top_side_config,
+    soc_sts_dec4_config,
+    soc_sts_req_rsp_async_raw_config,
     vpu_ss_tniu_sys_config,
     vpu_ss_tniu_top_side_config,
 )
@@ -49,22 +53,24 @@ class StsSocLogicTopo(UhdlWrapperNode):
         self.add_interface("clk_dbg_timer", is_global=True)
         self.add_interface("rst_dbg_timer_n", is_global=True)
 
-        self.aon_ss_iniu = StsIniuNode(id="aon_ss_iniu")
+        self.aon_ss_iniu = StsIniuNode(id="aon_ss_iniu", sys_cfg=aon_ss_iniu_sys_config, top_cfg=aon_ss_iniu_top_side_config)
         connect(self.aon_ss_iniu.clk_src, self.clk_sys)
         connect(self.aon_ss_iniu.rstn_src, self.rst_sys_n)
         connect(self.aon_ss_iniu.clk_dst, self.clk_harden_dn_func)
         connect(self.aon_ss_iniu.rstn_dst, self.rst_harden_dn_func_n)
 
-        self.dec0 = StsDecNode(id="dec0", slave_num=2)
-        self.dec1 = StsDecNode(id="dec1", slave_num=2)
-        self.dec2 = StsDecNode(id="dec2")
-        self.dec2_ext = StsDecNode(id="dec2_ext", slave_num=3)
+        self.dec0 = StsDecNode(id="dec0", slave_num=2, cfg=soc_sts_dec4_config)
+        self.dec1 = StsDecNode(id="dec1", slave_num=2, cfg=soc_sts_dec4_config)
+        self.dec2 = StsDecNode(id="dec2", slave_num=4, cfg=soc_sts_dec4_config)
+        self.dec2_ext = StsDecNode(id="dec2_ext", slave_num=3, cfg=soc_sts_dec4_config)
 
         self.harden_dn_async_bridge_slv = StsReqRspAsyncBridgeSlvNode(
-            id="harden_dn_async_bridge_slv"
+            id="harden_dn_async_bridge_slv",
+            cfg=soc_sts_req_rsp_async_raw_config,
         )
         self.harden_up_async_bridge_mst = StsReqRspAsyncBridgeMstNode(
-            id="harden_up_async_bridge_mst"
+            id="harden_up_async_bridge_mst",
+            cfg=soc_sts_req_rsp_async_raw_config,
         )
 
         harden_dn_decs = (self.dec0, self.dec1)

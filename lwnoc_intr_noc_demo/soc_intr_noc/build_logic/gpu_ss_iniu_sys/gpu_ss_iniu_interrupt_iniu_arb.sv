@@ -48,13 +48,11 @@ module gpu_ss_iniu_interrupt_iniu_arb
     // type switch
     //===========================================================================
 
-`ifndef VERILATOR
     generate
         for(genvar i = 0; i < INTERRUPT_NUM; i=i+1) begin : gen_interrupt_iniu_event_pld_vector
             assign v_event_pld_vector[i] = v_s_event_pld[i];
         end
     endgenerate
-`endif
     assign m_event_pld = recorder_pkg'(m_event_pld_vector);
 
     //===========================================================================

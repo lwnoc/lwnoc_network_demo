@@ -1,5 +1,0 @@
--f $DTI_TEST_DIR/build_logic/soc_dti_network_component/soc_dti_sw_dsp6_filelist.f
--f $DTI_TEST_DIR/build_logic/soc_dti_network_component/soc_dti_sw_gpu4_filelist.f
--f $DTI_TEST_DIR/build_logic/soc_dti_network_component/soc_dti_sw_io5_filelist.f
--f $DTI_TEST_DIR/build_logic/soc_dti_network_component/soc_dti_sw_right_filelist.f
--f $DTI_TEST_DIR/build_logic/soc_dti_network_component/soc_dti_sw_root_filelist.f

@@ -1,2 +1,0 @@
-`define ASYNC_FIFO_DEPTH 16
-`undef ASYNC_FIFO_DEPTH

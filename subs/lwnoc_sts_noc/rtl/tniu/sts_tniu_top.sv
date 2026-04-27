@@ -19,8 +19,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     parameter integer unsigned SYS_APB_MASTER_NUM = 2,
     parameter logic [SYS_APB_MASTER_NUM*TGT_ID_WIDTH-1:0] SYS_APB_ROUTE_BASE = '0,
     parameter logic [SYS_APB_MASTER_NUM*TGT_ID_WIDTH-1:0] SYS_APB_ROUTE_MASK = '0,
-    localparam int REQ_PLD_WIDTH = $bits(sts_req_typ),
-    localparam int RSP_PLD_WIDTH = $bits(sts_rsp_typ)
+    localparam int REQ_PLD_WIDTH = STS_REQ_WIDTH,
+    localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH
 ) (
     input   logic               clk_src ,
     input   logic               clk_dst ,
@@ -31,11 +31,11 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
 
     input   logic               in_req_vld,
     output  logic               in_req_rdy,
-    input   sts_req_typ         in_req_pld,
+    input  [REQ_PLD_WIDTH-1:0]  in_req_pld,
 
     output  logic               out_rsp_vld,
     input   logic               out_rsp_rdy,
-    output  sts_rsp_typ         out_rsp_pld,
+    output [RSP_PLD_WIDTH-1:0] out_rsp_pld,
 
     //============================================================
     // APB with PMC
@@ -110,6 +110,12 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_out_req;
     logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_out_ack;
 
+    // Boundary cast: top-level vector ↔ internal struct
+    sts_req_typ  in_req_pld_s;
+    sts_rsp_typ  out_rsp_pld_s;
+    assign in_req_pld_s = sts_req_typ'(in_req_pld);
+    assign out_rsp_pld = out_rsp_pld_s;
+
     `_PREFIX_(sts_tniu_noc)  #(
         .DBG_TIMESTAMP_WIDTH  (DBG_TIMESTAMP_WIDTH),
         .DBG_DATA_WIDTH       (DBG_DATA_WIDTH),
@@ -127,10 +133,10 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .rstn_dst           (rstn_dst),
         .in_req_vld         (in_req_vld),
         .in_req_rdy         (in_req_rdy),
-        .in_req_pld         (in_req_pld),
+        .in_req_pld         (in_req_pld_s),
         .out_rsp_vld        (out_rsp_vld),
         .out_rsp_rdy        (out_rsp_rdy),
-        .out_rsp_pld        (out_rsp_pld),
+        .out_rsp_pld        (out_rsp_pld_s),
         .req_wptr_async     (tmp_req_wptr_async),
         .req_rptr_async     (tmp_req_rptr_async),
         .req_rptr_sync      (tmp_req_rptr_sync),

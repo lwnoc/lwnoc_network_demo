@@ -1,4 +1,3 @@
-/home/lgzhu/dev/noc_work/lwnoc_network_demo/lwnoc_intr_noc_demo/soc_intr_noc/filelist/soc_intr_network_ring_noc_define.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/network/lwmnoc_flow_ctrl_buf.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/network/lwmnoc_flow_ctrl_chk.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/network/lwmnoc_rob_pingpong_prealloc.sv

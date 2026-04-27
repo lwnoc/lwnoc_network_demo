@@ -101,13 +101,6 @@ def _tniu_params(tniu_idx: int) -> dict[str, object]:
 
 # ── INIU configs ────────────────────────────────────────────────────────────
 
-aon_ss_iniu_sys_config = TemplateIPConfig(
-    name="aon_ss_iniu_sys",
-    prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "iniu_filelist.f"),
-    env_var="AON_SS_INIU_SYS_OUT_DIR",
-)
-
 _iniu_params = {
     "STS_DEMO_NODE_NUM": STS_DEMO_NODE_NUM,
     "STS_DEMO_ADDR_MAP_ENTRY_NUM": 48,
@@ -116,6 +109,14 @@ _iniu_params = {
     "STS_DEMO_ADDR_MAP_TGT_ID_TABLE": _sv_param(48 * TGT_ID_WIDTH, STS_DEMO_ADDR_MAP_TGT_ID_TABLE_INT),
     "STS_DEMO_ADDR_MAP_DEFAULT_TGT_ID": STS_DEMO_ADDR_MAP_DEFAULT_TGT_ID,
 }
+
+aon_ss_iniu_sys_config = TemplateIPConfig(
+    name="aon_ss_iniu_sys",
+    prefix="",
+    filelist=str(STS_NOC_ROOT / "vc" / "iniu_filelist.f"),
+    env_var="AON_SS_INIU_SYS_OUT_DIR",
+)
+aon_ss_iniu_sys_config.param_overrides = _iniu_params
 
 aon_ss_iniu_top_side_config = TemplateIPConfig(
     name="aon_ss_iniu_top_side",

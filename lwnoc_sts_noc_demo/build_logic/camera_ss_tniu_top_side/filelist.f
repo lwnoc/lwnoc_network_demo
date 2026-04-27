@@ -1,0 +1,12 @@
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_define.sv
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/pulse_async_bridge_receiver_qactive.sv
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/pulse_async_bridge_transmitter_qactive.sv
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/cti_handle.sv
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/RegSpaceBase_cfg_reg_bank_table.v
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/apb2apb_async_bridge_qual.sv
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_apb.sv
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_noc_dec2.sv
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_noc.sv
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_sys.sv
+$CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR/sts_tniu_top.sv

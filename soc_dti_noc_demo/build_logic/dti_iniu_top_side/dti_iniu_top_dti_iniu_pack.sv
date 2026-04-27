@@ -1,11 +1,11 @@
 package dti_iniu_top_dti_iniu_pack;
 
-    localparam integer unsigned TBU_NUM_WIDTH             = 6;
-    localparam integer unsigned AXIS_MAX_DATA_WIDTH       = 160;
-    localparam integer unsigned AXIS_DATA_WIDTH           = 80;
-    localparam integer unsigned AXIS_KEEP_WIDTH           = AXIS_DATA_WIDTH / 8;
-    localparam integer unsigned CUSTOM_DATA_WIDTH         = 80;
-    localparam integer unsigned CUSTOM_KEEP_WIDTH         = CUSTOM_DATA_WIDTH / 8;
+    localparam integer unsigned TBU_NUM_WIDTH             = `dti_iniu_top_INIU_TBU_NUM_WIDTH;
+    localparam integer unsigned AXIS_MAX_DATA_WIDTH       = `dti_iniu_top_INIU_AXIS_MAX_DATA_WIDTH;
+    localparam integer unsigned AXIS_DATA_WIDTH           = `dti_iniu_top_INIU_AXIS_DATA_WIDTH;
+    localparam integer unsigned AXIS_KEEP_WIDTH           = `dti_iniu_top_INIU_AXIS_KEEP_WIDTH;
+    localparam integer unsigned CUSTOM_DATA_WIDTH         = `dti_iniu_top_INIU_CUSTOM_DATA_WIDTH;
+    localparam integer unsigned CUSTOM_KEEP_WIDTH         = `dti_iniu_top_INIU_CUSTOM_KEEP_WIDTH;
 
     typedef enum logic [3:0] {
                               DTI_TBU_CONDIS_REQ = 4'h0,

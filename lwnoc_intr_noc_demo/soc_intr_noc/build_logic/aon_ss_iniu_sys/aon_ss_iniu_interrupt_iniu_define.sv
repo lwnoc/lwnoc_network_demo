@@ -1,4 +1,50 @@
-`ifndef _PREFIX_
+`ifndef aon_ss_iniu__PREFIX_
     `define _PREFIX_(x)  Base_``x
 `endif
-`undef _PREFIX_
+
+// ---------------------------------------------------------------------------
+// Interrupt INIU configurable parameters
+// Override before including this file to customize the instance.
+// ---------------------------------------------------------------------------
+`ifndef aon_ss_iniu_INTR_INIU_OVERFLOW_TGT_ID
+    `define aon_ss_iniu_INTR_INIU_OVERFLOW_TGT_ID          0
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_OVERFLOW_TGT_INTR_ID
+    `define aon_ss_iniu_INTR_INIU_OVERFLOW_TGT_INTR_ID     0
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_INTERRUPT_MAX_NUM
+    `define aon_ss_iniu_INTR_INIU_INTERRUPT_MAX_NUM         4096
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_NIU_ID_WIDTH
+    `define aon_ss_iniu_INTR_INIU_NIU_ID_WIDTH              8
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_INTR_ID_WIDTH
+    `define aon_ss_iniu_INTR_INIU_INTR_ID_WIDTH             12
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_LUT_BASE_ADDR
+    `define aon_ss_iniu_INTR_INIU_LUT_BASE_ADDR             32'h4000
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_PULSE_MODE_BASE_ADDR
+    `define aon_ss_iniu_INTR_INIU_PULSE_MODE_BASE_ADDR      32'h8000
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_EVENT_COUNT_MAX
+    `define aon_ss_iniu_INTR_INIU_EVENT_COUNT_MAX           16
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_ARB_LEVEL_0
+    `define aon_ss_iniu_INTR_INIU_ARB_LEVEL_0               16
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_ARB_LEVEL_1
+    `define aon_ss_iniu_INTR_INIU_ARB_LEVEL_1               512
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_ARB_LEVEL_2
+    `define aon_ss_iniu_INTR_INIU_ARB_LEVEL_2               4096
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_IDLE_DELAY_MAX
+    `define aon_ss_iniu_INTR_INIU_IDLE_DELAY_MAX            8
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_EVENT_REQ
+    `define aon_ss_iniu_INTR_INIU_EVENT_REQ                 0
+`endif
+`ifndef aon_ss_iniu_INTR_INIU_APB_REQ
+    `define aon_ss_iniu_INTR_INIU_APB_REQ                   1
+`endif

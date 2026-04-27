@@ -1,0 +1,4 @@
+$MIPI_INIU_SYS_DIR/mipi_dti_pr_iniu_define.sv
+$MIPI_INIU_SYS_DIR/mipi_dti_iniu_pack.sv
+$MIPI_INIU_SYS_DIR/mipi_dti_pr_iniu_async_sys_side.sv
+$MIPI_INIU_SYS_DIR/mipi_dti_pr_iniu_undef.sv

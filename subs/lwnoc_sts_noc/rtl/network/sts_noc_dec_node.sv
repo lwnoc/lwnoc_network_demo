@@ -13,20 +13,20 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     // ---- Master port (upstream: INIU or parent dec_node) ----
     input   logic               mst_req_vld ,
     output  logic               mst_req_rdy ,
-    input   sts_req_typ         mst_req_pld ,
+    input  [STS_REQ_WIDTH-1:0] mst_req_pld ,
 
     output  logic               mst_rsp_vld ,
     input   logic               mst_rsp_rdy ,
-    output  sts_rsp_typ         mst_rsp_pld ,
+    output [STS_RSP_WIDTH-1:0] mst_rsp_pld ,
 
     // ---- Slave ports (downstream: TNIU or child dec_node) ----
     output  logic [SLAVE_NUM-1:0]   slv_req_vld ,
     input   logic [SLAVE_NUM-1:0]   slv_req_rdy ,
-    output  sts_req_typ             slv_req_pld ,
+    output [STS_REQ_WIDTH-1:0] slv_req_pld ,
 
     input   logic [SLAVE_NUM-1:0]   slv_rsp_vld ,
     output  logic [SLAVE_NUM-1:0]   slv_rsp_rdy ,
-    input   sts_rsp_typ             slv_rsp_pld [SLAVE_NUM-1:0],
+    input  [STS_RSP_WIDTH-1:0] slv_rsp_pld [SLAVE_NUM-1:0],
 
     // ---- CTI Channel — CTM crossbar (master + slaves) ----
     input   logic [CTI_CHANNEL_WIDTH-1:0]              mst_cti_channel_in  ,
@@ -49,6 +49,11 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     output  logic [DBG_DATA_WIDTH-1:0]                 mst_dbg_data
 );
 
+    // Internal struct for boundary cast (top-level vector ↔ internal field access)
+    sts_req_typ  mst_req_pld_s;
+    sts_rsp_typ  mst_rsp_pld_s;
+    assign mst_req_pld_s = sts_req_typ'(mst_req_pld);
+
     // ================================================================
     // Req Decoder: base/mask match on tgt_id
     // ================================================================
@@ -65,7 +70,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
             assign base_i = ROUTE_BASE[gi*TGT_ID_WIDTH +: TGT_ID_WIDTH];
             assign mask_i = ROUTE_MASK[gi*TGT_ID_WIDTH +: TGT_ID_WIDTH];
 
-            assign hit[gi] = (mst_req_pld.cmn.tgt_id & mask_i)
+            assign hit[gi] = (mst_req_pld_s.cmn.tgt_id & mask_i)
                           == (base_i                  & mask_i);
         end
     endgenerate
@@ -74,7 +79,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
 
     // Slave req: gated valid, broadcast payload
     assign slv_req_vld = hit & {SLAVE_NUM{mst_req_vld}};
-    assign slv_req_pld = mst_req_pld;
+    assign slv_req_pld = mst_req_pld_s;
 
     // Master req rdy: from the hit slave, or from decerr path
     logic hit_slave_rdy;
@@ -98,12 +103,12 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
 
     assign decerr_rsp_vld             = mst_req_vld && !hit_any;
 
-    assign decerr_rsp_pld.cmn.src_id  = mst_req_pld.cmn.src_id;
-    assign decerr_rsp_pld.cmn.txn_id  = mst_req_pld.cmn.txn_id;
-    assign decerr_rsp_pld.cmn.tgt_id  = mst_req_pld.cmn.tgt_id;
-    assign decerr_rsp_pld.cmn.opcode  = (mst_req_pld.cmn.opcode == cfgOpcode_RdReq)
+    assign decerr_rsp_pld.cmn.src_id  = mst_req_pld_s.cmn.src_id;
+    assign decerr_rsp_pld.cmn.txn_id  = mst_req_pld_s.cmn.txn_id;
+    assign decerr_rsp_pld.cmn.tgt_id  = mst_req_pld_s.cmn.tgt_id;
+    assign decerr_rsp_pld.cmn.opcode  = (mst_req_pld_s.cmn.opcode == cfgOpcode_RdReq)
                                        ? cfgOpcode_RdRsp : cfgOpcode_WrRsp;
-    assign decerr_rsp_pld.cmn.qos     = mst_req_pld.cmn.qos;
+    assign decerr_rsp_pld.cmn.qos     = mst_req_pld_s.cmn.qos;
     assign decerr_rsp_pld.rsp.resp    = 2'b11;
     assign decerr_rsp_pld.rsp.data    = {AXI_DATA_WIDTH{1'b0}};
     assign decerr_rsp_pld.rsp.last    = 1'b1;
@@ -117,7 +122,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     // of bypassing and blocking the arbiter.
     // ================================================================
 
-    localparam integer unsigned RSP_PLD_WIDTH = $bits(sts_rsp_typ);
+    localparam integer unsigned RSP_PLD_WIDTH = STS_RSP_WIDTH;
     localparam integer unsigned ARB_WIDTH     = SLAVE_NUM + 1;  // +1 for DECERR
 
     logic                       arb_rsp_vld;
@@ -158,7 +163,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
 
     // Arbiter outputs directly to master rsp port
     assign mst_rsp_vld = arb_rsp_vld;
-    assign mst_rsp_pld = sts_rsp_typ'(arb_rsp_pld_flat);
+    assign mst_rsp_pld_s = sts_rsp_typ'(arb_rsp_pld_flat);
 
     // Route arbiter ready outputs back to slaves and DECERR
     assign slv_rsp_rdy    = arb_rdy_out[SLAVE_NUM-1:0];
@@ -232,4 +237,5 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         end
     end
 
+assign mst_rsp_pld = mst_rsp_pld_s;
 endmodule

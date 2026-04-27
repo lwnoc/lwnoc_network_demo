@@ -25,229 +25,152 @@ os.environ["LWNOC_LOWPOWER_COMPONENT"] = str(DTI_REPO_ROOT / "lwnoc_lowpower_com
 
 FILELIST_DIR = THIS_DIR / "filelists"
 
-
-def _new_cfg(name: str, prefix: str, filelist_name: str, env_var: str) -> TemplateIPConfig:
-    return TemplateIPConfig(
-        name=name,
-        prefix=prefix,
-        filelist=str(FILELIST_DIR / filelist_name),
-        env_var=env_var,
-    )
-
-
-# ── Per-endpoint INIU sys-side configs (TBU_NUM=1 per single-TBU node) ────
-# Left-branch initiators: SRCIDs 0-5
-pcie_eth_iniu_sys_config = _new_cfg(
-    name="pcie_eth_iniu_sys",
-    prefix="pcie_eth_",
-    filelist_name="dti_iniu_sys.f",
-    env_var="PCIE_ETH_INIU_SYS_DIR",
-)
-pcie_eth_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
-
-vpu_iniu_sys_config = _new_cfg(
-    name="vpu_iniu_sys",
-    prefix="vpu_",
-    filelist_name="dti_iniu_sys.f",
-    env_var="VPU_INIU_SYS_DIR",
-)
-vpu_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
-
-dsp2_iniu_sys_config = _new_cfg(
-    name="dsp2_iniu_sys",
-    prefix="dsp2_",
-    filelist_name="dti_iniu_sys.f",
-    env_var="DSP2_INIU_SYS_DIR",
-)
-dsp2_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
-
-dsp1_iniu_sys_config = _new_cfg(
-    name="dsp1_iniu_sys",
-    prefix="dsp1_",
-    filelist_name="dti_iniu_sys.f",
-    env_var="DSP1_INIU_SYS_DIR",
-)
-dsp1_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
-
-dsp0_iniu_sys_config = _new_cfg(
-    name="dsp0_iniu_sys",
-    prefix="dsp0_",
-    filelist_name="dti_iniu_sys.f",
-    env_var="DSP0_INIU_SYS_DIR",
-)
-dsp0_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
-
-noc_tbu1_iniu_sys_config = _new_cfg(
-    name="noc_tbu1_iniu_sys",
-    prefix="noc_tbu1_",
-    filelist_name="dti_iniu_sys.f",
-    env_var="NOC_TBU1_INIU_SYS_DIR",
-)
-noc_tbu1_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
-
-# Right-branch initiators: SRCIDs 6-10
-usb_ufs_iniu_sys_config = _new_cfg(
-    name="usb_ufs_iniu_sys",
-    prefix="usb_ufs_",
-    filelist_name="dti_iniu_sys.f",
-    env_var="USB_UFS_INIU_SYS_DIR",
-)
-usb_ufs_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
-
-mipi0_iniu_sys_config = _new_cfg(
-    name="mipi0_iniu_sys",
-    prefix="mipi0_",
-    filelist_name="dti_iniu_sys.f",
-    env_var="MIPI0_INIU_SYS_DIR",
-)
-mipi0_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
-
-mipi1_iniu_sys_config = _new_cfg(
-    name="mipi1_iniu_sys",
-    prefix="mipi1_",
-    filelist_name="dti_iniu_sys.f",
-    env_var="MIPI1_INIU_SYS_DIR",
-)
-mipi1_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
-
-camera_iniu_sys_config = _new_cfg(
-    name="camera_iniu_sys",
-    prefix="camera_",
-    filelist_name="dti_iniu_sys.f",
-    env_var="CAMERA_INIU_SYS_DIR",
-)
-camera_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
-
-noc_tbu0_iniu_sys_config = _new_cfg(
-    name="noc_tbu0_iniu_sys",
-    prefix="noc_tbu0_",
-    filelist_name="dti_iniu_sys.f",
-    env_var="NOC_TBU0_INIU_SYS_DIR",
-)
-noc_tbu0_iniu_sys_config.param_overrides = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
+# Mapping from local filelist names to publish-optimized filelists.
+# _pub.f files are self-contained (no FCIP/LP, only owner IP).
+_VC_FILELIST_MAP = {
+    "dti_iniu_sys.f":     "dti_iniu_sys_pub.f",
+    "dti_tniu_sys.f":     "dti_tniu_sys_pub.f",
+    "dti_iniu_top.f":     "dti_iniu_top_pub.f",
+    "dti_tniu_top.f":     "dti_tniu_top_pub.f",
+    "dti_switch_3i1o.f":  "dti_switch_pub.f",
+    "dti_switch_2i1o.f":  "dti_switch_pub.f",
+    "dti_switch_4i1o.f":  "dti_switch_pub.f",
+    "dti_req_rsp_async.f": "dti_req_rsp_async_pub.f",
+    "dti_link_pipe.f":    "network_filelist.f",
+    "dti_link_buf.f":     "network_filelist.f",
+    "dti_tieoff.f":       "network_filelist.f",
+}
 
 
-iniu_top_config = _new_cfg(
+def _resolve_fl(name: str) -> str:
+    vc_name = _VC_FILELIST_MAP.get(name, name)
+    # Prefer local file (workspace) over external repo vc/
+    local_f = THIS_DIR / vc_name
+    if local_f.exists():
+        return str(local_f)
+    return str(DTI_REPO_ROOT / "vc" / vc_name)
+
+
+def _pack_u32_ranges(ranges):
+    packed_min = 0
+    packed_max = 0
+    for idx, (range_min, range_max) in enumerate(ranges):
+        packed_min |= int(range_min) << (idx * 32)
+        packed_max |= int(range_max) << (idx * 32)
+    return packed_min, packed_max
+
+
+# ── Shared base for single-TBU INIU sys configs ─────────────────────────
+# All single-TBU INIUs use the same RTL with identical param_overrides.
+# Per-instance naming (prefix, env_var) is set on each derived config.
+_SINGLE_TBU_PARAMS = {"TBU_NUM": 1, "TRANSACTION_MAX_NUM": 8}
+_INIU_SYS_FILELIST = _resolve_fl("dti_iniu_sys.f")
+
+
+def _iniu_sys_cfg(name: str, prefix: str, env_var: str) -> TemplateIPConfig:
+    """Single-TBU INIU sys config — all use same filelist + param_overrides."""
+    cfg = TemplateIPConfig(name=name, prefix=prefix, filelist=_INIU_SYS_FILELIST, env_var=env_var)
+    cfg.param_overrides = dict(_SINGLE_TBU_PARAMS)
+    return cfg
+
+
+# ── Per-endpoint INIU sys-side configs ──────────────────────────────────
+pcie_eth_iniu_sys_config = _iniu_sys_cfg("pcie_eth_iniu_sys", "pcie_eth_", "PCIE_ETH_INIU_SYS_DIR")
+vpu_iniu_sys_config       = _iniu_sys_cfg("vpu_iniu_sys",       "vpu_",      "VPU_INIU_SYS_DIR")
+cpu_iniu_sys_config       = _iniu_sys_cfg("cpu_iniu_sys",       "cpu_",      "CPU_INIU_SYS_DIR")
+gpu_iniu_sys_config        = _iniu_sys_cfg("gpu_iniu_sys",       "gpu_",      "GPU_INIU_SYS_DIR")
+dp_iniu_sys_config        = _iniu_sys_cfg("dp_iniu_sys",        "dp_",       "DP_INIU_SYS_DIR")
+display_iniu_sys_config   = _iniu_sys_cfg("display_iniu_sys",   "display_",  "DISPLAY_INIU_SYS_DIR")
+usb_ufs_iniu_sys_config   = _iniu_sys_cfg("usb_ufs_iniu_sys",   "usb_ufs_",  "USB_UFS_INIU_SYS_DIR")
+mipi_iniu_sys_config      = _iniu_sys_cfg("mipi_iniu_sys",      "mipi_",    "MIPI_INIU_SYS_DIR")
+camera_iniu_sys_config     = _iniu_sys_cfg("camera_iniu_sys",    "camera_",   "CAMERA_INIU_SYS_DIR")
+noc_tbu0_iniu_sys_config   = _iniu_sys_cfg("noc_tbu0_iniu_sys",  "noc_tbu0_", "NOC_TBU0_INIU_SYS_DIR")
+noc_tbu1_iniu_sys_config   = _iniu_sys_cfg("noc_tbu1_iniu_sys",  "noc_tbu1_", "NOC_TBU1_INIU_SYS_DIR")
+
+# DSP INIUs (6 instances) — all use same config, per-instance naming via template macro
+dsp_iniu_sys_config = _iniu_sys_cfg("dsp_iniu_sys", "dsp_", "DSP_INIU_SYS_DIR")
+
+
+iniu_top_config = TemplateIPConfig(
     name="dti_iniu_top_side",
     prefix="dti_iniu_top_",
-    filelist_name="dti_iniu_top.f",
+    filelist=_resolve_fl("dti_iniu_top.f"),
     env_var="DTI_INIU_TOP_DIR",
 )
 
-
-tcu_tniu_sys_config = _new_cfg(
+tcu_tniu_sys_config = TemplateIPConfig(
     name="sys_tcu_tniu_sys",
     prefix="sys_tcu_",
-    filelist_name="dti_tniu_sys.f",
+    filelist=_resolve_fl("dti_tniu_sys.f"),
     env_var="SYS_TCU_TNIU_SYS_DIR",
 )
 
-
-tniu_top_config = _new_cfg(
+tniu_top_config = TemplateIPConfig(
     name="dti_tniu_top_side",
     prefix="dti_tniu_top_",
-    filelist_name="dti_tniu_top.f",
+    filelist=_resolve_fl("dti_tniu_top.f"),
     env_var="DTI_TNIU_TOP_DIR",
 )
 
 
-def _switch_cfg(name: str, prefix: str, filelist_name: str, env_var: str, iniu_ranges, tniu_range) -> TemplateIPConfig:
-    cfg = _new_cfg(name=name, prefix=prefix, filelist_name=filelist_name, env_var=env_var)
-    params = {
-        "DTI_TNIU_MIN": tniu_range[0],
-        "DTI_TNIU_MAX": tniu_range[1],
-    }
-    for idx, (rng_min, rng_max) in enumerate(iniu_ranges):
-        params[f"DTI_INIU{idx}_MIN"] = rng_min
-        params[f"DTI_INIU{idx}_MAX"] = rng_max
-    cfg.param_overrides = params
-    return cfg
+# ── Switch configs (direct declarations — no wrapper function) ──────────
+# SRCID layout per soc_dti_noc_topo:
+_SW_FILELIST = _resolve_fl("dti_switch_3i1o.f")
+_SWITCH_COMMON = {"NUM_TNIU": 1}
 
-
-# ── Switch configs: DECMIN/DECMAX reflect single-TBU-per-endpoint SRCIDs ─
-# Left branch: pcie_eth=0, vpu=1, dsp2=2, dsp1=3, dsp0=4, noc_tbu1=5
-# Right branch: usb_ufs=6, mipi0=7, mipi1=8, camera=9, noc_tbu0=10
-dti_sw_left3_config = _switch_cfg(
-    name="dti_sw_left3",
-    prefix="dti_sw_left3_",
-    filelist_name="dti_switch_3i1o.f",
-    env_var="DTI_SW_LEFT3_OUT_DIR",
-    iniu_ranges=[(0, 0), (1, 1), (2, 2)],
-    tniu_range=(0, 2),
+dti_sw0_config = TemplateIPConfig(
+    name="dti_sw0", prefix="dti_sw0_", filelist=_SW_FILELIST, env_var="DTI_SW0_OUT_DIR",
+)
+dti_sw0_config.param_overrides = dict(_SWITCH_COMMON,
+    NUM_INIU=6, TNIU_DECMIN=0, TNIU_DECMAX=5,
+    INIU_DECMIN=0, INIU_DECMAX=0,
 )
 
-dti_sw_left_dsp1_config = _switch_cfg(
-    name="dti_sw_left_dsp1",
-    prefix="dti_sw_left_dsp1_",
-    filelist_name="dti_switch_2i1o.f",
-    env_var="DTI_SW_LEFT_DSP1_OUT_DIR",
-    iniu_ranges=[(0, 2), (3, 3)],
-    tniu_range=(0, 3),
+dti_sw1_config = TemplateIPConfig(
+    name="dti_sw1", prefix="dti_sw1_", filelist=_SW_FILELIST, env_var="DTI_SW1_OUT_DIR",
+)
+dti_sw1_config.param_overrides = dict(_SWITCH_COMMON,
+    NUM_INIU=5, TNIU_DECMIN=0, TNIU_DECMAX=4,
+    INIU_DECMIN=0, INIU_DECMAX=0,
 )
 
-dti_sw_left_dsp0_config = _switch_cfg(
-    name="dti_sw_left_dsp0",
-    prefix="dti_sw_left_dsp0_",
-    filelist_name="dti_switch_2i1o.f",
-    env_var="DTI_SW_LEFT_DSP0_OUT_DIR",
-    iniu_ranges=[(0, 3), (4, 4)],
-    tniu_range=(0, 4),
+dti_sw2_config = TemplateIPConfig(
+    name="dti_sw2", prefix="dti_sw2_", filelist=_SW_FILELIST, env_var="DTI_SW2_OUT_DIR",
+)
+dti_sw2_config.param_overrides = dict(_SWITCH_COMMON,
+    NUM_INIU=4, TNIU_DECMIN=0, TNIU_DECMAX=3,
+    INIU_DECMIN=0, INIU_DECMAX=0,
 )
 
-dti_sw_left_noc1_config = _switch_cfg(
-    name="dti_sw_left_noc1",
-    prefix="dti_sw_left_noc1_",
-    filelist_name="dti_switch_2i1o.f",
-    env_var="DTI_SW_LEFT_NOC1_OUT_DIR",
-    iniu_ranges=[(0, 4), (5, 5)],
-    tniu_range=(0, 5),
+dti_sw3_config = TemplateIPConfig(
+    name="dti_sw3", prefix="dti_sw3_", filelist=_SW_FILELIST, env_var="DTI_SW3_OUT_DIR",
 )
-
-dti_sw_right4_config = _switch_cfg(
-    name="dti_sw_right4",
-    prefix="dti_sw_right4_",
-    filelist_name="dti_switch_4i1o.f",
-    env_var="DTI_SW_RIGHT4_OUT_DIR",
-    iniu_ranges=[(6, 6), (7, 7), (8, 8), (9, 9)],
-    tniu_range=(6, 9),
-)
-
-dti_sw_right_noc0_config = _switch_cfg(
-    name="dti_sw_right_noc0",
-    prefix="dti_sw_right_noc0_",
-    filelist_name="dti_switch_2i1o.f",
-    env_var="DTI_SW_RIGHT_NOC0_OUT_DIR",
-    iniu_ranges=[(6, 9), (10, 10)],
-    tniu_range=(6, 10),
-)
-
-dti_sw_root_config = _switch_cfg(
-    name="dti_sw_root",
-    prefix="dti_sw_root_",
-    filelist_name="dti_switch_2i1o.f",
-    env_var="DTI_SW_ROOT_OUT_DIR",
-    iniu_ranges=[(0, 5), (6, 10)],
-    tniu_range=(0, 43),
+dti_sw3_config.param_overrides = dict(_SWITCH_COMMON,
+    NUM_INIU=3, TNIU_DECMIN=0, TNIU_DECMAX=14,
+    INIU_DECMIN=0, INIU_DECMAX=5,
 )
 
 
-dti_req_rsp_async_config = _new_cfg(
+dti_req_rsp_async_config = TemplateIPConfig(
     name="dti_req_rsp_async",
-    prefix="dti_req_rsp_async_",
-    filelist_name="dti_req_rsp_async.f",
+    prefix="",
+    filelist=_resolve_fl("dti_req_rsp_async.f"),
     env_var="DTI_REQ_RSP_ASYNC_OUT_DIR",
 )
+dti_req_rsp_async_config.param_overrides = {"PAYLOAD_WIDTH": 90, "TID_WIDTH": 6}
 
-dti_link_pipe_config = _new_cfg(
+dti_link_pipe_config = TemplateIPConfig(
     name="dti_link_pipe",
-    prefix="dti_link_pipe_",
-    filelist_name="dti_link_pipe.f",
+    prefix="",
+    filelist=_resolve_fl("dti_link_pipe.f"),
     env_var="DTI_LINK_PIPE_OUT_DIR",
 )
+dti_link_pipe_config.param_overrides = {"PAYLOAD_WIDTH": 90, "TID_WIDTH": 6}
 
-dti_link_buf_config = _new_cfg(
+dti_link_buf_config = TemplateIPConfig(
     name="dti_link_buf",
-    prefix="dti_link_buf_",
-    filelist_name="dti_link_buf.f",
+    prefix="",
+    filelist=_resolve_fl("dti_link_buf.f"),
     env_var="DTI_LINK_BUF_OUT_DIR",
 )
+dti_link_buf_config.param_overrides = {"PAYLOAD_WIDTH": 90, "TID_WIDTH": 6}

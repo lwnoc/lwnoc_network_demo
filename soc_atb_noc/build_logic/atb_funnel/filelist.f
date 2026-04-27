@@ -1,4 +1,15 @@
-$ATB_FUNNEL_DIR/atb_funnel.sv
 $ATB_FUNNEL_DIR/atb_funnel_arbiter.sv
+$ATB_FUNNEL_DIR/atb_funnel.sv
 $ATB_FUNNEL_DIR/atb_funnel_reg_blk.sv
-$ATB_FUNNEL_DIR/atb_iniu_define.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator_2to1.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator_3to1.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator_4to1.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator_5to1.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator_6to1.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator_7to1.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator_8to1.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator_9to1.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator_10to1.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator_11to1.sv
+$ATB_FUNNEL_DIR/atb_funnel_ingress_aggregator_12to1.sv

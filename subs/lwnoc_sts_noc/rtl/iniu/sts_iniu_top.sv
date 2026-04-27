@@ -18,8 +18,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     parameter integer unsigned             ADDR_MAP_LINEAR_STRIDE_LOG2 = 0,
     parameter logic [TGT_ID_WIDTH-1:0]     ADDR_MAP_LINEAR_TGT_BASE   = '0,
     parameter logic [TGT_ID_WIDTH-1:0]                      ADDR_MAP_DEFAULT_TGT_ID = '0,
-    localparam int REQ_PLD_WIDTH = $bits(sts_req_typ),
-    localparam int RSP_PLD_WIDTH = $bits(sts_rsp_typ)
+    localparam int REQ_PLD_WIDTH = STS_REQ_WIDTH,
+    localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH
 ) (
     input logic clk_src ,
     input logic clk_dst ,
@@ -80,11 +80,11 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     //============================================================
     output  logic               out_req_vld,
     input   logic               out_req_rdy,
-    output  sts_req_typ         out_req_pld,
+    output [REQ_PLD_WIDTH-1:0] out_req_pld,
 
     input   logic               in_rsp_vld,
     output  logic               in_rsp_rdy,
-    input   sts_rsp_typ         in_rsp_pld,
+    input  [RSP_PLD_WIDTH-1:0]  in_rsp_pld,
 
     // CTI
     input   logic [CTI_EVENT_WIDTH-1:0]     sys_cti_event_in,
@@ -218,6 +218,12 @@ logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_out_ack;
     .dbg_data_out       (dbg_data_out)
 );
 
+// Boundary cast: top-level vector ↔ internal struct
+    sts_req_typ  out_req_pld_s;
+    sts_rsp_typ  in_rsp_pld_s;
+    assign out_req_pld_s = sts_req_typ'(out_req_pld);
+    assign in_rsp_pld = in_rsp_pld_s;
+
 `_PREFIX_(sts_iniu_noc) u_sts_iniu_noc (
     .clk_dst        (clk_dst),
     .rst_n_dst      (rstn_dst),
@@ -235,11 +241,11 @@ logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_out_ack;
 
     .req_s_vld      (out_req_vld      ),
     .req_s_rdy      (out_req_rdy      ),
-    .req_s_pld      (out_req_pld      ),
+    .req_s_pld      (out_req_pld_s),
 
     .rsp_m_vld      (in_rsp_vld       ),
     .rsp_m_rdy      (in_rsp_rdy       ),
-    .rsp_m_pld      (in_rsp_pld       ),
+    .rsp_m_pld      (in_rsp_pld_s),
 
     .cti_event_in       (noc_cti_event_in   ),
     .cti_event_in_req   (tmp_event_out_req  ),
