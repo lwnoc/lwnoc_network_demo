@@ -1,6 +1,0 @@
-$DSP2_INIU_SYS_DIR/dsp2_dti_pr_iniu_define.sv
-$DSP2_INIU_SYS_DIR/dsp2_dti_iniu_pack.sv
-$DSP2_INIU_SYS_DIR/dsp2_dti_pr_rob_state_entry.sv
-$DSP2_INIU_SYS_DIR/dsp2_dti_pr.sv
-$DSP2_INIU_SYS_DIR/dsp2_dti_to_gnpd_conv.sv
-$DSP2_INIU_SYS_DIR/dsp2_dti_pr_iniu_async_sys_side.sv

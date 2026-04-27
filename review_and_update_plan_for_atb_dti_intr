@@ -1,0 +1,121 @@
+# Comprehensive Audit and Modification Plan — ATB, DTI, INTR
+
+Generated: 2026-04-25
+Scope: Source compliance review against lwnoc-topo golden pattern + aichip_memnoc reference
+
+## soc_atb_noc — P0 (closest to golden pattern)
+
+Compliant: prefix="" all 12 cfg L28-111; standard build()+generate() flow;
+harden wrapper; cfg-first parameterization
+
+Violations:
+  A1 AtbTemplate.py:22-25 - filelist points to prebaked work/*_comp/ not raw vc/*.f
+  A2 AtbTemplate.py:57-58 - local filelist atb_funnel.f
+  A3 AtbTemplate.py:64-65 - local filelist atb_async_bridge.f
+  A4 gen_soc_atb_topo.py:11 - _CLEAN post-processing
+  A5 gen_soc_atb_topo.py - no _SINGLE_INSTANCE (camera/mipi/debug/dsp_iniu unmerged)
+
+Plan: delete _CLEAN; add _SINGLE_INSTANCE + merge; fix filelist paths
+
+## soc_dti_noc_demo — P1 (medium violations)
+
+Compliant: standard gen flow; cfg parameter passing
+
+Violations:
+  D1 DtiTemplate.py:29-33 - _new_cfg() wrapper obscures TemplateIPConfig
+  D2 DtiTemplate.py:33 - all filelist to local filelists/
+  D3 DtiTemplate.py:43-250 - all prefix non-empty (23 cfgs)
+  D4 gen_dti_topo.py:23-24 - harden wrapper is comment not impl
+  D5 gen_dti_topo.py - no _SINGLE_INSTANCE
+
+Plan: expand _new_cfg(); filelist to submodule vc/*.f; prefix=""; add harden + merge
+
+## lwnoc_intr_noc_demo/soc_intr_noc — P2 (severe deviations)
+
+~1500 line gen script, 30+ functions, 10+ post-processing phases
+
+Violations:
+  I1 gen:630-740 - build_uhdl() not build()
+  I2 gen:220-445 - _bootstrap_soc_intr_filelists_from_subs() manual filelist creation
+  I3 gen:380-432 - _build_role_wrapper_lines() per-role filtering in gen
+  I4 gen:630-740 - 10+ post-processing funcs (_patch,_rename,_localize,_tieoff,_cast,_move,_rewrite)
+  I5 SocIntrTemplate.py:30 - FILELIST_DIR = THIS_DIR / "filelist"
+  I6 SocIntrTemplate.py:131-132 - _new_cfg wrapper
+  I7 SocIntrTemplate.py:93-95 - env var controls prefix (non-deterministic)
+  I8 SocIntrTemplate.py:201-263 - mixed prefix (some empty, some non-empty)
+  I9 gen - no _SINGLE_INSTANCE
+  I10 gen - no standard harden
+  I11 gen:34-41 - depends on deleted files (SocIntrTopoDv/Pd/Config)
+
+Suggested: Phase1 (2-3h) decouple bootstrap; Phase2 (3-4h) standard gen flow;
+Phase3 (1-2h) prefix="". Do NOT execute now, discuss direction first.
+
+## Execution Order
+
+STS(DONE) -> ATB(P0 ~1h) -> DTI(P1 ~2h) -> INTR(P2 awaiting direction)
+
+## Gate Checklist (per demo after changes)
+
+- rm -rf build_logic && python gen_*_topo.py zero errors
+- rg -n 'prefix="[a-z]' *Template.py -> zero matches
+- rg -n "FILELIST_DIR" *Template.py -> zero matches
+- _SINGLE_INSTANCE defined
+- Single-instance dirs cleaned (ls build_logic/<name>/ fails)
+- Multi-instance dirs preserved
+- build_logic/<top>/ contains merged RTL
+- Generated filelist uses -f /filelist.f format
+
+## Update Note 2026-04-25 — Execution Results
+
+### ATB — DONE ✅
+- gen_soc_atb_topo.py: removed _CLEAN, added _SINGLE_INSTANCE + merge logic
+- Created missing filelist/atb_funnel.f and atb_async_bridge.f
+- Generation passes. Single-instance components (camera/mipi/debug/dsp_iniu) merged.
+
+### DTI — PARTIAL ⚠️
+- DtiTemplate.py: filelist paths changed from local FILELIST_DIR to DTI_REPO_ROOT/vc/*.f
+- gen_dti_topo.py: added _SINGLE_INSTANCE + merge, fixed import syntax error
+- Pre-existing RTL naming issue: DtiSwitchNode uses top="dti_switch_3i1o_wrap" etc.,
+  but actual RTL module is `_PREFIX_(dti_noc_switch)`. All 7 switch nodes affected.
+  Blocker: TemplateComponent cannot find instance.
+- DTI_RTL check: 45 occurrences of _PREFIX_ -- prefix change would break existing logic.
+  Recommendation: keep current prefixes, fix only the top= parameter in DtiTreeTopo.py.
+
+================================================================================
+## DTI Topology Fidelity Violation (Discovered 2026-04-25)
+================================================================================
+
+### Problem
+The generated build output does NOT match the topology described in
+soc_dti_noc_topo. The topology description specifies 4 switches (sw0/sw1/sw2/sw3)
++ buffer + async bridge + tcu_tniu, but the generator implements 7 switches
+with completely different naming (dti_sw_left3, dti_sw_left_dsp0, ...).
+
+### Current Gen Output
+  dti_sw_left3       dti_sw_left_dsp1    dti_sw_right4       dti_sw_root
+  dti_sw_left_dsp0   dti_sw_left_noc1    dti_sw_right_noc0
+
+### Topology Described
+  dsp ss0~5 iniu  -> sw0 ch0~5
+  cpu~mipi iniu   -> sw1 ch0~4
+  gpu~dp iniu     -> sw2 ch0~3 -> dti buffer -> dti async bridge slv
+  dti async bridge mst -> sw3 ch2
+  sw0 -> sw3 ch0
+  sw1 -> sw3 ch1
+  sw3 -> tcu tniu
+
+### Root Cause
+  The DtiTemplate.py and DtiTreeTopo.py were written for an OLD topology
+  (left/right tree with 7 switches) and were never updated to reflect the
+  soc_dti_noc_topo description. The generator code and topology description
+  have diverged completely.
+
+### Resolution Required
+  - Rewrite DtiTemplate.py switch configs to match sw0/sw1/sw2/sw3 naming
+  - Rewrite DtiTreeTopo.py connections to match soc_dti_noc_topo
+  - Verify build output directories match described switch names
+  - This is a P0 item that must be fixed before DTI can be considered compliant.
+
+### Gate Added (lwnoc-topo SKILL.md)
+  - Topo-description fidelity gate: gen output must match description
+  - Build-output topology naming gate: dir names must match node IDs
