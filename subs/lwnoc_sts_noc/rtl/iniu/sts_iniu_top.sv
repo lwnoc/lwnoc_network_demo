@@ -126,6 +126,9 @@ logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_in_ack;
 logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_out_req;
 logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_out_ack;
 
+    sts_req_typ  out_req_pld_s;
+    sts_rsp_typ  in_rsp_pld_s;
+
 `_PREFIX_(sts_iniu_sys) #(
     .ADDR_MAP_ENTRY_NUM     (ADDR_MAP_ENTRY_NUM),
     .ADDR_MAP_BASE_TABLE    (ADDR_MAP_BASE_TABLE),
@@ -219,8 +222,7 @@ logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_out_ack;
 );
 
 // Boundary cast: top-level vector ↔ internal struct
-    sts_req_typ  out_req_pld_s;
-    sts_rsp_typ  in_rsp_pld_s;
+
     assign out_req_pld_s = sts_req_typ'(out_req_pld);
     assign in_rsp_pld = in_rsp_pld_s;
 
