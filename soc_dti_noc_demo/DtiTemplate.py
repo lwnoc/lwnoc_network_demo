@@ -7,8 +7,7 @@ THIS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = THIS_DIR.parent
 LWNOC_TOPO_ROOT = REPO_ROOT / "lwnoc_topo"
 DEFAULT_DTI_REPO_ROOT = REPO_ROOT / "subs" / "lwnoc_dti_noc"
-EXTERNAL_DTI_REPO_ROOT = Path("/home/lgzhu/dev/noc_work/lwnoc_dti_noc")
-DTI_REPO_ROOT = EXTERNAL_DTI_REPO_ROOT if EXTERNAL_DTI_REPO_ROOT.exists() else DEFAULT_DTI_REPO_ROOT
+DTI_REPO_ROOT = DEFAULT_DTI_REPO_ROOT
 
 if str(LWNOC_TOPO_ROOT) not in sys.path:
     sys.path.insert(0, str(LWNOC_TOPO_ROOT))

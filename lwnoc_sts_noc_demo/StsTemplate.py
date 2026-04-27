@@ -7,8 +7,7 @@ THIS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = THIS_DIR.parent
 LWNOC_TOPO_ROOT = REPO_ROOT / "lwnoc_topo"
 DEFAULT_STS_NOC_ROOT = REPO_ROOT / "subs" / "lwnoc_sts_noc"
-EXTERNAL_STS_NOC_ROOT = Path("/home/lgzhu/dev/noc_work/lwnoc_sts_noc")
-STS_NOC_ROOT = EXTERNAL_STS_NOC_ROOT if EXTERNAL_STS_NOC_ROOT.exists() else DEFAULT_STS_NOC_ROOT
+STS_NOC_ROOT = DEFAULT_STS_NOC_ROOT
 
 if str(LWNOC_TOPO_ROOT) not in sys.path:
     sys.path.insert(0, str(LWNOC_TOPO_ROOT))

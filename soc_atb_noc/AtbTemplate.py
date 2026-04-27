@@ -3,7 +3,8 @@ from pathlib import Path
 from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
 
 THIS_DIR = Path(__file__).resolve().parent
-ATB_ROOT = Path(os.environ.get("ATB_SUBIP_ROOT", "/home/lgzhu/dev/noc_work/lwnoc_atb_noc"))
+SUBS_DIR = THIS_DIR.parent / "subs"
+ATB_ROOT = SUBS_DIR / "lwnoc_atb_noc"
 
 # Filelist reference: use component-specific .f (not _comp.f) to keep
 # publish directories clean. _comp.f includes common deps which causes

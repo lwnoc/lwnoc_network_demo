@@ -14,3 +14,6 @@
 [submodule "subs/lwnoc_ring_network"]
 	path = subs/lwnoc_ring_network
 	url = git@github.com:lwnoc/lwnoc_ring_network.git
+[submodule "subs/lwnoc_dti_noc"]
+	path = subs/lwnoc_dti_noc
+	url = git@github.com:lwnoc/lwnoc_dti_noc.git
