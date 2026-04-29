@@ -1,0 +1,180 @@
+{
+  "generated_stubs": [
+    {
+      "noc": "sts",
+      "category": "iniu_sys_side",
+      "top_module": "sts_iniu_sys",
+      "resolved_top_module": "sts_iniu_sys",
+      "config_attr": "aon_ss_iniu_sys_config",
+      "config_name": "aon_ss_iniu_sys",
+      "stub_module": "sts_iniu_sys_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/sts/sts_iniu_sys_side_stub.sv",
+      "port_count": 68
+    },
+    {
+      "noc": "sts",
+      "category": "iniu_top_side",
+      "top_module": "sts_iniu_top",
+      "resolved_top_module": "sts_iniu_top",
+      "config_attr": "aon_ss_iniu_top_side_config",
+      "config_name": "aon_ss_iniu_top_side",
+      "stub_module": "sts_iniu_top_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/sts/sts_iniu_top_side_stub.sv",
+      "port_count": 62
+    },
+    {
+      "noc": "sts",
+      "category": "tniu_sys_side",
+      "top_module": "sts_tniu_sys",
+      "resolved_top_module": "sts_tniu_sys",
+      "config_attr": "dspss_tniu_sys_config",
+      "config_name": "dspss_tniu_sys",
+      "stub_module": "sts_tniu_sys_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/sts/sts_tniu_sys_side_stub.sv",
+      "port_count": 40
+    },
+    {
+      "noc": "sts",
+      "category": "tniu_top_side",
+      "top_module": "sts_tniu_top",
+      "resolved_top_module": "sts_tniu_top",
+      "config_attr": "dspss_tniu_top_side_config",
+      "config_name": "dspss_tniu_top_side",
+      "stub_module": "sts_tniu_top_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/sts/sts_tniu_top_side_stub.sv",
+      "port_count": 48
+    },
+    {
+      "noc": "intr",
+      "category": "iniu_sys_side",
+      "top_module": "interrupt_iniu_async_sys_side",
+      "resolved_top_module": "interrupt_iniu_async_sys_side",
+      "config_attr": "audio_ss_iniu_cfg",
+      "config_name": "audio_ss_iniu_sys",
+      "stub_module": "intr_iniu_sys_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/intr/intr_iniu_sys_side_stub.sv",
+      "port_count": 24
+    },
+    {
+      "noc": "intr",
+      "category": "iniu_top_side",
+      "top_module": "interrupt_iniu_async_top_side",
+      "resolved_top_module": "interrupt_iniu_async_top_side",
+      "config_attr": "soc_intr_iniu_top_config",
+      "config_name": "intr_iniu_top_side",
+      "stub_module": "intr_iniu_top_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/intr/intr_iniu_top_side_stub.sv",
+      "port_count": 16
+    },
+    {
+      "noc": "intr",
+      "category": "tniu_sys_side",
+      "top_module": "interrupt_tniu_async_sys_side",
+      "resolved_top_module": "interrupt_tniu_async_sys_side",
+      "config_attr": "display_ss_tniu_cfg",
+      "config_name": "display_ss_tniu_sys",
+      "stub_module": "intr_tniu_sys_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/intr/intr_tniu_sys_side_stub.sv",
+      "port_count": 25
+    },
+    {
+      "noc": "intr",
+      "category": "tniu_top_side",
+      "top_module": "interrupt_tniu_async_top_side",
+      "resolved_top_module": "interrupt_tniu_async_top_side",
+      "config_attr": "soc_intr_tniu_top_config",
+      "config_name": "intr_tniu_top_side",
+      "stub_module": "intr_tniu_top_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/intr/intr_tniu_top_side_stub.sv",
+      "port_count": 17
+    },
+    {
+      "noc": "dti",
+      "category": "iniu_sys_side",
+      "top_module": "dti_pr_iniu_async_sys_side",
+      "resolved_top_module": "pcie_eth_dti_pr_iniu_async_sys_side",
+      "config_attr": "pcie_eth_iniu_sys_config",
+      "config_name": "pcie_eth_iniu_sys",
+      "stub_module": "dti_iniu_sys_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/dti/dti_iniu_sys_side_stub.sv",
+      "port_count": 32
+    },
+    {
+      "noc": "dti",
+      "category": "iniu_top_side",
+      "top_module": "dti_pr_iniu_async_top_side",
+      "resolved_top_module": "dti_iniu_top_dti_pr_iniu_async_top_side",
+      "config_attr": "iniu_top_config",
+      "config_name": "dti_iniu_top_side",
+      "stub_module": "dti_iniu_top_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/dti/dti_iniu_top_side_stub.sv",
+      "port_count": 28
+    },
+    {
+      "noc": "dti",
+      "category": "tniu_sys_side",
+      "top_module": "dti_tniu_async_sys_side",
+      "resolved_top_module": "sys_tcu_dti_tniu_async_sys_side",
+      "config_attr": "tcu_tniu_sys_config",
+      "config_name": "sys_tcu_tniu_sys",
+      "stub_module": "dti_tniu_sys_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/dti/dti_tniu_sys_side_stub.sv",
+      "port_count": 31
+    },
+    {
+      "noc": "dti",
+      "category": "tniu_top_side",
+      "top_module": "dti_tniu_async_top_side",
+      "resolved_top_module": "dti_tniu_top_dti_tniu_async_top_side",
+      "config_attr": "tniu_top_config",
+      "config_name": "dti_tniu_top_side",
+      "stub_module": "dti_tniu_top_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/dti/dti_tniu_top_side_stub.sv",
+      "port_count": 28
+    },
+    {
+      "noc": "atb",
+      "category": "iniu_sys_side",
+      "top_module": "atb_iniu_sys",
+      "resolved_top_module": "atb_iniu_sys",
+      "config_attr": "_atb_iniu_sys_cfg",
+      "config_name": "atb_iniu_sys",
+      "stub_module": "atb_iniu_sys_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/atb/atb_iniu_sys_side_stub.sv",
+      "port_count": 27
+    },
+    {
+      "noc": "atb",
+      "category": "iniu_top_side",
+      "top_module": "atb_iniu_noc",
+      "resolved_top_module": "atb_iniu_noc",
+      "config_attr": "_atb_iniu_noc_cfg",
+      "config_name": "atb_iniu_noc",
+      "stub_module": "atb_iniu_top_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/atb/atb_iniu_top_side_stub.sv",
+      "port_count": 22
+    },
+    {
+      "noc": "atb",
+      "category": "tniu_sys_side",
+      "top_module": "atb_tniu_sys",
+      "resolved_top_module": "atb_tniu_sys",
+      "config_attr": "_atb_tniu_sys_cfg",
+      "config_name": "atb_tniu_sys",
+      "stub_module": "atb_tniu_sys_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/atb/atb_tniu_sys_side_stub.sv",
+      "port_count": 27
+    },
+    {
+      "noc": "atb",
+      "category": "tniu_top_side",
+      "top_module": "atb_tniu_noc",
+      "resolved_top_module": "atb_tniu_noc",
+      "config_attr": "_atb_tniu_noc_cfg",
+      "config_name": "atb_tniu_noc",
+      "stub_module": "atb_tniu_top_side_stub",
+      "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/atb/atb_tniu_top_side_stub.sv",
+      "port_count": 23
+    }
+  ]
+}
