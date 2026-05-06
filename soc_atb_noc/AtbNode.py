@@ -61,7 +61,7 @@ class AtbIniuNode(UhdlWrapperNode):
         self.add_interface("rst_noc_n", is_global=True)
 
         self.sys_side = AtbIniuSysNode(node_id=node_id, cfg=cfg)
-        self.top_side = AtbIniuTopNode(node_id=node_id, cfg=cfg_top)
+        self.top_side = AtbIniuTopWrapNode(node_id=node_id, cfg_top=cfg_top)
 
         connect(self.sys_side.clk,   self.clk_sys)
         connect(self.sys_side.rst_n, self.rst_sys_n)
@@ -72,6 +72,17 @@ class AtbIniuNode(UhdlWrapperNode):
         connect(self.sys_side.lp_rx, self.top_side.lp_tx)
         connect(self.sys_side.lp_afifo_tx, self.top_side.lp_afifo_rx)
         connect(self.sys_side.lp_afifo_rx, self.top_side.lp_afifo_tx)
+        self.expose_unconnected_interfaces()
+
+
+class AtbIniuTopWrapNode(UhdlWrapperNode):
+    """INIU top-side wrapper: exposes noc-facing ports for harden mounting."""
+    def __init__(self, node_id: str, cfg_top):
+        super().__init__(id=f"{node_id}_top_wrap")
+        self.top_side = AtbIniuTopNode(node_id=node_id, cfg=cfg_top)
+        for iface_name in self.top_side.interfaces:
+            self.add_interface(iface_name)
+            connect(getattr(self.top_side, iface_name), getattr(self, iface_name))
         self.expose_unconnected_interfaces()
 
 
@@ -122,7 +133,7 @@ class AtbTniuNode(UhdlWrapperNode):
         self.add_interface("clk_noc", is_global=True)
         self.add_interface("rst_noc_n", is_global=True)
 
-        self.top_side = AtbTniuTopNode(node_id=node_id, cfg=cfg_top)
+        self.top_side = AtbTniuTopWrapNode(node_id=node_id, cfg_top=cfg_top)
         self.sys_side = AtbTniuSysNode(node_id=node_id, cfg=cfg)
 
         connect(self.top_side.clk,   self.clk_noc)
@@ -130,6 +141,17 @@ class AtbTniuNode(UhdlWrapperNode):
         connect(self.sys_side.clk,   self.clk_sys)
         connect(self.sys_side.rst_n, self.rst_sys_n)
         connect(self.top_side.async_fifo, self.sys_side.async_fifo)
+        self.expose_unconnected_interfaces()
+
+
+class AtbTniuTopWrapNode(UhdlWrapperNode):
+    """TNIU top-side wrapper: exposes noc-facing ports for harden mounting."""
+    def __init__(self, node_id: str, cfg_top):
+        super().__init__(id=f"{node_id}_top_wrap")
+        self.top_side = AtbTniuTopNode(node_id=node_id, cfg=cfg_top)
+        for iface_name in self.top_side.interfaces:
+            self.add_interface(iface_name)
+            connect(getattr(self.top_side, iface_name), getattr(self, iface_name))
         self.expose_unconnected_interfaces()
 
 

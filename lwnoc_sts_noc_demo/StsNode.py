@@ -133,6 +133,49 @@ class StsIniuTopNode(UhdlComponentNode):
         self.add_interface("noc_afifo_req_db_err", r"^noc_afifo_req_db_err$")
 
 
+class StsIniuTopWrapNode(UhdlWrapperNode):
+    """INIU top-side wrapper (ai memnoc pattern): exposes noc-facing ports for harden mounting."""
+    def __init__(self, id: str, inner_top: 'StsIniuTopNode'):
+        super().__init__(id=id)
+        setattr(self, inner_top.id, inner_top)  # register as proper UHDL child
+        self.add_interface("clk_src", is_global=True)
+        self.add_interface("clk_dst", is_global=True)
+        self.add_interface("rstn_src", is_global=True)
+        self.add_interface("rstn_dst", is_global=True)
+        self.add_interface("node_id")
+        self.add_interface("axi")
+        self.add_interface("req")
+        self.add_interface("rsp")
+        self.add_interface("cti_event")
+        self.add_interface("cti_channel")
+        self.add_interface("dbg_timestamp")
+        self.add_interface("dbg_data")
+        self.add_interface("cti_apb")
+        self.add_interface("sys_afifo_rsp_sb_err")
+        self.add_interface("sys_afifo_rsp_db_err")
+        self.add_interface("noc_afifo_req_sb_err")
+        self.add_interface("noc_afifo_req_db_err")
+
+        connect(inner_top.clk_src, self.clk_src)
+        connect(inner_top.clk_dst, self.clk_dst)
+        connect(inner_top.rstn_src, self.rstn_src)
+        connect(inner_top.rstn_dst, self.rstn_dst)
+        connect(inner_top.axi, self.axi)
+        connect(inner_top.node_id, self.node_id)
+        connect(inner_top.req, self.req)
+        connect(inner_top.rsp, self.rsp)
+        connect(inner_top.cti_event, self.cti_event)
+        connect(inner_top.cti_channel, self.cti_channel)
+        connect(inner_top.dbg_timestamp, self.dbg_timestamp)
+        connect(inner_top.dbg_data, self.dbg_data)
+        connect(inner_top.cti_apb, self.cti_apb)
+        connect(inner_top.sys_afifo_rsp_sb_err, self.sys_afifo_rsp_sb_err)
+        connect(inner_top.sys_afifo_rsp_db_err, self.sys_afifo_rsp_db_err)
+        connect(inner_top.noc_afifo_req_sb_err, self.noc_afifo_req_sb_err)
+        connect(inner_top.noc_afifo_req_db_err, self.noc_afifo_req_db_err)
+        self.expose_unconnected_interfaces()
+
+
 class StsIniuNode(UhdlWrapperNode):
     """INIU wrapper — composes StsIniuTopNode, exposes integration-facing interfaces."""
     def __init__(self, id: str, sys_cfg, top_cfg):
@@ -184,7 +227,10 @@ class StsIniuNode(UhdlWrapperNode):
 
     @property
     def top_side(self):
-        return self.iniu_top_side
+        """Return TopWrapNode for harden mounting (INTR/DTI/ai memnoc pattern)."""
+        if not hasattr(self, '_top_wrap_node'):
+            self._top_wrap_node = StsIniuTopWrapNode(id=f"{self.id}_top_wrap", inner_top=self.iniu_top_side)
+        return self._top_wrap_node
 
 
 # CONSTRAINT: Node class names must NOT encode specific config parameters.
@@ -265,6 +311,55 @@ class StsTniuTopNode(UhdlComponentNode):
         self.add_interface("dbg_en", r"^dbg_en$")
 
 
+class StsTniuTopWrapNode(UhdlWrapperNode):
+    """TNIU top-side wrapper (ai memnoc pattern): exposes noc-facing ports for harden mounting."""
+    def __init__(self, id: str, inner_top: 'StsTniuTopNode'):
+        super().__init__(id=id)
+        setattr(self, inner_top.id, inner_top)  # register as proper UHDL child
+        self.add_interface("clk_src", is_global=True)
+        self.add_interface("clk_dst", is_global=True)
+        self.add_interface("clk_dbg_timer", is_global=True)
+        self.add_interface("rstn_src", is_global=True)
+        self.add_interface("rstn_dst", is_global=True)
+        self.add_interface("rstn_dbg_timer", is_global=True)
+        self.add_interface("req")
+        self.add_interface("rsp")
+        self.add_interface("pmc_apb")
+        self.add_interface("sys_apb")
+        self.add_interface("dbg_data")
+        self.add_interface("dbg_timestamp")
+        self.add_interface("sys_cti_event")
+        self.add_interface("noc_cti_event")
+        self.add_interface("sys_cti_channel")
+        self.add_interface("noc_cti_channel")
+        self.add_interface("timing_bus1")
+        self.add_interface("timing_bus2")
+        self.add_interface("timing_bus3")
+        self.add_interface("dbg_en")
+
+        connect(inner_top.clk_src, self.clk_src)
+        connect(inner_top.clk_dst, self.clk_dst)
+        connect(inner_top.clk_dbg_timer, self.clk_dbg_timer)
+        connect(inner_top.rstn_src, self.rstn_src)
+        connect(inner_top.rstn_dst, self.rstn_dst)
+        connect(inner_top.rstn_dbg_timer, self.rstn_dbg_timer)
+        connect(inner_top.req, self.req)
+        connect(inner_top.rsp, self.rsp)
+        connect(inner_top.pmc_apb, self.pmc_apb)
+        connect(inner_top.sys_apb, self.sys_apb)
+        connect(inner_top.dbg_data, self.dbg_data)
+        connect(inner_top.dbg_timestamp, self.dbg_timestamp)
+        connect(inner_top.sys_cti_event, self.sys_cti_event)
+        connect(inner_top.noc_cti_event, self.noc_cti_event)
+        connect(inner_top.sys_cti_channel, self.sys_cti_channel)
+        connect(inner_top.noc_cti_channel, self.noc_cti_channel)
+        connect(inner_top.timing_bus1, self.timing_bus1)
+        connect(inner_top.timing_bus2, self.timing_bus2)
+        connect(inner_top.timing_bus3, self.timing_bus3)
+        connect(inner_top.dbg_en, self.dbg_en)
+        self.expose_unconnected_interfaces()
+
+
 class StsTniuSysNode(UhdlComponentNode):
     """TNIU system-side leaf — hierarchical inside sts_tniu_top."""
     def __init__(self, id: str, cfg: TemplateIPConfig):
@@ -302,32 +397,10 @@ class StsTniuWrapNode(UhdlWrapperNode):
         self.add_interface("dbg_en")
 
         self.sys_side = StsTniuSysNode(id=f"{id}_sys", cfg=sys_cfg)
-        self.top_side = StsTniuTopNode(id=f"{id}_top", cfg=top_cfg, top=top_wrap)
+        self.top_side = StsTniuTopWrapNode(id=f"{id}_top_wrap", inner_top=StsTniuTopNode(id=f"{id}_top", cfg=top_cfg, top=top_wrap))
 
-        # Connect sys↔top clock crossing — async bridge handles the crossing
+        # Connect sys-side — top-side exposed directly to harden (ai memnoc pattern)
         connect(self.sys_side.clk, self.clk_src)
         connect(self.sys_side.rst_n, self.rstn_src)
-
-        # Top-side clock/reset
-        connect(self.top_side.clk_src, self.clk_src)
-        connect(self.top_side.rstn_src, self.rstn_src)
-        connect(self.top_side.clk_dst, self.clk_dst)
-        connect(self.top_side.rstn_dst, self.rstn_dst)
-        connect(self.top_side.clk_dbg_timer, self.clk_dbg_timer)
-        connect(self.top_side.rstn_dbg_timer, self.rstn_dbg_timer)
-        connect(self.top_side.req, self.req)
-        connect(self.top_side.rsp, self.rsp)
-        connect(self.top_side.pmc_apb, self.pmc_apb)
-        connect(self.top_side.sys_apb, self.sys_apb)
-        connect(self.top_side.dbg_data, self.dbg_data)
-        connect(self.top_side.dbg_timestamp, self.dbg_timestamp)
-        connect(self.top_side.sys_cti_event, self.sys_cti_event)
-        connect(self.top_side.noc_cti_event, self.noc_cti_event)
-        connect(self.top_side.sys_cti_channel, self.sys_cti_channel)
-        connect(self.top_side.noc_cti_channel, self.noc_cti_channel)
-        connect(self.top_side.timing_bus1, self.timing_bus1)
-        connect(self.top_side.timing_bus2, self.timing_bus2)
-        connect(self.top_side.timing_bus3, self.timing_bus3)
-        connect(self.top_side.dbg_en, self.dbg_en)
 
         self.expose_unconnected_interfaces()
