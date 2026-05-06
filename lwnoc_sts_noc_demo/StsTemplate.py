@@ -280,4 +280,5 @@ soc_sts_req_rsp_async_raw_config = TemplateIPConfig(
     name="soc_sts_req_rsp_async_raw",
     filelist=soc_sts_req_rsp_async_config.filelist,
     prefix="",
+    env_var="STS_REQ_RSP_ASYNC_OUT_DIR",
 )
