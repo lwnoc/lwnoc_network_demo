@@ -1,3 +1,0 @@
-/home/lgzhu/software/vcs2016/bin/vcs
-/usr/bin/verilator
-/usr/bin/iverilog

@@ -10,67 +10,10 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 from topo_core.node.uhdlComponentNode import UhdlComponentNode
 from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
 from topo_core.utils.networkHierOpt import connect
-from uhdl.uhdl.core import BitXor, Component, Input, Output, UInt
+from uhdl.uhdl.core import Input, Output, UInt
 from uhdl.uhdl.core.TemplateIP import TemplateComponent, TemplateIPConfig
 
 from StsTemplate import *
-
-
-def _pack_int(width: int, values: list[int]) -> int:
-    result = 0
-    mask = (1 << width) - 1
-    for value in values:
-        result = (result << width) | (value & mask)
-    return result
-
-
-def _sv_param(total_bits: int, value: int) -> str:
-    hex_digits = max(1, (total_bits + 3) // 4)
-    return f"{total_bits}'h{value:0{hex_digits}X}"
-
-
-
-class StsReqSinkComponent(Component):
-    def __init__(self, payload_width: int = 119):
-        self._payload_width = payload_width
-        super().__init__()
-
-    def circuit(self):
-        self.req_vld = Input(UInt(1))
-        self.req_rdy = Output(UInt(1))
-        self.req_pld = Input(UInt(self._payload_width))
-        self.req_rdy += UInt(1, 1)
-
-
-class StsReqSinkNode(UhdlComponentNode):
-    def __init__(self, id: str = "sts_req_sink", payload_width: int = 119):
-        comp = StsReqSinkComponent(payload_width=payload_width)
-        super().__init__(id=id, impl=comp)
-
-        self.add_interface("req", r"^req_(vld|rdy|pld)$")
-
-
-class StsReqZeroSourceComponent(Component):
-    def __init__(self, payload_width: int = 119):
-        self._payload_width = payload_width
-        super().__init__()
-
-    def circuit(self):
-        self.req_vld = Output(UInt(1))
-        self.req_rdy = Input(UInt(1))
-        self.req_pld = Output(UInt(self._payload_width))
-        self.req_vld += BitXor(UInt(1, 1), UInt(1, 1))
-        self.req_pld += BitXor(UInt(self._payload_width, 1), UInt(self._payload_width, 1))
-
-
-class StsReqZeroSourceNode(UhdlComponentNode):
-    def __init__(self, id: str = "sts_req_zero_source", payload_width: int = 119):
-        comp = StsReqZeroSourceComponent(payload_width=payload_width)
-        super().__init__(id=id, impl=comp)
-
-        self.add_interface("req", r"^req_(vld|rdy|pld)$")
-
-
 class StsReqRspAsyncBridgeSlvNode(UhdlComponentNode):
     def __init__(self, id: str = "sts_req_rsp_async_slv", cfg=soc_sts_req_rsp_async_raw_config):
         comp = TemplateComponent(config=cfg, top="sts_async_bridge_slv",
@@ -168,7 +111,7 @@ class StsIniuTopNode(UhdlComponentNode):
     """INIU top-side — NoC-facing: AXI + req/rsp + CTI/debug (includes sys internally)."""
     def __init__(self, id: str, cfg):
         params = dict(getattr(cfg, 'param_overrides', {}))
-        comp = TemplateComponent(config=cfg, top="sts_iniu_top", **params)
+        comp = TemplateComponent(config=cfg, top="sts_iniu_top", struct_mode="packed", **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk_src", r"^clk_src$")
@@ -183,6 +126,11 @@ class StsIniuTopNode(UhdlComponentNode):
         self.add_interface("cti_channel", r"^(sys|noc)_cti_channel_.*")
         self.add_interface("dbg_timestamp", r"^dbg_timestamp_.*")
         self.add_interface("dbg_data", r"^dbg_data_.*")
+        self.add_interface("cti_apb", r"^cti_apb_.*")
+        self.add_interface("sys_afifo_rsp_sb_err", r"^sys_afifo_rsp_sb_err$")
+        self.add_interface("sys_afifo_rsp_db_err", r"^sys_afifo_rsp_db_err$")
+        self.add_interface("noc_afifo_req_sb_err", r"^noc_afifo_req_sb_err$")
+        self.add_interface("noc_afifo_req_db_err", r"^noc_afifo_req_db_err$")
 
 
 class StsIniuNode(UhdlWrapperNode):
@@ -202,6 +150,11 @@ class StsIniuNode(UhdlWrapperNode):
         self.add_interface("cti_channel")
         self.add_interface("dbg_timestamp")
         self.add_interface("dbg_data")
+        self.add_interface("cti_apb")
+        self.add_interface("sys_afifo_rsp_sb_err")
+        self.add_interface("sys_afifo_rsp_db_err")
+        self.add_interface("noc_afifo_req_sb_err")
+        self.add_interface("noc_afifo_req_db_err")
 
         self.iniu_sys_side = StsIniuSysNode(id=f"{id}_sys_side", cfg=sys_cfg)
         self.iniu_top_side = StsIniuTopNode(id=f"{id}_top_side", cfg=top_cfg)
@@ -222,6 +175,11 @@ class StsIniuNode(UhdlWrapperNode):
         connect(self.iniu_top_side.cti_channel, self.cti_channel)
         connect(self.iniu_top_side.dbg_timestamp, self.dbg_timestamp)
         connect(self.iniu_top_side.dbg_data, self.dbg_data)
+        connect(self.iniu_top_side.cti_apb, self.cti_apb)
+        connect(self.iniu_top_side.sys_afifo_rsp_sb_err, self.sys_afifo_rsp_sb_err)
+        connect(self.iniu_top_side.sys_afifo_rsp_db_err, self.sys_afifo_rsp_db_err)
+        connect(self.iniu_top_side.noc_afifo_req_sb_err, self.noc_afifo_req_sb_err)
+        connect(self.iniu_top_side.noc_afifo_req_db_err, self.noc_afifo_req_db_err)
         self.expose_unconnected_interfaces()
 
     @property
@@ -247,13 +205,13 @@ class StsDecNode(UhdlComponentNode):
         route_mask = getattr(cfg, '_route_mask_val', 0xB0)
         route_base_values = route_table[-slave_num:]
         route_mask_values = [route_mask] * slave_num
-        route_base_int = _pack_int(TGT_ID_WIDTH, route_base_values)
-        route_mask_int = _pack_int(TGT_ID_WIDTH, route_mask_values)
+        route_base_int = pack_int(TGT_ID_WIDTH, route_base_values)
+        route_mask_int = pack_int(TGT_ID_WIDTH, route_mask_values)
         params.update(
             {
                 "STS_DEMO_DEC_SLAVE_NUM": slave_num,
-                "STS_DEMO_ROUTE_BASE": _sv_param(slave_num * TGT_ID_WIDTH, route_base_int),
-                "STS_DEMO_ROUTE_MASK": _sv_param(slave_num * TGT_ID_WIDTH, route_mask_int),
+                "STS_DEMO_ROUTE_BASE": sv_param(slave_num * TGT_ID_WIDTH, route_base_int),
+                "STS_DEMO_ROUTE_MASK": sv_param(slave_num * TGT_ID_WIDTH, route_mask_int),
             }
         )
 
@@ -301,6 +259,10 @@ class StsTniuTopNode(UhdlComponentNode):
         self.add_interface("noc_cti_event", r"^noc_cti_event_.*")
         self.add_interface("sys_cti_channel", r"^sys_cti_channel_.*")
         self.add_interface("noc_cti_channel", r"^noc_cti_channel_.*")
+        self.add_interface("timing_bus1", r"^timing_bus1$")
+        self.add_interface("timing_bus2", r"^timing_bus2$")
+        self.add_interface("timing_bus3", r"^timing_bus3$")
+        self.add_interface("dbg_en", r"^dbg_en$")
 
 
 class StsTniuSysNode(UhdlComponentNode):
@@ -334,6 +296,10 @@ class StsTniuWrapNode(UhdlWrapperNode):
         self.add_interface("noc_cti_event")
         self.add_interface("sys_cti_channel")
         self.add_interface("noc_cti_channel")
+        self.add_interface("timing_bus1")
+        self.add_interface("timing_bus2")
+        self.add_interface("timing_bus3")
+        self.add_interface("dbg_en")
 
         self.sys_side = StsTniuSysNode(id=f"{id}_sys", cfg=sys_cfg)
         self.top_side = StsTniuTopNode(id=f"{id}_top", cfg=top_cfg, top=top_wrap)
@@ -359,5 +325,9 @@ class StsTniuWrapNode(UhdlWrapperNode):
         connect(self.top_side.noc_cti_event, self.noc_cti_event)
         connect(self.top_side.sys_cti_channel, self.sys_cti_channel)
         connect(self.top_side.noc_cti_channel, self.noc_cti_channel)
+        connect(self.top_side.timing_bus1, self.timing_bus1)
+        connect(self.top_side.timing_bus2, self.timing_bus2)
+        connect(self.top_side.timing_bus3, self.timing_bus3)
+        connect(self.top_side.dbg_en, self.dbg_en)
 
         self.expose_unconnected_interfaces()

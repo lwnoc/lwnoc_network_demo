@@ -39,27 +39,78 @@ Topology description (Topo.py)
 
 ### Filelist 解析策略
 
-每个 demo 的 Template.py 定义了 RTL 源码的加载路径：
-
-- **INTR/STS/DTI**: 优先检查 `EXTERNAL_*_ROOT`（独立仓库路径），回退到 `subs/` 目录
-- **ATB**: 使用 `ATB_SUBIP_ROOT` 环境变量（默认指向 `/home/lgzhu/dev/noc_work/lwnoc_atb_noc`）
-
-所有 `_pub.f` filelist 存储在**独立仓库的 `vc/` 目录**，不在 demo 目录中。
+所有 demo 的 filelist 统一从 `subs/<repo>/vc/` 目录获取，由 `_resolve_fl()` 函数解析。
+PT 层**不存储本地 filelist 副本**。共享依赖（`fcip`、`lwnoc_lowpower_component`）统一从 `subs/` 顶层获取，
+不再嵌套在各 NoC 子模块内部。
 
 ---
+## 2. 环境变量配置
 
-## 2. 环境配置
+### 2.1 三级回退机制（`_resolve_env_path`）
 
-### 前置条件
+每个 `*Template.py` 中定义了 `_resolve_env_path(name, csh_path, bash_path, default)` 函数，
+按以下优先级解析路径：
 
-```bash
-# 设置 lwnoc_topo (UHDL 框架)
-export PYTHONPATH=/path/to/lwnoc_topo:$PYTHONPATH
+1. **os.environ[name]** — 如果已设置（csh/bash/shell），直接使用
+2. **source csh_path** — 尝试 source 子模块的 `setup_env.csh`，读取其中的 `$name`
+3. **source bash_path** — 尝试 source 子模块的 `setup_env.sh`，读取其中的 `$name`
+4. **Python 默认值** — 使用 `default` 参数
 
-# 验证各 demo 的子模块路径正常：
-cd lwnoc_sts_noc_demo && python3 -c "from StsTemplate import *; print('OK')"
-cd soc_atb_noc      && python3 -c "from AtbTemplate import *; print('OK')"
+### 2.2 两类环境变量
+
+| 类型 | 设置方式 | 示例 | 说明 |
+|------|---------|------|------|
+| **源依赖** | Python 层 `os.environ["KEY"]=` | `INTR_NOC_DIR`、`FCIP_DIR`、`LWNOC_LOWPOWER_COMPONENT` | 各子模块根目录，gen 时必须存在 |
+| **输出目录** | Python 层仅声明 `env_var=` 名，**不设值** | `INTR_INIU_TOP_OUT_DIR`、`SOC_INTR_CPU_SS_INIU_SYS_OUT_DIR` | 由下游 sim/Makefile 设置，用于生成 filelist 中的 `-f $ENV_VAR/` 引用 |
+
+### 2.3 如何在 csh 中覆盖默认路径
+
+假设要使用自定义的 `INTR_NOC_DIR` 而非默认的 `subs/lwnoc_interrupt_noc`：
+
+**方法 1：在 csh shell 中直接 setenv（优先级最高）**
+```csh
+setenv INTR_NOC_DIR /path/to/my/interrupt_noc
 ```
+
+**方法 2：编辑子模块的 `setup_env.csh`**
+```csh
+# 编辑 subs/lwnoc_interrupt_noc/setup_env.csh
+setenv INTR_NOC_DIR /path/to/my/interrupt_noc
+```
+
+**方法 3：修改 `*Template.py` 的默认值**
+```python
+# 编辑 SocIntrTemplate.py，修改最后一个参数
+INTR_NOC_ROOT = _resolve_env_path("INTR_NOC_DIR",
+    DEFAULT_INTR_NOC_ROOT / "setup_env.csh",
+    DEFAULT_INTR_NOC_ROOT / "setup_env.sh",
+    Path("/path/to/my/interrupt_noc"))   # ← 修改此处
+```
+
+### 2.4 各 Demo 使用的源依赖环境变量
+
+| Demo | 环境变量 | 默认值 | 说明 |
+|------|---------|--------|------|
+| **INTR** | `INTR_NOC_DIR` | `subs/lwnoc_interrupt_noc` | interrupt NoC 仓库 |
+| | `INTR_NOC_NETWORK_DIR` | `subs/lwnoc_ring_network/de/rtl` | 环网 RTL |
+| | `FCIP_DIR` | `subs/fcip` | 共享 FIFO IP |
+| | `LWNOC_LOWPOWER_COMPONENT` | `subs/lwnoc_lowpower_component` | 共享低功耗 IP |
+| | `INTERRUPT_INIU` | 同 `INTR_NOC_DIR` | `vc/*_comp.f` 内部引用 |
+| | `INTERRUPT_TNIU` | 同 `INTR_NOC_DIR` | `vc/*_comp.f` 内部引用 |
+| **STS** | `STS_NOC_DIR` | `subs/lwnoc_sts_noc` | STS NoC 仓库 |
+| | `STS_INIU` | 同 `STS_NOC_DIR` | INIU 子模块路径 |
+| | `STS_TNIU` | 同 `STS_NOC_DIR` | TNIU 子模块路径 |
+| | `FCIP_DIR` | `subs/fcip` | 共享 FIFO IP |
+| **ATB** | `ATB_SUBIP_ROOT` | `subs/lwnoc_atb_noc` | ATB NoC 仓库 |
+| | `RTL_PATH` | 同 `ATB_SUBIP_ROOT` | RTL 根路径 |
+| | `ATB_INIU` | 同 `ATB_SUBIP_ROOT` | INIU 子模块路径 |
+| | `LWNOC_LOWPOWER_COMPONENT` | `subs/lwnoc_lowpower_component` | 共享低功耗 IP |
+| **DTI** | `DTI_PR` | `subs/lwnoc_dti_noc` | DTI NoC 仓库 |
+| | `RTL_PATH` | 同 `DTI_PR` | RTL 根路径 |
+| | `FCIP_DIR` | `subs/fcip` | 共享 FIFO IP |
+| | `LWNOC_LOWPOWER_COMPONENT` | `subs/lwnoc_lowpower_component` | 共享低功耗 IP |
+
+---
 
 ### 生成流程详解
 
@@ -172,23 +223,22 @@ BUILD_DIR = THIS_DIR / "build_logic"
 comp.generate_verilog(iteration=True)
 comp.generate_filelist(abs_path=False, prefix="$SOC_PREFIX")
 
-# 硬分区输出 → top_wrap_dir（扁平聚合，memnoc 模式）
-top_wrap_dir = str(BUILD_DIR / "sts_soc_top_wrap")
-hc.output_dir = top_wrap_dir  # ← 所有 harden .v 输出到 top_wrap 目录
-hc.generate_verilog(iteration=True)
-hc.generate_filelist(abs_path=False, prefix="$SOC_PREFIX")
+# 硬分区输出到 BUILD_DIR（与子 IP 目录并列），参考 INTR 模式
+for harden in [dn_harden, up_harden]:
+    hc = harden.build_uhdl()
+    hc.output_dir = str(BUILD_DIR)  # ← 并列输出，不嵌套
+    hc.generate_verilog(iteration=True)
 
-# 最终聚合 wrapper
+# 最终聚合 wrapper（同 BUILD_DIR 并列）
 rtw_comp = ring_top_wrap.build_uhdl()
-rtw_comp.output_dir = top_wrap_dir
+rtw_comp.output_dir = str(BUILD_DIR)
 rtw_comp.generate_verilog(iteration=True)
 ```
 
 修改输出布局：
 - **修改输出根目录**：修改 `BUILD_DIR`
-- **扁平 vs 分层**：harden `.v` 文件 → `top_wrap_dir`（扁平）；IP template `.v` 文件 → `BUILD_DIR/<ip_name>/`（分层）
+- **并列结构**：所有目录（IP、harden、top_wrap）并列在 `BUILD_DIR` 下（参考 INTR 的 `build_logic/`）
 - **Filelist 前缀**：修改 `generate_filelist()` 的 `prefix=` 参数
-- **Filelist 格式**：`abs_path=False` 使用相对路径，`True` 使用绝对路径
 
 ### 3.7 增删拓扑结构（硬分区）
 

@@ -18,25 +18,25 @@ import DtiTemplate as template
 
 
 class DtiReqRspAsyncBridgeSlvNode(UhdlComponentNode):
-    def __init__(self, id: str, cfg):
+    def __init__(self, id: str, cfg, clk_name="clk_noc", rst_name="rst_noc_n"):
         params = getattr(cfg, 'param_overrides', {})
         comp = TemplateComponent(config=cfg, top="dti_async_bridge_slv", **params)
         super().__init__(id=id, impl=comp)
 
-        self.add_interface("clk", r"^clk$")
-        self.add_interface("rst_n", r"^rst_n$")
+        self.add_interface(clk_name, r"^clk$")
+        self.add_interface(rst_name, r"^rst_n$")
         self.add_interface("s_chan", r"^s_(valid|ready|payload|last|srcid|tgtid|qos|threshold)$")
         self.add_interface("sync", r"^(wptr_async|rptr_async|rptr_sync|pld_sync)$")
 
 
 class DtiReqRspAsyncBridgeMstNode(UhdlComponentNode):
-    def __init__(self, id: str, cfg):
+    def __init__(self, id: str, cfg, clk_name="clk_noc_up", rst_name="rst_noc_up_n"):
         params = getattr(cfg, 'param_overrides', {})
         comp = TemplateComponent(config=cfg, top="dti_async_bridge_mst", **params)
         super().__init__(id=id, impl=comp)
 
-        self.add_interface("clk", r"^clk$")
-        self.add_interface("rst_n", r"^rst_n$")
+        self.add_interface(clk_name, r"^clk$")
+        self.add_interface(rst_name, r"^rst_n$")
         self.add_interface("m_chan", r"^m_(valid|ready|payload|last|srcid|tgtid|qos|threshold)$")
         self.add_interface("sync", r"^(wptr_async|rptr_async|rptr_sync|pld_sync)$")
 
@@ -52,13 +52,13 @@ class DtiReqRspAsyncBridgeNode(UhdlWrapperNode):
         self.add_interface("s_chan")
         self.add_interface("m_chan")
 
-        self.slv_side = DtiReqRspAsyncBridgeSlvNode(id=f"{id}_slv", cfg=cfg)
-        self.mst_side = DtiReqRspAsyncBridgeMstNode(id=f"{id}_mst", cfg=cfg)
+        self.slv_side = DtiReqRspAsyncBridgeSlvNode(id=f"{id}_slv", cfg=cfg, clk_name="clk_noc", rst_name="rst_noc_n")
+        self.mst_side = DtiReqRspAsyncBridgeMstNode(id=f"{id}_mst", cfg=cfg, clk_name="clk_noc_up", rst_name="rst_noc_up_n")
 
-        connect(self.slv_side.clk, self.clk_src)
-        connect(self.slv_side.rst_n, self.rst_src_n)
-        connect(self.mst_side.clk, self.clk_dst)
-        connect(self.mst_side.rst_n, self.rst_dst_n)
+        connect(self.slv_side.clk_noc, self.clk_src)
+        connect(self.slv_side.rst_noc_n, self.rst_src_n)
+        connect(self.mst_side.clk_noc_up, self.clk_dst)
+        connect(self.mst_side.rst_noc_up_n, self.rst_dst_n)
         connect(self.slv_side.s_chan, self.s_chan)
         connect(self.mst_side.m_chan, self.m_chan)
         connect(self.slv_side.sync, self.mst_side.sync)
@@ -105,8 +105,8 @@ class DtiLinkBufReqNode(UhdlComponentNode):
         comp = TemplateComponent(config=cfg, top="dti_link_buf", **params)
         super().__init__(id=id, impl=comp)
 
-        self.add_interface("clk", r"^clk$")
-        self.add_interface("rst_n", r"^rst_n$")
+        self.add_interface("clk_noc", r"^clk$")
+        self.add_interface("rst_noc_n", r"^rst_n$")
         self.add_interface("s_req", r"^(write_req_(valid|ready|payload|last|srcid|tgtid|qos|threshold))$")
         self.add_interface("m_req", r"^(read_resp_(valid|ready|payload|last|srcid|tgtid|qos|threshold))$")
         self.add_interface("ctrl", r"^(stall|clear|idle|almost_full|almost_empty|empty|full)$")
@@ -134,7 +134,7 @@ class DtiLinkBufRspNode(UhdlComponentNode):
 class DtiIniuSysNode(UhdlComponentNode):
     def __init__(self, id: str, cfg):
         params = getattr(cfg, 'param_overrides', {})
-        comp = TemplateComponent(config=cfg, top="dti_pr_iniu_async_sys_side", **params)
+        comp = TemplateComponent(config=cfg, top="dti_pr_iniu_async_sys_side", struct_mode="packed", **params)
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", "clk")
@@ -148,25 +148,29 @@ class DtiIniuSysNode(UhdlComponentNode):
         self.add_interface("lp_top_rx", r"lp_hub_rx_req")
         self.add_interface("timeout_val", "timeout_val")
         self.add_interface("pchnl_ctrl", r"preq|pstate|pactive|paccept|pdeny")
+        self.add_interface("rsp_afifo_sb_err", r"^rsp_afifo_sb_err$")
+        self.add_interface("rsp_afifo_db_err", r"^rsp_afifo_db_err$")
 
 
 class DtiIniuTopNode(UhdlComponentNode):
-    def __init__(self, id: str, cfg):
-        comp = TemplateComponent(config=cfg, top="dti_pr_iniu_async_top_side")
+    def __init__(self, id: str, cfg, clk_name="clk_noc", rst_name="rst_noc_n"):
+        comp = TemplateComponent(config=cfg, top="dti_pr_iniu_async_top_side", struct_mode="packed")
         super().__init__(id=id, impl=comp)
 
-        self.add_interface("clk", "clk")
-        self.add_interface("rst_n", "rst_n")
+        self.add_interface(clk_name, "clk")
+        self.add_interface(rst_name, "rst_n")
         self.add_interface("async_fifo", r".*wptr_async|.*rptr_async|.*rptr_sync|.*pld_sync")
         self.add_interface("lp_top_tx", r"lp_hub_tx_req")
         self.add_interface("lp_top_rx", r"lp_hub_rx_req")
         self.add_interface("top_req", r"req_(valid|payload|last|srcid|tgtid|qos|threshold|ready)")
         self.add_interface("top_rsp", r"rsp_(valid|payload|last|srcid|tgtid|qos|threshold|ready)")
+        self.add_interface("afifo_sb_err", r"^req_afifo_sb_err$")
+        self.add_interface("afifo_db_err", r"^req_afifo_db_err$")
 
 
 class DtiTniuSysNode(UhdlComponentNode):
     def __init__(self, id: str, cfg):
-        comp = TemplateComponent(config=cfg, top="dti_tniu_async_sys_side")
+        comp = TemplateComponent(config=cfg, top="dti_tniu_async_sys_side", struct_mode="packed")
         super().__init__(id=id, impl=comp)
 
         self.add_interface("clk", "clk")
@@ -179,15 +183,17 @@ class DtiTniuSysNode(UhdlComponentNode):
         self.add_interface("lp_top_tx", r"lp_hub_tx_req")
         self.add_interface("lp_top_rx", r"lp_hub_rx_req")
         self.add_interface("pchnl_ctrl", r"preq|pstate|pactive|paccept|pdeny")
+        self.add_interface("req_afifo_sb_err", r"^req_afifo_sb_err$")
+        self.add_interface("req_afifo_db_err", r"^req_afifo_db_err$")
 
 
 class DtiTniuTopNode(UhdlComponentNode):
-    def __init__(self, id: str, cfg):
-        comp = TemplateComponent(config=cfg, top="dti_tniu_async_top_side")
+    def __init__(self, id: str, cfg, clk_name="clk_noc_up", rst_name="rst_noc_up_n"):
+        comp = TemplateComponent(config=cfg, top="dti_tniu_async_top_side", struct_mode="packed")
         super().__init__(id=id, impl=comp)
 
-        self.add_interface("clk", "clk")
-        self.add_interface("rst_n", "rst_n")
+        self.add_interface(clk_name, "clk")
+        self.add_interface(rst_name, "rst_n")
         self.add_interface("async_fifo", r".*wptr_async|.*rptr_async|.*rptr_sync|.*pld_sync")
         self.add_interface("lp_top_tx", r"lp_hub_tx_req")
         self.add_interface("lp_top_rx", r"lp_hub_rx_req")
@@ -196,46 +202,50 @@ class DtiTniuTopNode(UhdlComponentNode):
 
 
 class DtiIniuTopWrapNode(UhdlWrapperNode):
-    def __init__(self, id: str, top_cfg, node_name: str):
+    def __init__(self, id: str, top_cfg, node_name: str, clk_name="clk_noc", rst_name="rst_noc_n"):
         super().__init__(id=id)
 
-        self.add_interface("clk_top", is_global=True)
-        self.add_interface("rst_top_n", is_global=True)
+        self.add_interface(clk_name, is_global=True)
+        self.add_interface(rst_name, is_global=True)
         self.add_interface("async_fifo")
         self.add_interface("lp_top_tx")
         self.add_interface("lp_top_rx")
         self.add_interface("top_req", r"^top_req_req_(valid|payload|last|srcid|tgtid|qos|threshold|ready)$")
         self.add_interface("top_rsp", r"^top_rsp_rsp_(valid|payload|last|srcid|tgtid|qos|threshold|ready)$")
+        self.add_interface("afifo_sb_err")
+        self.add_interface("afifo_db_err")
 
-        self.top_side = DtiIniuTopNode(id=f"{node_name}_top_side", cfg=top_cfg)
+        self.top_side = DtiIniuTopNode(id=f"{node_name}_top_side", cfg=top_cfg, clk_name=clk_name, rst_name=rst_name)
 
-        connect(self.top_side.clk, self.clk_top)
-        connect(self.top_side.rst_n, self.rst_top_n)
+        connect(getattr(self.top_side, clk_name), getattr(self, clk_name))
+        connect(getattr(self.top_side, rst_name), getattr(self, rst_name))
         connect(self.top_side.async_fifo, self.async_fifo)
         connect(self.top_side.lp_top_tx, self.lp_top_tx)
         connect(self.top_side.lp_top_rx, self.lp_top_rx)
         connect(self.top_side.top_req, self.top_req)
         connect(self.top_side.top_rsp, self.top_rsp)
+        connect(self.top_side.afifo_sb_err, self.afifo_sb_err)
+        connect(self.top_side.afifo_db_err, self.afifo_db_err)
 
         self.expose_unconnected_interfaces()
 
 
 class DtiTniuTopWrapNode(UhdlWrapperNode):
-    def __init__(self, id: str, top_cfg, node_name: str):
+    def __init__(self, id: str, top_cfg, node_name: str, clk_name="clk_noc", rst_name="rst_noc_n"):
         super().__init__(id=id)
 
-        self.add_interface("clk_top", is_global=True)
-        self.add_interface("rst_top_n", is_global=True)
+        self.add_interface(clk_name, is_global=True)
+        self.add_interface(rst_name, is_global=True)
         self.add_interface("async_fifo")
         self.add_interface("lp_top_tx")
         self.add_interface("lp_top_rx")
         self.add_interface("top_req_data", r"^top_req_req_(valid|payload|last|srcid|tgtid|qos|threshold|ready)$")
         self.add_interface("top_rsp", r"^top_rsp_rsp_(valid|payload|last|srcid|tgtid|qos|threshold|ready)$")
 
-        self.top_side = DtiTniuTopNode(id=f"{node_name}_top_side", cfg=top_cfg)
+        self.top_side = DtiTniuTopNode(id=f"{node_name}_top_side", cfg=top_cfg, clk_name=clk_name, rst_name=rst_name)
 
-        connect(self.top_side.clk, self.clk_top)
-        connect(self.top_side.rst_n, self.rst_top_n)
+        connect(getattr(self.top_side, clk_name), getattr(self, clk_name))
+        connect(getattr(self.top_side, rst_name), getattr(self, rst_name))
         connect(self.top_side.async_fifo, self.async_fifo)
         connect(self.top_side.lp_top_tx, self.lp_top_tx)
         connect(self.top_side.lp_top_rx, self.lp_top_rx)
@@ -310,13 +320,13 @@ class DtiTniuSysWrapNode(UhdlWrapperNode):
 
 
 class DtiIniuNode(UhdlWrapperNode):
-    def __init__(self, id: str, sys_cfg, top_cfg, node_name: str):
+    def __init__(self, id: str, sys_cfg, top_cfg, node_name: str, clk_name="clk_noc", rst_name="rst_noc_n"):
         super().__init__(id=id)
 
         self.add_interface("clk_sys")
         self.add_interface("rst_sys_n")
-        self.add_interface("clk_top", is_global=True)
-        self.add_interface("rst_top_n", is_global=True)
+        self.add_interface(clk_name, is_global=True)
+        self.add_interface(rst_name, is_global=True)
 
         self.add_interface("dti_req")
         self.add_interface("dti_rsp")
@@ -328,7 +338,7 @@ class DtiIniuNode(UhdlWrapperNode):
         self.add_interface("top_rsp", r"^top_rsp_rsp_(valid|payload|last|srcid|tgtid|qos|threshold|ready)$")
 
         self.sys_wrap = DtiIniuSysWrapNode(id=f"{node_name}_sys_wrap", cfg=sys_cfg, node_name=node_name)
-        self.top_wrap = DtiIniuTopWrapNode(id=f"{node_name}_top_wrap", top_cfg=top_cfg, node_name=node_name)
+        self.top_wrap = DtiIniuTopWrapNode(id=f"{node_name}_top_wrap", top_cfg=top_cfg, node_name=node_name, clk_name=clk_name, rst_name=rst_name)
 
         connect(self.sys_wrap.clk_sys, self.clk_sys)
         connect(self.sys_wrap.rst_sys_n, self.rst_sys_n)
@@ -342,8 +352,8 @@ class DtiIniuNode(UhdlWrapperNode):
         connect(self.sys_wrap.lp_top_tx, self.top_wrap.lp_top_rx)
         connect(self.sys_wrap.lp_top_rx, self.top_wrap.lp_top_tx)
 
-        connect(self.top_wrap.clk_top, self.clk_top)
-        connect(self.top_wrap.rst_top_n, self.rst_top_n)
+        connect(getattr(self.top_wrap, clk_name), getattr(self, clk_name))
+        connect(getattr(self.top_wrap, rst_name), getattr(self, rst_name))
         connect(self.top_wrap.top_req, self.top_req)
         connect(self.top_wrap.top_rsp, self.top_rsp)
 
@@ -351,13 +361,13 @@ class DtiIniuNode(UhdlWrapperNode):
 
 
 class DtiTniuNode(UhdlWrapperNode):
-    def __init__(self, id: str, sys_cfg, top_cfg, node_name: str):
+    def __init__(self, id: str, sys_cfg, top_cfg, node_name: str, clk_name="clk_noc_up", rst_name="rst_noc_up_n"):
         super().__init__(id=id)
 
         self.add_interface("clk_sys")
         self.add_interface("rst_sys_n")
-        self.add_interface("clk_top", is_global=True)
-        self.add_interface("rst_top_n", is_global=True)
+        self.add_interface(clk_name, is_global=True)
+        self.add_interface(rst_name, is_global=True)
 
         self.add_interface("dti_req")
         self.add_interface("dti_rsp")
@@ -368,7 +378,7 @@ class DtiTniuNode(UhdlWrapperNode):
         self.add_interface("top_rsp", r"^top_rsp_rsp_(valid|payload|last|srcid|tgtid|qos|threshold|ready)$")
 
         self.sys_wrap = DtiTniuSysWrapNode(id=f"{node_name}_sys_wrap", sys_cfg=sys_cfg, node_name=node_name)
-        self.top_wrap = DtiTniuTopWrapNode(id=f"{node_name}_top_wrap", top_cfg=top_cfg, node_name=node_name)
+        self.top_wrap = DtiTniuTopWrapNode(id=f"{node_name}_top_wrap", top_cfg=top_cfg, node_name=node_name, clk_name=clk_name, rst_name=rst_name)
 
         connect(self.sys_wrap.clk_sys, self.clk_sys)
         connect(self.sys_wrap.rst_sys_n, self.rst_sys_n)
@@ -381,8 +391,8 @@ class DtiTniuNode(UhdlWrapperNode):
         connect(self.sys_wrap.lp_top_tx, self.top_wrap.lp_top_rx)
         connect(self.sys_wrap.lp_top_rx, self.top_wrap.lp_top_tx)
 
-        connect(self.top_wrap.clk_top, self.clk_top)
-        connect(self.top_wrap.rst_top_n, self.rst_top_n)
+        connect(getattr(self.top_wrap, clk_name), getattr(self, clk_name))
+        connect(getattr(self.top_wrap, rst_name), getattr(self, rst_name))
         connect(self.top_wrap.top_req_data, self.top_req_data)
         connect(self.top_wrap.top_rsp, self.top_rsp)
 
@@ -397,7 +407,7 @@ class DtiSwitchNode(UhdlComponentNode):
                                   'TNIU_DECMIN', 'TNIU_DECMAX',
                                   'INIU_DECMIN', 'INIU_DECMAX'})
 
-    def __init__(self, id: str, cfg, top: str, input_count: int):
+    def __init__(self, id: str, cfg, top: str, input_count: int, clk_name="clk_noc", rst_name="rst_noc_n"):
         # For 2..10 INIUs, use the per-N wrapper with per-channel port names
         if 2 <= input_count <= 10:
             top = f"dti_noc_switch_{input_count}to1_wrap"
@@ -409,8 +419,8 @@ class DtiSwitchNode(UhdlComponentNode):
         comp = TemplateComponent(config=cfg, top=top, **params)
         super().__init__(id=id, impl=comp)
 
-        self.add_interface("clk", r"^clk$")
-        self.add_interface("rst_n", r"^rst_n$")
+        self.add_interface(clk_name, r"^clk$")
+        self.add_interface(rst_name, r"^rst_n$")
         self.add_interface("tniu_req", r"^tniu_req_.*")
         self.add_interface("tniu_rsp", r"^tniu_rsp_.*")
 

@@ -75,8 +75,8 @@ def generate():
     for harden in [up_harden, dn_harden]:
         harden.expose_unconnected_interfaces()
         hc = harden.build_uhdl()
-        # Output harden .v to top_wrap_dir (memnoc pattern: flat aggregation)
-        hc.output_dir = str(BUILD_DIR / "atb_soc_top_wrap")
+        # Output harden .v to BUILD_DIR (parallel with sub-component dirs)
+        hc.output_dir = str(BUILD_DIR)
         hc.generate_verilog(iteration=True)
         hc.generate_filelist(abs_path=False, prefix="$ATB_SOC_TOP")
 
@@ -85,21 +85,8 @@ def generate():
     ring_top_wrap.u_dn_harden = dn_harden
     ring_top_wrap.expose_unconnected_interfaces()
     rtw_comp = ring_top_wrap.build_uhdl()
-    top_wrap_dir = str(BUILD_DIR / "atb_soc_top_wrap")
-    rtw_comp.output_dir = top_wrap_dir
+    rtw_comp.output_dir = str(BUILD_DIR)
     rtw_comp.generate_verilog(iteration=True)
-
-    # Collect all IP .v/.sv files into top_wrap_dir (flat aggregation)
-    import os, shutil
-    for ip_dir in BUILD_DIR.iterdir():
-        if not ip_dir.is_dir() or ip_dir.name == "atb_soc_top_wrap":
-            continue
-        for fn in os.listdir(str(ip_dir)):
-            if fn.endswith((".v", ".sv")):
-                src = str(ip_dir / fn)
-                dst = os.path.join(top_wrap_dir, fn)
-                if not os.path.exists(dst):
-                    shutil.copy2(src, dst)
     rtw_comp.generate_filelist(abs_path=False, prefix="$ATB_SOC_TOP")
 
     print(f"Done. RTL: {BUILD_DIR}")

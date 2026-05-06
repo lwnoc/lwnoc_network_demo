@@ -1,10 +1,62 @@
-import os
+import os, subprocess
 from pathlib import Path
 from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
 
 THIS_DIR = Path(__file__).resolve().parent
-SUBS_DIR = THIS_DIR.parent / "subs"
-ATB_ROOT = SUBS_DIR / "lwnoc_atb_noc"
+REPO_ROOT = THIS_DIR.parent
+SUBS_DIR = REPO_ROOT / "subs"
+
+
+def _resolve_env_path(name: str, csh_path: Path, bash_path: Path, default: Path) -> Path:
+    """Resolve an env-dependent path with three-tier fallback:
+    1. Shell env (csh or bash) — already in os.environ
+    2. Source setup_env.csh → echo $name
+    3. Source setup_env.sh → echo $name
+    4. Python-side default
+    """
+    val = os.environ.get(name)
+    if val:
+        return Path(val).expanduser()
+
+    # Try csh setup file
+    if csh_path.exists():
+        try:
+            r = subprocess.run(
+                ["csh", "-c", f'source "{csh_path}" >& /dev/null; if ( $?{name} ) printf "%s" "${name}"'],
+                capture_output=True, text=True, timeout=10,
+            )
+            val = r.stdout.strip()
+            if val:
+                return Path(val).expanduser()
+        except Exception:
+            pass
+
+    # Try bash setup file
+    if bash_path.exists():
+        try:
+            r = subprocess.run(
+                ["bash", "-c", f'source "{bash_path}" 2>/dev/null; printf "%s" "${{{name}}}"'],
+                capture_output=True, text=True, timeout=10,
+            )
+            val = r.stdout.strip()
+            if val:
+                return Path(val).expanduser()
+        except Exception:
+            pass
+
+    return Path(str(default)).expanduser()
+
+
+DEFAULT_ATB_ROOT = SUBS_DIR / "lwnoc_atb_noc"
+ATB_ROOT = _resolve_env_path("ATB_SUBIP_ROOT",
+    DEFAULT_ATB_ROOT / "setup_env.csh", DEFAULT_ATB_ROOT / "setup_env.sh",
+    DEFAULT_ATB_ROOT)
+RTL_PATH_ROOT = _resolve_env_path("RTL_PATH",
+    DEFAULT_ATB_ROOT / "setup_env.csh", DEFAULT_ATB_ROOT / "setup_env.sh",
+    ATB_ROOT)
+ATB_INIU_ROOT = _resolve_env_path("ATB_INIU",
+    DEFAULT_ATB_ROOT / "setup_env.csh", DEFAULT_ATB_ROOT / "setup_env.sh",
+    ATB_ROOT)
 
 # Filelist reference: use component-specific .f (not _comp.f) to keep
 # publish directories clean. _comp.f includes common deps which causes
@@ -25,17 +77,23 @@ def _vcf(name: str) -> str:
     return str(p)
 
 
-# Set env var for submodule vc/ filelists that use $RTL_PATH, $ATB_INIU etc.
-os.environ["RTL_PATH"] = str(ATB_ROOT)
-os.environ["ATB_INIU"] = str(ATB_ROOT)
+# ── Source dependency env vars (one per submodule, following ai memnoc pattern) ──
+os.environ["RTL_PATH"] = str(RTL_PATH_ROOT)
+os.environ["ATB_INIU"] = str(ATB_INIU_ROOT)
 os.environ["ATB_SUBIP_ROOT"] = str(ATB_ROOT)
 # LOWPOWER_PATH: needed for pchnl_ctrl enum types (lwnoc_pchannel_active_t/state_t).
 # Set to subs/ path so _comp.f filelists can resolve the LP package.
-SUBS_DIR = Path(__file__).resolve().parent.parent / "subs"
-LP_SUB = SUBS_DIR / "lwnoc_lowpower_component"
-if LP_SUB.exists():
-    os.environ["LOWPOWER_PATH"] = str(LP_SUB)
-    os.environ["LWNOC_LOWPOWER_COMPONENT"] = str(LP_SUB)
+DEFAULT_LP_SUB = SUBS_DIR / "lwnoc_lowpower_component"
+LP_SUB = _resolve_env_path("LWNOC_LOWPOWER_COMPONENT",
+    DEFAULT_LP_SUB / "setup_env.csh", DEFAULT_LP_SUB / "setup_env.sh",
+    DEFAULT_LP_SUB)
+LP_SUB_alt = _resolve_env_path("LOWPOWER_PATH",
+    DEFAULT_LP_SUB / "setup_env.csh", DEFAULT_LP_SUB / "setup_env.sh",
+    LP_SUB if LP_SUB.exists() else DEFAULT_LP_SUB)
+if not LP_SUB.exists() and LP_SUB_alt.exists():
+    LP_SUB = LP_SUB_alt
+os.environ["LOWPOWER_PATH"] = str(LP_SUB)
+os.environ["LWNOC_LOWPOWER_COMPONENT"] = str(LP_SUB)
 
 
 # ── Combined filelists for sys configs (need LP package for pchnl_ctrl) ──

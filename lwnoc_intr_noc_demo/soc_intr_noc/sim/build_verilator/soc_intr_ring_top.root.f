@@ -1,2 +1,0 @@
--f ../filelist/intr_common_dep.f
--f ../build_logic/soc_intr_ring_top/filelist.f

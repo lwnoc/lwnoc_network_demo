@@ -1,4 +1,4 @@
-import os
+import os, subprocess
 import sys
 from pathlib import Path
 
@@ -7,7 +7,61 @@ THIS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = THIS_DIR.parent
 LWNOC_TOPO_ROOT = REPO_ROOT / "lwnoc_topo"
 DEFAULT_DTI_REPO_ROOT = REPO_ROOT / "subs" / "lwnoc_dti_noc"
-DTI_REPO_ROOT = DEFAULT_DTI_REPO_ROOT
+SUBS_DIR = REPO_ROOT / "subs"
+
+
+def _resolve_env_path(name: str, csh_path: Path, bash_path: Path, default: Path) -> Path:
+    """Resolve an env-dependent path with three-tier fallback:
+    1. Shell env (csh or bash) — already in os.environ
+    2. Source setup_env.csh → echo $name
+    3. Source setup_env.sh → echo $name
+    4. Python-side default
+    """
+    val = os.environ.get(name)
+    if val:
+        return Path(val).expanduser()
+
+    # Try csh setup file
+    if csh_path.exists():
+        try:
+            r = subprocess.run(
+                ["csh", "-c", f'source "{csh_path}" >& /dev/null; if ( $?{name} ) printf "%s" "${name}"'],
+                capture_output=True, text=True, timeout=10,
+            )
+            val = r.stdout.strip()
+            if val:
+                return Path(val).expanduser()
+        except Exception:
+            pass
+
+    # Try bash setup file
+    if bash_path.exists():
+        try:
+            r = subprocess.run(
+                ["bash", "-c", f'source "{bash_path}" 2>/dev/null; printf "%s" "${{{name}}}"'],
+                capture_output=True, text=True, timeout=10,
+            )
+            val = r.stdout.strip()
+            if val:
+                return Path(val).expanduser()
+        except Exception:
+            pass
+
+    return Path(str(default)).expanduser()
+
+
+DTI_REPO_ROOT = _resolve_env_path("DTI_PR",
+    DEFAULT_DTI_REPO_ROOT / "setup_env.csh", DEFAULT_DTI_REPO_ROOT / "setup_env.sh",
+    DEFAULT_DTI_REPO_ROOT)
+RTL_PATH_ROOT = _resolve_env_path("RTL_PATH",
+    DEFAULT_DTI_REPO_ROOT / "setup_env.csh", DEFAULT_DTI_REPO_ROOT / "setup_env.sh",
+    DTI_REPO_ROOT)
+FCIP_DIR = _resolve_env_path("FCIP_DIR",
+    SUBS_DIR / "fcip" / "set_fcip_dir.sh", SUBS_DIR / "fcip" / "set_fcip_dir.sh",
+    REPO_ROOT / "subs" / "fcip")
+LWNOC_LOWPOWER_COMPONENT = _resolve_env_path("LWNOC_LOWPOWER_COMPONENT",
+    SUBS_DIR / "lwnoc_lowpower_component" / "setup_env.csh", SUBS_DIR / "lwnoc_lowpower_component" / "setup_env.sh",
+    REPO_ROOT / "subs" / "lwnoc_lowpower_component")
 
 if str(LWNOC_TOPO_ROOT) not in sys.path:
     sys.path.insert(0, str(LWNOC_TOPO_ROOT))
@@ -15,14 +69,12 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
 
 
+# ── Source dependency env vars (one per submodule, following ai memnoc pattern) ──
 os.environ["DTI_PR"] = str(DTI_REPO_ROOT)
-os.environ["DTI_TEST_DIR"] = str(THIS_DIR)
-os.environ["RTL_PATH"] = str(DTI_REPO_ROOT)
-os.environ["FCIP_DIR"] = str(DTI_REPO_ROOT / "fcip")
-os.environ["LWNOC_LOWPOWER_COMPONENT"] = str(DTI_REPO_ROOT / "lwnoc_lowpower_component")
+os.environ["RTL_PATH"] = str(RTL_PATH_ROOT)
+os.environ["FCIP_DIR"] = str(FCIP_DIR)
+os.environ["LWNOC_LOWPOWER_COMPONENT"] = str(LWNOC_LOWPOWER_COMPONENT)
 
-
-FILELIST_DIR = THIS_DIR / "filelists"
 
 # Mapping from local filelist names to publish-optimized filelists.
 # _pub.f files are self-contained (no FCIP/LP, only owner IP).
@@ -43,10 +95,6 @@ _VC_FILELIST_MAP = {
 
 def _resolve_fl(name: str) -> str:
     vc_name = _VC_FILELIST_MAP.get(name, name)
-    # Prefer local file (workspace) over external repo vc/
-    local_f = THIS_DIR / vc_name
-    if local_f.exists():
-        return str(local_f)
     return str(DTI_REPO_ROOT / "vc" / vc_name)
 
 

@@ -1,6 +1,6 @@
 """TemplateIPConfig definitions for the SoC-scale interrupt ring NoC demo."""
 
-import os
+import os, subprocess
 import shutil
 import sys
 from pathlib import Path
@@ -9,8 +9,63 @@ from pathlib import Path
 THIS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = THIS_DIR.parents[1]
 LWNOC_TOPO_ROOT = REPO_ROOT / "lwnoc_topo"
-INTR_NOC_ROOT = REPO_ROOT / "subs" / "lwnoc_interrupt_noc"
-RING_NETWORK_ROOT = REPO_ROOT / "subs" / "lwnoc_ring_network" / "de" / "rtl"
+DEFAULT_INTR_NOC_ROOT = REPO_ROOT / "subs" / "lwnoc_interrupt_noc"
+DEFAULT_RING_NETWORK_ROOT = REPO_ROOT / "subs" / "lwnoc_ring_network" / "de" / "rtl"
+SUBS_DIR = REPO_ROOT / "subs"
+
+
+def _resolve_env_path(name: str, csh_path: Path, bash_path: Path, default: Path) -> Path:
+    """Resolve an env-dependent path with three-tier fallback:
+    1. Shell env (csh or bash) — already in os.environ
+    2. Source setup_env.csh → echo $name
+    3. Source setup_env.sh → echo $name
+    4. Python-side default
+    """
+    val = os.environ.get(name)
+    if val:
+        return Path(val).expanduser()
+
+    # Try csh setup file
+    if csh_path.exists():
+        try:
+            r = subprocess.run(
+                ["csh", "-c", f'source "{csh_path}" >& /dev/null; if ( $?{name} ) printf "%s" "${name}"'],
+                capture_output=True, text=True, timeout=10,
+            )
+            val = r.stdout.strip()
+            if val:
+                return Path(val).expanduser()
+        except Exception:
+            pass
+
+    # Try bash setup file
+    if bash_path.exists():
+        try:
+            r = subprocess.run(
+                ["bash", "-c", f'source "{bash_path}" 2>/dev/null; printf "%s" "${{{name}}}"'],
+                capture_output=True, text=True, timeout=10,
+            )
+            val = r.stdout.strip()
+            if val:
+                return Path(val).expanduser()
+        except Exception:
+            pass
+
+    return Path(str(default)).expanduser()
+
+
+INTR_NOC_ROOT = _resolve_env_path("INTR_NOC_DIR",
+    DEFAULT_INTR_NOC_ROOT / "setup_env.csh", DEFAULT_INTR_NOC_ROOT / "setup_env.sh",
+    DEFAULT_INTR_NOC_ROOT)
+RING_NETWORK_ROOT = _resolve_env_path("INTR_NOC_NETWORK_DIR",
+    SUBS_DIR / "lwnoc_ring_network" / "set_lwring_dir.sh", SUBS_DIR / "lwnoc_ring_network" / "set_lwring_dir.sh",
+    DEFAULT_RING_NETWORK_ROOT)
+FCIP_DIR = _resolve_env_path("FCIP_DIR",
+    SUBS_DIR / "fcip" / "set_fcip_dir.sh", SUBS_DIR / "fcip" / "set_fcip_dir.sh",
+    REPO_ROOT / "subs" / "fcip")
+LWNOC_LOWPOWER_COMPONENT = _resolve_env_path("LWNOC_LOWPOWER_COMPONENT",
+    SUBS_DIR / "lwnoc_lowpower_component" / "setup_env.csh", SUBS_DIR / "lwnoc_lowpower_component" / "setup_env.sh",
+    REPO_ROOT / "subs" / "lwnoc_lowpower_component")
 
 if str(LWNOC_TOPO_ROOT) not in sys.path:
     sys.path.insert(0, str(LWNOC_TOPO_ROOT))
@@ -18,68 +73,59 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
 
 
+BUILD_LOGIC_DIR = THIS_DIR / "build_logic"
+
+
+# ── Source dependency env vars (one per submodule, following ai memnoc pattern) ──
 os.environ["INTR_NOC_DIR"] = str(INTR_NOC_ROOT)
-os.environ["INTR_NOC_STANDALONE_DIR"] = "/home/lgzhu/dev/noc_work/lwnoc_interrupt_noc"
-os.environ["INTR_NOC_DEMO_DIR"] = str(THIS_DIR)
 os.environ["INTR_NOC_NETWORK_DIR"] = str(RING_NETWORK_ROOT)
+os.environ["FCIP_DIR"] = str(FCIP_DIR)
+os.environ["LWNOC_LOWPOWER_COMPONENT"] = str(LWNOC_LOWPOWER_COMPONENT)
+os.environ["lwnoc_lowpower_component"] = str(LWNOC_LOWPOWER_COMPONENT)
+# These are referenced by vc/*_comp.f filelists internally (fexpand expansion),
+# not by Python code. By default they equal INTR_NOC_DIR.
 os.environ["INTERRUPT_INIU"] = str(INTR_NOC_ROOT)
 os.environ["INTERRUPT_TNIU"] = str(INTR_NOC_ROOT)
-os.environ["FCIP_DIR"] = str(INTR_NOC_ROOT / "fcip")
-os.environ["LWNOC_LOWPOWER_COMPONENT"] = str(INTR_NOC_ROOT / "lwnoc_lowpower_component")
-os.environ["lwnoc_lowpower_component"] = str(INTR_NOC_ROOT / "lwnoc_lowpower_component")
 
 
-FILELIST_DIR = THIS_DIR / "filelist"
+FILELIST_DIR = THIS_DIR / "filelist"  # demo-local overrides (optional, may not exist)
 USE_SUBS_VC_FILELIST_MODE = os.environ.get("SOC_INTR_USE_SUBS_VC_FILELIST", "1") == "1"
 
 # Map publish filelist names to submodule vc/ counterparts.
 # Publishes use submodule source filelists directly (not synthesized).
+# *_comp.f variants include foundation IP (FCIP + LP) — prefer them over bare *_filelist.f.
 _VC_FILELIST_MAP: dict[str, str] = {
-    "intr_iniu_sys.f":         "iniu_filelist.f",
-    "intr_tniu_sys.f":         "tniu_filelist.f",
-    "intr_iniu_top.f":         "iniu_top.f",
-    "intr_tniu_top.f":         "tniu_top.f",
-    "intr_ring_network_wrap.f":"network_filelist.f",
-    "intr_ring_buf_wrap.f":    "network_filelist.f",
-    "intr_ring_station.f":     "network_filelist.f",
-    "intr_ring_link.f":        "network_filelist.f",
-    "intr_ring_req_sink.f":    "network_filelist.f",
-    "intr_ring_req_zero_source.f":"network_filelist.f",
+    "intr_iniu_sys.f":         "iniu_comp.f",
+    "intr_tniu_sys.f":         "tniu_comp.f",
+    "intr_iniu_top.f":         "iniu_comp.f",
+    "intr_tniu_top.f":         "tniu_comp.f",
+    "intr_iniu_endpoint_wrap.f":"network_comp.f",
+    "intr_tniu_endpoint_wrap.f":"network_comp.f",
+    "intr_ring_network_wrap.f":"network_comp.f",
+    "intr_ring_buf_wrap.f":    "network_comp.f",
+    "intr_ring_station.f":     "network_comp.f",
+    "intr_ring_link.f":        "network_comp.f",
+    "intr_ring_req_sink.f":    "network_comp.f",
+    "intr_ring_req_zero_source.f":"network_comp.f",
 }
 
 
+
+
+
 def _resolve_fl(name: str) -> str:
-    # Sys-side filelists need LP package wrappers for VComponent type resolution
-    # (memnoc pattern: filelist is self-contained). Use local filelist when it
-    # exists in the demo's filelist/ directory.
+    # Prefer submodule *_comp.f filelists which already include foundation IP
+    # (FCIP + LP).  Only fall back to a local override when the file actually
+    # exists in the demo filelist/ directory.
     local_path = FILELIST_DIR / name
     if local_path.exists():
         return str(local_path)
     if USE_SUBS_VC_FILELIST_MODE:
         vc_name = _VC_FILELIST_MAP.get(name, name)
+        if name.startswith("intr_iniu") or name.startswith("intr_tniu"):
+            return str(INTR_NOC_ROOT / "vc" / vc_name)
         return str(INTR_NOC_ROOT / "vc" / vc_name)
     return str(FILELIST_DIR / name)
-
-
-def _effective_prefix(prefix: str, filelist_name: str) -> str:
-    if not USE_SUBS_VC_FILELIST_MODE:
-        return prefix
-    plain_lists = {
-        "intr_iniu_top.f",
-        "intr_tniu_top.f",
-        "intr_ring_network_wrap.f",
-        "intr_ring_buf_wrap.f",
-        "intr_ring_station.f",
-        "intr_ring_link.f",
-        "intr_ring_req_sink.f",
-        "intr_ring_req_zero_source.f",
-    }
-    if filelist_name in plain_lists:
-        return ""
-
-    # Keep sys-side naming source-owned: per-ss TemplateIP prefixes should be
-    # applied by ip_builder at generation time (memnoc-style flow).
-    return prefix
 
 
 def _new_cfg(name: str, prefix: str, filelist_name: str, env_var: str) -> TemplateIPConfig:
@@ -292,6 +338,24 @@ _INTR_RING_BUF_PARAMS = {
     "NODE_NUM": SOC_INTR_RING_NODE_NUM,
 }
 soc_intr_ring_buf_config.param_overrides = dict(_INTR_RING_BUF_PARAMS)
+
+soc_intr_iniu_endpoint_config = _new_cfg(
+    name="intr_iniu_endpoint_wrap",
+    prefix="",
+    filelist_name="intr_iniu_endpoint_wrap.f",
+    env_var="INTR_INIU_ENDPOINT_OUT_DIR",
+)
+soc_intr_iniu_endpoint_config.set_macro("NODE_NUM", SOC_INTR_RING_NODE_NUM)
+soc_intr_iniu_endpoint_config.param_overrides = dict(_INTR_RING_BUF_PARAMS)
+
+soc_intr_tniu_endpoint_config = _new_cfg(
+    name="intr_tniu_endpoint_wrap",
+    prefix="",
+    filelist_name="intr_tniu_endpoint_wrap.f",
+    env_var="INTR_TNIU_ENDPOINT_OUT_DIR",
+)
+soc_intr_tniu_endpoint_config.set_macro("NODE_NUM", SOC_INTR_RING_NODE_NUM)
+soc_intr_tniu_endpoint_config.param_overrides = dict(_INTR_RING_BUF_PARAMS)
 
 soc_intr_ring_station_config = _new_cfg(
     name="intr_ring_station",

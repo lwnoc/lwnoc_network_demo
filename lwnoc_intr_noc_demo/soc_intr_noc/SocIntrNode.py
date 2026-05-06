@@ -1,5 +1,7 @@
 """Node definitions for the SoC-scale interrupt ring NoC demo."""
 
+import os
+import re
 import sys
 from pathlib import Path
 
@@ -10,42 +12,52 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
     sys.path.insert(0, str(LWNOC_TOPO_ROOT))
 
 from uhdl.uhdl.core.TemplateIP import TemplateComponent
+from uhdl.uhdl.core.VComponent import VComponent
 from topo_core.node.uhdlComponentNode import UhdlComponentNode
 from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
 from topo_core.utils.networkHierOpt import connect
+from topo_core.utils.data_topology import register_data_topology
 
 TOP_LAYER_SUFFIX = "_noc_side"
 TOP_FUNC_CLK = "clk_top_func"
 TOP_FUNC_RST_N = "rst_top_func_n"
 
 
-class ParamInstTemplateComponent(TemplateComponent):
-    """TemplateComponent variant that preserves per-instance RTL parameters."""
+def _expand_source_filelist(filelist: str) -> str:
+    """Expand $ENV tokens in source-owned .f files for direct VComponent parsing."""
+
+    src_path = Path(filelist)
+    text = src_path.read_text(encoding="utf-8")
+
+    def replace_env(match: re.Match[str]) -> str:
+        env_name = match.group(1)
+        return os.environ.get(env_name, match.group(0))
+
+    expanded_text = re.sub(r"\$([A-Za-z_][A-Za-z0-9_]*)", replace_env, text)
+    temp_dir = THIS_DIR / "build" / "temp"
+    temp_dir.mkdir(parents=True, exist_ok=True)
+    expanded_path = temp_dir / f"{src_path.stem}.expanded.source.f"
+    expanded_path.write_text(expanded_text, encoding="utf-8")
+    return str(expanded_path)
+
+
+class ParamInstTemplateComponent(VComponent):
+    """Source-filelist VComponent variant that preserves per-instance RTL parameters."""
 
     def __init__(self, config, top: str, instance=None, **kwargs):
-        super().__init__(config=config, top=top, instance=instance, **kwargs)
+        source_file = config.filelist
+        if str(source_file).endswith('.f'):
+            source_file = _expand_source_filelist(source_file)
 
-    @property
-    def verilog_inst(self):
-        from functools import reduce
+        if instance is None:
+            instance = top
 
-        def concat(lhs, rhs):
-            return lhs + rhs
-
-        param_assignment_list = reduce(concat, [param.verilog_assignment for param in self.param_list], [])
-        if param_assignment_list:
-            str_list = [f"{self.module_name} #("]
-            str_list += self._Component__eol_append(param_assignment_list, ",", ")")
-            str_list += [f"{self.name} ("]
-        else:
-            str_list = [f"{self.module_name} {self.name} ("]
-
-        str_list += self._Component__eol_append(
-            reduce(concat, [io.verilog_inst for io in self.io_list], []),
-            ",",
-            ");",
+        super().__init__(
+            file=source_file,
+            top=config.prefix + top,
+            instance=instance,
+            **kwargs,
         )
-        return str_list
 
 
 def _top_layer_id(node_name: str) -> str:
@@ -112,11 +124,12 @@ class SocIntrXbarRoutingLutNode(UhdlComponentNode):
     """
     
     def __init__(self, id: str, node_id_width: int = 5, num_channels: int = 1):
-        default_lut = {(i, j): 0 for i in range(2**node_id_width) for j in range(2**node_id_width)}
+        self.num_nodes = 2**node_id_width
+        default_lut = {(i, j): 0 for i in range(self.num_nodes) for j in range(self.num_nodes)}
         
         comp = SocIntrXbarRoutingLutComponent(
             lut_data=default_lut,
-            num_nodes=2**node_id_width,
+            num_nodes=self.num_nodes,
             node_id_width=node_id_width,
             num_channels=num_channels
         )
@@ -135,9 +148,10 @@ class SocIntrXbarRoutingLutNode(UhdlComponentNode):
         """Extract routing decisions from DataTopology shortest paths."""
         lut = {}
         all_paths = data_topo.all_pairs_shortest_paths()
+        num_nodes = len(data_topo.get_all_node_ids())
         
-        for src_id in range(self.num_nodes):
-            for tgt_id in range(self.num_nodes):
+        for src_id in range(num_nodes):
+            for tgt_id in range(num_nodes):
                 if src_id == tgt_id:
                     lut[(src_id, tgt_id)] = 0
                 elif (src_id, tgt_id) in all_paths:
@@ -173,10 +187,11 @@ class SocIntrXbarRoutingLutNode(UhdlComponentNode):
         if _datatopo:
             lut_data = self._compute_lut_from_shortest_paths(_datatopo)
             num_nodes = len(_datatopo.get_all_node_ids())
+            self.num_nodes = num_nodes
             _logger.info(f"Computed xbar LUT from DataTopology for {self.id}: {len(lut_data)} entries")
         else:
-            lut_data = {(i, j): 0 for i in range(2**self.node_id_width) for j in range(2**self.node_id_width)}
-            num_nodes = 2**self.node_id_width
+            num_nodes = self.num_nodes
+            lut_data = {(i, j): 0 for i in range(num_nodes) for j in range(num_nodes)}
             _logger.warning(f"DataTopology not found for {self.id}, using default all-pring LUT")
 
         # memnoc pattern: create NEW Component with computed data, replace uhdl_component
@@ -193,6 +208,52 @@ class SocIntrXbarRoutingLutNode(UhdlComponentNode):
         for ch in range(self.num_channels):
             self.map_interface(f"xbar_ch{ch}_tgt_id", f"xbar_ch{ch}_tgt_id")
             self.map_interface(f"xbar_ch{ch}_sel_bit", f"xbar_ch{ch}_sel_bit")
+        return self.uhdl_component
+
+
+class NodeIdGenComponent(Component):
+    def __init__(self, node_id_value: int = 0, node_id_width: int = 8):
+        self._node_id_value = node_id_value
+        self._node_id_width = node_id_width
+        super().__init__()
+
+    @property
+    def module_name(self):
+        return (
+            f"SocIntrNodeIdGen_node_id_value_{self._node_id_value}"
+            f"_node_id_width_{self._node_id_width}"
+        )
+
+    def circuit(self):
+        self.node_id = Output(UInt(self._node_id_width))
+        self.node_id += UInt(self._node_id_width, self._node_id_value)
+
+
+class NodeIdGenNode(UhdlComponentNode):
+    def __init__(self, id: str = "node_id_gen", node_id_width: int = 8):
+        self._node_id_width = node_id_width
+        comp = NodeIdGenComponent(node_id_value=0, node_id_width=node_id_width)
+        super().__init__(id=id, impl=comp)
+        self.add_interface("node_id", "node_id")
+
+    def build_uhdl(self):
+        node_id_value = 0
+        visited = set()
+        queue = deque(getattr(self, "parents", []))
+        while queue:
+            parent = queue.popleft()
+            if id(parent) in visited:
+                continue
+            visited.add(id(parent))
+            if hasattr(parent, 'data_topo_id') and parent.data_topo_id is not None:
+                node_id_value = parent.data_topo_id
+                break
+            queue.extend(getattr(parent, 'parents', []))
+
+        self.uhdl_component = NodeIdGenComponent(
+            node_id_value=node_id_value,
+            node_id_width=self._node_id_width,
+        )
         return self.uhdl_component
 
 
@@ -216,6 +277,8 @@ class SocIntrIniuSysNode(UhdlComponentNode):
         self.add_interface("lp_async", r"s_async_master_hub.*")
         self.add_interface("lp_hub", r"^lp_hub.*")
         self.add_interface("pchannel", r"^(preq|pstate|pactive|paccept|pdeny)$")
+        self.add_interface("afifo_sb_err", r"^afifo_sb_err$")
+        self.add_interface("afifo_db_err", r"^afifo_db_err$")
 
 
 class SocIntrIniuTopNode(UhdlComponentNode):
@@ -233,6 +296,8 @@ class SocIntrIniuTopNode(UhdlComponentNode):
         self.add_interface("async_fifo", r".*wptr_async|.*rptr_async|.*rptr_sync|.*pld_sync")
         self.add_interface("lp_async", r"m_async_master_hub.*")
         self.add_interface("ring_req", r"^req_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("afifo_sb_err", r"^afifo_sb_err$")
+        self.add_interface("afifo_db_err", r"^afifo_db_err$")
 
 
 class SocIntrTniuSysNode(UhdlComponentNode):
@@ -256,6 +321,11 @@ class SocIntrTniuSysNode(UhdlComponentNode):
         self.add_interface("lp_async", r"m_async_master_hub.*")
         self.add_interface("lp_niu_hub", r"m_niu_lp_hub.*")
         self.add_interface("pchannel", r"^(preq|pstate|pactive|paccept|pdeny)$")
+        self.add_interface("afifo_sb_err", r"^afifo_sb_err$")
+        self.add_interface("afifo_db_err", r"^afifo_db_err$")
+        self.add_interface("regbank_parity_err", r"^regbank_parity_err$")
+        self.add_interface("tniu_lut_sb_err", r"^tniu_lut_sb_err$")
+        self.add_interface("tniu_lut_db_err", r"^tniu_lut_db_err$")
 
 
 class SocIntrTniuTopNode(UhdlComponentNode):
@@ -278,16 +348,18 @@ class SocIntrTniuTopNode(UhdlComponentNode):
         self.add_interface("ring_req", r"^req_(valid|ready|payload|srcid|tgtid|qos|last)$")
 
 
+@register_data_topology([
+    ('pring_in_if', 'pring_out_if', 1),
+    ('nring_in_if', 'nring_out_if', 1),
+])
 class SocIntrRingBufNode(UhdlComponentNode):
-    """Ring node primitive based on intr_ring_buf_wrap (buffer and station integrated)."""
+    """Dual-direction ring station primitive with explicit per-direction local ports."""
 
-    def __init__(self, id: str, cfg, node_id: int, node_count: int, has_iniu: bool, has_tniu: bool):
+    def __init__(self, id: str, cfg, node_id: int, node_count: int):
         _p = dict(getattr(cfg, 'param_overrides', {}))
         _p.update({
             "RING_ID": node_id,
             "NODE_NUM": node_count,
-            "HAS_INIU": 1 if has_iniu else 0,
-            "HAS_TNIU": 1 if has_tniu else 0,
         })
         comp = ParamInstTemplateComponent(config=cfg, top="intr_ring_buf_wrap", **_p)
         super().__init__(id=id, impl=comp)
@@ -298,10 +370,69 @@ class SocIntrRingBufNode(UhdlComponentNode):
         self.add_interface("pring_out_if", r"^pring_out_if_(valid|ready|payload|srcid|tgtid|qos|last)$")
         self.add_interface("nring_in_if", r"^nring_in_if_(valid|ready|payload|srcid|tgtid|qos|last)$")
         self.add_interface("nring_out_if", r"^nring_out_if_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("pring_local_tx", r"^pring_local_tx_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("pring_local_rx", r"^pring_local_rx_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("nring_local_tx", r"^nring_local_tx_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("nring_local_rx", r"^nring_local_rx_(valid|ready|payload|srcid|tgtid|qos|last)$")
+
+
+@register_data_topology([
+    ('pring_in_if', 'pring_out_if', 1),
+    ('nring_in_if', 'nring_out_if', 1),
+])
+class SocIntrIniuEndpointNode(UhdlComponentNode):
+    """REQ-source endpoint wrapper with explicit xbar routing contract."""
+
+    def __init__(self, id: str, cfg, node_id: int, node_count: int):
+        _p = dict(getattr(cfg, 'param_overrides', {}))
+        _p.update({
+            "RING_ID": node_id,
+            "NODE_NUM": node_count,
+        })
+        comp = ParamInstTemplateComponent(config=cfg, top="lwnoc_intr_iniu_endpoint_wrap", **_p)
+        super().__init__(id=id, impl=comp)
+
+        self.add_interface("clk", "clk")
+        self.add_interface("rst_n", "rst_n")
+        self.add_interface("pring_in_if", r"^pring_in_if_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("pring_out_if", r"^pring_out_if_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("nring_in_if", r"^nring_in_if_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("nring_out_if", r"^nring_out_if_(valid|ready|payload|srcid|tgtid|qos|last)$")
         self.add_interface("local_tx", r"^local_tx_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("local_rx", r"^local_rx_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("xbar_req_tgt_id", "xbar_req_tgt_id")
+        self.add_interface("xbar_req_sel_bit", "xbar_req_sel_bit")
+
+
+@register_data_topology([
+    ('pring_in_if', 'pring_out_if', 1),
+    ('nring_in_if', 'nring_out_if', 1),
+])
+class SocIntrTniuEndpointNode(UhdlComponentNode):
+    """REQ-sink endpoint wrapper that only receives from the ring."""
+
+    def __init__(self, id: str, cfg, node_id: int, node_count: int):
+        _p = dict(getattr(cfg, 'param_overrides', {}))
+        _p.update({
+            "RING_ID": node_id,
+            "NODE_NUM": node_count,
+        })
+        comp = ParamInstTemplateComponent(config=cfg, top="lwnoc_intr_tniu_endpoint_wrap", **_p)
+        super().__init__(id=id, impl=comp)
+
+        self.add_interface("clk", "clk")
+        self.add_interface("rst_n", "rst_n")
+        self.add_interface("pring_in_if", r"^pring_in_if_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("pring_out_if", r"^pring_out_if_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("nring_in_if", r"^nring_in_if_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("nring_out_if", r"^nring_out_if_(valid|ready|payload|srcid|tgtid|qos|last)$")
         self.add_interface("local_rx", r"^local_rx_(valid|ready|payload|srcid|tgtid|qos|last)$")
 
 
+@register_data_topology([
+    ('pring_in_if', 'pring_out_if', 0),
+    ('nring_in_if', 'nring_out_if', 0),
+])
 class SocIntrRingSpNode(UhdlComponentNode):
     """Simplified ring-visible SP node using a local adapter wrapper."""
 
@@ -359,6 +490,10 @@ class SocIntrRingAsyncBridgeMstNode(UhdlComponentNode):
         self.add_interface("nring_async_if", r"^nring_(wptr_async|rptr_async|rptr_sync|pld_sync|vc_buf_rdy)$")
 
 
+@register_data_topology([
+    ('pring_in_if', 'pring_out_if', 6),
+    ('nring_in_if', 'nring_out_if', 6),
+])
 class SocIntrRingAsyncBridgeNode(UhdlWrapperNode):
     """Bidirectional async cut composed from explicit source/destination halves."""
 
@@ -430,60 +565,24 @@ class SocIntrRingSinkStationNode(UhdlWrapperNode):
         self.add_interface("nring_in_if")
         self.add_interface("nring_out_if")
 
-        self.ring_wrap = SocIntrRingNodeWrap(
-            id=f"{id}_ring",
+        self.endpoint_wrap = SocIntrTniuEndpointNode(
+            id=f"{id}_endpoint",
             cfg=cfg,
             node_id=node_id,
             node_count=node_count,
-            has_iniu=False,
-            has_tniu=True,
         )
         self.ring_sink = SocIntrRingReqSinkNode(id=f"{id}_sink", cfg=cfg)
 
-        connect(self.ring_wrap.clk, self.clk)
-        connect(self.ring_wrap.rst_n, self.rst_n)
+        connect(self.endpoint_wrap.clk, self.clk)
+        connect(self.endpoint_wrap.rst_n, self.rst_n)
         connect(self.ring_sink.clk, self.clk)
         connect(self.ring_sink.rst_n, self.rst_n)
-        connect(self.ring_wrap.local_rx, self.ring_sink.local_rx)
+        connect(self.endpoint_wrap.local_rx, self.ring_sink.local_rx)
 
-        connect(self.ring_wrap.pring_in_if, self.pring_in_if)
-        connect(self.ring_wrap.pring_out_if, self.pring_out_if)
-        connect(self.ring_wrap.nring_in_if, self.nring_in_if)
-        connect(self.ring_wrap.nring_out_if, self.nring_out_if)
-
-        self.expose_unconnected_interfaces()
-
-
-class SocIntrRingNodeWrap(UhdlWrapperNode):
-    def __init__(self, id: str, cfg, node_id: int, node_count: int, has_iniu: bool, has_tniu: bool):
-        super().__init__(id=id)
-
-        self.add_interface("clk", is_global=True)
-        self.add_interface("rst_n", is_global=True)
-        self.add_interface("pring_in_if")
-        self.add_interface("pring_out_if")
-        self.add_interface("nring_in_if")
-        self.add_interface("nring_out_if")
-        self.add_interface("local_tx")
-        self.add_interface("local_rx")
-
-        self.ring_buf = SocIntrRingBufNode(
-            id=f"{id}_ring_buf",
-            cfg=cfg,
-            node_id=node_id,
-            node_count=node_count,
-            has_iniu=has_iniu,
-            has_tniu=has_tniu,
-        )
-
-        connect(self.ring_buf.clk, self.clk)
-        connect(self.ring_buf.rst_n, self.rst_n)
-        connect(self.ring_buf.pring_in_if, self.pring_in_if)
-        connect(self.ring_buf.pring_out_if, self.pring_out_if)
-        connect(self.ring_buf.nring_in_if, self.nring_in_if)
-        connect(self.ring_buf.nring_out_if, self.nring_out_if)
-        connect(self.ring_buf.local_tx, self.local_tx)
-        connect(self.ring_buf.local_rx, self.local_rx)
+        connect(self.endpoint_wrap.pring_in_if, self.pring_in_if)
+        connect(self.endpoint_wrap.pring_out_if, self.pring_out_if)
+        connect(self.endpoint_wrap.nring_in_if, self.nring_in_if)
+        connect(self.endpoint_wrap.nring_out_if, self.nring_out_if)
 
         self.expose_unconnected_interfaces()
 
@@ -492,37 +591,52 @@ class SocIntrIniuTopWrapNode(UhdlWrapperNode):
     """Top-side wrapper for INIU (memnoc-style, prevents _porting_ IO names)."""
     def __init__(self, id: str, top_cfg, ring_cfg, node_id: int, node_count: int):
         super().__init__(id=id)
+        node_id_width = int(getattr(ring_cfg, 'param_overrides', {}).get("ID_WIDTH", 8))
         self.add_interface("clk", is_global=True)
         self.add_interface("rst_n", is_global=True)
+        self.add_interface("node_id", is_global=True)
         self.add_interface("async_fifo")
         self.add_interface("lp_async")
         self.add_interface("pring_in_if")
         self.add_interface("pring_out_if")
         self.add_interface("nring_in_if")
         self.add_interface("nring_out_if")
+        self.add_interface("afifo_sb_err")
+        self.add_interface("afifo_db_err")
 
+        self.node_id_gen_top = NodeIdGenNode(id=f"{id}_node_id_gen", node_id_width=8)
+        self.xbar_routing_lut = SocIntrXbarRoutingLutNode(
+            id=f"{id}_xbar_lut",
+            node_id_width=node_id_width,
+            num_channels=1,
+        )
         self.iniu_top = SocIntrIniuTopNode(id=f"{id}_top", cfg=top_cfg)
-        self.ring_wrap = SocIntrRingNodeWrap(
-            id=f"{id}_ring", cfg=ring_cfg,
+        self.endpoint_wrap = SocIntrIniuEndpointNode(
+            id=f"{id}_endpoint", cfg=ring_cfg,
             node_id=node_id, node_count=node_count,
-            has_iniu=True, has_tniu=False,
         )
         self.ring_sink = SocIntrRingReqSinkNode(id=f"{id}_sink", cfg=ring_cfg)
 
         connect(self.iniu_top.clk, self.clk)
         connect(self.iniu_top.rst_n, self.rst_n)
-        connect(self.ring_wrap.clk, self.clk)
-        connect(self.ring_wrap.rst_n, self.rst_n)
+        connect(self.endpoint_wrap.clk, self.clk)
+        connect(self.endpoint_wrap.rst_n, self.rst_n)
         connect(self.ring_sink.clk, self.clk)
         connect(self.ring_sink.rst_n, self.rst_n)
+        connect(self.node_id_gen_top.node_id, self.node_id)
+        connect(self.xbar_routing_lut.src_id, self.node_id)
+        connect(self.endpoint_wrap.xbar_req_tgt_id, self.xbar_routing_lut.xbar_ch0_tgt_id)
+        connect(self.xbar_routing_lut.xbar_ch0_sel_bit, self.endpoint_wrap.xbar_req_sel_bit)
         connect(self.iniu_top.async_fifo, self.async_fifo)
         connect(self.iniu_top.lp_async, self.lp_async)
-        connect(self.iniu_top.ring_req, self.ring_wrap.local_tx)
-        connect(self.ring_wrap.local_rx, self.ring_sink.local_rx)
-        connect(self.ring_wrap.pring_in_if, self.pring_in_if)
-        connect(self.ring_wrap.pring_out_if, self.pring_out_if)
-        connect(self.ring_wrap.nring_in_if, self.nring_in_if)
-        connect(self.ring_wrap.nring_out_if, self.nring_out_if)
+        connect(self.iniu_top.afifo_sb_err, self.afifo_sb_err)
+        connect(self.iniu_top.afifo_db_err, self.afifo_db_err)
+        connect(self.iniu_top.ring_req, self.endpoint_wrap.local_tx)
+        connect(self.endpoint_wrap.local_rx, self.ring_sink.local_rx)
+        connect(self.endpoint_wrap.pring_in_if, self.pring_in_if)
+        connect(self.endpoint_wrap.pring_out_if, self.pring_out_if)
+        connect(self.endpoint_wrap.nring_in_if, self.nring_in_if)
+        connect(self.endpoint_wrap.nring_out_if, self.nring_out_if)
         self.expose_unconnected_interfaces()
 
 
@@ -532,6 +646,7 @@ class SocIntrTniuTopWrapNode(UhdlWrapperNode):
         super().__init__(id=id)
         self.add_interface("clk", is_global=True)
         self.add_interface("rst_n", is_global=True)
+        self.add_interface("node_id", is_global=True)
         self.add_interface("async_fifo")
         self.add_interface("lp_async")
         self.add_interface("lp_niu_hub")
@@ -540,32 +655,33 @@ class SocIntrTniuTopWrapNode(UhdlWrapperNode):
         self.add_interface("nring_in_if")
         self.add_interface("nring_out_if")
 
+        self.node_id_gen_top = NodeIdGenNode(id=f"{id}_node_id_gen", node_id_width=8)
         self.tniu_top = SocIntrTniuTopNode(id=f"{id}_top", cfg=top_cfg)
-        self.ring_wrap = SocIntrRingNodeWrap(
-            id=f"{id}_ring", cfg=ring_cfg,
+        self.endpoint_wrap = SocIntrTniuEndpointNode(
+            id=f"{id}_endpoint", cfg=ring_cfg,
             node_id=node_id, node_count=node_count,
-            has_iniu=True, has_tniu=True,
         )
-        self.ring_zero = SocIntrRingReqZeroSourceNode(id=f"{id}_zero", cfg=ring_cfg)
 
         connect(self.tniu_top.clk, self.clk)
         connect(self.tniu_top.rst_n, self.rst_n)
-        connect(self.ring_wrap.clk, self.clk)
-        connect(self.ring_wrap.rst_n, self.rst_n)
-        connect(self.ring_zero.clk, self.clk)
-        connect(self.ring_zero.rst_n, self.rst_n)
+        connect(self.endpoint_wrap.clk, self.clk)
+        connect(self.endpoint_wrap.rst_n, self.rst_n)
+        connect(self.node_id_gen_top.node_id, self.node_id)
         connect(self.tniu_top.async_fifo, self.async_fifo)
         connect(self.tniu_top.lp_async, self.lp_async)
         connect(self.tniu_top.lp_niu_hub, self.lp_niu_hub)
-        connect(self.ring_zero.local_tx, self.ring_wrap.local_tx)
-        connect(self.tniu_top.ring_req, self.ring_wrap.local_rx)
-        connect(self.ring_wrap.pring_in_if, self.pring_in_if)
-        connect(self.ring_wrap.pring_out_if, self.pring_out_if)
-        connect(self.ring_wrap.nring_in_if, self.nring_in_if)
-        connect(self.ring_wrap.nring_out_if, self.nring_out_if)
+        connect(self.tniu_top.ring_req, self.endpoint_wrap.local_rx)
+        connect(self.endpoint_wrap.pring_in_if, self.pring_in_if)
+        connect(self.endpoint_wrap.pring_out_if, self.pring_out_if)
+        connect(self.endpoint_wrap.nring_in_if, self.nring_in_if)
+        connect(self.endpoint_wrap.nring_out_if, self.nring_out_if)
         self.expose_unconnected_interfaces()
 
 
+@register_data_topology([
+    ('pring_in_if', 'pring_out_if', 1),
+    ('nring_in_if', 'nring_out_if', 1),
+])
 class SocIntrIniuNode(UhdlWrapperNode):
     def __init__(self, id: str, sys_cfg, top_cfg, ring_cfg, node_id: int, node_count: int):
         super().__init__(id=id)
@@ -579,6 +695,10 @@ class SocIntrIniuNode(UhdlWrapperNode):
         self.add_interface("nring_in_if")
         self.add_interface("nring_out_if")
         self.add_interface("pchannel")
+        self.add_interface("afifo_sb_err")
+        self.add_interface("afifo_db_err")
+        self.add_interface("afifo_top_sb_err")
+        self.add_interface("afifo_top_db_err")
 
         self.iniu_sys = SocIntrIniuSysNode(id=f"{id}_sys", cfg=sys_cfg)
         self.iniu_top_wrap = SocIntrIniuTopWrapNode(
@@ -590,6 +710,9 @@ class SocIntrIniuNode(UhdlWrapperNode):
         connect(self.iniu_sys.clk, self.clk_sys)
         connect(self.iniu_sys.rst_n, self.rst_sys_n)
         connect(self.iniu_sys.pchannel, self.pchannel)
+        connect(self.iniu_sys.afifo_sb_err, self.afifo_sb_err)
+        connect(self.iniu_sys.afifo_db_err, self.afifo_db_err)
+        connect(self.iniu_sys.iniu_src_id, self.iniu_top_wrap.node_id)
         connect(self.iniu_sys.async_fifo, self.iniu_top_wrap.async_fifo)
         connect(self.iniu_sys.lp_async, self.iniu_top_wrap.lp_async)
 
@@ -597,6 +720,8 @@ class SocIntrIniuNode(UhdlWrapperNode):
         connect(self.iniu_top_wrap.pring_out_if, self.pring_out_if)
         connect(self.iniu_top_wrap.nring_in_if, self.nring_in_if)
         connect(self.iniu_top_wrap.nring_out_if, self.nring_out_if)
+        connect(self.iniu_top_wrap.afifo_sb_err, self.afifo_top_sb_err)
+        connect(self.iniu_top_wrap.afifo_db_err, self.afifo_top_db_err)
 
         self.expose_unconnected_interfaces()
 
@@ -606,6 +731,10 @@ class SocIntrIniuNode(UhdlWrapperNode):
         return self.iniu_top_wrap
 
 
+@register_data_topology([
+    ('pring_in_if', 'pring_out_if', 1),
+    ('nring_in_if', 'nring_out_if', 1),
+])
 class SocIntrTniuNode(UhdlWrapperNode):
     def __init__(self, id: str, sys_cfg, top_cfg, ring_cfg, node_id: int, node_count: int):
         super().__init__(id=id)
@@ -619,6 +748,11 @@ class SocIntrTniuNode(UhdlWrapperNode):
         self.add_interface("nring_in_if")
         self.add_interface("nring_out_if")
         self.add_interface("pchannel")
+        self.add_interface("afifo_sb_err")
+        self.add_interface("afifo_db_err")
+        self.add_interface("regbank_parity_err")
+        self.add_interface("tniu_lut_sb_err")
+        self.add_interface("tniu_lut_db_err")
 
         self.tniu_sys = SocIntrTniuSysNode(id=f"{id}_sys", cfg=sys_cfg)
         self.tniu_top_wrap = SocIntrTniuTopWrapNode(
@@ -630,6 +764,12 @@ class SocIntrTniuNode(UhdlWrapperNode):
         connect(self.tniu_sys.clk, self.clk_sys)
         connect(self.tniu_sys.rst_n, self.rst_sys_n)
         connect(self.tniu_sys.pchannel, self.pchannel)
+        connect(self.tniu_sys.afifo_sb_err, self.afifo_sb_err)
+        connect(self.tniu_sys.afifo_db_err, self.afifo_db_err)
+        connect(self.tniu_sys.regbank_parity_err, self.regbank_parity_err)
+        connect(self.tniu_sys.tniu_lut_sb_err, self.tniu_lut_sb_err)
+        connect(self.tniu_sys.tniu_lut_db_err, self.tniu_lut_db_err)
+        connect(self.tniu_sys.tniu_tgt_id, self.tniu_top_wrap.node_id)
         connect(self.tniu_sys.async_fifo, self.tniu_top_wrap.async_fifo)
         connect(self.tniu_sys.lp_async, self.tniu_top_wrap.lp_async)
         connect(self.tniu_sys.lp_niu_hub, self.tniu_top_wrap.lp_niu_hub)
@@ -650,10 +790,10 @@ class SocIntrTniuNode(UhdlWrapperNode):
 class SocIntrIniuTopLayerNode(UhdlWrapperNode):
     def __init__(self, id: str, top_cfg, ring_cfg, node_id: int, node_count: int):
         super().__init__(id=id)
+        node_id_width = int(getattr(ring_cfg, 'param_overrides', {}).get("ID_WIDTH", 8))
 
         self.add_interface(TOP_FUNC_CLK, is_global=True)
         self.add_interface(TOP_FUNC_RST_N, is_global=True)
-        # NEW: expose node_id globally for xbar_routing_lut
         self.add_interface("node_id", is_global=True)
         self.add_interface("pring_in_if")
         self.add_interface("pring_out_if")
@@ -662,44 +802,40 @@ class SocIntrIniuTopLayerNode(UhdlWrapperNode):
         self.add_interface("async_fifo")
         self.add_interface("lp_async")
 
-        # NEW: Create XbarRoutingLutNode
         self.xbar_routing_lut = SocIntrXbarRoutingLutNode(
             id=f"{id.replace('_noc_side', '')}_xbar_lut",
-            node_id_width=5,
-            num_channels=1  # INIU: 1 channel (interrupt requests)
+            node_id_width=node_id_width,
+            num_channels=1,
         )
 
         self.iniu_top = SocIntrIniuTopNode(id=f"{id}_top", cfg=top_cfg)
-        self.ring_wrap = SocIntrRingNodeWrap(
-            id=f"{id}_ring",
+        self.endpoint_wrap = SocIntrIniuEndpointNode(
+            id=f"{id}_endpoint",
             cfg=ring_cfg,
             node_id=node_id,
             node_count=node_count,
-            has_iniu=True,
-            has_tniu=False,
         )
         self.ring_sink = SocIntrRingReqSinkNode(id=f"{id}_sink", cfg=ring_cfg)
 
         connect(self.iniu_top.clk, self.clk_top_func)
         connect(self.iniu_top.rst_n, self.rst_top_func_n)
-        connect(self.ring_wrap.clk, self.clk_top_func)
-        connect(self.ring_wrap.rst_n, self.rst_top_func_n)
+        connect(self.endpoint_wrap.clk, self.clk_top_func)
+        connect(self.endpoint_wrap.rst_n, self.rst_top_func_n)
         connect(self.ring_sink.clk, self.clk_top_func)
         connect(self.ring_sink.rst_n, self.rst_top_func_n)
 
         connect(self.iniu_top.async_fifo, self.async_fifo)
         connect(self.iniu_top.lp_async, self.lp_async)
-        connect(self.iniu_top.ring_req, self.ring_wrap.local_tx)
-        connect(self.ring_wrap.local_rx, self.ring_sink.local_rx)
+        connect(self.iniu_top.ring_req, self.endpoint_wrap.local_tx)
+        connect(self.endpoint_wrap.local_rx, self.ring_sink.local_rx)
 
-        connect(self.ring_wrap.pring_in_if, self.pring_in_if)
-        connect(self.ring_wrap.pring_out_if, self.pring_out_if)
-        connect(self.ring_wrap.nring_in_if, self.nring_in_if)
-        connect(self.ring_wrap.nring_out_if, self.nring_out_if)
-
-
-        # NEW: Wire xbar_routing_lut.src_id to node_id
+        connect(self.endpoint_wrap.pring_in_if, self.pring_in_if)
+        connect(self.endpoint_wrap.pring_out_if, self.pring_out_if)
+        connect(self.endpoint_wrap.nring_in_if, self.nring_in_if)
+        connect(self.endpoint_wrap.nring_out_if, self.nring_out_if)
         connect(self.xbar_routing_lut.src_id, self.node_id)
+        connect(self.endpoint_wrap.xbar_req_tgt_id, self.xbar_routing_lut.xbar_ch0_tgt_id)
+        connect(self.xbar_routing_lut.xbar_ch0_sel_bit, self.endpoint_wrap.xbar_req_sel_bit)
         self.expose_unconnected_interfaces()
 
 
@@ -709,7 +845,6 @@ class SocIntrTniuTopLayerNode(UhdlWrapperNode):
 
         self.add_interface(TOP_FUNC_CLK, is_global=True)
         self.add_interface(TOP_FUNC_RST_N, is_global=True)
-        # NEW: expose node_id globally for xbar_routing_lut
         self.add_interface("node_id", is_global=True)
         self.add_interface("pring_in_if")
         self.add_interface("pring_out_if")
@@ -721,45 +856,28 @@ class SocIntrTniuTopLayerNode(UhdlWrapperNode):
         self.add_interface("lp_niu_hub")
         self.add_interface("lp_async")
 
-        # NEW: Create XbarRoutingLutNode
-        self.xbar_routing_lut = SocIntrXbarRoutingLutNode(
-            id=f"{id.replace('_noc_side', '')}_xbar_lut",
-            node_id_width=5,
-            num_channels=1  # TNIU: 1 channel (interrupt responses)
-        )
-
         self.tniu_top = SocIntrTniuTopNode(id=f"{id}_top", cfg=top_cfg)
-        self.ring_wrap = SocIntrRingNodeWrap(
-            id=f"{id}_ring",
+        self.endpoint_wrap = SocIntrTniuEndpointNode(
+            id=f"{id}_endpoint",
             cfg=ring_cfg,
             node_id=node_id,
             node_count=node_count,
-            has_iniu=True,
-            has_tniu=True,
         )
-        self.ring_zero = SocIntrRingReqZeroSourceNode(id=f"{id}_zero", cfg=ring_cfg)
 
         connect(self.tniu_top.clk, self.clk_top_func)
         connect(self.tniu_top.rst_n, self.rst_top_func_n)
-        connect(self.ring_wrap.clk, self.clk_top_func)
-        connect(self.ring_wrap.rst_n, self.rst_top_func_n)
-        connect(self.ring_zero.clk, self.clk_top_func)
-        connect(self.ring_zero.rst_n, self.rst_top_func_n)
+        connect(self.endpoint_wrap.clk, self.clk_top_func)
+        connect(self.endpoint_wrap.rst_n, self.rst_top_func_n)
 
         connect(self.tniu_top.async_fifo, self.async_fifo)
         connect(self.tniu_top.timeout_val, self.timeout_val)
         connect(self.tniu_top.lp_hub, self.lp_hub)
         connect(self.tniu_top.lp_niu_hub, self.lp_niu_hub)
         connect(self.tniu_top.lp_async, self.lp_async)
-        connect(self.ring_zero.local_tx, self.ring_wrap.local_tx)
-        connect(self.tniu_top.ring_req, self.ring_wrap.local_rx)
+        connect(self.tniu_top.ring_req, self.endpoint_wrap.local_rx)
 
-        connect(self.ring_wrap.pring_in_if, self.pring_in_if)
-        connect(self.ring_wrap.pring_out_if, self.pring_out_if)
-        connect(self.ring_wrap.nring_in_if, self.nring_in_if)
-        connect(self.ring_wrap.nring_out_if, self.nring_out_if)
-
-
-        # NEW: Wire xbar_routing_lut.src_id to node_id
-        connect(self.xbar_routing_lut.src_id, self.node_id)
+        connect(self.endpoint_wrap.pring_in_if, self.pring_in_if)
+        connect(self.endpoint_wrap.pring_out_if, self.pring_out_if)
+        connect(self.endpoint_wrap.nring_in_if, self.nring_in_if)
+        connect(self.endpoint_wrap.nring_out_if, self.nring_out_if)
         self.expose_unconnected_interfaces()

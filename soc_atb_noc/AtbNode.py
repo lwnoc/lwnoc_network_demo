@@ -109,6 +109,8 @@ class AtbTniuTopNode(UhdlComponentNode):
         self.add_interface("lp_lw", r"^lw_(rx|tx)_req$")
         self.add_interface("lp_afifo", r"^afifo_slv_(rx|tx)_req$")
         self.add_interface("timeout_val", r"^timeout_val$")
+        # FUSA error signal
+        self.add_interface("aifo_slv_full_zero", r"^aifo_slv_full_zero$")
 
 
 class AtbTniuNode(UhdlWrapperNode):
@@ -204,6 +206,9 @@ class AtbAsyncBridgeMstNode(UhdlComponentNode):
         self.add_interface("afifo_mst_full_zero", r"^afifo_mst_full_zero$")
         self.add_interface("afifo_mst_read_idle", r"^afifo_mst_read_idle$")
         self.add_interface("flush_req_level", r"^flush_req_level$")
+        # FUSA error signals
+        self.add_interface("atb_net_sb_err", r"^atb_net_sb_err$")
+        self.add_interface("atb_net_db_err", r"^atb_net_db_err$")
 
 
 class AtbAsyncBridgeNode(UhdlWrapperNode):

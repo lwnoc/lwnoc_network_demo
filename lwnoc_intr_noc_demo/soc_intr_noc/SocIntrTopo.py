@@ -13,19 +13,20 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 
 from topo_core.node.uhdlWrapperNode import UhdlWrapperNode  # pyright: ignore[reportMissingImports]
 from topo_core.utils.networkHierOpt import connect  # pyright: ignore[reportMissingImports]
+from topo_core.utils.data_topology import DataTopology  # pyright: ignore[reportMissingImports]
 
 from SocIntrNode import (
     SocIntrIniuNode, SocIntrTniuNode,
     SocIntrRingSpNode, SocIntrRingAsyncBridgeNode,
     SocIntrRingReqSinkNode, SocIntrRingReqZeroSourceNode,
-    SocIntrRingSinkStationNode, SocIntrRingNodeWrap,
+    SocIntrRingSinkStationNode,
     SocIntrIniuTopLayerNode, SocIntrTniuTopLayerNode,
-    SocIntrXbarRoutingLutNode,
     TOP_LAYER_SUFFIX, TOP_FUNC_CLK, TOP_FUNC_RST_N,
 )
 from SocIntrTemplate import (
     INIU_SYS_CONFIGS, TNIU_SYS_CONFIGS,
     soc_intr_iniu_top_config, soc_intr_tniu_top_config,
+    soc_intr_iniu_endpoint_config, soc_intr_tniu_endpoint_config,
     soc_intr_ring_network_config, soc_intr_ring_buf_config,
     soc_intr_ring_station_config, soc_intr_ring_link_config,
     soc_intr_ring_req_sink_config, soc_intr_ring_req_zero_source_config,
@@ -80,6 +81,9 @@ def _ring_node_id(ss_name: str, role: str) -> int:
 def _node_attr_name(ss_name: str, role: str) -> str:
     return f"{ss_name}_{role}_node"
 
+def _ring_node_attr_names() -> list[str]:
+    return [_node_attr_name(ss_name, role) for _, ss_name, role, _ in RING_PLAN]
+
 def _harden_iface(side: str) -> str:
     return f"clk_{side}_func"
 def _harden_rst(side: str) -> str:
@@ -110,7 +114,7 @@ class SocIntrLogicTopo(UhdlWrapperNode):
                     id=f"{sys_name}_node",
                     sys_cfg=node_cfg,
                     top_cfg=soc_intr_iniu_top_config,
-                    ring_cfg=soc_intr_ring_buf_config,
+                    ring_cfg=soc_intr_iniu_endpoint_config,
                     node_id=node_id,
                     node_count=SOC_INTR_RING_NODE_NUM,
                 )
@@ -120,13 +124,14 @@ class SocIntrLogicTopo(UhdlWrapperNode):
                     id=f"{sys_name}_node",
                     sys_cfg=node_cfg,
                     top_cfg=soc_intr_tniu_top_config,
-                    ring_cfg=soc_intr_ring_buf_config,
+                    ring_cfg=soc_intr_tniu_endpoint_config,
                     node_id=node_id,
                     node_count=SOC_INTR_RING_NODE_NUM,
                 )
             setattr(self, _node_attr_name(ss_name, role), n)
             connect(n.clk_noc, self.clk_noc)
             connect(n.rst_noc_n, self.rst_noc_n)
+            n.set_data_topo_id(node_id)
 
         # Ring network (SP + async bridges, req_sink, zero_source)
         self.ring_sp = SocIntrRingSpNode(id="ring_sp", cfg=soc_intr_ring_buf_config)
@@ -139,15 +144,127 @@ class SocIntrLogicTopo(UhdlWrapperNode):
         connect(self.ring_zero_source.clk, self.clk_noc)
         connect(self.ring_zero_source.rst_n, self.rst_noc_n)
 
+        ring_nodes = [getattr(self, attr_name) for attr_name in _ring_node_attr_names()]
+        for prev_node, next_node in zip(ring_nodes, ring_nodes[1:]):
+            connect(prev_node.pring_out_if, next_node.pring_in_if)
+            connect(next_node.nring_out_if, prev_node.nring_in_if)
+
+        first_node = ring_nodes[0]
+        last_node = ring_nodes[-1]
+        connect(last_node.pring_out_if, self.ring_sp.pring_in_if)
+        connect(self.ring_sp.pring_out_if, first_node.pring_in_if)
+        connect(first_node.nring_out_if, self.ring_sp.nring_in_if)
+        connect(self.ring_sp.nring_out_if, last_node.nring_in_if)
+
+        self.datatopo = DataTopology(TOPO_ID)
+        for ring_node in ring_nodes:
+            self.datatopo.add(ring_node)
+        self.datatopo.add(self.ring_sp)
+        self.datatopo.validate_ids()
+
         self.expose_unconnected_interfaces()
 
 
-# ── PD topology is in gen_soc_intr_topo.py (ATB pattern — PD wrappers local to gen) ──
+# ── PD topology (ai memnoc pattern: harden wrappers + top aggregation in Topo.py) ──
+
+class SocIntrPdTopo(UhdlWrapperNode):
+    """PD-mode harden topology: self-contained, instantiated directly by gen script."""
+
+    def __init__(self, id: str = PD_TOPO_ID):
+        super().__init__(id=id)
+
+        # Top-level clocks
+        self.add_interface("clk_up_func", is_global=True)
+        self.add_interface("rst_up_func_n", is_global=True)
+        self.add_interface("clk_dn_func", is_global=True)
+        self.add_interface("rst_dn_func_n", is_global=True)
+
+        # Compute harden assignment (same algorithm as before)
+        n = len(RING_PLAN)
+        assigned = [None] * n
+        for i, (node_id, ss_name, role, harden) in enumerate(RING_PLAN):
+            if harden == "a":
+                assigned[i] = "a"
+            elif harden == "b":
+                assigned[i] = "b"
+
+        changed = True
+        while changed:
+            changed = False
+            for i in range(n):
+                if assigned[i] is not None:
+                    continue
+                prev = (i - 1) % n
+                nxt = (i + 1) % n
+                if assigned[prev] == "a" or assigned[nxt] == "a":
+                    assigned[i] = "a"
+                    changed = True
+                elif assigned[prev] == "b" or assigned[nxt] == "b":
+                    assigned[i] = "b"
+                    changed = True
+        for i in range(n):
+            if assigned[i] is None:
+                assigned[i] = "a"
+
+        # Create harden wrappers and nodes directly (ai memnoc pattern)
+        self.u_up_harden = UhdlWrapperNode(UP_HARDEN_ID)
+        self.u_up_harden.add_interface("clk_up_func", is_global=True)
+        self.u_up_harden.add_interface("rst_up_func_n", is_global=True)
+        self.u_dn_harden = UhdlWrapperNode(DN_HARDEN_ID)
+        self.u_dn_harden.add_interface("clk_dn_func", is_global=True)
+        self.u_dn_harden.add_interface("rst_dn_func_n", is_global=True)
+
+        up_nodes = []
+        dn_nodes = []
+
+        for i, (node_id, ss_name, role, harden) in enumerate(RING_PLAN):
+            sys_name = f"{ss_name}_{role}"
+            if role == "iniu":
+                top_layer = SocIntrIniuTopLayerNode(
+                    id=f"{ss_name}_iniu{TOP_LAYER_SUFFIX}",
+                    top_cfg=soc_intr_iniu_top_config,
+                    ring_cfg=soc_intr_iniu_endpoint_config,
+                    node_id=node_id,
+                    node_count=SOC_INTR_RING_NODE_NUM,
+                )
+            else:
+                top_layer = SocIntrTniuTopLayerNode(
+                    id=f"{ss_name}_tniu{TOP_LAYER_SUFFIX}",
+                    top_cfg=soc_intr_tniu_top_config,
+                    ring_cfg=soc_intr_tniu_endpoint_config,
+                    node_id=node_id,
+                    node_count=SOC_INTR_RING_NODE_NUM,
+                )
+            if assigned[i] == "a":
+                setattr(self.u_up_harden, f"u_{sys_name}", top_layer)
+                up_nodes.append(top_layer)
+            else:
+                setattr(self.u_dn_harden, f"u_{sys_name}", top_layer)
+                dn_nodes.append(top_layer)
+
+        # Ring core in up_harden
+        for ring_cls, ring_cfg, ring_name in [
+            (SocIntrRingSpNode, soc_intr_ring_buf_config, "ring_sp"),
+            (SocIntrRingReqSinkNode, soc_intr_ring_req_sink_config, "ring_req_sink"),
+            (SocIntrRingReqZeroSourceNode, soc_intr_ring_req_zero_source_config, "ring_zero_source"),
+        ]:
+            sub = ring_cls(id=ring_name, cfg=ring_cfg)
+            setattr(self.u_up_harden, f"u_{ring_name}", sub)
+
+        self.u_up_harden.expose_unconnected_interfaces()
+        self.u_dn_harden.expose_unconnected_interfaces()
+
+        connect(self.u_up_harden.clk_up_func, self.clk_up_func)
+        connect(self.u_up_harden.rst_up_func_n, self.rst_up_func_n)
+        connect(self.u_dn_harden.clk_dn_func, self.clk_dn_func)
+        connect(self.u_dn_harden.rst_dn_func_n, self.rst_dn_func_n)
+
+        self.expose_unconnected_interfaces()
 
 
 __all__ = [
     "TOPO_ID", "PD_TOPO_ID",
     "HARDEN_TOP_ID", "UP_HARDEN_ID", "DN_HARDEN_ID",
     "INIU_COUNT", "TNIU_COUNT", "RING_PLAN",
-    "SocIntrLogicTopo",
+    "SocIntrLogicTopo", "SocIntrPdTopo",
 ]

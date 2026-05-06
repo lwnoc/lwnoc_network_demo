@@ -1,4 +1,4 @@
-import os
+import os, subprocess
 import sys
 from pathlib import Path
 
@@ -7,7 +7,61 @@ THIS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = THIS_DIR.parent
 LWNOC_TOPO_ROOT = REPO_ROOT / "lwnoc_topo"
 DEFAULT_STS_NOC_ROOT = REPO_ROOT / "subs" / "lwnoc_sts_noc"
-STS_NOC_ROOT = DEFAULT_STS_NOC_ROOT
+SUBS_DIR = REPO_ROOT / "subs"
+
+
+def _resolve_env_path(name: str, csh_path: Path, bash_path: Path, default: Path) -> Path:
+    """Resolve an env-dependent path with three-tier fallback:
+    1. Shell env (csh or bash) — already in os.environ
+    2. Source setup_env.csh → echo $name
+    3. Source setup_env.sh → echo $name
+    4. Python-side default
+    """
+    val = os.environ.get(name)
+    if val:
+        return Path(val).expanduser()
+
+    # Try csh setup file
+    if csh_path.exists():
+        try:
+            r = subprocess.run(
+                ["csh", "-c", f'source "{csh_path}" >& /dev/null; if ( $?{name} ) printf "%s" "${name}"'],
+                capture_output=True, text=True, timeout=10,
+            )
+            val = r.stdout.strip()
+            if val:
+                return Path(val).expanduser()
+        except Exception:
+            pass
+
+    # Try bash setup file
+    if bash_path.exists():
+        try:
+            r = subprocess.run(
+                ["bash", "-c", f'source "{bash_path}" 2>/dev/null; printf "%s" "${{{name}}}"'],
+                capture_output=True, text=True, timeout=10,
+            )
+            val = r.stdout.strip()
+            if val:
+                return Path(val).expanduser()
+        except Exception:
+            pass
+
+    return Path(str(default)).expanduser()
+
+
+STS_NOC_ROOT = _resolve_env_path("STS_NOC_DIR",
+    DEFAULT_STS_NOC_ROOT / "setup_env.csh", DEFAULT_STS_NOC_ROOT / "setup_env.sh",
+    DEFAULT_STS_NOC_ROOT)
+STS_INIU_ROOT = _resolve_env_path("STS_INIU",
+    DEFAULT_STS_NOC_ROOT / "setup_env.csh", DEFAULT_STS_NOC_ROOT / "setup_env.sh",
+    STS_NOC_ROOT)
+STS_TNIU_ROOT = _resolve_env_path("STS_TNIU",
+    DEFAULT_STS_NOC_ROOT / "setup_env.csh", DEFAULT_STS_NOC_ROOT / "setup_env.sh",
+    STS_NOC_ROOT)
+FCIP_DIR = _resolve_env_path("FCIP_DIR",
+    SUBS_DIR / "fcip" / "set_fcip_dir.sh", SUBS_DIR / "fcip" / "set_fcip_dir.sh",
+    REPO_ROOT / "subs" / "fcip")
 
 if str(LWNOC_TOPO_ROOT) not in sys.path:
     sys.path.insert(0, str(LWNOC_TOPO_ROOT))
@@ -15,15 +69,13 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
 
 
-os.environ["RTL_PATH"] = str(STS_NOC_ROOT)
-os.environ["STS_INIU"] = str(STS_NOC_ROOT)
-os.environ["STS_TNIU"] = str(STS_NOC_ROOT)
-os.environ["FCIP_DIR"] = str(STS_NOC_ROOT / "fcip")
-os.environ["STS_NOC_DIR"] = str(STS_NOC_ROOT)
-os.environ["STS_NOC_DEMO_DIR"] = str(THIS_DIR)
+os.environ.setdefault("RTL_PATH", str(STS_NOC_ROOT))
+os.environ.setdefault("STS_INIU", str(STS_INIU_ROOT))
+os.environ.setdefault("STS_TNIU", str(STS_TNIU_ROOT))
+os.environ.setdefault("FCIP_DIR", str(FCIP_DIR))
+os.environ.setdefault("STS_NOC_DIR", str(STS_NOC_ROOT))
+os.environ.setdefault("STS_NOC_DEMO_DIR", str(THIS_DIR))
 
-
-FILELIST_DIR = THIS_DIR / "filelists"
 
 AXI_ADDR_WIDTH = 32
 TGT_ID_WIDTH = 8
@@ -36,16 +88,16 @@ STS_DEMO_SYS_APB_MASTER_NUM = 10
 STS_DEMO_ADDR_MAP_DEFAULT_TGT_ID = 0xFF
 
 
-def _sv_hex(width: int, value: int) -> str:
+def sv_hex(width: int, value: int) -> str:
     digits = max(1, (width + 3) // 4)
     return f"{width}'h{value:0{digits}X}"
 
 
-def _sv_concat(width: int, values: list[int]) -> str:
-    return "{" + ",".join(_sv_hex(width, value) for value in values) + "}"
+def sv_concat(width: int, values: list[int]) -> str:
+    return "{" + ",".join(sv_hex(width, value) for value in values) + "}"
 
 
-def _pack_int(width: int, values: list[int]) -> int:
+def pack_int(width: int, values: list[int]) -> int:
     """Pack MSB-first values into a single integer for kwargs."""
     result = 0
     mask = (1 << width) - 1
@@ -54,7 +106,7 @@ def _pack_int(width: int, values: list[int]) -> int:
     return result
 
 
-def _sv_param(total_bits: int, value: int) -> str:
+def sv_param(total_bits: int, value: int) -> str:
     """Format integer as a sized hex literal for slang -G parameter override."""
     hex_digits = max(1, (total_bits + 3) // 4)
     return f"{total_bits}'h{value:0{hex_digits}X}"
@@ -70,15 +122,15 @@ def _tniu_target_ids(tniu_idx: int) -> list[int]:
     return [sys_base + sys_idx for sys_idx in range(9, -1, -1)] + [local_base + 0x1, local_base + 0x0]
 
 
-STS_DEMO_ROUTE_BASE_INT = _pack_int(TGT_ID_WIDTH, [0x30, 0x20, 0x10, 0x00])
-STS_DEMO_ROUTE_MASK_INT = _pack_int(TGT_ID_WIDTH, [0xB0, 0xB0, 0xB0, 0xB0])
+STS_DEMO_ROUTE_BASE_INT = pack_int(TGT_ID_WIDTH, [0x30, 0x20, 0x10, 0x00])
+STS_DEMO_ROUTE_MASK_INT = pack_int(TGT_ID_WIDTH, [0xB0, 0xB0, 0xB0, 0xB0])
 
-STS_DEMO_ADDR_MAP_BASE_TABLE_INT = _pack_int(
+STS_DEMO_ADDR_MAP_BASE_TABLE_INT = pack_int(
     AXI_ADDR_WIDTH,
     [base for tniu_idx in range(3, -1, -1) for base in _tniu_window_bases(tniu_idx)],
 )
-STS_DEMO_ADDR_MAP_MASK_TABLE_INT = _pack_int(AXI_ADDR_WIDTH, [0xFFFF_F000] * 48)
-STS_DEMO_ADDR_MAP_TGT_ID_TABLE_INT = _pack_int(
+STS_DEMO_ADDR_MAP_MASK_TABLE_INT = pack_int(AXI_ADDR_WIDTH, [0xFFFF_F000] * 48)
+STS_DEMO_ADDR_MAP_TGT_ID_TABLE_INT = pack_int(
     TGT_ID_WIDTH,
     [tgt_id for tniu_idx in range(3, -1, -1) for tgt_id in _tniu_target_ids(tniu_idx)],
 )
@@ -86,15 +138,15 @@ STS_DEMO_ADDR_MAP_TGT_ID_TABLE_INT = _pack_int(
 
 def _tniu_params(tniu_idx: int) -> dict[str, object]:
     local_base = tniu_idx << 4
-    route_base_int = _pack_int(TGT_ID_WIDTH, [0x40 + local_base + idx for idx in range(9, -1, -1)])
-    route_mask_int = _pack_int(TGT_ID_WIDTH, [0xFF] * STS_DEMO_SYS_APB_MASTER_NUM)
+    route_base_int = pack_int(TGT_ID_WIDTH, [0x40 + local_base + idx for idx in range(9, -1, -1)])
+    route_mask_int = pack_int(TGT_ID_WIDTH, [0xFF] * STS_DEMO_SYS_APB_MASTER_NUM)
     return {
         "STS_DEMO_APB_ADDR_WIDTH": STS_DEMO_APB_ADDR_WIDTH,
         "STS_DEMO_LOCAL_RSC_TGT_ID": local_base + 0x1,
         "STS_DEMO_LOCAL_REGBANK_TGT_ID": local_base + 0x0,
         "STS_DEMO_SYS_APB_MASTER_NUM": STS_DEMO_SYS_APB_MASTER_NUM,
-        "STS_DEMO_SYS_APB_ROUTE_BASE": _sv_param(STS_DEMO_SYS_APB_MASTER_NUM * TGT_ID_WIDTH, route_base_int),
-        "STS_DEMO_SYS_APB_ROUTE_MASK": _sv_param(STS_DEMO_SYS_APB_MASTER_NUM * TGT_ID_WIDTH, route_mask_int),
+        "STS_DEMO_SYS_APB_ROUTE_BASE": sv_param(STS_DEMO_SYS_APB_MASTER_NUM * TGT_ID_WIDTH, route_base_int),
+        "STS_DEMO_SYS_APB_ROUTE_MASK": sv_param(STS_DEMO_SYS_APB_MASTER_NUM * TGT_ID_WIDTH, route_mask_int),
     }
 
 
@@ -103,24 +155,24 @@ def _tniu_params(tniu_idx: int) -> dict[str, object]:
 _iniu_params = {
     "STS_DEMO_NODE_NUM": STS_DEMO_NODE_NUM,
     "STS_DEMO_ADDR_MAP_ENTRY_NUM": 48,
-    "STS_DEMO_ADDR_MAP_BASE_TABLE": _sv_param(48 * AXI_ADDR_WIDTH, STS_DEMO_ADDR_MAP_BASE_TABLE_INT),
-    "STS_DEMO_ADDR_MAP_MASK_TABLE": _sv_param(48 * AXI_ADDR_WIDTH, STS_DEMO_ADDR_MAP_MASK_TABLE_INT),
-    "STS_DEMO_ADDR_MAP_TGT_ID_TABLE": _sv_param(48 * TGT_ID_WIDTH, STS_DEMO_ADDR_MAP_TGT_ID_TABLE_INT),
+    "STS_DEMO_ADDR_MAP_BASE_TABLE": sv_param(48 * AXI_ADDR_WIDTH, STS_DEMO_ADDR_MAP_BASE_TABLE_INT),
+    "STS_DEMO_ADDR_MAP_MASK_TABLE": sv_param(48 * AXI_ADDR_WIDTH, STS_DEMO_ADDR_MAP_MASK_TABLE_INT),
+    "STS_DEMO_ADDR_MAP_TGT_ID_TABLE": sv_param(48 * TGT_ID_WIDTH, STS_DEMO_ADDR_MAP_TGT_ID_TABLE_INT),
     "STS_DEMO_ADDR_MAP_DEFAULT_TGT_ID": STS_DEMO_ADDR_MAP_DEFAULT_TGT_ID,
 }
 
 aon_ss_iniu_sys_config = TemplateIPConfig(
     name="aon_ss_iniu_sys",
-    prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "iniu_filelist.f"),
+    prefix="aon_ss_",
+    filelist=str(STS_INIU_ROOT / "vc" / "iniu_sys_pub.f"),
     env_var="AON_SS_INIU_SYS_OUT_DIR",
 )
 aon_ss_iniu_sys_config.param_overrides = _iniu_params
 
 aon_ss_iniu_top_side_config = TemplateIPConfig(
     name="aon_ss_iniu_top_side",
-    prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "iniu_filelist.f"),
+    prefix="aon_ss_",
+    filelist=str(STS_INIU_ROOT / "vc" / "iniu_top_pub.f"),
     env_var="AON_SS_INIU_TOP_SIDE_OUT_DIR",
 )
 aon_ss_iniu_top_side_config.param_overrides = _iniu_params
@@ -141,8 +193,8 @@ soc_sts_dec4_config._route_base_table = [0x30, 0x20, 0x10, 0x00]
 soc_sts_dec4_config._route_mask_val = 0xB0
 soc_sts_dec4_config.param_overrides = {
     "STS_DEMO_DEC_SLAVE_NUM": STS_DEMO_DEC_SLAVE_NUM,
-    "STS_DEMO_ROUTE_BASE": _sv_param(STS_DEMO_DEC_SLAVE_NUM * TGT_ID_WIDTH, STS_DEMO_ROUTE_BASE_INT),
-    "STS_DEMO_ROUTE_MASK": _sv_param(STS_DEMO_DEC_SLAVE_NUM * TGT_ID_WIDTH, STS_DEMO_ROUTE_MASK_INT),
+    "STS_DEMO_ROUTE_BASE": sv_param(STS_DEMO_DEC_SLAVE_NUM * TGT_ID_WIDTH, STS_DEMO_ROUTE_BASE_INT),
+    "STS_DEMO_ROUTE_MASK": sv_param(STS_DEMO_DEC_SLAVE_NUM * TGT_ID_WIDTH, STS_DEMO_ROUTE_MASK_INT),
     "STS_DEMO_DBG_TIMESTAMP_WIDTH": STS_DEMO_DBG_TIMESTAMP_WIDTH,
     "STS_DEMO_DBG_DATA_WIDTH": STS_DEMO_DBG_DATA_WIDTH,
 }
@@ -152,22 +204,22 @@ soc_sts_dec4_config.param_overrides = {
 
 vpu_ss_tniu_sys_config = TemplateIPConfig(
     name="vpu_ss_tniu_sys",
-    prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    prefix="vpu_ss_",
+    filelist=str(STS_TNIU_ROOT / "vc" / "tniu_sys_pub.f"),
     env_var="VPU_SS_TNIU_SYS_OUT_DIR",
 )
 
 camera_ss_tniu_sys_config = TemplateIPConfig(
     name="camera_ss_tniu_sys",
-    prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    prefix="camera_ss_",
+    filelist=str(STS_TNIU_ROOT / "vc" / "tniu_sys_pub.f"),
     env_var="CAMERA_SS_TNIU_SYS_OUT_DIR",
 )
 
 dspss_tniu_sys_config = TemplateIPConfig(
     name="dspss_tniu_sys",
-    prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    prefix="dspss_",
+    filelist=str(STS_TNIU_ROOT / "vc" / "tniu_sys_pub.f"),
     env_var="DSPSS_TNIU_SYS_OUT_DIR",
 )
 
@@ -175,8 +227,8 @@ dspss_tniu_sys_config = TemplateIPConfig(
 
 vpu_ss_tniu_top_side_config = TemplateIPConfig(
     name="vpu_ss_tniu_top_side",
-    prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    prefix="vpu_ss_",
+    filelist=str(STS_TNIU_ROOT / "vc" / "tniu_top_pub.f"),
     env_var="VPU_SS_TNIU_TOP_SIDE_OUT_DIR",
 )
 vpu_ss_tniu_top_side_config.param_overrides = _tniu_params(0)
@@ -184,8 +236,8 @@ vpu_ss_tniu_top_side_config.top_wrap = "sts_tniu_top"
 
 camera_ss_tniu_top_side_config = TemplateIPConfig(
     name="camera_ss_tniu_top_side",
-    prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    prefix="camera_ss_",
+    filelist=str(STS_TNIU_ROOT / "vc" / "tniu_top_pub.f"),
     env_var="CAMERA_SS_TNIU_TOP_SIDE_OUT_DIR",
 )
 camera_ss_tniu_top_side_config.param_overrides = _tniu_params(1)
@@ -193,8 +245,8 @@ camera_ss_tniu_top_side_config.top_wrap = "sts_tniu_top"
 
 dspss_tniu_top_side_config = TemplateIPConfig(
     name="dspss_tniu_top_side",
-    prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "tniu_filelist.f"),
+    prefix="dspss_",
+    filelist=str(STS_TNIU_ROOT / "vc" / "tniu_top_pub.f"),
     env_var="DSPSS_TNIU_TOP_SIDE_OUT_DIR",
 )
 dspss_tniu_top_side_config.param_overrides = _tniu_params(2)
@@ -205,21 +257,21 @@ dspss_tniu_top_side_config.top_wrap = "sts_tniu_top"
 soc_sts_req_rsp_async_config = TemplateIPConfig(
     name="soc_sts_req_rsp_async",
     prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
+    filelist=str(STS_NOC_ROOT / "vc" / "network_comp.f"),
     env_var="STS_REQ_RSP_ASYNC_OUT_DIR",
 )
 
 soc_sts_link_pipe_config = TemplateIPConfig(
     name="soc_sts_link_pipe",
     prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
+    filelist=str(STS_NOC_ROOT / "vc" / "network_comp.f"),
     env_var="SOC_STS_LINK_PIPE_OUT_DIR",
 )
 
 soc_sts_link_buf_config = TemplateIPConfig(
     name="soc_sts_link_buf",
     prefix="",
-    filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
+    filelist=str(STS_NOC_ROOT / "vc" / "network_comp.f"),
     env_var="SOC_STS_LINK_BUF_OUT_DIR",
 )
 

@@ -17,3 +17,11 @@
 [submodule "subs/lwnoc_dti_noc"]
 	path = subs/lwnoc_dti_noc
 	url = git@github.com:lwnoc/lwnoc_dti_noc.git
+[submodule "subs/fcip"]
+	path = subs/fcip
+	url = git@github.com:fliibs/fcip.git
+	branch = new
+[submodule "subs/lwnoc_lowpower_component"]
+	path = subs/lwnoc_lowpower_component
+	url = git@github.com:fliibs/lwnoc_lowpower_component.git
+	branch = main

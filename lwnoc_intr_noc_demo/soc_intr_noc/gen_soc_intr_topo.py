@@ -120,17 +120,6 @@ def generate():
     rtw_comp.generate_verilog(iteration=True)
     rtw_comp.generate_filelist(abs_path=False, prefix="$SOC_INTR_RING_NOC")
 
-    # ── Viz (optional) ─────────────────────────────────────────────────
-    try:
-        import networkx  # noqa: F401
-        from tools.intr_gen_viz import emit_topology_visualization
-        emit_topology_visualization(
-            logic_wrapper, THIS_DIR / f"{TOPO_ID}_topology.png",
-            topology_json=THIS_DIR / f"{TOPO_ID}_logic_topology.json",
-        )
-    except ImportError:
-        print("  [viz] skipped (missing networkx)")
-
     print(f"Done. Layers: {BUILD_DIR}")
 
 

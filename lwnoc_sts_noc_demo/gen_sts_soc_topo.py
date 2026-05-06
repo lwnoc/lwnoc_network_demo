@@ -70,12 +70,11 @@ def main():
     connect(logic_wrapper.harden_up_async_bridge_mst.clk, up_harden.clk_harden_up_func)
     connect(logic_wrapper.harden_up_async_bridge_mst.rst_n, up_harden.rst_harden_up_func_n)
 
-    # Output all harden .v files to top_wrap_dir (memnoc pattern: flat aggregation)
-    top_wrap_dir = str(BUILD_DIR / "sts_soc_top_wrap")
+    # Output all harden .v files to BUILD_DIR (parallel with sub-component dirs)
     for harden in [dn_harden, up_harden]:
         harden.expose_unconnected_interfaces()
         hc = harden.build_uhdl()
-        hc.output_dir = top_wrap_dir
+        hc.output_dir = str(BUILD_DIR)
         hc.generate_verilog(iteration=True)
         hc.generate_filelist(abs_path=False, prefix="$STS_SOC_NOC")
 
@@ -86,20 +85,8 @@ def main():
     ring_top_wrap.u_up_harden = up_harden
     ring_top_wrap.expose_unconnected_interfaces()
     rtw_comp = ring_top_wrap.build_uhdl()
-    rtw_comp.output_dir = top_wrap_dir
+    rtw_comp.output_dir = str(BUILD_DIR)
     rtw_comp.generate_verilog(iteration=True)
-
-    # Collect all template .v/.sv files from sibling build dirs into top_wrap
-    import os, shutil
-    for ip_dir in BUILD_DIR.iterdir():
-        if not ip_dir.is_dir() or ip_dir.name == "sts_soc_top_wrap":
-            continue
-        for fn in os.listdir(str(ip_dir)):
-            if fn.endswith((".v", ".sv")):
-                src = str(ip_dir / fn)
-                dst = os.path.join(top_wrap_dir, fn)
-                if not os.path.exists(dst):
-                    shutil.copy2(src, dst)
     rtw_comp.generate_filelist(abs_path=False, prefix="$STS_SOC_NOC")
 
     print(f"Done. RTL: {BUILD_DIR}")

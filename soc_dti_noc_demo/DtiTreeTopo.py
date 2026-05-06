@@ -64,18 +64,18 @@ class DtiLogicTopo(UhdlWrapperNode):
         self.sw0 = DtiSwitchNode(id="sw0", cfg=dti_sw0_config, top="dti_noc_switch", input_count=6)
         self.sw1 = DtiSwitchNode(id="sw1", cfg=dti_sw1_config, top="dti_noc_switch", input_count=5)
         self.sw2 = DtiSwitchNode(id="sw2", cfg=dti_sw2_config, top="dti_noc_switch", input_count=4)
-        self.sw3 = DtiSwitchNode(id="sw3", cfg=dti_sw3_config, top="dti_noc_switch", input_count=3)
+        self.sw3 = DtiSwitchNode(id="sw3", cfg=dti_sw3_config, top="dti_noc_switch", input_count=3, clk_name="clk_noc_up", rst_name="rst_noc_up_n")
 
         for sw in [self.sw0, self.sw1, self.sw2]:
-            connect(sw.clk, self.clk_noc)
-            connect(sw.rst_n, self.rst_noc_n)
-        connect(self.sw3.clk, self.clk_noc_up)
-        connect(self.sw3.rst_n, self.rst_noc_up_n)
+            connect(sw.clk_noc, self.clk_noc)
+            connect(sw.rst_noc_n, self.rst_noc_n)
+        connect(self.sw3.clk_noc_up, self.clk_noc_up)
+        connect(self.sw3.rst_noc_up_n, self.rst_noc_up_n)
 
         # Buffer + async bridge (sw2 -> buffer -> async slv)
         self.dti_buffer = DtiLinkBufReqNode(id="dti_buffer", cfg=dti_link_buf_config)
-        connect(self.dti_buffer.clk, self.clk_noc)
-        connect(self.dti_buffer.rst_n, self.rst_noc_n)
+        connect(self.dti_buffer.clk_noc, self.clk_noc)
+        connect(self.dti_buffer.rst_noc_n, self.rst_noc_n)
 
         self.async_bridge = DtiReqRspAsyncBridgeNode(id="dti_req_rsp_async_bridge", cfg=dti_req_rsp_async_config)
         connect(self.async_bridge.clk_src, self.clk_noc)
@@ -87,8 +87,8 @@ class DtiLogicTopo(UhdlWrapperNode):
         for i in range(6):
             node = DtiIniuNode(id=f"dsp{i}_iniu_node", sys_cfg=dsp_iniu_sys_config, top_cfg=iniu_top_config, node_name=f"dsp{i}")
             setattr(self, f"dsp{i}_iniu", node)
-            connect(node.clk_top, self.clk_noc)
-            connect(node.rst_top_n, self.rst_noc_n)
+            # clk_noc auto-propagates (is_global)
+            # rst_noc_n auto-propagates (is_global)
             connect(node.top_req, getattr(self.sw0, f"iniu{i}_req"))
             connect(node.top_rsp, getattr(self.sw0, f"iniu{i}_rsp"))
 
@@ -101,8 +101,8 @@ class DtiLogicTopo(UhdlWrapperNode):
 
         for idx, iniu in enumerate([self.cpu_iniu, self.pcie_iniu, self.ufs_iniu,
                                      self.camera_iniu, self.mipi_iniu]):
-            connect(iniu.clk_top, self.clk_noc)
-            connect(iniu.rst_top_n, self.rst_noc_n)
+            # clk_noc auto-propagates (is_global)
+            # rst_noc_n auto-propagates (is_global)
             connect(iniu.top_req, getattr(self.sw1, f"iniu{idx}_req"))
             connect(iniu.top_rsp, getattr(self.sw1, f"iniu{idx}_rsp"))
 
@@ -114,8 +114,8 @@ class DtiLogicTopo(UhdlWrapperNode):
 
         for idx, iniu in enumerate([self.gpu0_iniu, self.gpu1_iniu,
                                      self.dp_iniu, self.display_iniu]):
-            connect(iniu.clk_top, self.clk_noc)
-            connect(iniu.rst_top_n, self.rst_noc_n)
+            # clk_noc auto-propagates (is_global)
+            # rst_noc_n auto-propagates (is_global)
             connect(iniu.top_req, getattr(self.sw2, f"iniu{idx}_req"))
             connect(iniu.top_rsp, getattr(self.sw2, f"iniu{idx}_rsp"))
 
@@ -136,8 +136,8 @@ class DtiLogicTopo(UhdlWrapperNode):
 
         # sw3 -> tcu_tniu
         self.tcu_tniu = DtiTniuNode(id="tcu_tniu_node", sys_cfg=tcu_tniu_sys_config, top_cfg=tniu_top_config, node_name="sys_tcu_tniu")
-        connect(self.tcu_tniu.clk_top, self.clk_noc_up)
-        connect(self.tcu_tniu.rst_top_n, self.rst_noc_up_n)
+        # clk_noc_up auto-propagates (is_global)
+        # rst_noc_up_n auto-propagates (is_global)
         connect(self.sw3.tniu_req, self.tcu_tniu.top_req_data)
         connect(self.tcu_tniu.top_rsp, self.sw3.tniu_rsp)
 
