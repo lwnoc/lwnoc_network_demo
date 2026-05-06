@@ -13,3 +13,5 @@ $RTL_PATH/rtl/common/lwring_id_remap.sv
 
 $RTL_PATH/rtl/common/sts_ctm.sv
 $RTL_PATH/rtl/common/sts_tniu_apb_dec.sv
+
+$RTL_PATH/rtl/common/sts_cti.sv

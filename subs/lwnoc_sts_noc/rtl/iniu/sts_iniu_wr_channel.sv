@@ -35,7 +35,9 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
 
     input   logic                   in_rsp_vld,
     output  logic                   in_rsp_rdy,
-    input   sts_rsp_typ             in_rsp_pld
+    input   sts_rsp_typ             in_rsp_pld,
+    // ASIL-D addr decoder lock-step error
+    output  logic                   addr_map_wr_err
 );
 
 logic                   aw_hold_vld;
@@ -95,6 +97,32 @@ logic                    mapped_aw_tgt_hit;
     .out_tgt_id (mapped_aw_tgt_id    ),
     .out_hit    (mapped_aw_tgt_hit   )
 );
+// Shadow addr_map for ASIL-D lock-step
+logic [TGT_ID_WIDTH-1:0] mapped_aw_tgt_id_shd;
+logic                    mapped_aw_tgt_hit_shd;
+`_PREFIX_(sts_iniu_addr_map) #(
+    .ENTRY_NUM      (ADDR_MAP_ENTRY_NUM),
+    .ADDR_BASE_TABLE(ADDR_MAP_BASE_TABLE),
+    .ADDR_MASK_TABLE(ADDR_MAP_MASK_TABLE),
+    .TGT_ID_TABLE   (ADDR_MAP_TGT_ID_TABLE),
+    .LINEAR_EN         (ADDR_MAP_LINEAR_EN),
+    .LINEAR_BASE       (ADDR_MAP_LINEAR_BASE),
+    .LINEAR_NUM        (ADDR_MAP_LINEAR_NUM),
+    .LINEAR_STRIDE_LOG2(ADDR_MAP_LINEAR_STRIDE_LOG2),
+    .LINEAR_TGT_BASE   (ADDR_MAP_LINEAR_TGT_BASE),
+    .DEFAULT_TGT_ID (ADDR_MAP_DEFAULT_TGT_ID)
+) u_aw_addr_map_shadow (
+    .in_addr    (aw_hold_pld.awaddr),
+    .out_tgt_id (mapped_aw_tgt_id_shd ),
+    .out_hit    (mapped_aw_tgt_hit_shd)
+);
+// Lock-step comparator
+always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        addr_map_wr_err <= 1'b0;
+    else if ({mapped_aw_tgt_id, mapped_aw_tgt_hit} != {mapped_aw_tgt_id_shd, mapped_aw_tgt_hit_shd})
+        addr_map_wr_err <= 1'b1;
+end
 
 assign merged_req_vld = aw_hold_vld && w_hold_vld;
 assign fifo_out_aw_vld = aw_hold_vld;
@@ -225,18 +253,26 @@ always_comb begin : out_req_pld_map
     out_req_pld.req        = rs_out_pld.req;
 end
 
-cmn_vrp_reg_fifo #(
-    .PLD_TYPE  (sts_iniu_axi_b_chnl),
-    .ADDR_WIDTH($clog2(STS_INIU_REQ_FIFO_DEPTH))
+fcip_sync_fifo_reg #(
+    .FIFO_DEPTH (STS_INIU_REQ_FIFO_DEPTH          ),
+    .FIFO_WIDTH ($bits(sts_iniu_axi_b_chnl)       ),
+    .FORWARD_EN (0                                )
 ) u_b_fifo (
-    .clk    (clk),
-    .rst_n  (rst_n),
-    .in_vld (fifo_in_rsp_vld),
-    .in_rdy (fifo_in_rsp_rdy),
-    .in_pld (fifo_in_rsp_pld),
-    .out_vld(upstrm_b_vld),
-    .out_rdy(upstrm_b_rdy),
-    .out_pld(upstrm_b_pld)
+    .clk            (clk                ),
+    .rst_n          (rst_n              ),
+    .stall          (1'b0               ),
+    .clear          (1'b0               ),
+    .idle           (                   ),
+    .write_req_vld  (fifo_in_rsp_vld    ),
+    .write_req_pld  (fifo_in_rsp_pld    ),
+    .write_req_rdy  (fifo_in_rsp_rdy    ),
+    .read_resp_vld  (upstrm_b_vld       ),
+    .read_resp_pld  (upstrm_b_pld       ),
+    .read_resp_rdy  (upstrm_b_rdy       ),
+    .almost_full    (                   ),
+    .almost_empty   (                   ),
+    .empty          (                   ),
+    .full           (                   )
 );
 
 assign retire_rsp_pld = sts_rsp_typ'(retire_rsp_pld_flat);

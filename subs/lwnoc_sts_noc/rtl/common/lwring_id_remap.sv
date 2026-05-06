@@ -94,18 +94,26 @@ module lwring_id_remap
         .out_pld_oh(              )
     );
 
-    cmn_vrp_reg_fifo #(
-        .PLD_TYPE  (logic [IDX_WIDTH-1:0]),
-        .ADDR_WIDTH(8                    )
+    fcip_sync_fifo_reg #(
+        .FIFO_DEPTH (256      ),
+        .FIFO_WIDTH (IDX_WIDTH),
+        .FORWARD_EN (0        )
     ) u_id_fifo (
-        .clk    (clk         ),
-        .rst_n  (rst_n       ),
-        .in_vld (prealloc_vld),
-        .in_rdy (prealloc_rdy),
-        .in_pld (prealloc_pld),
-        .out_vld(fifo_vld    ),
-        .out_rdy(fifo_rdy    ),
-        .out_pld(fifo_pld    )
+        .clk            (clk             ),
+        .rst_n          (rst_n           ),
+        .stall          (1'b0            ),
+        .clear          (1'b0            ),
+        .idle           (                ),
+        .write_req_vld  (prealloc_vld    ),
+        .write_req_pld  (prealloc_pld    ),
+        .write_req_rdy  (prealloc_rdy    ),
+        .read_resp_vld  (fifo_vld        ),
+        .read_resp_pld  (fifo_pld        ),
+        .read_resp_rdy  (fifo_rdy        ),
+        .almost_full    (                ),
+        .almost_empty   (                ),
+        .empty          (                ),
+        .full           (                )
     );
 
     fcip_rob_id_dec #(

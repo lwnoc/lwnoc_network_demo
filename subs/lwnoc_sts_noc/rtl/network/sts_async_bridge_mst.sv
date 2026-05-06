@@ -5,6 +5,7 @@ module sts_async_bridge_mst #(
     parameter integer unsigned THRESHOLD_EN = 0,
     parameter integer unsigned ALMOST_EMPTY_THRESHOLD = 4,
     parameter integer unsigned DATA_WIDTH = 32,
+    parameter integer unsigned ERR_INT_CNT_WIDTH = 16,
     parameter integer unsigned VT_TYPE = 1
 )(
     input   logic                       clk,
@@ -17,11 +18,28 @@ module sts_async_bridge_mst #(
     output  logic [DATA_WIDTH-1:0]      out_rsp_pld,
     input   logic                       out_rsp_rdy,
     output  logic                       almost_empty,
+    output  logic                       sb_err,
+    output  logic                       db_err
     input   logic [FIFO_DEPTH-1:0]      wptr_async,
     output  logic [FIFO_DEPTH-1:0]      rptr_async,
     output  logic [FIFO_DEPTH-1:0]      rptr_sync,
     input   logic [DATA_WIDTH:0]        pld_sync
 );
+
+    logic [32+7:0] m_pld_ecc;
+    logic                   ecc_sb_raw, ecc_db_raw;
+    fcip_ecc_dec #(.DATA_WIDTH(32)) u_bridge_ecc_dec (
+        .encode_data(m_pld_ecc),
+        .data       (out_rsp_pld),
+        .sb_err     (ecc_sb_raw),
+        .db_err     (ecc_db_raw)
+    );
+    fcip_fusa_pulse_gen #(.CNT_WIDTH(ERR_INT_CNT_WIDTH)) u_pulse_sb (
+        .clk(clk), .rst_n(rst_n), .err_in(ecc_sb_raw), .intr_out(sb_err)
+    );
+    fcip_fusa_pulse_gen #(.CNT_WIDTH(ERR_INT_CNT_WIDTH)) u_pulse_db (
+        .clk(clk), .rst_n(rst_n), .err_in(ecc_db_raw), .intr_out(db_err)
+    );
 
     fcip_afifo_mst #(
         .FIFO_DEPTH             (FIFO_DEPTH),
@@ -39,7 +57,7 @@ module sts_async_bridge_mst #(
         .full_zero              (full_zero),
         .idle                   (idle),
         .m_vld                  (out_rsp_vld),
-        .m_pld                  (out_rsp_pld),
+        .m_pld                  (m_pld_ecc),
         .m_rdy                  (out_rsp_rdy),
         .almost_empty           (almost_empty),
         .wptr_async             (wptr_async),

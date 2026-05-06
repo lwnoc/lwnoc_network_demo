@@ -6,6 +6,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     parameter integer unsigned FIFO_DEPTH          = 4,
     parameter integer unsigned SYNC_STAGE          = 2,
     parameter integer unsigned NODE_NUM            = 2,
+    parameter integer unsigned SAFETY_TIMEOUT_CYCLES = 1024,
     parameter integer unsigned ADDR_MAP_ENTRY_NUM  = 1,
     parameter logic [ADDR_MAP_ENTRY_NUM*AXI_ADDR_WIDTH-1:0] ADDR_MAP_BASE_TABLE = '0,
     parameter logic [ADDR_MAP_ENTRY_NUM*AXI_ADDR_WIDTH-1:0] ADDR_MAP_MASK_TABLE = '0,
@@ -16,8 +17,14 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     parameter integer unsigned             ADDR_MAP_LINEAR_STRIDE_LOG2 = 0,
     parameter logic [TGT_ID_WIDTH-1:0]     ADDR_MAP_LINEAR_TGT_BASE   = '0,
     parameter logic [TGT_ID_WIDTH-1:0]                      ADDR_MAP_DEFAULT_TGT_ID = '0,
+    // ECC: REQ_WIDTH=119 → CODE_WIDTH=7+1=8 overhead → 127, RSP_WIDTH=65 → 73
     localparam int REQ_PLD_AFIFO_WIDTH = STS_REQ_WIDTH,
-    localparam int RSP_PLD_AFIFO_WIDTH = STS_RSP_WIDTH
+    localparam int RSP_PLD_AFIFO_WIDTH = STS_RSP_WIDTH,
+    parameter integer unsigned  ERR_INT_CNT_WIDTH = 16,
+    localparam int REQ_ECC_OH = ($clog2(STS_REQ_WIDTH)+STS_REQ_WIDTH+1 <= 2**$clog2(STS_REQ_WIDTH))? 8 : 9,
+    localparam int RSP_ECC_OH = ($clog2(STS_RSP_WIDTH)+STS_RSP_WIDTH+1 <= 2**$clog2(STS_RSP_WIDTH))? 8 : 9,
+    localparam int REQ_AFIFO_W = STS_REQ_WIDTH + REQ_ECC_OH,
+    localparam int RSP_AFIFO_W = STS_RSP_WIDTH + RSP_ECC_OH
 ) (
     input logic clk_src ,
     input logic clk_dst ,
@@ -90,28 +97,32 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     output  logic [FIFO_DEPTH-1:0]          rsp_rptr_sync   ,
     input   logic [RSP_PLD_AFIFO_WIDTH+1:0]   rsp_pld_sync    , 
 
-    // CTI
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_in,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_req,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_ack,
-    
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_out,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_req,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_ack,
-
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_channel_in,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_channel_in_req,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_channel_in_ack,
-
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_channel_out,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_channel_out_req,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_channel_out_ack,
+    // CTI — level pass-through (sys clock domain)
+    //   Each signal: input → wire → output (_o suffix = to noc side via CDC)
+    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_in,       // from sys top
+    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_o,     // to noc side (via CDC)
+    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_ack,   // from noc side (via CDC)
+    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_ack_o, // to sys top
+    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_out,      // from noc side (via CDC)
+    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_o,    // to sys top
+    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_ack,  // from sys top
+    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_ack_o,// to noc side (via CDC)
 
     input   logic [DBG_TIMESTAMP_WIDTH-1:0] dbg_timestamp_in,
     output  logic [DBG_TIMESTAMP_WIDTH-1:0] dbg_timestamp_out,
 
     input   logic [DBG_DATA_WIDTH-1:0]      dbg_data_in,
-    output  logic [DBG_DATA_WIDTH-1:0]      dbg_data_out
+    output  logic [DBG_DATA_WIDTH-1:0]      dbg_data_out,
+
+    // safety_err[7:0] — raw level error vector; each bit self-latches at source.
+    //   [0] = req_timeout_err, [1] = rsp_timeout_err,
+    //   [2] = aw_timeout_err,  [3] = w_timeout_err,
+    //   [4] = ar_timeout_err,  [5] = addr_map_rd_err,
+    //   [6] = addr_map_wr_err, [7] = arb_lockstep_err
+    output  logic [7:0]                     safety_err,
+    // FUSA AFIFO ECC error outputs
+    output  logic                           safety_afifo_rsp_sb_err,
+    output  logic                           safety_afifo_rsp_db_err
 );
 
 
@@ -149,6 +160,16 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
 
     logic [REQ_PLD_AFIFO_WIDTH-1:0] req_pld_afifo;
     logic [RSP_PLD_AFIFO_WIDTH-1:0] rsp_pld_afifo;
+    logic                           safety_req_timeout_err;
+    logic                           safety_rsp_timeout_err;
+    logic                           safety_afifo_req_ecc_err;
+    logic                           safety_afifo_rsp_ecc_err;
+    logic                           safety_aw_timeout_err;
+    logic                           safety_w_timeout_err;
+    logic                           safety_ar_timeout_err;
+    logic                           safety_arb_lockstep_err;
+    logic                           addr_map_wr_err;
+    logic                           addr_map_rd_err;
 
     `_PREFIX_(sts_iniu_axi_bundle) u_axi_bundle (
         .s_awvalid (s_awvalid ),
@@ -209,6 +230,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
 
     `_PREFIX_(sts_iniu_axi_iniu) #(
         .NODE_NUM              (NODE_NUM),
+        .SAFETY_TIMEOUT_CYCLES (SAFETY_TIMEOUT_CYCLES),
         .ADDR_MAP_ENTRY_NUM    (ADDR_MAP_ENTRY_NUM),
         .ADDR_MAP_BASE_TABLE   (ADDR_MAP_BASE_TABLE),
         .ADDR_MAP_MASK_TABLE   (ADDR_MAP_MASK_TABLE),
@@ -245,7 +267,15 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .out_req_pld     (req_pld_temp    ),
         .in_rsp_vld      (rsp_vld_temp    ),
         .in_rsp_rdy      (rsp_rdy_temp    ),
-        .in_rsp_pld      (rsp_pld_temp    )
+        .in_rsp_pld      (rsp_pld_temp    ),
+        .safety_req_timeout_err(safety_req_timeout_err),
+        .safety_rsp_timeout_err(safety_rsp_timeout_err),
+        .safety_aw_timeout_err(safety_aw_timeout_err),
+        .safety_w_timeout_err(safety_w_timeout_err),
+        .safety_ar_timeout_err(safety_ar_timeout_err),
+        .safety_arb_lockstep_err(safety_arb_lockstep_err),
+        .addr_map_wr_err(addr_map_wr_err),
+        .addr_map_rd_err(addr_map_rd_err)
     );
 
     // Connect struct payloads to the AFIFO sideband explicitly through their last fields.
@@ -256,9 +286,34 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     assign rsp_last_temp = rsp_last_afifo;
 
 
+    // REQ: ECC encode before AFIFO write (clk_src domain)
+    logic [REQ_AFIFO_W-1:0] req_pld_ecc;
+    logic [RSP_AFIFO_W-1:0] rsp_pld_ecc;
+    logic                    req_sb_err_raw, req_db_err_raw;
+    logic                    rsp_sb_err_raw, rsp_db_err_raw;
+    fcip_ecc_enc #(.DATA_WIDTH(STS_REQ_WIDTH)) u_req_ecc_enc (
+        .data       (req_pld_afifo ),
+        .encode_data(req_pld_ecc   )
+    );
+    // RSP: ECC decode after AFIFO read (clk_src domain)
+    fcip_ecc_dec #(.DATA_WIDTH(STS_RSP_WIDTH)) u_rsp_ecc_dec (
+        .encode_data(rsp_pld_ecc),
+        .data       (rsp_pld_afifo),
+        .sb_err     (rsp_sb_err_raw),
+        .db_err     (rsp_db_err_raw)
+    );
+    fcip_fusa_pulse_gen #(.CNT_WIDTH(ERR_INT_CNT_WIDTH)) u_rsp_pulse_sb (
+        .clk(clk_src), .rst_n(rstn_src), .err_in(rsp_sb_err_raw), .intr_out(safety_afifo_rsp_sb_err)
+    );
+    fcip_fusa_pulse_gen #(.CNT_WIDTH(ERR_INT_CNT_WIDTH)) u_rsp_pulse_db (
+        .clk(clk_src), .rst_n(rstn_src), .err_in(rsp_db_err_raw), .intr_out(safety_afifo_rsp_db_err)
+    );
+    assign safety_afifo_req_ecc_err = 1'b0; // REQ ECC decoded in sts_iniu_noc (req_afifo_sb/db_err at top wrapper)
+    assign safety_afifo_rsp_ecc_err = safety_afifo_rsp_sb_err | safety_afifo_rsp_db_err;
+
     fcip_req_rsp_afifo_slv #(
-        .REQ_WIDTH      (REQ_PLD_AFIFO_WIDTH),
-        .RSP_WIDTH      (RSP_PLD_AFIFO_WIDTH),
+        .REQ_WIDTH      (REQ_AFIFO_W),
+        .RSP_WIDTH      (RSP_AFIFO_W),
         .FIFO_DEPTH     (FIFO_DEPTH),
         .AUTO_CLEAR_EN  (1'b1),
         .SYNC_STAGE     (SYNC_STAGE)
@@ -267,11 +322,11 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .rst_n          (rstn_src),
         .req_s_vld      (req_vld_temp),
         .req_s_rdy      (req_rdy_temp),
-        .req_s_pld      (req_pld_afifo),
+        .req_s_pld      (req_pld_ecc),
         .req_s_last     (req_last_temp),
         .rsp_m_vld      (rsp_vld_temp),
         .rsp_m_rdy      (rsp_rdy_temp),
-        .rsp_m_pld      (rsp_pld_afifo),
+        .rsp_m_pld      (rsp_pld_ecc),
         .rsp_m_last     (rsp_last_afifo),
         .req_wptr_async (req_wptr_async),
         .req_rptr_async (req_rptr_async),
@@ -299,26 +354,21 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .Z(dbg_timestamp_out)
     );
 
-    `_PREFIX_(cti_handle) #(
-        .SYNC_STAGE(SYNC_STAGE)
-    ) u_cti_handle_iniu_sys (
-        .clk_src            (clk_src            ),
-        .clk_dst            (clk_dst            ),
-        .rstn_src           (rstn_src           ),
-        .rstn_dst           (rstn_dst           ),
-        .cti_event_in       (cti_event_in       ),
-        .cti_event_in_req   (cti_event_in_req   ),
-        .cti_event_in_ack   (cti_event_in_ack   ),
-        .cti_event_out      (cti_event_out      ),
-        .cti_event_out_req  (cti_event_out_req  ),
-        .cti_event_out_ack  (cti_event_out_ack  ),
-        .cti_channel_in     (cti_channel_in     ),
-        .cti_channel_in_req (cti_channel_in_req ),
-        .cti_channel_in_ack (cti_channel_in_ack ),
-        .cti_channel_out    (cti_channel_out    ),
-        .cti_channel_out_req(cti_channel_out_req),
-        .cti_channel_out_ack(cti_channel_out_ack)
-    );
+    // CTI level pass-through (wire pairs, no CDC in sys side)
+    assign cti_event_in_o       = cti_event_in;
+    assign cti_event_in_ack_o   = cti_event_in_ack;
+    assign cti_event_out_o      = cti_event_out;
+    assign cti_event_out_ack_o  = cti_event_out_ack;
+
+    assign safety_block_req = |safety_err;
+    assign safety_err       = {safety_arb_lockstep_err,         // [7]
+                               addr_map_wr_err,                 // [6]
+                               addr_map_rd_err,                 // [5]
+                               safety_afifo_rsp_ecc_err,        // [4]
+                               safety_afifo_req_ecc_err,        // [3]
+                               safety_ar_timeout_err,           // [2]
+                               safety_w_timeout_err,            // [1]
+                               safety_aw_timeout_err};          // [0]
 
     
 endmodule

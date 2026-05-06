@@ -59,6 +59,15 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     output  logic [CTI_EVENT_WIDTH-1:0] sys_cti_event_out,
     input   logic [CTI_CHANNEL_WIDTH-1:0] sys_cti_channel_in,
     output  logic [CTI_CHANNEL_WIDTH-1:0] sys_cti_channel_out,
+    // CTI APB — INIU side (for sts_cti register access)
+    input   logic                           iniu_cti_apb_psel,
+    input   logic                           iniu_cti_apb_penable,
+    input   logic [11:0]                    iniu_cti_apb_paddr,
+    input   logic                           iniu_cti_apb_pwrite,
+    input   logic [31:0]                    iniu_cti_apb_pwdata,
+    output  logic [31:0]                    iniu_cti_apb_prdata,
+    output  logic                           iniu_cti_apb_pready,
+    output  logic                           iniu_cti_apb_pslverr,
     input   logic [DBG_TIMESTAMP_WIDTH-1:0] dbg_timestamp_in,
     input   logic [DBG_DATA_WIDTH-1:0]      dbg_data_in,
     output  logic [DBG_TIMESTAMP_WIDTH-1:0] dbg_timestamp_out_0,
@@ -213,20 +222,24 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     logic                    pready_21;
     logic [31:0]             prdata_21;
     logic                    pslverr_21;
+    logic [7:0]              iniu_safety_err;
     assign tniu2_sys_pready  = {pready_21,  pready_20};
     assign tniu2_sys_prdata  = {prdata_21,  prdata_20};
     assign tniu2_sys_pslverr = {pslverr_21, pslverr_20};
 
     `_PREFIX_(sts_iniu_top) #(
         .NODE_NUM                (NODE_NUM),
-        .ADDR_MAP_ENTRY_NUM      (12),
-        .ADDR_MAP_BASE_TABLE     ({32'h0000_B000, 32'h0000_A000, 32'h0000_9000, 32'h0000_8000,
+        .ADDR_MAP_ENTRY_NUM      (15),
+        .ADDR_MAP_BASE_TABLE     ({32'h0000_E000, 32'h0000_D000, 32'h0000_C000,
+                                   32'h0000_B000, 32'h0000_A000, 32'h0000_9000, 32'h0000_8000,
                                    32'h0000_7000, 32'h0000_6000, 32'h0000_5000, 32'h0000_4000,
                                    32'h0000_3000, 32'h0000_2000, 32'h0000_1000, 32'h0000_0000}),
-        .ADDR_MAP_MASK_TABLE     ({32'hFFFF_F000, 32'hFFFF_F000, 32'hFFFF_F000, 32'hFFFF_F000,
+        .ADDR_MAP_MASK_TABLE     ({32'hFFFF_F000, 32'hFFFF_F000, 32'hFFFF_F000,
+                                   32'hFFFF_F000, 32'hFFFF_F000, 32'hFFFF_F000, 32'hFFFF_F000,
                                    32'hFFFF_F000, 32'hFFFF_F000, 32'hFFFF_F000, 32'hFFFF_F000,
                                    32'hFFFF_F000, 32'hFFFF_F000, 32'hFFFF_F000, 32'hFFFF_F000}),
-        .ADDR_MAP_TGT_ID_TABLE   ({8'h55, 8'h54, 8'h45, 8'h44, 8'h53, 8'h52, 8'h43, 8'h42, 8'h51, 8'h50, 8'h41, 8'h40}),
+        .ADDR_MAP_TGT_ID_TABLE   ({8'h64, 8'h62, 8'h60,
+                                   8'h55, 8'h54, 8'h45, 8'h44, 8'h53, 8'h52, 8'h43, 8'h42, 8'h51, 8'h50, 8'h41, 8'h40}),
         .ADDR_MAP_DEFAULT_TGT_ID (8'hFF)
     ) u_iniu (
         .clk_src             (clk_src),
@@ -289,10 +302,19 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .sys_cti_channel_out (sys_cti_channel_out),
         .noc_cti_channel_out (iniu_noc_cti_channel_out),
         .noc_cti_channel_in  (dec_mst_cti_channel_out),
+        .cti_apb_psel        (iniu_cti_apb_psel    ),
+        .cti_apb_penable     (iniu_cti_apb_penable ),
+        .cti_apb_paddr       (iniu_cti_apb_paddr   ),
+        .cti_apb_pwrite      (iniu_cti_apb_pwrite  ),
+        .cti_apb_pwdata      (iniu_cti_apb_pwdata  ),
+        .cti_apb_prdata      (iniu_cti_apb_prdata  ),
+        .cti_apb_pready      (iniu_cti_apb_pready  ),
+        .cti_apb_pslverr     (iniu_cti_apb_pslverr ),
         .dbg_timestamp_in    (dbg_timestamp_in),
         .dbg_timestamp_out   (),
         .dbg_data_in         (dbg_data_in),
-        .dbg_data_out        ()
+        .dbg_data_out        (),
+        .safety_err          (iniu_safety_err)
     );
 
     assign dec_slv_rsp_pld[0] = tniu0_rsp_pld;
@@ -302,7 +324,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     `_PREFIX_(sts_noc_dec_node) #(
         .SLAVE_NUM  (3),
         .ROUTE_BASE ({8'h44, 8'h42, 8'h40}),
-        .ROUTE_MASK ({8'hEE, 8'hEE, 8'hEE})
+        .ROUTE_MASK ({8'hCE, 8'hCE, 8'hCE})
     ) u_noc_dec (
         .clk         (clk_dst),
         .rst_n       (rstn_dst),
@@ -344,6 +366,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .APB_ADDR_WIDTH        (APB_ADDR_WIDTH),
         .LOCAL_RSC_TGT_ID      (8'h41),
         .LOCAL_REGBANK_TGT_ID  (8'h40),
+        .LOCAL_CTI_TGT_ID      (8'h60),
         .SYS_APB_ROUTE_BASE    ({8'h51, 8'h50}),
         .SYS_APB_ROUTE_MASK    ({8'hFF, 8'hFF})
     ) u_tniu0 (
@@ -363,6 +386,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .APB_ADDR_WIDTH        (APB_ADDR_WIDTH),
         .LOCAL_RSC_TGT_ID      (8'h43),
         .LOCAL_REGBANK_TGT_ID  (8'h42),
+        .LOCAL_CTI_TGT_ID      (8'h62),
         .SYS_APB_ROUTE_BASE    ({8'h53, 8'h52}),
         .SYS_APB_ROUTE_MASK    ({8'hFF, 8'hFF})
     ) u_tniu1 (
@@ -382,6 +406,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .APB_ADDR_WIDTH        (APB_ADDR_WIDTH),
         .LOCAL_RSC_TGT_ID      (8'h45),
         .LOCAL_REGBANK_TGT_ID  (8'h44),
+        .LOCAL_CTI_TGT_ID      (8'h64),
         .SYS_APB_ROUTE_BASE    ({8'h55, 8'h54}),
         .SYS_APB_ROUTE_MASK    ({8'hFF, 8'hFF})
     ) u_tniu2 (

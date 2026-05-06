@@ -11,8 +11,14 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     parameter logic [TGT_TYPE_WIDTH-1:0] LOCAL_APB_TGT_TYPE = 2'b01,
     parameter logic [TGT_ID_WIDTH-1:0]   LOCAL_RSC_TGT_ID = '0,
     parameter logic [TGT_ID_WIDTH-1:0]   LOCAL_REGBANK_TGT_ID = 'd1,
+    parameter logic [TGT_ID_WIDTH-1:0]   LOCAL_CTI_TGT_ID = 'd2,
+    parameter integer unsigned  ERR_INT_CNT_WIDTH = 16,
     localparam int REQ_PLD_WIDTH = STS_REQ_WIDTH,
-    localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH
+    localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH,
+    localparam int REQ_ECC_OH = ($clog2(STS_REQ_WIDTH)+STS_REQ_WIDTH+1 <= 2**$clog2(STS_REQ_WIDTH))? 8 : 9,
+    localparam int RSP_ECC_OH = ($clog2(STS_RSP_WIDTH)+STS_RSP_WIDTH+1 <= 2**$clog2(STS_RSP_WIDTH))? 8 : 9,
+    localparam int REQ_AFIFO_W = STS_REQ_WIDTH + REQ_ECC_OH,
+    localparam int RSP_AFIFO_W = STS_RSP_WIDTH + RSP_ECC_OH
 ) (
     input   logic   clk_src ,
     input   logic   clk_dst ,
@@ -24,11 +30,11 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     //============================================================
     input   logic               in_req_vld,
     output  logic               in_req_rdy,
-    input   sts_req_typ         in_req_pld,
+    input  [REQ_PLD_WIDTH-1:0]  in_req_pld,
 
     output  logic               out_rsp_vld,
     input   logic               out_rsp_rdy,
-    output  sts_rsp_typ         out_rsp_pld,
+    output [RSP_PLD_WIDTH-1:0] out_rsp_pld,
     //============================================================
     // async bridge signal with tniu sys side
     //============================================================
@@ -62,22 +68,13 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     input   logic [DBG_TIMESTAMP_WIDTH-1:0]  dbg_timestamp_in   ,
     output  logic [DBG_TIMESTAMP_WIDTH-1:0]  dbg_timestamp_out  ,
 
-    //CTI
+    // CTI — level event I/O (CDC in tniu_top) + channel (to/from dec_node CTM)
     input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_in,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_req,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_ack,
-    
+    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_ack,
     output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_out,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_req,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_ack,
-
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_channel_in,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_channel_in_req,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_channel_in_ack,
-
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_channel_out,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_channel_out_req,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_channel_out_ack,
+    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_ack,
+    input   logic [CTI_CHANNEL_WIDTH-1:0]   cti_channel_in,
+    output  logic [CTI_CHANNEL_WIDTH-1:0]   cti_channel_out,
 
     ///============================================================
     // Static Signal
@@ -85,10 +82,16 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     output  logic [31:0] timing_bus1,
     output  logic [31:0] timing_bus2,
     output  logic [31:0] timing_bus3,
-    output  logic [31:0] dbg_en
-
+    output  logic [31:0] dbg_en,
+    output  logic        tniu_regbank_parity_err
 );
-    
+
+    // Boundary cast: top-level vector ↔ internal struct
+    sts_req_typ  in_req_pld_s;
+    sts_rsp_typ  out_rsp_pld_s;
+    assign in_req_pld_s = sts_req_typ'(in_req_pld);
+    assign out_rsp_pld  = RSP_PLD_WIDTH'(out_rsp_pld_s);
+
     // req to control apb slaves in tniu noc side
     logic                   req_apb_tniu_vld;
     sts_req_typ             req_apb_tniu_pld;
@@ -176,14 +179,15 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     // Request Channel
     //=============================================================
     assign req_is_local_apb =
-        (in_req_pld.cmn.tgt_id == LOCAL_RSC_TGT_ID) ||
-        (in_req_pld.cmn.tgt_id == LOCAL_REGBANK_TGT_ID);
+        (in_req_pld_s.cmn.tgt_id == LOCAL_RSC_TGT_ID) ||
+        (in_req_pld_s.cmn.tgt_id == LOCAL_REGBANK_TGT_ID) ||
+        (in_req_pld_s.cmn.tgt_id == LOCAL_CTI_TGT_ID);
 
     `_PREFIX_(sts_tniu_noc_dec2) #(
         .WIDTH(REQ_PLD_WIDTH)
     ) u_tniu_noc_req_dec2 ( 
         .s_req_vld  (in_req_vld),
-        .s_req_pld  (in_req_pld),
+        .s_req_pld  (in_req_pld_s),
         .s_req_rdy  (in_req_rdy),
         .sel        (~req_is_local_apb),
         .m_req0_vld (req_apb_tniu_vld),
@@ -217,26 +221,32 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     );
 
     // packed array wires for parameterised apb_dec
-    logic [1:0]                 loc_apb_m_psel;
+    // Master[0] = REGBANK, Master[1] = CTI, Master[2] = RSC (external → sys via async bridge)
+    logic [2:0]                 loc_apb_m_psel;
     logic [APB_ADDR_WIDTH-1:0]  loc_apb_m_paddr;
-    logic [1:0]                 loc_apb_m_pready;
-    logic [63:0]                loc_apb_m_prdata;
-    logic [1:0]                 loc_apb_m_pslverr;
+    logic [2:0]                 loc_apb_m_pready;
+    logic [95:0]                loc_apb_m_prdata;
+    logic [2:0]                 loc_apb_m_pslverr;
 
-    assign loc_apb_m_pready  = {pready_pre_sync, pready_reg};
-    assign loc_apb_m_prdata  = {prdata_pre_sync, prdata_reg};
-    assign loc_apb_m_pslverr = {pslverr_pre_sync, pslverr_reg};
+    logic                       cti_pready;
+    logic [31:0]                cti_prdata;
+    logic                       cti_pslverr;
+    assign loc_apb_m_pready  = {pready_pre_sync, cti_pready, pready_reg};
+    assign loc_apb_m_prdata  = {prdata_pre_sync, cti_prdata, prdata_reg};
+    assign loc_apb_m_pslverr = {pslverr_pre_sync, cti_pslverr, pslverr_reg};
 
-    assign psel_reg       = loc_apb_m_psel[0];
+    assign psel_reg       = loc_apb_m_psel[0];   // Master[0] → REGBANK
     assign paddr_reg      = loc_apb_m_paddr;
-    assign psel_pre_sync  = loc_apb_m_psel[1];
+    logic   cti_psel;
+    assign cti_psel       = loc_apb_m_psel[1];   // Master[1] → CTI
+    assign psel_pre_sync  = loc_apb_m_psel[2];   // Master[2] → RSC (async bridge)
     assign paddr_pre_sync = loc_apb_m_paddr;
 
     `_PREFIX_(sts_tniu_apb_dec) #(
         .APB_ADDR_WIDTH(APB_ADDR_WIDTH),
-        .MASTER_NUM    (2),
-        .ROUTE_BASE    ({LOCAL_RSC_TGT_ID, LOCAL_REGBANK_TGT_ID}),
-        .ROUTE_MASK    ({8'hFF, 8'hFF})
+        .MASTER_NUM    (3),
+        .ROUTE_BASE    ({LOCAL_RSC_TGT_ID, LOCAL_CTI_TGT_ID, LOCAL_REGBANK_TGT_ID}),
+        .ROUTE_MASK    ({8'hFF, 8'hFF, 8'hFF})
     ) u_sts_tniu_apb_dec (
         .clk            (clk_src            ),
         .rst_n          (rstn_src           ),
@@ -276,6 +286,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     assign pwdata_pre_sync  = pwdata_pre_dec   ;
     assign pstrb_pre_sync   = pstrb_pre_dec    ;
 
+    logic parity_sw_check_err;
+
     `_PREFIX_(RegSpaceBase_cfg_reg_bank_table) u_regbank_sts_tniu (
         .clk            (clk_src        ),
         .rst_n          (rstn_src       ),
@@ -284,7 +296,6 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .p_enable       (penable_reg),
         .p_write        (pwrite_reg),
         .p_wdata        (pwdata_reg),
-        .p_strb         (pstrb_reg),
         .p_ready        (pready_reg),
         .p_rdata        (prdata_reg),
         .p_slverr       (pslverr_reg),
@@ -292,7 +303,11 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .timing_bus1_timing_bus1_rdat       (timing_bus1),
         .timing_bus2_timing_bus2_rdat       (timing_bus2),
         .timing_bus3_timing_bus3_rdat       (timing_bus3),
-        .debug_data_gate_debug_data_gate_rdat(dbg_data_gate)
+        .debug_data_gate_debug_data_gate_rdat(dbg_data_gate),
+        .parity_sw_check_err                (parity_sw_check_err)
+    );
+    fcip_fusa_pulse_gen #(.CNT_WIDTH(ERR_INT_CNT_WIDTH)) u_pulse_parity (
+        .clk(clk_src), .rst_n(rstn_src), .err_in(parity_sw_check_err), .intr_out(tniu_regbank_parity_err)
     );
 
     apb2apb_async_bridge_qual  #(
@@ -381,9 +396,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .v_pld_s ( v_arb_rsp_pld    ), 
         .vld_m   ( out_rsp_vld      ), 
         .rdy_m   ( out_rsp_rdy      ),
-        .pld_m   ( out_rsp_pld      )
+        .pld_m   ( out_rsp_pld_s    )
     );
-
 
     //============================================================
     // Debug Data Gate
@@ -412,25 +426,82 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .Z(dbg_timestamp_out)
     );
 
-    `_PREFIX_(cti_handle) #(
-        .SYNC_STAGE(SYNC_STAGE)
-    ) u_cti_handle_iniu_sys (
-        .clk_src            (clk_src            ),
-        .clk_dst            (clk_dst            ),
-        .rstn_src           (rstn_src           ),
-        .rstn_dst           (rstn_dst           ),
-        .cti_event_in       (cti_event_in       ),
-        .cti_event_in_req   (cti_event_in_req   ),
-        .cti_event_in_ack   (cti_event_in_ack   ),
-        .cti_event_out      (cti_event_out      ),
-        .cti_event_out_req  (cti_event_out_req  ),
-        .cti_event_out_ack  (cti_event_out_ack  ),
-        .cti_channel_in     (cti_channel_in     ),
-        .cti_channel_in_req (cti_channel_in_req ),
-        .cti_channel_in_ack (cti_channel_in_ack ),
-        .cti_channel_out    (cti_channel_out    ),
-        .cti_channel_out_req(cti_channel_out_req),
-        .cti_channel_out_ack(cti_channel_out_ack)
+    // CTI — level mode (EVENT_IN_LEVEL=1, SW_HANDSHAKE=0 + pulse_async_bridge_receiver)
+    // =================================================================
+    //   cti_event_in (level) → sts_cti.trig_in (level mode, internal edge detect)
+    //   cti_event_in_ack = rising edge captured → level for CDC
+    //
+    //   sts_cti.trig_out (pulse) → [receiver] → level → cti_event_out
+    //   cti_event_out_ack → receiver.pulse_ack → clear level
+    // =================================================================
+
+    // cti_event_in_ack: rising edge captured → level for CDC
+    logic [CTI_EVENT_WIDTH-1:0]     ev_in_d1;
+    logic [CTI_EVENT_WIDTH-1:0]     ev_in_rise;
+
+    always_ff @(posedge clk_src or negedge rstn_src) begin
+        if (!rstn_src) begin
+            ev_in_d1 <= '0;
+        end else begin
+            ev_in_d1 <= cti_event_in;
+        end
+    end
+    assign ev_in_rise = cti_event_in & ~ev_in_d1;
+
+    always_ff @(posedge clk_src or negedge rstn_src) begin
+        if (!rstn_src) begin
+            cti_event_in_ack <= '0;
+        end else begin
+            for (int i = 0; i < CTI_EVENT_WIDTH; i = i + 1) begin
+                if (ev_in_rise[i])              cti_event_in_ack[i] <= 1'b1;
+                else if (~cti_event_in[i])      cti_event_in_ack[i] <= 1'b0;
+            end
+        end
+    end
+
+    // CTI→sys: pulse_async_bridge_receiver (pulse→level latch)
+    logic [CTI_EVENT_WIDTH-1:0]     ev_out_pulse;
+    logic [CTI_EVENT_WIDTH-1:0]     ev_out_req;
+
+    pulse_async_bridge_receiver_qactive #(
+        .DATA_WIDTH   (CTI_EVENT_WIDTH),
+        .FF_SYNC_DEPTH(SYNC_STAGE)
+    ) u_ev_out_rx (
+        .clk_rx        (clk_src            ),
+        .rstn_rx       (rstn_src           ),
+        .pulse_in      (ev_out_pulse       ),
+        .pulse_req     (ev_out_req         ),
+        .pulse_ack     (cti_event_out_ack  ),
+        .clk_rx_qactive(                   )
+    );
+
+    assign cti_event_out = ev_out_req;
+
+    // --- CTI instance (noc clock domain = clk_src) ---
+    `_PREFIX_(sts_cti) #(
+        .TRIG_IN_NUM    (CTI_EVENT_WIDTH ),
+        .TRIG_OUT_NUM   (CTI_EVENT_WIDTH ),
+        .CHANNEL_NUM    (CTI_CHANNEL_WIDTH),
+        .EVENT_IN_LEVEL ({CTI_EVENT_WIDTH{1'b1}}),  // level mode
+        .SW_HANDSHAKE   ('0               ),  // pulse mode
+        .SYNC_STAGE     (SYNC_STAGE       ),
+        .APB_ADDR_WIDTH (12               )
+    ) u_sts_cti (
+        .clk            (clk_src            ),
+        .rst_n          (rstn_src           ),
+        .psel           (cti_psel           ),
+        .penable        (cmn_penable        ),
+        .paddr          (paddr_reg[11:0]    ),
+        .pwrite         (cmn_pwrite         ),
+        .pwdata         (cmn_pwdata         ),
+        .prdata         (cti_prdata         ),
+        .pready         (cti_pready         ),
+        .pslverr        (cti_pslverr        ),
+        .trig_in        (cti_event_in       ),  // level, internal edge detect
+        .trig_out       (ev_out_pulse       ),  // pulse → external receiver
+        .channel_in     (cti_channel_in     ),
+        .channel_out    (cti_channel_out    ),
+        .asicctrl       (                   )
     );
 
 endmodule

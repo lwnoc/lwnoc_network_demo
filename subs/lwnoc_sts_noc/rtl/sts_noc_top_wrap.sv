@@ -35,6 +35,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     parameter logic [AXI_ADDR_WIDTH-1:0] ADDR_MAP_MASK_TABLE = '0,
     parameter logic [TGT_ID_WIDTH-1:0]   ADDR_MAP_TGT_ID_TABLE = '0,
     parameter logic [TGT_ID_WIDTH-1:0]   ADDR_MAP_DEFAULT_TGT_ID = '0,
+    parameter integer unsigned ERR_INT_CNT_WIDTH = 16,
     localparam int REQ_PLD_WIDTH = STS_REQ_WIDTH,
     localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH
 )(
@@ -149,7 +150,17 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     // Debug timestamp input (chains through iniu_sys then iniu_noc)
     // -----------------------------------------------------------------
     input  logic [DBG_TIMESTAMP_WIDTH-1:0]  dbg_timestamp_in    ,
-    input  logic [DBG_DATA_WIDTH-1:0]       dbg_data_in
+    input  logic [DBG_DATA_WIDTH-1:0]       dbg_data_in,
+    // FUSA safety error outputs
+    output logic [7:0]                      safety_err,
+    output logic                            tniu_regbank_parity_err,
+    // FUSA AFIFO ECC error outputs (per-source, pulse-stretched)
+    output logic                            iniu_afifo_rsp_sb_err,
+    output logic                            iniu_afifo_rsp_db_err,
+    output logic                            iniu_afifo_req_sb_err,
+    output logic                            iniu_afifo_req_db_err,
+    output logic                            tniu_afifo_req_sb_err,
+    output logic                            tniu_afifo_req_db_err
 );
 
     // -----------------------------------------------------------------
@@ -192,6 +203,13 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     logic [DBG_DATA_WIDTH-1:0]      dbg_iniu_sys_out    ;
     logic [DBG_DATA_WIDTH-1:0]      dbg_iniu_noc_out    ;
     logic [DBG_DATA_WIDTH-1:0]      dbg_tniu_noc_out    ;
+    logic [7:0]                     iniu_safety_err     ;
+    logic                           iniu_afifo_rsp_sb_err_w;
+    logic                           iniu_afifo_rsp_db_err_w;
+    logic                           iniu_afifo_req_sb_err_w;
+    logic                           iniu_afifo_req_db_err_w;
+    logic                           tniu_afifo_req_sb_err_w;
+    logic                           tniu_afifo_req_db_err_w;
 
     // -----------------------------------------------------------------
     // u_iniu_sys : AXI slave (clk_sys) — REQ AFIFO write, RSP AFIFO read
@@ -207,7 +225,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .ADDR_MAP_BASE_TABLE    (ADDR_MAP_BASE_TABLE    ),
         .ADDR_MAP_MASK_TABLE    (ADDR_MAP_MASK_TABLE    ),
         .ADDR_MAP_TGT_ID_TABLE  (ADDR_MAP_TGT_ID_TABLE  ),
-        .ADDR_MAP_DEFAULT_TGT_ID(ADDR_MAP_DEFAULT_TGT_ID)
+        .ADDR_MAP_DEFAULT_TGT_ID(ADDR_MAP_DEFAULT_TGT_ID),
+        .ERR_INT_CNT_WIDTH     (ERR_INT_CNT_WIDTH)
     ) u_iniu_sys (
         .clk_src            (clk_sys            ),
         .clk_dst            (clk_noc            ),
@@ -267,24 +286,23 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .rsp_rptr_async     (iniu_rsp_rptr_async),
         .rsp_rptr_sync      (iniu_rsp_rptr_sync ),
         .rsp_pld_sync       (iniu_rsp_pld_sync  ),
-        // CTI: tie off
+        // CTI: tie off (sys side has -o/-ack pairs for CDC)
         .cti_event_in       ('0                 ),
-        .cti_event_in_req   (/* unused */       ),
+        .cti_event_in_o     (/* unused */       ),
         .cti_event_in_ack   ('0                 ),
-        .cti_event_out      (/* unused */       ),
-        .cti_event_out_req  ('0                 ),
-        .cti_event_out_ack  (/* unused */       ),
-        .cti_channel_in     ('0                 ),
-        .cti_channel_in_req (/* unused */       ),
-        .cti_channel_in_ack ('0                 ),
-        .cti_channel_out    (/* unused */       ),
-        .cti_channel_out_req('0                 ),
-        .cti_channel_out_ack(/* unused */       ),
+        .cti_event_in_ack_o (/* unused */       ),
+        .cti_event_out      ('0                 ),
+        .cti_event_out_o    (/* unused */       ),
+        .cti_event_out_ack  ('0                 ),
+        .cti_event_out_ack_o(/* unused */       ),
         // DBG
         .dbg_timestamp_in   (dbg_timestamp_in   ),
         .dbg_timestamp_out  (ts_iniu_sys_out    ),
         .dbg_data_in        (dbg_data_in        ),
-        .dbg_data_out       (dbg_iniu_sys_out   )
+        .dbg_data_out       (dbg_iniu_sys_out   ),
+        .safety_err         (safety_err         ),
+        .safety_afifo_rsp_sb_err(iniu_afifo_rsp_sb_err_w),
+        .safety_afifo_rsp_db_err(iniu_afifo_rsp_db_err_w)
     );
 
     // -----------------------------------------------------------------
@@ -295,7 +313,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .DBG_TIMESTAMP_WIDTH(DBG_TIMESTAMP_WIDTH),
         .DBG_DATA_WIDTH     (DBG_DATA_WIDTH     ),
         .FIFO_DEPTH         (INIU_FIFO_DEPTH    ),
-        .SYNC_STAGE         (SYNC_STAGE         )
+        .SYNC_STAGE         (SYNC_STAGE         ),
+        .ERR_INT_CNT_WIDTH  (ERR_INT_CNT_WIDTH)
     ) u_iniu_noc (
         .clk_dst            (clk_noc            ),
         .rst_n_dst          (rstn_noc           ),
@@ -319,24 +338,29 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .rsp_m_vld          (noc_rsp_m_vld      ),
         .rsp_m_rdy          (noc_rsp_m_rdy      ),
         .rsp_m_pld          (noc_rsp_m_pld      ),
-        // CTI: tie off
+        // CTI: tie off (noc side has event + channel + APB)
         .cti_event_in       ('0                 ),
-        .cti_event_in_req   (/* unused */       ),
-        .cti_event_in_ack   ('0                 ),
+        .cti_event_in_ack   (/* unused */       ),
         .cti_event_out      (/* unused */       ),
-        .cti_event_out_req  ('0                 ),
-        .cti_event_out_ack  (/* unused */       ),
+        .cti_event_out_ack  ('0                 ),
         .cti_channel_in     ('0                 ),
-        .cti_channel_in_req (/* unused */       ),
-        .cti_channel_in_ack ('0                 ),
         .cti_channel_out    (/* unused */       ),
-        .cti_channel_out_req('0                 ),
-        .cti_channel_out_ack(/* unused */       ),
+        .cti_apb_psel       (1'b0               ),
+        .cti_apb_penable    (1'b0               ),
+        .cti_apb_paddr      (12'b0              ),
+        .cti_apb_pwrite     (1'b0               ),
+        .cti_apb_pwdata     (32'b0              ),
+        .cti_apb_prdata     (/* unused */       ),
+        .cti_apb_pready     (/* unused */       ),
+        .cti_apb_pslverr    (/* unused */       ),
         // DBG
         .dbg_timestamp_in   (ts_iniu_sys_out    ),
         .dbg_timestamp_out  (ts_iniu_noc_out    ),
         .dbg_data_in        (dbg_iniu_sys_out   ),
-        .dbg_data_out       (dbg_iniu_noc_out   )
+        .dbg_data_out       (dbg_iniu_noc_out   ),
+        // FUSA ECC error outputs (req-side decode)
+        .req_afifo_sb_err   (iniu_afifo_req_sb_err_w),
+        .req_afifo_db_err   (iniu_afifo_req_db_err_w)
     );
 
     // -----------------------------------------------------------------
@@ -349,7 +373,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .APB_ADDR_WIDTH     (APB_ADDR_WIDTH     ),
         .SYNC_STAGE         (SYNC_STAGE         ),
         .ASYNC_FIFO_DEPTH   (TNIU_ASYNC_FIFO_DEPTH),
-        .FIFO_DEPTH         (TNIU_FIFO_DEPTH    )
+        .FIFO_DEPTH         (TNIU_FIFO_DEPTH    ),
+        .ERR_INT_CNT_WIDTH  (ERR_INT_CNT_WIDTH)
     ) u_tniu_noc (
         .clk_src            (clk_noc            ),
         .clk_dst            (clk_sys            ),
@@ -384,24 +409,19 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .pstrb              (tniu_noc_pstrb     ),
         .pprot              (tniu_noc_pprot     ),
         .pslverr            (tniu_noc_pslverr   ),
-        // CTI: tie off
+        // CTI: tie off (noc side has event + channel, no APB)
         .cti_event_in       ('0                 ),
-        .cti_event_in_req   (/* unused */       ),
-        .cti_event_in_ack   ('0                 ),
+        .cti_event_in_ack   (/* unused */       ),
         .cti_event_out      (/* unused */       ),
-        .cti_event_out_req  ('0                 ),
-        .cti_event_out_ack  (/* unused */       ),
+        .cti_event_out_ack  ('0                 ),
         .cti_channel_in     ('0                 ),
-        .cti_channel_in_req (/* unused */       ),
-        .cti_channel_in_ack ('0                 ),
         .cti_channel_out    (/* unused */       ),
-        .cti_channel_out_req('0                 ),
-        .cti_channel_out_ack(/* unused */       ),
         // DBG
         .dbg_timestamp_in   (ts_iniu_noc_out    ),
         .dbg_timestamp_out  (ts_tniu_noc_out    ),
         .dbg_data_in        (dbg_iniu_noc_out   ),
-        .dbg_data_out       (dbg_tniu_noc_out   )
+        .dbg_data_out       (dbg_tniu_noc_out   ),
+        .tniu_regbank_parity_err(tniu_regbank_parity_err)
     );
 
     // -----------------------------------------------------------------
@@ -445,24 +465,31 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .m_pwrite           (tniu_sys_m_pwrite  ),
         .m_pwdata           (tniu_sys_m_pwdata  ),
         .m_pstrb            (tniu_sys_m_pstrb   ),
-        // CTI: tie off
-        .cti_event_in       ('0                 ),
-        .cti_event_in_req   (/* unused */       ),
-        .cti_event_in_ack   ('0                 ),
-        .cti_event_out      (/* unused */       ),
-        .cti_event_out_req  ('0                 ),
-        .cti_event_out_ack  (/* unused */       ),
-        .cti_channel_in     ('0                 ),
-        .cti_channel_in_req (/* unused */       ),
-        .cti_channel_in_ack ('0                 ),
-        .cti_channel_out    (/* unused */       ),
-        .cti_channel_out_req('0                 ),
-        .cti_channel_out_ack(/* unused */       ),
+        // CTI: tie off (sys side has _i/_o pairs for CDC)
+        .cti_event_in_i     ('0                 ),
+        .cti_event_in_o     (/* unused */       ),
+        .cti_event_in_ack_i ('0                 ),
+        .cti_event_in_ack_o (/* unused */       ),
+        .cti_event_out_i    ('0                 ),
+        .cti_event_out_o    (/* unused */       ),
+        .cti_event_out_ack_i('0                 ),
+        .cti_event_out_ack_o(/* unused */       ),
         // DBG
         .dbg_data_in        (dbg_tniu_noc_out   ),
         .dbg_data_out       (/* unused */       ),
         .dbg_timestamp_in   (ts_tniu_noc_out    ),
-        .dbg_timestamp_out  (/* unused */       )
+        .dbg_timestamp_out  (/* unused */       ),
+        // FUSA ECC error outputs (req-side decode)
+        .sts_tniu_req_afifo_sb_err(tniu_afifo_req_sb_err_w),
+        .sts_tniu_req_afifo_db_err(tniu_afifo_req_db_err_w)
     );
+
+    // FUSA ECC error output assignments
+    assign iniu_afifo_rsp_sb_err = iniu_afifo_rsp_sb_err_w;
+    assign iniu_afifo_rsp_db_err = iniu_afifo_rsp_db_err_w;
+    assign iniu_afifo_req_sb_err = iniu_afifo_req_sb_err_w;
+    assign iniu_afifo_req_db_err = iniu_afifo_req_db_err_w;
+    assign tniu_afifo_req_sb_err = tniu_afifo_req_sb_err_w;
+    assign tniu_afifo_req_db_err = tniu_afifo_req_db_err_w;
 
 endmodule

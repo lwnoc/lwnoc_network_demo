@@ -5,6 +5,7 @@ module sts_async_bridge_slv #(
     parameter integer unsigned THRESHOLD_EN = 0,
     parameter integer unsigned ALMOST_FULL_THRESHOLD = FIFO_DEPTH - 2,
     parameter integer unsigned DATA_WIDTH = 32,
+    parameter integer unsigned ERR_INT_CNT_WIDTH = 16,
     parameter integer unsigned VT_TYPE = 1
 )(
     input   logic                       clk,
@@ -22,6 +23,12 @@ module sts_async_bridge_slv #(
     output  logic [DATA_WIDTH:0]        pld_sync
 );
 
+    logic [32+7:0] s_pld_ecc;
+    fcip_ecc_enc #(.DATA_WIDTH(32)) u_bridge_ecc_enc (
+        .data       (in_req_pld),
+        .encode_data(s_pld_ecc)
+    );
+
     fcip_afifo_slv #(
         .FIFO_DEPTH             (FIFO_DEPTH),
         .DATA_WIDTH             (DATA_WIDTH),
@@ -37,7 +44,7 @@ module sts_async_bridge_slv #(
         .clear                  (clear),
         .full_zero              (full_zero),
         .s_vld                  (in_req_vld),
-        .s_pld                  (in_req_pld),
+        .s_pld                  (s_pld_ecc),
         .s_rdy                  (in_req_rdy),
         .almost_full            (almost_full),
         .wptr_async             (wptr_async),

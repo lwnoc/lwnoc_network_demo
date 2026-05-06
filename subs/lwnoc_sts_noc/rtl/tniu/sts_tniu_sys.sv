@@ -9,8 +9,13 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     parameter integer unsigned SYS_APB_MASTER_NUM   = 2,
     parameter logic [SYS_APB_MASTER_NUM*TGT_ID_WIDTH-1:0] SYS_APB_ROUTE_BASE = '0,
     parameter logic [SYS_APB_MASTER_NUM*TGT_ID_WIDTH-1:0] SYS_APB_ROUTE_MASK = '0,
+    parameter integer unsigned  ERR_INT_CNT_WIDTH = 16,
     localparam int REQ_PLD_WIDTH = STS_REQ_WIDTH,
-    localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH
+    localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH,
+    localparam int REQ_ECC_OH = ($clog2(STS_REQ_WIDTH)+STS_REQ_WIDTH+1 <= 2**$clog2(STS_REQ_WIDTH))? 8 : 9,
+    localparam int RSP_ECC_OH = ($clog2(STS_RSP_WIDTH)+STS_RSP_WIDTH+1 <= 2**$clog2(STS_RSP_WIDTH))? 8 : 9,
+    localparam int REQ_AFIFO_W = STS_REQ_WIDTH + REQ_ECC_OH,
+    localparam int RSP_AFIFO_W = STS_RSP_WIDTH + RSP_ECC_OH
 ) (
     input   logic   clk_src ,
     input   logic   clk_dst ,
@@ -45,29 +50,24 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     output  logic [31:0]                         m_pwdata    ,
     output  logic [3:0]                          m_pstrb     ,
 
-    //CTI
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_in,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_req,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_ack,
-    
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_out,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_req,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_ack,
-
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_channel_in,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_channel_in_req,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_channel_in_ack,
-
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_channel_out,
-    input   logic [CTI_EVENT_WIDTH-1:0]     cti_channel_out_req,
-    output  logic [CTI_EVENT_WIDTH-1:0]     cti_channel_out_ack,
+    // CTI — level pass-through (sys clock domain)
+    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_i,
+    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_o,
+    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_ack_i,
+    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_in_ack_o,
+    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_i,
+    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_o,
+    input   logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_ack_i,
+    output  logic [CTI_EVENT_WIDTH-1:0]     cti_event_out_ack_o,
 
     input   logic [DBG_DATA_WIDTH-1:0]       dbg_data_in,
     output  logic [DBG_DATA_WIDTH-1:0]       dbg_data_out,
 
     input   logic [DBG_TIMESTAMP_WIDTH-1:0]  dbg_timestamp_in,
-    output  logic [DBG_TIMESTAMP_WIDTH-1:0]  dbg_timestamp_out
-
+    output  logic [DBG_TIMESTAMP_WIDTH-1:0]  dbg_timestamp_out,
+    // FUSA ECC error outputs (REQ AFIFO mst-side decode)
+    output  logic                            sts_tniu_req_afifo_sb_err,
+    output  logic                            sts_tniu_req_afifo_db_err
 );
 
     // req to APB TNIU in sys side
@@ -96,9 +96,28 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     logic                       pslver_pre_dec;
     logic [DBG_TIMESTAMP_WIDTH-1:0] dbg_timestamp_tmp;
     
+    // REQ: ECC decode after AFIFO read
+    logic [REQ_AFIFO_W-1:0] req_s_pld_ecc;
+    logic [RSP_AFIFO_W-1:0] rsp_m_pld_ecc;
+    logic                    req_sb_err_raw, req_db_err_raw;
+    fcip_ecc_dec #(.DATA_WIDTH(STS_REQ_WIDTH)) u_tniu_req_ecc_dec (
+        .encode_data(req_s_pld_ecc),
+        .data       (req_s_pld_tmp  ),
+        .sb_err     (req_sb_err_raw ),
+        .db_err     (req_db_err_raw )
+    );
+    fcip_fusa_pulse_gen #(.CNT_WIDTH(ERR_INT_CNT_WIDTH)) u_tniu_req_pulse_sb (
+        .clk(clk_dst), .rst_n(rst_n_dst), .err_in(req_sb_err_raw), .intr_out(sts_tniu_req_afifo_sb_err)
+    );
+    fcip_fusa_pulse_gen #(.CNT_WIDTH(ERR_INT_CNT_WIDTH)) u_tniu_req_pulse_db (
+        .clk(clk_dst), .rst_n(rst_n_dst), .err_in(req_db_err_raw), .intr_out(sts_tniu_req_afifo_db_err)
+    );
+    // RSP: ECC encode before AFIFO write: rsp_apb_tniu_pld → fcip_ecc_enc → AFIFO
+    assign rsp_m_pld_ecc = sts_rsp_typ'(rsp_apb_tniu_pld);
+
     fcip_req_rsp_afifo_mst #(
-        .REQ_WIDTH      (REQ_PLD_WIDTH),
-        .RSP_WIDTH      (RSP_PLD_WIDTH),
+        .REQ_WIDTH      (REQ_AFIFO_W),
+        .RSP_WIDTH      (RSP_AFIFO_W),
         .FIFO_DEPTH     (ASYNC_FIFO_DEPTH),
         .AUTO_CLEAR_EN  (1'b1),
         .SYNC_STAGE     (SYNC_STAGE)
@@ -107,7 +126,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .rst_n          (rstn_dst),
         .req_s_vld      (req_apb_tniu_vld  ),
         .req_s_rdy      (req_apb_tniu_rdy),
-        .req_s_pld      (req_apb_tniu_pld_tmp),
+        .req_s_pld      (req_s_pld_ecc),
         .req_s_last     (req_apb_tniu_last),
         .rsp_m_vld      (rsp_apb_tniu_vld),
         .rsp_m_rdy      (rsp_apb_tniu_rdy),
@@ -218,24 +237,10 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .q           (dbg_timestamp_out)
     );
 
-    `_PREFIX_(cti_handle) #(
-        .SYNC_STAGE(SYNC_STAGE)
-    ) u_cti_handle_iniu_sys (
-        .clk_src            (clk_src            ),
-        .clk_dst            (clk_dst            ),
-        .rstn_src           (rstn_src           ),
-        .rstn_dst           (rstn_dst           ),
-        .cti_event_in       (cti_event_in       ),
-        .cti_event_in_req   (cti_event_in_req   ),
-        .cti_event_in_ack   (cti_event_in_ack   ),
-        .cti_event_out      (cti_event_out      ),
-        .cti_event_out_req  (cti_event_out_req  ),
-        .cti_event_out_ack  (cti_event_out_ack  ),
-        .cti_channel_in     (cti_channel_in     ),
-        .cti_channel_in_req (cti_channel_in_req ),
-        .cti_channel_in_ack (cti_channel_in_ack ),
-        .cti_channel_out    (cti_channel_out    ),
-        .cti_channel_out_req(cti_channel_out_req),
-        .cti_channel_out_ack(cti_channel_out_ack)
-    );
+    // CTI level pass-through (wire pairs, no CDC in sys side)
+    assign cti_event_in_o       = cti_event_in_i;
+    assign cti_event_in_ack_o   = cti_event_in_ack_i;
+    assign cti_event_out_o      = cti_event_out_i;
+    assign cti_event_out_ack_o  = cti_event_out_ack_i;
+
 endmodule

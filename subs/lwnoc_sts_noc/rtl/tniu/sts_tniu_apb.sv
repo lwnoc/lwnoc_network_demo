@@ -53,19 +53,32 @@ localparam int APB_WINDOW_ADDR_WIDTH = 12;
 
 //====================== Request Channel ====================//
 
-// fifo to offer OT
-cmn_vrp_reg_fifo #(
-    .PLD_TYPE  (sts_req_typ), 
-    .ADDR_WIDTH($clog2(STS_INIU_REQ_FIFO_DEPTH))
+// fifo to offer OT — using fcip_sync_fifo_reg
+logic [$bits(sts_req_typ)-1:0] req_fifo_in_flat;
+logic [$bits(sts_req_typ)-1:0] req_fifo_out_flat;
+assign req_fifo_in_flat  = in_req_pld;
+assign fifo_out_req_pld  = sts_req_typ'(req_fifo_out_flat);
+
+fcip_sync_fifo_reg #(
+    .FIFO_DEPTH (STS_INIU_REQ_FIFO_DEPTH),
+    .FIFO_WIDTH ($bits(sts_req_typ)           ),
+    .FORWARD_EN (0                       )
 ) u_req_fifo (
-    .clk    (clk),
-    .rst_n  (rst_n),
-    .in_vld (fifo_in_req_vld),
-    .in_rdy (fifo_in_req_rdy),
-    .in_pld (in_req_pld),
-    .out_vld(fifo_out_req_vld),
-    .out_rdy(fifo_out_req_rdy),
-    .out_pld(fifo_out_req_pld)
+    .clk            (clk                ),
+    .rst_n          (rst_n              ),
+    .stall          (1'b0               ),
+    .clear          (1'b0               ),
+    .idle           (                   ),
+    .write_req_vld  (fifo_in_req_vld    ),
+    .write_req_pld  (req_fifo_in_flat   ),
+    .write_req_rdy  (fifo_in_req_rdy    ),
+    .read_resp_vld  (fifo_out_req_vld   ),
+    .read_resp_pld  (req_fifo_out_flat  ),
+    .read_resp_rdy  (fifo_out_req_rdy   ),
+    .almost_full    (                   ),
+    .almost_empty   (                   ),
+    .empty          (                   ),
+    .full           (                   )
 );
 
 assign req_busy        = fifo_out_req_vld || (apb_state != APB_IDLE) || rsp_pending;

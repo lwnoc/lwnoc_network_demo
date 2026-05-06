@@ -18,6 +18,7 @@ UHDL.log
 elab.log
 cov_analysis_output.txt
 chat.json
+new_tb/fullexclude.tgl
 
 # Verdi waveform & session files
 *.fsdb
@@ -25,6 +26,9 @@ novas.conf
 novas.rc
 novas_dump.log
 verdiLog/
+
+# Generated build cache
+rtl/reg/build/reg_bank_table/chead/*.gch
 
 # Editor & misc
 .vscode/

@@ -6,6 +6,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     parameter integer unsigned APB_ADDR_WIDTH      = 32,
     parameter integer unsigned SYNC_STAGE = 2,
     parameter integer unsigned ASYNC_FIFO_DEPTH = 4,
+    parameter logic            FUSA_ECC_EN         = 1'b0,
     // --- tgt_id routing parameters ---
     // tgt_id[TGT_ID_WIDTH-1 -: TGT_TYPE_WIDTH] selects the target class:
     //   == LOCAL_APB_TGT_TYPE  -> local APB path (regbank / RSC)
@@ -15,6 +16,7 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     // Exact tgt_id values for NOC-side local APB decode (first stage)
     parameter logic [TGT_ID_WIDTH-1:0]   LOCAL_RSC_TGT_ID = '0,
     parameter logic [TGT_ID_WIDTH-1:0]   LOCAL_REGBANK_TGT_ID = 'd1,
+    parameter logic [TGT_ID_WIDTH-1:0]   LOCAL_CTI_TGT_ID    = 'd2,
     // Exact tgt_id values for SYS-side APB parameterized decoder
     parameter integer unsigned SYS_APB_MASTER_NUM = 2,
     parameter logic [SYS_APB_MASTER_NUM*TGT_ID_WIDTH-1:0] SYS_APB_ROUTE_BASE = '0,
@@ -69,16 +71,15 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     input   logic [DBG_TIMESTAMP_WIDTH-1:0]  dbg_timestamp_in,
     output  logic [DBG_TIMESTAMP_WIDTH-1:0]  dbg_timestamp_out,
 
-    // CTI
+    // CTI — level event I/O (CDC in this module) + channel (to/from dec_node CTM)
     input   logic [CTI_EVENT_WIDTH-1:0]     sys_cti_event_in,
     output  logic [CTI_EVENT_WIDTH-1:0]     sys_cti_event_out,
     output  logic [CTI_EVENT_WIDTH-1:0]     noc_cti_event_out,
     input   logic [CTI_EVENT_WIDTH-1:0]     noc_cti_event_in,
-    
-    input   logic [CTI_EVENT_WIDTH-1:0]     sys_cti_channel_in,
-    output  logic [CTI_EVENT_WIDTH-1:0]     sys_cti_channel_out,
-    output  logic [CTI_EVENT_WIDTH-1:0]     noc_cti_channel_out,
-    input   logic [CTI_EVENT_WIDTH-1:0]     noc_cti_channel_in,
+    input   logic [CTI_CHANNEL_WIDTH-1:0]   sys_cti_channel_in,
+    output  logic [CTI_CHANNEL_WIDTH-1:0]   sys_cti_channel_out,
+    output  logic [CTI_CHANNEL_WIDTH-1:0]   noc_cti_channel_out,
+    input   logic [CTI_CHANNEL_WIDTH-1:0]   noc_cti_channel_in,
 
     ///============================================================
     // Static Signal
@@ -101,14 +102,16 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
     logic [DBG_DATA_WIDTH-1:0]      dbg_data_tmp;
     logic [DBG_TIMESTAMP_WIDTH-1:0] dbg_timestamp_tmp;
 
-    logic [CTI_EVENT_WIDTH-1:0]     tmp_event_in_req;
-    logic [CTI_EVENT_WIDTH-1:0]     tmp_event_in_ack;
-    logic [CTI_EVENT_WIDTH-1:0]     tmp_event_out_req;
-    logic [CTI_EVENT_WIDTH-1:0]     tmp_event_out_ack;
-    logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_in_req;
-    logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_in_ack;
-    logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_out_req;
-    logic [CTI_CHANNEL_WIDTH-1:0]   tmp_channel_out_ack;
+    // CTI CDC: sys→noc event, noc→sys event
+    logic [CTI_EVENT_WIDTH-1:0]  cti_sys_to_noc;
+    logic [CTI_EVENT_WIDTH-1:0]  cti_noc_to_sys;
+
+    sts_req_typ  in_req_pld_s;
+    sts_rsp_typ  out_rsp_pld_s;
+
+    // Boundary cast: top-level vector ↔ internal struct
+    assign in_req_pld_s = sts_req_typ'(in_req_pld);
+    assign out_rsp_pld  = RSP_PLD_WIDTH'(out_rsp_pld_s);
 
     // Boundary cast: top-level vector ↔ internal struct
     sts_req_typ  in_req_pld_s;
@@ -125,7 +128,8 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .TGT_TYPE_WIDTH       (TGT_TYPE_WIDTH),
         .LOCAL_APB_TGT_TYPE   (LOCAL_APB_TGT_TYPE),
         .LOCAL_RSC_TGT_ID     (LOCAL_RSC_TGT_ID),
-        .LOCAL_REGBANK_TGT_ID (LOCAL_REGBANK_TGT_ID)
+        .LOCAL_REGBANK_TGT_ID (LOCAL_REGBANK_TGT_ID),
+        .LOCAL_CTI_TGT_ID     (LOCAL_CTI_TGT_ID)
     ) u_sts_tniu_noc (
         .clk_src            (clk_src),
         .clk_dst            (clk_dst),
@@ -159,18 +163,12 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .dbg_data_out       (dbg_data_tmp),
         .dbg_timestamp_in   (dbg_timestamp_in),
         .dbg_timestamp_out  (dbg_timestamp_tmp),
-        .cti_event_in       (noc_cti_event_in),
-        .cti_event_in_req   (tmp_event_in_req),
-        .cti_event_in_ack   (tmp_event_in_ack),
-        .cti_event_out      (noc_cti_event_out),
-        .cti_event_out_req  (tmp_event_out_req),
-        .cti_event_out_ack  (tmp_event_out_ack),
-        .cti_channel_in     (noc_cti_channel_in),
-        .cti_channel_in_req (tmp_channel_in_req),
-        .cti_channel_in_ack (tmp_channel_in_ack),
+        .cti_event_in       (cti_sys_to_noc     ),  // sys→noc event → sts_cti
+        .cti_event_in_ack   (cti_ack_to_noc     ),  // sys→noc ack
+        .cti_event_out      (cti_noc_to_sys     ),  // sts_cti event → sys
+        .cti_event_out_ack  ({CTI_EVENT_WIDTH{1'b1}}),// always ack for level-to-pulse receiver
+        .cti_channel_in     (noc_cti_channel_in ),
         .cti_channel_out    (noc_cti_channel_out),
-        .cti_channel_out_req(tmp_channel_out_req),
-        .cti_channel_out_ack(tmp_channel_out_ack),
         .timing_bus1        (timing_bus1),
         .timing_bus2        (timing_bus2),
         .timing_bus3        (timing_bus3),
@@ -211,21 +209,18 @@ import `_PREFIX_(lwnoc_sts_pack)::*;
         .m_pwrite           (m_pwrite),
         .m_pwdata           (m_pwdata),
         .m_pstrb            (m_pstrb),
-        .cti_event_in       (sys_cti_event_in),
-        .cti_event_in_req   (tmp_event_out_req),
-        .cti_event_in_ack   (tmp_event_out_ack),
-        .cti_event_out      (sys_cti_event_out),
-        .cti_event_out_req  (tmp_event_in_req),
-        .cti_event_out_ack  (tmp_event_in_ack),
-        .cti_channel_in     (sys_cti_channel_in),
-        .cti_channel_in_req (tmp_channel_out_req),
-        .cti_channel_in_ack (tmp_channel_out_ack),
-        .cti_channel_out    (sys_cti_channel_out),
-        .cti_channel_out_req(tmp_channel_in_req),
-        .cti_channel_out_ack(tmp_channel_in_ack),
+        .cti_event_in_i     (sys_cti_event_in     ),
+        .cti_event_in_o     (cti_sys_to_noc       ),
+        .cti_event_in_ack_i (cti_noc_to_sys       ),
+        .cti_event_in_ack_o (cti_sys_ack_from_noc ),
+        .cti_event_out_i    (cti_noc_to_sys       ),
+        .cti_event_out_o    (cti_sys_ev_from_noc  ),
         .dbg_data_in        (dbg_data_tmp),
         .dbg_data_out       (dbg_data_out),
         .dbg_timestamp_in   (dbg_timestamp_tmp),
         .dbg_timestamp_out  (dbg_timestamp_out)
     );
+always_comb begin
+    sys_cti_event_out  = cti_sys_ev_from_noc;
+end
 endmodule
