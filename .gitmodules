@@ -11,6 +11,7 @@
 [submodule "subs/lwnoc_sts_noc"]
 	path = subs/lwnoc_sts_noc
 	url = git@github.com:lwnoc/lwnoc_sts_noc.git
+	branch = main
 [submodule "subs/lwnoc_ring_network"]
 	path = subs/lwnoc_ring_network
 	url = git@github.com:lwnoc/lwnoc_ring_network.git

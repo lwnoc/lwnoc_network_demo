@@ -1,5 +1,0 @@
-**1.APB TNIU:convert vls/rdy->APB,datawidth issue(if noc data width we need convert data and strb width,need to handle burst?)**
-2.APB Decoder:generate by script,could script implement this function-define how many sets APB generated and prefix name or postfix name?
-**3.AXI INIU-use module from lhz,need to keep packge with cfg NOC(DONE)**
-4.CTI implement
-5.tniu noc vld/rdy decoder implement,use which information?
