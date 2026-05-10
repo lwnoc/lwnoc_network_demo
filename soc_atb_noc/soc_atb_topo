@@ -1,12 +1,96 @@
-atb soc noc topo:
-dsp ss0 to ss5(6 sys) iniu noc side connect to dsp_funnel_6ch input
-dsp_funnel_6ch output connect to async bridge slv
-async bridge slv output to async bridge mst
-async bridge mst output to one input channel of right funnel(3 atb input channels)
-camera ss connect to one channel of right funnel
-mipi ss connect to last channel right funnel
-right funnel output to debug ss
+soc atb topo (image 2026-05-10):
 
-top(only contain iniu/tniu top side + network layer) harden partition cut:
-node from dsp ss0 to ss5 to async bridge slv are all in one harden,use one top clk
-node from async bridge mst to right funnel to debug ss and camera/mipi ss are all in another harden, use another top clk
+arrow convention:
+- all `a -> b` arrows below describe the forward ATB trace direction only
+- the reverse flush / syncreq direction is the opposite edge `b -> a`, unless a later spec says otherwise
+
+clock / fabric convention:
+- the new sketch labels the fabric as `ATB128 @500MHz`
+- the sketch shows one continuous SoC-level ATB fabric, not the old `left_funnel -> async_bridge -> right_funnel` 2-domain split
+- therefore the previous async-bridge / dual-harden-cut description is obsolete for this topo note
+
+left-top final aggregation funnel and sink:
+- gpu_ss0 -> left_top_funnel0
+- cpu_ss -> left_top_funnel0
+- right_dsp_funnel0 -> left_top_funnel0
+- top_media_funnel0 -> left_top_funnel0
+- mcu_ss -> left_top_funnel0
+- left_top_funnel0 -> peri_ss_tniu
+- this is the final aggregation point in the clarified topology; `left_top_funnel0` and `peri_ss_tniu` are temporary descriptive names for this topo review only
+
+top-middle funnel cluster:
+- camera_ss -> top_media_funnel0
+- mipi_ss -> top_media_funnel0
+- gpu1_ss -> top_media_funnel0
+- usb_dp_ss -> top_media_funnel0
+- display_ss -> top_media_funnel0
+- aon_ss -> top_media_funnel0
+- top_media_funnel0 -> left_top_funnel0
+- the clarified sketch shows these six SS blocks converging into one top-center funnel; `top_media_funnel0` is a temporary descriptive name for that funnel
+
+right-middle DSP funnel cluster:
+- dspss0 -> right_dsp_funnel0
+- dspss1 -> right_dsp_funnel0
+- dspss2 -> right_dsp_funnel0
+- dspss3 -> right_dsp_funnel0
+- dspss4 -> right_dsp_funnel0
+- dspss5 -> right_dsp_funnel0
+- right_dsp_funnel0 -> left_top_funnel0
+- the screenshot shows these six DSP SS blocks sharing one funnel; `right_dsp_funnel0` is a temporary descriptive name for that funnel
+
+bottom visible blocks / clarified input:
+- gpu_ss0 is a confirmed input to `left_top_funnel0`
+- ufs_ss and pcie_eth_ss are visible in the screenshot, but they are not part of the ATB network
+
+confirmed ATB-relevant blocks in the clarified sketch:
+- cpu_ss is a confirmed input to `left_top_funnel0`
+- peri_ss is the confirmed final TNIU sink in the clarified topology
+- aon_ss is a confirmed input to `top_media_funnel0`
+
+image-visible but ATB-unrelated blocks:
+- npu_ss0 ~ npu_ss4 are visible in the screenshot, but they are not part of the ATB NoC
+- audio_ss is visible in the screenshot, but it is not part of the ATB network
+- debug_ss is drawn as if connected near peri_ss, but that drawing is incorrect; the actual final TNIU location for this topology is peri_ss
+
+provisional funnel convergence interpreted from the clarified image:
+- dspss0 ~ dspss5 -> right_dsp_funnel0 -> left_top_funnel0
+- camera_ss / mipi_ss / gpu1_ss / usb_dp_ss / display_ss / aon_ss -> top_media_funnel0 -> left_top_funnel0
+- gpu_ss0 -> left_top_funnel0
+- cpu_ss -> left_top_funnel0
+- mcu_ss -> left_top_funnel0
+- left_top_funnel0 -> peri_ss_tniu
+- reverse flush / syncreq direction should be the opposite tree from `peri_ss_tniu` back toward all upstream funnel inputs
+
+ddr-side review note:
+- ddr0 ~ ddr5 are drawn on the left side next to the left collector
+- ddr6 ~ ddr11 are drawn on the right side next to the right collector
+- the screenshot visually suggests left/right memory-side tap groups, but it is still ambiguous whether those DDR arrows are true ATB endpoints or only placement context
+- do not freeze DDR0~11 as ATB generator nodes until the source owner confirms they are real ATB participants
+
+review against current implementation:
+- current `soc_atb_noc/AtbTopo.py` still implements the old small topology:
+	- dsp_ss0~5 -> left_funnel
+	- left_funnel -> async_bridge
+	- async_bridge + camera_ss + mipi_ss -> right_funnel
+	- right_funnel -> debug_tniu_ss
+- current `soc_atb_noc/AtbTemplate.py` also only carries sys/noc configs for dsp / camera / mipi / debug plus bridge/funnel components
+- therefore this updated topo note should be treated as the reviewed target topology from the new image, not as a statement that the Python generator is already aligned
+
+review findings / delta summary:
+- severity high: the old `debug_tniu_ss` single-sink model is wrong for this clarified topology; the confirmed final sink is `peri_ss_tniu`
+- severity high: the old async-bridge-based 2-domain harden cut is not shown in the clarified image; carrying that split forward by default would likely mis-model the new fabric
+- severity high: the current note's earlier `central_atb_spine` / `bottom_io_merge0` interpretation was too broad; the clarified backbone is a 3-funnel tree, not a generic multi-merge spine
+- severity medium: the clarified sketch contains exactly 3 confirmed funnel aggregation points: `right_dsp_funnel0`, `top_media_funnel0`, and `left_top_funnel0`
+- severity medium: `gpu_ss0`, `cpu_ss`, `mcu_ss`, `aon_ss`, and `peri_ss_tniu` now have confirmed positions in the funnel tree and should no longer remain in the generic unresolved bucket
+- severity medium: `npu_ss0~4`, `audio_ss`, `debug_ss`, `ufs_ss`, and `pcie_eth_ss` are visible in the picture but should be treated as non-ATB blocks / drawing noise for this topology update
+- severity medium: ddr0~11 participation is still ambiguous and needs one more owner confirmation before generator modeling
+
+open questions before Python topo refactor:
+- is `peri_ss_tniu` the only final sink in this ATB tree, or are there additional downstream TNIU sinks not visible in the screenshot
+- are ddr0~11 real ATB-visible sinks / sources or only background SoC blocks shown in the same picture
+- should the entire new fabric stay in one 500MHz ATB domain, or is there an unstated CDC / harden boundary not captured in the screenshot
+- should flush broadcast from `peri_ss_tniu` across the full 3-funnel tree, or only to a subset of the confirmed sources
+
+temporary naming note:
+- `left_top_funnel0`, `top_media_funnel0`, `right_dsp_funnel0`, and `peri_ss_tniu` are descriptive placeholders for this topo review only
+- when the Python topology is updated, replace them with real funnel / switch / arbiter / wrapper instance names

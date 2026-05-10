@@ -1,0 +1,11 @@
+-f $FCIP_DIR/vc/arbiter.f
+-f $FCIP_DIR/vc/async_fifo.f
+-f $FCIP_DIR/vc/basic.f
+-f $FCIP_DIR/vc/ecc_codec.f
+-f $FCIP_DIR/vc/memory.f
+-f $FCIP_DIR/vc/regslice.f
+-f $FCIP_DIR/vc/stdcell_wrap.f
+-f $FCIP_DIR/vc/sync_fifo.f
+-f $FCIP_DIR/vc/handshake.f
+-f $LWNOC_LOWPOWER_COMPONENT/src/vc/lwnoc_lp_core.f
+-f $ATB_SOC_TOP/atb_soc_topo/filelist.f
