@@ -1,0 +1,1634 @@
+// Auto-generated DTI NoC loopback testbench
+`timescale 1ns/1ps
+module tb_dti_loopback;
+
+  reg clk_noc, rst_noc_n;
+
+  // Per-leaf clock/reset
+  reg  camera_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  camera_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  camera_ss_iniu_node_clk_noc_porting;
+  reg  camera_ss_iniu_node_rst_noc_n_porting;
+  reg  display_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  display_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  display_ss_iniu_node_clk_noc_porting;
+  reg  display_ss_iniu_node_rst_noc_n_porting;
+  reg  dspss0_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  dspss0_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  dspss0_iniu_node_clk_noc_porting;
+  reg  dspss0_iniu_node_rst_noc_n_porting;
+  reg  dspss1_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  dspss1_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  dspss1_iniu_node_clk_noc_porting;
+  reg  dspss1_iniu_node_rst_noc_n_porting;
+  reg  dspss2_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  dspss2_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  dspss2_iniu_node_clk_noc_porting;
+  reg  dspss2_iniu_node_rst_noc_n_porting;
+  reg  dspss3_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  dspss3_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  dspss3_iniu_node_clk_noc_porting;
+  reg  dspss3_iniu_node_rst_noc_n_porting;
+  reg  dspss4_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  dspss4_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  dspss4_iniu_node_clk_noc_porting;
+  reg  dspss4_iniu_node_rst_noc_n_porting;
+  reg  dspss5_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  dspss5_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  dspss5_iniu_node_clk_noc_porting;
+  reg  dspss5_iniu_node_rst_noc_n_porting;
+  reg  gpu_ss0_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  gpu_ss0_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  gpu_ss0_iniu_node_clk_noc_porting;
+  reg  gpu_ss0_iniu_node_rst_noc_n_porting;
+  reg  gpu_ss1_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  gpu_ss1_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  gpu_ss1_iniu_node_clk_noc_porting;
+  reg  gpu_ss1_iniu_node_rst_noc_n_porting;
+  reg  mipi_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  mipi_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  mipi_ss_iniu_node_clk_noc_porting;
+  reg  mipi_ss_iniu_node_rst_noc_n_porting;
+  reg  npu_ss0_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  npu_ss0_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  npu_ss0_iniu_node_clk_noc_porting;
+  reg  npu_ss0_iniu_node_rst_noc_n_porting;
+  reg  npu_ss1_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  npu_ss1_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  npu_ss1_iniu_node_clk_noc_porting;
+  reg  npu_ss1_iniu_node_rst_noc_n_porting;
+  reg  npu_ss2_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  npu_ss2_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  npu_ss2_iniu_node_clk_noc_porting;
+  reg  npu_ss2_iniu_node_rst_noc_n_porting;
+  reg  npu_ss3_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  npu_ss3_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  npu_ss3_iniu_node_clk_noc_porting;
+  reg  npu_ss3_iniu_node_rst_noc_n_porting;
+  reg  npu_ss4_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  npu_ss4_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  npu_ss4_iniu_node_clk_noc_porting;
+  reg  npu_ss4_iniu_node_rst_noc_n_porting;
+  reg  pcie_eth_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  pcie_eth_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  pcie_eth_ss_iniu_node_clk_noc_porting;
+  reg  pcie_eth_ss_iniu_node_rst_noc_n_porting;
+  reg  peri_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  peri_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  peri_ss_iniu_node_clk_noc_porting;
+  reg  peri_ss_iniu_node_rst_noc_n_porting;
+  reg  ufs_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  ufs_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  ufs_ss_iniu_node_clk_noc_porting;
+  reg  ufs_ss_iniu_node_rst_noc_n_porting;
+  reg  usb_dp_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  usb_dp_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  usb_dp_ss_iniu_node_clk_noc_porting;
+  reg  usb_dp_ss_iniu_node_rst_noc_n_porting;
+  reg  vpu_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  vpu_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  vpu_ss_iniu_node_clk_noc_porting;
+  reg  vpu_ss_iniu_node_rst_noc_n_porting;
+  reg  cpu_ss_tniu0_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  cpu_ss_tniu0_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  cpu_ss_tniu0_node_clk_noc_porting;
+  reg  cpu_ss_tniu0_node_rst_noc_n_porting;
+  reg  cpu_ss_tniu1_node_clk_sys_porting_clk_sys_clk_sys_clk;
+  reg  cpu_ss_tniu1_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n;
+  reg  cpu_ss_tniu1_node_clk_noc_porting;
+  reg  cpu_ss_tniu1_node_rst_noc_n_porting;
+
+  // INIU DTI REQ drivers / RSP monitors
+  reg  [79:0] camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] camera_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  camera_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        camera_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         camera_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  camera_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        camera_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  camera_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire camera_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] camera_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire camera_ss_iniu_node_camera_ss_sys_wrap_camera_ss_sys_side_rsp_afifo_sb_err_porting_camera_ss_sys_wrap_camera_ss_sys_side_rsp_afifo_sb_err_porting_camera_ss_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire camera_ss_iniu_node_camera_ss_sys_wrap_camera_ss_sys_side_rsp_afifo_db_err_porting_camera_ss_sys_wrap_camera_ss_sys_side_rsp_afifo_db_err_porting_camera_ss_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire camera_ss_iniu_node_camera_ss_top_wrap_afifo_sb_err_porting_camera_ss_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire camera_ss_iniu_node_camera_ss_top_wrap_afifo_db_err_porting_camera_ss_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] display_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  display_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        display_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         display_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  display_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        display_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  display_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire display_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] display_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire display_ss_iniu_node_display_ss_sys_wrap_display_ss_sys_side_rsp_afifo_sb_err_porting_display_ss_sys_wrap_display_ss_sys_side_rsp_afifo_sb_err_porting_display_ss_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire display_ss_iniu_node_display_ss_sys_wrap_display_ss_sys_side_rsp_afifo_db_err_porting_display_ss_sys_wrap_display_ss_sys_side_rsp_afifo_db_err_porting_display_ss_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire display_ss_iniu_node_display_ss_top_wrap_afifo_sb_err_porting_display_ss_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire display_ss_iniu_node_display_ss_top_wrap_afifo_db_err_porting_display_ss_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] dspss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  dspss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        dspss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         dspss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  dspss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        dspss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  dspss0_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire dspss0_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] dspss0_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire dspss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] dspss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire dspss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  dspss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] dspss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire dspss0_iniu_node_dspss0_sys_wrap_dspss0_sys_side_rsp_afifo_sb_err_porting_dspss0_sys_wrap_dspss0_sys_side_rsp_afifo_sb_err_porting_dspss0_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire dspss0_iniu_node_dspss0_sys_wrap_dspss0_sys_side_rsp_afifo_db_err_porting_dspss0_sys_wrap_dspss0_sys_side_rsp_afifo_db_err_porting_dspss0_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire dspss0_iniu_node_dspss0_top_wrap_afifo_sb_err_porting_dspss0_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire dspss0_iniu_node_dspss0_top_wrap_afifo_db_err_porting_dspss0_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] dspss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  dspss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        dspss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         dspss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  dspss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        dspss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  dspss1_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire dspss1_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] dspss1_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire dspss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] dspss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire dspss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  dspss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] dspss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire dspss1_iniu_node_dspss1_sys_wrap_dspss1_sys_side_rsp_afifo_sb_err_porting_dspss1_sys_wrap_dspss1_sys_side_rsp_afifo_sb_err_porting_dspss1_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire dspss1_iniu_node_dspss1_sys_wrap_dspss1_sys_side_rsp_afifo_db_err_porting_dspss1_sys_wrap_dspss1_sys_side_rsp_afifo_db_err_porting_dspss1_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire dspss1_iniu_node_dspss1_top_wrap_afifo_sb_err_porting_dspss1_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire dspss1_iniu_node_dspss1_top_wrap_afifo_db_err_porting_dspss1_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] dspss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  dspss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        dspss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         dspss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  dspss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        dspss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  dspss2_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire dspss2_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] dspss2_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire dspss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] dspss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire dspss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  dspss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] dspss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire dspss2_iniu_node_dspss2_sys_wrap_dspss2_sys_side_rsp_afifo_sb_err_porting_dspss2_sys_wrap_dspss2_sys_side_rsp_afifo_sb_err_porting_dspss2_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire dspss2_iniu_node_dspss2_sys_wrap_dspss2_sys_side_rsp_afifo_db_err_porting_dspss2_sys_wrap_dspss2_sys_side_rsp_afifo_db_err_porting_dspss2_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire dspss2_iniu_node_dspss2_top_wrap_afifo_sb_err_porting_dspss2_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire dspss2_iniu_node_dspss2_top_wrap_afifo_db_err_porting_dspss2_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] dspss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  dspss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        dspss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         dspss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  dspss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        dspss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  dspss3_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire dspss3_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] dspss3_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire dspss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] dspss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire dspss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  dspss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] dspss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire dspss3_iniu_node_dspss3_sys_wrap_dspss3_sys_side_rsp_afifo_sb_err_porting_dspss3_sys_wrap_dspss3_sys_side_rsp_afifo_sb_err_porting_dspss3_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire dspss3_iniu_node_dspss3_sys_wrap_dspss3_sys_side_rsp_afifo_db_err_porting_dspss3_sys_wrap_dspss3_sys_side_rsp_afifo_db_err_porting_dspss3_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire dspss3_iniu_node_dspss3_top_wrap_afifo_sb_err_porting_dspss3_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire dspss3_iniu_node_dspss3_top_wrap_afifo_db_err_porting_dspss3_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] dspss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  dspss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        dspss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         dspss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  dspss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        dspss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  dspss4_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire dspss4_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] dspss4_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire dspss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] dspss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire dspss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  dspss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] dspss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire dspss4_iniu_node_dspss4_sys_wrap_dspss4_sys_side_rsp_afifo_sb_err_porting_dspss4_sys_wrap_dspss4_sys_side_rsp_afifo_sb_err_porting_dspss4_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire dspss4_iniu_node_dspss4_sys_wrap_dspss4_sys_side_rsp_afifo_db_err_porting_dspss4_sys_wrap_dspss4_sys_side_rsp_afifo_db_err_porting_dspss4_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire dspss4_iniu_node_dspss4_top_wrap_afifo_sb_err_porting_dspss4_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire dspss4_iniu_node_dspss4_top_wrap_afifo_db_err_porting_dspss4_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] dspss5_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  dspss5_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        dspss5_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         dspss5_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  dspss5_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        dspss5_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  dspss5_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire dspss5_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] dspss5_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire dspss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] dspss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire dspss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  dspss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] dspss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire dspss5_iniu_node_dspss5_sys_wrap_dspss5_sys_side_rsp_afifo_sb_err_porting_dspss5_sys_wrap_dspss5_sys_side_rsp_afifo_sb_err_porting_dspss5_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire dspss5_iniu_node_dspss5_sys_wrap_dspss5_sys_side_rsp_afifo_db_err_porting_dspss5_sys_wrap_dspss5_sys_side_rsp_afifo_db_err_porting_dspss5_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire dspss5_iniu_node_dspss5_top_wrap_afifo_sb_err_porting_dspss5_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire dspss5_iniu_node_dspss5_top_wrap_afifo_db_err_porting_dspss5_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] gpu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  gpu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        gpu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         gpu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  gpu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        gpu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  gpu_ss0_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire gpu_ss0_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] gpu_ss0_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire gpu_ss0_iniu_node_gpu_ss0_sys_wrap_gpu_ss0_sys_side_rsp_afifo_sb_err_porting_gpu_ss0_sys_wrap_gpu_ss0_sys_side_rsp_afifo_sb_err_porting_gpu_ss0_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire gpu_ss0_iniu_node_gpu_ss0_sys_wrap_gpu_ss0_sys_side_rsp_afifo_db_err_porting_gpu_ss0_sys_wrap_gpu_ss0_sys_side_rsp_afifo_db_err_porting_gpu_ss0_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire gpu_ss0_iniu_node_gpu_ss0_top_wrap_afifo_sb_err_porting_gpu_ss0_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire gpu_ss0_iniu_node_gpu_ss0_top_wrap_afifo_db_err_porting_gpu_ss0_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] gpu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  gpu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        gpu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         gpu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  gpu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        gpu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  gpu_ss1_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire gpu_ss1_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] gpu_ss1_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire gpu_ss1_iniu_node_gpu_ss1_sys_wrap_gpu_ss1_sys_side_rsp_afifo_sb_err_porting_gpu_ss1_sys_wrap_gpu_ss1_sys_side_rsp_afifo_sb_err_porting_gpu_ss1_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire gpu_ss1_iniu_node_gpu_ss1_sys_wrap_gpu_ss1_sys_side_rsp_afifo_db_err_porting_gpu_ss1_sys_wrap_gpu_ss1_sys_side_rsp_afifo_db_err_porting_gpu_ss1_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire gpu_ss1_iniu_node_gpu_ss1_top_wrap_afifo_sb_err_porting_gpu_ss1_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire gpu_ss1_iniu_node_gpu_ss1_top_wrap_afifo_db_err_porting_gpu_ss1_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] mipi_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  mipi_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        mipi_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         mipi_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  mipi_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        mipi_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  mipi_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire mipi_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] mipi_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire mipi_ss_iniu_node_mipi_ss_sys_wrap_mipi_ss_sys_side_rsp_afifo_sb_err_porting_mipi_ss_sys_wrap_mipi_ss_sys_side_rsp_afifo_sb_err_porting_mipi_ss_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire mipi_ss_iniu_node_mipi_ss_sys_wrap_mipi_ss_sys_side_rsp_afifo_db_err_porting_mipi_ss_sys_wrap_mipi_ss_sys_side_rsp_afifo_db_err_porting_mipi_ss_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire mipi_ss_iniu_node_mipi_ss_top_wrap_afifo_sb_err_porting_mipi_ss_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire mipi_ss_iniu_node_mipi_ss_top_wrap_afifo_db_err_porting_mipi_ss_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] npu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  npu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        npu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         npu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  npu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        npu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  npu_ss0_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire npu_ss0_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] npu_ss0_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire npu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] npu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire npu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  npu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] npu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire npu_ss0_iniu_node_npu_ss0_sys_wrap_npu_ss0_sys_side_rsp_afifo_sb_err_porting_npu_ss0_sys_wrap_npu_ss0_sys_side_rsp_afifo_sb_err_porting_npu_ss0_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire npu_ss0_iniu_node_npu_ss0_sys_wrap_npu_ss0_sys_side_rsp_afifo_db_err_porting_npu_ss0_sys_wrap_npu_ss0_sys_side_rsp_afifo_db_err_porting_npu_ss0_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire npu_ss0_iniu_node_npu_ss0_top_wrap_afifo_sb_err_porting_npu_ss0_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire npu_ss0_iniu_node_npu_ss0_top_wrap_afifo_db_err_porting_npu_ss0_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] npu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  npu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        npu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         npu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  npu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        npu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  npu_ss1_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire npu_ss1_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] npu_ss1_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire npu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] npu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire npu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  npu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] npu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire npu_ss1_iniu_node_npu_ss1_sys_wrap_npu_ss1_sys_side_rsp_afifo_sb_err_porting_npu_ss1_sys_wrap_npu_ss1_sys_side_rsp_afifo_sb_err_porting_npu_ss1_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire npu_ss1_iniu_node_npu_ss1_sys_wrap_npu_ss1_sys_side_rsp_afifo_db_err_porting_npu_ss1_sys_wrap_npu_ss1_sys_side_rsp_afifo_db_err_porting_npu_ss1_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire npu_ss1_iniu_node_npu_ss1_top_wrap_afifo_sb_err_porting_npu_ss1_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire npu_ss1_iniu_node_npu_ss1_top_wrap_afifo_db_err_porting_npu_ss1_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] npu_ss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  npu_ss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        npu_ss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         npu_ss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  npu_ss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        npu_ss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  npu_ss2_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire npu_ss2_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] npu_ss2_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire npu_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] npu_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire npu_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  npu_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] npu_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire npu_ss2_iniu_node_npu_ss2_sys_wrap_npu_ss2_sys_side_rsp_afifo_sb_err_porting_npu_ss2_sys_wrap_npu_ss2_sys_side_rsp_afifo_sb_err_porting_npu_ss2_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire npu_ss2_iniu_node_npu_ss2_sys_wrap_npu_ss2_sys_side_rsp_afifo_db_err_porting_npu_ss2_sys_wrap_npu_ss2_sys_side_rsp_afifo_db_err_porting_npu_ss2_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire npu_ss2_iniu_node_npu_ss2_top_wrap_afifo_sb_err_porting_npu_ss2_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire npu_ss2_iniu_node_npu_ss2_top_wrap_afifo_db_err_porting_npu_ss2_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] npu_ss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  npu_ss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        npu_ss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         npu_ss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  npu_ss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        npu_ss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  npu_ss3_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire npu_ss3_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] npu_ss3_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire npu_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] npu_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire npu_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  npu_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] npu_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire npu_ss3_iniu_node_npu_ss3_sys_wrap_npu_ss3_sys_side_rsp_afifo_sb_err_porting_npu_ss3_sys_wrap_npu_ss3_sys_side_rsp_afifo_sb_err_porting_npu_ss3_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire npu_ss3_iniu_node_npu_ss3_sys_wrap_npu_ss3_sys_side_rsp_afifo_db_err_porting_npu_ss3_sys_wrap_npu_ss3_sys_side_rsp_afifo_db_err_porting_npu_ss3_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire npu_ss3_iniu_node_npu_ss3_top_wrap_afifo_sb_err_porting_npu_ss3_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire npu_ss3_iniu_node_npu_ss3_top_wrap_afifo_db_err_porting_npu_ss3_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] npu_ss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  npu_ss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        npu_ss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         npu_ss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  npu_ss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        npu_ss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  npu_ss4_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire npu_ss4_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] npu_ss4_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire npu_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] npu_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire npu_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  npu_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] npu_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire npu_ss4_iniu_node_npu_ss4_sys_wrap_npu_ss4_sys_side_rsp_afifo_sb_err_porting_npu_ss4_sys_wrap_npu_ss4_sys_side_rsp_afifo_sb_err_porting_npu_ss4_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire npu_ss4_iniu_node_npu_ss4_sys_wrap_npu_ss4_sys_side_rsp_afifo_db_err_porting_npu_ss4_sys_wrap_npu_ss4_sys_side_rsp_afifo_db_err_porting_npu_ss4_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire npu_ss4_iniu_node_npu_ss4_top_wrap_afifo_sb_err_porting_npu_ss4_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire npu_ss4_iniu_node_npu_ss4_top_wrap_afifo_db_err_porting_npu_ss4_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  pcie_eth_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire pcie_eth_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] pcie_eth_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire pcie_eth_ss_iniu_node_pcie_eth_ss_sys_wrap_pcie_eth_ss_sys_side_rsp_afifo_sb_err_porting_pcie_eth_ss_sys_wrap_pcie_eth_ss_sys_side_rsp_afifo_sb_err_porting_pcie_eth_ss_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire pcie_eth_ss_iniu_node_pcie_eth_ss_sys_wrap_pcie_eth_ss_sys_side_rsp_afifo_db_err_porting_pcie_eth_ss_sys_wrap_pcie_eth_ss_sys_side_rsp_afifo_db_err_porting_pcie_eth_ss_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire pcie_eth_ss_iniu_node_pcie_eth_ss_top_wrap_afifo_sb_err_porting_pcie_eth_ss_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire pcie_eth_ss_iniu_node_pcie_eth_ss_top_wrap_afifo_db_err_porting_pcie_eth_ss_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] peri_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  peri_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        peri_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         peri_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  peri_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        peri_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  peri_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire peri_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] peri_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire peri_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] peri_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire peri_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  peri_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] peri_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire peri_ss_iniu_node_peri_ss_sys_wrap_peri_ss_sys_side_rsp_afifo_sb_err_porting_peri_ss_sys_wrap_peri_ss_sys_side_rsp_afifo_sb_err_porting_peri_ss_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire peri_ss_iniu_node_peri_ss_sys_wrap_peri_ss_sys_side_rsp_afifo_db_err_porting_peri_ss_sys_wrap_peri_ss_sys_side_rsp_afifo_db_err_porting_peri_ss_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire peri_ss_iniu_node_peri_ss_top_wrap_afifo_sb_err_porting_peri_ss_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire peri_ss_iniu_node_peri_ss_top_wrap_afifo_db_err_porting_peri_ss_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] ufs_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  ufs_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        ufs_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         ufs_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  ufs_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        ufs_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  ufs_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire ufs_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] ufs_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire ufs_ss_iniu_node_ufs_ss_sys_wrap_ufs_ss_sys_side_rsp_afifo_sb_err_porting_ufs_ss_sys_wrap_ufs_ss_sys_side_rsp_afifo_sb_err_porting_ufs_ss_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire ufs_ss_iniu_node_ufs_ss_sys_wrap_ufs_ss_sys_side_rsp_afifo_db_err_porting_ufs_ss_sys_wrap_ufs_ss_sys_side_rsp_afifo_db_err_porting_ufs_ss_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire ufs_ss_iniu_node_ufs_ss_top_wrap_afifo_sb_err_porting_ufs_ss_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire ufs_ss_iniu_node_ufs_ss_top_wrap_afifo_db_err_porting_ufs_ss_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] usb_dp_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  usb_dp_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        usb_dp_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         usb_dp_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  usb_dp_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        usb_dp_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  usb_dp_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire usb_dp_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] usb_dp_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire usb_dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] usb_dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire usb_dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  usb_dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] usb_dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire usb_dp_ss_iniu_node_usb_dp_ss_sys_wrap_usb_dp_ss_sys_side_rsp_afifo_sb_err_porting_usb_dp_ss_sys_wrap_usb_dp_ss_sys_side_rsp_afifo_sb_err_porting_usb_dp_ss_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire usb_dp_ss_iniu_node_usb_dp_ss_sys_wrap_usb_dp_ss_sys_side_rsp_afifo_db_err_porting_usb_dp_ss_sys_wrap_usb_dp_ss_sys_side_rsp_afifo_db_err_porting_usb_dp_ss_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire usb_dp_ss_iniu_node_usb_dp_ss_top_wrap_afifo_sb_err_porting_usb_dp_ss_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire usb_dp_ss_iniu_node_usb_dp_ss_top_wrap_afifo_db_err_porting_usb_dp_ss_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+  reg  [79:0] vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  reg  [9:0]  vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  reg         vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  wire        vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready;
+  reg  [5:0]  vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  reg         vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  wire [79:0] vpu_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  wire [9:0]  vpu_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  wire        vpu_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  reg         vpu_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  wire [5:0]  vpu_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  wire        vpu_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  reg  vpu_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  wire vpu_ss_iniu_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  reg  [9:0] vpu_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val;
+  wire vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire vpu_ss_iniu_node_vpu_ss_sys_wrap_vpu_ss_sys_side_rsp_afifo_sb_err_porting_vpu_ss_sys_wrap_vpu_ss_sys_side_rsp_afifo_sb_err_porting_vpu_ss_sys_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire vpu_ss_iniu_node_vpu_ss_sys_wrap_vpu_ss_sys_side_rsp_afifo_db_err_porting_vpu_ss_sys_wrap_vpu_ss_sys_side_rsp_afifo_db_err_porting_vpu_ss_sys_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire vpu_ss_iniu_node_vpu_ss_top_wrap_afifo_sb_err_porting_vpu_ss_top_wrap_afifo_sb_err_porting_afifo_sb_err_req_afifo_sb_err;
+  wire vpu_ss_iniu_node_vpu_ss_top_wrap_afifo_db_err_porting_vpu_ss_top_wrap_afifo_db_err_porting_afifo_db_err_req_afifo_db_err;
+
+  // TNIU DTI loopback: REQ output -> RSP input
+  wire [79:0] cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  wire [9:0]  cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  wire        cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  reg         cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_tready;
+  wire [5:0]  cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  wire        cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  reg  [79:0] cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  reg  [9:0]  cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  reg         cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  wire        cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  reg  [5:0]  cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  reg         cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  wire cpu_ss_tniu0_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  reg  cpu_ss_tniu0_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  wire cpu_ss_tniu0_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] cpu_ss_tniu0_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire cpu_ss_tniu0_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  cpu_ss_tniu0_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] cpu_ss_tniu0_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire cpu_ss_tniu0_node_cpu_ss_tniu0_sys_wrap_cpu_ss_tniu0_sys_side_req_afifo_sb_err_porting_cpu_ss_tniu0_sys_wrap_cpu_ss_tniu0_sys_side_req_afifo_sb_err_porting_cpu_ss_tniu0_sys_side_req_afifo_sb_err_porting_req_afifo_sb_err;
+  wire cpu_ss_tniu0_node_cpu_ss_tniu0_sys_wrap_cpu_ss_tniu0_sys_side_req_afifo_db_err_porting_cpu_ss_tniu0_sys_wrap_cpu_ss_tniu0_sys_side_req_afifo_db_err_porting_cpu_ss_tniu0_sys_side_req_afifo_db_err_porting_req_afifo_db_err;
+  wire cpu_ss_tniu0_node_cpu_ss_tniu0_top_wrap_cpu_ss_tniu0_top_side_rsp_afifo_sb_err_porting_cpu_ss_tniu0_top_wrap_cpu_ss_tniu0_top_side_rsp_afifo_sb_err_porting_cpu_ss_tniu0_top_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire cpu_ss_tniu0_node_cpu_ss_tniu0_top_wrap_cpu_ss_tniu0_top_side_rsp_afifo_db_err_porting_cpu_ss_tniu0_top_wrap_cpu_ss_tniu0_top_side_rsp_afifo_db_err_porting_cpu_ss_tniu0_top_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+  wire [79:0] cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_tdata;
+  wire [9:0]  cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+  wire        cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_tlast;
+  reg         cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_tready;
+  wire [5:0]  cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_ttid;
+  wire        cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_tvalid;
+  reg  [79:0] cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata;
+  reg  [9:0]  cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep;
+  reg         cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast;
+  wire        cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready;
+  reg  [5:0]  cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid;
+  reg         cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid;
+  wire cpu_ss_tniu1_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup;
+  reg  cpu_ss_tniu1_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup;
+  wire cpu_ss_tniu1_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_paccept;
+  wire [1:0] cpu_ss_tniu1_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pactive;
+  wire cpu_ss_tniu1_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pdeny;
+  reg  cpu_ss_tniu1_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq;
+  reg  [1:0] cpu_ss_tniu1_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate;
+  wire cpu_ss_tniu1_node_cpu_ss_tniu1_sys_wrap_cpu_ss_tniu1_sys_side_req_afifo_sb_err_porting_cpu_ss_tniu1_sys_wrap_cpu_ss_tniu1_sys_side_req_afifo_sb_err_porting_cpu_ss_tniu1_sys_side_req_afifo_sb_err_porting_req_afifo_sb_err;
+  wire cpu_ss_tniu1_node_cpu_ss_tniu1_sys_wrap_cpu_ss_tniu1_sys_side_req_afifo_db_err_porting_cpu_ss_tniu1_sys_wrap_cpu_ss_tniu1_sys_side_req_afifo_db_err_porting_cpu_ss_tniu1_sys_side_req_afifo_db_err_porting_req_afifo_db_err;
+  wire cpu_ss_tniu1_node_cpu_ss_tniu1_top_wrap_cpu_ss_tniu1_top_side_rsp_afifo_sb_err_porting_cpu_ss_tniu1_top_wrap_cpu_ss_tniu1_top_side_rsp_afifo_sb_err_porting_cpu_ss_tniu1_top_side_rsp_afifo_sb_err_porting_rsp_afifo_sb_err;
+  wire cpu_ss_tniu1_node_cpu_ss_tniu1_top_wrap_cpu_ss_tniu1_top_side_rsp_afifo_db_err_porting_cpu_ss_tniu1_top_wrap_cpu_ss_tniu1_top_side_rsp_afifo_db_err_porting_cpu_ss_tniu1_top_side_rsp_afifo_db_err_porting_rsp_afifo_db_err;
+
+  dti_logic_topo dut (.*);
+
+  // Clock generation
+  always #5 clk_noc = ~clk_noc;
+
+  // Task: send one DTI REQ and wait for RSP on a given INIU
+  task automatic send_req(input string leaf, input int ttid);
+    case (leaf)
+      "npu_ss0": begin
+        @(posedge clk_noc);
+        npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0000_0000;
+        npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "npu_ss3": begin
+        @(posedge clk_noc);
+        npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0001_0000;
+        npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "npu_ss4": begin
+        @(posedge clk_noc);
+        npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0002_0000;
+        npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "npu_ss2": begin
+        @(posedge clk_noc);
+        npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0003_0000;
+        npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "npu_ss1": begin
+        @(posedge clk_noc);
+        npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0004_0000;
+        npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "peri_ss": begin
+        @(posedge clk_noc);
+        peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0005_0000;
+        peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "ufs_ss": begin
+        @(posedge clk_noc);
+        ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0006_0000;
+        ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "pcie_eth_ss": begin
+        @(posedge clk_noc);
+        pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0007_0000;
+        pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "gpu_ss0": begin
+        @(posedge clk_noc);
+        gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0008_0000;
+        gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "dspss0": begin
+        @(posedge clk_noc);
+        dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0009_0000;
+        dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "dspss1": begin
+        @(posedge clk_noc);
+        dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_000A_0000;
+        dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "dspss2": begin
+        @(posedge clk_noc);
+        dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_000B_0000;
+        dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "dspss3": begin
+        @(posedge clk_noc);
+        dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_000C_0000;
+        dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "dspss4": begin
+        @(posedge clk_noc);
+        dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_000D_0000;
+        dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "dspss5": begin
+        @(posedge clk_noc);
+        dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_000E_0000;
+        dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "camera_ss": begin
+        @(posedge clk_noc);
+        camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_000F_0000;
+        camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "mipi_ss": begin
+        @(posedge clk_noc);
+        mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0010_0000;
+        mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "gpu_ss1": begin
+        @(posedge clk_noc);
+        gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0011_0000;
+        gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "usb_dp_ss": begin
+        @(posedge clk_noc);
+        usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0012_0000;
+        usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "display_ss": begin
+        @(posedge clk_noc);
+        display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0013_0000;
+        display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+      "vpu_ss": begin
+        @(posedge clk_noc);
+        vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 80'hA5A5_0014_0000;
+        vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 10'h3FF;
+        vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 1'b1;
+        vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = ttid[5:0];
+        vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b1;
+        @(posedge clk_noc);
+        while (!vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tready) @(posedge clk_noc);
+        vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 1'b0;
+      end
+    endcase
+  endtask
+
+  // Result tracking
+  integer pass_count, fail_count, total_tests;
+  reg npu_ss0_rsp_seen;
+  reg npu_ss3_rsp_seen;
+  reg npu_ss4_rsp_seen;
+  reg npu_ss2_rsp_seen;
+  reg npu_ss1_rsp_seen;
+  reg peri_ss_rsp_seen;
+  reg ufs_ss_rsp_seen;
+  reg pcie_eth_ss_rsp_seen;
+  reg gpu_ss0_rsp_seen;
+  reg dspss0_rsp_seen;
+  reg dspss1_rsp_seen;
+  reg dspss2_rsp_seen;
+  reg dspss3_rsp_seen;
+  reg dspss4_rsp_seen;
+  reg dspss5_rsp_seen;
+  reg camera_ss_rsp_seen;
+  reg mipi_ss_rsp_seen;
+  reg gpu_ss1_rsp_seen;
+  reg usb_dp_ss_rsp_seen;
+  reg display_ss_rsp_seen;
+  reg vpu_ss_rsp_seen;
+
+  initial begin
+    $display("========================================");
+    $display(" DTI NoC Loopback Test");
+    $display("========================================");
+
+    // Init
+    clk_noc = 0; rst_noc_n = 0;
+    pass_count = 0; fail_count = 0; total_tests = 0;
+
+    // Init all leaf clk/rst
+    camera_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    camera_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    camera_ss_iniu_node_clk_noc_porting = 0;
+    camera_ss_iniu_node_rst_noc_n_porting = 0;
+    display_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    display_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    display_ss_iniu_node_clk_noc_porting = 0;
+    display_ss_iniu_node_rst_noc_n_porting = 0;
+    dspss0_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    dspss0_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    dspss0_iniu_node_clk_noc_porting = 0;
+    dspss0_iniu_node_rst_noc_n_porting = 0;
+    dspss1_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    dspss1_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    dspss1_iniu_node_clk_noc_porting = 0;
+    dspss1_iniu_node_rst_noc_n_porting = 0;
+    dspss2_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    dspss2_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    dspss2_iniu_node_clk_noc_porting = 0;
+    dspss2_iniu_node_rst_noc_n_porting = 0;
+    dspss3_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    dspss3_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    dspss3_iniu_node_clk_noc_porting = 0;
+    dspss3_iniu_node_rst_noc_n_porting = 0;
+    dspss4_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    dspss4_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    dspss4_iniu_node_clk_noc_porting = 0;
+    dspss4_iniu_node_rst_noc_n_porting = 0;
+    dspss5_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    dspss5_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    dspss5_iniu_node_clk_noc_porting = 0;
+    dspss5_iniu_node_rst_noc_n_porting = 0;
+    gpu_ss0_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    gpu_ss0_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    gpu_ss0_iniu_node_clk_noc_porting = 0;
+    gpu_ss0_iniu_node_rst_noc_n_porting = 0;
+    gpu_ss1_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    gpu_ss1_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    gpu_ss1_iniu_node_clk_noc_porting = 0;
+    gpu_ss1_iniu_node_rst_noc_n_porting = 0;
+    mipi_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    mipi_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    mipi_ss_iniu_node_clk_noc_porting = 0;
+    mipi_ss_iniu_node_rst_noc_n_porting = 0;
+    npu_ss0_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    npu_ss0_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    npu_ss0_iniu_node_clk_noc_porting = 0;
+    npu_ss0_iniu_node_rst_noc_n_porting = 0;
+    npu_ss1_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    npu_ss1_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    npu_ss1_iniu_node_clk_noc_porting = 0;
+    npu_ss1_iniu_node_rst_noc_n_porting = 0;
+    npu_ss2_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    npu_ss2_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    npu_ss2_iniu_node_clk_noc_porting = 0;
+    npu_ss2_iniu_node_rst_noc_n_porting = 0;
+    npu_ss3_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    npu_ss3_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    npu_ss3_iniu_node_clk_noc_porting = 0;
+    npu_ss3_iniu_node_rst_noc_n_porting = 0;
+    npu_ss4_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    npu_ss4_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    npu_ss4_iniu_node_clk_noc_porting = 0;
+    npu_ss4_iniu_node_rst_noc_n_porting = 0;
+    pcie_eth_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    pcie_eth_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    pcie_eth_ss_iniu_node_clk_noc_porting = 0;
+    pcie_eth_ss_iniu_node_rst_noc_n_porting = 0;
+    peri_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    peri_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    peri_ss_iniu_node_clk_noc_porting = 0;
+    peri_ss_iniu_node_rst_noc_n_porting = 0;
+    ufs_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    ufs_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    ufs_ss_iniu_node_clk_noc_porting = 0;
+    ufs_ss_iniu_node_rst_noc_n_porting = 0;
+    usb_dp_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    usb_dp_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    usb_dp_ss_iniu_node_clk_noc_porting = 0;
+    usb_dp_ss_iniu_node_rst_noc_n_porting = 0;
+    vpu_ss_iniu_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    vpu_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    vpu_ss_iniu_node_clk_noc_porting = 0;
+    vpu_ss_iniu_node_rst_noc_n_porting = 0;
+    cpu_ss_tniu0_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    cpu_ss_tniu0_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    cpu_ss_tniu0_node_clk_noc_porting = 0;
+    cpu_ss_tniu0_node_rst_noc_n_porting = 0;
+    cpu_ss_tniu1_node_clk_sys_porting_clk_sys_clk_sys_clk = 0;
+    cpu_ss_tniu1_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 0;
+    cpu_ss_tniu1_node_clk_noc_porting = 0;
+    cpu_ss_tniu1_node_rst_noc_n_porting = 0;
+
+    // Init INIU REQ drivers
+    camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    camera_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    camera_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    camera_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    camera_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    camera_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    display_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    display_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    display_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    display_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    display_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    dspss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    dspss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    dspss0_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    dspss0_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    dspss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    dspss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    dspss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    dspss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    dspss1_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    dspss1_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    dspss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    dspss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    dspss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    dspss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    dspss2_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    dspss2_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    dspss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    dspss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    dspss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    dspss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    dspss3_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    dspss3_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    dspss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    dspss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    dspss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    dspss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    dspss4_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    dspss4_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    dspss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    dspss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    dspss5_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    dspss5_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    dspss5_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    dspss5_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    dspss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    dspss5_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    gpu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    gpu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    gpu_ss0_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    gpu_ss0_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    gpu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    gpu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    gpu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    gpu_ss1_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    gpu_ss1_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    gpu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    mipi_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    mipi_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    mipi_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    mipi_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    mipi_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    npu_ss0_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    npu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    npu_ss0_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    npu_ss0_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    npu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    npu_ss0_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    npu_ss1_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    npu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    npu_ss1_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    npu_ss1_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    npu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    npu_ss1_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    npu_ss2_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    npu_ss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    npu_ss2_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    npu_ss2_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    npu_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    npu_ss2_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    npu_ss3_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    npu_ss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    npu_ss3_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    npu_ss3_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    npu_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    npu_ss3_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    npu_ss4_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    npu_ss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    npu_ss4_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    npu_ss4_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    npu_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    npu_ss4_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    pcie_eth_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    pcie_eth_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    pcie_eth_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    pcie_eth_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    peri_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    peri_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    peri_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    peri_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    peri_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    peri_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    ufs_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    ufs_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    ufs_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    ufs_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    ufs_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    usb_dp_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    usb_dp_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    usb_dp_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    usb_dp_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    usb_dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    usb_dp_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tdata  = 0;
+    vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tkeep  = 0;
+    vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tlast  = 0;
+    vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_ttid   = 0;
+    vpu_ss_iniu_node_dti_req_porting_dti_req_dti_req_req_tvalid = 0;
+    vpu_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready = 1;
+    vpu_ss_iniu_node_req_twakeup_porting_req_twakeup_req_twakeup_req_twakeup = 0;
+    vpu_ss_iniu_node_timeout_val_porting_timeout_val_timeout_val_timeout_val = 0;
+    vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    vpu_ss_iniu_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+
+    // Init TNIU loopback
+    cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_tready = 1;
+    cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata  = 0;
+    cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep  = 0;
+    cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast  = 0;
+    cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid   = 0;
+    cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid = 0;
+    cpu_ss_tniu0_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup = 0;
+    cpu_ss_tniu0_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    cpu_ss_tniu0_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+    cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_tready = 1;
+    cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata  = 0;
+    cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep  = 0;
+    cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast  = 0;
+    cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid   = 0;
+    cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid = 0;
+    cpu_ss_tniu1_node_rsp_twakeup_porting_rsp_twakeup_rsp_twakeup_rsp_twakeup = 0;
+    cpu_ss_tniu1_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_preq   = 0;
+    cpu_ss_tniu1_node_pchnl_ctrl_porting_pchnl_ctrl_pchnl_ctrl_pstate = 0;
+
+    // Reset
+    repeat(20) @(posedge clk_noc);
+    rst_noc_n = 1;
+    camera_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    camera_ss_iniu_node_rst_noc_n_porting = 1;
+    display_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    display_ss_iniu_node_rst_noc_n_porting = 1;
+    dspss0_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    dspss0_iniu_node_rst_noc_n_porting = 1;
+    dspss1_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    dspss1_iniu_node_rst_noc_n_porting = 1;
+    dspss2_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    dspss2_iniu_node_rst_noc_n_porting = 1;
+    dspss3_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    dspss3_iniu_node_rst_noc_n_porting = 1;
+    dspss4_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    dspss4_iniu_node_rst_noc_n_porting = 1;
+    dspss5_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    dspss5_iniu_node_rst_noc_n_porting = 1;
+    gpu_ss0_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    gpu_ss0_iniu_node_rst_noc_n_porting = 1;
+    gpu_ss1_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    gpu_ss1_iniu_node_rst_noc_n_porting = 1;
+    mipi_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    mipi_ss_iniu_node_rst_noc_n_porting = 1;
+    npu_ss0_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    npu_ss0_iniu_node_rst_noc_n_porting = 1;
+    npu_ss1_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    npu_ss1_iniu_node_rst_noc_n_porting = 1;
+    npu_ss2_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    npu_ss2_iniu_node_rst_noc_n_porting = 1;
+    npu_ss3_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    npu_ss3_iniu_node_rst_noc_n_porting = 1;
+    npu_ss4_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    npu_ss4_iniu_node_rst_noc_n_porting = 1;
+    pcie_eth_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    pcie_eth_ss_iniu_node_rst_noc_n_porting = 1;
+    peri_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    peri_ss_iniu_node_rst_noc_n_porting = 1;
+    ufs_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    ufs_ss_iniu_node_rst_noc_n_porting = 1;
+    usb_dp_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    usb_dp_ss_iniu_node_rst_noc_n_porting = 1;
+    vpu_ss_iniu_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    vpu_ss_iniu_node_rst_noc_n_porting = 1;
+    cpu_ss_tniu0_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    cpu_ss_tniu0_node_rst_noc_n_porting = 1;
+    cpu_ss_tniu1_node_rst_sys_n_porting_rst_sys_n_rst_sys_n_rst_n = 1;
+    cpu_ss_tniu1_node_rst_noc_n_porting = 1;
+    repeat(10) @(posedge clk_noc);
+
+    // Test each INIU leaf
+    fork begin : test_npu_ss0_t0
+      npu_ss0_rsp_seen = 0;
+      send_req("npu_ss0", 0);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (npu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && npu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 0) begin
+          npu_ss0_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "npu_ss0", 0, npu_ss0_rsp_seen ? "PASS" : "FAIL");
+      if (npu_ss0_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_npu_ss3_t1
+      npu_ss3_rsp_seen = 0;
+      send_req("npu_ss3", 1);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (npu_ss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && npu_ss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 1) begin
+          npu_ss3_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "npu_ss3", 1, npu_ss3_rsp_seen ? "PASS" : "FAIL");
+      if (npu_ss3_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_npu_ss4_t2
+      npu_ss4_rsp_seen = 0;
+      send_req("npu_ss4", 2);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (npu_ss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && npu_ss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 2) begin
+          npu_ss4_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "npu_ss4", 2, npu_ss4_rsp_seen ? "PASS" : "FAIL");
+      if (npu_ss4_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_npu_ss2_t3
+      npu_ss2_rsp_seen = 0;
+      send_req("npu_ss2", 3);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (npu_ss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && npu_ss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 3) begin
+          npu_ss2_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "npu_ss2", 3, npu_ss2_rsp_seen ? "PASS" : "FAIL");
+      if (npu_ss2_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_npu_ss1_t4
+      npu_ss1_rsp_seen = 0;
+      send_req("npu_ss1", 4);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (npu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && npu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 4) begin
+          npu_ss1_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "npu_ss1", 4, npu_ss1_rsp_seen ? "PASS" : "FAIL");
+      if (npu_ss1_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_peri_ss_t5
+      peri_ss_rsp_seen = 0;
+      send_req("peri_ss", 5);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (peri_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && peri_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 5) begin
+          peri_ss_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "peri_ss", 5, peri_ss_rsp_seen ? "PASS" : "FAIL");
+      if (peri_ss_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_ufs_ss_t6
+      ufs_ss_rsp_seen = 0;
+      send_req("ufs_ss", 6);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (ufs_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && ufs_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 6) begin
+          ufs_ss_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "ufs_ss", 6, ufs_ss_rsp_seen ? "PASS" : "FAIL");
+      if (ufs_ss_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_pcie_eth_ss_t7
+      pcie_eth_ss_rsp_seen = 0;
+      send_req("pcie_eth_ss", 7);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && pcie_eth_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 7) begin
+          pcie_eth_ss_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "pcie_eth_ss", 7, pcie_eth_ss_rsp_seen ? "PASS" : "FAIL");
+      if (pcie_eth_ss_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_gpu_ss0_t8
+      gpu_ss0_rsp_seen = 0;
+      send_req("gpu_ss0", 8);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (gpu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && gpu_ss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 8) begin
+          gpu_ss0_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "gpu_ss0", 8, gpu_ss0_rsp_seen ? "PASS" : "FAIL");
+      if (gpu_ss0_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_dspss0_t9
+      dspss0_rsp_seen = 0;
+      send_req("dspss0", 9);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (dspss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && dspss0_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 9) begin
+          dspss0_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "dspss0", 9, dspss0_rsp_seen ? "PASS" : "FAIL");
+      if (dspss0_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_dspss1_t10
+      dspss1_rsp_seen = 0;
+      send_req("dspss1", 10);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (dspss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && dspss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 10) begin
+          dspss1_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "dspss1", 10, dspss1_rsp_seen ? "PASS" : "FAIL");
+      if (dspss1_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_dspss2_t11
+      dspss2_rsp_seen = 0;
+      send_req("dspss2", 11);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (dspss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && dspss2_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 11) begin
+          dspss2_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "dspss2", 11, dspss2_rsp_seen ? "PASS" : "FAIL");
+      if (dspss2_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_dspss3_t12
+      dspss3_rsp_seen = 0;
+      send_req("dspss3", 12);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (dspss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && dspss3_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 12) begin
+          dspss3_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "dspss3", 12, dspss3_rsp_seen ? "PASS" : "FAIL");
+      if (dspss3_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_dspss4_t13
+      dspss4_rsp_seen = 0;
+      send_req("dspss4", 13);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (dspss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && dspss4_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 13) begin
+          dspss4_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "dspss4", 13, dspss4_rsp_seen ? "PASS" : "FAIL");
+      if (dspss4_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_dspss5_t14
+      dspss5_rsp_seen = 0;
+      send_req("dspss5", 14);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (dspss5_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && dspss5_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 14) begin
+          dspss5_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "dspss5", 14, dspss5_rsp_seen ? "PASS" : "FAIL");
+      if (dspss5_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_camera_ss_t15
+      camera_ss_rsp_seen = 0;
+      send_req("camera_ss", 15);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (camera_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && camera_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 15) begin
+          camera_ss_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "camera_ss", 15, camera_ss_rsp_seen ? "PASS" : "FAIL");
+      if (camera_ss_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_mipi_ss_t16
+      mipi_ss_rsp_seen = 0;
+      send_req("mipi_ss", 16);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (mipi_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && mipi_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 16) begin
+          mipi_ss_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "mipi_ss", 16, mipi_ss_rsp_seen ? "PASS" : "FAIL");
+      if (mipi_ss_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_gpu_ss1_t17
+      gpu_ss1_rsp_seen = 0;
+      send_req("gpu_ss1", 17);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (gpu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && gpu_ss1_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 17) begin
+          gpu_ss1_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "gpu_ss1", 17, gpu_ss1_rsp_seen ? "PASS" : "FAIL");
+      if (gpu_ss1_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_usb_dp_ss_t18
+      usb_dp_ss_rsp_seen = 0;
+      send_req("usb_dp_ss", 18);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (usb_dp_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && usb_dp_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 18) begin
+          usb_dp_ss_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "usb_dp_ss", 18, usb_dp_ss_rsp_seen ? "PASS" : "FAIL");
+      if (usb_dp_ss_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_display_ss_t19
+      display_ss_rsp_seen = 0;
+      send_req("display_ss", 19);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (display_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && display_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 19) begin
+          display_ss_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "display_ss", 19, display_ss_rsp_seen ? "PASS" : "FAIL");
+      if (display_ss_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_vpu_ss_t20
+      vpu_ss_rsp_seen = 0;
+      send_req("vpu_ss", 20);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (vpu_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && vpu_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 20) begin
+          vpu_ss_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "vpu_ss", 20, vpu_ss_rsp_seen ? "PASS" : "FAIL");
+      if (vpu_ss_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+    fork begin : test_vpu_ss_t21
+      vpu_ss_rsp_seen = 0;
+      send_req("vpu_ss", 21);
+      repeat(500) begin
+        @(posedge clk_noc);
+        if (vpu_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && vpu_ss_iniu_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid == 21) begin
+          vpu_ss_rsp_seen = 1;
+        end
+      end
+      $display("[%0t] %s TTID=%0d: %s", $time, "vpu_ss", 21, vpu_ss_rsp_seen ? "PASS" : "FAIL");
+      if (vpu_ss_rsp_seen) pass_count = pass_count + 1; else fail_count = fail_count + 1;
+      total_tests = total_tests + 1;
+    end join
+
+    $display("========================================");
+    $display(" Summary: %0d PASS, %0d FAIL, %0d TOTAL", pass_count, fail_count, total_tests);
+    $display("========================================");
+
+    if (fail_count == 0) begin
+      $display("ALL TESTS PASSED - dumping FSDB");
+      $fsdbDumpfile(`"tb_dti_loopback.fsdb`");
+      $fsdbDumpvars(0, tb_dti_loopback);
+      repeat(100) @(posedge clk_noc);
+      $fsdbDumpoff;
+      $display("FSDB dump complete");
+    end
+    $finish;
+  end
+
+  // TNIU loopback: buffer REQ data, echo back as RSP after 1 cycle
+  always_ff @(posedge clk_noc) begin
+    if (cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_tvalid && cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_tready) begin
+      cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata  <= cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_tdata;
+      cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep  <= cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+      cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast  <= cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_tlast;
+      cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid   <= cpu_ss_tniu0_node_dti_req_porting_dti_req_dti_req_req_ttid;
+      cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid <= 1'b1;
+    end else if (cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready) begin
+      cpu_ss_tniu0_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid <= 1'b0;
+    end
+  end
+  always_ff @(posedge clk_noc) begin
+    if (cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_tvalid && cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_tready) begin
+      cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tdata  <= cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_tdata;
+      cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tkeep  <= cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_tkeep;
+      cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tlast  <= cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_tlast;
+      cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_ttid   <= cpu_ss_tniu1_node_dti_req_porting_dti_req_dti_req_req_ttid;
+      cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid <= 1'b1;
+    end else if (cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid && cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tready) begin
+      cpu_ss_tniu1_node_dti_rsp_porting_dti_rsp_dti_rsp_rsp_tvalid <= 1'b0;
+    end
+  end
+
+endmodule

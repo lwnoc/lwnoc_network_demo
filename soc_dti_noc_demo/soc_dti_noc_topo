@@ -1,30 +1,62 @@
-from lwnoc_topo.topo_core.node import node
-from lwnoc_topo.uhdl.test.test_simplified_integration import top
+soc dti topo (image 2026-05-08):
 
+arrow convention:
+- all `a -> b` arrows below describe req direction only
+- the corresponding rsp direction is the reverse path `b -> a`, unless a line explicitly says otherwise
 
-soc dti topo:
-dsp ss0 iniu -> sw0 ch0
-dsp ss1 iniu -> sw0 ch1
-dsp ss2 iniu -> sw0 ch2
-dsp ss3 iniu -> sw0 ch3
-dsp ss4 iniu -> sw0 ch4
-dsp ss5 iniu -> sw0 ch5
-cpu ss iniu -> sw1 ch0
-pcie_eth_ss -> sw1 ch1
-ufs_ss iniu -> sw1 ch2
-camera_ss iniu -> sw1 ch3
-mipi_ss iniu -> sw1 ch4
-gpu_ss0 iniu -> sw2 ch0
-gpu_ss1 iniu -> sw2 ch1
-dp_ss iniu -> sw2 ch2
-display_ss iniu -> sw2 ch3
-sw2 -> dti buffer
-dti buffer -> dti async bridge slv
-dti async bridge mst -> sw3 ch2
-sw0 -> sw3 ch0
-sw1 -> sw3 ch1
-sw3 -> tcu tniu
+clock domain:
+- single DTI fabric domain shown in image: dti80@1GHz
+- image does not show the old req_buf -> async_bridge_slv/mst -> sw3 split
+- therefore the previous 4-switch + async-bridge description is obsolete
 
-top harden(top rtl contain iniu/tniu top side and network node) cut:
-node until dti async bridge slv are in one harden and  in one top clk domain
-node from dti async bridge mst are in another harden and in anther top clk domain
+top-left ingress cluster:
+- peri_ss -> tl_merge0
+- bottom_merge0 -> tl_merge0
+- dsp_merge0 -> tl_merge0
+- tr_merge0 -> tl_merge0
+- debug_ss / audio_ss / mcu_ss remain visible in the image, but their exact merge attachment needs another image cross-check before freezing them here
+
+top-right ingress cluster:
+- camera_ss -> tr_merge0
+- mipi_ss -> tr_merge0
+- gpu_ss1 -> tr_merge0
+- usb_dp_ss -> tr_merge0
+- display_ss -> tr_merge0
+- vpu_ss -> tr_merge0
+- npu_ss1 -> top_spine
+
+right-middle ingress cluster:
+- dspss0 -> dsp_merge0
+- dspss1 -> dsp_merge0
+- dspss2 -> dsp_merge0
+- dspss3 -> dsp_merge0
+- dspss4 -> dsp_merge0
+- dspss5 -> dsp_merge0
+
+bottom ingress cluster:
+- ufs_ss -> bottom_merge0
+- pcie_eth_ss -> bottom_merge0
+- gpu_ss0 -> bottom_merge0
+- npu_ss3 -> bottom_merge1
+- npu_ss4 -> bottom_merge1
+- npu_ss2 -> bottom_merge1
+
+fabric convergence:
+- npu_ss0 iniu -> top_spine
+- bottom_merge1 -> top_spine
+- tl_merge0 -> cpu_ss tniu0
+- top_spine -> cpu_ss tniu1
+- cpu_ss sits in front of the central fabric region in the image; the exact named edge from cpu_ss toward central_spine needs one more image cross-check before freezing it here
+
+target / egress side visible in image:
+- central_spine -> t0
+- central_spine -> t1
+- ddr0 ~ ddr11 are present in the screenshot background, but they are not part of this DTI fabric connectivity and must not be modeled as central_spine targets here
+
+image-visible but not yet frozen as generator naming:
+- aon_ss is inside the dti80@1GHz frame, but the screenshot does not show a clear DTI ingress/egress arrow; treat it as placement-only until the owning topology update confirms whether it is a real DTI endpoint
+- tl_merge0 / tr_merge0 / dsp_merge0 / bottom_merge0 / bottom_merge1 / top_spine / central_spine are temporary descriptive node names for this topo note; when Python topology is updated, replace them with real switch / funnel / arbiter instance names
+
+harden note:
+- no explicit async bridge or 2-domain harden cut is shown in this new image
+- unless a later spec reintroduces an async boundary, do not inherit the old dn/up harden split from the previous topology note

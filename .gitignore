@@ -49,38 +49,20 @@ run_logs/
 
 # Generated build artifacts (keep only scripts + environment)
 **/build_logic/
-
-# Gen / build runtime logs
-**/run_logs/
-**/*.log
-UHDL.log
-
-# Sim/verif build artifacts
-**/sim/build_iverilog/
-**/sim/build_verilator/
-**/sim/verilator_work/
-**/csrc/
-*.flat.f
-
-# Compiled binaries / temp files
-a.out
-*.daidir/
-*.vdb/
-ucli.key
-
-# Simulation artifacts (VCS/Verilator)
-**/sim/build*/
+tb_dti_route.fsdb
+# VCS compiled simv binaries
 **/simv
-**/simv.daidir/
-**/csrc/
-*.daidir/
+**/simv_*
+**/simv_dti_*
+# FSDB waveform dumps
+*.fsdb
+*.vdb
+# VCS daidir
+**/simv*.daidir/
+# UHDL logs  
+UHDL.log
+# Run logs
+run_logs/
+**/run_logs/
+# .vdb directories
 *.vdb/
-simv
-
-# Utility scripts (auto-generated)
-*_manual_run.sh
-
-# Auto-generated topo JSON and PNG
-**/soc_*_topology.json
-**/*_topology.json
-**/*_topology.png
