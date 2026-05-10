@@ -1,0 +1,6 @@
+$CPU_TNIU_SYS_DIR/cpu_tniu_sys_macros_c2e887d113.sv
+$CPU_TNIU_SYS_DIR/cpu_tniu_dti_tniu_define.sv
+$CPU_TNIU_SYS_DIR/cpu_tniu_dti_tniu_pack.sv
+$CPU_TNIU_SYS_DIR/cpu_tniu_gnpd_to_dti_conv.sv
+$CPU_TNIU_SYS_DIR/cpu_tniu_dti_tniu_async_sys_side.sv
+$CPU_TNIU_SYS_DIR/cpu_tniu_dti_tniu_undef.sv

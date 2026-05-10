@@ -1,0 +1,13 @@
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_network_define.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_noc_switch.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_noc_switch_2to1_wrap.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_noc_switch_3to1_wrap.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_noc_switch_4to1_wrap.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_noc_switch_5to1_wrap.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_noc_switch_6to1_wrap.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_noc_switch_7to1_wrap.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_noc_switch_8to1_wrap.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_noc_switch_9to1_wrap.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_noc_switch_10to1_wrap.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_network_undef.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_dti_noc/rtl/network/dti_network_prefix_undef.sv

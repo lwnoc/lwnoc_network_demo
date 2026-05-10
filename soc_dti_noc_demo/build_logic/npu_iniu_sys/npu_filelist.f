@@ -1,0 +1,8 @@
+$NPU_INIU_SYS_DIR/npu_iniu_sys_macros_a0b3757ede.sv
+$NPU_INIU_SYS_DIR/npu_dti_pr_iniu_define.sv
+$NPU_INIU_SYS_DIR/npu_dti_iniu_pack.sv
+$NPU_INIU_SYS_DIR/npu_dti_pr_rob_state_entry.sv
+$NPU_INIU_SYS_DIR/npu_dti_pr.sv
+$NPU_INIU_SYS_DIR/npu_dti_to_gnpd_conv.sv
+$NPU_INIU_SYS_DIR/npu_dti_pr_iniu_async_sys_side.sv
+$NPU_INIU_SYS_DIR/npu_dti_pr_iniu_undef.sv

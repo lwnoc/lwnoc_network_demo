@@ -1,0 +1,5 @@
+`define dti_iniu_top_dspss5_INIU_ROUTE_BASE 14
+`define dti_iniu_top_dspss5_PAYLOAD_WIDTH 90
+`define dti_iniu_top_dspss5_TBU_NUM 1
+`define dti_iniu_top_dspss5_TID_WIDTH 6
+`define dti_iniu_top_dspss5_TRANSACTION_MAX_NUM 8

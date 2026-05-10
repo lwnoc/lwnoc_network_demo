@@ -1,0 +1,347 @@
+`ifndef dti_sw2__PREFIX_
+    `define _PREFIX_(x)  NPU_``x
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_NUM_INIU
+    `define dti_sw2_DTI_NOC_SWITCH_NUM_INIU 4
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_NUM_TNIU
+    `define dti_sw2_DTI_NOC_SWITCH_NUM_TNIU 2
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_TID_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_PAYLOAD_WIDTH 90
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_TNIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_TNIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_TNIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_TNIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_INIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_INIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_INIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_INIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_TID_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_PAYLOAD_WIDTH 90
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_TNIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_TNIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_TNIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_TNIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_INIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_INIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_INIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_2TO1_WRAP_INIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_TID_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_PAYLOAD_WIDTH 90
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_TNIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_TNIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_TNIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_TNIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_INIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_INIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_INIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_3TO1_WRAP_INIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_TID_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_PAYLOAD_WIDTH 90
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_TNIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_TNIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_TNIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_TNIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_INIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_INIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_INIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_4TO1_WRAP_INIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_TID_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_PAYLOAD_WIDTH 90
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_TNIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_TNIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_TNIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_TNIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_INIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_INIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_INIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_5TO1_WRAP_INIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_TID_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_PAYLOAD_WIDTH 90
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_TNIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_TNIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_TNIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_TNIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_INIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_INIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_INIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_6TO1_WRAP_INIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_TID_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_PAYLOAD_WIDTH 90
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_TNIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_TNIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_TNIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_TNIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_INIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_INIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_INIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_7TO1_WRAP_INIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_TID_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_PAYLOAD_WIDTH 90
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_TNIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_TNIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_TNIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_TNIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_INIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_INIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_INIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_8TO1_WRAP_INIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_TID_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_PAYLOAD_WIDTH 90
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_TNIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_TNIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_TNIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_TNIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_INIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_INIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_INIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_9TO1_WRAP_INIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_TID_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_PAYLOAD_WIDTH 90
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_TNIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_TNIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_TNIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_TNIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_INIU_DECMIN
+    `define dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_INIU_DECMIN '0
+`endif
+
+`ifndef dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_INIU_DECMAX
+    `define dti_sw2_DTI_NOC_SWITCH_10TO1_WRAP_INIU_DECMAX '0
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_SLV_SYNC_STAGE
+    `define dti_sw2_DTI_ASYNC_BRIDGE_SLV_SYNC_STAGE 3
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_SLV_FIFO_DEPTH
+    `define dti_sw2_DTI_ASYNC_BRIDGE_SLV_FIFO_DEPTH 16
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_SLV_THRESHOLD_EN
+    `define dti_sw2_DTI_ASYNC_BRIDGE_SLV_THRESHOLD_EN 0
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_SLV_ALMOST_FULL_THRESHOLD
+    `define dti_sw2_DTI_ASYNC_BRIDGE_SLV_ALMOST_FULL_THRESHOLD (FIFO_DEPTH - 2)
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_SLV_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_ASYNC_BRIDGE_SLV_PAYLOAD_WIDTH 64
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_SLV_TID_WIDTH
+    `define dti_sw2_DTI_ASYNC_BRIDGE_SLV_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_SLV_VT_TYPE
+    `define dti_sw2_DTI_ASYNC_BRIDGE_SLV_VT_TYPE 1
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_MST_SYNC_STAGE
+    `define dti_sw2_DTI_ASYNC_BRIDGE_MST_SYNC_STAGE 3
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_MST_FIFO_DEPTH
+    `define dti_sw2_DTI_ASYNC_BRIDGE_MST_FIFO_DEPTH 16
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_MST_THRESHOLD_EN
+    `define dti_sw2_DTI_ASYNC_BRIDGE_MST_THRESHOLD_EN 0
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_MST_ALMOST_EMPTY_THRESHOLD
+    `define dti_sw2_DTI_ASYNC_BRIDGE_MST_ALMOST_EMPTY_THRESHOLD 4
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_MST_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_ASYNC_BRIDGE_MST_PAYLOAD_WIDTH 64
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_MST_TID_WIDTH
+    `define dti_sw2_DTI_ASYNC_BRIDGE_MST_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_MST_ERR_INT_CNT_WIDTH
+    `define dti_sw2_DTI_ASYNC_BRIDGE_MST_ERR_INT_CNT_WIDTH 16
+`endif
+
+`ifndef dti_sw2_DTI_ASYNC_BRIDGE_MST_VT_TYPE
+    `define dti_sw2_DTI_ASYNC_BRIDGE_MST_VT_TYPE 1
+`endif
+
+`ifndef dti_sw2_DTI_LINK_PIPE_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_LINK_PIPE_PAYLOAD_WIDTH 64
+`endif
+
+`ifndef dti_sw2_DTI_LINK_PIPE_TID_WIDTH
+    `define dti_sw2_DTI_LINK_PIPE_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_LINK_PIPE_RS_TYPE
+    `define dti_sw2_DTI_LINK_PIPE_RS_TYPE 0
+`endif
+
+`ifndef dti_sw2_DTI_LINK_BUF_FIFO_DEPTH
+    `define dti_sw2_DTI_LINK_BUF_FIFO_DEPTH 16
+`endif
+
+`ifndef dti_sw2_DTI_LINK_BUF_PAYLOAD_WIDTH
+    `define dti_sw2_DTI_LINK_BUF_PAYLOAD_WIDTH 64
+`endif
+
+`ifndef dti_sw2_DTI_LINK_BUF_TID_WIDTH
+    `define dti_sw2_DTI_LINK_BUF_TID_WIDTH 6
+`endif
+
+`ifndef dti_sw2_DTI_LINK_BUF_ALMOST_FULL_THRESHOLD
+    `define dti_sw2_DTI_LINK_BUF_ALMOST_FULL_THRESHOLD 12
+`endif
+
+`ifndef dti_sw2_DTI_LINK_BUF_ALMOST_EMPTY_THRESHOLD
+    `define dti_sw2_DTI_LINK_BUF_ALMOST_EMPTY_THRESHOLD 4
+`endif
+
+`ifndef dti_sw2_DTI_LINK_BUF_FORWARD_EN
+    `define dti_sw2_DTI_LINK_BUF_FORWARD_EN 1
+`endif

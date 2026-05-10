@@ -1,0 +1,5 @@
+`define dti_iniu_top_vpu_ss_INIU_ROUTE_BASE 20
+`define dti_iniu_top_vpu_ss_PAYLOAD_WIDTH 90
+`define dti_iniu_top_vpu_ss_TBU_NUM 2
+`define dti_iniu_top_vpu_ss_TID_WIDTH 6
+`define dti_iniu_top_vpu_ss_TRANSACTION_MAX_NUM 8
