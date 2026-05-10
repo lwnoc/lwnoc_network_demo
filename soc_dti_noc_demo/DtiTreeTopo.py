@@ -13,43 +13,35 @@ from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
 from topo_core.utils.networkHierOpt import connect
 
 from DtiTemplate import (
-    dsp_iniu_sys_config,
-    pcie_eth_iniu_sys_config,
-    vpu_iniu_sys_config,
-    usb_ufs_iniu_sys_config,
-    mipi_iniu_sys_config,
-    camera_iniu_sys_config,
-    cpu_iniu_sys_config,
-    gpu_iniu_sys_config,
-    dp_iniu_sys_config,
-    display_iniu_sys_config,
-    dti_link_buf_config,
-    dti_req_rsp_async_config,
+    SOC_DTI_INIU_SYS_CFG_BY_LEAF,
+    SOC_DTI_TTID_BASES,
     iniu_top_config,
-    tcu_tniu_sys_config,
+    cpu_tniu_sys_config,
     tniu_top_config,
     dti_sw0_config,
     dti_sw1_config,
     dti_sw2_config,
     dti_sw3_config,
+    dti_sw4_config,
+    dti_sw5_config,
 )
 from DtiNode import (
     DtiIniuNode,
     DtiTniuNode,
     DtiSwitchNode,
-    DtiLinkBufReqNode,
-    DtiReqRspAsyncBridgeNode,
+    safe_connect,
 )
 
 
 class DtiLogicTopo(UhdlWrapperNode):
-    """4-switch topology matching soc_dti_noc_topo.
+    """Single-domain SoC DTI ingress tree rooted at cpu_ss tniu0/1.
 
-    sw0 (6i1o, dsp0~5)        -> sw3 ch0
-    sw1 (5i1o, cpu/pcie/ufs/camera/mipi) -> sw3 ch1
-    sw2 (4i1o, gpu0/gpu1/dp/display) -> dti_buffer -> async_bridge_slv
-    async_bridge_mst -> sw3 ch2
-    sw3 (3i1o) -> tcu_tniu
+    bottom_merge1 (3i1o): npu_ss3, npu_ss4, npu_ss2
+    bottom_merge0 (3i1o): ufs_ss, pcie_eth_ss, gpu_ss0
+    dsp_merge0    (6i1o): dspss0..5
+    tr_merge0     (6i1o): camera_ss, mipi_ss, gpu_ss1, usb_dp_ss, display_ss, vpu_ss
+    tl_merge0     (4i1o): peri_ss, bottom_merge0, dsp_merge0, tr_merge0 -> cpu_ss_tniu0
+    top_spine     (3i1o): npu_ss0, bottom_merge1, npu_ss1 -> cpu_ss_tniu1
     """
 
     def __init__(self, id: str = "dti_logic_topo"):
@@ -57,88 +49,80 @@ class DtiLogicTopo(UhdlWrapperNode):
 
         self.add_interface("clk_noc", is_global=True)
         self.add_interface("rst_noc_n", is_global=True)
-        self.add_interface("clk_noc_up", is_global=True)
-        self.add_interface("rst_noc_up_n", is_global=True)
 
-        # Switches
-        self.sw0 = DtiSwitchNode(id="sw0", cfg=dti_sw0_config, top="dti_noc_switch", input_count=6)
-        self.sw1 = DtiSwitchNode(id="sw1", cfg=dti_sw1_config, top="dti_noc_switch", input_count=5)
-        self.sw2 = DtiSwitchNode(id="sw2", cfg=dti_sw2_config, top="dti_noc_switch", input_count=4)
-        self.sw3 = DtiSwitchNode(id="sw3", cfg=dti_sw3_config, top="dti_noc_switch", input_count=3, clk_name="clk_noc_up", rst_name="rst_noc_up_n")
+        switch_specs = (
+            ("bottom_merge1", dti_sw0_config, 3),
+            ("bottom_merge0", dti_sw1_config, 3),
+            ("dsp_merge0", dti_sw2_config, 6),
+            ("tr_merge0", dti_sw3_config, 6),
+            ("tl_merge0", dti_sw4_config, 4),
+            ("top_spine", dti_sw5_config, 3),
+        )
+        for switch_name, switch_cfg, input_count in switch_specs:
+            switch_node = DtiSwitchNode(id=switch_name, cfg=switch_cfg, top="dti_noc_switch", input_count=input_count)
+            setattr(self, switch_name, switch_node)
+            safe_connect(self, switch_node.clk_noc, self.clk_noc)
+            safe_connect(self, switch_node.rst_noc_n, self.rst_noc_n)
 
-        for sw in [self.sw0, self.sw1, self.sw2]:
-            connect(sw.clk_noc, self.clk_noc)
-            connect(sw.rst_noc_n, self.rst_noc_n)
-        connect(self.sw3.clk_noc_up, self.clk_noc_up)
-        connect(self.sw3.rst_noc_up_n, self.rst_noc_up_n)
+        def add_iniu_leaf(leaf_name: str, parent_switch: DtiSwitchNode, input_idx: int):
+            node = DtiIniuNode(
+                id=f"{leaf_name}_iniu_node",
+                sys_cfg=SOC_DTI_INIU_SYS_CFG_BY_LEAF[leaf_name],
+                top_cfg=iniu_top_config,
+                node_name=leaf_name,
+                route_base=SOC_DTI_TTID_BASES[leaf_name],
+                clk_name="clk_noc",
+                rst_name="rst_noc_n",
+            )
+            setattr(self, f"{leaf_name}_iniu", node)
+            safe_connect(self, node.top_req, getattr(parent_switch, f"iniu{input_idx}_req"))
+            safe_connect(self, node.top_rsp, getattr(parent_switch, f"iniu{input_idx}_rsp"))
+            return node
 
-        # Buffer + async bridge (sw2 -> buffer -> async slv)
-        self.dti_buffer = DtiLinkBufReqNode(id="dti_buffer", cfg=dti_link_buf_config)
-        connect(self.dti_buffer.clk_noc, self.clk_noc)
-        connect(self.dti_buffer.rst_noc_n, self.rst_noc_n)
+        for input_idx, leaf_name in enumerate(("npu_ss3", "npu_ss4", "npu_ss2")):
+            add_iniu_leaf(leaf_name, self.bottom_merge1, input_idx)
 
-        self.async_bridge = DtiReqRspAsyncBridgeNode(id="dti_req_rsp_async_bridge", cfg=dti_req_rsp_async_config)
-        connect(self.async_bridge.clk_src, self.clk_noc)
-        connect(self.async_bridge.rst_src_n, self.rst_noc_n)
-        connect(self.async_bridge.clk_dst, self.clk_noc_up)
-        connect(self.async_bridge.rst_dst_n, self.rst_noc_up_n)
+        for input_idx, leaf_name in enumerate(("ufs_ss", "pcie_eth_ss", "gpu_ss0")):
+            add_iniu_leaf(leaf_name, self.bottom_merge0, input_idx)
 
-        # INIU nodes for sw0 (dsp0~5) — shared config per SS type
-        for i in range(6):
-            node = DtiIniuNode(id=f"dsp{i}_iniu_node", sys_cfg=dsp_iniu_sys_config, top_cfg=iniu_top_config, node_name=f"dsp{i}")
-            setattr(self, f"dsp{i}_iniu", node)
-            # clk_noc auto-propagates (is_global)
-            # rst_noc_n auto-propagates (is_global)
-            connect(node.top_req, getattr(self.sw0, f"iniu{i}_req"))
-            connect(node.top_rsp, getattr(self.sw0, f"iniu{i}_rsp"))
+        for input_idx, leaf_name in enumerate(("dspss0", "dspss1", "dspss2", "dspss3", "dspss4", "dspss5")):
+            add_iniu_leaf(leaf_name, self.dsp_merge0, input_idx)
 
-        # INIU nodes for sw1 (cpu, pcie_eth, ufs, camera, mipi)
-        self.cpu_iniu    = DtiIniuNode(id="cpu_iniu_node",    sys_cfg=cpu_iniu_sys_config,    top_cfg=iniu_top_config, node_name="cpu")
-        self.pcie_iniu   = DtiIniuNode(id="pcie_iniu_node",   sys_cfg=pcie_eth_iniu_sys_config, top_cfg=iniu_top_config, node_name="pcie_eth")
-        self.ufs_iniu    = DtiIniuNode(id="ufs_iniu_node",    sys_cfg=usb_ufs_iniu_sys_config, top_cfg=iniu_top_config, node_name="usb_ufs")
-        self.camera_iniu = DtiIniuNode(id="camera_iniu_node", sys_cfg=camera_iniu_sys_config,   top_cfg=iniu_top_config, node_name="camera")
-        self.mipi_iniu   = DtiIniuNode(id="mipi_iniu_node",   sys_cfg=mipi_iniu_sys_config,     top_cfg=iniu_top_config, node_name="mipi")
+        for input_idx, leaf_name in enumerate(("camera_ss", "mipi_ss", "gpu_ss1", "usb_dp_ss", "display_ss", "vpu_ss")):
+            add_iniu_leaf(leaf_name, self.tr_merge0, input_idx)
 
-        for idx, iniu in enumerate([self.cpu_iniu, self.pcie_iniu, self.ufs_iniu,
-                                     self.camera_iniu, self.mipi_iniu]):
-            # clk_noc auto-propagates (is_global)
-            # rst_noc_n auto-propagates (is_global)
-            connect(iniu.top_req, getattr(self.sw1, f"iniu{idx}_req"))
-            connect(iniu.top_rsp, getattr(self.sw1, f"iniu{idx}_rsp"))
+        add_iniu_leaf("peri_ss", self.tl_merge0, 0)
+        safe_connect(self, self.bottom_merge0.tniu_req, self.tl_merge0.iniu1_req)
+        safe_connect(self, self.bottom_merge0.tniu_rsp, self.tl_merge0.iniu1_rsp)
+        safe_connect(self, self.dsp_merge0.tniu_req, self.tl_merge0.iniu2_req)
+        safe_connect(self, self.dsp_merge0.tniu_rsp, self.tl_merge0.iniu2_rsp)
+        safe_connect(self, self.tr_merge0.tniu_req, self.tl_merge0.iniu3_req)
+        safe_connect(self, self.tr_merge0.tniu_rsp, self.tl_merge0.iniu3_rsp)
 
-        # INIU nodes for sw2 (gpu0, gpu1, dp, display)
-        self.gpu0_iniu    = DtiIniuNode(id="gpu0_iniu_node",    sys_cfg=gpu_iniu_sys_config,     top_cfg=iniu_top_config, node_name="gpu0")
-        self.gpu1_iniu    = DtiIniuNode(id="gpu1_iniu_node",    sys_cfg=gpu_iniu_sys_config,     top_cfg=iniu_top_config, node_name="gpu1")
-        self.dp_iniu      = DtiIniuNode(id="dp_iniu_node",      sys_cfg=dp_iniu_sys_config,      top_cfg=iniu_top_config, node_name="dp")
-        self.display_iniu = DtiIniuNode(id="display_iniu_node", sys_cfg=display_iniu_sys_config, top_cfg=iniu_top_config, node_name="display")
+        add_iniu_leaf("npu_ss0", self.top_spine, 0)
+        safe_connect(self, self.bottom_merge1.tniu_req, self.top_spine.iniu1_req)
+        safe_connect(self, self.bottom_merge1.tniu_rsp, self.top_spine.iniu1_rsp)
+        add_iniu_leaf("npu_ss1", self.top_spine, 2)
 
-        for idx, iniu in enumerate([self.gpu0_iniu, self.gpu1_iniu,
-                                     self.dp_iniu, self.display_iniu]):
-            # clk_noc auto-propagates (is_global)
-            # rst_noc_n auto-propagates (is_global)
-            connect(iniu.top_req, getattr(self.sw2, f"iniu{idx}_req"))
-            connect(iniu.top_rsp, getattr(self.sw2, f"iniu{idx}_rsp"))
-
-        # Inter-switch wiring
-        connect(self.sw0.tniu_req, self.sw3.iniu0_req)
-        connect(self.sw0.tniu_rsp, self.sw3.iniu0_rsp)
-        connect(self.sw1.tniu_req, self.sw3.iniu1_req)
-        connect(self.sw1.tniu_rsp, self.sw3.iniu1_rsp)
-
-        # sw2 → buffer → async bridge slv (unidirectional, request path)
-        connect(self.sw2.tniu_req, self.dti_buffer.s_req)
-        connect(self.dti_buffer.m_req, self.async_bridge.s_chan)
-
-        # async bridge mst → sw3 ch2
-        connect(self.async_bridge.m_chan, self.sw3.iniu2_req)
-        # RSP return: sw3 ch2 → sw2 TNIU slave side (response routing)
-        connect(self.sw3.iniu2_rsp, self.sw2.tniu_rsp)
-
-        # sw3 -> tcu_tniu
-        self.tcu_tniu = DtiTniuNode(id="tcu_tniu_node", sys_cfg=tcu_tniu_sys_config, top_cfg=tniu_top_config, node_name="sys_tcu_tniu")
-        # clk_noc_up auto-propagates (is_global)
-        # rst_noc_up_n auto-propagates (is_global)
-        connect(self.sw3.tniu_req, self.tcu_tniu.top_req_data)
-        connect(self.tcu_tniu.top_rsp, self.sw3.tniu_rsp)
+        self.cpu_ss_tniu0 = DtiTniuNode(
+            id="cpu_ss_tniu0_node",
+            sys_cfg=cpu_tniu_sys_config,
+            top_cfg=tniu_top_config,
+            node_name="cpu_ss_tniu0",
+            clk_name="clk_noc",
+            rst_name="rst_noc_n",
+        )
+        self.cpu_ss_tniu1 = DtiTniuNode(
+            id="cpu_ss_tniu1_node",
+            sys_cfg=cpu_tniu_sys_config,
+            top_cfg=tniu_top_config,
+            node_name="cpu_ss_tniu1",
+            clk_name="clk_noc",
+            rst_name="rst_noc_n",
+        )
+        safe_connect(self, self.tl_merge0.tniu_req, self.cpu_ss_tniu0.top_req_data)
+        safe_connect(self, self.cpu_ss_tniu0.top_rsp, self.tl_merge0.tniu_rsp)
+        safe_connect(self, self.top_spine.tniu_req, self.cpu_ss_tniu1.top_req_data)
+        safe_connect(self, self.cpu_ss_tniu1.top_rsp, self.top_spine.tniu_rsp)
 
         self.expose_unconnected_interfaces()
