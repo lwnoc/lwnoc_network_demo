@@ -1,0 +1,5 @@
+$MCUSS_TNIU_NOC_SIDE_OUT_DIR/mcuss_tniu_noc_side_macros_054e6e1ffa.sv
+$MCUSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
+$MCUSS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$MCUSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
+$MCUSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

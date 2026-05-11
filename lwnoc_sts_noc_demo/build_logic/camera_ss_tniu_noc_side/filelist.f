@@ -1,0 +1,5 @@
+$CAMERASS_TNIU_NOC_SIDE_OUT_DIR/camera_ss_tniu_noc_side_macros_09e23a4e2d.sv
+$CAMERASS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
+$CAMERASS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$CAMERASS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
+$CAMERASS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

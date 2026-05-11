@@ -1,0 +1,5 @@
+$UFSSS_TNIU_NOC_SIDE_OUT_DIR/ufsss_tniu_noc_side_macros_32d5093a27.sv
+$UFSSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
+$UFSSS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$UFSSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
+$UFSSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

@@ -1,0 +1,5 @@
+$NOCSS_TNIU_NOC_SIDE_OUT_DIR/nocss_tniu_noc_side_macros_09de6ceaad.sv
+$NOCSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
+$NOCSS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$NOCSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
+$NOCSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

@@ -1,0 +1,253 @@
+module sts_iniu_rd_channel
+import lwnoc_sts_pack::*;
+#(
+    parameter integer unsigned ADDR_MAP_ENTRY_NUM = 1,
+    parameter logic [ADDR_MAP_ENTRY_NUM*AXI_ADDR_WIDTH-1:0] ADDR_MAP_BASE_TABLE = '0,
+    parameter logic [ADDR_MAP_ENTRY_NUM*AXI_ADDR_WIDTH-1:0] ADDR_MAP_MASK_TABLE = '0,
+    parameter logic [ADDR_MAP_ENTRY_NUM*TGT_ID_WIDTH-1:0]   ADDR_MAP_TGT_ID_TABLE = '0,
+    parameter logic [TGT_ID_WIDTH-1:0]                      ADDR_MAP_DEFAULT_TGT_ID = '0
+)
+(
+    input   logic                       clk    ,
+    input   logic                       rst_n  ,
+    input   logic [SRC_ID_WIDTH-1:0]    node_id,
+
+    input   logic                       upstrm_ar_vld,
+    output  logic                       upstrm_ar_rdy,
+    input   sts_iniu_axi_ar_chnl        upstrm_ar_pld,
+
+    output  logic                       upstrm_r_vld,
+    input   logic                       upstrm_r_rdy,
+    output  sts_iniu_axi_r_chnl         upstrm_r_pld,
+
+    output  logic                       out_req_vld,
+    input   logic                       out_req_rdy,
+    output  sts_req_typ                 out_req_pld,
+
+    input   logic                       in_rsp_vld,
+    output  logic                       in_rsp_rdy,
+    input   sts_rsp_typ                 in_rsp_pld,
+    // ASIL-D addr decoder lock-step error
+    output  logic                       addr_map_rd_err
+);
+
+logic                   ar_in_hold_vld;
+sts_iniu_axi_ar_chnl    ar_in_hold_pld;
+sts_iniu_axi_ar_chnl    ar_in_sel_pld;
+
+logic                   fifo_in_ar_vld;
+logic                   fifo_in_ar_rdy;
+sts_req_typ             fifo_in_ar_pld;
+
+logic                   fifo_out_ar_vld;
+logic                   fifo_out_ar_rdy;
+sts_req_typ             fifo_out_ar_pld;
+logic                   ar_stage_seen;
+logic                   ar_hold_vld;
+sts_req_typ             ar_hold_pld;
+
+logic                   fifo_in_rsp_vld;
+logic                   fifo_in_rsp_rdy;
+sts_iniu_axi_r_chnl     fifo_in_rsp_pld;
+logic [TGT_ID_WIDTH-1:0] mapped_ar_tgt_id;
+logic                    mapped_ar_tgt_hit;
+logic [TGT_ID_WIDTH-1:0] mapped_ar_tgt_id_shd;
+logic                    mapped_ar_tgt_hit_shd;
+logic [AXI_ARID_WIDTH-1:0]              check_id;
+logic [AXI_ARID_WIDTH-1:0]              alloc_id;
+logic                                    alloc_vld;
+logic                                    alloc_rdy;
+logic                                    complete_rdy;
+logic                                    retire_vld;
+logic                                    retire_rdy;
+logic [$clog2(STS_INIU_OT_TOTAL)-1:0]   rd_id_alloc;
+logic [$clog2(STS_INIU_OT_TOTAL)-1:0]   complete_idx;
+logic [STS_RSP_WIDTH-1:0]               retire_rsp_pld_flat;
+sts_rsp_typ                             retire_rsp_pld;
+
+sts_iniu_addr_map #(
+    .ENTRY_NUM      (ADDR_MAP_ENTRY_NUM),
+    .ADDR_BASE_TABLE(ADDR_MAP_BASE_TABLE),
+    .ADDR_MASK_TABLE(ADDR_MAP_MASK_TABLE),
+    .TGT_ID_TABLE   (ADDR_MAP_TGT_ID_TABLE),
+    .DEFAULT_TGT_ID (ADDR_MAP_DEFAULT_TGT_ID)
+) u_ar_addr_map (
+    .in_addr    (ar_in_sel_pld.araddr),
+    .out_tgt_id (mapped_ar_tgt_id   ),
+    .out_hit    (mapped_ar_tgt_hit  )
+);
+// Shadow addr_map for ASIL-D lock-step
+sts_iniu_addr_map #(
+    .ENTRY_NUM      (ADDR_MAP_ENTRY_NUM),
+    .ADDR_BASE_TABLE(ADDR_MAP_BASE_TABLE),
+    .ADDR_MASK_TABLE(ADDR_MAP_MASK_TABLE),
+    .TGT_ID_TABLE   (ADDR_MAP_TGT_ID_TABLE),
+    .DEFAULT_TGT_ID (ADDR_MAP_DEFAULT_TGT_ID)
+) u_ar_addr_map_shadow (
+    .in_addr    (ar_in_sel_pld.araddr),
+    .out_tgt_id (mapped_ar_tgt_id_shd ),
+    .out_hit    (mapped_ar_tgt_hit_shd)
+);
+// Lock-step comparator
+always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        addr_map_rd_err <= 1'b0;
+    else if ({mapped_ar_tgt_id, mapped_ar_tgt_hit} != {mapped_ar_tgt_id_shd, mapped_ar_tgt_hit_shd})
+        addr_map_rd_err <= 1'b1;
+end
+
+assign ar_in_sel_pld  = ar_in_hold_vld ? ar_in_hold_pld : upstrm_ar_pld;
+assign fifo_in_ar_vld = ar_in_hold_vld || upstrm_ar_vld;
+assign upstrm_ar_rdy  = ~ar_in_hold_vld && fifo_in_ar_rdy;
+
+always_comb begin
+    fifo_in_ar_pld.cmn.src_id = node_id;
+    fifo_in_ar_pld.cmn.txn_id = ar_in_sel_pld.arid;
+    fifo_in_ar_pld.cmn.tgt_id = mapped_ar_tgt_id;
+    fifo_in_ar_pld.cmn.opcode = cfgOpcode_RdReq;
+    fifo_in_ar_pld.cmn.qos    = ar_in_sel_pld.arqos;
+
+    fifo_in_ar_pld.req.addr   = ar_in_sel_pld.araddr;
+    fifo_in_ar_pld.req.burst  = ar_in_sel_pld.arburst;
+    fifo_in_ar_pld.req.size   = ar_in_sel_pld.arsize;
+    fifo_in_ar_pld.req.len    = ar_in_sel_pld.arlen;
+    fifo_in_ar_pld.req.lock   = ar_in_sel_pld.arlock;
+    fifo_in_ar_pld.req.user   = ar_in_sel_pld.aruser;
+    fifo_in_ar_pld.req.data   = 'b0;
+    fifo_in_ar_pld.req.strb   = 'b0;
+    fifo_in_ar_pld.req.last   = 1'b1;
+end
+
+always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        ar_in_hold_vld   <= 1'b0;
+        ar_in_hold_pld   <= '0;
+    end else begin
+        if (ar_in_hold_vld && fifo_in_ar_rdy) begin
+            ar_in_hold_vld <= 1'b0;
+        end else if (~ar_in_hold_vld && upstrm_ar_vld && ~fifo_in_ar_rdy) begin
+            ar_in_hold_vld <= 1'b1;
+            ar_in_hold_pld <= upstrm_ar_pld;
+        end
+    end
+end
+
+fcip_sync_fifo_reg #(
+    .FIFO_DEPTH (STS_INIU_REQ_FIFO_DEPTH),
+    .FIFO_WIDTH ($bits(sts_req_typ)      ),
+    .FORWARD_EN (0                       )
+) u_ar_fifo (
+    .clk            (clk                ),
+    .rst_n          (rst_n              ),
+    .stall          (1'b0               ),
+    .clear          (1'b0               ),
+    .idle           (                   ),
+    .write_req_vld  (fifo_in_ar_vld     ),
+    .write_req_pld  (fifo_in_ar_pld     ),
+    .write_req_rdy  (fifo_in_ar_rdy     ),
+    .read_resp_vld  (fifo_out_ar_vld    ),
+    .read_resp_pld  (fifo_out_ar_pld    ),
+    .read_resp_rdy  (fifo_out_ar_rdy    ),
+    .almost_full    (                   ),
+    .almost_empty   (                   ),
+    .empty          (                   ),
+    .full           (                   )
+);
+
+fcip_sync_fifo_reg #(
+    .FIFO_DEPTH (STS_INIU_REQ_FIFO_DEPTH          ),
+    .FIFO_WIDTH ($bits(sts_iniu_axi_r_chnl)       ),
+    .FORWARD_EN (0                                )
+) u_r_fifo (
+    .clk            (clk                ),
+    .rst_n          (rst_n              ),
+    .stall          (1'b0               ),
+    .clear          (1'b0               ),
+    .idle           (                   ),
+    .write_req_vld  (fifo_in_rsp_vld    ),
+    .write_req_pld  (fifo_in_rsp_pld    ),
+    .write_req_rdy  (fifo_in_rsp_rdy    ),
+    .read_resp_vld  (upstrm_r_vld       ),
+    .read_resp_pld  (upstrm_r_pld       ),
+    .read_resp_rdy  (upstrm_r_rdy       ),
+    .almost_full    (                   ),
+    .almost_empty   (                   ),
+    .empty          (                   ),
+    .full           (                   )
+);
+
+assign retire_rsp_pld = sts_rsp_typ'(retire_rsp_pld_flat);
+assign fifo_in_rsp_vld = retire_vld;
+assign retire_rdy      = fifo_in_rsp_rdy;
+assign in_rsp_rdy      = complete_rdy;
+
+always_comb begin
+    fifo_in_rsp_pld = 'b0;
+    fifo_in_rsp_pld.rid    = check_id;
+    fifo_in_rsp_pld.rdata  = retire_rsp_pld.rsp.data;
+    fifo_in_rsp_pld.rresp  = retire_rsp_pld.rsp.resp;
+    fifo_in_rsp_pld.rlast  = retire_rsp_pld.rsp.last;
+end
+
+
+lwring_id_remap #(
+    .DEPTH    (STS_INIU_OT_TOTAL),
+    .ID_WIDTH (AXI_ARID_WIDTH),
+    .PLD_WIDTH(STS_RSP_WIDTH)
+) u_r_id_remap (
+    .clk           (clk               ),
+    .rst_n         (rst_n             ),
+    .alloc_vld     (alloc_vld         ),
+    .alloc_rdy     (alloc_rdy         ),
+    .alloc_id      (alloc_id          ),
+    .alloc_remap_id(rd_id_alloc       ),
+    .complete_vld  (in_rsp_vld        ),
+    .complete_rdy  (complete_rdy      ),
+    .complete_idx  (complete_idx      ),
+    .complete_pld  (in_rsp_pld        ),
+    .retire_vld    (retire_vld        ),
+    .retire_rdy    (retire_rdy        ),
+    .retire_id     (check_id          ),
+    .retire_pld    (retire_rsp_pld_flat)
+);
+
+assign alloc_vld = ar_hold_vld && out_req_rdy && alloc_rdy;
+assign alloc_id  = ar_hold_pld.cmn.txn_id;
+
+assign fifo_out_ar_rdy = fifo_out_ar_vld && ar_stage_seen && ~ar_hold_vld;
+
+assign complete_idx = in_rsp_pld.cmn.txn_id;
+
+assign out_req_vld = ar_hold_vld && alloc_rdy;
+
+always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        ar_stage_seen <= 1'b0;
+        ar_hold_vld   <= 1'b0;
+        ar_hold_pld   <= '0;
+    end else begin
+        if (ar_stage_seen && fifo_out_ar_rdy) begin
+            ar_stage_seen <= 1'b0;
+            ar_hold_vld   <= 1'b1;
+        end else if (out_req_vld && out_req_rdy) begin
+            ar_hold_vld <= 1'b0;
+        end else if (~ar_hold_vld && ~ar_stage_seen && fifo_out_ar_vld) begin
+            ar_stage_seen <= 1'b1;
+            ar_hold_pld   <= fifo_out_ar_pld;
+        end else if (~fifo_out_ar_vld) begin
+            ar_stage_seen <= 1'b0;
+        end
+    end
+end
+
+always_comb begin : out_req_pld_map
+    out_req_pld = 'b0;
+    out_req_pld.cmn        = ar_hold_pld.cmn;
+    out_req_pld.cmn.txn_id = rd_id_alloc; //remaped txn id
+    out_req_pld.req        = ar_hold_pld.req;
+end
+
+
+
+
+endmodule

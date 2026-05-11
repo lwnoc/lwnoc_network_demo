@@ -10,6 +10,12 @@ VERDI         := /home/lgzhu/software/verdi2016/bin/verdi
 VERDI_PLI_TAB := /home/lgzhu/software/verdi2016/share/PLI/VCS/linux64/novas.tab
 VERDI_PLI_LIB := /home/lgzhu/software/verdi2016/share/PLI/VCS/linux64/pli.a
 FCIP_DIR      := $(STS_NOC_DIR)/fcip
+COMMON_FCIP_DIR := $(realpath $(DEMO_DIR)/../subs/fcip)
+STS_SOC_PUBLISH_ENV_MK := $(DEMO_DIR)/filelists/sts_soc_publish_env.mk
+
+ifneq ($(wildcard $(STS_SOC_PUBLISH_ENV_MK)),)
+include $(STS_SOC_PUBLISH_ENV_MK)
+endif
 
 export STS_NOC_DIR
 export STS_NOC_DEMO_DIR
@@ -39,6 +45,17 @@ BUILD_DIR    := $(SIM_DIR)/build
 SIMV         := $(BUILD_DIR)/simv
 COMPILE_LOG  := $(BUILD_DIR)/compile.log
 TB_SV        := $(SIM_DIR)/tb_sts_logic_topo_1i4t.sv
+AON_ADDR_MAP_TB_SV := $(SIM_DIR)/tb_sts_aon_addr_map.sv
+AON_ADDR_MAP_BUILD_DIR := $(BUILD_DIR)/aon_addr_map
+AON_ADDR_MAP_SIMV := $(AON_ADDR_MAP_BUILD_DIR)/simv
+AON_ADDR_MAP_COMPILE_LOG := $(AON_ADDR_MAP_BUILD_DIR)/compile.log
+AON_ADDR_MAP_RUN_LOG := $(AON_ADDR_MAP_BUILD_DIR)/run.log
+AON_INIU_MACROS := $(firstword $(wildcard $(AON_SS_INIU_SYS_OUT_DIR)/aon_ss_iniu_sys_macros_*.sv))
+AON_AXI_ACCESS_TB_SV := $(SIM_DIR)/tb_sts_aon_axi_access.sv
+AON_AXI_ACCESS_BUILD_DIR := $(BUILD_DIR)/aon_axi_access
+AON_AXI_ACCESS_SIMV := $(AON_AXI_ACCESS_BUILD_DIR)/simv
+AON_AXI_ACCESS_COMPILE_LOG := $(AON_AXI_ACCESS_BUILD_DIR)/compile.log
+AON_AXI_ACCESS_RUN_LOG := $(AON_AXI_ACCESS_BUILD_DIR)/run.log
 COMMON_DEPS_F := $(DEMO_DIR)/filelists/sts_common_dep.f
 CHECK_COMPILE_LOG := $(SIM_DIR)/check_compile_log.py
 # Top-level DUT filelist published under filelists/
@@ -57,7 +74,7 @@ VCS_FLAGS := -full64 \
              +define+ASIC_SIM \
              -P $(VERDI_PLI_TAB) $(VERDI_PLI_LIB)
 
-.PHONY: all compile run_test regression sim_wave wave clean
+.PHONY: all compile run_test regression compile_aon_addr_map run_aon_addr_map compile_aon_axi_access run_aon_axi_access sim_wave wave clean
 
 all: compile regression
 
@@ -85,6 +102,60 @@ run_test: $(SIMV)
 	@if [ -z "$(TESTCASE)" ]; then echo "TESTCASE is required"; exit 1; fi
 	mkdir -p $(BUILD_DIR)/logs
 	cd $(BUILD_DIR) && $(SIMV) +TESTCASE=$(TESTCASE) $(SIM_ARGS) -l logs/$(TESTCASE).log
+
+compile_aon_addr_map:
+	@if [ -z "$(AON_INIU_MACROS)" ]; then \
+	    echo "AON INIU generated macro file is missing. Run python3 $(DEMO_DIR)/gen_sts_soc_topo.py first."; \
+	    exit 1; \
+	fi
+	mkdir -p $(AON_ADDR_MAP_BUILD_DIR)
+	cd $(SIM_DIR) && $(VCS) $(VCS_FLAGS) \
+	    $(AON_INIU_MACROS) \
+	    $(STS_INIU)/rtl/iniu/sts_iniu_define.sv \
+	    $(STS_INIU)/rtl/common/lwnoc_sts_pack.sv \
+	    $(STS_INIU)/rtl/common/sts_iniu_addr_map.sv \
+	    $(AON_ADDR_MAP_TB_SV) \
+	    -top tb_sts_aon_addr_map \
+	    -Mdir=$(AON_ADDR_MAP_BUILD_DIR)/csrc \
+	    -o $(AON_ADDR_MAP_SIMV) \
+	    -l $(AON_ADDR_MAP_COMPILE_LOG)
+
+run_aon_addr_map: compile_aon_addr_map
+	cd $(AON_ADDR_MAP_BUILD_DIR) && $(AON_ADDR_MAP_SIMV) -l $(AON_ADDR_MAP_RUN_LOG)
+
+compile_aon_axi_access:
+	@if [ -z "$(AON_INIU_MACROS)" ]; then \
+	    echo "AON INIU generated macro file is missing. Run python3 $(DEMO_DIR)/gen_sts_soc_topo.py first."; \
+	    exit 1; \
+	fi
+	@if [ ! -d "$(COMMON_FCIP_DIR)" ]; then \
+	    echo "Common FCIP directory is missing: $(COMMON_FCIP_DIR)"; \
+	    exit 1; \
+	fi
+	mkdir -p $(AON_AXI_ACCESS_BUILD_DIR)
+	cd $(SIM_DIR) && FCIP_DIR=$(COMMON_FCIP_DIR) $(VCS) $(VCS_FLAGS) \
+	    -f $(COMMON_FCIP_DIR)/vc/arbiter.f \
+	    -f $(COMMON_FCIP_DIR)/vc/basic.f \
+	    -f $(COMMON_FCIP_DIR)/vc/regslice.f \
+	    -f $(COMMON_FCIP_DIR)/vc/sync_fifo.f \
+	    $(AON_INIU_MACROS) \
+	    $(STS_INIU)/rtl/iniu/sts_iniu_define.sv \
+	    $(STS_INIU)/rtl/common/lwnoc_sts_pack.sv \
+	    $(STS_INIU)/rtl/common/sts_iniu_addr_map.sv \
+	    $(STS_INIU)/rtl/common/lwring_id_remap_entry.sv \
+	    $(STS_INIU)/rtl/common/lwring_id_remap.sv \
+	    $(STS_INIU)/rtl/iniu/sts_iniu_axi_bundle.sv \
+	    $(STS_INIU)/rtl/iniu/sts_iniu_wr_channel.sv \
+	    $(STS_INIU)/rtl/iniu/sts_iniu_rd_channel.sv \
+	    $(STS_INIU)/rtl/iniu/sts_iniu_axi_iniu.sv \
+	    $(AON_AXI_ACCESS_TB_SV) \
+	    -top tb_sts_aon_axi_access \
+	    -Mdir=$(AON_AXI_ACCESS_BUILD_DIR)/csrc \
+	    -o $(AON_AXI_ACCESS_SIMV) \
+	    -l $(AON_AXI_ACCESS_COMPILE_LOG)
+
+run_aon_axi_access: compile_aon_axi_access
+	cd $(AON_AXI_ACCESS_BUILD_DIR) && $(AON_AXI_ACCESS_SIMV) -l $(AON_AXI_ACCESS_RUN_LOG)
 
 regression: $(SIMV)
 	mkdir -p $(BUILD_DIR)/logs

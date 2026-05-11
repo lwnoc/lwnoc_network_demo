@@ -1,0 +1,5 @@
+$AON_LOCAL_TNIU_NOC_SIDE_OUT_DIR/safetyss_aon_local_tniu_noc_side_macros_36d221a8b5.sv
+$AON_LOCAL_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
+$AON_LOCAL_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$AON_LOCAL_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
+$AON_LOCAL_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

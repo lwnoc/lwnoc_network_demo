@@ -1,17 +1,60 @@
-soc sts noc topo:
-aonss iniu->dec0 
-dec0->vpuss tniu
-dec0->dec1 
-dec1->camerass tniu
-dec1->async bridge slv
-async bridge mst->dec2
-dec2->dspss0
-dec2->dspss1
-dec2->dspss2
-dec2->dspss3
-dec2->dspss4
-dec2->dspss5
+soc sts noc topo review
 
-so there are two hardens:
-from aonss to async bridge slv,all node on top(means except sys side) are one hardens
-from async bridge mst to all dspss, all node on top are in another harden
+section a: image-derived full-soc view (from the attached topology figure)
+
+canonical names used for this review:
+- MIPI SS -> MIPISS
+- Peri SS -> PERISS
+- AON SS -> SafetySS(Aon)
+
+what is extracted from the image:
+- image root-side NIU entry is at AON SS / SafetySS(Aon)
+- the figure shows 6 clear major fanout / dec nodes
+
+proposed formal hierarchical dec names for review:
+- sts_dec_l0_root: root fanout under AON SS, feeding the top-right cluster and the two downstream dec branches
+- sts_dec_l1_upper_ctrl: upper-middle fanout feeding Camera SS / MCU SS / PERISS / NPU SS0 / Debug SS / CPU SS / sts_dec_l2_left_ddr
+- sts_dec_l2_left_ddr: left-middle fanout that feeds DDR0..DDR5
+- sts_dec_l1_right_upper: right-middle upper fanout feeding DSP SS0..2 / DDR SS6..8 / sts_dec_l2_right_lower
+- sts_dec_l2_right_lower: right-middle lower fanout feeding DSP SS3..5 / DDR SS9..11 / sts_dec_l3_lower_mid
+- sts_dec_l3_lower_mid: lower-middle fanout feeding NPU SS2..4 / GPU SS0 / UFS SS / PCIE_ETH SS
+
+image-derived req-direction dec / iniu / tniu / dec connectivity:
+- SafetySS(Aon) root-side entry -> sts_dec_l0_root
+- sts_dec_l0_root -> NPU SS1
+- sts_dec_l0_root -> Display SS
+- sts_dec_l0_root -> VPU SS
+- sts_dec_l0_root -> USB_DP SS
+- sts_dec_l0_root -> MIPISS
+- sts_dec_l0_root -> GPU1 SS
+- sts_dec_l0_root -> Noc SS
+- sts_dec_l0_root -> sts_dec_l1_upper_ctrl
+- sts_dec_l0_root -> sts_dec_l1_right_upper
+- sts_dec_l1_upper_ctrl -> Camera SS
+- sts_dec_l1_upper_ctrl -> MCU SS
+- sts_dec_l1_upper_ctrl -> PERISS
+- sts_dec_l1_upper_ctrl -> NPU SS0
+- sts_dec_l1_upper_ctrl -> Debug SS
+- sts_dec_l1_upper_ctrl -> CPU SS
+- sts_dec_l1_upper_ctrl -> sts_dec_l2_left_ddr
+- sts_dec_l2_left_ddr -> DDR0 / DDR1 / DDR2 / DDR3 / DDR4 / DDR5
+- sts_dec_l1_right_upper -> DSP SS0 / DSP SS1 / DSP SS2
+- sts_dec_l1_right_upper -> DDR SS6 / DDR SS7 / DDR SS8
+- sts_dec_l1_right_upper -> sts_dec_l2_right_lower
+- sts_dec_l2_right_lower -> DSP SS3 / DSP SS4 / DSP SS5
+- sts_dec_l2_right_lower -> DDR SS9 / DDR SS10 / DDR SS11
+- sts_dec_l2_right_lower -> sts_dec_l3_lower_mid
+- sts_dec_l3_lower_mid -> NPU SS2
+- sts_dec_l3_lower_mid -> NPU SS3
+- sts_dec_l3_lower_mid -> NPU SS4
+- sts_dec_l3_lower_mid -> GPU SS0
+- sts_dec_l3_lower_mid -> UFS SS
+- sts_dec_l3_lower_mid -> PCIE_ETH SS
+
+image-derived tree summary in one line:
+- SafetySS(Aon) -> sts_dec_l0_root -> {NPU SS1, Display SS, VPU SS, USB_DP SS, MIPISS, GPU1 SS, Noc SS, sts_dec_l1_upper_ctrl, sts_dec_l1_right_upper}
+- sts_dec_l1_upper_ctrl -> {Camera SS, MCU SS, PERISS, NPU SS0, Debug SS, CPU SS, sts_dec_l2_left_ddr}
+- sts_dec_l2_left_ddr -> {DDR0..DDR5}
+- sts_dec_l1_right_upper -> {DSP SS0, DSP SS1, DSP SS2, DDR SS6, DDR SS7, DDR SS8, sts_dec_l2_right_lower}
+- sts_dec_l2_right_lower -> {DSP SS3, DSP SS4, DSP SS5, DDR SS9, DDR SS10, DDR SS11, sts_dec_l3_lower_mid}
+- sts_dec_l3_lower_mid -> {NPU SS2, NPU SS3, NPU SS4, GPU SS0, UFS SS, PCIE_ETH SS}

@@ -1,0 +1,5 @@
+$GPUSS1_TNIU_NOC_SIDE_OUT_DIR/gpuss1_tniu_noc_side_macros_df733f9d3f.sv
+$GPUSS1_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
+$GPUSS1_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$GPUSS1_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
+$GPUSS1_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

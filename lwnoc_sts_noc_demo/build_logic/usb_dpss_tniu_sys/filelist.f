@@ -1,0 +1,8 @@
+$USB_DPSS_TNIU_SYS_OUT_DIR/usb_dpss_tniu_sys_macros_be18861587.sv
+$USB_DPSS_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
+$USB_DPSS_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
+$USB_DPSS_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
+$USB_DPSS_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
+$USB_DPSS_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
+$USB_DPSS_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
+$USB_DPSS_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv

@@ -1,0 +1,5 @@
+$DEBUGSS_TNIU_NOC_SIDE_OUT_DIR/debug_ss_tniu_noc_side_macros_abf9c7b70f.sv
+$DEBUGSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
+$DEBUGSS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$DEBUGSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
+$DEBUGSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv
