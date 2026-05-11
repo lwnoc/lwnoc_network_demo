@@ -1,71 +1,42 @@
 """TemplateIPConfig definitions for the SoC-scale interrupt ring NoC demo."""
 
-import os, subprocess
+import os
 import shutil
 import sys
 from pathlib import Path
 
+from _project_env import LWNOC_TOPO_ROOT, REPO_ROOT, THIS_DIR
 
-THIS_DIR = Path(__file__).resolve().parent
-REPO_ROOT = THIS_DIR.parents[1]
-LWNOC_TOPO_ROOT = REPO_ROOT / "lwnoc_topo"
-DEFAULT_INTR_NOC_ROOT = REPO_ROOT / "subs" / "lwnoc_interrupt_noc"
-DEFAULT_RING_NETWORK_ROOT = REPO_ROOT / "subs" / "lwnoc_ring_network" / "de" / "rtl"
-SUBS_DIR = REPO_ROOT / "subs"
+# ═══════════════════════════════════════════════════════════════════════════════
+# PATHS — edit these to match your environment, or leave ""
+#         and set the corresponding env var instead.
+# ═══════════════════════════════════════════════════════════════════════════════
+_HARDCODED_PATHS = {
+    "INTR_NOC_DIR":            "",   # e.g. "/home/lgzhu/dev/noc_work/lwnoc_interrupt_noc"
+    "INTR_NOC_NETWORK_DIR":    "",
+    "FCIP_DIR":                "",
+    "LWNOC_LOWPOWER_COMPONENT": "",
+}
 
 
-def _resolve_env_path(name: str, csh_path: Path, bash_path: Path, default: Path) -> Path:
-    """Resolve an env-dependent path with three-tier fallback:
-    1. Shell env (csh or bash) — already in os.environ
-    2. Source setup_env.csh → echo $name
-    3. Source setup_env.sh → echo $name
-    4. Python-side default
-    """
+def _resolve_path(name: str) -> Path:
+    """Use hardcoded path if set, else env var, else error."""
+    hard = _HARDCODED_PATHS.get(name, "").strip()
+    if hard:
+        return Path(hard)
     val = os.environ.get(name)
     if val:
-        return Path(val).expanduser()
-
-    # Try csh setup file
-    if csh_path.exists():
-        try:
-            r = subprocess.run(
-                ["csh", "-c", f'source "{csh_path}" >& /dev/null; if ( $?{name} ) printf "%s" "${name}"'],
-                capture_output=True, text=True, timeout=10,
-            )
-            val = r.stdout.strip()
-            if val:
-                return Path(val).expanduser()
-        except Exception:
-            pass
-
-    # Try bash setup file
-    if bash_path.exists():
-        try:
-            r = subprocess.run(
-                ["bash", "-c", f'source "{bash_path}" 2>/dev/null; printf "%s" "${{{name}}}"'],
-                capture_output=True, text=True, timeout=10,
-            )
-            val = r.stdout.strip()
-            if val:
-                return Path(val).expanduser()
-        except Exception:
-            pass
-
-    return Path(str(default)).expanduser()
+        return Path(val)
+    print(f"[ERROR] ${name} is not set in your shell or in _HARDCODED_PATHS.")
+    print(f"  bash:  export {name}=<absolute/path>")
+    print(f"  csh:   setenv {name} <absolute/path>")
+    raise SystemExit(f"Missing path for: {name}")
 
 
-INTR_NOC_ROOT = _resolve_env_path("INTR_NOC_DIR",
-    DEFAULT_INTR_NOC_ROOT / "setup_env.csh", DEFAULT_INTR_NOC_ROOT / "setup_env.sh",
-    DEFAULT_INTR_NOC_ROOT)
-RING_NETWORK_ROOT = _resolve_env_path("INTR_NOC_NETWORK_DIR",
-    SUBS_DIR / "lwnoc_ring_network" / "set_lwring_dir.sh", SUBS_DIR / "lwnoc_ring_network" / "set_lwring_dir.sh",
-    DEFAULT_RING_NETWORK_ROOT)
-FCIP_DIR = _resolve_env_path("FCIP_DIR",
-    SUBS_DIR / "fcip" / "set_fcip_dir.sh", SUBS_DIR / "fcip" / "set_fcip_dir.sh",
-    REPO_ROOT / "subs" / "fcip")
-LWNOC_LOWPOWER_COMPONENT = _resolve_env_path("LWNOC_LOWPOWER_COMPONENT",
-    SUBS_DIR / "lwnoc_lowpower_component" / "setup_env.csh", SUBS_DIR / "lwnoc_lowpower_component" / "setup_env.sh",
-    REPO_ROOT / "subs" / "lwnoc_lowpower_component")
+INTR_NOC_ROOT = _resolve_path("INTR_NOC_DIR")
+RING_NETWORK_ROOT = _resolve_path("INTR_NOC_NETWORK_DIR")
+FCIP_DIR = _resolve_path("FCIP_DIR")
+LWNOC_LOWPOWER_COMPONENT = _resolve_path("LWNOC_LOWPOWER_COMPONENT")
 
 if str(LWNOC_TOPO_ROOT) not in sys.path:
     sys.path.insert(0, str(LWNOC_TOPO_ROOT))
@@ -75,17 +46,15 @@ from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
 
 BUILD_LOGIC_DIR = THIS_DIR / "build_logic"
 
-
-# ── Source dependency env vars (one per submodule, following ai memnoc pattern) ──
-os.environ["INTR_NOC_DIR"] = str(INTR_NOC_ROOT)
-os.environ["INTR_NOC_NETWORK_DIR"] = str(RING_NETWORK_ROOT)
-os.environ["FCIP_DIR"] = str(FCIP_DIR)
-os.environ["LWNOC_LOWPOWER_COMPONENT"] = str(LWNOC_LOWPOWER_COMPONENT)
-os.environ["lwnoc_lowpower_component"] = str(LWNOC_LOWPOWER_COMPONENT)
-# These are referenced by vc/*_comp.f filelists internally (fexpand expansion),
-# not by Python code. By default they equal INTR_NOC_DIR.
-os.environ["INTERRUPT_INIU"] = str(INTR_NOC_ROOT)
-os.environ["INTERRUPT_TNIU"] = str(INTR_NOC_ROOT)
+# export derived paths for downstream consumers
+for _k, _v in (("INTR_NOC_DIR", INTR_NOC_ROOT),
+               ("INTR_NOC_NETWORK_DIR", RING_NETWORK_ROOT),
+               ("FCIP_DIR", FCIP_DIR),
+               ("LWNOC_LOWPOWER_COMPONENT", LWNOC_LOWPOWER_COMPONENT),
+               ("lwnoc_lowpower_component", LWNOC_LOWPOWER_COMPONENT),
+               ("INTERRUPT_INIU", INTR_NOC_ROOT),
+               ("INTERRUPT_TNIU", INTR_NOC_ROOT)):
+    os.environ.setdefault(_k, str(_v))
 
 
 FILELIST_DIR = THIS_DIR / "filelist"  # demo-local overrides (optional, may not exist)

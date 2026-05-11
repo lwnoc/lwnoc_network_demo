@@ -3,13 +3,7 @@
 Four-file rule compliance: this file replaces SocIntrTopoConfig, SocIntrTopoDv,
 SocIntrTopoPd. All topology classes, constants, ring plan, and node wiring.
 """
-import sys
-from pathlib import Path
-
-THIS_DIR = Path(__file__).resolve().parent
-LWNOC_TOPO_ROOT = THIS_DIR.parents[1] / "lwnoc_topo"
-if str(LWNOC_TOPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(LWNOC_TOPO_ROOT))
+from _project_env import LWNOC_TOPO_ROOT
 
 from topo_core.node.uhdlWrapperNode import UhdlWrapperNode  # pyright: ignore[reportMissingImports]
 from topo_core.utils.networkHierOpt import connect  # pyright: ignore[reportMissingImports]

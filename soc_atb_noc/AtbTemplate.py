@@ -158,24 +158,20 @@ debug_tniu_noc_cfg.param_overrides = dict(_TNIU_PARAMS, **_PACK_PARAMS)
 for macro_name, macro_value in debug_tniu_noc_cfg.param_overrides.items():
     debug_tniu_noc_cfg.set_macro(macro_name, macro_value)
 
-gpu0_iniu_noc_cfg = _new_iniu_cfg(
-    name="gpu0_iniu_noc",
-    prefix="gpu0_noc_",
-    env_var="GPU0_INIU_NOC_DIR",
+gpu_iniu_noc_cfg = _new_iniu_cfg(
+    name="gpu_iniu_noc",
+    prefix="gpu_noc_",
+    env_var="GPU_INIU_NOC_DIR",
     filelist_name="atb_iniu_noc_pub.f",
 )
+gpu0_iniu_noc_cfg = gpu_iniu_noc_cfg
 cpu_iniu_noc_cfg = _new_iniu_cfg(
     name="cpu_iniu_noc",
     prefix="cpu_noc_",
     env_var="CPU_INIU_NOC_DIR",
     filelist_name="atb_iniu_noc_pub.f",
 )
-gpu1_iniu_noc_cfg = _new_iniu_cfg(
-    name="gpu1_iniu_noc",
-    prefix="gpu1_noc_",
-    env_var="GPU1_INIU_NOC_DIR",
-    filelist_name="atb_iniu_noc_pub.f",
-)
+gpu1_iniu_noc_cfg = gpu_iniu_noc_cfg
 usb_dp_iniu_noc_cfg = _new_iniu_cfg(
     name="usb_dp_iniu_noc",
     prefix="usb_dp_noc_",
@@ -288,24 +284,20 @@ debug_tniu_cfg.param_overrides = dict(_TNIU_PARAMS, **_PACK_PARAMS)
 for macro_name, macro_value in debug_tniu_cfg.param_overrides.items():
     debug_tniu_cfg.set_macro(macro_name, macro_value)
 
-gpu0_iniu_cfg = _new_iniu_cfg(
-    name="gpu0_iniu_sys",
-    prefix="gpu0_",
-    env_var="GPU0_INIU_SYS_DIR",
+gpu_iniu_cfg = _new_iniu_cfg(
+    name="gpu_iniu_sys",
+    prefix="gpu_",
+    env_var="GPU_INIU_SYS_DIR",
     filelist_name="atb_iniu_sys_pub.f",
 )
+gpu0_iniu_cfg = gpu_iniu_cfg
 cpu_iniu_cfg = _new_iniu_cfg(
     name="cpu_iniu_sys",
     prefix="cpu_",
     env_var="CPU_INIU_SYS_DIR",
     filelist_name="atb_iniu_sys_pub.f",
 )
-gpu1_iniu_cfg = _new_iniu_cfg(
-    name="gpu1_iniu_sys",
-    prefix="gpu1_",
-    env_var="GPU1_INIU_SYS_DIR",
-    filelist_name="atb_iniu_sys_pub.f",
-)
+gpu1_iniu_cfg = gpu_iniu_cfg
 usb_dp_iniu_cfg = _new_iniu_cfg(
     name="usb_dp_iniu_sys",
     prefix="usb_dp_",

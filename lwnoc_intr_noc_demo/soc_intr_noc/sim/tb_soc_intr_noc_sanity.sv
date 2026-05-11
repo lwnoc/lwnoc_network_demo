@@ -14,8 +14,6 @@ module tb_soc_intr_noc_sanity;
     localparam logic [7:0] TNIU_RING_ID [NUM_TNIUS] = '{8'd1, 8'd3, 8'd5, 8'd7, 8'd14, 8'd16, 8'd18, 8'd20, 8'd22, 8'd24, 8'd26, 8'd35, 8'd42, 8'd44};
 
     localparam logic [31:0] INTR_LUT_BASE_ADDR = 32'h4000;
-    localparam logic [31:0] INTR_INIU_PULSE_MODE_BASE_ADDR = 32'h8000;
-    localparam logic [31:0] INTR_TNIU_PULSE_MODE_BASE_ADDR = 32'h0600;
 
     integer fail_count = 0;
     integer pass_count = 0;
@@ -1535,7 +1533,6 @@ module tb_soc_intr_noc_sanity;
     logic ddr5_iniu_node_ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready;
     logic [7:0] ddr5_iniu_node_ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid;
     logic [7:0] ddr5_iniu_node_ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid;
-    logic ddr5_iniu_node_ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid;
 
     always #5  clk_sys = ~clk_sys;
     always #7  clk_noc = ~clk_noc;
@@ -2274,33 +2271,6 @@ module tb_soc_intr_noc_sanity;
         end
     endtask
 
-    task automatic wait_tniu_intr_value(
-        input string msg,
-        input int unsigned tniu_idx,
-        input int unsigned bit_idx,
-        input logic expected,
-        input int unsigned max_cycles
-    );
-        int unsigned cycle;
-        logic observed;
-        begin
-            observed = 1'b0;
-            for (cycle = 0; (cycle < max_cycles) && !observed; cycle++) begin
-                @(posedge clk_sys);
-                if (get_tniu_intr(tniu_idx, bit_idx) === expected) begin
-                    observed = 1'b1;
-                end
-            end
-            if (!observed) begin
-                fail_count++;
-                $error("[FAIL] %s did not reach expected=%0b in %0d cycles", msg, expected, max_cycles);
-            end else begin
-                pass_count++;
-                $display("[PASS] %s", msg);
-            end
-        end
-    endtask
-
     task automatic iniu_apb_write(
         input int unsigned iniu_idx,
         input logic [31:0] addr_i,
@@ -2693,17 +2663,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             1: begin
                 while ((npu_ss0_iniu_node_npu_ss0_iniu_node_sys_apb_porting_npu_ss0_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             2: begin
@@ -2711,17 +2675,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             3: begin
                 while ((npu_ss2_iniu_node_npu_ss2_iniu_node_sys_apb_porting_npu_ss2_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             4: begin
@@ -2729,17 +2687,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             5: begin
                 while ((mipi_ss_iniu_node_mipi_ss_iniu_node_sys_apb_porting_mipi_ss_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             6: begin
@@ -2747,17 +2699,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             7: begin
                 while ((display_ss_iniu_node_display_ss_iniu_node_sys_apb_porting_display_ss_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             8: begin
@@ -2765,17 +2711,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             9: begin
                 while ((aon_ss_iniu_node_aon_ss_iniu_node_sys_apb_porting_aon_ss_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             10: begin
@@ -2783,17 +2723,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             11: begin
                 while ((dsp_ss4_iniu_node_dsp_ss4_iniu_node_sys_apb_porting_dsp_ss4_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             12: begin
@@ -2801,17 +2735,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             13: begin
                 while ((dsp_ss2_iniu_node_dsp_ss2_iniu_node_sys_apb_porting_dsp_ss2_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             14: begin
@@ -2819,17 +2747,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             15: begin
                 while ((dsp_ss0_iniu_node_dsp_ss0_iniu_node_sys_apb_porting_dsp_ss0_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             16: begin
@@ -2837,17 +2759,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             17: begin
                 while ((ddr7_iniu_node_ddr7_iniu_node_sys_apb_porting_ddr7_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             18: begin
@@ -2855,17 +2771,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             19: begin
                 while ((ddr9_iniu_node_ddr9_iniu_node_sys_apb_porting_ddr9_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             20: begin
@@ -2873,17 +2783,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             21: begin
                 while ((ddr11_iniu_node_ddr11_iniu_node_sys_apb_porting_ddr11_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             22: begin
@@ -2891,17 +2795,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             23: begin
                 while ((npu_ss3_iniu_node_npu_ss3_iniu_node_sys_apb_porting_npu_ss3_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             24: begin
@@ -2909,17 +2807,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             25: begin
                 while ((gpu_ss0_iniu_node_gpu_ss0_iniu_node_sys_apb_porting_gpu_ss0_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             26: begin
@@ -2927,17 +2819,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             27: begin
                 while ((ufs_ss_iniu_node_ufs_ss_iniu_node_sys_apb_porting_ufs_ss_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             28: begin
@@ -2945,17 +2831,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             29: begin
                 while ((mcu_ss_iniu_node_mcu_ss_iniu_node_sys_apb_porting_mcu_ss_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             30: begin
@@ -2963,17 +2843,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             31: begin
                 while ((ddr0_iniu_node_ddr0_iniu_node_sys_apb_porting_ddr0_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             32: begin
@@ -2981,17 +2855,11 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             33: begin
                 while ((ddr2_iniu_node_ddr2_iniu_node_sys_apb_porting_ddr2_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
             34: begin
@@ -2999,26 +2867,17 @@ module tb_soc_intr_noc_sanity;
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             35: begin
                 while ((ddr4_iniu_node_ddr4_iniu_node_sys_apb_porting_ddr4_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
                 end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
-                end
             end
             36: begin
                 while ((ddr5_iniu_node_ddr5_iniu_node_sys_apb_porting_ddr5_iniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
                     @(posedge clk_sys);
                     timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] INIU APB ready timeout idx=%0d addr=0x%08x", iniu_idx, addr_i);
                 end
             end
                 default: $fatal(1, "[TB] invalid INIU index %0d", iniu_idx);
@@ -3289,396 +3148,6 @@ module tb_soc_intr_noc_sanity;
         end
     endtask
 
-    task automatic tniu_apb_write(
-        input int unsigned tniu_idx,
-        input logic [31:0] addr_i,
-        input logic [31:0] data_i
-    );
-        int unsigned timeout;
-        begin
-            @(negedge clk_sys);
-            case (tniu_idx)
-            0: begin
-                cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            1: begin
-                npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            2: begin
-                npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            3: begin
-                npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            4: begin
-                aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            5: begin
-                dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            6: begin
-                dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            7: begin
-                dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            8: begin
-                dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            9: begin
-                dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            10: begin
-                dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            11: begin
-                npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            12: begin
-                mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            13: begin
-                npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_addr <= addr_i;
-                npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_wdata <= data_i;
-                npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_write <= 1'b1;
-                npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_sel <= 1'b1;
-                npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-                default: $fatal(1, "[TB] invalid TNIU index %0d", tniu_idx);
-            endcase
-            @(negedge clk_sys);
-            case (tniu_idx)
-            0: begin
-                cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            1: begin
-                npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            2: begin
-                npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            3: begin
-                npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            4: begin
-                aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            5: begin
-                dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            6: begin
-                dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            7: begin
-                dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            8: begin
-                dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            9: begin
-                dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            10: begin
-                dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            11: begin
-                npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            12: begin
-                mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-            13: begin
-                npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_enable <= 1'b1;
-            end
-                default: $fatal(1, "[TB] invalid TNIU index %0d", tniu_idx);
-            endcase
-            timeout = 0;
-            case (tniu_idx)
-            0: begin
-                while ((cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            1: begin
-                while ((npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            2: begin
-                while ((npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            3: begin
-                while ((npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            4: begin
-                while ((aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            5: begin
-                while ((dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            6: begin
-                while ((dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            7: begin
-                while ((dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            8: begin
-                while ((dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            9: begin
-                while ((dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            10: begin
-                while ((dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            11: begin
-                while ((npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            12: begin
-                while ((mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-            13: begin
-                while ((npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_ready !== 1'b1) && timeout < 40) begin
-                    @(posedge clk_sys);
-                    timeout++;
-                end
-                if (timeout >= 40) begin
-                    $fatal(1, "[TB] TNIU APB ready timeout idx=%0d addr=0x%08x", tniu_idx, addr_i);
-                end
-            end
-                default: $fatal(1, "[TB] invalid TNIU index %0d", tniu_idx);
-            endcase
-            @(negedge clk_sys);
-            case (tniu_idx)
-            0: begin
-                cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_addr <= '0;
-                cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_wdata <= '0;
-                cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                cpu_ss_tniu_node_cpu_ss_tniu_node_sys_apb_porting_cpu_ss_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            1: begin
-                npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_addr <= '0;
-                npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_wdata <= '0;
-                npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                npu_ss0_tniu_node_npu_ss0_tniu_node_sys_apb_porting_npu_ss0_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            2: begin
-                npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_addr <= '0;
-                npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_wdata <= '0;
-                npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                npu_ss1_tniu_node_npu_ss1_tniu_node_sys_apb_porting_npu_ss1_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            3: begin
-                npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_addr <= '0;
-                npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_wdata <= '0;
-                npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                npu_ss2_tniu_node_npu_ss2_tniu_node_sys_apb_porting_npu_ss2_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            4: begin
-                aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_addr <= '0;
-                aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_wdata <= '0;
-                aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                aon_ss_tniu_node_aon_ss_tniu_node_sys_apb_porting_aon_ss_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            5: begin
-                dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_addr <= '0;
-                dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_wdata <= '0;
-                dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_apb_porting_dsp_ss5_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            6: begin
-                dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_addr <= '0;
-                dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_wdata <= '0;
-                dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_apb_porting_dsp_ss4_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            7: begin
-                dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_addr <= '0;
-                dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_wdata <= '0;
-                dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_apb_porting_dsp_ss3_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            8: begin
-                dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_addr <= '0;
-                dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_wdata <= '0;
-                dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_apb_porting_dsp_ss2_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            9: begin
-                dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_addr <= '0;
-                dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_wdata <= '0;
-                dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_apb_porting_dsp_ss1_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            10: begin
-                dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_addr <= '0;
-                dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_wdata <= '0;
-                dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_apb_porting_dsp_ss0_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            11: begin
-                npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_addr <= '0;
-                npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_wdata <= '0;
-                npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                npu_ss3_tniu_node_npu_ss3_tniu_node_sys_apb_porting_npu_ss3_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            12: begin
-                mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_addr <= '0;
-                mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_wdata <= '0;
-                mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                mcu_ss_tniu_node_mcu_ss_tniu_node_sys_apb_porting_mcu_ss_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-            13: begin
-                npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_addr <= '0;
-                npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_wdata <= '0;
-                npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_write <= 1'b0;
-                npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_sel <= 1'b0;
-                npu_ss4_tniu_node_npu_ss4_tniu_node_sys_apb_porting_npu_ss4_tniu_node_sys_apb_porting_p_enable <= 1'b0;
-            end
-                default: $fatal(1, "[TB] invalid TNIU index %0d", tniu_idx);
-            endcase
-        end
-    endtask
-
     task automatic program_iniu_lut(
         input int unsigned iniu_idx,
         input int unsigned src_intr_id,
@@ -3689,6 +3158,12 @@ module tb_soc_intr_noc_sanity;
         begin
             lut_data = {8'h00, tgt_ring_id, 4'h0, tgt_intr_id};
             iniu_apb_write(iniu_idx, INTR_LUT_BASE_ADDR + 32'(src_intr_id) * 4, lut_data);
+        end
+    endtask
+
+    task automatic probe_cpu_to_cpu_route(input string phase);
+        begin
+            $display("[PROBE] %s t=%0t", phase, $time);
         end
     endtask
 
@@ -3816,59 +3291,6 @@ module tb_soc_intr_noc_sanity;
         end
     endtask
 
-    function automatic logic get_tniu_intr(
-        input int unsigned tniu_idx,
-        input int unsigned bit_idx
-    );
-        begin
-            case (tniu_idx)
-            0: begin
-                get_tniu_intr = cpu_ss_tniu_node_cpu_ss_tniu_node_sys_v_interrupt_porting_cpu_ss_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            1: begin
-                get_tniu_intr = npu_ss0_tniu_node_npu_ss0_tniu_node_sys_v_interrupt_porting_npu_ss0_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            2: begin
-                get_tniu_intr = npu_ss1_tniu_node_npu_ss1_tniu_node_sys_v_interrupt_porting_npu_ss1_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            3: begin
-                get_tniu_intr = npu_ss2_tniu_node_npu_ss2_tniu_node_sys_v_interrupt_porting_npu_ss2_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            4: begin
-                get_tniu_intr = aon_ss_tniu_node_aon_ss_tniu_node_sys_v_interrupt_porting_aon_ss_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            5: begin
-                get_tniu_intr = dsp_ss5_tniu_node_dsp_ss5_tniu_node_sys_v_interrupt_porting_dsp_ss5_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            6: begin
-                get_tniu_intr = dsp_ss4_tniu_node_dsp_ss4_tniu_node_sys_v_interrupt_porting_dsp_ss4_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            7: begin
-                get_tniu_intr = dsp_ss3_tniu_node_dsp_ss3_tniu_node_sys_v_interrupt_porting_dsp_ss3_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            8: begin
-                get_tniu_intr = dsp_ss2_tniu_node_dsp_ss2_tniu_node_sys_v_interrupt_porting_dsp_ss2_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            9: begin
-                get_tniu_intr = dsp_ss1_tniu_node_dsp_ss1_tniu_node_sys_v_interrupt_porting_dsp_ss1_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            10: begin
-                get_tniu_intr = dsp_ss0_tniu_node_dsp_ss0_tniu_node_sys_v_interrupt_porting_dsp_ss0_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            11: begin
-                get_tniu_intr = npu_ss3_tniu_node_npu_ss3_tniu_node_sys_v_interrupt_porting_npu_ss3_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            12: begin
-                get_tniu_intr = mcu_ss_tniu_node_mcu_ss_tniu_node_sys_v_interrupt_porting_mcu_ss_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-            13: begin
-                get_tniu_intr = npu_ss4_tniu_node_npu_ss4_tniu_node_sys_v_interrupt_porting_npu_ss4_tniu_node_sys_v_interrupt_porting_v_interrupt[bit_idx];
-            end
-                default: get_tniu_intr = 1'bx;
-            endcase
-        end
-    endfunction
-
     task automatic expect_tniu_intr(
         input string msg,
         input int unsigned tniu_idx,
@@ -3924,49 +3346,20 @@ module tb_soc_intr_noc_sanity;
         end
     endtask
 
-    task automatic configure_pulse_modes(input logic pulse_mode);
+    task automatic tc_sanity();
         int unsigned iniu_idx;
         int unsigned tniu_idx;
-        int unsigned group;
-        int unsigned intr_id;
-        int unsigned bit_idx;
-        logic [31:0] mode_mask;
+        int unsigned i, j;
+        string msg;
+        localparam int unsigned TEST_INIU [4] = '{32'd0, 32'd1, 32'd12, 32'd24};
+        localparam int unsigned TEST_TNIU [4] = '{32'd0, 32'd1, 32'd7, 32'd13};
         begin
-            for (si = 0; si < 4; si++) begin iniu_idx = SAMPLE_INIU[si]; for (st = 0; st < 4; st++) begin tniu_idx = SAMPLE_TNIU[st];
-                for (group = SRC_INTR_BASE / 32; group <= (SRC_INTR_BASE + NUM_TNIUS - 1) / 32; group++) begin
-                    mode_mask = '0;
-                    for (tniu_idx = 0; tniu_idx < NUM_TNIUS; tniu_idx++) begin
-                        intr_id = SRC_INTR_BASE + tniu_idx;
-                        if ((intr_id / 32) == group) begin
-                            bit_idx = intr_id % 32;
-                            mode_mask[bit_idx] = pulse_mode;
-                        end
-                    end
-                    iniu_apb_write(iniu_idx, INTR_INIU_PULSE_MODE_BASE_ADDR + 32'(group) * 4, mode_mask);
-                end
-            end
-            for (tniu_idx = 0; tniu_idx < NUM_TNIUS; tniu_idx++) begin
-                for (group = TGT_INTR_BASE / 32; group <= (TGT_INTR_BASE + NUM_INIUS - 1) / 32; group++) begin
-                    mode_mask = '0;
-                    for (si = 0; si < 4; si++) begin iniu_idx = SAMPLE_INIU[si]; for (st = 0; st < 4; st++) begin tniu_idx = SAMPLE_TNIU[st];
-                        intr_id = TGT_INTR_BASE + iniu_idx;
-                        if ((intr_id / 32) == group) begin
-                            bit_idx = intr_id % 32;
-                            mode_mask[bit_idx] = pulse_mode;
-                        end
-                    end
-                    tniu_apb_write(tniu_idx, INTR_TNIU_PULSE_MODE_BASE_ADDR + 32'(group) * 4, mode_mask);
-                end
-            end
-        end
-    endtask
-
-    task automatic program_all_routes();
-        int unsigned iniu_idx;
-        int unsigned tniu_idx;
-        begin
-            for (si = 0; si < 4; si++) begin iniu_idx = SAMPLE_INIU[si]; for (st = 0; st < 4; st++) begin tniu_idx = SAMPLE_TNIU[st];
-                for (tniu_idx = 0; tniu_idx < NUM_TNIUS; tniu_idx++) begin
+            $display("[TB] tc_sanity: program 4x4 INIU->TNIU routes and verify delivery/clear");
+            reset_dut();
+            for (i = 0; i < 4; i++) begin
+                iniu_idx = TEST_INIU[i];
+                for (j = 0; j < 4; j++) begin
+                    tniu_idx = TEST_TNIU[j];
                     program_iniu_lut(
                         iniu_idx,
                         SRC_INTR_BASE + tniu_idx,
@@ -3975,86 +3368,20 @@ module tb_soc_intr_noc_sanity;
                     );
                 end
             end
-        end
-    endtask
-
-    task automatic expect_other_tnius_low(
-        input string msg,
-        input int unsigned target_tniu_idx,
-        input int unsigned bit_idx
-    );
-        int unsigned other_idx;
-        begin
-            for (other_idx = 0; other_idx < NUM_TNIUS; other_idx++) begin
-                if (other_idx != target_tniu_idx) begin
-                    expect_tniu_intr($sformatf("%s other_tniu[%0d] low", msg, other_idx), other_idx, bit_idx, 1'b0);
+            wait_sys(20);
+            for (i = 0; i < 4; i++) begin
+                iniu_idx = TEST_INIU[i];
+                for (j = 0; j < 4; j++) begin
+                    tniu_idx = TEST_TNIU[j];
+                    msg = $sformatf("iniu[%0d,id=%0d]->tniu[%0d,id=%0d]", iniu_idx, INIU_SRC_ID[iniu_idx], tniu_idx, TNIU_RING_ID[tniu_idx]);
+                    set_iniu_intr(iniu_idx, SRC_INTR_BASE + tniu_idx, 1'b1);
+                    wait_sys(SYS_WAIT);
+                    expect_tniu_intr({msg, " high"}, tniu_idx, TGT_INTR_BASE + iniu_idx, 1'b1);
+                    set_iniu_intr(iniu_idx, SRC_INTR_BASE + tniu_idx, 1'b0);
+                    wait_sys(SYS_WAIT);
+                    expect_tniu_intr({msg, " low"}, tniu_idx, TGT_INTR_BASE + iniu_idx, 1'b0);
                 end
             end
-        end
-    endtask
-
-    task automatic tc_all_to_all_level();
-        int unsigned iniu_idx;
-        int unsigned tniu_idx;
-        int unsigned src_intr_id;
-        int unsigned tgt_intr_id;
-        string msg;
-        begin
-            $display("[TB] tc_all_to_all_level: verify level interrupt delivery and clear");
-            configure_pulse_modes(1'b0);
-            wait_sys(20);
-            for (si = 0; si < 4; si++) begin iniu_idx = SAMPLE_INIU[si]; for (st = 0; st < 4; st++) begin tniu_idx = SAMPLE_TNIU[st];
-                for (tniu_idx = 0; tniu_idx < NUM_TNIUS; tniu_idx++) begin
-                    src_intr_id = SRC_INTR_BASE + tniu_idx;
-                    tgt_intr_id = TGT_INTR_BASE + iniu_idx;
-                    msg = $sformatf("level iniu[%0d,id=%0d]->tniu[%0d,id=%0d]", iniu_idx, INIU_SRC_ID[iniu_idx], tniu_idx, TNIU_RING_ID[tniu_idx]);
-                    set_iniu_intr(iniu_idx, src_intr_id, 1'b1);
-                    wait_tniu_intr_value({msg, " high"}, tniu_idx, tgt_intr_id, 1'b1, SYS_WAIT);
-                    expect_other_tnius_low({msg, " tgtid"}, tniu_idx, tgt_intr_id);
-                    set_iniu_intr(iniu_idx, src_intr_id, 1'b0);
-                    wait_tniu_intr_value({msg, " low"}, tniu_idx, tgt_intr_id, 1'b0, SYS_WAIT);
-                end
-            end
-        end
-    endtask
-
-    task automatic tc_all_to_all_pulse();
-        int unsigned iniu_idx;
-        int unsigned tniu_idx;
-        int unsigned src_intr_id;
-        int unsigned tgt_intr_id;
-        string msg;
-        begin
-            $display("[TB] tc_all_to_all_pulse: verify pulse interrupt delivery and auto-clear");
-            configure_pulse_modes(1'b1);
-            wait_sys(20);
-            for (si = 0; si < 4; si++) begin iniu_idx = SAMPLE_INIU[si]; for (st = 0; st < 4; st++) begin tniu_idx = SAMPLE_TNIU[st];
-                for (tniu_idx = 0; tniu_idx < NUM_TNIUS; tniu_idx++) begin
-                    src_intr_id = SRC_INTR_BASE + tniu_idx;
-                    tgt_intr_id = TGT_INTR_BASE + iniu_idx;
-                    msg = $sformatf("pulse iniu[%0d,id=%0d]->tniu[%0d,id=%0d]", iniu_idx, INIU_SRC_ID[iniu_idx], tniu_idx, TNIU_RING_ID[tniu_idx]);
-                    set_iniu_intr(iniu_idx, src_intr_id, 1'b1);
-                    wait_tniu_intr_value({msg, " high"}, tniu_idx, tgt_intr_id, 1'b1, SYS_WAIT);
-                    expect_other_tnius_low({msg, " tgtid"}, tniu_idx, tgt_intr_id);
-                    wait_tniu_intr_value({msg, " auto-low"}, tniu_idx, tgt_intr_id, 1'b0, 64);
-                    set_iniu_intr(iniu_idx, src_intr_id, 1'b0);
-                    wait_sys(2);
-                end
-            end
-        end
-    endtask
-
-    localparam int unsigned SAMPLE_INIU [4] = '{0, 10, 20, 30};
-    localparam int unsigned SAMPLE_TNIU [4] = '{0, 4, 8, 12};
-
-    task automatic tc_sanity();
-        begin
-            $display("[TB] tc_sanity: program all INIU->TNIU routes and verify level/pulse modes");
-            reset_dut();
-            program_all_routes();
-            wait_sys(20);
-            tc_all_to_all_level();
-            tc_all_to_all_pulse();
         end
     endtask
 

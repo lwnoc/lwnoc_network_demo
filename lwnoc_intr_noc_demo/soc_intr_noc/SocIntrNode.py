@@ -1,14 +1,9 @@
 """Node definitions for the SoC-scale interrupt ring NoC demo."""
 
 import os
-import sys
 from pathlib import Path
 
-
-THIS_DIR = Path(__file__).resolve().parent
-LWNOC_TOPO_ROOT = THIS_DIR.parents[1] / "lwnoc_topo"
-if str(LWNOC_TOPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(LWNOC_TOPO_ROOT))
+from _project_env import LWNOC_TOPO_ROOT
 
 from uhdl.uhdl.core.TemplateIP import TemplateComponent
 from uhdl.uhdl.core.VComponent import VComponent

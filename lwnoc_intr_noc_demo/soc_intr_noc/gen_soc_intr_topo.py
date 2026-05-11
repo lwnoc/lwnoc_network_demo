@@ -9,17 +9,9 @@ Topo description file: soc_intr_noc_topo (clk domain split around async bridges)
 """
 
 import argparse
-import sys
 from pathlib import Path
 
-
-THIS_DIR = Path(__file__).resolve().parent
-LWNOC_TOPO_ROOT = THIS_DIR.parents[1] / "lwnoc_topo"
-
-if str(LWNOC_TOPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(LWNOC_TOPO_ROOT))
-if str(THIS_DIR) not in sys.path:
-    sys.path.insert(0, str(THIS_DIR))
+from _project_env import LWNOC_TOPO_ROOT, THIS_DIR
 
 from topo_core.utils.serialization import TopologySerializer
 from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
