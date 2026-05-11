@@ -1,7 +1,3 @@
-
-
-
-
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/interrupt_tniu_define.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/tniu/interrupt_tniu_pkg.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/tniu/interrupt_tniu_mem_reg_bank.sv
@@ -15,4 +11,11 @@
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/tniu/interrupt_tniu_xbar_internal.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/tniu/interrupt_tniu.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/interrupt_tniu_async_top_side.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/interrupt_tniu_async_sys_side.sv
 /home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/interrupt_tniu_undef.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_4096x26.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_2048x26.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_1024x26.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_512x26.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_256x26.sv
+/home/lgzhu/dev/noc_work/lwnoc_network_demo/subs/lwnoc_interrupt_noc/rtl/mem_wrapper/spram_128x26.sv

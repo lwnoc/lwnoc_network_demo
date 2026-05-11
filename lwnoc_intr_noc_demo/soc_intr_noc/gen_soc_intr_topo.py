@@ -95,10 +95,10 @@ def generate():
             setattr(up_harden, f"u_{sys_name}", node.top_side)
         else:
             setattr(dn_harden, f"u_{sys_name}", node.top_side)
-    # Ring core lives in up_harden
-    for ring_node_name in ("ring_sp", "ring_req_sink", "ring_zero_source"):
+    # Ring core lives in dn_harden (per soc_intr_noc_topo: ring_sp + err_tgtid_sink in Domain B)
+    for ring_node_name in ("ring_sp", "ring_sink_station"):
         sub_node = getattr(logic_wrapper, ring_node_name)
-        setattr(up_harden, f"u_{ring_node_name}", sub_node)
+        setattr(dn_harden, f"u_{ring_node_name}", sub_node)
     up_harden.expose_unconnected_interfaces()
     dn_harden.expose_unconnected_interfaces()
 
@@ -112,7 +112,6 @@ def generate():
     # Only nests harden sub-nodes — NO sys-side files, NO full Iniu/Tniu nodes.
     ring_top_wrap = UhdlWrapperNode("ring_top_wrap")
     ring_top_wrap.u_up_harden = up_harden
-    ring_top_wrap.u_dn_harden = dn_harden
     ring_top_wrap.u_dn_harden = dn_harden
     ring_top_wrap.expose_unconnected_interfaces()
     rtw_comp = ring_top_wrap.build_uhdl()

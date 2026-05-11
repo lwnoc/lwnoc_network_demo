@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:c9afe5271208b2e97526c971f805708c]
+//[UHDL]Content Start [md5:031848a0eb3ab8a89b7639d9295c24d6]
 module dp_ss_iniu_node_top_wrap (
 	input         clk                                                                ,
 	input         rst_n                                                              ,
@@ -73,7 +73,7 @@ module dp_ss_iniu_node_top_wrap (
 	
 
 	//module inst.
-	SocIntrNodeIdGen_node_id_value_6_node_id_width_8 node_id_gen_top (
+	SocIntrNodeIdGen_node_id_value_10_node_id_width_8 node_id_gen_top (
 		.node_id(node_id_gen_top_node_id));
 	soc_intr_xbar_routing_lut_w8_c1 xbar_routing_lut (
 		.src_id(xbar_routing_lut_src_id),
@@ -99,8 +99,8 @@ module dp_ss_iniu_node_top_wrap (
 		.req_last(iniu_top_TO_endpoint_wrap_SIG_req_last),
 		.req_threshold());
 	lwnoc_intr_iniu_endpoint_wrap #(
-		.RING_ID(32'd6),
-		.NODE_NUM(32'd39),
+		.RING_ID(32'd10),
+		.NODE_NUM(32'd51),
 		.PLD_WIDTH(32'd40),
 		.ID_WIDTH(32'd8),
 		.QOS_WIDTH(32'd4),
@@ -154,5 +154,5 @@ module dp_ss_iniu_node_top_wrap (
 		.xbar_req_sel_bit(xbar_routing_lut_TO_endpoint_wrap_SIG_xbar_ch0_sel_bit));
 
 endmodule
-//[UHDL]Content End [md5:c9afe5271208b2e97526c971f805708c]
+//[UHDL]Content End [md5:031848a0eb3ab8a89b7639d9295c24d6]
 

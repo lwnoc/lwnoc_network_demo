@@ -10,7 +10,7 @@ from pathlib import Path
 
 THIS_DIR = Path(__file__).resolve().parent
 DEMO_DIR = THIS_DIR.parent
-WRAPPER_PATH = DEMO_DIR / "build_logic" / "soc_intr_noc_wrap" / "soc_intr_noc_wrap.v"
+WRAPPER_PATH = DEMO_DIR / "build_logic" / "soc_intr_ring_noc" / "soc_intr_ring_noc.v"
 ENDPOINT_TABLE = DEMO_DIR / "build" / "soc_intr_endpoint_id_table.csv"
 TB_PATH = THIS_DIR / "tb_soc_intr_noc_sanity.sv"
 
@@ -26,7 +26,7 @@ def parse_wrapper_ports() -> list[dict[str, str]]:
     ports: list[dict[str, str]] = []
     in_header = False
     for line in WRAPPER_PATH.read_text().splitlines():
-        if line.startswith("module soc_intr_noc_wrap"):
+        if line.startswith("module soc_intr_ring_noc"):
             in_header = True
             continue
         if not in_header:
@@ -380,7 +380,7 @@ def generate_tb() -> str:
     lines.extend(
         [
             "",
-            "    soc_intr_noc_wrap dut (.*);",
+            "    soc_intr_ring_noc dut (.*);",
             "",
             "    task automatic wait_sys(input int unsigned n);",
             "        repeat (n) @(posedge clk_sys);",

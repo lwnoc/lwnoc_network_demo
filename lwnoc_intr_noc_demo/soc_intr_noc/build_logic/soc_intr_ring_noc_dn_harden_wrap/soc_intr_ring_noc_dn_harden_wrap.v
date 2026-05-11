@@ -1,835 +1,556 @@
-//[UHDL]Content Start [md5:8519f8bba7b001e32e963b10045fd6df]
+//[UHDL]Content Start [md5:5609b2cbe8c5040bd12c8ce5a682128a]
 module soc_intr_ring_noc_dn_harden_wrap (
-	input         ddr6_iniu_node_top_wrap_clk_porting                                                                                                                        ,
-	input         ddr6_iniu_node_top_wrap_rst_n_porting                                                                                                                      ,
-	input  [69:0] ddr6_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                             ,
-	output [15:0] ddr6_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                           ,
-	output [15:0] ddr6_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                            ,
-	input  [15:0] ddr6_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                           ,
-	output [12:0] ddr6_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                ,
-	input  [12:0] ddr6_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                ,
-	input         ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_last                                                                                   ,
-	input  [39:0] ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_payload                                                                                ,
-	input  [3:0]  ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_qos                                                                                    ,
-	output        ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_ready                                                                                  ,
-	input  [7:0]  ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_srcid                                                                                  ,
-	input  [7:0]  ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_tgtid                                                                                  ,
-	input         ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_valid                                                                                  ,
-	output        ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_last                                                                                ,
-	output [39:0] ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_payload                                                                             ,
-	output [3:0]  ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_qos                                                                                 ,
-	input         ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_ready                                                                               ,
-	output [7:0]  ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_srcid                                                                               ,
-	output [7:0]  ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_tgtid                                                                               ,
-	output        ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_valid                                                                               ,
-	output        ddr6_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                     ,
-	output        ddr6_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                     ,
-	output        ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
-	output [39:0] ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
-	output [3:0]  ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
-	input         ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
-	output [7:0]  ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
-	output [7:0]  ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
-	output        ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 ,
-	input         ddr7_iniu_node_top_wrap_clk_porting                                                                                                                        ,
-	input         ddr7_iniu_node_top_wrap_rst_n_porting                                                                                                                      ,
-	input  [69:0] ddr7_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                             ,
-	output [15:0] ddr7_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                           ,
-	output [15:0] ddr7_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                            ,
-	input  [15:0] ddr7_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                           ,
-	output [12:0] ddr7_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                ,
-	input  [12:0] ddr7_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                ,
-	output        ddr7_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                     ,
-	output        ddr7_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                     ,
-	output        ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
-	output [39:0] ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
-	output [3:0]  ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
-	input         ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
-	output [7:0]  ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
-	output [7:0]  ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
-	output        ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 ,
-	input         ddr8_iniu_node_top_wrap_clk_porting                                                                                                                        ,
-	input         ddr8_iniu_node_top_wrap_rst_n_porting                                                                                                                      ,
-	input  [69:0] ddr8_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                             ,
-	output [15:0] ddr8_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                           ,
-	output [15:0] ddr8_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                            ,
-	input  [15:0] ddr8_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                           ,
-	output [12:0] ddr8_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                ,
-	input  [12:0] ddr8_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                ,
-	output        ddr8_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                     ,
-	output        ddr8_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                     ,
-	output        ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
-	output [39:0] ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
-	output [3:0]  ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
-	input         ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
-	output [7:0]  ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
-	output [7:0]  ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
-	output        ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 ,
-	input         ddr9_iniu_node_top_wrap_clk_porting                                                                                                                        ,
-	input         ddr9_iniu_node_top_wrap_rst_n_porting                                                                                                                      ,
-	input  [69:0] ddr9_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                             ,
-	output [15:0] ddr9_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                           ,
-	output [15:0] ddr9_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                            ,
-	input  [15:0] ddr9_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                           ,
-	output [12:0] ddr9_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                ,
-	input  [12:0] ddr9_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                ,
-	output        ddr9_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                     ,
-	output        ddr9_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                     ,
-	output        ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
-	output [39:0] ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
-	output [3:0]  ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
-	input         ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
-	output [7:0]  ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
-	output [7:0]  ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
-	output        ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 ,
-	input         ddr10_iniu_node_top_wrap_clk_porting                                                                                                                       ,
-	input         ddr10_iniu_node_top_wrap_rst_n_porting                                                                                                                     ,
-	input  [69:0] ddr10_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                            ,
-	output [15:0] ddr10_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                          ,
-	output [15:0] ddr10_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                           ,
-	input  [15:0] ddr10_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                          ,
-	output [12:0] ddr10_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                               ,
-	input  [12:0] ddr10_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                               ,
-	output        ddr10_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                    ,
-	output        ddr10_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                    ,
-	output        ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last               ,
-	output [39:0] ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload            ,
-	output [3:0]  ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                ,
-	input         ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready              ,
-	output [7:0]  ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid              ,
-	output [7:0]  ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid              ,
-	output        ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid              ,
-	input         ddr11_tniu_node_top_wrap_clk_porting                                                                                                                       ,
-	input         ddr11_tniu_node_top_wrap_rst_n_porting                                                                                                                     ,
-	output [69:0] ddr11_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                            ,
-	input  [9:0]  ddr11_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                          ,
-	input  [9:0]  ddr11_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                           ,
-	output [9:0]  ddr11_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                          ,
-	input  [12:0] ddr11_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req                                                                               ,
-	output [12:0] ddr11_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req                                                                               ,
-	input  [9:0]  ddr11_tniu_node_top_wrap_ddr11_tniu_node_top_wrap_top_timeout_val_porting_ddr11_tniu_node_top_wrap_top_timeout_val_porting_timeout_val                     ,
-	input         mipi_ss_iniu_node_top_wrap_clk_porting                                                                                                                     ,
-	input         mipi_ss_iniu_node_top_wrap_rst_n_porting                                                                                                                   ,
-	input  [69:0] mipi_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                          ,
-	output [15:0] mipi_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                        ,
-	output [15:0] mipi_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                         ,
-	input  [15:0] mipi_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                        ,
-	output [12:0] mipi_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                             ,
-	input  [12:0] mipi_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                             ,
-	output        mipi_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                  ,
-	output        mipi_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                  ,
-	output        mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last         ,
-	output [39:0] mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload      ,
-	output [3:0]  mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos          ,
-	input         mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready        ,
-	output [7:0]  mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid        ,
-	output [7:0]  mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid        ,
-	output        mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid        ,
-	input         ufs_ss_iniu_node_top_wrap_clk_porting                                                                                                                      ,
-	input         ufs_ss_iniu_node_top_wrap_rst_n_porting                                                                                                                    ,
-	input  [69:0] ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                           ,
-	output [15:0] ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                         ,
-	output [15:0] ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                          ,
-	input  [15:0] ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                         ,
-	output [12:0] ufs_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                              ,
-	input  [12:0] ufs_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                              ,
-	output        ufs_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                   ,
-	output        ufs_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                   ,
-	output        ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last            ,
-	output [39:0] ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload         ,
-	output [3:0]  ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos             ,
-	input         ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready           ,
-	output [7:0]  ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid           ,
-	output [7:0]  ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid           ,
-	output        ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid           ,
-	input         camera_ss_iniu_node_top_wrap_clk_porting                                                                                                                   ,
-	input         camera_ss_iniu_node_top_wrap_rst_n_porting                                                                                                                 ,
-	input  [69:0] camera_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                        ,
-	output [15:0] camera_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                      ,
-	output [15:0] camera_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                       ,
-	input  [15:0] camera_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                      ,
-	output [12:0] camera_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                           ,
-	input  [12:0] camera_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                           ,
-	output        camera_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                ,
-	output        camera_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                ,
-	output        camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last   ,
-	output [39:0] camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload,
-	output [3:0]  camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos    ,
-	input         camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready  ,
-	output [7:0]  camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid  ,
-	output [7:0]  camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid  ,
-	output        camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid  ,
-	input         camera_ss_tniu_node_top_wrap_clk_porting                                                                                                                   ,
-	input         camera_ss_tniu_node_top_wrap_rst_n_porting                                                                                                                 ,
-	output [69:0] camera_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                        ,
-	input  [9:0]  camera_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                      ,
-	input  [9:0]  camera_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                       ,
-	output [9:0]  camera_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                      ,
-	input  [12:0] camera_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req                                                                           ,
-	output [12:0] camera_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req                                                                           ,
-	input  [9:0]  camera_ss_tniu_node_top_wrap_camera_ss_tniu_node_top_wrap_top_timeout_val_porting_camera_ss_tniu_node_top_wrap_top_timeout_val_porting_timeout_val         ,
-	input         vpu_ss_iniu_node_top_wrap_clk_porting                                                                                                                      ,
-	input         vpu_ss_iniu_node_top_wrap_rst_n_porting                                                                                                                    ,
-	input  [69:0] vpu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                           ,
-	output [15:0] vpu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                         ,
-	output [15:0] vpu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                          ,
-	input  [15:0] vpu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                         ,
-	output [12:0] vpu_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                              ,
-	input  [12:0] vpu_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                              ,
-	output        vpu_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                   ,
-	output        vpu_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                   ,
-	output        vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last            ,
-	output [39:0] vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload         ,
-	output [3:0]  vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos             ,
-	input         vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready           ,
-	output [7:0]  vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid           ,
-	output [7:0]  vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid           ,
-	output        vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid           ,
-	input         aon_ss_iniu_node_top_wrap_clk_porting                                                                                                                      ,
-	input         aon_ss_iniu_node_top_wrap_rst_n_porting                                                                                                                    ,
-	input  [69:0] aon_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                           ,
-	output [15:0] aon_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                         ,
-	output [15:0] aon_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                          ,
-	input  [15:0] aon_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                         ,
-	output [12:0] aon_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                              ,
-	input  [12:0] aon_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                              ,
-	output        aon_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                   ,
-	output        aon_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                   ,
-	output        aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last            ,
-	output [39:0] aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload         ,
-	output [3:0]  aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos             ,
-	input         aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready           ,
-	output [7:0]  aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid           ,
-	output [7:0]  aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid           ,
-	output        aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid           ,
-	input         aon_ss_tniu_node_top_wrap_clk_porting                                                                                                                      ,
-	input         aon_ss_tniu_node_top_wrap_rst_n_porting                                                                                                                    ,
-	output [69:0] aon_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                           ,
-	input  [9:0]  aon_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                         ,
-	input  [9:0]  aon_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                          ,
-	output [9:0]  aon_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                         ,
-	input  [12:0] aon_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req                                                                              ,
-	output [12:0] aon_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req                                                                              ,
-	input  [9:0]  aon_ss_tniu_node_top_wrap_aon_ss_tniu_node_top_wrap_top_timeout_val_porting_aon_ss_tniu_node_top_wrap_top_timeout_val_porting_timeout_val                  ,
-	input         debug_ss_iniu_node_top_wrap_clk_porting                                                                                                                    ,
-	input         debug_ss_iniu_node_top_wrap_rst_n_porting                                                                                                                  ,
-	input  [69:0] debug_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                         ,
-	output [15:0] debug_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                       ,
-	output [15:0] debug_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                        ,
-	input  [15:0] debug_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                       ,
-	output [12:0] debug_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                            ,
-	input  [12:0] debug_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                            ,
-	output        debug_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                 ,
-	output        debug_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                 ,
-	output        debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last      ,
-	output [39:0] debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload   ,
-	output [3:0]  debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos       ,
-	input         debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready     ,
-	output [7:0]  debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid     ,
-	output [7:0]  debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid     ,
-	output        debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid     ,
-	input         ucie_ss1_iniu_node_top_wrap_clk_porting                                                                                                                    ,
-	input         ucie_ss1_iniu_node_top_wrap_rst_n_porting                                                                                                                  ,
-	input  [69:0] ucie_ss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                         ,
-	output [15:0] ucie_ss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                       ,
-	output [15:0] ucie_ss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                        ,
-	input  [15:0] ucie_ss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                       ,
-	output [12:0] ucie_ss1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                            ,
-	input  [12:0] ucie_ss1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                            ,
-	output        ucie_ss1_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                 ,
-	output        ucie_ss1_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                 ,
-	output        ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last      ,
-	output [39:0] ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload   ,
-	output [3:0]  ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos       ,
-	input         ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready     ,
-	output [7:0]  ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid     ,
-	output [7:0]  ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid     ,
-	output        ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid     ,
-	input         ucie_ss1_tniu_node_top_wrap_clk_porting                                                                                                                    ,
-	input         ucie_ss1_tniu_node_top_wrap_rst_n_porting                                                                                                                  ,
-	output [69:0] ucie_ss1_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                         ,
-	input  [9:0]  ucie_ss1_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                       ,
-	input  [9:0]  ucie_ss1_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                        ,
-	output [9:0]  ucie_ss1_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                       ,
-	input  [12:0] ucie_ss1_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req                                                                            ,
-	output [12:0] ucie_ss1_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req                                                                            ,
-	input  [9:0]  ucie_ss1_tniu_node_top_wrap_ucie_ss1_tniu_node_top_wrap_top_timeout_val_porting_ucie_ss1_tniu_node_top_wrap_top_timeout_val_porting_timeout_val            ,
-	input         dspss0_tniu_node_top_wrap_clk_porting                                                                                                                      ,
-	input         dspss0_tniu_node_top_wrap_rst_n_porting                                                                                                                    ,
-	output [69:0] dspss0_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                           ,
-	input  [9:0]  dspss0_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                         ,
-	input  [9:0]  dspss0_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                          ,
-	output [9:0]  dspss0_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                         ,
-	input  [12:0] dspss0_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req                                                                              ,
-	output [12:0] dspss0_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req                                                                              ,
-	input  [9:0]  dspss0_tniu_node_top_wrap_dspss0_tniu_node_top_wrap_top_timeout_val_porting_dspss0_tniu_node_top_wrap_top_timeout_val_porting_timeout_val                  ,
-	input         dspss1_iniu_node_top_wrap_clk_porting                                                                                                                      ,
-	input         dspss1_iniu_node_top_wrap_rst_n_porting                                                                                                                    ,
-	input  [69:0] dspss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                           ,
-	output [15:0] dspss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                         ,
-	output [15:0] dspss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                          ,
-	input  [15:0] dspss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                         ,
-	output [12:0] dspss1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                              ,
-	input  [12:0] dspss1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                              ,
-	output        dspss1_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                   ,
-	output        dspss1_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                   ,
-	output        dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last            ,
-	output [39:0] dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload         ,
-	output [3:0]  dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos             ,
-	input         dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready           ,
-	output [7:0]  dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid           ,
-	output [7:0]  dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid           ,
-	output        dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid           ,
-	input         dspss2_tniu_node_top_wrap_clk_porting                                                                                                                      ,
-	input         dspss2_tniu_node_top_wrap_rst_n_porting                                                                                                                    ,
-	output [69:0] dspss2_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                           ,
-	input  [9:0]  dspss2_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                         ,
-	input  [9:0]  dspss2_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                          ,
-	output [9:0]  dspss2_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                         ,
-	input  [12:0] dspss2_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req                                                                              ,
-	output [12:0] dspss2_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req                                                                              ,
-	input  [9:0]  dspss2_tniu_node_top_wrap_dspss2_tniu_node_top_wrap_top_timeout_val_porting_dspss2_tniu_node_top_wrap_top_timeout_val_porting_timeout_val                  ,
-	input         dspss3_iniu_node_top_wrap_clk_porting                                                                                                                      ,
-	input         dspss3_iniu_node_top_wrap_rst_n_porting                                                                                                                    ,
-	input  [69:0] dspss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                           ,
-	output [15:0] dspss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                         ,
-	output [15:0] dspss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                          ,
-	input  [15:0] dspss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                         ,
-	output [12:0] dspss3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                              ,
-	input  [12:0] dspss3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                              ,
-	output        dspss3_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                   ,
-	output        dspss3_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                   ,
-	output        dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last            ,
-	output [39:0] dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload         ,
-	output [3:0]  dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos             ,
-	input         dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready           ,
-	output [7:0]  dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid           ,
-	output [7:0]  dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid           ,
-	output        dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid           ,
-	input         dspss4_tniu_node_top_wrap_clk_porting                                                                                                                      ,
-	input         dspss4_tniu_node_top_wrap_rst_n_porting                                                                                                                    ,
-	output [69:0] dspss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                           ,
-	input  [9:0]  dspss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                         ,
-	input  [9:0]  dspss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                          ,
-	output [9:0]  dspss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                         ,
-	input  [12:0] dspss4_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req                                                                              ,
-	output [12:0] dspss4_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req                                                                              ,
-	input  [9:0]  dspss4_tniu_node_top_wrap_dspss4_tniu_node_top_wrap_top_timeout_val_porting_dspss4_tniu_node_top_wrap_top_timeout_val_porting_timeout_val                  ,
-	input         dspss5_iniu_node_top_wrap_clk_porting                                                                                                                      ,
-	input         dspss5_iniu_node_top_wrap_rst_n_porting                                                                                                                    ,
-	input  [69:0] dspss5_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                           ,
-	output [15:0] dspss5_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                         ,
-	output [15:0] dspss5_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                          ,
-	input  [15:0] dspss5_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                         ,
-	output [12:0] dspss5_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                              ,
-	input  [12:0] dspss5_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                              ,
-	output        dspss5_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                   ,
-	output        dspss5_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                   ,
-	output        dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last            ,
-	output [39:0] dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload         ,
-	output [3:0]  dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos             ,
-	input         dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready           ,
-	output [7:0]  dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid           ,
-	output [7:0]  dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid           ,
-	output        dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid           ,
-	input         ddr0_iniu_node_top_wrap_clk_porting                                                                                                                        ,
-	input         ddr0_iniu_node_top_wrap_rst_n_porting                                                                                                                      ,
-	input  [69:0] ddr0_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                             ,
-	output [15:0] ddr0_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                           ,
-	output [15:0] ddr0_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                            ,
-	input  [15:0] ddr0_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                           ,
-	output [12:0] ddr0_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                ,
-	input  [12:0] ddr0_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                ,
-	output        ddr0_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                     ,
-	output        ddr0_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                     ,
-	output        ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
-	output [39:0] ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
-	output [3:0]  ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
-	input         ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
-	output [7:0]  ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
-	output [7:0]  ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
-	output        ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 ,
-	input         ddr1_iniu_node_top_wrap_clk_porting                                                                                                                        ,
-	input         ddr1_iniu_node_top_wrap_rst_n_porting                                                                                                                      ,
-	input  [69:0] ddr1_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                             ,
-	output [15:0] ddr1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                           ,
-	output [15:0] ddr1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                            ,
-	input  [15:0] ddr1_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                           ,
-	output [12:0] ddr1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                ,
-	input  [12:0] ddr1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                ,
-	output        ddr1_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                     ,
-	output        ddr1_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                     ,
-	output        ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
-	output [39:0] ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
-	output [3:0]  ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
-	input         ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
-	output [7:0]  ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
-	output [7:0]  ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
-	output        ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 ,
-	input         ddr2_iniu_node_top_wrap_clk_porting                                                                                                                        ,
-	input         ddr2_iniu_node_top_wrap_rst_n_porting                                                                                                                      ,
-	input  [69:0] ddr2_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                             ,
-	output [15:0] ddr2_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                           ,
-	output [15:0] ddr2_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                            ,
-	input  [15:0] ddr2_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                           ,
-	output [12:0] ddr2_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                ,
-	input  [12:0] ddr2_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                ,
-	output        ddr2_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                     ,
-	output        ddr2_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                     ,
-	output        ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
-	output [39:0] ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
-	output [3:0]  ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
-	input         ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
-	output [7:0]  ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
-	output [7:0]  ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
-	output        ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 ,
-	input         ddr3_iniu_node_top_wrap_clk_porting                                                                                                                        ,
-	input         ddr3_iniu_node_top_wrap_rst_n_porting                                                                                                                      ,
-	input  [69:0] ddr3_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                             ,
-	output [15:0] ddr3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                           ,
-	output [15:0] ddr3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                            ,
-	input  [15:0] ddr3_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                           ,
-	output [12:0] ddr3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                ,
-	input  [12:0] ddr3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                ,
-	output        ddr3_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                     ,
-	output        ddr3_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                     ,
-	output        ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
-	output [39:0] ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
-	output [3:0]  ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
-	input         ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
-	output [7:0]  ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
-	output [7:0]  ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
-	output        ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 ,
-	input         ddr4_iniu_node_top_wrap_clk_porting                                                                                                                        ,
-	input         ddr4_iniu_node_top_wrap_rst_n_porting                                                                                                                      ,
-	input  [69:0] ddr4_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                             ,
-	output [15:0] ddr4_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                           ,
-	output [15:0] ddr4_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                            ,
-	input  [15:0] ddr4_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                           ,
-	output [12:0] ddr4_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                ,
-	input  [12:0] ddr4_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                ,
-	output        ddr4_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                     ,
-	output        ddr4_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                     ,
-	output        ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
-	output [39:0] ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
-	output [3:0]  ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
-	input         ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
-	output [7:0]  ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
-	output [7:0]  ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
-	output        ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 ,
-	input         ddr5_iniu_node_top_wrap_clk_porting                                                                                                                        ,
-	input         ddr5_iniu_node_top_wrap_rst_n_porting                                                                                                                      ,
-	input  [69:0] ddr5_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                             ,
-	output [15:0] ddr5_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                           ,
-	output [15:0] ddr5_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                            ,
-	input  [15:0] ddr5_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                           ,
-	output [12:0] ddr5_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                ,
-	input  [12:0] ddr5_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                ,
-	output        ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_last                                                                                ,
-	output [39:0] ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_payload                                                                             ,
-	output [3:0]  ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_qos                                                                                 ,
-	input         ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_ready                                                                               ,
-	output [7:0]  ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_srcid                                                                               ,
-	output [7:0]  ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_tgtid                                                                               ,
-	output        ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_valid                                                                               ,
-	input         ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_last                                                                                   ,
-	input  [39:0] ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_payload                                                                                ,
-	input  [3:0]  ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_qos                                                                                    ,
-	output        ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_ready                                                                                  ,
-	input  [7:0]  ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_srcid                                                                                  ,
-	input  [7:0]  ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_tgtid                                                                                  ,
-	input         ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_valid                                                                                  ,
-	output        ddr5_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                     ,
-	output        ddr5_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                     ,
-	output        ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
-	output [39:0] ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
-	output [3:0]  ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
-	input         ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
-	output [7:0]  ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
-	output [7:0]  ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
-	output        ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 );
+	input         npu_ss3_iniu_node_top_wrap_clk_porting                                                                                                                           ,
+	input         npu_ss3_iniu_node_top_wrap_rst_n_porting                                                                                                                         ,
+	input  [69:0] npu_ss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                ,
+	output [15:0] npu_ss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                              ,
+	output [15:0] npu_ss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                               ,
+	input  [15:0] npu_ss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                              ,
+	output [12:0] npu_ss3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                   ,
+	input  [12:0] npu_ss3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                   ,
+	input         npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_last                                                                                      ,
+	input  [39:0] npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_payload                                                                                   ,
+	input  [3:0]  npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_qos                                                                                       ,
+	output        npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_ready                                                                                     ,
+	input  [7:0]  npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_srcid                                                                                     ,
+	input  [7:0]  npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_tgtid                                                                                     ,
+	input         npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_valid                                                                                     ,
+	output        npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_last                                                                                   ,
+	output [39:0] npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_payload                                                                                ,
+	output [3:0]  npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_qos                                                                                    ,
+	input         npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_ready                                                                                  ,
+	output [7:0]  npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_srcid                                                                                  ,
+	output [7:0]  npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_tgtid                                                                                  ,
+	output        npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_valid                                                                                  ,
+	output        npu_ss3_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                        ,
+	output        npu_ss3_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                        ,
+	output        npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last               ,
+	output [39:0] npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload            ,
+	output [3:0]  npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                ,
+	input         npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready              ,
+	output [7:0]  npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid              ,
+	output [7:0]  npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid              ,
+	output        npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid              ,
+	input         npu_ss3_tniu_node_top_wrap_clk_porting                                                                                                                           ,
+	input         npu_ss3_tniu_node_top_wrap_rst_n_porting                                                                                                                         ,
+	output [69:0] npu_ss3_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                ,
+	input  [15:0] npu_ss3_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                              ,
+	input  [15:0] npu_ss3_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                               ,
+	output [15:0] npu_ss3_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                              ,
+	input  [12:0] npu_ss3_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req                                                                                   ,
+	output [12:0] npu_ss3_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req                                                                                   ,
+	input  [9:0]  npu_ss3_tniu_node_top_wrap_npu_ss3_tniu_node_top_wrap_top_timeout_val_porting_npu_ss3_tniu_node_top_wrap_top_timeout_val_porting_timeout_val                     ,
+	input         peri_ss_iniu_node_top_wrap_clk_porting                                                                                                                           ,
+	input         peri_ss_iniu_node_top_wrap_rst_n_porting                                                                                                                         ,
+	input  [69:0] peri_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                ,
+	output [15:0] peri_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                              ,
+	output [15:0] peri_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                               ,
+	input  [15:0] peri_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                              ,
+	output [12:0] peri_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                   ,
+	input  [12:0] peri_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                   ,
+	output        peri_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                        ,
+	output        peri_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                        ,
+	output        peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last               ,
+	output [39:0] peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload            ,
+	output [3:0]  peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                ,
+	input         peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready              ,
+	output [7:0]  peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid              ,
+	output [7:0]  peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid              ,
+	output        peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid              ,
+	input         gpu_ss0_iniu_node_top_wrap_clk_porting                                                                                                                           ,
+	input         gpu_ss0_iniu_node_top_wrap_rst_n_porting                                                                                                                         ,
+	input  [69:0] gpu_ss0_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                ,
+	output [15:0] gpu_ss0_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                              ,
+	output [15:0] gpu_ss0_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                               ,
+	input  [15:0] gpu_ss0_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                              ,
+	output [12:0] gpu_ss0_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                   ,
+	input  [12:0] gpu_ss0_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                   ,
+	output        gpu_ss0_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                        ,
+	output        gpu_ss0_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                        ,
+	output        gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last               ,
+	output [39:0] gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload            ,
+	output [3:0]  gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                ,
+	input         gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready              ,
+	output [7:0]  gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid              ,
+	output [7:0]  gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid              ,
+	output        gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid              ,
+	input         camera_ss_iniu_node_top_wrap_clk_porting                                                                                                                         ,
+	input         camera_ss_iniu_node_top_wrap_rst_n_porting                                                                                                                       ,
+	input  [69:0] camera_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                              ,
+	output [15:0] camera_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                            ,
+	output [15:0] camera_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                             ,
+	input  [15:0] camera_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                            ,
+	output [12:0] camera_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                 ,
+	input  [12:0] camera_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                 ,
+	output        camera_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                      ,
+	output        camera_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                      ,
+	output        camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last         ,
+	output [39:0] camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload      ,
+	output [3:0]  camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos          ,
+	input         camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready        ,
+	output [7:0]  camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid        ,
+	output [7:0]  camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid        ,
+	output        camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid        ,
+	input         ufs_ss_iniu_node_top_wrap_clk_porting                                                                                                                            ,
+	input         ufs_ss_iniu_node_top_wrap_rst_n_porting                                                                                                                          ,
+	input  [69:0] ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                 ,
+	output [15:0] ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                               ,
+	output [15:0] ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                                ,
+	input  [15:0] ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                               ,
+	output [12:0] ufs_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                    ,
+	input  [12:0] ufs_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                    ,
+	output        ufs_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                         ,
+	output        ufs_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                         ,
+	output        ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
+	output [39:0] ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
+	output [3:0]  ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
+	input         ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
+	output [7:0]  ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
+	output [7:0]  ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
+	output        ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 ,
+	input         pcie_eth_ss_iniu_node_top_wrap_clk_porting                                                                                                                       ,
+	input         pcie_eth_ss_iniu_node_top_wrap_rst_n_porting                                                                                                                     ,
+	input  [69:0] pcie_eth_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                            ,
+	output [15:0] pcie_eth_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                          ,
+	output [15:0] pcie_eth_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                           ,
+	input  [15:0] pcie_eth_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                          ,
+	output [12:0] pcie_eth_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                               ,
+	input  [12:0] pcie_eth_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                               ,
+	output        pcie_eth_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                    ,
+	output        pcie_eth_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                    ,
+	output        pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last   ,
+	output [39:0] pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload,
+	output [3:0]  pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos    ,
+	input         pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready  ,
+	output [7:0]  pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid  ,
+	output [7:0]  pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid  ,
+	output        pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid  ,
+	input         mcu_ss_iniu_node_top_wrap_clk_porting                                                                                                                            ,
+	input         mcu_ss_iniu_node_top_wrap_rst_n_porting                                                                                                                          ,
+	input  [69:0] mcu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                 ,
+	output [15:0] mcu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                               ,
+	output [15:0] mcu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                                ,
+	input  [15:0] mcu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                               ,
+	output [12:0] mcu_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                    ,
+	input  [12:0] mcu_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                    ,
+	output        mcu_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                         ,
+	output        mcu_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                         ,
+	output        mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                  ,
+	output [39:0] mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload               ,
+	output [3:0]  mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                   ,
+	input         mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                 ,
+	output [7:0]  mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                 ,
+	output [7:0]  mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                 ,
+	output        mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                 ,
+	input         mcu_ss_tniu_node_top_wrap_clk_porting                                                                                                                            ,
+	input         mcu_ss_tniu_node_top_wrap_rst_n_porting                                                                                                                          ,
+	output [69:0] mcu_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                 ,
+	input  [15:0] mcu_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                               ,
+	input  [15:0] mcu_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                                ,
+	output [15:0] mcu_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                               ,
+	input  [12:0] mcu_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req                                                                                    ,
+	output [12:0] mcu_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req                                                                                    ,
+	input  [9:0]  mcu_ss_tniu_node_top_wrap_mcu_ss_tniu_node_top_wrap_top_timeout_val_porting_mcu_ss_tniu_node_top_wrap_top_timeout_val_porting_timeout_val                        ,
+	input         npu_ss4_iniu_node_top_wrap_clk_porting                                                                                                                           ,
+	input         npu_ss4_iniu_node_top_wrap_rst_n_porting                                                                                                                         ,
+	input  [69:0] npu_ss4_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                ,
+	output [15:0] npu_ss4_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                              ,
+	output [15:0] npu_ss4_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                               ,
+	input  [15:0] npu_ss4_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                              ,
+	output [12:0] npu_ss4_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                   ,
+	input  [12:0] npu_ss4_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                   ,
+	output        npu_ss4_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                        ,
+	output        npu_ss4_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                        ,
+	output        npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last               ,
+	output [39:0] npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload            ,
+	output [3:0]  npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                ,
+	input         npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready              ,
+	output [7:0]  npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid              ,
+	output [7:0]  npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid              ,
+	output        npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid              ,
+	input         npu_ss4_tniu_node_top_wrap_clk_porting                                                                                                                           ,
+	input         npu_ss4_tniu_node_top_wrap_rst_n_porting                                                                                                                         ,
+	output [69:0] npu_ss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                ,
+	input  [15:0] npu_ss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                              ,
+	input  [15:0] npu_ss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                               ,
+	output [15:0] npu_ss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                              ,
+	input  [12:0] npu_ss4_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req                                                                                   ,
+	output [12:0] npu_ss4_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req                                                                                   ,
+	input  [9:0]  npu_ss4_tniu_node_top_wrap_npu_ss4_tniu_node_top_wrap_top_timeout_val_porting_npu_ss4_tniu_node_top_wrap_top_timeout_val_porting_timeout_val                     ,
+	input         ddr0_iniu_node_top_wrap_clk_porting                                                                                                                              ,
+	input         ddr0_iniu_node_top_wrap_rst_n_porting                                                                                                                            ,
+	input  [69:0] ddr0_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                   ,
+	output [15:0] ddr0_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                                 ,
+	output [15:0] ddr0_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                                  ,
+	input  [15:0] ddr0_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                                 ,
+	output [12:0] ddr0_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                      ,
+	input  [12:0] ddr0_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                      ,
+	output        ddr0_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                           ,
+	output        ddr0_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                           ,
+	output        ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                        ,
+	output [39:0] ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload                     ,
+	output [3:0]  ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                         ,
+	input         ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                       ,
+	output [7:0]  ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                       ,
+	output [7:0]  ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                       ,
+	output        ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                       ,
+	input         ddr1_iniu_node_top_wrap_clk_porting                                                                                                                              ,
+	input         ddr1_iniu_node_top_wrap_rst_n_porting                                                                                                                            ,
+	input  [69:0] ddr1_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                   ,
+	output [15:0] ddr1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                                 ,
+	output [15:0] ddr1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                                  ,
+	input  [15:0] ddr1_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                                 ,
+	output [12:0] ddr1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                      ,
+	input  [12:0] ddr1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                      ,
+	output        ddr1_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                           ,
+	output        ddr1_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                           ,
+	output        ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                        ,
+	output [39:0] ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload                     ,
+	output [3:0]  ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                         ,
+	input         ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                       ,
+	output [7:0]  ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                       ,
+	output [7:0]  ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                       ,
+	output        ddr1_iniu_node_top_wrap_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_ddr1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                       ,
+	input         ddr2_iniu_node_top_wrap_clk_porting                                                                                                                              ,
+	input         ddr2_iniu_node_top_wrap_rst_n_porting                                                                                                                            ,
+	input  [69:0] ddr2_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                   ,
+	output [15:0] ddr2_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                                 ,
+	output [15:0] ddr2_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                                  ,
+	input  [15:0] ddr2_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                                 ,
+	output [12:0] ddr2_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                      ,
+	input  [12:0] ddr2_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                      ,
+	output        ddr2_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                           ,
+	output        ddr2_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                           ,
+	output        ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                        ,
+	output [39:0] ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload                     ,
+	output [3:0]  ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                         ,
+	input         ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                       ,
+	output [7:0]  ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                       ,
+	output [7:0]  ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                       ,
+	output        ddr2_iniu_node_top_wrap_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_ddr2_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                       ,
+	input         ddr3_iniu_node_top_wrap_clk_porting                                                                                                                              ,
+	input         ddr3_iniu_node_top_wrap_rst_n_porting                                                                                                                            ,
+	input  [69:0] ddr3_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                   ,
+	output [15:0] ddr3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                                 ,
+	output [15:0] ddr3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                                  ,
+	input  [15:0] ddr3_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                                 ,
+	output [12:0] ddr3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                      ,
+	input  [12:0] ddr3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                      ,
+	output        ddr3_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                           ,
+	output        ddr3_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                           ,
+	output        ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                        ,
+	output [39:0] ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload                     ,
+	output [3:0]  ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                         ,
+	input         ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                       ,
+	output [7:0]  ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                       ,
+	output [7:0]  ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                       ,
+	output        ddr3_iniu_node_top_wrap_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_ddr3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                       ,
+	input         ddr4_iniu_node_top_wrap_clk_porting                                                                                                                              ,
+	input         ddr4_iniu_node_top_wrap_rst_n_porting                                                                                                                            ,
+	input  [69:0] ddr4_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                   ,
+	output [15:0] ddr4_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                                 ,
+	output [15:0] ddr4_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                                  ,
+	input  [15:0] ddr4_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                                 ,
+	output [12:0] ddr4_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                      ,
+	input  [12:0] ddr4_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                      ,
+	output        ddr4_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                           ,
+	output        ddr4_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                           ,
+	output        ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                        ,
+	output [39:0] ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload                     ,
+	output [3:0]  ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                         ,
+	input         ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                       ,
+	output [7:0]  ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                       ,
+	output [7:0]  ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                       ,
+	output        ddr4_iniu_node_top_wrap_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_ddr4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                       ,
+	input         ddr5_iniu_node_top_wrap_clk_porting                                                                                                                              ,
+	input         ddr5_iniu_node_top_wrap_rst_n_porting                                                                                                                            ,
+	input  [69:0] ddr5_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync                                                                                                   ,
+	output [15:0] ddr5_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async                                                                                                 ,
+	output [15:0] ddr5_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync                                                                                                  ,
+	input  [15:0] ddr5_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async                                                                                                 ,
+	output [12:0] ddr5_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req                                                                                      ,
+	input  [12:0] ddr5_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req                                                                                      ,
+	output        ddr5_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err                                                                                           ,
+	output        ddr5_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err                                                                                           ,
+	output        ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last                        ,
+	output [39:0] ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload                     ,
+	output [3:0]  ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos                         ,
+	input         ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready                       ,
+	output [7:0]  ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid                       ,
+	output [7:0]  ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid                       ,
+	output        ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid                       ,
+	output        ring_sp_pring_out_if_porting_pring_out_if_last                                                                                                                   ,
+	output [39:0] ring_sp_pring_out_if_porting_pring_out_if_payload                                                                                                                ,
+	output [3:0]  ring_sp_pring_out_if_porting_pring_out_if_qos                                                                                                                    ,
+	input         ring_sp_pring_out_if_porting_pring_out_if_ready                                                                                                                  ,
+	output [7:0]  ring_sp_pring_out_if_porting_pring_out_if_srcid                                                                                                                  ,
+	output [7:0]  ring_sp_pring_out_if_porting_pring_out_if_tgtid                                                                                                                  ,
+	output        ring_sp_pring_out_if_porting_pring_out_if_valid                                                                                                                  ,
+	input         ring_sp_nring_in_if_porting_nring_in_if_last                                                                                                                     ,
+	input  [39:0] ring_sp_nring_in_if_porting_nring_in_if_payload                                                                                                                  ,
+	input  [3:0]  ring_sp_nring_in_if_porting_nring_in_if_qos                                                                                                                      ,
+	output        ring_sp_nring_in_if_porting_nring_in_if_ready                                                                                                                    ,
+	input  [7:0]  ring_sp_nring_in_if_porting_nring_in_if_srcid                                                                                                                    ,
+	input  [7:0]  ring_sp_nring_in_if_porting_nring_in_if_tgtid                                                                                                                    ,
+	input         ring_sp_nring_in_if_porting_nring_in_if_valid                                                                                                                    ,
+	input         u_ring_sink_station_clk_porting                                                                                                                                  ,
+	input         u_ring_sink_station_rst_n_porting                                                                                                                                );
 
 	//Wire define for this module.
 
 	//Wire define for sub module.
-	wire        u_ddr7_iniu_TO_u_ddr6_iniu_SIG_pring_in_if_pring_in_if_ready              ;
-	wire        u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_last             ;
-	wire [39:0] u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_payload          ;
-	wire [3:0]  u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_qos              ;
-	wire [7:0]  u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_srcid            ;
-	wire [7:0]  u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_tgtid            ;
-	wire        u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_valid            ;
-	wire        u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_last             ;
-	wire [39:0] u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_payload          ;
-	wire [3:0]  u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_qos              ;
-	wire [7:0]  u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_srcid            ;
-	wire [7:0]  u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_tgtid            ;
-	wire        u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_valid            ;
-	wire        u_ddr8_iniu_TO_u_ddr7_iniu_SIG_pring_in_if_pring_in_if_ready              ;
-	wire        u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_last             ;
-	wire [39:0] u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_payload          ;
-	wire [3:0]  u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_qos              ;
-	wire [7:0]  u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_srcid            ;
-	wire [7:0]  u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_tgtid            ;
-	wire        u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_valid            ;
-	wire        u_ddr6_iniu_TO_u_ddr7_iniu_SIG_nring_in_if_nring_in_if_ready              ;
-	wire        u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_last             ;
-	wire [39:0] u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_payload          ;
-	wire [3:0]  u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_qos              ;
-	wire [7:0]  u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_srcid            ;
-	wire [7:0]  u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_tgtid            ;
-	wire        u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_valid            ;
-	wire        u_ddr9_iniu_TO_u_ddr8_iniu_SIG_pring_in_if_pring_in_if_ready              ;
-	wire        u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_last             ;
-	wire [39:0] u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_payload          ;
-	wire [3:0]  u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_qos              ;
-	wire [7:0]  u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_srcid            ;
-	wire [7:0]  u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_tgtid            ;
-	wire        u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_valid            ;
-	wire        u_ddr7_iniu_TO_u_ddr8_iniu_SIG_nring_in_if_nring_in_if_ready              ;
-	wire        u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_last             ;
-	wire [39:0] u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_payload          ;
-	wire [3:0]  u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_qos              ;
-	wire [7:0]  u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_srcid            ;
-	wire [7:0]  u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_tgtid            ;
-	wire        u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_valid            ;
-	wire        u_ddr10_iniu_TO_u_ddr9_iniu_SIG_pring_in_if_pring_in_if_ready             ;
-	wire        u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_last            ;
-	wire [39:0] u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_payload         ;
-	wire [3:0]  u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_qos             ;
-	wire [7:0]  u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_srcid           ;
-	wire [7:0]  u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_tgtid           ;
-	wire        u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_valid           ;
-	wire        u_ddr8_iniu_TO_u_ddr9_iniu_SIG_nring_in_if_nring_in_if_ready              ;
-	wire        u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_last            ;
-	wire [39:0] u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_payload         ;
-	wire [3:0]  u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_qos             ;
-	wire [7:0]  u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_srcid           ;
-	wire [7:0]  u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_tgtid           ;
-	wire        u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_valid           ;
-	wire        u_ddr11_tniu_TO_u_ddr10_iniu_SIG_pring_in_if_pring_in_if_ready            ;
-	wire        u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_last           ;
-	wire [39:0] u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_payload        ;
-	wire [3:0]  u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_qos            ;
-	wire [7:0]  u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_srcid          ;
-	wire [7:0]  u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_tgtid          ;
-	wire        u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_valid          ;
-	wire        u_ddr9_iniu_TO_u_ddr10_iniu_SIG_nring_in_if_nring_in_if_ready             ;
-	wire        u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_last           ;
-	wire [39:0] u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_payload        ;
-	wire [3:0]  u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_qos            ;
-	wire [7:0]  u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_srcid          ;
-	wire [7:0]  u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_tgtid          ;
-	wire        u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_valid          ;
-	wire        u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_pring_in_if_pring_in_if_ready          ;
-	wire        u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_last         ;
-	wire [39:0] u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_payload      ;
-	wire [3:0]  u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_qos          ;
-	wire [7:0]  u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_srcid        ;
-	wire [7:0]  u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_tgtid        ;
-	wire        u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_valid        ;
-	wire        u_ddr10_iniu_TO_u_ddr11_tniu_SIG_nring_in_if_nring_in_if_ready            ;
-	wire        u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_last         ;
-	wire [39:0] u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_payload      ;
-	wire [3:0]  u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_qos          ;
-	wire [7:0]  u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_srcid        ;
-	wire [7:0]  u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid        ;
-	wire        u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_valid        ;
-	wire        u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_pring_in_if_pring_in_if_ready         ;
-	wire        u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_last        ;
-	wire [39:0] u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_payload     ;
-	wire [3:0]  u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_qos         ;
-	wire [7:0]  u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_srcid       ;
-	wire [7:0]  u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid       ;
-	wire        u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_valid       ;
-	wire        u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_nring_in_if_nring_in_if_ready          ;
-	wire        u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_last        ;
-	wire [39:0] u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_payload     ;
-	wire [3:0]  u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_qos         ;
-	wire [7:0]  u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_srcid       ;
-	wire [7:0]  u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid       ;
-	wire        u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_valid       ;
-	wire        u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_in_if_pring_in_if_ready       ;
-	wire        u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_last      ;
-	wire [39:0] u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_payload   ;
-	wire [3:0]  u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_qos       ;
-	wire [7:0]  u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_srcid     ;
-	wire [7:0]  u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid     ;
-	wire        u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_valid     ;
-	wire        u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_in_if_nring_in_if_ready         ;
-	wire        u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_last      ;
-	wire [39:0] u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_payload   ;
-	wire [3:0]  u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_qos       ;
-	wire [7:0]  u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_srcid     ;
-	wire [7:0]  u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid     ;
-	wire        u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_valid     ;
-	wire        u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_pring_in_if_pring_in_if_ready    ;
-	wire        u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_last   ;
-	wire [39:0] u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_payload;
-	wire [3:0]  u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_qos    ;
-	wire [7:0]  u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_srcid  ;
-	wire [7:0]  u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid  ;
-	wire        u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_valid  ;
-	wire        u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_in_if_nring_in_if_ready       ;
-	wire        u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_last   ;
-	wire [39:0] u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_payload;
-	wire [3:0]  u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_qos    ;
-	wire [7:0]  u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_srcid  ;
-	wire [7:0]  u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_tgtid  ;
-	wire        u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_valid  ;
-	wire        u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_in_if_pring_in_if_ready       ;
-	wire        u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_last      ;
-	wire [39:0] u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_payload   ;
-	wire [3:0]  u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_qos       ;
-	wire [7:0]  u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_srcid     ;
-	wire [7:0]  u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_tgtid     ;
-	wire        u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_valid     ;
-	wire        u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_in_if_nring_in_if_ready    ;
-	wire        u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_last      ;
-	wire [39:0] u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_payload   ;
-	wire [3:0]  u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_qos       ;
-	wire [7:0]  u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_srcid     ;
-	wire [7:0]  u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid     ;
-	wire        u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_valid     ;
-	wire        u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_pring_in_if_pring_in_if_ready          ;
-	wire        u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_last         ;
-	wire [39:0] u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_payload      ;
-	wire [3:0]  u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_qos          ;
-	wire [7:0]  u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_srcid        ;
-	wire [7:0]  u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid        ;
-	wire        u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_valid        ;
-	wire        u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_nring_in_if_nring_in_if_ready       ;
-	wire        u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_last         ;
-	wire [39:0] u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_payload      ;
-	wire [3:0]  u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_qos          ;
-	wire [7:0]  u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_srcid        ;
-	wire [7:0]  u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid        ;
-	wire        u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_valid        ;
-	wire        u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_pring_in_if_pring_in_if_ready          ;
-	wire        u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_last         ;
-	wire [39:0] u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_payload      ;
-	wire [3:0]  u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_qos          ;
-	wire [7:0]  u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_srcid        ;
-	wire [7:0]  u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid        ;
-	wire        u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_valid        ;
-	wire        u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_nring_in_if_nring_in_if_ready          ;
-	wire        u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_last         ;
-	wire [39:0] u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_payload      ;
-	wire [3:0]  u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_qos          ;
-	wire [7:0]  u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_srcid        ;
-	wire [7:0]  u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_tgtid        ;
-	wire        u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_valid        ;
-	wire        u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_in_if_pring_in_if_ready        ;
-	wire        u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_last       ;
-	wire [39:0] u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_payload    ;
-	wire [3:0]  u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_qos        ;
-	wire [7:0]  u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_srcid      ;
-	wire [7:0]  u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_tgtid      ;
-	wire        u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_valid      ;
-	wire        u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_in_if_nring_in_if_ready          ;
-	wire        u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_last       ;
-	wire [39:0] u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_payload    ;
-	wire [3:0]  u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_qos        ;
-	wire [7:0]  u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_srcid      ;
-	wire [7:0]  u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid      ;
-	wire        u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_valid      ;
-	wire        u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_pring_in_if_pring_in_if_ready      ;
-	wire        u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_last     ;
-	wire [39:0] u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_payload  ;
-	wire [3:0]  u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_qos      ;
-	wire [7:0]  u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_srcid    ;
-	wire [7:0]  u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid    ;
-	wire        u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_valid    ;
-	wire        u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_nring_in_if_nring_in_if_ready        ;
-	wire        u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_last     ;
-	wire [39:0] u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_payload  ;
-	wire [3:0]  u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_qos      ;
-	wire [7:0]  u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_srcid    ;
-	wire [7:0]  u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_tgtid    ;
-	wire        u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_valid    ;
-	wire        u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_pring_in_if_pring_in_if_ready      ;
-	wire        u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_last     ;
-	wire [39:0] u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_payload  ;
-	wire [3:0]  u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_qos      ;
-	wire [7:0]  u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_srcid    ;
-	wire [7:0]  u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_tgtid    ;
-	wire        u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_valid    ;
-	wire        u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_nring_in_if_nring_in_if_ready      ;
-	wire        u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_last     ;
-	wire [39:0] u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_payload  ;
-	wire [3:0]  u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_qos      ;
-	wire [7:0]  u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_srcid    ;
-	wire [7:0]  u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_tgtid    ;
-	wire        u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_valid    ;
-	wire        u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_pring_in_if_pring_in_if_ready        ;
-	wire        u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_last       ;
-	wire [39:0] u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_payload    ;
-	wire [3:0]  u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_qos        ;
-	wire [7:0]  u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_srcid      ;
-	wire [7:0]  u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_tgtid      ;
-	wire        u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_valid      ;
-	wire        u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_nring_in_if_nring_in_if_ready      ;
-	wire        u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_last       ;
-	wire [39:0] u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_payload    ;
-	wire [3:0]  u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_qos        ;
-	wire [7:0]  u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_srcid      ;
-	wire [7:0]  u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_tgtid      ;
-	wire        u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_valid      ;
-	wire        u_dspss1_iniu_TO_u_dspss0_tniu_SIG_pring_in_if_pring_in_if_ready          ;
-	wire        u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_last         ;
-	wire [39:0] u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_payload      ;
-	wire [3:0]  u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_qos          ;
-	wire [7:0]  u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_srcid        ;
-	wire [7:0]  u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_tgtid        ;
-	wire        u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_valid        ;
-	wire        u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_nring_in_if_nring_in_if_ready        ;
-	wire        u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_last         ;
-	wire [39:0] u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_payload      ;
-	wire [3:0]  u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_qos          ;
-	wire [7:0]  u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_srcid        ;
-	wire [7:0]  u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_tgtid        ;
-	wire        u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_valid        ;
-	wire        u_dspss2_tniu_TO_u_dspss1_iniu_SIG_pring_in_if_pring_in_if_ready          ;
-	wire        u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_last         ;
-	wire [39:0] u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_payload      ;
-	wire [3:0]  u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_qos          ;
-	wire [7:0]  u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_srcid        ;
-	wire [7:0]  u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_tgtid        ;
-	wire        u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_valid        ;
-	wire        u_dspss0_tniu_TO_u_dspss1_iniu_SIG_nring_in_if_nring_in_if_ready          ;
-	wire        u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_last         ;
-	wire [39:0] u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_payload      ;
-	wire [3:0]  u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_qos          ;
-	wire [7:0]  u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_srcid        ;
-	wire [7:0]  u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_tgtid        ;
-	wire        u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_valid        ;
-	wire        u_dspss3_iniu_TO_u_dspss2_tniu_SIG_pring_in_if_pring_in_if_ready          ;
-	wire        u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_last         ;
-	wire [39:0] u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_payload      ;
-	wire [3:0]  u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_qos          ;
-	wire [7:0]  u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_srcid        ;
-	wire [7:0]  u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_tgtid        ;
-	wire        u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_valid        ;
-	wire        u_dspss1_iniu_TO_u_dspss2_tniu_SIG_nring_in_if_nring_in_if_ready          ;
-	wire        u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_last         ;
-	wire [39:0] u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_payload      ;
-	wire [3:0]  u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_qos          ;
-	wire [7:0]  u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_srcid        ;
-	wire [7:0]  u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_tgtid        ;
-	wire        u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_valid        ;
-	wire        u_dspss4_tniu_TO_u_dspss3_iniu_SIG_pring_in_if_pring_in_if_ready          ;
-	wire        u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_last         ;
-	wire [39:0] u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_payload      ;
-	wire [3:0]  u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_qos          ;
-	wire [7:0]  u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_srcid        ;
-	wire [7:0]  u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_tgtid        ;
-	wire        u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_valid        ;
-	wire        u_dspss2_tniu_TO_u_dspss3_iniu_SIG_nring_in_if_nring_in_if_ready          ;
-	wire        u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_last         ;
-	wire [39:0] u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_payload      ;
-	wire [3:0]  u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_qos          ;
-	wire [7:0]  u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_srcid        ;
-	wire [7:0]  u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_tgtid        ;
-	wire        u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_valid        ;
-	wire        u_dspss5_iniu_TO_u_dspss4_tniu_SIG_pring_in_if_pring_in_if_ready          ;
-	wire        u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_last         ;
-	wire [39:0] u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_payload      ;
-	wire [3:0]  u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_qos          ;
-	wire [7:0]  u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_srcid        ;
-	wire [7:0]  u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_tgtid        ;
-	wire        u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_valid        ;
-	wire        u_dspss3_iniu_TO_u_dspss4_tniu_SIG_nring_in_if_nring_in_if_ready          ;
-	wire        u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_last         ;
-	wire [39:0] u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_payload      ;
-	wire [3:0]  u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_qos          ;
-	wire [7:0]  u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_srcid        ;
-	wire [7:0]  u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_tgtid        ;
-	wire        u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_valid        ;
-	wire        u_ddr0_iniu_TO_u_dspss5_iniu_SIG_pring_in_if_pring_in_if_ready            ;
-	wire        u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_last           ;
-	wire [39:0] u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_payload        ;
-	wire [3:0]  u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_qos            ;
-	wire [7:0]  u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_srcid          ;
-	wire [7:0]  u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_tgtid          ;
-	wire        u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_valid          ;
-	wire        u_dspss4_tniu_TO_u_dspss5_iniu_SIG_nring_in_if_nring_in_if_ready          ;
-	wire        u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_last           ;
-	wire [39:0] u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_payload        ;
-	wire [3:0]  u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_qos            ;
-	wire [7:0]  u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_srcid          ;
-	wire [7:0]  u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_tgtid          ;
-	wire        u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_valid          ;
-	wire        u_ddr1_iniu_TO_u_ddr0_iniu_SIG_pring_in_if_pring_in_if_ready              ;
-	wire        u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_last             ;
-	wire [39:0] u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_payload          ;
-	wire [3:0]  u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_qos              ;
-	wire [7:0]  u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_srcid            ;
-	wire [7:0]  u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_tgtid            ;
-	wire        u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_valid            ;
-	wire        u_dspss5_iniu_TO_u_ddr0_iniu_SIG_nring_in_if_nring_in_if_ready            ;
-	wire        u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_last             ;
-	wire [39:0] u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_payload          ;
-	wire [3:0]  u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_qos              ;
-	wire [7:0]  u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_srcid            ;
-	wire [7:0]  u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_tgtid            ;
-	wire        u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_valid            ;
-	wire        u_ddr2_iniu_TO_u_ddr1_iniu_SIG_pring_in_if_pring_in_if_ready              ;
-	wire        u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_last             ;
-	wire [39:0] u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_payload          ;
-	wire [3:0]  u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_qos              ;
-	wire [7:0]  u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_srcid            ;
-	wire [7:0]  u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_tgtid            ;
-	wire        u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_valid            ;
-	wire        u_ddr0_iniu_TO_u_ddr1_iniu_SIG_nring_in_if_nring_in_if_ready              ;
-	wire        u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_last             ;
-	wire [39:0] u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_payload          ;
-	wire [3:0]  u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_qos              ;
-	wire [7:0]  u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_srcid            ;
-	wire [7:0]  u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_tgtid            ;
-	wire        u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_valid            ;
-	wire        u_ddr3_iniu_TO_u_ddr2_iniu_SIG_pring_in_if_pring_in_if_ready              ;
-	wire        u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_last             ;
-	wire [39:0] u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_payload          ;
-	wire [3:0]  u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_qos              ;
-	wire [7:0]  u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_srcid            ;
-	wire [7:0]  u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_tgtid            ;
-	wire        u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_valid            ;
-	wire        u_ddr1_iniu_TO_u_ddr2_iniu_SIG_nring_in_if_nring_in_if_ready              ;
-	wire        u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_last             ;
-	wire [39:0] u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_payload          ;
-	wire [3:0]  u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_qos              ;
-	wire [7:0]  u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_srcid            ;
-	wire [7:0]  u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_tgtid            ;
-	wire        u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_valid            ;
-	wire        u_ddr4_iniu_TO_u_ddr3_iniu_SIG_pring_in_if_pring_in_if_ready              ;
-	wire        u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_last             ;
-	wire [39:0] u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_payload          ;
-	wire [3:0]  u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_qos              ;
-	wire [7:0]  u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_srcid            ;
-	wire [7:0]  u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_tgtid            ;
-	wire        u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_valid            ;
-	wire        u_ddr2_iniu_TO_u_ddr3_iniu_SIG_nring_in_if_nring_in_if_ready              ;
-	wire        u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_last             ;
-	wire [39:0] u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_payload          ;
-	wire [3:0]  u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_qos              ;
-	wire [7:0]  u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_srcid            ;
-	wire [7:0]  u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_tgtid            ;
-	wire        u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_valid            ;
-	wire        u_ddr5_iniu_TO_u_ddr4_iniu_SIG_pring_in_if_pring_in_if_ready              ;
-	wire        u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_last             ;
-	wire [39:0] u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_payload          ;
-	wire [3:0]  u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_qos              ;
-	wire [7:0]  u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_srcid            ;
-	wire [7:0]  u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_tgtid            ;
-	wire        u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_valid            ;
-	wire        u_ddr3_iniu_TO_u_ddr4_iniu_SIG_nring_in_if_nring_in_if_ready              ;
-	wire        u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_last             ;
-	wire [39:0] u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_payload          ;
-	wire [3:0]  u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_qos              ;
-	wire [7:0]  u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_srcid            ;
-	wire [7:0]  u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_tgtid            ;
-	wire        u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_valid            ;
-	wire        u_ddr4_iniu_TO_u_ddr5_iniu_SIG_nring_in_if_nring_in_if_ready              ;
+	wire        u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_pring_in_if_pring_in_if_ready       ;
+	wire        u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_last      ;
+	wire [39:0] u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_payload   ;
+	wire [3:0]  u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_qos       ;
+	wire [7:0]  u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_srcid     ;
+	wire [7:0]  u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_tgtid     ;
+	wire        u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_valid     ;
+	wire        u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_last      ;
+	wire [39:0] u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_payload   ;
+	wire [3:0]  u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_qos       ;
+	wire [7:0]  u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_srcid     ;
+	wire [7:0]  u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_tgtid     ;
+	wire        u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_valid     ;
+	wire        u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_pring_in_if_pring_in_if_ready       ;
+	wire        u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_last      ;
+	wire [39:0] u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_payload   ;
+	wire [3:0]  u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_qos       ;
+	wire [7:0]  u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_srcid     ;
+	wire [7:0]  u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_tgtid     ;
+	wire        u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_valid     ;
+	wire        u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_nring_in_if_nring_in_if_ready       ;
+	wire        u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_last      ;
+	wire [39:0] u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_payload   ;
+	wire [3:0]  u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_qos       ;
+	wire [7:0]  u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_srcid     ;
+	wire [7:0]  u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid     ;
+	wire        u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_valid     ;
+	wire        u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_pring_in_if_pring_in_if_ready       ;
+	wire        u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_last      ;
+	wire [39:0] u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_payload   ;
+	wire [3:0]  u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_qos       ;
+	wire [7:0]  u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_srcid     ;
+	wire [7:0]  u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid     ;
+	wire        u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_valid     ;
+	wire        u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_nring_in_if_nring_in_if_ready       ;
+	wire        u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_last      ;
+	wire [39:0] u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_payload   ;
+	wire [3:0]  u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_qos       ;
+	wire [7:0]  u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_srcid     ;
+	wire [7:0]  u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_tgtid     ;
+	wire        u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_valid     ;
+	wire        u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_in_if_pring_in_if_ready     ;
+	wire        u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_last    ;
+	wire [39:0] u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_payload ;
+	wire [3:0]  u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_qos     ;
+	wire [7:0]  u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_srcid   ;
+	wire [7:0]  u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_tgtid   ;
+	wire        u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_valid   ;
+	wire        u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_in_if_nring_in_if_ready       ;
+	wire        u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_last    ;
+	wire [39:0] u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_payload ;
+	wire [3:0]  u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_qos     ;
+	wire [7:0]  u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_srcid   ;
+	wire [7:0]  u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid   ;
+	wire        u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_valid   ;
+	wire        u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_in_if_pring_in_if_ready      ;
+	wire        u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_last     ;
+	wire [39:0] u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_payload  ;
+	wire [3:0]  u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_qos      ;
+	wire [7:0]  u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_srcid    ;
+	wire [7:0]  u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid    ;
+	wire        u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_valid    ;
+	wire        u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_nring_in_if_nring_in_if_ready     ;
+	wire        u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_last     ;
+	wire [39:0] u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_payload  ;
+	wire [3:0]  u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_qos      ;
+	wire [7:0]  u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_srcid    ;
+	wire [7:0]  u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid    ;
+	wire        u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_valid    ;
+	wire        u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_in_if_pring_in_if_ready    ;
+	wire        u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_last   ;
+	wire [39:0] u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_payload;
+	wire [3:0]  u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_qos    ;
+	wire [7:0]  u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_srcid  ;
+	wire [7:0]  u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid  ;
+	wire        u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_valid  ;
+	wire        u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_in_if_nring_in_if_ready      ;
+	wire        u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_last   ;
+	wire [39:0] u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_payload;
+	wire [3:0]  u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_qos    ;
+	wire [7:0]  u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_srcid  ;
+	wire [7:0]  u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid  ;
+	wire        u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_valid  ;
+	wire        u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_in_if_pring_in_if_ready    ;
+	wire        u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_last   ;
+	wire [39:0] u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_payload;
+	wire [3:0]  u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_qos    ;
+	wire [7:0]  u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_srcid  ;
+	wire [7:0]  u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid  ;
+	wire        u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_valid  ;
+	wire        u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_in_if_nring_in_if_ready    ;
+	wire        u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_last   ;
+	wire [39:0] u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_payload;
+	wire [3:0]  u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_qos    ;
+	wire [7:0]  u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_srcid  ;
+	wire [7:0]  u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid  ;
+	wire        u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_valid  ;
+	wire        u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_pring_in_if_pring_in_if_ready         ;
+	wire        u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_last        ;
+	wire [39:0] u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_payload     ;
+	wire [3:0]  u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_qos         ;
+	wire [7:0]  u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_srcid       ;
+	wire [7:0]  u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid       ;
+	wire        u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_valid       ;
+	wire        u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_nring_in_if_nring_in_if_ready    ;
+	wire        u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_last        ;
+	wire [39:0] u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_payload     ;
+	wire [3:0]  u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_qos         ;
+	wire [7:0]  u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_srcid       ;
+	wire [7:0]  u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_tgtid       ;
+	wire        u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_valid       ;
+	wire        u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_pring_in_if_pring_in_if_ready        ;
+	wire        u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_last       ;
+	wire [39:0] u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_payload    ;
+	wire [3:0]  u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_qos        ;
+	wire [7:0]  u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_srcid      ;
+	wire [7:0]  u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_tgtid      ;
+	wire        u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_valid      ;
+	wire        u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_nring_in_if_nring_in_if_ready         ;
+	wire        u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_last       ;
+	wire [39:0] u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_payload    ;
+	wire [3:0]  u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_qos        ;
+	wire [7:0]  u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_srcid      ;
+	wire [7:0]  u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_tgtid      ;
+	wire        u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_valid      ;
+	wire        u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_pring_in_if_pring_in_if_ready       ;
+	wire        u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_last      ;
+	wire [39:0] u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_payload   ;
+	wire [3:0]  u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_qos       ;
+	wire [7:0]  u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_srcid     ;
+	wire [7:0]  u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_tgtid     ;
+	wire        u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_valid     ;
+	wire        u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_nring_in_if_nring_in_if_ready        ;
+	wire        u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_last      ;
+	wire [39:0] u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_payload   ;
+	wire [3:0]  u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_qos       ;
+	wire [7:0]  u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_srcid     ;
+	wire [7:0]  u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_tgtid     ;
+	wire        u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_valid     ;
+	wire        u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_pring_in_if_pring_in_if_ready          ;
+	wire        u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_last         ;
+	wire [39:0] u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_payload      ;
+	wire [3:0]  u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_qos          ;
+	wire [7:0]  u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_srcid        ;
+	wire [7:0]  u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_tgtid        ;
+	wire        u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_valid        ;
+	wire        u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_nring_in_if_nring_in_if_ready       ;
+	wire        u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_last         ;
+	wire [39:0] u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_payload      ;
+	wire [3:0]  u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_qos          ;
+	wire [7:0]  u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_srcid        ;
+	wire [7:0]  u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_tgtid        ;
+	wire        u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_valid        ;
+	wire        u_ddr1_iniu_TO_u_ddr0_iniu_SIG_pring_in_if_pring_in_if_ready             ;
+	wire        u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_last            ;
+	wire [39:0] u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_payload         ;
+	wire [3:0]  u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_qos             ;
+	wire [7:0]  u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_srcid           ;
+	wire [7:0]  u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_tgtid           ;
+	wire        u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_valid           ;
+	wire        u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_nring_in_if_nring_in_if_ready          ;
+	wire        u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_last            ;
+	wire [39:0] u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_payload         ;
+	wire [3:0]  u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_qos             ;
+	wire [7:0]  u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_srcid           ;
+	wire [7:0]  u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_tgtid           ;
+	wire        u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_valid           ;
+	wire        u_ddr2_iniu_TO_u_ddr1_iniu_SIG_pring_in_if_pring_in_if_ready             ;
+	wire        u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_last            ;
+	wire [39:0] u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_payload         ;
+	wire [3:0]  u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_qos             ;
+	wire [7:0]  u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_srcid           ;
+	wire [7:0]  u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_tgtid           ;
+	wire        u_ddr2_iniu_TO_u_ddr1_iniu_SIG_nring_out_if_nring_out_if_valid           ;
+	wire        u_ddr0_iniu_TO_u_ddr1_iniu_SIG_nring_in_if_nring_in_if_ready             ;
+	wire        u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_last            ;
+	wire [39:0] u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_payload         ;
+	wire [3:0]  u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_qos             ;
+	wire [7:0]  u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_srcid           ;
+	wire [7:0]  u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_tgtid           ;
+	wire        u_ddr1_iniu_TO_u_ddr2_iniu_SIG_pring_out_if_pring_out_if_valid           ;
+	wire        u_ddr3_iniu_TO_u_ddr2_iniu_SIG_pring_in_if_pring_in_if_ready             ;
+	wire        u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_last            ;
+	wire [39:0] u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_payload         ;
+	wire [3:0]  u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_qos             ;
+	wire [7:0]  u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_srcid           ;
+	wire [7:0]  u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_tgtid           ;
+	wire        u_ddr3_iniu_TO_u_ddr2_iniu_SIG_nring_out_if_nring_out_if_valid           ;
+	wire        u_ddr1_iniu_TO_u_ddr2_iniu_SIG_nring_in_if_nring_in_if_ready             ;
+	wire        u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_last            ;
+	wire [39:0] u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_payload         ;
+	wire [3:0]  u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_qos             ;
+	wire [7:0]  u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_srcid           ;
+	wire [7:0]  u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_tgtid           ;
+	wire        u_ddr2_iniu_TO_u_ddr3_iniu_SIG_pring_out_if_pring_out_if_valid           ;
+	wire        u_ddr4_iniu_TO_u_ddr3_iniu_SIG_pring_in_if_pring_in_if_ready             ;
+	wire        u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_last            ;
+	wire [39:0] u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_payload         ;
+	wire [3:0]  u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_qos             ;
+	wire [7:0]  u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_srcid           ;
+	wire [7:0]  u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_tgtid           ;
+	wire        u_ddr4_iniu_TO_u_ddr3_iniu_SIG_nring_out_if_nring_out_if_valid           ;
+	wire        u_ddr2_iniu_TO_u_ddr3_iniu_SIG_nring_in_if_nring_in_if_ready             ;
+	wire        u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_last            ;
+	wire [39:0] u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_payload         ;
+	wire [3:0]  u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_qos             ;
+	wire [7:0]  u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_srcid           ;
+	wire [7:0]  u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_tgtid           ;
+	wire        u_ddr3_iniu_TO_u_ddr4_iniu_SIG_pring_out_if_pring_out_if_valid           ;
+	wire        u_ddr5_iniu_TO_u_ddr4_iniu_SIG_pring_in_if_pring_in_if_ready             ;
+	wire        u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_last            ;
+	wire [39:0] u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_payload         ;
+	wire [3:0]  u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_qos             ;
+	wire [7:0]  u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_srcid           ;
+	wire [7:0]  u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_tgtid           ;
+	wire        u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_valid           ;
+	wire        u_ddr3_iniu_TO_u_ddr4_iniu_SIG_nring_in_if_nring_in_if_ready             ;
+	wire        u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_last            ;
+	wire [39:0] u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_payload         ;
+	wire [3:0]  u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_qos             ;
+	wire [7:0]  u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_srcid           ;
+	wire [7:0]  u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_tgtid           ;
+	wire        u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_valid           ;
+	wire        u_ring_sink_station_TO_u_ddr5_iniu_SIG_pring_in_if_pring_in_if_ready     ;
+	wire        u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_last    ;
+	wire [39:0] u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_payload ;
+	wire [3:0]  u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_qos     ;
+	wire [7:0]  u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_srcid   ;
+	wire [7:0]  u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_tgtid   ;
+	wire        u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_valid   ;
+	wire        u_ddr4_iniu_TO_u_ddr5_iniu_SIG_nring_in_if_nring_in_if_ready             ;
+	wire        u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_valid     ;
+	wire [39:0] u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_payload   ;
+	wire [7:0]  u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_srcid     ;
+	wire [7:0]  u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_tgtid     ;
+	wire [3:0]  u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_qos       ;
+	wire        u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_last      ;
+	wire        u_ring_sink_station_TO_u_ring_sp_SIG_nring_in_if_nring_in_if_ready       ;
+	wire        u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_last    ;
+	wire [39:0] u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_payload ;
+	wire [3:0]  u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_qos     ;
+	wire [7:0]  u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_srcid   ;
+	wire [7:0]  u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_tgtid   ;
+	wire        u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_valid   ;
+	wire        u_ring_sp_TO_u_ring_sink_station_SIG_pring_in_if_ready                   ;
+	wire        u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_last                   ;
+	wire [39:0] u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_payload                ;
+	wire [3:0]  u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_qos                    ;
+	wire [7:0]  u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_srcid                  ;
+	wire [7:0]  u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_tgtid                  ;
+	wire        u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_valid                  ;
+	wire        u_ddr5_iniu_TO_u_ring_sink_station_SIG_nring_in_if_nring_in_if_ready     ;
 
 	//Wire define for Inout.
 
@@ -838,366 +559,182 @@ module soc_intr_ring_noc_dn_harden_wrap (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	ddr6_iniu_node_top_wrap u_ddr6_iniu (
-		.clk(ddr6_iniu_node_top_wrap_clk_porting),
-		.rst_n(ddr6_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(ddr6_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(ddr6_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(ddr6_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(ddr6_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(ddr6_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(ddr6_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_last),
-		.pring_in_if_pring_in_if_payload(ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_payload),
-		.pring_in_if_pring_in_if_qos(ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_qos),
-		.pring_in_if_pring_in_if_ready(ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_tgtid),
-		.pring_in_if_pring_in_if_valid(ddr6_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_valid),
-		.pring_out_if_pring_out_if_last(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_ready),
-		.nring_out_if_nring_out_if_srcid(ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(ddr6_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(ddr6_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(ddr6_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(ddr6_iniu_node_top_wrap_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_ddr6_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	ddr7_iniu_node_top_wrap u_ddr7_iniu (
-		.clk(ddr7_iniu_node_top_wrap_clk_porting),
-		.rst_n(ddr7_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(ddr7_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(ddr7_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(ddr7_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(ddr7_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(ddr7_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(ddr7_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_ddr6_iniu_TO_u_ddr7_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_ddr7_iniu_TO_u_ddr6_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(ddr7_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(ddr7_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(ddr7_iniu_node_top_wrap_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_ddr7_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	ddr8_iniu_node_top_wrap u_ddr8_iniu (
-		.clk(ddr8_iniu_node_top_wrap_clk_porting),
-		.rst_n(ddr8_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(ddr8_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(ddr8_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(ddr8_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(ddr8_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(ddr8_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(ddr8_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_ddr7_iniu_TO_u_ddr8_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_ddr8_iniu_TO_u_ddr7_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(ddr8_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(ddr8_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(ddr8_iniu_node_top_wrap_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_ddr8_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	ddr9_iniu_node_top_wrap u_ddr9_iniu (
-		.clk(ddr9_iniu_node_top_wrap_clk_porting),
-		.rst_n(ddr9_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(ddr9_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(ddr9_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(ddr9_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(ddr9_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(ddr9_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(ddr9_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_ddr8_iniu_TO_u_ddr9_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_ddr9_iniu_TO_u_ddr8_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(ddr9_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(ddr9_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(ddr9_iniu_node_top_wrap_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_ddr9_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	ddr10_iniu_node_top_wrap u_ddr10_iniu (
-		.clk(ddr10_iniu_node_top_wrap_clk_porting),
-		.rst_n(ddr10_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(ddr10_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(ddr10_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(ddr10_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(ddr10_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(ddr10_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(ddr10_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_ddr9_iniu_TO_u_ddr10_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_ddr10_iniu_TO_u_ddr9_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(ddr10_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(ddr10_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(ddr10_iniu_node_top_wrap_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_ddr10_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	ddr11_tniu_node_top_wrap u_ddr11_tniu (
-		.clk(ddr11_tniu_node_top_wrap_clk_porting),
-		.rst_n(ddr11_tniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(ddr11_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(ddr11_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(ddr11_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(ddr11_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_s_async_master_hub_rx_req(ddr11_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req),
-		.lp_async_s_async_master_hub_tx_req(ddr11_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_ddr10_iniu_TO_u_ddr11_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_ddr11_tniu_TO_u_ddr10_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.ddr11_tniu_node_top_wrap_top_timeout_val_porting_timeout_val(ddr11_tniu_node_top_wrap_ddr11_tniu_node_top_wrap_top_timeout_val_porting_ddr11_tniu_node_top_wrap_top_timeout_val_porting_timeout_val));
-	mipi_ss_iniu_node_top_wrap u_mipi_ss_iniu (
-		.clk(mipi_ss_iniu_node_top_wrap_clk_porting),
-		.rst_n(mipi_ss_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(mipi_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(mipi_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(mipi_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(mipi_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(mipi_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(mipi_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_ddr11_tniu_TO_u_mipi_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_mipi_ss_iniu_TO_u_ddr11_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(mipi_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(mipi_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(mipi_ss_iniu_node_top_wrap_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mipi_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	ufs_ss_iniu_node_top_wrap u_ufs_ss_iniu (
-		.clk(ufs_ss_iniu_node_top_wrap_clk_porting),
-		.rst_n(ufs_ss_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(ufs_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(ufs_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_mipi_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_ufs_ss_iniu_TO_u_mipi_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(ufs_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(ufs_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
+	npu_ss3_iniu_node_top_wrap u_npu_ss3_iniu (
+		.clk(npu_ss3_iniu_node_top_wrap_clk_porting),
+		.rst_n(npu_ss3_iniu_node_top_wrap_rst_n_porting),
+		.async_fifo_pld_sync(npu_ss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
+		.async_fifo_rptr_async(npu_ss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
+		.async_fifo_rptr_sync(npu_ss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
+		.async_fifo_wptr_async(npu_ss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
+		.lp_async_m_async_master_hub_rx_req(npu_ss3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
+		.lp_async_m_async_master_hub_tx_req(npu_ss3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
+		.pring_in_if_pring_in_if_last(npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_last),
+		.pring_in_if_pring_in_if_payload(npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_payload),
+		.pring_in_if_pring_in_if_qos(npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_qos),
+		.pring_in_if_pring_in_if_ready(npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_tgtid),
+		.pring_in_if_pring_in_if_valid(npu_ss3_iniu_node_top_wrap_pring_in_if_porting_pring_in_if_pring_in_if_valid),
+		.pring_out_if_pring_out_if_last(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_ready),
+		.nring_out_if_nring_out_if_srcid(npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(npu_ss3_iniu_node_top_wrap_nring_out_if_porting_nring_out_if_nring_out_if_valid),
+		.afifo_sb_err_afifo_sb_err(npu_ss3_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
+		.afifo_db_err_afifo_db_err(npu_ss3_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
+		.npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
+		.npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
+		.npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
+		.npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
+		.npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
+		.npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
+		.npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(npu_ss3_iniu_node_top_wrap_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
+	npu_ss3_tniu_node_top_wrap u_npu_ss3_tniu (
+		.clk(npu_ss3_tniu_node_top_wrap_clk_porting),
+		.rst_n(npu_ss3_tniu_node_top_wrap_rst_n_porting),
+		.async_fifo_pld_sync(npu_ss3_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
+		.async_fifo_rptr_async(npu_ss3_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
+		.async_fifo_rptr_sync(npu_ss3_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
+		.async_fifo_wptr_async(npu_ss3_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
+		.lp_async_s_async_master_hub_rx_req(npu_ss3_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req),
+		.lp_async_s_async_master_hub_tx_req(npu_ss3_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req),
+		.pring_in_if_pring_in_if_last(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_pring_out_if_pring_out_if_valid),
+		.pring_out_if_pring_out_if_last(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_npu_ss3_iniu_TO_u_npu_ss3_tniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_npu_ss3_tniu_TO_u_npu_ss3_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.npu_ss3_tniu_node_top_wrap_top_timeout_val_porting_timeout_val(npu_ss3_tniu_node_top_wrap_npu_ss3_tniu_node_top_wrap_top_timeout_val_porting_npu_ss3_tniu_node_top_wrap_top_timeout_val_porting_timeout_val));
+	peri_ss_iniu_node_top_wrap u_peri_ss_iniu (
+		.clk(peri_ss_iniu_node_top_wrap_clk_porting),
+		.rst_n(peri_ss_iniu_node_top_wrap_rst_n_porting),
+		.async_fifo_pld_sync(peri_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
+		.async_fifo_rptr_async(peri_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
+		.async_fifo_rptr_sync(peri_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
+		.async_fifo_wptr_async(peri_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
+		.lp_async_m_async_master_hub_rx_req(peri_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
+		.lp_async_m_async_master_hub_tx_req(peri_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
+		.pring_in_if_pring_in_if_last(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.pring_out_if_pring_out_if_last(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_npu_ss3_tniu_TO_u_peri_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_peri_ss_iniu_TO_u_npu_ss3_tniu_SIG_nring_out_if_nring_out_if_valid),
+		.afifo_sb_err_afifo_sb_err(peri_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
+		.afifo_db_err_afifo_db_err(peri_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
+		.peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
+		.peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
+		.peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
+		.peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
+		.peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
+		.peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
+		.peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(peri_ss_iniu_node_top_wrap_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_peri_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
+	gpu_ss0_iniu_node_top_wrap u_gpu_ss0_iniu (
+		.clk(gpu_ss0_iniu_node_top_wrap_clk_porting),
+		.rst_n(gpu_ss0_iniu_node_top_wrap_rst_n_porting),
+		.async_fifo_pld_sync(gpu_ss0_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
+		.async_fifo_rptr_async(gpu_ss0_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
+		.async_fifo_rptr_sync(gpu_ss0_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
+		.async_fifo_wptr_async(gpu_ss0_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
+		.lp_async_m_async_master_hub_rx_req(gpu_ss0_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
+		.lp_async_m_async_master_hub_tx_req(gpu_ss0_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
+		.pring_in_if_pring_in_if_last(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.pring_out_if_pring_out_if_last(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_peri_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_gpu_ss0_iniu_TO_u_peri_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.afifo_sb_err_afifo_sb_err(gpu_ss0_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
+		.afifo_db_err_afifo_db_err(gpu_ss0_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
+		.gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
+		.gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
+		.gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
+		.gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
+		.gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
+		.gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
+		.gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(gpu_ss0_iniu_node_top_wrap_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_gpu_ss0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
 	camera_ss_iniu_node_top_wrap u_camera_ss_iniu (
 		.clk(camera_ss_iniu_node_top_wrap_clk_porting),
 		.rst_n(camera_ss_iniu_node_top_wrap_rst_n_porting),
@@ -1207,34 +744,34 @@ module soc_intr_ring_noc_dn_harden_wrap (
 		.async_fifo_wptr_async(camera_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
 		.lp_async_m_async_master_hub_rx_req(camera_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
 		.lp_async_m_async_master_hub_tx_req(camera_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.pring_in_if_pring_in_if_last(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.pring_out_if_pring_out_if_last(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_gpu_ss0_iniu_TO_u_camera_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_camera_ss_iniu_TO_u_gpu_ss0_iniu_SIG_nring_out_if_nring_out_if_valid),
 		.afifo_sb_err_afifo_sb_err(camera_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
 		.afifo_db_err_afifo_db_err(camera_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
 		.camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
@@ -1244,556 +781,266 @@ module soc_intr_ring_noc_dn_harden_wrap (
 		.camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
 		.camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
 		.camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(camera_ss_iniu_node_top_wrap_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_camera_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	camera_ss_tniu_node_top_wrap u_camera_ss_tniu (
-		.clk(camera_ss_tniu_node_top_wrap_clk_porting),
-		.rst_n(camera_ss_tniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(camera_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(camera_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(camera_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(camera_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_s_async_master_hub_rx_req(camera_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req),
-		.lp_async_s_async_master_hub_tx_req(camera_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_camera_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_camera_ss_tniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.camera_ss_tniu_node_top_wrap_top_timeout_val_porting_timeout_val(camera_ss_tniu_node_top_wrap_camera_ss_tniu_node_top_wrap_top_timeout_val_porting_camera_ss_tniu_node_top_wrap_top_timeout_val_porting_timeout_val));
-	vpu_ss_iniu_node_top_wrap u_vpu_ss_iniu (
-		.clk(vpu_ss_iniu_node_top_wrap_clk_porting),
-		.rst_n(vpu_ss_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(vpu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(vpu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(vpu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(vpu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(vpu_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(vpu_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_camera_ss_tniu_TO_u_vpu_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_vpu_ss_iniu_TO_u_camera_ss_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(vpu_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(vpu_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(vpu_ss_iniu_node_top_wrap_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_vpu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	aon_ss_iniu_node_top_wrap u_aon_ss_iniu (
-		.clk(aon_ss_iniu_node_top_wrap_clk_porting),
-		.rst_n(aon_ss_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(aon_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(aon_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(aon_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(aon_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(aon_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(aon_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_vpu_ss_iniu_TO_u_aon_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_aon_ss_iniu_TO_u_vpu_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(aon_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(aon_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(aon_ss_iniu_node_top_wrap_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_aon_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	aon_ss_tniu_node_top_wrap u_aon_ss_tniu (
-		.clk(aon_ss_tniu_node_top_wrap_clk_porting),
-		.rst_n(aon_ss_tniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(aon_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(aon_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(aon_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(aon_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_s_async_master_hub_rx_req(aon_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req),
-		.lp_async_s_async_master_hub_tx_req(aon_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_aon_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_aon_ss_tniu_TO_u_aon_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.aon_ss_tniu_node_top_wrap_top_timeout_val_porting_timeout_val(aon_ss_tniu_node_top_wrap_aon_ss_tniu_node_top_wrap_top_timeout_val_porting_aon_ss_tniu_node_top_wrap_top_timeout_val_porting_timeout_val));
-	debug_ss_iniu_node_top_wrap u_debug_ss_iniu (
-		.clk(debug_ss_iniu_node_top_wrap_clk_porting),
-		.rst_n(debug_ss_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(debug_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(debug_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(debug_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(debug_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(debug_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(debug_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_aon_ss_tniu_TO_u_debug_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_debug_ss_iniu_TO_u_aon_ss_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(debug_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(debug_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(debug_ss_iniu_node_top_wrap_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_debug_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	ucie_ss1_iniu_node_top_wrap u_ucie_ss1_iniu (
-		.clk(ucie_ss1_iniu_node_top_wrap_clk_porting),
-		.rst_n(ucie_ss1_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(ucie_ss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(ucie_ss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(ucie_ss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(ucie_ss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(ucie_ss1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(ucie_ss1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_debug_ss_iniu_TO_u_ucie_ss1_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_ucie_ss1_iniu_TO_u_debug_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(ucie_ss1_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(ucie_ss1_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(ucie_ss1_iniu_node_top_wrap_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_ucie_ss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	ucie_ss1_tniu_node_top_wrap u_ucie_ss1_tniu (
-		.clk(ucie_ss1_tniu_node_top_wrap_clk_porting),
-		.rst_n(ucie_ss1_tniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(ucie_ss1_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(ucie_ss1_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(ucie_ss1_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(ucie_ss1_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_s_async_master_hub_rx_req(ucie_ss1_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req),
-		.lp_async_s_async_master_hub_tx_req(ucie_ss1_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_ucie_ss1_iniu_TO_u_ucie_ss1_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_ucie_ss1_tniu_TO_u_ucie_ss1_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.ucie_ss1_tniu_node_top_wrap_top_timeout_val_porting_timeout_val(ucie_ss1_tniu_node_top_wrap_ucie_ss1_tniu_node_top_wrap_top_timeout_val_porting_ucie_ss1_tniu_node_top_wrap_top_timeout_val_porting_timeout_val));
-	dspss0_tniu_node_top_wrap u_dspss0_tniu (
-		.clk(dspss0_tniu_node_top_wrap_clk_porting),
-		.rst_n(dspss0_tniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(dspss0_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(dspss0_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(dspss0_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(dspss0_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_s_async_master_hub_rx_req(dspss0_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req),
-		.lp_async_s_async_master_hub_tx_req(dspss0_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_ucie_ss1_tniu_TO_u_dspss0_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_dspss0_tniu_TO_u_ucie_ss1_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.dspss0_tniu_node_top_wrap_top_timeout_val_porting_timeout_val(dspss0_tniu_node_top_wrap_dspss0_tniu_node_top_wrap_top_timeout_val_porting_dspss0_tniu_node_top_wrap_top_timeout_val_porting_timeout_val));
-	dspss1_iniu_node_top_wrap u_dspss1_iniu (
-		.clk(dspss1_iniu_node_top_wrap_clk_porting),
-		.rst_n(dspss1_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(dspss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(dspss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(dspss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(dspss1_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(dspss1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(dspss1_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_dspss0_tniu_TO_u_dspss1_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_dspss1_iniu_TO_u_dspss0_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(dspss1_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(dspss1_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(dspss1_iniu_node_top_wrap_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_dspss1_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	dspss2_tniu_node_top_wrap u_dspss2_tniu (
-		.clk(dspss2_tniu_node_top_wrap_clk_porting),
-		.rst_n(dspss2_tniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(dspss2_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(dspss2_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(dspss2_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(dspss2_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_s_async_master_hub_rx_req(dspss2_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req),
-		.lp_async_s_async_master_hub_tx_req(dspss2_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_dspss1_iniu_TO_u_dspss2_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_dspss2_tniu_TO_u_dspss1_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.dspss2_tniu_node_top_wrap_top_timeout_val_porting_timeout_val(dspss2_tniu_node_top_wrap_dspss2_tniu_node_top_wrap_top_timeout_val_porting_dspss2_tniu_node_top_wrap_top_timeout_val_porting_timeout_val));
-	dspss3_iniu_node_top_wrap u_dspss3_iniu (
-		.clk(dspss3_iniu_node_top_wrap_clk_porting),
-		.rst_n(dspss3_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(dspss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(dspss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(dspss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(dspss3_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(dspss3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(dspss3_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_dspss2_tniu_TO_u_dspss3_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_dspss3_iniu_TO_u_dspss2_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(dspss3_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(dspss3_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(dspss3_iniu_node_top_wrap_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_dspss3_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
-	dspss4_tniu_node_top_wrap u_dspss4_tniu (
-		.clk(dspss4_tniu_node_top_wrap_clk_porting),
-		.rst_n(dspss4_tniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(dspss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(dspss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(dspss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(dspss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_s_async_master_hub_rx_req(dspss4_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req),
-		.lp_async_s_async_master_hub_tx_req(dspss4_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_dspss3_iniu_TO_u_dspss4_tniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_dspss4_tniu_TO_u_dspss3_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.dspss4_tniu_node_top_wrap_top_timeout_val_porting_timeout_val(dspss4_tniu_node_top_wrap_dspss4_tniu_node_top_wrap_top_timeout_val_porting_dspss4_tniu_node_top_wrap_top_timeout_val_porting_timeout_val));
-	dspss5_iniu_node_top_wrap u_dspss5_iniu (
-		.clk(dspss5_iniu_node_top_wrap_clk_porting),
-		.rst_n(dspss5_iniu_node_top_wrap_rst_n_porting),
-		.async_fifo_pld_sync(dspss5_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
-		.async_fifo_rptr_async(dspss5_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
-		.async_fifo_rptr_sync(dspss5_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
-		.async_fifo_wptr_async(dspss5_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
-		.lp_async_m_async_master_hub_rx_req(dspss5_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
-		.lp_async_m_async_master_hub_tx_req(dspss5_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_out_if_pring_out_if_srcid(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_in_if_nring_in_if_payload(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_in_if_nring_in_if_qos(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_in_if_nring_in_if_ready(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_in_if_nring_in_if_valid(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_dspss4_tniu_TO_u_dspss5_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_dspss5_iniu_TO_u_dspss4_tniu_SIG_nring_out_if_nring_out_if_valid),
-		.afifo_sb_err_afifo_sb_err(dspss5_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
-		.afifo_db_err_afifo_db_err(dspss5_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
-		.dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
-		.dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
-		.dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
-		.dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
-		.dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
-		.dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
-		.dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(dspss5_iniu_node_top_wrap_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_dspss5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
+	ufs_ss_iniu_node_top_wrap u_ufs_ss_iniu (
+		.clk(ufs_ss_iniu_node_top_wrap_clk_porting),
+		.rst_n(ufs_ss_iniu_node_top_wrap_rst_n_porting),
+		.async_fifo_pld_sync(ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
+		.async_fifo_rptr_async(ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
+		.async_fifo_rptr_sync(ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
+		.async_fifo_wptr_async(ufs_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
+		.lp_async_m_async_master_hub_rx_req(ufs_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
+		.lp_async_m_async_master_hub_tx_req(ufs_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
+		.pring_in_if_pring_in_if_last(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.pring_out_if_pring_out_if_last(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_camera_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_ufs_ss_iniu_TO_u_camera_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.afifo_sb_err_afifo_sb_err(ufs_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
+		.afifo_db_err_afifo_db_err(ufs_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
+		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
+		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
+		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
+		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
+		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
+		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
+		.ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(ufs_ss_iniu_node_top_wrap_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_ufs_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
+	pcie_eth_ss_iniu_node_top_wrap u_pcie_eth_ss_iniu (
+		.clk(pcie_eth_ss_iniu_node_top_wrap_clk_porting),
+		.rst_n(pcie_eth_ss_iniu_node_top_wrap_rst_n_porting),
+		.async_fifo_pld_sync(pcie_eth_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
+		.async_fifo_rptr_async(pcie_eth_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
+		.async_fifo_rptr_sync(pcie_eth_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
+		.async_fifo_wptr_async(pcie_eth_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
+		.lp_async_m_async_master_hub_rx_req(pcie_eth_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
+		.lp_async_m_async_master_hub_tx_req(pcie_eth_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
+		.pring_in_if_pring_in_if_last(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.pring_out_if_pring_out_if_last(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_ufs_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_pcie_eth_ss_iniu_TO_u_ufs_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.afifo_sb_err_afifo_sb_err(pcie_eth_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
+		.afifo_db_err_afifo_db_err(pcie_eth_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
+		.pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
+		.pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
+		.pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
+		.pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
+		.pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
+		.pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
+		.pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(pcie_eth_ss_iniu_node_top_wrap_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_pcie_eth_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
+	mcu_ss_iniu_node_top_wrap u_mcu_ss_iniu (
+		.clk(mcu_ss_iniu_node_top_wrap_clk_porting),
+		.rst_n(mcu_ss_iniu_node_top_wrap_rst_n_porting),
+		.async_fifo_pld_sync(mcu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
+		.async_fifo_rptr_async(mcu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
+		.async_fifo_rptr_sync(mcu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
+		.async_fifo_wptr_async(mcu_ss_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
+		.lp_async_m_async_master_hub_rx_req(mcu_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
+		.lp_async_m_async_master_hub_tx_req(mcu_ss_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
+		.pring_in_if_pring_in_if_last(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.pring_out_if_pring_out_if_last(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_pcie_eth_ss_iniu_TO_u_mcu_ss_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_mcu_ss_iniu_TO_u_pcie_eth_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.afifo_sb_err_afifo_sb_err(mcu_ss_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
+		.afifo_db_err_afifo_db_err(mcu_ss_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
+		.mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
+		.mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
+		.mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
+		.mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
+		.mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
+		.mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
+		.mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(mcu_ss_iniu_node_top_wrap_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_mcu_ss_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
+	mcu_ss_tniu_node_top_wrap u_mcu_ss_tniu (
+		.clk(mcu_ss_tniu_node_top_wrap_clk_porting),
+		.rst_n(mcu_ss_tniu_node_top_wrap_rst_n_porting),
+		.async_fifo_pld_sync(mcu_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
+		.async_fifo_rptr_async(mcu_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
+		.async_fifo_rptr_sync(mcu_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
+		.async_fifo_wptr_async(mcu_ss_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
+		.lp_async_s_async_master_hub_rx_req(mcu_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req),
+		.lp_async_s_async_master_hub_tx_req(mcu_ss_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req),
+		.pring_in_if_pring_in_if_last(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_pring_out_if_pring_out_if_valid),
+		.pring_out_if_pring_out_if_last(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_mcu_ss_iniu_TO_u_mcu_ss_tniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_mcu_ss_tniu_TO_u_mcu_ss_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.mcu_ss_tniu_node_top_wrap_top_timeout_val_porting_timeout_val(mcu_ss_tniu_node_top_wrap_mcu_ss_tniu_node_top_wrap_top_timeout_val_porting_mcu_ss_tniu_node_top_wrap_top_timeout_val_porting_timeout_val));
+	npu_ss4_iniu_node_top_wrap u_npu_ss4_iniu (
+		.clk(npu_ss4_iniu_node_top_wrap_clk_porting),
+		.rst_n(npu_ss4_iniu_node_top_wrap_rst_n_porting),
+		.async_fifo_pld_sync(npu_ss4_iniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
+		.async_fifo_rptr_async(npu_ss4_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
+		.async_fifo_rptr_sync(npu_ss4_iniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
+		.async_fifo_wptr_async(npu_ss4_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
+		.lp_async_m_async_master_hub_rx_req(npu_ss4_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
+		.lp_async_m_async_master_hub_tx_req(npu_ss4_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
+		.pring_in_if_pring_in_if_last(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.pring_out_if_pring_out_if_last(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_mcu_ss_tniu_TO_u_npu_ss4_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_npu_ss4_iniu_TO_u_mcu_ss_tniu_SIG_nring_out_if_nring_out_if_valid),
+		.afifo_sb_err_afifo_sb_err(npu_ss4_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
+		.afifo_db_err_afifo_db_err(npu_ss4_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
+		.npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
+		.npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload(npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_payload),
+		.npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos(npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_qos),
+		.npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready(npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_ready),
+		.npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
+		.npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
+		.npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(npu_ss4_iniu_node_top_wrap_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_npu_ss4_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
+	npu_ss4_tniu_node_top_wrap u_npu_ss4_tniu (
+		.clk(npu_ss4_tniu_node_top_wrap_clk_porting),
+		.rst_n(npu_ss4_tniu_node_top_wrap_rst_n_porting),
+		.async_fifo_pld_sync(npu_ss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_pld_sync),
+		.async_fifo_rptr_async(npu_ss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_async),
+		.async_fifo_rptr_sync(npu_ss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_rptr_sync),
+		.async_fifo_wptr_async(npu_ss4_tniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
+		.lp_async_s_async_master_hub_rx_req(npu_ss4_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_rx_req),
+		.lp_async_s_async_master_hub_tx_req(npu_ss4_tniu_node_top_wrap_lp_async_porting_lp_async_s_async_master_hub_tx_req),
+		.pring_in_if_pring_in_if_last(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_pring_out_if_pring_out_if_valid),
+		.pring_out_if_pring_out_if_last(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_npu_ss4_iniu_TO_u_npu_ss4_tniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_npu_ss4_tniu_TO_u_npu_ss4_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.npu_ss4_tniu_node_top_wrap_top_timeout_val_porting_timeout_val(npu_ss4_tniu_node_top_wrap_npu_ss4_tniu_node_top_wrap_top_timeout_val_porting_npu_ss4_tniu_node_top_wrap_top_timeout_val_porting_timeout_val));
 	ddr0_iniu_node_top_wrap u_ddr0_iniu (
 		.clk(ddr0_iniu_node_top_wrap_clk_porting),
 		.rst_n(ddr0_iniu_node_top_wrap_rst_n_porting),
@@ -1803,13 +1050,13 @@ module soc_intr_ring_noc_dn_harden_wrap (
 		.async_fifo_wptr_async(ddr0_iniu_node_top_wrap_async_fifo_porting_async_fifo_wptr_async),
 		.lp_async_m_async_master_hub_rx_req(ddr0_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_rx_req),
 		.lp_async_m_async_master_hub_tx_req(ddr0_iniu_node_top_wrap_lp_async_porting_lp_async_m_async_master_hub_tx_req),
-		.pring_in_if_pring_in_if_last(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_last),
-		.pring_in_if_pring_in_if_payload(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_payload),
-		.pring_in_if_pring_in_if_qos(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_qos),
-		.pring_in_if_pring_in_if_ready(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_pring_in_if_pring_in_if_ready),
-		.pring_in_if_pring_in_if_srcid(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_srcid),
-		.pring_in_if_pring_in_if_tgtid(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_tgtid),
-		.pring_in_if_pring_in_if_valid(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_valid),
+		.pring_in_if_pring_in_if_last(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_pring_out_if_pring_out_if_valid),
 		.pring_out_if_pring_out_if_last(u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_last),
 		.pring_out_if_pring_out_if_payload(u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_payload),
 		.pring_out_if_pring_out_if_qos(u_ddr0_iniu_TO_u_ddr1_iniu_SIG_pring_out_if_pring_out_if_qos),
@@ -1824,13 +1071,13 @@ module soc_intr_ring_noc_dn_harden_wrap (
 		.nring_in_if_nring_in_if_srcid(u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_srcid),
 		.nring_in_if_nring_in_if_tgtid(u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_tgtid),
 		.nring_in_if_nring_in_if_valid(u_ddr1_iniu_TO_u_ddr0_iniu_SIG_nring_out_if_nring_out_if_valid),
-		.nring_out_if_nring_out_if_last(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_last),
-		.nring_out_if_nring_out_if_payload(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_payload),
-		.nring_out_if_nring_out_if_qos(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_qos),
-		.nring_out_if_nring_out_if_ready(u_dspss5_iniu_TO_u_ddr0_iniu_SIG_nring_in_if_nring_in_if_ready),
-		.nring_out_if_nring_out_if_srcid(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_srcid),
-		.nring_out_if_nring_out_if_tgtid(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_tgtid),
-		.nring_out_if_nring_out_if_valid(u_ddr0_iniu_TO_u_dspss5_iniu_SIG_nring_out_if_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_npu_ss4_tniu_TO_u_ddr0_iniu_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_ddr0_iniu_TO_u_npu_ss4_tniu_SIG_nring_out_if_nring_out_if_valid),
 		.afifo_sb_err_afifo_sb_err(ddr0_iniu_node_top_wrap_afifo_sb_err_porting_afifo_sb_err_afifo_sb_err),
 		.afifo_db_err_afifo_db_err(ddr0_iniu_node_top_wrap_afifo_db_err_porting_afifo_db_err_afifo_db_err),
 		.ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last(ddr0_iniu_node_top_wrap_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_ddr0_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_last),
@@ -2040,20 +1287,20 @@ module soc_intr_ring_noc_dn_harden_wrap (
 		.pring_in_if_pring_in_if_srcid(u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_srcid),
 		.pring_in_if_pring_in_if_tgtid(u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_tgtid),
 		.pring_in_if_pring_in_if_valid(u_ddr4_iniu_TO_u_ddr5_iniu_SIG_pring_out_if_pring_out_if_valid),
-		.pring_out_if_pring_out_if_last(ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_last),
-		.pring_out_if_pring_out_if_payload(ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_payload),
-		.pring_out_if_pring_out_if_qos(ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_qos),
-		.pring_out_if_pring_out_if_ready(ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_ready),
-		.pring_out_if_pring_out_if_srcid(ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_srcid),
-		.pring_out_if_pring_out_if_tgtid(ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_tgtid),
-		.pring_out_if_pring_out_if_valid(ddr5_iniu_node_top_wrap_pring_out_if_porting_pring_out_if_pring_out_if_valid),
-		.nring_in_if_nring_in_if_last(ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_last),
-		.nring_in_if_nring_in_if_payload(ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_payload),
-		.nring_in_if_nring_in_if_qos(ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_qos),
-		.nring_in_if_nring_in_if_ready(ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_ready),
-		.nring_in_if_nring_in_if_srcid(ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_srcid),
-		.nring_in_if_nring_in_if_tgtid(ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_tgtid),
-		.nring_in_if_nring_in_if_valid(ddr5_iniu_node_top_wrap_nring_in_if_porting_nring_in_if_nring_in_if_valid),
+		.pring_out_if_pring_out_if_last(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_ring_sink_station_TO_u_ddr5_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_ddr5_iniu_TO_u_ring_sink_station_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_valid),
 		.nring_out_if_nring_out_if_last(u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_last),
 		.nring_out_if_nring_out_if_payload(u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_payload),
 		.nring_out_if_nring_out_if_qos(u_ddr5_iniu_TO_u_ddr4_iniu_SIG_nring_out_if_nring_out_if_qos),
@@ -2070,7 +1317,68 @@ module soc_intr_ring_noc_dn_harden_wrap (
 		.ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid(ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_srcid),
 		.ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid(ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_tgtid),
 		.ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid(ddr5_iniu_node_top_wrap_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_ddr5_iniu_node_top_wrap_endpoint_local_rx_porting_local_rx_valid));
+	lwnoc_intr_ring_sp_wrap u_ring_sp (
+		.clk(u_ring_sink_station_clk_porting),
+		.pring_in_if_valid(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_valid),
+		.pring_in_if_ready(u_ring_sp_TO_u_ring_sink_station_SIG_pring_in_if_ready),
+		.pring_in_if_payload(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_srcid(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_tgtid(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_qos(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_last(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_valid(ring_sp_pring_out_if_porting_pring_out_if_valid),
+		.pring_out_if_ready(ring_sp_pring_out_if_porting_pring_out_if_ready),
+		.pring_out_if_payload(ring_sp_pring_out_if_porting_pring_out_if_payload),
+		.pring_out_if_srcid(ring_sp_pring_out_if_porting_pring_out_if_srcid),
+		.pring_out_if_tgtid(ring_sp_pring_out_if_porting_pring_out_if_tgtid),
+		.pring_out_if_qos(ring_sp_pring_out_if_porting_pring_out_if_qos),
+		.pring_out_if_last(ring_sp_pring_out_if_porting_pring_out_if_last),
+		.nring_in_if_valid(ring_sp_nring_in_if_porting_nring_in_if_valid),
+		.nring_in_if_ready(ring_sp_nring_in_if_porting_nring_in_if_ready),
+		.nring_in_if_payload(ring_sp_nring_in_if_porting_nring_in_if_payload),
+		.nring_in_if_srcid(ring_sp_nring_in_if_porting_nring_in_if_srcid),
+		.nring_in_if_tgtid(ring_sp_nring_in_if_porting_nring_in_if_tgtid),
+		.nring_in_if_qos(ring_sp_nring_in_if_porting_nring_in_if_qos),
+		.nring_in_if_last(ring_sp_nring_in_if_porting_nring_in_if_last),
+		.nring_out_if_valid(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_valid),
+		.nring_out_if_ready(u_ring_sink_station_TO_u_ring_sp_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_payload(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_payload),
+		.nring_out_if_srcid(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_srcid),
+		.nring_out_if_tgtid(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_tgtid),
+		.nring_out_if_qos(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_qos),
+		.nring_out_if_last(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_last));
+	ring_sink_station u_ring_sink_station (
+		.clk(u_ring_sink_station_clk_porting),
+		.rst_n(u_ring_sink_station_rst_n_porting),
+		.pring_in_if_pring_in_if_last(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_last),
+		.pring_in_if_pring_in_if_payload(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_payload),
+		.pring_in_if_pring_in_if_qos(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_qos),
+		.pring_in_if_pring_in_if_ready(u_ring_sink_station_TO_u_ddr5_iniu_SIG_pring_in_if_pring_in_if_ready),
+		.pring_in_if_pring_in_if_srcid(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_in_if_pring_in_if_tgtid(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_in_if_pring_in_if_valid(u_ddr5_iniu_TO_u_ring_sink_station_SIG_pring_out_if_pring_out_if_valid),
+		.pring_out_if_pring_out_if_last(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_last),
+		.pring_out_if_pring_out_if_payload(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_payload),
+		.pring_out_if_pring_out_if_qos(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_qos),
+		.pring_out_if_pring_out_if_ready(u_ring_sp_TO_u_ring_sink_station_SIG_pring_in_if_ready),
+		.pring_out_if_pring_out_if_srcid(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_srcid),
+		.pring_out_if_pring_out_if_tgtid(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_tgtid),
+		.pring_out_if_pring_out_if_valid(u_ring_sink_station_TO_u_ring_sp_SIG_pring_out_if_pring_out_if_valid),
+		.nring_in_if_nring_in_if_last(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_last),
+		.nring_in_if_nring_in_if_payload(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_payload),
+		.nring_in_if_nring_in_if_qos(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_qos),
+		.nring_in_if_nring_in_if_ready(u_ring_sink_station_TO_u_ring_sp_SIG_nring_in_if_nring_in_if_ready),
+		.nring_in_if_nring_in_if_srcid(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_srcid),
+		.nring_in_if_nring_in_if_tgtid(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_tgtid),
+		.nring_in_if_nring_in_if_valid(u_ring_sp_TO_u_ring_sink_station_SIG_nring_out_if_valid),
+		.nring_out_if_nring_out_if_last(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_last),
+		.nring_out_if_nring_out_if_payload(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_payload),
+		.nring_out_if_nring_out_if_qos(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_qos),
+		.nring_out_if_nring_out_if_ready(u_ddr5_iniu_TO_u_ring_sink_station_SIG_nring_in_if_nring_in_if_ready),
+		.nring_out_if_nring_out_if_srcid(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_srcid),
+		.nring_out_if_nring_out_if_tgtid(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_tgtid),
+		.nring_out_if_nring_out_if_valid(u_ring_sink_station_TO_u_ddr5_iniu_SIG_nring_out_if_nring_out_if_valid));
 
 endmodule
-//[UHDL]Content End [md5:8519f8bba7b001e32e963b10045fd6df]
+//[UHDL]Content End [md5:5609b2cbe8c5040bd12c8ce5a682128a]
 

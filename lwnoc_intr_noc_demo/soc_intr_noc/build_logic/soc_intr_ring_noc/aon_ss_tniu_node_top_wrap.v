@@ -1,11 +1,11 @@
-//[UHDL]Content Start [md5:d3883aaa2fc5c9bd66e48f5a45431075]
+//[UHDL]Content Start [md5:bf0d109d143489372a302427f1faac2c]
 module aon_ss_tniu_node_top_wrap (
 	input         clk                                                          ,
 	input         rst_n                                                        ,
 	output [69:0] async_fifo_pld_sync                                          ,
-	input  [9:0]  async_fifo_rptr_async                                        ,
-	input  [9:0]  async_fifo_rptr_sync                                         ,
-	output [9:0]  async_fifo_wptr_async                                        ,
+	input  [15:0] async_fifo_rptr_async                                        ,
+	input  [15:0] async_fifo_rptr_sync                                         ,
+	output [15:0] async_fifo_wptr_async                                        ,
 	input  [12:0] lp_async_s_async_master_hub_rx_req                           ,
 	output [12:0] lp_async_s_async_master_hub_tx_req                           ,
 	input         pring_in_if_pring_in_if_last                                 ,
@@ -57,7 +57,7 @@ module aon_ss_tniu_node_top_wrap (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	SocIntrNodeIdGen_node_id_value_20_node_id_width_8 node_id_gen_top (
+	SocIntrNodeIdGen_node_id_value_14_node_id_width_8 node_id_gen_top (
 		.node_id(node_id));
 	intr_tniu_top_interrupt_tniu_async_top_side tniu_top (
 		.clk(clk),
@@ -78,8 +78,8 @@ module aon_ss_tniu_node_top_wrap (
 		.req_last(endpoint_wrap_TO_tniu_top_SIG_local_rx_last),
 		.req_threshold());
 	lwnoc_intr_tniu_endpoint_wrap #(
-		.RING_ID(32'd20),
-		.NODE_NUM(32'd39),
+		.RING_ID(32'd14),
+		.NODE_NUM(32'd51),
 		.PLD_WIDTH(32'd40),
 		.ID_WIDTH(32'd8),
 		.QOS_WIDTH(32'd4),
@@ -124,5 +124,5 @@ module aon_ss_tniu_node_top_wrap (
 		.local_rx_last(endpoint_wrap_TO_tniu_top_SIG_local_rx_last));
 
 endmodule
-//[UHDL]Content End [md5:d3883aaa2fc5c9bd66e48f5a45431075]
+//[UHDL]Content End [md5:bf0d109d143489372a302427f1faac2c]
 

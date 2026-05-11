@@ -1,0 +1,2 @@
+`define pcie_eth_ss_iniu_INTR_INIU_SYS_ASYNC_FIFO_DEPTH 16
+`define pcie_eth_ss_iniu_INTR_INIU_TOP_ASYNC_FIFO_DEPTH 16

@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:2b6889a17e1c0940043893c35b15a2a2]
+//[UHDL]Content Start [md5:44b1e5f7c8180711f3e45077e0286a48]
 module ddr7_iniu_node_top_wrap (
 	input         clk                                                               ,
 	input         rst_n                                                             ,
@@ -73,7 +73,7 @@ module ddr7_iniu_node_top_wrap (
 	
 
 	//module inst.
-	SocIntrNodeIdGen_node_id_value_9_node_id_width_8 node_id_gen_top (
+	SocIntrNodeIdGen_node_id_value_28_node_id_width_8 node_id_gen_top (
 		.node_id(node_id_gen_top_node_id));
 	soc_intr_xbar_routing_lut_w8_c1 xbar_routing_lut (
 		.src_id(xbar_routing_lut_src_id),
@@ -99,8 +99,8 @@ module ddr7_iniu_node_top_wrap (
 		.req_last(iniu_top_TO_endpoint_wrap_SIG_req_last),
 		.req_threshold());
 	lwnoc_intr_iniu_endpoint_wrap #(
-		.RING_ID(32'd9),
-		.NODE_NUM(32'd39),
+		.RING_ID(32'd28),
+		.NODE_NUM(32'd51),
 		.PLD_WIDTH(32'd40),
 		.ID_WIDTH(32'd8),
 		.QOS_WIDTH(32'd4),
@@ -154,5 +154,5 @@ module ddr7_iniu_node_top_wrap (
 		.xbar_req_sel_bit(xbar_routing_lut_TO_endpoint_wrap_SIG_xbar_ch0_sel_bit));
 
 endmodule
-//[UHDL]Content End [md5:2b6889a17e1c0940043893c35b15a2a2]
+//[UHDL]Content End [md5:44b1e5f7c8180711f3e45077e0286a48]
 

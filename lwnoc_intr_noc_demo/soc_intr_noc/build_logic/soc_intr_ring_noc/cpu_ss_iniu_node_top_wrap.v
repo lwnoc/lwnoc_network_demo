@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:ffa5f0d289e334e49675cf4d7ab05775]
+//[UHDL]Content Start [md5:9d4edf8718095f35ec4cf36af1f837f8]
 module cpu_ss_iniu_node_top_wrap (
 	input         clk                                                                 ,
 	input         rst_n                                                               ,
@@ -100,7 +100,7 @@ module cpu_ss_iniu_node_top_wrap (
 		.req_threshold());
 	lwnoc_intr_iniu_endpoint_wrap #(
 		.RING_ID(32'd0),
-		.NODE_NUM(32'd39),
+		.NODE_NUM(32'd51),
 		.PLD_WIDTH(32'd40),
 		.ID_WIDTH(32'd8),
 		.QOS_WIDTH(32'd4),
@@ -154,5 +154,5 @@ module cpu_ss_iniu_node_top_wrap (
 		.xbar_req_sel_bit(xbar_routing_lut_TO_endpoint_wrap_SIG_xbar_ch0_sel_bit));
 
 endmodule
-//[UHDL]Content End [md5:ffa5f0d289e334e49675cf4d7ab05775]
+//[UHDL]Content End [md5:9d4edf8718095f35ec4cf36af1f837f8]
 

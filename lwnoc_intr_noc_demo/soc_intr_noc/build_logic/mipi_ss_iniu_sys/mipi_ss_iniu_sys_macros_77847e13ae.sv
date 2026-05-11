@@ -1,0 +1,2 @@
+`define mipi_ss_iniu_INTR_INIU_SYS_ASYNC_FIFO_DEPTH 16
+`define mipi_ss_iniu_INTR_INIU_TOP_ASYNC_FIFO_DEPTH 16

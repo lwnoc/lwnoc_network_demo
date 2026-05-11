@@ -1,7 +1,115 @@
-soc intr noc topo: 
-async bridge mst up <-> ucie_ss0 iniu <-> ucie_ss0 tniu-> cpu_ss iniu <-> cpu_ss tniu-> audio_ss iniu <-> peri_ss iniu-> gpu_ss1 iniu <-> gpu_ss0 iniu <-> display_ss tniu <-> dp_ss iniu <-> ddr6_ss_iniu <-> ddr7_ss iniu-> ddr8_ss iniu-> ddr9_ss iniu <-> ddr10_ss iniu <-> ddr11_ss iniu <-> async bridge slv down <-> async bridge mst down <-> mipi_ss iniu <-> camera_ss iniu <->camera_ss tniu <-> ufs_ss iniu <-> pcie_eth_ss iniu <->vpu_ss iniu <-> debug_ss iniu <-> aon_ss tniu <-> aon_ss iniu <-> ucie_ss1_tniu <-> ucie_ss1_iniu <-> err_tgtid_sink <-> SP(start pointer) <-> dsp_ss5 iniu <-> dsp_ss5 tniu <-> dsp_ss4 iniu <-> dsp_ss4 tniu <-> dsp_ss3 iniu <-> dsp_ss3 tniu <-> dsp_ss2 iniu <-> dsp_ss2 tniu <-> dsp_ss1 iniu <-> dsp_ss1 tniu <-> dsp_ss0 iniu <-> dsp_ss0 tniu <-> ddr0 iniu <-> ddr1 iniu <-> ddr2 iniu <-> ddr3 iniu <-> ddr4 iniu <-> ddr5 iniu <-> async bridge slv up 
+# SoC Intr NoC Topology
 
-harden description:
-async bridge mst up <-> ucie_ss0 iniu <-> ucie_ss0 tniu-> cpu_ss iniu <-> cpu_ss tniu-> audio_ss iniu <-> peri_ss iniu-> gpu_ss1 iniu <-> gpu_ss0 iniu <-> display_ss tniu <-> dp_ss iniu <-> ddr6_ss_iniu <-> ddr7_ss iniu-> ddr8_ss iniu-> ddr9_ss iniu <-> ddr10_ss iniu <-> ddr11_ss iniu <-> async bridge slv down is a noc clk domain
+## 1. 分析口径
 
-async bridge mst down <-> mipi_ss iniu <-> camera_ss iniu <->camera_ss tniu <-> ufs_ss iniu <-> pcie_eth_ss iniu <->vpu_ss iniu <-> debug_ss iniu <-> aon_ss tniu <-> aon_ss iniu <-> ucie_ss1_tniu <-> ucie_ss1_iniu <-> err_tgtid_sink <-> SP(start pointer) <-> dsp_ss5 iniu <-> dsp_ss5 tniu <-> dsp_ss4 iniu <-> dsp_ss4 tniu <-> dsp_ss3 iniu <-> dsp_ss3 tniu <-> dsp_ss2 iniu <-> dsp_ss2 tniu <-> dsp_ss1 iniu <-> dsp_ss1 tniu <-> dsp_ss0 iniu <-> dsp_ss0 tniu <-> ddr0 iniu <-> ddr1 iniu <-> ddr2 iniu <-> ddr3 iniu <-> ddr4 iniu <-> ddr5 iniu <-> async bridge slv up  is another clk domain
+- 所有有 intr iniu/tniu 的 SS 以 `/home/lgzhu/dev/noc_fusa/soc_noc_topology_and_global_ids.md` 第 6.5 节 Intr NOC 表为准。
+- top-side 时钟域划分以附图中的 async bridge cut 点为准，domain 命名为 `clk_up_func` / `clk_dn_func`。
+- 时钟域按 cut 点决定，不按 INIU/TNIU role 决定。
+
+## 2. Top-side Ring 顺序
+
+双向 ring，以下仅列单向顺序。
+
+### Domain A: `clk_up_func`
+
+```text
+async bridge mst up
+-> CPUSS iniu (20)
+-> CPUSS tniu (0)
+-> NPUSS0 iniu (23)
+-> NPUSS0 tniu (1)
+-> NPUSS1 iniu (24)
+-> NPUSS1 tniu (2)
+-> NPUSS2 iniu (25)
+-> NPUSS2 tniu (3)
+-> GPUSS1 iniu (22)
+-> MIPISS iniu (29)
+-> USB_DPSS iniu (52)
+-> DisplaySS iniu (44)
+-> VPUSS iniu (43)
+-> SafetySS(Aon) iniu (54)
+-> SafetySS(Aon) tniu (12)
+-> VDSPSS5 iniu (51)
+-> VDSPSS5 tniu (11)
+-> VDSPSS4 iniu (50)
+-> VDSPSS4 tniu (10)
+-> VDSPSS3 iniu (49)
+-> VDSPSS3 tniu (9)
+-> VDSPSS2 iniu (48)
+-> VDSPSS2 tniu (8)
+-> VDSPSS1 iniu (47)
+-> VDSPSS1 tniu (7)
+-> VDSPSS0 iniu (46)
+-> VDSPSS0 tniu (6)
+-> DDRSS6 iniu (37)
+-> DDRSS7 iniu (38)
+-> DDRSS8 iniu (39)
+-> DDRSS9 iniu (40)
+-> DDRSS10 iniu (41)
+-> DDRSS11 iniu (42)
+-> NOCSS iniu (57)
+-> async bridge slv down
+```
+
+### Domain B: `clk_dn_func`
+
+```text
+async bridge mst down
+-> NPUSS3 iniu (26)
+-> NPUSS3 tniu (4)
+-> PERISS iniu (55)
+-> GPUSS0 iniu (21)
+-> CameraSS iniu (30)
+-> UFSSS iniu (53)
+-> PCIE_ETHSS iniu (45)
+-> MCUSS iniu (56)
+-> MCUSS tniu (13)
+-> err_tgtid_sink
+-> ring_sp
+-> NPUSS4 iniu (27)
+-> NPUSS4 tniu (5)
+-> DDRSS0 iniu (31)
+-> DDRSS1 iniu (32)
+-> DDRSS2 iniu (33)
+-> DDRSS3 iniu (34)
+-> DDRSS4 iniu (35)
+-> DDRSS5 iniu (36)
+-> async bridge slv up
+```
+
+## 3. 时钟域边界
+
+- Boundary 0: `async bridge slv up` -> `async bridge mst up`，Domain B -> Domain A
+- Boundary 1: `async bridge slv down` -> `async bridge mst down`，Domain A -> Domain B
+
+## 4. 命名对照 (6.5 标准名)
+
+| 标准名 | 旧名 | Domain |
+|---|---|---|
+| CPUSS | cpu_ss | up |
+| NPUSS0-2 | (新增) | up |
+| NPUSS3-4 | (新增) | dn |
+| GPUSS0 | gpu_ss0 | dn |
+| GPUSS1 | gpu_ss1 | up |
+| PERISS | peri_ss | dn |
+| MIPISS | mipi_ss | up |
+| USB_DPSS | dp_ss | up |
+| DisplaySS | display_ss | up |
+| VPUSS | vpu_ss | up |
+| CameraSS | camera_ss | dn |
+| UFSSS | ufs_ss | dn |
+| PCIE_ETHSS | pcie_eth_ss | dn |
+| SafetySS(Aon) | aon_ss | up |
+| MCUSS | (新增) | dn |
+| VDSPSS0-5 | dsp_ss0-5 | up |
+| DDRSS0-5 | ddr0-5 | dn |
+| DDRSS6-11 | ddr6-11 | up |
+| NOCSS | (新增) | up |
+
+注：`MIPISS` 不在 6.5 Intr NOC 表中，但附图中存在，作为例外保留。
+
+## 5. 与当前代码实现的已知偏差
+
+- 本文档以 6.5 表 + 附图为准，不保证与 `SocIntrTopo.py` 的 `RING_PLAN` 当前快照完全一致。
+- 已知偏差示例：源码中 `pcie_eth_ss_iniu` 在 up_harden（本表 Domain B），`ddr11` 角色为 `tniu`（6.5 表仅 INIU=42）。
+- 这些偏差应通过修改源码 (`RING_PLAN` + `harden` 标记) 来对齐本文档。

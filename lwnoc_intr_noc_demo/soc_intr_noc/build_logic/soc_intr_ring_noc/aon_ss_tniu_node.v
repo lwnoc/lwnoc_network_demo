@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:1da99ecb4d02504d194cccf5352f9632]
+//[UHDL]Content Start [md5:5face838556efc5bf5c9d5ac384b6a71]
 module aon_ss_tniu_node (
 	input           clk_sys_clk                                                                                                                              ,
 	input           rst_sys_n_rst_n                                                                                                                          ,
@@ -58,11 +58,11 @@ module aon_ss_tniu_node (
 	//Wire define for this module.
 
 	//Wire define for sub module.
-	wire [9:0]  tniu_top_wrap_TO_tniu_sys_SIG_async_fifo_wptr_async             ;
+	wire [15:0] tniu_top_wrap_TO_tniu_sys_SIG_async_fifo_wptr_async             ;
 	wire [69:0] tniu_top_wrap_TO_tniu_sys_SIG_async_fifo_pld_sync               ;
 	wire [12:0] tniu_top_wrap_TO_tniu_sys_SIG_lp_async_s_async_master_hub_tx_req;
-	wire [9:0]  tniu_sys_TO_tniu_top_wrap_SIG_rptr_async                        ;
-	wire [9:0]  tniu_sys_TO_tniu_top_wrap_SIG_rptr_sync                         ;
+	wire [15:0] tniu_sys_TO_tniu_top_wrap_SIG_rptr_async                        ;
+	wire [15:0] tniu_sys_TO_tniu_top_wrap_SIG_rptr_sync                         ;
 	wire [12:0] tniu_sys_TO_tniu_top_wrap_SIG_m_async_master_hub_rx_req         ;
 
 	//Wire define for Inout.
@@ -143,5 +143,5 @@ module aon_ss_tniu_node (
 		.aon_ss_tniu_node_top_wrap_top_timeout_val_porting_timeout_val(aon_ss_tniu_node_top_wrap_aon_ss_tniu_node_top_wrap_top_timeout_val_porting_aon_ss_tniu_node_top_wrap_top_timeout_val_porting_timeout_val));
 
 endmodule
-//[UHDL]Content End [md5:1da99ecb4d02504d194cccf5352f9632]
+//[UHDL]Content End [md5:5face838556efc5bf5c9d5ac384b6a71]
 

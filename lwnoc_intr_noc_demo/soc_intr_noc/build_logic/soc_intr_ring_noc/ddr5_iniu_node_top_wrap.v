@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:d38054c18e89bb830b4a362120a7a0b2]
+//[UHDL]Content Start [md5:b7f798985198acb9e0ee4dfe21863a2c]
 module ddr5_iniu_node_top_wrap (
 	input         clk                                                               ,
 	input         rst_n                                                             ,
@@ -73,7 +73,7 @@ module ddr5_iniu_node_top_wrap (
 	
 
 	//module inst.
-	SocIntrNodeIdGen_node_id_value_35_node_id_width_8 node_id_gen_top (
+	SocIntrNodeIdGen_node_id_value_50_node_id_width_8 node_id_gen_top (
 		.node_id(node_id_gen_top_node_id));
 	soc_intr_xbar_routing_lut_w8_c1 xbar_routing_lut (
 		.src_id(xbar_routing_lut_src_id),
@@ -99,8 +99,8 @@ module ddr5_iniu_node_top_wrap (
 		.req_last(iniu_top_TO_endpoint_wrap_SIG_req_last),
 		.req_threshold());
 	lwnoc_intr_iniu_endpoint_wrap #(
-		.RING_ID(32'd35),
-		.NODE_NUM(32'd39),
+		.RING_ID(32'd50),
+		.NODE_NUM(32'd51),
 		.PLD_WIDTH(32'd40),
 		.ID_WIDTH(32'd8),
 		.QOS_WIDTH(32'd4),
@@ -154,5 +154,5 @@ module ddr5_iniu_node_top_wrap (
 		.xbar_req_sel_bit(xbar_routing_lut_TO_endpoint_wrap_SIG_xbar_ch0_sel_bit));
 
 endmodule
-//[UHDL]Content End [md5:d38054c18e89bb830b4a362120a7a0b2]
+//[UHDL]Content End [md5:b7f798985198acb9e0ee4dfe21863a2c]
 
