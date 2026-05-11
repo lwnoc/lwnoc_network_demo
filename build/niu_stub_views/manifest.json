@@ -9,7 +9,7 @@
       "config_name": "aon_ss_iniu_sys",
       "stub_module": "sts_iniu_sys_side_stub",
       "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/sts/sts_iniu_sys_side_stub.sv",
-      "port_count": 82
+      "port_count": 80
     },
     {
       "noc": "sts",
@@ -20,7 +20,7 @@
       "config_name": "aon_ss_iniu_top_side",
       "stub_module": "sts_iniu_top_side_stub",
       "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/sts/sts_iniu_top_side_stub.sv",
-      "port_count": 42
+      "port_count": 40
     },
     {
       "noc": "sts",
@@ -42,7 +42,7 @@
       "config_name": "ddrss_tniu_top_side",
       "stub_module": "sts_tniu_top_side_stub",
       "path": "/home/lgzhu/dev/noc_work/lwnoc_network_demo/build/niu_stub_views/sts/sts_tniu_top_side_stub.sv",
-      "port_count": 49
+      "port_count": 48
     },
     {
       "noc": "intr",

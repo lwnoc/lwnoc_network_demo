@@ -7,9 +7,7 @@
 // Representative config: aon_ss_iniu_sys_config (TemplateIPConfig name=aon_ss_iniu_sys)
 module sts_iniu_sys_side_stub (
     input  logic [0:0]   clk_src                 ,  // clock input
-    input  logic [0:0]   clk_dst                 ,  // clock input
     input  logic [0:0]   rstn_src                ,  // active-low reset
-    input  logic [0:0]   rstn_dst                ,  // active-low reset
     input  logic [7:0]   node_id                 ,  // node identifier
     input  logic [0:0]   s_awvalid               ,  // AXI write address valid/ready
     output logic [0:0]   s_awready               ,  // AXI write address valid/ready
@@ -58,14 +56,14 @@ module sts_iniu_sys_side_stub (
     output logic [15:0]  rsp_rptr_async          ,  // async FIFO read pointer (async)
     output logic [15:0]  rsp_rptr_sync           ,  // async FIFO read pointer (sync)
     input  logic [75:0]  rsp_pld_sync            ,  // async FIFO payload sync
-    input  logic [7:0]   sys_cti_trigin          ,  // from sys cti trigger
-    output logic [7:0]   sys_cti_trigin_ack      ,  // to sys cti trigger
-    output logic [7:0]   noc_cti_trigin          ,  // to noc dec cti trigger
-    input  logic [7:0]   noc_cti_trigin_ack      ,  // from noc dec cti trigger
-    input  logic [7:0]   noc_cti_trigout         ,  // from noc dec cti trigger
-    output logic [7:0]   noc_cti_trigout_ack     ,  // to noc dec cti trigger
-    output logic [7:0]   sys_cti_trigout         ,  // to sys cti trigger output
-    input  logic [7:0]   sys_cti_trigout_ack     ,  // from sys cti trigger output
+    input  logic [7:0]   sys_cti_trigin          ,
+    output logic [7:0]   sys_cti_trigin_ack      ,
+    output logic [7:0]   noc_cti_trigin          ,
+    input  logic [7:0]   noc_cti_trigin_ack      ,
+    input  logic [7:0]   noc_cti_trigout         ,
+    output logic [7:0]   noc_cti_trigout_ack     ,
+    output logic [7:0]   sys_cti_trigout         ,
+    input  logic [7:0]   sys_cti_trigout_ack     ,
     input  logic [31:0]  sys_ctm_trigin          ,
     output logic [31:0]  sys_ctm_trigin_ack      ,
     output logic [31:0]  noc_ctm_trigin          ,

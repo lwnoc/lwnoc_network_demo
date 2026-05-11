@@ -5,9 +5,10 @@ module tb_sts_aon_addr_map;
 
     localparam int unsigned TNIU_NUM             = 38;
     localparam int unsigned EXPECTED_ENTRY_NUM   = 191;
-    localparam logic [31:0] FUNC_STRIDE          = 32'h0002_0000;
-    localparam logic [31:0] DEBUG_BASE_START     = 32'h0200_0000;
-    localparam logic [31:0] DEBUG_STRIDE         = 32'h0200_0000;
+    localparam logic [31:0] FUNC_BASE_START      = 32'h5700_0000;
+    localparam logic [31:0] FUNC_STRIDE          = 32'h0001_0000;
+    localparam logic [31:0] DEBUG_BASE_START     = 32'h4800_0000;
+    localparam logic [31:0] DEBUG_STRIDE         = 32'h0020_0000;
     localparam logic [31:0] FUNC_SYS_SAMPLE_OFS  = 32'h0000_2000;
     localparam logic [31:0] DEBUG_SYS_SAMPLE_OFS = 32'h0000_2000;
 
@@ -24,8 +25,8 @@ module tb_sts_aon_addr_map;
 
     Base_sts_iniu_addr_map #(
         .ENTRY_NUM      (`STS_INIU_ADDR_MAP_ENTRY_NUM),
-        .ADDR_BASE_TABLE(`STS_INIU_ADDR_MAP_BASE_TABLE),
-        .ADDR_MASK_TABLE(`STS_INIU_ADDR_MAP_MASK_TABLE),
+        .ADDR_START_TABLE(`STS_INIU_ADDR_MAP_START_TABLE),
+        .ADDR_END_TABLE  (`STS_INIU_ADDR_MAP_END_TABLE),
         .TGT_ID_TABLE   (`STS_INIU_ADDR_MAP_TGT_ID_TABLE),
         .DEFAULT_TGT_ID (`STS_INIU_ADDR_MAP_DEFAULT_TGT_ID)
     ) dut (
@@ -141,7 +142,7 @@ module tb_sts_aon_addr_map;
         end
 
         for (int unsigned resource_idx = 0; resource_idx < TNIU_NUM; resource_idx++) begin
-            func_base_addr  = addr_idx[resource_idx] * FUNC_STRIDE;
+            func_base_addr  = FUNC_BASE_START + (addr_idx[resource_idx] * FUNC_STRIDE);
             debug_base_addr = DEBUG_BASE_START + (addr_idx[resource_idx] * DEBUG_STRIDE);
 
             label = {resource_name[resource_idx], ".local_regbank"};

@@ -7,9 +7,7 @@
 // Representative config: STS_SOC_TNIU_TOP_CONFIGS.ddrss0 (TemplateIPConfig name=ddrss_tniu_top_side)
 module sts_tniu_top_side_stub (
     input  logic [0:0]   clk_src                 ,  // clock input
-    input  logic [0:0]   clk_dst                 ,  // clock input
     input  logic [0:0]   rstn_src                ,  // active-low reset
-    input  logic [0:0]   rstn_dst                ,  // active-low reset
     input  logic [0:0]   in_req_vld              ,
     output logic [0:0]   in_req_rdy              ,
     input  logic [119:0] in_req_pld              ,
@@ -52,6 +50,7 @@ module sts_tniu_top_side_stub (
     output logic [31:0]  timing_bus2             ,
     output logic [31:0]  timing_bus3             ,
     output logic [31:0]  dbg_en                  ,  // debug interface
+    output logic [9:0]   hw_dbg_sel              ,  // debug interface
     output logic [0:0]   tniu_regbank_parity_err ,  // register bank parity error
     output logic [0:0]   rsp_afifo_sb_err        ,  // ECC error flag (single/double bit)
     output logic [0:0]   rsp_afifo_db_err          // ECC error flag (single/double bit)
@@ -87,6 +86,7 @@ module sts_tniu_top_side_stub (
     assign timing_bus2 = '0;
     assign timing_bus3 = '0;
     assign dbg_en = '0;
+    assign hw_dbg_sel = '0;
     assign tniu_regbank_parity_err = '0;
     assign rsp_afifo_sb_err = '0;
     assign rsp_afifo_db_err = '0;

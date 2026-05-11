@@ -6,9 +6,10 @@ module tb_sts_aon_axi_access;
     localparam int unsigned TNIU_NUM             = 38;
     localparam int unsigned EXPECTED_ENTRY_NUM   = 191;
     localparam int unsigned TIMEOUT_CYCLES       = 2000;
-    localparam logic [31:0] FUNC_STRIDE          = 32'h0002_0000;
-    localparam logic [31:0] DEBUG_BASE_START     = 32'h0200_0000;
-    localparam logic [31:0] DEBUG_STRIDE         = 32'h0200_0000;
+    localparam logic [31:0] FUNC_BASE_START      = 32'h5700_0000;
+    localparam logic [31:0] FUNC_STRIDE          = 32'h0001_0000;
+    localparam logic [31:0] DEBUG_BASE_START     = 32'h4800_0000;
+    localparam logic [31:0] DEBUG_STRIDE         = 32'h0020_0000;
     localparam logic [31:0] FUNC_SYS_SAMPLE_OFS  = 32'h0000_2000;
     localparam logic [31:0] DEBUG_SYS_SAMPLE_OFS = 32'h0000_2000;
     localparam logic [SRC_ID_WIDTH-1:0] AON_NODE_ID = '0;
@@ -127,8 +128,8 @@ module tb_sts_aon_axi_access;
     Base_sts_iniu_axi_iniu #(
         .NODE_NUM(`STS_INIU_NODE_NUM),
         .ADDR_MAP_ENTRY_NUM(`STS_INIU_ADDR_MAP_ENTRY_NUM),
-        .ADDR_MAP_BASE_TABLE(`STS_INIU_ADDR_MAP_BASE_TABLE),
-        .ADDR_MAP_MASK_TABLE(`STS_INIU_ADDR_MAP_MASK_TABLE),
+        .ADDR_MAP_START_TABLE(`STS_INIU_ADDR_MAP_START_TABLE),
+        .ADDR_MAP_END_TABLE(`STS_INIU_ADDR_MAP_END_TABLE),
         .ADDR_MAP_TGT_ID_TABLE(`STS_INIU_ADDR_MAP_TGT_ID_TABLE),
         .ADDR_MAP_DEFAULT_TGT_ID(`STS_INIU_ADDR_MAP_DEFAULT_TGT_ID),
         .SAFETY_TIMEOUT_EN(1'b0)
@@ -403,7 +404,7 @@ module tb_sts_aon_axi_access;
         repeat (20) @(posedge clk);
 
         for (int unsigned resource_idx = 0; resource_idx < TNIU_NUM; resource_idx++) begin
-            func_base_addr  = addr_idx[resource_idx] * FUNC_STRIDE;
+            func_base_addr  = FUNC_BASE_START + (addr_idx[resource_idx] * FUNC_STRIDE);
             debug_base_addr = DEBUG_BASE_START + (addr_idx[resource_idx] * DEBUG_STRIDE);
 
             label = {resource_name[resource_idx], ".local_regbank"};

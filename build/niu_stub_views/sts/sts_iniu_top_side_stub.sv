@@ -8,8 +8,6 @@
 module sts_iniu_top_side_stub (
     input  logic [0:0]   clk_dst                 ,  // clock input
     input  logic [0:0]   rst_n_dst               ,  // active-low reset
-    input  logic [0:0]   clk_src                 ,  // clock input
-    input  logic [0:0]   rst_n_src               ,  // active-low reset
     input  logic [15:0]  req_wptr_async          ,  // async FIFO write pointer
     output logic [15:0]  req_rptr_async          ,  // async FIFO read pointer (async)
     output logic [15:0]  req_rptr_sync           ,  // async FIFO read pointer (sync)

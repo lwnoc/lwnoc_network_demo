@@ -3,40 +3,23 @@ import sys
 from pathlib import Path
 from typing import Mapping, TypedDict
 
-from _project_env import LWNOC_TOPO_ROOT, REPO_ROOT, THIS_DIR
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# PATHS — edit these to match your environment, or leave ""
-#         and set the corresponding env var instead.
-# ═══════════════════════════════════════════════════════════════════════════════
-_HARDCODED_PATHS = {
-    "STS_NOC_DIR":             "",   # e.g. "/home/lgzhu/dev/noc_work/lwnoc_sts_noc"
-    "STS_INIU":                "",
-    "STS_TNIU":                "",
-    "FCIP_DIR":                "",
-    "RTL_PATH":                "",
-    "STS_NOC_DEMO_DIR":        "",
-}
+THIS_DIR = Path(__file__).resolve().parent
+REPO_ROOT = THIS_DIR.parent
+LWNOC_TOPO_ROOT = REPO_ROOT / "lwnoc_topo"
+DEFAULT_STS_NOC_ROOT = REPO_ROOT / "subs" / "lwnoc_sts_noc"
 
 
-def _resolve_path(name: str) -> Path:
-    """Use hardcoded path if set, else env var, else error."""
-    hard = _HARDCODED_PATHS.get(name, "").strip()
-    if hard:
-        return Path(hard)
-    val = os.environ.get(name)
-    if val:
-        return Path(val)
-    print(f"[ERROR] ${name} is not set in your shell or in _HARDCODED_PATHS.")
-    print(f"  bash:  export {name}=<absolute/path>")
-    print(f"  csh:   setenv {name} <absolute/path>")
-    raise SystemExit(f"Missing path for: {name}")
+def _export_env_path(name: str, value: Path) -> Path:
+    resolved = value.resolve()
+    os.environ[name] = str(resolved)
+    return resolved
 
 
-STS_NOC_ROOT = _resolve_path("STS_NOC_DIR")
-STS_INIU_ROOT = _resolve_path("STS_INIU") if _HARDCODED_PATHS.get("STS_INIU", "").strip() or os.environ.get("STS_INIU") else STS_NOC_ROOT
-STS_TNIU_ROOT = _resolve_path("STS_TNIU") if _HARDCODED_PATHS.get("STS_TNIU", "").strip() or os.environ.get("STS_TNIU") else STS_NOC_ROOT
-FCIP_DIR = _resolve_path("FCIP_DIR")
+STS_NOC_ROOT = _export_env_path("STS_NOC_DIR", DEFAULT_STS_NOC_ROOT)
+STS_INIU_ROOT = _export_env_path("STS_INIU", STS_NOC_ROOT)
+STS_TNIU_ROOT = _export_env_path("STS_TNIU", STS_NOC_ROOT)
+FCIP_DIR = _export_env_path("FCIP_DIR", STS_NOC_ROOT / "fcip")
 STS_INIU_SYS_PUB_F = STS_INIU_ROOT / "vc" / "iniu_sys_pub.f"
 STS_INIU_NOC_PUB_F = STS_INIU_ROOT / "vc" / "iniu_noc_pub.f"
 STS_TNIU_SYS_PUB_F = STS_TNIU_ROOT / "vc" / "tniu_sys_pub.f"
@@ -48,11 +31,13 @@ if str(LWNOC_TOPO_ROOT) not in sys.path:
 
 from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
 
-# export derived paths to os.environ for downstream consumers
-for _k, _v in (("RTL_PATH", STS_NOC_ROOT), ("STS_INIU", STS_INIU_ROOT),
-               ("STS_TNIU", STS_TNIU_ROOT), ("FCIP_DIR", FCIP_DIR),
-               ("STS_NOC_DIR", STS_NOC_ROOT), ("STS_NOC_DEMO_DIR", THIS_DIR)):
-    os.environ.setdefault(_k, str(_v))
+
+_export_env_path("RTL_PATH", STS_NOC_ROOT)
+_export_env_path("STS_INIU", STS_INIU_ROOT)
+_export_env_path("STS_TNIU", STS_TNIU_ROOT)
+_export_env_path("FCIP_DIR", FCIP_DIR)
+_export_env_path("STS_NOC_DIR", STS_NOC_ROOT)
+_export_env_path("STS_NOC_DEMO_DIR", THIS_DIR)
 
 
 AXI_ADDR_WIDTH = 32
@@ -62,11 +47,16 @@ STS_DEMO_DBG_TIMESTAMP_WIDTH = 64
 STS_DEMO_DBG_DATA_WIDTH = 32
 STS_APB_ADDR_WIDTH = 32
 STS_TNIU_SYS_APB_MASTER_NUM = 1
+STS_SOC_NIU_CFG_BASE = 0x5700_0000
+STS_SOC_NIU_CFG_END = 0x573F_FFFF
+STS_SOC_FUNC_STRIDE = 0x0001_0000
+STS_SOC_FUNC_WINDOW_MASK = 0xFFFF_0000
+STS_SOC_DEBUG_BASE = 0x4800_0000
+STS_SOC_DEBUG_END = 0x4FFF_FFFF
+STS_SOC_DEBUG_STRIDE = 0x0020_0000
+STS_SOC_DEBUG_WINDOW_MASK = 0xFFE0_0000
 STS_SOC_FUNC_4KB_MASK = 0xFFFF_F000
-STS_SOC_FUNC_128KB_MASK = 0xFFFE_0000
-STS_SOC_DEBUG_32MB_MASK = 0xFE00_0000
 STS_SOC_FULL_MASK = 0x1FF
-STS_SOC_FUNC_ADDR_OFFSET = 0x0800_0000
 STS_SOC_ADDR_MAP_DEFAULT_TGT_ID = 0x1FF
 STS_INIU_NUM = 16
 STS_INIU_OT_TOTAL = 264
@@ -183,8 +173,8 @@ for key, env_token, canonical, addr_idx, tniu_id, has_iniu_cti_apb in _STS_SOC_T
             "canonical": canonical,
             "addr_idx": addr_idx,
             "tniu_id": tniu_id,
-            "func_base": addr_idx * 0x0002_0000,
-            "debug_base": 0x0200_0000 + (addr_idx * 0x0200_0000),
+            "func_base": STS_SOC_NIU_CFG_BASE + (addr_idx * STS_SOC_FUNC_STRIDE),
+            "debug_base": STS_SOC_DEBUG_BASE + (addr_idx * STS_SOC_DEBUG_STRIDE),
             "sys_apb_route_base": tniu_id,
             "sys_reg_route_base": 0x040 | tniu_id,
             "local_regbank_tgt_id": 0x080 | tniu_id,
@@ -195,6 +185,13 @@ for key, env_token, canonical, addr_idx, tniu_id, has_iniu_cti_apb in _STS_SOC_T
     )
 
 STS_SOC_TNIU_RESOURCE_BY_NAME = {entry["key"]: entry for entry in STS_SOC_TNIU_RESOURCES}
+for entry in STS_SOC_TNIU_RESOURCES:
+    func_end = entry["func_base"] | (~STS_SOC_FUNC_WINDOW_MASK & 0xFFFF_FFFF)
+    debug_end = entry["debug_base"] | (~STS_SOC_DEBUG_WINDOW_MASK & 0xFFFF_FFFF)
+    if not (STS_SOC_NIU_CFG_BASE <= entry["func_base"] <= func_end <= STS_SOC_NIU_CFG_END):
+        raise ValueError(f"{entry['key']} func window 0x{entry['func_base']:08X}..0x{func_end:08X} exceeds NIU cfg space")
+    if not (STS_SOC_DEBUG_BASE <= entry["debug_base"] <= debug_end <= STS_SOC_DEBUG_END):
+        raise ValueError(f"{entry['key']} debug window 0x{entry['debug_base']:08X}..0x{debug_end:08X} exceeds debug space")
 
 _STS_SOC_TNIU_SHARED_CFG_GROUPS = (
     ("gpuss0", ("gpuss0", "gpuss1")),
@@ -248,108 +245,32 @@ def _tniu_cfg_display_name(key: str) -> str:
     return _STS_SOC_TNIU_FAMILY_NAMES.get(key, key)
 
 
-STS_SOC_ADDR_MAP_SOURCE_ROWS: tuple[tuple[str, str, int, int, str, int, int], ...] = (
-    ("func", "CPU niu", 0x08000000, 0x0800FFFF, "cpuss", 1, 0x001),
-    ("func", "GPU0 niu", 0x08010000, 0x0801FFFF, "gpuss0", 2, 0x002),
-    ("func", "GPU1 niu", 0x08020000, 0x0802FFFF, "gpuss1", 3, 0x003),
-    ("func", "NPU0 niu", 0x08030000, 0x0803FFFF, "npuss0", 4, 0x004),
-    ("func", "NPU1 niu", 0x08040000, 0x0804FFFF, "npuss1", 5, 0x005),
-    ("func", "NPU2 niu", 0x08050000, 0x0805FFFF, "npuss2", 6, 0x006),
-    ("func", "NPU3 niu", 0x08060000, 0x0806FFFF, "npuss3", 7, 0x007),
-    ("func", "NPU4 niu", 0x08070000, 0x0807FFFF, "npuss4", 8, 0x008),
-    ("func", "MIPI niu", 0x08080000, 0x0808FFFF, "mipiss", 9, 0x009),
-    ("func", "Camera niu", 0x08090000, 0x0809FFFF, "camera_ss", 10, 0x00A),
-    ("func", "DDR0 niu", 0x080A0000, 0x080AFFFF, "ddrss0", 11, 0x00B),
-    ("func", "DDR1 niu", 0x080B0000, 0x080BFFFF, "ddrss1", 12, 0x00C),
-    ("func", "DDR2 niu", 0x080C0000, 0x080CFFFF, "ddrss2", 13, 0x00D),
-    ("func", "DDR3 niu", 0x080D0000, 0x080DFFFF, "ddrss3", 14, 0x00E),
-    ("func", "DDR4 niu", 0x080E0000, 0x080EFFFF, "ddrss4", 15, 0x00F),
-    ("func", "DDR5 niu", 0x080F0000, 0x080FFFFF, "ddrss5", 16, 0x010),
-    ("func", "DDR6 niu", 0x08100000, 0x0810FFFF, "ddrss6", 17, 0x011),
-    ("func", "DDR7 niu", 0x08110000, 0x0811FFFF, "ddrss7", 18, 0x012),
-    ("func", "DDR8 niu", 0x08120000, 0x0812FFFF, "ddrss8", 19, 0x013),
-    ("func", "DDR9 niu", 0x08130000, 0x0813FFFF, "ddrss9", 20, 0x014),
-    ("func", "DDR10 niu", 0x08140000, 0x0814FFFF, "ddrss10", 21, 0x015),
-    ("func", "DDR11 niu", 0x08150000, 0x0815FFFF, "ddrss11", 22, 0x016),
-    ("func", "VPU niu", 0x08160000, 0x0816FFFF, "vpuss", 23, 0x017),
-    ("func", "Display niu", 0x08170000, 0x0817FFFF, "display_ss", 24, 0x018),
-    ("func", "PCIE_ETH niu", 0x08180000, 0x0818FFFF, "pcie_ethss", 25, 0x019),
-    ("func", "VDSP0 niu", 0x08190000, 0x0819FFFF, "vdspss0", 26, 0x01A),
-    ("func", "VDSP1 niu", 0x081A0000, 0x081AFFFF, "vdspss1", 27, 0x01B),
-    ("func", "VDSP2 niu", 0x081B0000, 0x081BFFFF, "vdspss2", 28, 0x01C),
-    ("func", "VDSP3 niu", 0x081C0000, 0x081CFFFF, "vdspss3", 29, 0x01D),
-    ("func", "VDSP4 niu", 0x081D0000, 0x081DFFFF, "vdspss4", 30, 0x01E),
-    ("func", "VDSP5 niu", 0x081E0000, 0x081EFFFF, "vdspss5", 31, 0x01F),
-    ("func", "USB_DP niu", 0x081F0000, 0x081FFFFF, "usb_dpss", 32, 0x020),
-    ("func", "UFS niu", 0x08200000, 0x0820FFFF, "ufsss", 33, 0x021),
-    ("func", "Safety niu", 0x08210000, 0x0821FFFF, "safetyss_aon_local", 34, 0x022),
-    ("func", "PERI niu", 0x08220000, 0x0822FFFF, "periss", 35, 0x023),
-    ("func", "Debug niu", 0x08230000, 0x0823FFFF, "debug_ss", 36, 0x024),
-    ("func", "Audio niu", 0x08240000, 0x0824FFFF, "periss", 35, 0x023),
-    ("func", "MCU niu", 0x08250000, 0x0825FFFF, "mcuss", 37, 0x025),
-    ("func", "Noc niu", 0x08260000, 0x0826FFFF, "nocss", 38, 0x026),
-    ("debug", "ROMTABLE", 0x00000000, 0x003FFFFF, "safetyss_aon_local", 34, 0x022),
-    ("debug", "SAFETY CL0 R52 ROM TABLE", 0x00400000, 0x007FFFFF, "safetyss_aon_local", 34, 0x022),
-    ("debug", "SAFETY CL1 R52 ROM TABLE", 0x00800000, 0x00BFFFFF, "safetyss_aon_local", 34, 0x022),
-    ("debug", "SAFETY CL0 Funnel8", 0x00C00000, 0x00C00FFF, "safetyss_aon_local", 34, 0x022),
-    ("debug", "SAFETY CL1 Funnel8", 0x00C01000, 0x00C01FFF, "safetyss_aon_local", 34, 0x022),
-    ("debug", "SAFETY Funnel2", 0x00C02000, 0x00C02FFF, "safetyss_aon_local", 34, 0x022),
-    ("debug", "CPU CL0 ROM TABLE", 0x02000000, 0x027FFFFF, "cpuss", 1, 0x001),
-    ("debug", "CPU CL1 ROM TABLE", 0x02800000, 0x02FFFFFF, "cpuss", 1, 0x001),
-    ("debug", "CPU CL2 ROM TABLE", 0x03000000, 0x037FFFFF, "cpuss", 1, 0x001),
-    ("debug", "CPU CL3 ROM TABLE", 0x03800000, 0x03DFFFFF, "cpuss", 1, 0x001),
-    ("debug", "CPU Funnel2", 0x03E00000, 0x03E00FFF, "cpuss", 1, 0x001),
-    ("debug", "CPU CTI", 0x03E01000, 0x03E01FFF, "cpuss", 1, 0x001),
-    ("debug", "MCU Core0", 0x04000000, 0x043FFFFF, "mcuss", 37, 0x025),
-    ("debug", "MCU Core1", 0x04400000, 0x047FFFFF, "mcuss", 37, 0x025),
-    ("debug", "MCU Core2", 0x04800000, 0x04BFFFFF, "mcuss", 37, 0x025),
-    ("debug", "MCU Core3", 0x04C00000, 0x04FFFFFF, "mcuss", 37, 0x025),
-    ("debug", "MCU Funnel", 0x05000000, 0x05000FFF, "mcuss", 37, 0x025),
-    ("debug", "GPU0", 0x06000000, 0x065FFFFF, "gpuss0", 2, 0x002),
-    ("debug", "GPU0 CTI", 0x06600000, 0x06600FFF, "gpuss0", 2, 0x002),
-    ("debug", "GPU1", 0x06800000, 0x06DFFFFF, "gpuss1", 3, 0x003),
-    ("debug", "GPU1 CTI", 0x06E00000, 0x06E00FFF, "gpuss1", 3, 0x003),
-    ("debug", "VDSP0", 0x07000000, 0x07003FFF, "vdspss0", 26, 0x01A),
-    ("debug", "VDSP0 CTI", 0x07004000, 0x07004FFF, "vdspss0", 26, 0x01A),
-    ("debug", "VDSP1", 0x07008000, 0x0700BFFF, "vdspss1", 27, 0x01B),
-    ("debug", "VDSP1 CTI", 0x0700C000, 0x0700CFFF, "vdspss1", 27, 0x01B),
-    ("debug", "VDSP2", 0x07010000, 0x07013FFF, "vdspss2", 28, 0x01C),
-    ("debug", "VDSP2 CTI", 0x07014000, 0x07014FFF, "vdspss2", 28, 0x01C),
-    ("debug", "VDSP3", 0x07018000, 0x0701BFFF, "vdspss3", 29, 0x01D),
-    ("debug", "VDSP3 CTI", 0x0701C000, 0x0701CFFF, "vdspss3", 29, 0x01D),
-    ("debug", "VDSP4", 0x07020000, 0x07023FFF, "vdspss4", 30, 0x01E),
-    ("debug", "VDSP4 CTI", 0x07024000, 0x07024FFF, "vdspss4", 30, 0x01E),
-    ("debug", "VDSP5", 0x07028000, 0x0702BFFF, "vdspss5", 31, 0x01F),
-    ("debug", "VDSP5 CTI", 0x0702C000, 0x0702CFFF, "vdspss5", 31, 0x01F),
-    ("debug", "Camera Funnel", 0x07400000, 0x07400FFF, "camera_ss", 10, 0x00A),
-    ("debug", "Camera CTI", 0x07401000, 0x07401FFF, "camera_ss", 10, 0x00A),
-    ("debug", "Audio Core0", 0x07800000, 0x07803FFF, "periss", 35, 0x023),
-    ("debug", "Audio Core1", 0x07804000, 0x07807FFF, "periss", 35, 0x023),
-    ("debug", "Peri dbg tsgen", 0x07808000, 0x07808FFF, "periss", 35, 0x023),
-    ("debug", "Peri dbg etf", 0x07809000, 0x07809FFF, "periss", 35, 0x023),
-    ("debug", "Peri dbg cti0", 0x0780A000, 0x0780AFFF, "periss", 35, 0x023),
-    ("debug", "Peri dbg stm", 0x0780B000, 0x0780BFFF, "periss", 35, 0x023),
-    ("debug", "Peri dbg cti1", 0x0780C000, 0x0780CFFF, "periss", 35, 0x023),
-)
+def _build_full_addr_map_entries() -> list[tuple[int, int, int]]:
+    entries: list[tuple[int, int, int]] = []
+    for entry in reversed(STS_SOC_TNIU_RESOURCES):
+        debug_base = entry["debug_base"]
+        func_base = entry["func_base"]
+        debug_end = debug_base | (~STS_SOC_DEBUG_WINDOW_MASK & 0xFFFF_FFFF)
+        func_end = func_base | (~STS_SOC_FUNC_WINDOW_MASK & 0xFFFF_FFFF)
+        sys_apb_tgt_id = entry["sys_apb_route_base"]
+        local_iniu_cti_tgt_id = entry["local_iniu_cti_tgt_id"]
+        local_cti_tgt_id = entry["local_cti_tgt_id"]
+        sys_reg_tgt_id = entry["sys_reg_route_base"]
+        local_regbank_tgt_id = entry["local_regbank_tgt_id"]
 
-STS_SOC_ADDR_MAP_ENTRIES = tuple((start_addr, end_addr, tgt_id) for _, _, start_addr, end_addr, _, _, tgt_id in STS_SOC_ADDR_MAP_SOURCE_ROWS)
-if len(STS_SOC_ADDR_MAP_ENTRIES) != 81:
-    raise ValueError(f"expected 81 latest address-map entries, got {len(STS_SOC_ADDR_MAP_ENTRIES)}")
+        entries.append((debug_base, debug_end, sys_apb_tgt_id))
+        if entry["has_iniu_cti_apb"]:
+            entries.append((debug_base + 0x1000, debug_base + 0x1FFF, local_iniu_cti_tgt_id))
+        entries.append((debug_base, debug_base + 0x0FFF, local_cti_tgt_id))
+        entries.append((func_base, func_end, sys_apb_tgt_id))
+        entries.append((func_base + 0x1000, func_base + 0x1FFF, sys_reg_tgt_id))
+        entries.append((func_base, func_base + 0x0FFF, local_regbank_tgt_id))
+    return entries
 
-for row_idx, (domain, row_name, start_addr, end_addr, owner_key, tniu_id, tgt_id) in enumerate(STS_SOC_ADDR_MAP_SOURCE_ROWS):
-    if start_addr > end_addr:
-        raise ValueError(f"invalid address range at row {row_idx}: {row_name}")
-    if owner_key not in STS_SOC_TNIU_RESOURCE_BY_NAME:
-        raise ValueError(f"unknown owner_key at row {row_idx}: {owner_key}")
-    expected_tgt_id = STS_SOC_TNIU_RESOURCE_BY_NAME[owner_key]["sys_apb_route_base"]
-    if tniu_id != STS_SOC_TNIU_RESOURCE_BY_NAME[owner_key]["tniu_id"] or tgt_id != expected_tgt_id:
-        raise ValueError(f"owner/tgt_id mismatch at row {row_idx}: {row_name}")
 
-for lhs_idx, lhs_entry in enumerate(STS_SOC_ADDR_MAP_SOURCE_ROWS):
-    for rhs_idx in range(lhs_idx + 1, len(STS_SOC_ADDR_MAP_SOURCE_ROWS)):
-        rhs_entry = STS_SOC_ADDR_MAP_SOURCE_ROWS[rhs_idx]
-        if max(lhs_entry[2], rhs_entry[2]) <= min(lhs_entry[3], rhs_entry[3]):
-            raise ValueError(f"overlapped STS addr map rows: {lhs_idx} {lhs_entry[1]} / {rhs_idx} {rhs_entry[1]}")
+STS_SOC_ADDR_MAP_ENTRIES = _build_full_addr_map_entries()
+if len(STS_SOC_ADDR_MAP_ENTRIES) != 191:
+    raise ValueError(f"expected 191 full-topo address-map entries, got {len(STS_SOC_ADDR_MAP_ENTRIES)}")
 
 STS_SOC_ADDR_MAP_START_TABLE_INT = _pack_int(AXI_ADDR_WIDTH, [entry[0] for entry in STS_SOC_ADDR_MAP_ENTRIES])
 STS_SOC_ADDR_MAP_END_TABLE_INT = _pack_int(AXI_ADDR_WIDTH, [entry[1] for entry in STS_SOC_ADDR_MAP_ENTRIES])
@@ -549,17 +470,10 @@ def _apply_tniu_macros(cfg: TemplateIPConfig, tniu_name: str) -> TemplateIPConfi
         STS_TNIU_STATIC_MACROS,
         {
             "STS_TNIU_LOCAL_RSC_TGT_ID": _sv_hex(TGT_ID_WIDTH, entry["local_regbank_tgt_id"]),
-            "STS_TNIU_LOCAL_INIU_CTI_TGT_ID": _sv_hex(TGT_ID_WIDTH, entry["local_iniu_cti_tgt_id"]),
-            "STS_TNIU_LOCAL_INIU_CTI_TGT_MASK": _sv_hex(TGT_ID_WIDTH, STS_SOC_FULL_MASK),
             "STS_TNIU_LOCAL_REGBANK_TGT_ID": _sv_hex(TGT_ID_WIDTH, entry["local_regbank_tgt_id"]),
-            "STS_TNIU_LOCAL_REGBANK_TGT_MASK": _sv_hex(TGT_ID_WIDTH, STS_SOC_FULL_MASK),
             "STS_TNIU_LOCAL_CTI_TGT_ID": _sv_hex(TGT_ID_WIDTH, entry["local_cti_tgt_id"]),
-            "STS_TNIU_LOCAL_CTI_TGT_MASK": _sv_hex(TGT_ID_WIDTH, STS_SOC_FULL_MASK),
-            "STS_TNIU_HAS_INIU_CTI_APB": int(entry["has_iniu_cti_apb"]),
-            "STS_TNIU_SYS_REG_ROUTE_BASE": _sv_hex(TGT_ID_WIDTH, entry["sys_reg_route_base"]),
-            "STS_TNIU_SYS_REG_ROUTE_MASK": _sv_hex(TGT_ID_WIDTH, 0x1C0),
             "STS_TNIU_SYS_APB_ROUTE_BASE": _sv_param(STS_TNIU_SYS_APB_MASTER_NUM * TGT_ID_WIDTH, entry["sys_apb_route_base"]),
-            "STS_TNIU_SYS_APB_ROUTE_MASK": _sv_param(STS_TNIU_SYS_APB_MASTER_NUM * TGT_ID_WIDTH, 0x1C0),
+            "STS_TNIU_SYS_APB_ROUTE_MASK": _sv_param(STS_TNIU_SYS_APB_MASTER_NUM * TGT_ID_WIDTH, STS_SOC_FULL_MASK),
         },
     )
     cfg._canonical_name = entry["canonical"]

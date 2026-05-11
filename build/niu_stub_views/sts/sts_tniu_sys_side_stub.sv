@@ -6,10 +6,8 @@
 // Resolved source top module: sts_tniu_sys
 // Representative config: STS_SOC_TNIU_SYS_CONFIGS.ddrss0 (TemplateIPConfig name=ddrss_tniu_sys)
 module sts_tniu_sys_side_stub (
-    input  logic [0:0]   clk_src                    ,  // clock input
     input  logic [0:0]   clk_dst                    ,  // clock input
     input  logic [0:0]   clk_dbg_timer              ,  // clock input
-    input  logic [0:0]   rstn_src                   ,  // active-low reset
     input  logic [0:0]   rstn_dst                   ,  // active-low reset
     input  logic [0:0]   rstn_dbg_timer             ,  // active-low reset
     input  logic [3:0]   req_wptr_async             ,  // async FIFO write pointer
@@ -53,7 +51,9 @@ module sts_tniu_sys_side_stub (
     output logic [63:0]  dbg_timestamp_out          ,  // debug interface
     output logic [0:0]   tniu_sys_regbank_parity_err,  // register bank parity error
     output logic [0:0]   sts_tniu_req_afifo_sb_err  ,  // ECC error flag (single/double bit)
-    output logic [0:0]   sts_tniu_req_afifo_db_err    // ECC error flag (single/double bit)
+    output logic [0:0]   sts_tniu_req_afifo_db_err  ,  // ECC error flag (single/double bit)
+    input  logic [9:0]   hw_dbg_sel_in              ,  // debug interface
+    output logic [9:0]   hw_dbg_sel_out               // debug interface
 );
 
     // Future boundary note:
@@ -86,5 +86,6 @@ module sts_tniu_sys_side_stub (
     assign tniu_sys_regbank_parity_err = '0;
     assign sts_tniu_req_afifo_sb_err = '0;
     assign sts_tniu_req_afifo_db_err = '0;
+    assign hw_dbg_sel_out = '0;
 
 endmodule
