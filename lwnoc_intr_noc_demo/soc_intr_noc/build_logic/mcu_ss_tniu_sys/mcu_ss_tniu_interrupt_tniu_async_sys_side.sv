@@ -14,7 +14,10 @@ module mcu_ss_tniu_interrupt_tniu_async_sys_side
     localparam integer unsigned ECC_CODE_WIDTH      = ($clog2(PLD_ORG_WIDTH)+PLD_ORG_WIDTH+1 <= 2**$clog2(PLD_ORG_WIDTH))? $clog2(PLD_ORG_WIDTH) : $clog2(PLD_ORG_WIDTH)+1,
     localparam integer unsigned ECC_OVERHEAD        = ECC_CODE_WIDTH + 1,
     localparam integer unsigned PLD_ECC_WIDTH       = PLD_ORG_WIDTH + ECC_OVERHEAD,
-    localparam integer unsigned FIFO_DATA_WIDTH     = PLD_ECC_WIDTH
+    localparam integer unsigned FIFO_DATA_WIDTH     = PLD_ECC_WIDTH,
+    localparam int PCH_WIDTH  = $bits(lwnoc_pchannel_state_t),
+    localparam int PCA_WIDTH  = $bits(lwnoc_pchannel_active_t),
+    localparam int LP_SIG_WIDTH = $bits(lwnoc_lp_req_signal_t)
 
 )(
     input  logic                                    clk                             ,
@@ -42,12 +45,12 @@ module mcu_ss_tniu_interrupt_tniu_async_sys_side
     //lp interface
     input  logic [TIME_OUT_WIDTH-1              :0] timeout_val                     ,
 
-    output lwnoc_lp_req_signal_t                    m_async_master_hub_rx_req       ,
-    input  lwnoc_lp_req_signal_t                    m_async_master_hub_tx_req       ,
+    output logic [LP_SIG_WIDTH-1:0]                 m_async_master_hub_rx_req       ,
+    input  logic [LP_SIG_WIDTH-1:0]                 m_async_master_hub_tx_req       ,
 
     input  logic                                    preq                            ,
-    input  lwnoc_pchannel_state_t                   pstate                          ,
-    output lwnoc_pchannel_active_t                  pactive                         ,
+    input  logic [PCH_WIDTH-1:0]                    pstate                          ,
+    output logic [PCA_WIDTH-1:0]                    pactive                         ,
     output logic                                    paccept                         ,
     output logic                                    pdeny                           ,
 
@@ -105,9 +108,16 @@ module mcu_ss_tniu_interrupt_tniu_async_sys_side
     lwnoc_lp_req_signal_t                   v_stage_1_hub_rx_req    [3:0];
     lwnoc_lp_req_signal_t                   v_stage_1_hub_tx_req    [3:0];
 
+    lwnoc_pchannel_active_t                 pactive_typed;
+    lwnoc_lp_req_signal_t                   m_async_master_hub_rx_req_typed;
+
 //===========================================================================
 // package
 //===========================================================================
+
+    // Pchannel / LP type casts (ports are flat vectors)
+    assign pactive                      = pactive_typed;
+    assign m_async_master_hub_rx_req    = m_async_master_hub_rx_req_typed;
 
 
     assign req_valid            = resp_valid;
@@ -163,8 +173,8 @@ module mcu_ss_tniu_interrupt_tniu_async_sys_side
         .rx_req             (lp_iniu_hub_tx_req         ),
         .tx_req             (lp_iniu_hub_rx_req         ),
         .preq               (preq                       ),
-        .pstate             (pstate                     ),
-        .pactive            (pactive                    ),
+        .pstate             (lwnoc_pchannel_state_t'(pstate) ),
+        .pactive            (pactive_typed                  ),
         .paccept            (paccept                    ),
         .pdeny              (pdeny                      )
     );
@@ -190,8 +200,8 @@ module mcu_ss_tniu_interrupt_tniu_async_sys_side
 
         .rx_req_main        (lp_nest_tx_req             ),
         .tx_req_main        (lp_nest_rx_req             ),
-        .rx_req_sub         (m_async_master_hub_tx_req  ),
-        .tx_req_sub         (m_async_master_hub_rx_req  )
+        .rx_req_sub         (lwnoc_lp_req_signal_t'(m_async_master_hub_tx_req)  ),
+        .tx_req_sub         (m_async_master_hub_rx_req_typed                      )
 
     );
 

@@ -9,9 +9,3 @@ $INTR_INIU_TOP_OUT_DIR/intr_iniu_top_interrupt_iniu.sv
 $INTR_INIU_TOP_OUT_DIR/intr_iniu_top_interrupt_iniu_async_sys_side.sv
 $INTR_INIU_TOP_OUT_DIR/intr_iniu_top_interrupt_iniu_async_top_side.sv
 $INTR_INIU_TOP_OUT_DIR/intr_iniu_top_interrupt_iniu_undef.sv
-$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_spram_4096x26.sv
-$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_spram_2048x26.sv
-$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_spram_1024x26.sv
-$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_spram_512x26.sv
-$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_spram_256x26.sv
-$INTR_INIU_TOP_OUT_DIR/intr_iniu_top_spram_128x26.sv

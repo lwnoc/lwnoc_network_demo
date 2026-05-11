@@ -11,7 +11,8 @@ module dti_iniu_top_gpu_ss0_dti_pr_iniu_async_top_side
         localparam integer unsigned  ECC_OVERHEAD     = 8,
         localparam integer unsigned  ECC_PLD_WIDTH    = ORG_PLD_WIDTH + ECC_OVERHEAD,
         localparam integer unsigned  AFIFO_DATA_WIDTH = ECC_PLD_WIDTH,
-        parameter integer unsigned  ERR_INT_CNT_WIDTH = `dti_iniu_top_gpu_ss0_INIU_ERR_INT_CNT_WIDTH
+        parameter integer unsigned  ERR_INT_CNT_WIDTH = `dti_iniu_top_gpu_ss0_INIU_ERR_INT_CNT_WIDTH,
+        localparam int LP_SIG_WIDTH = $bits(lwnoc_lp_req_signal_t)
     )(
     input   logic                                              clk           ,
     input   logic                                              rst_n         ,
@@ -47,8 +48,8 @@ module dti_iniu_top_gpu_ss0_dti_pr_iniu_async_top_side
     input  logic    [ASYNC_FIFO_DEPTH-1                   :0]  rsp_rptr_sync ,
     output logic    [AFIFO_DATA_WIDTH                     :0]  rsp_pld_sync  ,
     // LP
-    input  lwnoc_lp_req_signal_t                               lp_hub_rx_req ,
-    output lwnoc_lp_req_signal_t                               lp_hub_tx_req
+    input  logic [LP_SIG_WIDTH-1:0]                            lp_hub_rx_req ,
+    output logic [LP_SIG_WIDTH-1:0]                            lp_hub_tx_req
     );
 
     logic [90+6+6+1+1-1:0]  req_pld_vector     ;
@@ -78,7 +79,7 @@ module dti_iniu_top_gpu_ss0_dti_pr_iniu_async_top_side
     //=================================================
     // LP
     //=================================================
-    assign v_stage_1_hub_rx_req[0] = lp_hub_rx_req;
+    assign v_stage_1_hub_rx_req[0] = lwnoc_lp_req_signal_t'(lp_hub_rx_req);
     assign v_stage_1_hub_rx_req[1] = async_slave_hub_rx_req;
     assign v_stage_1_hub_rx_req[2] = async_master_hub_rx_req;
     assign lp_hub_tx_req           = v_stage_1_hub_tx_req[0];

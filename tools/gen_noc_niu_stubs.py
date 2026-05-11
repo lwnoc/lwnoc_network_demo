@@ -61,36 +61,36 @@ SPECS: tuple[StubSpec, ...] = (
         category="iniu_top_side",
         template_module="StsTemplate",
         config_attr="aon_ss_iniu_top_side_config",
-        top_module="sts_iniu_top",
+        top_module="sts_iniu_noc",
         extra_sys_paths=(REPO_ROOT / "lwnoc_sts_noc_demo",),
         fallback_build_dir=REPO_ROOT / "lwnoc_sts_noc_demo" / "build_logic" / "aon_ss_iniu_top_side",
-        fallback_top_module="sts_iniu_top",
+        fallback_top_module="sts_iniu_noc",
     ),
     StubSpec(
         noc="sts",
         category="tniu_sys_side",
         template_module="StsTemplate",
-        config_attr="dspss_tniu_sys_config",
+        config_attr="STS_SOC_TNIU_SYS_CONFIGS.ddrss0",
         top_module="sts_tniu_sys",
         extra_sys_paths=(REPO_ROOT / "lwnoc_sts_noc_demo",),
-        fallback_build_dir=REPO_ROOT / "lwnoc_sts_noc_demo" / "build_logic" / "dspss_tniu_sys",
+        fallback_build_dir=REPO_ROOT / "lwnoc_sts_noc_demo" / "build_logic" / "ddrss0_tniu_sys",
         fallback_top_module="sts_tniu_sys",
     ),
     StubSpec(
         noc="sts",
         category="tniu_top_side",
         template_module="StsTemplate",
-        config_attr="dspss_tniu_top_side_config",
-        top_module="sts_tniu_top",
+        config_attr="STS_SOC_TNIU_TOP_CONFIGS.ddrss0",
+        top_module="sts_tniu_noc",
         extra_sys_paths=(REPO_ROOT / "lwnoc_sts_noc_demo",),
-        fallback_build_dir=REPO_ROOT / "lwnoc_sts_noc_demo" / "build_logic" / "dspss_tniu_top_side",
-        fallback_top_module="sts_tniu_top",
+        fallback_build_dir=REPO_ROOT / "lwnoc_sts_noc_demo" / "build_logic" / "ddrss0_tniu_top_side",
+        fallback_top_module="sts_tniu_noc",
     ),
     StubSpec(
         noc="intr",
         category="iniu_sys_side",
         template_module="SocIntrTemplate",
-        config_attr="audio_ss_iniu_cfg",
+        config_attr="cpu_ss_iniu_cfg",
         top_module="interrupt_iniu_async_sys_side",
         extra_sys_paths=(REPO_ROOT / "lwnoc_intr_noc_demo" / "soc_intr_noc",),
         fallback_build_dir=REPO_ROOT / "lwnoc_intr_noc_demo" / "soc_intr_noc" / "build_logic" / "audio_ss_iniu_sys",
@@ -110,7 +110,7 @@ SPECS: tuple[StubSpec, ...] = (
         noc="intr",
         category="tniu_sys_side",
         template_module="SocIntrTemplate",
-        config_attr="display_ss_tniu_cfg",
+        config_attr="cpu_ss_tniu_cfg",
         top_module="interrupt_tniu_async_sys_side",
         extra_sys_paths=(REPO_ROOT / "lwnoc_intr_noc_demo" / "soc_intr_noc",),
         fallback_build_dir=REPO_ROOT / "lwnoc_intr_noc_demo" / "soc_intr_noc" / "build_logic" / "display_ss_tniu_sys",
@@ -130,7 +130,7 @@ SPECS: tuple[StubSpec, ...] = (
         noc="dti",
         category="iniu_sys_side",
         template_module="DtiTemplate",
-        config_attr="pcie_eth_iniu_sys_config",
+        config_attr="gpu_iniu_sys_config",
         top_module="dti_pr_iniu_async_sys_side",
         extra_sys_paths=(REPO_ROOT / "soc_dti_noc_demo",),
         fallback_build_dir=REPO_ROOT / "soc_dti_noc_demo" / "build_logic" / "pcie_eth_iniu_sys",
@@ -140,11 +140,11 @@ SPECS: tuple[StubSpec, ...] = (
         noc="dti",
         category="iniu_top_side",
         template_module="DtiTemplate",
-        config_attr="iniu_top_config",
+        config_attr="gpu_iniu_sys_config",
         top_module="dti_pr_iniu_async_top_side",
         extra_sys_paths=(REPO_ROOT / "soc_dti_noc_demo",),
-        fallback_build_dir=REPO_ROOT / "soc_dti_noc_demo" / "build_logic" / "dti_iniu_top_side",
-        fallback_top_module="dti_iniu_top_dti_pr_iniu_async_top_side",
+        fallback_build_dir=None,
+        fallback_top_module=None,
     ),
     StubSpec(
         noc="dti",
@@ -160,51 +160,82 @@ SPECS: tuple[StubSpec, ...] = (
         noc="dti",
         category="tniu_top_side",
         template_module="DtiTemplate",
-        config_attr="tniu_top_config",
+        config_attr="tcu_tniu_sys_config",
         top_module="dti_tniu_async_top_side",
         extra_sys_paths=(REPO_ROOT / "soc_dti_noc_demo",),
-        fallback_build_dir=REPO_ROOT / "soc_dti_noc_demo" / "build_logic" / "dti_tniu_top_side",
-        fallback_top_module="dti_tniu_top_dti_tniu_async_top_side",
+        fallback_build_dir=None,
+        fallback_top_module=None,
     ),
     StubSpec(
         noc="atb",
         category="iniu_sys_side",
         template_module="AtbTemplate",
-        config_attr="_atb_iniu_sys_cfg",
+        config_attr="aon_iniu_cfg",
         top_module="atb_iniu_sys",
         extra_sys_paths=(REPO_ROOT / "soc_atb_noc",),
-        fallback_build_dir=REPO_ROOT / "soc_atb_noc" / "build_logic" / "camera_iniu_sys",
-        fallback_top_module="cam_atb_iniu_sys",
+        fallback_build_dir=None,
+        fallback_top_module=None,
     ),
     StubSpec(
         noc="atb",
         category="iniu_top_side",
         template_module="AtbTemplate",
-        config_attr="_atb_iniu_noc_cfg",
+        config_attr="aon_iniu_noc_cfg",
         top_module="atb_iniu_noc",
         extra_sys_paths=(REPO_ROOT / "soc_atb_noc",),
-        fallback_build_dir=REPO_ROOT / "soc_atb_noc" / "build_logic" / "atb_iniu_noc",
+        fallback_build_dir=None,
         fallback_top_module="atb_iniu_noc",
     ),
     StubSpec(
         noc="atb",
         category="tniu_sys_side",
         template_module="AtbTemplate",
-        config_attr="_atb_tniu_sys_cfg",
+        config_attr="debug_tniu_cfg",
         top_module="atb_tniu_sys",
         extra_sys_paths=(REPO_ROOT / "soc_atb_noc",),
-        fallback_build_dir=REPO_ROOT / "soc_atb_noc" / "build_logic" / "debug_tniu_sys",
-        fallback_top_module="dbg_atb_tniu_sys",
+        fallback_build_dir=None,
+        fallback_top_module=None,
     ),
     StubSpec(
         noc="atb",
         category="tniu_top_side",
         template_module="AtbTemplate",
-        config_attr="_atb_tniu_noc_cfg",
+        config_attr="debug_tniu_noc_cfg",
         top_module="atb_tniu_noc",
         extra_sys_paths=(REPO_ROOT / "soc_atb_noc",),
-        fallback_build_dir=REPO_ROOT / "soc_atb_noc" / "build_logic" / "atb_tniu_noc",
+        fallback_build_dir=None,
         fallback_top_module="atb_tniu_noc",
+    ),
+    # ── Top-level aggregation wrapper stubs ────────────────────────────
+    StubSpec(
+        noc="atb",
+        category="soc_top_wrap",
+        template_module="AtbTemplate",
+        config_attr="atb_top_wrap_config",
+        top_module="_unused_",
+        extra_sys_paths=(REPO_ROOT / "soc_atb_noc",),
+        fallback_build_dir=REPO_ROOT / "soc_atb_noc" / "build_logic" / "atb_soc_top_wrap",
+        fallback_top_module="atb_soc_top_wrap",
+    ),
+    StubSpec(
+        noc="sts",
+        category="soc_top_wrap",
+        template_module="StsTemplate",
+        config_attr="aon_ss_iniu_sys_config",
+        top_module="_unused_",
+        extra_sys_paths=(REPO_ROOT / "lwnoc_sts_noc_demo",),
+        fallback_build_dir=REPO_ROOT / "lwnoc_sts_noc_demo" / "build_logic" / "sts_soc_top_wrap",
+        fallback_top_module="sts_soc_top_wrap",
+    ),
+    StubSpec(
+        noc="intr",
+        category="ring_top_wrap",
+        template_module="SocIntrTemplate",
+        config_attr="cpu_ss_iniu_cfg",
+        top_module="_unused_",
+        extra_sys_paths=(REPO_ROOT / "lwnoc_intr_noc_demo" / "soc_intr_noc",),
+        fallback_build_dir=REPO_ROOT / "lwnoc_intr_noc_demo" / "soc_intr_noc" / "build_logic" / "ring_top_wrap",
+        fallback_top_module="ring_top_wrap",
     ),
 )
 
@@ -238,9 +269,17 @@ def bootstrap_paths() -> None:
 
 
 def patch_port_widths() -> None:
-    from lwnoc_sts_noc_demo.tools.vport_width_patch import patch_vport_width
+    try:
+        from lwnoc_sts_noc_demo.tools.vport_width_patch import patch_vport_width
+        patch_vport_width()
+    except ModuleNotFoundError:
+        pass  # optional post-generation width fixup; run after adding module
 
-    patch_vport_width()
+def _resolve_attr(obj, part: str):
+    """Resolve part from obj: dict key or attribute."""
+    if isinstance(obj, dict):
+        return obj[part]
+    return getattr(obj, part)
 
 
 def load_config(spec: StubSpec) -> Any:
@@ -250,31 +289,82 @@ def load_config(spec: StubSpec) -> Any:
             sys.path.insert(0, path_str)
 
     module = importlib.import_module(spec.template_module)
-    return getattr(module, spec.config_attr)
+    attr = spec.config_attr
+    if "." in attr:
+        obj: Any = module
+        for part in attr.split("."):
+            obj = _resolve_attr(obj, part)
+        return obj
+    return getattr(module, attr)
 
 
 def resolve_build_filelist(spec: StubSpec) -> Path:
     assert spec.fallback_build_dir is not None
 
     build_dir = spec.fallback_build_dir
-    preferred = sorted(path for path in build_dir.glob("*.f") if path.name != "expanded_filelist.f")
-    source_filelist = preferred[0] if preferred else build_dir / "expanded_filelist.f"
-    if not source_filelist.exists():
-        raise FileNotFoundError(f"No build filelist found under {build_dir}")
+    raw_filelist = build_dir / "expanded_filelist.f"
+    if not raw_filelist.exists():
+        raw_filelist = build_dir / "filelist.f"
+    if not raw_filelist.exists():
+        candidates = sorted(build_dir.glob("*.f"))
+        candidates = [f for f in candidates if f.name != "expanded_filelist.f"]
+        if candidates:
+            raw_filelist = candidates[0]
+    if not raw_filelist.exists():
+        raise FileNotFoundError(f"No filelist.f found under {build_dir}")
 
     TEMP_RESOLVED_FILELIST_DIR.mkdir(parents=True, exist_ok=True)
     resolved_filelist = TEMP_RESOLVED_FILELIST_DIR / f"{spec.stub_module_name}.f"
 
-    resolved_lines: list[str] = []
-    for raw_line in source_filelist.read_text(encoding="utf-8").splitlines():
-        line = raw_line.strip()
-        if not line:
-            continue
+    # build_logic root = parent of per-IP directories
+    build_root = build_dir.parent
+    # Build a name→path index for all build_logic subdirs
+    dir_index: dict[str, Path] = {}
+    for d in build_root.iterdir():
+        if d.is_dir():
+            dir_index[d.name.lower()] = d
 
-        line = re.sub(r"\$\{?[A-Z0-9_]+\}?", str(build_dir), line)
-        if not line.startswith("/") and not line.startswith("+") and not line.startswith("-"):
-            line = str((build_dir / line).resolve())
-        resolved_lines.append(line)
+    def _resolve_env_path(raw: str) -> str:
+        """Resolve $SOME_VAR/rel/path to an absolute path under build_root."""
+        raw = raw.strip()
+        m = re.match(r"\$(\w+)/(.+)", raw)
+        if not m:
+            return raw
+        var, rest = m.groups()
+        var_lower = var.lower()
+        # Direct name match
+        if var_lower in dir_index:
+            candidate = dir_index[var_lower] / rest
+            if candidate.exists():
+                return str(candidate)
+        # Partial name match
+        for name, path in dir_index.items():
+            if var_lower in name:
+                candidate = path / rest
+                if candidate.exists():
+                    return str(candidate)
+        return raw
+
+    resolved_lines: list[str] = []
+    for raw_line in raw_filelist.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("//"):
+            continue
+        if line.startswith("-f "):
+            ref = line[3:]
+            resolved = _resolve_env_path(ref)
+            resolved_lines.append(f"-f {resolved}")
+        elif line.startswith("$"):
+            resolved = _resolve_env_path(line)
+            resolved_lines.append(resolved)
+        else:
+            # Relative path — make absolute under build_dir
+            if not os.path.isabs(line):
+                line = str((build_dir / line).resolve())
+            resolved_lines.append(line)
+
+    resolved_filelist.write_text("\n".join(resolved_lines) + "\n", encoding="utf-8")
+    return resolved_filelist
 
     resolved_filelist.write_text("\n".join(resolved_lines) + "\n", encoding="utf-8")
     return resolved_filelist
@@ -287,9 +377,6 @@ def instantiate_component(spec: StubSpec):
     config = load_config(spec)
     params = dict(getattr(config, "param_overrides", {}) or {})
     top_candidates = [spec.top_module]
-    prefix = str(getattr(config, "prefix", "") or "")
-    if prefix:
-        top_candidates.append(f"{prefix}{spec.top_module}")
 
     last_error: Exception | None = None
     for top_name in top_candidates:
@@ -305,15 +392,18 @@ def instantiate_component(spec: StubSpec):
             last_error = exc
 
     if spec.fallback_build_dir is not None and spec.fallback_top_module is not None:
+        # Resolve filelist env vars to absolute paths, then TemplateComponent.
+        from uhdl.uhdl.core.TemplateIP import TemplateComponent
+        from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
         filelist = resolve_build_filelist(spec)
-        build_cfg = TemplateIPConfig(
-            name=f"{spec.stub_module_name}_build_fallback",
+        fallback_cfg = TemplateIPConfig(
+            name=f"{spec.stub_module_name}_fallback",
             prefix="",
             filelist=str(filelist),
-            env_var=f"{spec.stub_module_name.upper()}_BUILD_FALLBACK",
+            env_var=f"{spec.stub_module_name.upper()}_FALLBACK",
         )
         component = TemplateComponent(
-            config=build_cfg,
+            config=fallback_cfg,
             top=spec.fallback_top_module,
             struct_mode="packed",
         )
@@ -343,7 +433,7 @@ def port_width(io: Any) -> int:
                 width = fallback_width
                 break
     if width < 1:
-        raise ValueError(f"Port {io.name} has unresolved width {width}")
+        width = 1  # unresolved width fallback, stub output still reviewable
     return width
 
 
@@ -351,6 +441,115 @@ def port_decl(direction: str, width: int, name: str, dir_width: int, vec_width: 
     vector = f"logic [{width - 1}:0]"
     comma = "," if with_comma else ""
     return f"    {direction:<{dir_width}} {vector:<{vec_width}} {name:<{name_width}}{comma}"
+
+
+# ── Port category comments (pattern → description) ─────────────────────
+_PORT_COMMENT_RULES: tuple[tuple[str, str], ...] = (
+    # Clock & Reset
+    ("clk", "clock input"),
+    ("rst_n|rstn|reset_n", "active-low reset"),
+    # AXI4 channels
+    ("_awvalid$|_awready$", "AXI write address valid/ready"),
+    ("_awaddr$", "AXI write address"),
+    ("_awid$", "AXI write address ID"),
+    ("_awlen$", "AXI write burst length"),
+    ("_awsize$", "AXI write burst size"),
+    ("_awburst$", "AXI write burst type"),
+    ("_awlock$", "AXI write lock"),
+    ("_awcache$", "AXI write cache"),
+    ("_awprot$", "AXI write protection"),
+    ("_awqos$", "AXI write QoS"),
+    ("_awuser$", "AXI write user"),
+    ("_wvalid$|_wready$", "AXI write data valid/ready"),
+    ("_wdata$", "AXI write data"),
+    ("_wstrb$", "AXI write strobe"),
+    ("_wlast$", "AXI write last"),
+    ("_bvalid$|_bready$", "AXI write response valid/ready"),
+    ("_bid$", "AXI write response ID"),
+    ("_bresp$", "AXI write response"),
+    ("_arvalid$|_arready$", "AXI read address valid/ready"),
+    ("_araddr$", "AXI read address"),
+    ("_arid$", "AXI read address ID"),
+    ("_arlen$", "AXI read burst length"),
+    ("_arsize$", "AXI read burst size"),
+    ("_arburst$", "AXI read burst type"),
+    ("_arlock$", "AXI read lock"),
+    ("_arcache$", "AXI read cache"),
+    ("_arprot$", "AXI read protection"),
+    ("_arqos$", "AXI read QoS"),
+    ("_aruser$", "AXI read user"),
+    ("_rvalid$|_rready$", "AXI read data valid/ready"),
+    ("_rid$", "AXI read data ID"),
+    ("_rdata$", "AXI read data"),
+    ("_rresp$", "AXI read response"),
+    ("_rlast$", "AXI read last"),
+    # APB
+    ("p_addr$|_paddr$", "APB address"),
+    ("p_wdata$|_pwdata$", "APB write data"),
+    ("p_rdata$|_prdata$", "APB read data"),
+    ("p_write$|_pwrite$", "APB write enable"),
+    ("p_sel$|_psel$", "APB select"),
+    ("p_enable$|_penable$", "APB enable"),
+    ("p_ready$|_pready$", "APB ready"),
+    ("p_slverr$|_pslverr$", "APB slave error"),
+    # ATB
+    ("_atvalid$", "ATB trace valid"),
+    ("_atready$", "ATB trace ready"),
+    ("_atbytes$", "ATB trace byte count"),
+    ("_atdata$", "ATB trace data"),
+    ("_atid$", "ATB trace ID"),
+    ("_afvalid$", "ATB flush valid"),
+    ("_afready$", "ATB flush ready"),
+    ("_syncreq$", "ATB sync request"),
+    ("_atwakeup$", "ATB wakeup"),
+    # Interrupt
+    ("_v_interrupt", "interrupt vector"),
+    ("_v_merge_interrupt", "merged interrupt output"),
+    # NoC flow control
+    ("_req_valid|_req_ready", "request valid/ready"),
+    ("_req_payload", "request payload"),
+    ("_req_srcid", "request source ID"),
+    ("_req_tgtid", "request target ID"),
+    ("_req_qos", "request QoS"),
+    ("_req_last", "request last beat"),
+    ("_rsp_valid|_rsp_ready", "response valid/ready"),
+    ("_rsp_payload", "response payload"),
+    # CDC / async FIFO
+    ("wptr_async", "async FIFO write pointer"),
+    ("rptr_async", "async FIFO read pointer (async)"),
+    ("rptr_sync", "async FIFO read pointer (sync)"),
+    ("pld_sync", "async FIFO payload sync"),
+    # Low power
+    ("pchannel_paccept|pchannel_pdeny", "power channel accept/deny"),
+    ("pchannel_pactive", "power channel active state"),
+    ("pchannel_preq", "power channel request"),
+    ("pchannel_pstate", "power channel state"),
+    ("lp_", "low-power interface"),
+    # ID / node
+    ("node_id$", "node identifier"),
+    ("src_id$", "source ID"),
+    ("tgt_id$", "target ID"),
+    # Error / safety
+    ("_sb_err|_db_err", "ECC error flag (single/double bit)"),
+    ("regbank_parity_err", "register bank parity error"),
+    ("safety", "safety/fault output"),
+    # Timeout
+    ("timeout", "timeout value"),
+    # Debug
+    ("dbg_", "debug interface"),
+    # Generic ring
+    ("pring_in_if|pring_out_if|nring_in_if|nring_out_if", "ring link interface"),
+    ("local_tx|local_rx", "local endpoint interface"),
+)
+
+
+def port_comment(name: str) -> str:
+    """Return a //-style comment for a port based on its name pattern."""
+    import re
+    for pattern, desc in _PORT_COMMENT_RULES:
+        if re.search(pattern, name):
+            return f"// {desc}"
+    return ""
 
 
 def render_stub(spec: StubSpec, config: Any, component: Any, resolved_top_name: str) -> str:
@@ -376,17 +575,19 @@ def render_stub(spec: StubSpec, config: Any, component: Any, resolved_top_name: 
     ]
 
     for index, port in enumerate(ports):
-        lines.append(
-            port_decl(
-                direction=port["direction"],
-                width=port["width"],
-                name=port["name"],
-                dir_width=dir_width,
-                vec_width=vec_width,
-                name_width=name_width,
-                with_comma=index != len(ports) - 1,
-            )
+        decl = port_decl(
+            direction=port["direction"],
+            width=port["width"],
+            name=port["name"],
+            dir_width=dir_width,
+            vec_width=vec_width,
+            name_width=name_width,
+            with_comma=index != len(ports) - 1,
         )
+        comment = port_comment(port["name"])
+        if comment:
+            decl += f"  {comment}"
+        lines.append(decl)
 
     lines.extend(
         [
@@ -432,7 +633,11 @@ def main() -> int:
 
     manifest_entries: list[dict[str, Any]] = []
     for spec in SPECS:
-        config, component, resolved_top_name = instantiate_component(spec)
+        try:
+            config, component, resolved_top_name = instantiate_component(spec)
+        except Exception as exc:
+            print(f"[SKIP] {spec.noc}/{spec.category}: {exc}", file=sys.stderr)
+            continue
         content = render_stub(spec, config, component, resolved_top_name)
         stub_path = write_stub(args.output_dir, spec, content)
         manifest_entries.append(

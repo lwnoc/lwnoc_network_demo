@@ -103,14 +103,8 @@ module atb_funnel_arbiter #(
     atbytesm = '0;
     afreadym = 1'b0;
     atreadys = ~en_ports;
-    // Reverse flush must broadcast to all enabled upstream ports even when no
-    // forward data channel is currently selected.
-    afvalids = afvalidm ? en_ports : '0;
+    afvalids = '0;
     syncreqs = syncreqm ? en_ports : '0;
-
-    if (afvalidm) begin
-      afreadym = &(afreadys | ~en_ports);
-    end
 
     selected_valid = en_ports[current_sel] && atvalids[current_sel];
     if (selected_valid) begin
@@ -120,6 +114,8 @@ module atb_funnel_arbiter #(
       atbytesm = atbytess[current_sel];
 
       atreadys[current_sel] = atreadym;
+      afvalids[current_sel] = afvalidm;
+      afreadym              = afreadys[current_sel];
     end
   end
 endmodule

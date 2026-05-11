@@ -10,7 +10,8 @@ module dsp_ss_tniu_interrupt_tniu_async_top_side
     localparam integer unsigned ECC_CODE_WIDTH  = ($clog2(PLD_ORG_WIDTH)+PLD_ORG_WIDTH+1 <= 2**$clog2(PLD_ORG_WIDTH))? $clog2(PLD_ORG_WIDTH) : $clog2(PLD_ORG_WIDTH)+1,
     localparam integer unsigned ECC_OVERHEAD    = ECC_CODE_WIDTH + 1,
     localparam integer unsigned PLD_ECC_WIDTH   = PLD_ORG_WIDTH + ECC_OVERHEAD,
-    localparam integer unsigned FIFO_DATA_WIDTH = PLD_ECC_WIDTH
+    localparam integer unsigned FIFO_DATA_WIDTH = PLD_ECC_WIDTH,
+    localparam int LP_SIG_WIDTH = $bits(lwnoc_lp_req_signal_t)
 
 )(
     input  logic                                    clk                             ,
@@ -23,8 +24,8 @@ module dsp_ss_tniu_interrupt_tniu_async_top_side
     //lp interface
     input  logic [TIME_OUT_WIDTH-1              :0] timeout_val                     ,
 
-    input  lwnoc_lp_req_signal_t                    s_async_master_hub_rx_req       ,
-    output lwnoc_lp_req_signal_t                    s_async_master_hub_tx_req       ,
+    input  logic [LP_SIG_WIDTH-1:0]                 s_async_master_hub_rx_req       ,
+    output logic [LP_SIG_WIDTH-1:0]                 s_async_master_hub_tx_req       ,
 
 
     input  logic                                    req_valid                       ,
@@ -69,7 +70,7 @@ module dsp_ss_tniu_interrupt_tniu_async_top_side
 // lp port 2-connect with ds lp hub
 //===========================================================================
 
-    assign v_stage_2_hub_rx_req[0]  = s_async_master_hub_rx_req;
+    assign v_stage_2_hub_rx_req[0]  = lwnoc_lp_req_signal_t'(s_async_master_hub_rx_req);
     assign v_stage_2_hub_rx_req[1]  = async_slave_hub_rx_req;
     assign v_stage_2_hub_rx_req[2]  = ds_lp_hub_rx_req;
 

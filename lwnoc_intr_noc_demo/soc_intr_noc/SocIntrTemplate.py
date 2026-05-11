@@ -101,14 +101,14 @@ _VC_FILELIST_MAP: dict[str, str] = {
     "intr_tniu_top.f":         "tniu_comp.f",
     # Network per-wrapper pub files — each contains ONLY its own leaf RTL.
     # Common primitives come from network_common_pub.f (compile-once).
-    "intr_iniu_endpoint_wrap.f":"network_endpoint_wrap_pub.f",
-    "intr_tniu_endpoint_wrap.f":"network_endpoint_wrap_pub.f",
-    "intr_ring_network_wrap.f":"network_common_pub.f",
-    "intr_ring_buf_wrap.f":    "network_ring_buf_wrap_pub.f",
-    "intr_ring_station.f":     "network_common_pub.f",
-    "intr_ring_link.f":        "network_common_pub.f",
+    "intr_iniu_endpoint_wrap.f":"network_wrappers_pub.f",
+    "intr_tniu_endpoint_wrap.f":"network_wrappers_pub.f",
+    "intr_ring_network_wrap.f":"network_wrappers_pub.f",
+    "intr_ring_buf_wrap.f":    "network_wrappers_pub.f",
+    "intr_ring_station.f":     "network_wrappers_pub.f",
+    "intr_ring_link.f":        "network_wrappers_pub.f",
     "intr_ring_req_sink.f":    "network_req_sink_pub.f",
-    "intr_ring_req_zero_source.f":"network_common_pub.f",
+    "intr_ring_req_zero_source.f":"network_wrappers_pub.f",
     # network_common is a shared ingress — all wrappers share one copy.
     "network_common_pub.f":    "network_common_pub.f",
 }

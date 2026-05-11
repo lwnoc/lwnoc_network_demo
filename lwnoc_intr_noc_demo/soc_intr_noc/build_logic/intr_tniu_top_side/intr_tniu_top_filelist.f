@@ -14,9 +14,3 @@ $INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_interrupt_tniu.sv
 $INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_interrupt_tniu_async_top_side.sv
 $INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_interrupt_tniu_async_sys_side.sv
 $INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_interrupt_tniu_undef.sv
-$INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_spram_4096x26.sv
-$INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_spram_2048x26.sv
-$INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_spram_1024x26.sv
-$INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_spram_512x26.sv
-$INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_spram_256x26.sv
-$INTR_TNIU_TOP_OUT_DIR/intr_tniu_top_spram_128x26.sv

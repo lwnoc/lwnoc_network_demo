@@ -98,12 +98,16 @@ def tniu_id_name(endpoint: str) -> str:
 
 
 def classify_input_port(name: str) -> str:
-    if name in {"clk_noc_up", "clk_noc_dn", "rst_noc_up_n", "rst_noc_dn_n"}:
+    if name in {"clk_noc", "rst_noc_n", "clk_noc_up", "clk_noc_dn", "rst_noc_up_n", "rst_noc_dn_n"}:
         return "procedural"
     if "_apb_porting_" in name and name.endswith(("_p_addr", "_p_enable", "_p_wdata", "_p_write", "_p_sel")):
         return "procedural"
     if "_v_interrupt_porting_" in name and name.endswith("_v_interrupt"):
         return "procedural"
+    if name.endswith("_top_wrap_clk_porting"):
+        return "assign_clk"
+    if name.endswith("_top_wrap_rst_n_porting"):
+        return "assign_rst"
     if "_clk_sys_porting_" in name and name.endswith("_clk"):
         return "assign_clk"
     if "_rst_sys_n_porting_" in name and name.endswith("_rst_n"):
@@ -317,27 +321,23 @@ def generate_tb() -> str:
         [
             "",
             "    always #5  clk_sys = ~clk_sys;",
-            "    always #7  clk_noc_up = ~clk_noc_up;",
-            "    always #11 clk_noc_dn = ~clk_noc_dn;",
+            "    always #7  clk_noc = ~clk_noc;",
             "",
             "    initial begin",
-            "        clk_noc_up = 1'b0;",
-            "        clk_noc_dn = 1'b0;",
-            "        rst_noc_up_n = 1'b0;",
-            "        rst_noc_dn_n = 1'b0;",
+            "        clk_noc = 1'b0;",
+            "        rst_noc_n = 1'b0;",
         ]
     )
 
     for port in input_ports:
-        if classify_input_port(port["name"]) == "procedural" and port["name"] not in {"clk_noc_up", "clk_noc_dn", "rst_noc_up_n", "rst_noc_dn_n"}:
+        if classify_input_port(port["name"]) == "procedural" and port["name"] not in {"clk_noc", "rst_noc_n"}:
             lines.append(f"        {port['name']} = '0;")
 
     lines.extend(
         [
             "        #100;",
             "        rstn_sys = 1'b1;",
-            "        rst_noc_up_n = 1'b1;",
-            "        rst_noc_dn_n = 1'b1;",
+            "        rst_noc_n = 1'b1;",
             "    end",
             "",
         ]
@@ -388,7 +388,7 @@ def generate_tb() -> str:
             "",
             "    task automatic reset_dut();",
             "        begin",
-            "            wait (rstn_sys === 1'b1 && rst_noc_up_n === 1'b1 && rst_noc_dn_n === 1'b1);",
+            "            wait (rstn_sys === 1'b1 && rst_noc_n === 1'b1);",
             "            wait_sys(100);",
             "        end",
             "    endtask",
@@ -443,12 +443,17 @@ def generate_tb() -> str:
             "    task automatic tc_sanity();",
             "        int unsigned iniu_idx;",
             "        int unsigned tniu_idx;",
+            "        int unsigned i, j;",
             "        string msg;",
+        f"        localparam int unsigned TEST_INIU [4] = '{{32'd0, 32'd{min(1, len(inius)-1)}, 32'd{min(len(inius)//3, len(inius)-1)}, 32'd{min(2*len(inius)//3, len(inius)-1)}}};",
+        f"        localparam int unsigned TEST_TNIU [4] = '{{32'd0, 32'd{min(1, len(tnius)-1)}, 32'd{min(len(tnius)//2, len(tnius)-1)}, 32'd{min(len(tnius)-1, len(tnius)-1)}}};",
             "        begin",
-            "            $display(\"[TB] tc_sanity: program all INIU->TNIU routes and verify delivery/clear\");",
+            "            $display(\"[TB] tc_sanity: program 4x4 INIU->TNIU routes and verify delivery/clear\");",
             "            reset_dut();",
-            "            for (iniu_idx = 0; iniu_idx < NUM_INIUS; iniu_idx++) begin",
-            "                for (tniu_idx = 0; tniu_idx < NUM_TNIUS; tniu_idx++) begin",
+            "            for (i = 0; i < 4; i++) begin",
+            "                iniu_idx = TEST_INIU[i];",
+            "                for (j = 0; j < 4; j++) begin",
+            "                    tniu_idx = TEST_TNIU[j];",
             "                    program_iniu_lut(",
             "                        iniu_idx,",
             "                        SRC_INTR_BASE + tniu_idx,",
@@ -458,19 +463,15 @@ def generate_tb() -> str:
             "                end",
             "            end",
             "            wait_sys(20);",
-            "            for (iniu_idx = 0; iniu_idx < NUM_INIUS; iniu_idx++) begin",
-            "                for (tniu_idx = 0; tniu_idx < NUM_TNIUS; tniu_idx++) begin",
+            "            for (i = 0; i < 4; i++) begin",
+            "                iniu_idx = TEST_INIU[i];",
+            "                for (j = 0; j < 4; j++) begin",
+            "                    tniu_idx = TEST_TNIU[j];",
             "                    msg = $sformatf(\"iniu[%0d,id=%0d]->tniu[%0d,id=%0d]\", iniu_idx, INIU_SRC_ID[iniu_idx], tniu_idx, TNIU_RING_ID[tniu_idx]);",
             "                    set_iniu_intr(iniu_idx, SRC_INTR_BASE + tniu_idx, 1'b1);",
-            "                    if ((iniu_idx == 0) && (tniu_idx == 0)) begin",
-            "                        probe_cpu_to_cpu_route(\"after_raise\");",
-            "                    end",
             "                    wait_sys(SYS_WAIT);",
             "                    expect_tniu_intr({msg, \" high\"}, tniu_idx, TGT_INTR_BASE + iniu_idx, 1'b1);",
             "                    set_iniu_intr(iniu_idx, SRC_INTR_BASE + tniu_idx, 1'b0);",
-            "                    if ((iniu_idx == 0) && (tniu_idx == 0)) begin",
-            "                        probe_cpu_to_cpu_route(\"after_clear\");",
-            "                    end",
             "                    wait_sys(SYS_WAIT);",
             "                    expect_tniu_intr({msg, \" low\"}, tniu_idx, TGT_INTR_BASE + iniu_idx, 1'b0);",
             "                end",

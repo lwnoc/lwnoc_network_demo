@@ -13,7 +13,10 @@ module display_ss_iniu_interrupt_iniu_async_sys_side
     localparam integer unsigned ECC_CODE_WIDTH      = ($clog2(PLD_ORG_WIDTH)+PLD_ORG_WIDTH+1 <= 2**$clog2(PLD_ORG_WIDTH))? $clog2(PLD_ORG_WIDTH) : $clog2(PLD_ORG_WIDTH)+1,
     localparam integer unsigned ECC_OVERHEAD        = ECC_CODE_WIDTH + 1,
     localparam integer unsigned PLD_ECC_WIDTH       = PLD_ORG_WIDTH + ECC_OVERHEAD,
-    localparam integer unsigned FIFO_DATA_WIDTH     = PLD_ECC_WIDTH
+    localparam integer unsigned FIFO_DATA_WIDTH     = PLD_ECC_WIDTH,
+    localparam int PCH_WIDTH  = $bits(lwnoc_pchannel_state_t),
+    localparam int PCA_WIDTH  = $bits(lwnoc_pchannel_active_t),
+    localparam int LP_SIG_WIDTH = $bits(lwnoc_lp_req_signal_t)
 
 )(
     input  logic                                    clk                             ,
@@ -38,12 +41,12 @@ module display_ss_iniu_interrupt_iniu_async_sys_side
     //lp interface
     input  logic [TIME_OUT_WIDTH-1              :0] timeout_val                     ,
 
-    input  lwnoc_lp_req_signal_t                    s_async_master_hub_rx_req       ,
-    output lwnoc_lp_req_signal_t                    s_async_master_hub_tx_req       ,
+    input  logic [LP_SIG_WIDTH-1:0]                 s_async_master_hub_rx_req       ,
+    output logic [LP_SIG_WIDTH-1:0]                 s_async_master_hub_tx_req       ,
 
     input  logic                                    preq                            ,
-    input  lwnoc_pchannel_state_t                   pstate                          ,
-    output lwnoc_pchannel_active_t                  pactive                         ,
+    input  logic [PCH_WIDTH-1:0]                    pstate                          ,
+    output logic [PCA_WIDTH-1:0]                    pactive                         ,
     output logic                                    paccept                         ,
     output logic                                    pdeny                           ,
 
@@ -102,9 +105,16 @@ module display_ss_iniu_interrupt_iniu_async_sys_side
     lwnoc_lp_req_signal_t                   v_stage_2_hub_rx_req    [2:0];
     lwnoc_lp_req_signal_t                   v_stage_2_hub_tx_req    [2:0];
 
+    lwnoc_pchannel_state_t                  pstate_typed;
+    lwnoc_pchannel_active_t                 pactive_typed;
+
 //===========================================================================
 // lp
 //===========================================================================
+
+    // Pchannel type casts (ports are flat vectors)
+    assign pstate_typed = lwnoc_pchannel_state_t'(pstate);
+    assign pactive      = pactive_typed;
     assign v_stage_1_hub_rx_req[0]  = lp_iniu_hub_rx_req;
     assign v_stage_1_hub_rx_req[1]  = niu_lp_hub_rx_req;
     assign v_stage_1_hub_rx_req[2]  = barrier_lp_hub_rx_req;
@@ -115,7 +125,7 @@ module display_ss_iniu_interrupt_iniu_async_sys_side
 
     assign v_stage_2_hub_rx_req[0]  = barrier_lp_sub_hub_rx_req;
     assign v_stage_2_hub_rx_req[1]  = async_slave_hub_rx_req;
-    assign v_stage_2_hub_rx_req[2]  = s_async_master_hub_rx_req;
+    assign v_stage_2_hub_rx_req[2]  = lwnoc_lp_req_signal_t'(s_async_master_hub_rx_req);
 
     assign barrier_lp_sub_hub_tx_req= v_stage_2_hub_tx_req[0];
     assign async_slave_hub_tx_req   = v_stage_2_hub_tx_req[1];
@@ -127,8 +137,8 @@ module display_ss_iniu_interrupt_iniu_async_sys_side
         .rx_req             (lp_iniu_hub_tx_req         ),
         .tx_req             (lp_iniu_hub_rx_req         ),
         .preq               (preq                       ),
-        .pstate             (pstate                     ),
-        .pactive            (pactive                    ),
+        .pstate             (pstate_typed               ),
+        .pactive            (pactive_typed              ),
         .paccept            (paccept                    ),
         .pdeny              (pdeny                      )
     );

@@ -9,7 +9,8 @@ module dti_tniu_top_dti_tniu_async_top_side
     localparam integer unsigned ECC_OVERHEAD     = 8,
     localparam integer unsigned ECC_PLD_WIDTH    = ORG_PLD_WIDTH + ECC_OVERHEAD,
     parameter integer unsigned  ERR_INT_CNT_WIDTH   = `dti_tniu_top_TNIU_ERR_INT_CNT_WIDTH,
-    localparam integer unsigned AFIFO_DATA_WIDTH = ECC_PLD_WIDTH
+    localparam integer unsigned AFIFO_DATA_WIDTH = ECC_PLD_WIDTH,
+    localparam int LP_SIG_WIDTH = $bits(lwnoc_lp_req_signal_t)
 )(
     input   logic                                            clk                                        ,
     input   logic                                            rst_n                                      ,
@@ -45,8 +46,8 @@ module dti_tniu_top_dti_tniu_async_top_side
     output logic                                             rsp_afifo_sb_err                           ,
     output logic                                             rsp_afifo_db_err                           ,
     // lp
-    input  lwnoc_lp_req_signal_t                             lp_hub_rx_req                              ,
-    output lwnoc_lp_req_signal_t                             lp_hub_tx_req
+    input  logic [LP_SIG_WIDTH-1:0]                          lp_hub_rx_req                              ,
+    output logic [LP_SIG_WIDTH-1:0]                          lp_hub_tx_req
 );
     logic [90+6+6+1+1-1:0]  req_pld_vector     ;
     logic [AFIFO_DATA_WIDTH-1:0] req_pld_fifo_in   ;
@@ -72,7 +73,7 @@ module dti_tniu_top_dti_tniu_async_top_side
     //===========================================================================
     assign v_stage_1_hub_rx_req[0] = async_slave_hub_rx_req;
     assign v_stage_1_hub_rx_req[1] = async_master_hub_rx_req;
-    assign v_stage_1_hub_rx_req[2] = lp_hub_rx_req;
+    assign v_stage_1_hub_rx_req[2] = lwnoc_lp_req_signal_t'(lp_hub_rx_req);
 
     assign async_slave_hub_tx_req  = v_stage_1_hub_tx_req[0];
     assign async_master_hub_tx_req = v_stage_1_hub_tx_req[1];

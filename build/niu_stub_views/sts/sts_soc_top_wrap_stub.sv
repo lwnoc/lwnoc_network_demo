@@ -1,0 +1,3291 @@
+// Manually generated review stub from build_logic source.
+// Review-only boundary stub with expanded vector widths where source constants are known.
+// All outputs are tied to '0 so reviewers can focus on interface shape and bit width.
+// Source file: lwnoc_sts_noc_demo/build_logic/sts_soc_top_wrap/sts_soc_top_wrap.v
+// Source top module: sts_soc_top_wrap
+// Boundary note: STS SoC top_wrap boundary generated in build_logic.
+module sts_soc_top_wrap_stub (
+    input  logic [0:0]   aon_ss_iniu_noc_clk_dst_porting_clk_dst                                                 ,  // clock input
+    input  logic [0:0]   aon_ss_iniu_noc_rst_n_dst_porting_rst_n_dst                                             ,  // active-low reset
+    input  logic [0:0]   aon_ss_iniu_noc_clk_src_porting_clk_src                                                 ,  // clock input
+    input  logic [0:0]   aon_ss_iniu_noc_rst_n_src_porting_rst_n_src                                             ,  // active-low reset
+    input  logic [129:0] aon_ss_iniu_noc_async_fifo_porting_req_pld_sync                                         ,  // async FIFO payload sync
+    output logic [15:0]  aon_ss_iniu_noc_async_fifo_porting_req_rptr_async                                       ,  // async FIFO read pointer (async)
+    output logic [15:0]  aon_ss_iniu_noc_async_fifo_porting_req_rptr_sync                                        ,  // async FIFO read pointer (sync)
+    input  logic [15:0]  aon_ss_iniu_noc_async_fifo_porting_req_wptr_async                                       ,  // async FIFO write pointer
+    output logic [75:0]  aon_ss_iniu_noc_async_fifo_porting_rsp_pld_sync                                         ,  // async FIFO payload sync
+    input  logic [15:0]  aon_ss_iniu_noc_async_fifo_porting_rsp_rptr_async                                       ,  // async FIFO read pointer (async)
+    input  logic [15:0]  aon_ss_iniu_noc_async_fifo_porting_rsp_rptr_sync                                        ,  // async FIFO read pointer (sync)
+    output logic [15:0]  aon_ss_iniu_noc_async_fifo_porting_rsp_wptr_async                                       ,  // async FIFO write pointer
+    output logic [119:0] aon_ss_iniu_noc_req_porting_req_s_pld                                                   ,
+    input  logic [0:0]   aon_ss_iniu_noc_req_porting_req_s_rdy                                                   ,
+    output logic [0:0]   aon_ss_iniu_noc_req_porting_req_s_vld                                                   ,
+    input  logic [65:0]  aon_ss_iniu_noc_rsp_porting_rsp_m_pld                                                   ,
+    output logic [0:0]   aon_ss_iniu_noc_rsp_porting_rsp_m_rdy                                                   ,
+    input  logic [0:0]   aon_ss_iniu_noc_rsp_porting_rsp_m_vld                                                   ,
+    input  logic [71:0]  aon_ss_iniu_noc_cti_channel_in_porting_ctm_channel_in                                   ,  // cross-trigger/debug channel
+    output logic [71:0]  aon_ss_iniu_noc_cti_channel_out_porting_ctm_channel_out                                 ,  // cross-trigger/debug channel
+    input  logic [63:0]  aon_ss_iniu_noc_dbg_timestamp_in_porting_dbg_timestamp_in                               ,  // debug/timestamp signal
+    output logic [63:0]  aon_ss_iniu_noc_dbg_timestamp_out_porting_dbg_timestamp_out                             ,  // debug/timestamp signal
+    input  logic [31:0]  aon_ss_iniu_noc_dbg_data_in_porting_dbg_data_in                                         ,  // debug/timestamp signal
+    output logic [31:0]  aon_ss_iniu_noc_dbg_data_out_porting_dbg_data_out                                       ,  // debug/timestamp signal
+    input  logic [11:0]  aon_ss_iniu_noc_cti_apb_porting_cti_apb_paddr                                           ,  // APB address
+    input  logic [0:0]   aon_ss_iniu_noc_cti_apb_porting_cti_apb_penable                                         ,  // APB enable
+    output logic [31:0]  aon_ss_iniu_noc_cti_apb_porting_cti_apb_prdata                                          ,  // APB read data
+    output logic [0:0]   aon_ss_iniu_noc_cti_apb_porting_cti_apb_pready                                          ,  // APB ready
+    input  logic [0:0]   aon_ss_iniu_noc_cti_apb_porting_cti_apb_psel                                            ,  // APB select
+    output logic [0:0]   aon_ss_iniu_noc_cti_apb_porting_cti_apb_pslverr                                         ,  // APB slave error
+    input  logic [31:0]  aon_ss_iniu_noc_cti_apb_porting_cti_apb_pwdata                                          ,  // APB write data
+    input  logic [0:0]   aon_ss_iniu_noc_cti_apb_porting_cti_apb_pwrite                                          ,  // APB write control
+    output logic [0:0]   aon_ss_iniu_noc_req_afifo_sb_err_porting_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   aon_ss_iniu_noc_req_afifo_db_err_porting_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   camera_ss_tniu_top_side_clk_src_porting_clk_src                                         ,  // clock input
+    input  logic [0:0]   camera_ss_tniu_top_side_clk_dst_porting_clk_dst                                         ,  // clock input
+    input  logic [0:0]   camera_ss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                             ,  // clock input
+    input  logic [0:0]   camera_ss_tniu_top_side_rstn_src_porting_rstn_src                                       ,  // active-low reset
+    input  logic [0:0]   camera_ss_tniu_top_side_rstn_dst_porting_rstn_dst                                       ,  // active-low reset
+    input  logic [0:0]   camera_ss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                           ,  // active-low reset
+    input  logic [119:0] camera_ss_tniu_top_side_req_porting_in_req_pld                                          ,
+    output logic [0:0]   camera_ss_tniu_top_side_req_porting_in_req_rdy                                          ,
+    input  logic [0:0]   camera_ss_tniu_top_side_req_porting_in_req_vld                                          ,
+    output logic [65:0]  camera_ss_tniu_top_side_rsp_porting_out_rsp_pld                                         ,
+    input  logic [0:0]   camera_ss_tniu_top_side_rsp_porting_out_rsp_rdy                                         ,
+    output logic [0:0]   camera_ss_tniu_top_side_rsp_porting_out_rsp_vld                                         ,
+    output logic [31:0]  camera_ss_tniu_top_side_top_apb_porting_top_paddr                                       ,  // APB address
+    output logic [0:0]   camera_ss_tniu_top_side_top_apb_porting_top_penable                                     ,  // APB enable
+    output logic [2:0]   camera_ss_tniu_top_side_top_apb_porting_top_pprot                                       ,  // APB protection
+    input  logic [31:0]  camera_ss_tniu_top_side_top_apb_porting_top_prdata                                      ,  // APB read data
+    input  logic [0:0]   camera_ss_tniu_top_side_top_apb_porting_top_pready                                      ,  // APB ready
+    output logic [0:0]   camera_ss_tniu_top_side_top_apb_porting_top_psel                                        ,  // APB select
+    input  logic [0:0]   camera_ss_tniu_top_side_top_apb_porting_top_pslverr                                     ,  // APB slave error
+    output logic [3:0]   camera_ss_tniu_top_side_top_apb_porting_top_pstrb                                       ,  // APB write strobe
+    output logic [31:0]  camera_ss_tniu_top_side_top_apb_porting_top_pwdata                                      ,  // APB write data
+    output logic [0:0]   camera_ss_tniu_top_side_top_apb_porting_top_pwrite                                      ,  // APB write control
+    output logic [31:0]  camera_ss_tniu_top_side_sys_apb_porting_m_paddr                                         ,  // APB address
+    output logic [0:0]   camera_ss_tniu_top_side_sys_apb_porting_m_penable                                       ,  // APB enable
+    output logic [2:0]   camera_ss_tniu_top_side_sys_apb_porting_m_pprot                                         ,  // APB protection
+    input  logic [31:0]  camera_ss_tniu_top_side_sys_apb_porting_m_prdata                                        ,  // APB read data
+    input  logic [0:0]   camera_ss_tniu_top_side_sys_apb_porting_m_pready                                        ,  // APB ready
+    output logic [0:0]   camera_ss_tniu_top_side_sys_apb_porting_m_psel                                          ,  // APB select
+    input  logic [0:0]   camera_ss_tniu_top_side_sys_apb_porting_m_pslverr                                       ,  // APB slave error
+    output logic [3:0]   camera_ss_tniu_top_side_sys_apb_porting_m_pstrb                                         ,  // APB write strobe
+    output logic [31:0]  camera_ss_tniu_top_side_sys_apb_porting_m_pwdata                                        ,  // APB write data
+    output logic [0:0]   camera_ss_tniu_top_side_sys_apb_porting_m_pwrite                                        ,  // APB write control
+    input  logic [31:0]  camera_ss_tniu_top_side_dbg_data_porting_dbg_data_in                                    ,  // debug/timestamp signal
+    output logic [31:0]  camera_ss_tniu_top_side_dbg_data_porting_dbg_data_out                                   ,  // debug/timestamp signal
+    input  logic [63:0]  camera_ss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                          ,  // debug/timestamp signal
+    output logic [63:0]  camera_ss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                         ,  // debug/timestamp signal
+    input  logic [7:0]   camera_ss_tniu_top_side_cti_event_porting_cti_trig_in                                   ,  // cross-trigger/debug channel
+    output logic [7:0]   camera_ss_tniu_top_side_cti_event_porting_cti_trig_out                                  ,  // cross-trigger/debug channel
+    input  logic [31:0]  camera_ss_tniu_top_side_ctm_event_porting_ctm_trig_in                                   ,  // cross-trigger/debug channel
+    output logic [31:0]  camera_ss_tniu_top_side_ctm_event_porting_ctm_trig_out                                  ,  // cross-trigger/debug channel
+    input  logic [71:0]  camera_ss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                          ,  // cross-trigger/debug channel
+    output logic [71:0]  camera_ss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                         ,  // cross-trigger/debug channel
+    input  logic [71:0]  camera_ss_tniu_top_side_ctm_channel_porting_ctm_channel_in                              ,  // cross-trigger/debug channel
+    output logic [71:0]  camera_ss_tniu_top_side_ctm_channel_porting_ctm_channel_out                             ,  // cross-trigger/debug channel
+    output logic [31:0]  camera_ss_tniu_top_side_timing_bus1_porting_timing_bus1                                 ,  // debug/timestamp signal
+    output logic [31:0]  camera_ss_tniu_top_side_timing_bus2_porting_timing_bus2                                 ,  // debug/timestamp signal
+    output logic [31:0]  camera_ss_tniu_top_side_timing_bus3_porting_timing_bus3                                 ,  // debug/timestamp signal
+    output logic [31:0]  camera_ss_tniu_top_side_dbg_en_porting_dbg_en                                           ,  // debug/timestamp signal
+    output logic [0:0]   camera_ss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err         ,  // FUSA/ECC error flag
+    output logic [0:0]   camera_ss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                            ,  // FUSA/ECC error flag
+    output logic [0:0]   camera_ss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                            ,  // FUSA/ECC error flag
+    output logic [0:0]   camera_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                            ,  // FUSA/ECC error flag
+    output logic [0:0]   camera_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                            ,  // FUSA/ECC error flag
+    input  logic [0:0]   cpuss_tniu_top_side_clk_src_porting_clk_src                                             ,  // clock input
+    input  logic [0:0]   cpuss_tniu_top_side_clk_dst_porting_clk_dst                                             ,  // clock input
+    input  logic [0:0]   cpuss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                 ,  // clock input
+    input  logic [0:0]   cpuss_tniu_top_side_rstn_src_porting_rstn_src                                           ,  // active-low reset
+    input  logic [0:0]   cpuss_tniu_top_side_rstn_dst_porting_rstn_dst                                           ,  // active-low reset
+    input  logic [0:0]   cpuss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                               ,  // active-low reset
+    input  logic [119:0] cpuss_tniu_top_side_req_porting_in_req_pld                                              ,
+    output logic [0:0]   cpuss_tniu_top_side_req_porting_in_req_rdy                                              ,
+    input  logic [0:0]   cpuss_tniu_top_side_req_porting_in_req_vld                                              ,
+    output logic [65:0]  cpuss_tniu_top_side_rsp_porting_out_rsp_pld                                             ,
+    input  logic [0:0]   cpuss_tniu_top_side_rsp_porting_out_rsp_rdy                                             ,
+    output logic [0:0]   cpuss_tniu_top_side_rsp_porting_out_rsp_vld                                             ,
+    output logic [31:0]  cpuss_tniu_top_side_top_apb_porting_top_paddr                                           ,  // APB address
+    output logic [0:0]   cpuss_tniu_top_side_top_apb_porting_top_penable                                         ,  // APB enable
+    output logic [2:0]   cpuss_tniu_top_side_top_apb_porting_top_pprot                                           ,  // APB protection
+    input  logic [31:0]  cpuss_tniu_top_side_top_apb_porting_top_prdata                                          ,  // APB read data
+    input  logic [0:0]   cpuss_tniu_top_side_top_apb_porting_top_pready                                          ,  // APB ready
+    output logic [0:0]   cpuss_tniu_top_side_top_apb_porting_top_psel                                            ,  // APB select
+    input  logic [0:0]   cpuss_tniu_top_side_top_apb_porting_top_pslverr                                         ,  // APB slave error
+    output logic [3:0]   cpuss_tniu_top_side_top_apb_porting_top_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  cpuss_tniu_top_side_top_apb_porting_top_pwdata                                          ,  // APB write data
+    output logic [0:0]   cpuss_tniu_top_side_top_apb_porting_top_pwrite                                          ,  // APB write control
+    output logic [31:0]  cpuss_tniu_top_side_sys_apb_porting_m_paddr                                             ,  // APB address
+    output logic [0:0]   cpuss_tniu_top_side_sys_apb_porting_m_penable                                           ,  // APB enable
+    output logic [2:0]   cpuss_tniu_top_side_sys_apb_porting_m_pprot                                             ,  // APB protection
+    input  logic [31:0]  cpuss_tniu_top_side_sys_apb_porting_m_prdata                                            ,  // APB read data
+    input  logic [0:0]   cpuss_tniu_top_side_sys_apb_porting_m_pready                                            ,  // APB ready
+    output logic [0:0]   cpuss_tniu_top_side_sys_apb_porting_m_psel                                              ,  // APB select
+    input  logic [0:0]   cpuss_tniu_top_side_sys_apb_porting_m_pslverr                                           ,  // APB slave error
+    output logic [3:0]   cpuss_tniu_top_side_sys_apb_porting_m_pstrb                                             ,  // APB write strobe
+    output logic [31:0]  cpuss_tniu_top_side_sys_apb_porting_m_pwdata                                            ,  // APB write data
+    output logic [0:0]   cpuss_tniu_top_side_sys_apb_porting_m_pwrite                                            ,  // APB write control
+    input  logic [31:0]  cpuss_tniu_top_side_dbg_data_porting_dbg_data_in                                        ,  // debug/timestamp signal
+    output logic [31:0]  cpuss_tniu_top_side_dbg_data_porting_dbg_data_out                                       ,  // debug/timestamp signal
+    input  logic [63:0]  cpuss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                              ,  // debug/timestamp signal
+    output logic [63:0]  cpuss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                             ,  // debug/timestamp signal
+    input  logic [7:0]   cpuss_tniu_top_side_cti_event_porting_cti_trig_in                                       ,  // cross-trigger/debug channel
+    output logic [7:0]   cpuss_tniu_top_side_cti_event_porting_cti_trig_out                                      ,  // cross-trigger/debug channel
+    input  logic [31:0]  cpuss_tniu_top_side_ctm_event_porting_ctm_trig_in                                       ,  // cross-trigger/debug channel
+    output logic [31:0]  cpuss_tniu_top_side_ctm_event_porting_ctm_trig_out                                      ,  // cross-trigger/debug channel
+    input  logic [71:0]  cpuss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                              ,  // cross-trigger/debug channel
+    output logic [71:0]  cpuss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                             ,  // cross-trigger/debug channel
+    input  logic [71:0]  cpuss_tniu_top_side_ctm_channel_porting_ctm_channel_in                                  ,  // cross-trigger/debug channel
+    output logic [71:0]  cpuss_tniu_top_side_ctm_channel_porting_ctm_channel_out                                 ,  // cross-trigger/debug channel
+    output logic [31:0]  cpuss_tniu_top_side_timing_bus1_porting_timing_bus1                                     ,  // debug/timestamp signal
+    output logic [31:0]  cpuss_tniu_top_side_timing_bus2_porting_timing_bus2                                     ,  // debug/timestamp signal
+    output logic [31:0]  cpuss_tniu_top_side_timing_bus3_porting_timing_bus3                                     ,  // debug/timestamp signal
+    output logic [31:0]  cpuss_tniu_top_side_dbg_en_porting_dbg_en                                               ,  // debug/timestamp signal
+    output logic [0:0]   cpuss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err             ,  // FUSA/ECC error flag
+    output logic [0:0]   cpuss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   cpuss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   cpuss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   cpuss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                                ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss0_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   ddrss0_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   ddrss0_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   ddrss0_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   ddrss0_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   ddrss0_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] ddrss0_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   ddrss0_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   ddrss0_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  ddrss0_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   ddrss0_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   ddrss0_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  ddrss0_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   ddrss0_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   ddrss0_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  ddrss0_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   ddrss0_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   ddrss0_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   ddrss0_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   ddrss0_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  ddrss0_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   ddrss0_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  ddrss0_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   ddrss0_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   ddrss0_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  ddrss0_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   ddrss0_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   ddrss0_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   ddrss0_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   ddrss0_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  ddrss0_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   ddrss0_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  ddrss0_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  ddrss0_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  ddrss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss0_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss0_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss0_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss0_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss0_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss0_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss0_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss0_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss0_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss0_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   ddrss0_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss0_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss0_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss0_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss0_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss1_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   ddrss1_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   ddrss1_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   ddrss1_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   ddrss1_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   ddrss1_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] ddrss1_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   ddrss1_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   ddrss1_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  ddrss1_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   ddrss1_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   ddrss1_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  ddrss1_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   ddrss1_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   ddrss1_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  ddrss1_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   ddrss1_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   ddrss1_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   ddrss1_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   ddrss1_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  ddrss1_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   ddrss1_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  ddrss1_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   ddrss1_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   ddrss1_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  ddrss1_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   ddrss1_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   ddrss1_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   ddrss1_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   ddrss1_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  ddrss1_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   ddrss1_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  ddrss1_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  ddrss1_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  ddrss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss1_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss1_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss1_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss1_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss1_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss1_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss1_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss1_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss1_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss1_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   ddrss1_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss1_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss1_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss1_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss1_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss10_tniu_top_side_clk_src_porting_clk_src                                           ,  // clock input
+    input  logic [0:0]   ddrss10_tniu_top_side_clk_dst_porting_clk_dst                                           ,  // clock input
+    input  logic [0:0]   ddrss10_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                               ,  // clock input
+    input  logic [0:0]   ddrss10_tniu_top_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
+    input  logic [0:0]   ddrss10_tniu_top_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
+    input  logic [0:0]   ddrss10_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
+    input  logic [119:0] ddrss10_tniu_top_side_req_porting_in_req_pld                                            ,
+    output logic [0:0]   ddrss10_tniu_top_side_req_porting_in_req_rdy                                            ,
+    input  logic [0:0]   ddrss10_tniu_top_side_req_porting_in_req_vld                                            ,
+    output logic [65:0]  ddrss10_tniu_top_side_rsp_porting_out_rsp_pld                                           ,
+    input  logic [0:0]   ddrss10_tniu_top_side_rsp_porting_out_rsp_rdy                                           ,
+    output logic [0:0]   ddrss10_tniu_top_side_rsp_porting_out_rsp_vld                                           ,
+    output logic [31:0]  ddrss10_tniu_top_side_top_apb_porting_top_paddr                                         ,  // APB address
+    output logic [0:0]   ddrss10_tniu_top_side_top_apb_porting_top_penable                                       ,  // APB enable
+    output logic [2:0]   ddrss10_tniu_top_side_top_apb_porting_top_pprot                                         ,  // APB protection
+    input  logic [31:0]  ddrss10_tniu_top_side_top_apb_porting_top_prdata                                        ,  // APB read data
+    input  logic [0:0]   ddrss10_tniu_top_side_top_apb_porting_top_pready                                        ,  // APB ready
+    output logic [0:0]   ddrss10_tniu_top_side_top_apb_porting_top_psel                                          ,  // APB select
+    input  logic [0:0]   ddrss10_tniu_top_side_top_apb_porting_top_pslverr                                       ,  // APB slave error
+    output logic [3:0]   ddrss10_tniu_top_side_top_apb_porting_top_pstrb                                         ,  // APB write strobe
+    output logic [31:0]  ddrss10_tniu_top_side_top_apb_porting_top_pwdata                                        ,  // APB write data
+    output logic [0:0]   ddrss10_tniu_top_side_top_apb_porting_top_pwrite                                        ,  // APB write control
+    output logic [31:0]  ddrss10_tniu_top_side_sys_apb_porting_m_paddr                                           ,  // APB address
+    output logic [0:0]   ddrss10_tniu_top_side_sys_apb_porting_m_penable                                         ,  // APB enable
+    output logic [2:0]   ddrss10_tniu_top_side_sys_apb_porting_m_pprot                                           ,  // APB protection
+    input  logic [31:0]  ddrss10_tniu_top_side_sys_apb_porting_m_prdata                                          ,  // APB read data
+    input  logic [0:0]   ddrss10_tniu_top_side_sys_apb_porting_m_pready                                          ,  // APB ready
+    output logic [0:0]   ddrss10_tniu_top_side_sys_apb_porting_m_psel                                            ,  // APB select
+    input  logic [0:0]   ddrss10_tniu_top_side_sys_apb_porting_m_pslverr                                         ,  // APB slave error
+    output logic [3:0]   ddrss10_tniu_top_side_sys_apb_porting_m_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  ddrss10_tniu_top_side_sys_apb_porting_m_pwdata                                          ,  // APB write data
+    output logic [0:0]   ddrss10_tniu_top_side_sys_apb_porting_m_pwrite                                          ,  // APB write control
+    input  logic [31:0]  ddrss10_tniu_top_side_dbg_data_porting_dbg_data_in                                      ,  // debug/timestamp signal
+    output logic [31:0]  ddrss10_tniu_top_side_dbg_data_porting_dbg_data_out                                     ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss10_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                            ,  // debug/timestamp signal
+    output logic [63:0]  ddrss10_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                           ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss10_tniu_top_side_cti_event_porting_cti_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss10_tniu_top_side_cti_event_porting_cti_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss10_tniu_top_side_ctm_event_porting_ctm_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss10_tniu_top_side_ctm_event_porting_ctm_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss10_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                            ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss10_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                           ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss10_tniu_top_side_ctm_channel_porting_ctm_channel_in                                ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss10_tniu_top_side_ctm_channel_porting_ctm_channel_out                               ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss10_tniu_top_side_timing_bus1_porting_timing_bus1                                   ,  // debug/timestamp signal
+    output logic [31:0]  ddrss10_tniu_top_side_timing_bus2_porting_timing_bus2                                   ,  // debug/timestamp signal
+    output logic [31:0]  ddrss10_tniu_top_side_timing_bus3_porting_timing_bus3                                   ,  // debug/timestamp signal
+    output logic [31:0]  ddrss10_tniu_top_side_dbg_en_porting_dbg_en                                             ,  // debug/timestamp signal
+    output logic [0:0]   ddrss10_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err           ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss10_tniu_top_side_safety_porting_tniu_req_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss10_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss10_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss10_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                              ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss11_tniu_top_side_clk_src_porting_clk_src                                           ,  // clock input
+    input  logic [0:0]   ddrss11_tniu_top_side_clk_dst_porting_clk_dst                                           ,  // clock input
+    input  logic [0:0]   ddrss11_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                               ,  // clock input
+    input  logic [0:0]   ddrss11_tniu_top_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
+    input  logic [0:0]   ddrss11_tniu_top_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
+    input  logic [0:0]   ddrss11_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
+    input  logic [119:0] ddrss11_tniu_top_side_req_porting_in_req_pld                                            ,
+    output logic [0:0]   ddrss11_tniu_top_side_req_porting_in_req_rdy                                            ,
+    input  logic [0:0]   ddrss11_tniu_top_side_req_porting_in_req_vld                                            ,
+    output logic [65:0]  ddrss11_tniu_top_side_rsp_porting_out_rsp_pld                                           ,
+    input  logic [0:0]   ddrss11_tniu_top_side_rsp_porting_out_rsp_rdy                                           ,
+    output logic [0:0]   ddrss11_tniu_top_side_rsp_porting_out_rsp_vld                                           ,
+    output logic [31:0]  ddrss11_tniu_top_side_top_apb_porting_top_paddr                                         ,  // APB address
+    output logic [0:0]   ddrss11_tniu_top_side_top_apb_porting_top_penable                                       ,  // APB enable
+    output logic [2:0]   ddrss11_tniu_top_side_top_apb_porting_top_pprot                                         ,  // APB protection
+    input  logic [31:0]  ddrss11_tniu_top_side_top_apb_porting_top_prdata                                        ,  // APB read data
+    input  logic [0:0]   ddrss11_tniu_top_side_top_apb_porting_top_pready                                        ,  // APB ready
+    output logic [0:0]   ddrss11_tniu_top_side_top_apb_porting_top_psel                                          ,  // APB select
+    input  logic [0:0]   ddrss11_tniu_top_side_top_apb_porting_top_pslverr                                       ,  // APB slave error
+    output logic [3:0]   ddrss11_tniu_top_side_top_apb_porting_top_pstrb                                         ,  // APB write strobe
+    output logic [31:0]  ddrss11_tniu_top_side_top_apb_porting_top_pwdata                                        ,  // APB write data
+    output logic [0:0]   ddrss11_tniu_top_side_top_apb_porting_top_pwrite                                        ,  // APB write control
+    output logic [31:0]  ddrss11_tniu_top_side_sys_apb_porting_m_paddr                                           ,  // APB address
+    output logic [0:0]   ddrss11_tniu_top_side_sys_apb_porting_m_penable                                         ,  // APB enable
+    output logic [2:0]   ddrss11_tniu_top_side_sys_apb_porting_m_pprot                                           ,  // APB protection
+    input  logic [31:0]  ddrss11_tniu_top_side_sys_apb_porting_m_prdata                                          ,  // APB read data
+    input  logic [0:0]   ddrss11_tniu_top_side_sys_apb_porting_m_pready                                          ,  // APB ready
+    output logic [0:0]   ddrss11_tniu_top_side_sys_apb_porting_m_psel                                            ,  // APB select
+    input  logic [0:0]   ddrss11_tniu_top_side_sys_apb_porting_m_pslverr                                         ,  // APB slave error
+    output logic [3:0]   ddrss11_tniu_top_side_sys_apb_porting_m_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  ddrss11_tniu_top_side_sys_apb_porting_m_pwdata                                          ,  // APB write data
+    output logic [0:0]   ddrss11_tniu_top_side_sys_apb_porting_m_pwrite                                          ,  // APB write control
+    input  logic [31:0]  ddrss11_tniu_top_side_dbg_data_porting_dbg_data_in                                      ,  // debug/timestamp signal
+    output logic [31:0]  ddrss11_tniu_top_side_dbg_data_porting_dbg_data_out                                     ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss11_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                            ,  // debug/timestamp signal
+    output logic [63:0]  ddrss11_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                           ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss11_tniu_top_side_cti_event_porting_cti_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss11_tniu_top_side_cti_event_porting_cti_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss11_tniu_top_side_ctm_event_porting_ctm_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss11_tniu_top_side_ctm_event_porting_ctm_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss11_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                            ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss11_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                           ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss11_tniu_top_side_ctm_channel_porting_ctm_channel_in                                ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss11_tniu_top_side_ctm_channel_porting_ctm_channel_out                               ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss11_tniu_top_side_timing_bus1_porting_timing_bus1                                   ,  // debug/timestamp signal
+    output logic [31:0]  ddrss11_tniu_top_side_timing_bus2_porting_timing_bus2                                   ,  // debug/timestamp signal
+    output logic [31:0]  ddrss11_tniu_top_side_timing_bus3_porting_timing_bus3                                   ,  // debug/timestamp signal
+    output logic [31:0]  ddrss11_tniu_top_side_dbg_en_porting_dbg_en                                             ,  // debug/timestamp signal
+    output logic [0:0]   ddrss11_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err           ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss11_tniu_top_side_safety_porting_tniu_req_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss11_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss11_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss11_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                              ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss2_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   ddrss2_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   ddrss2_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   ddrss2_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   ddrss2_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   ddrss2_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] ddrss2_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   ddrss2_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   ddrss2_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  ddrss2_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   ddrss2_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   ddrss2_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  ddrss2_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   ddrss2_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   ddrss2_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  ddrss2_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   ddrss2_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   ddrss2_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   ddrss2_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   ddrss2_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  ddrss2_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   ddrss2_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  ddrss2_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   ddrss2_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   ddrss2_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  ddrss2_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   ddrss2_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   ddrss2_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   ddrss2_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   ddrss2_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  ddrss2_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   ddrss2_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  ddrss2_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  ddrss2_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss2_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  ddrss2_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss2_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss2_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss2_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss2_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss2_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss2_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss2_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss2_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss2_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss2_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss2_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss2_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   ddrss2_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss2_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss2_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss2_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss2_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss3_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   ddrss3_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   ddrss3_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   ddrss3_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   ddrss3_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   ddrss3_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] ddrss3_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   ddrss3_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   ddrss3_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  ddrss3_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   ddrss3_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   ddrss3_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  ddrss3_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   ddrss3_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   ddrss3_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  ddrss3_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   ddrss3_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   ddrss3_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   ddrss3_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   ddrss3_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  ddrss3_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   ddrss3_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  ddrss3_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   ddrss3_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   ddrss3_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  ddrss3_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   ddrss3_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   ddrss3_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   ddrss3_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   ddrss3_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  ddrss3_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   ddrss3_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  ddrss3_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  ddrss3_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss3_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  ddrss3_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss3_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss3_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss3_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss3_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss3_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss3_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss3_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss3_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss3_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss3_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss3_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss3_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   ddrss3_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss3_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss3_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss3_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss3_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss4_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   ddrss4_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   ddrss4_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   ddrss4_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   ddrss4_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   ddrss4_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] ddrss4_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   ddrss4_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   ddrss4_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  ddrss4_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   ddrss4_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   ddrss4_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  ddrss4_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   ddrss4_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   ddrss4_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  ddrss4_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   ddrss4_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   ddrss4_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   ddrss4_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   ddrss4_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  ddrss4_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   ddrss4_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  ddrss4_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   ddrss4_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   ddrss4_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  ddrss4_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   ddrss4_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   ddrss4_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   ddrss4_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   ddrss4_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  ddrss4_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   ddrss4_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  ddrss4_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  ddrss4_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss4_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  ddrss4_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss4_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss4_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss4_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss4_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss4_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss4_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss4_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss4_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss4_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss4_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss4_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss4_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   ddrss4_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss4_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss4_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss4_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss4_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss5_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   ddrss5_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   ddrss5_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   ddrss5_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   ddrss5_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   ddrss5_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] ddrss5_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   ddrss5_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   ddrss5_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  ddrss5_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   ddrss5_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   ddrss5_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  ddrss5_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   ddrss5_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   ddrss5_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  ddrss5_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   ddrss5_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   ddrss5_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   ddrss5_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   ddrss5_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  ddrss5_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   ddrss5_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  ddrss5_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   ddrss5_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   ddrss5_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  ddrss5_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   ddrss5_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   ddrss5_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   ddrss5_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   ddrss5_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  ddrss5_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   ddrss5_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  ddrss5_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  ddrss5_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss5_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  ddrss5_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss5_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss5_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss5_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss5_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss5_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss5_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss5_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss5_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss5_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss5_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss5_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss5_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   ddrss5_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss5_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss5_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss5_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss5_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss6_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   ddrss6_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   ddrss6_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   ddrss6_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   ddrss6_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   ddrss6_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] ddrss6_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   ddrss6_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   ddrss6_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  ddrss6_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   ddrss6_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   ddrss6_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  ddrss6_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   ddrss6_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   ddrss6_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  ddrss6_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   ddrss6_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   ddrss6_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   ddrss6_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   ddrss6_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  ddrss6_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   ddrss6_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  ddrss6_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   ddrss6_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   ddrss6_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  ddrss6_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   ddrss6_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   ddrss6_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   ddrss6_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   ddrss6_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  ddrss6_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   ddrss6_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  ddrss6_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  ddrss6_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss6_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  ddrss6_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss6_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss6_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss6_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss6_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss6_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss6_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss6_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss6_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss6_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss6_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss6_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss6_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   ddrss6_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss6_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss6_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss6_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss6_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss7_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   ddrss7_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   ddrss7_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   ddrss7_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   ddrss7_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   ddrss7_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] ddrss7_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   ddrss7_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   ddrss7_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  ddrss7_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   ddrss7_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   ddrss7_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  ddrss7_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   ddrss7_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   ddrss7_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  ddrss7_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   ddrss7_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   ddrss7_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   ddrss7_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   ddrss7_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  ddrss7_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   ddrss7_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  ddrss7_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   ddrss7_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   ddrss7_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  ddrss7_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   ddrss7_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   ddrss7_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   ddrss7_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   ddrss7_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  ddrss7_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   ddrss7_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  ddrss7_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  ddrss7_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss7_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  ddrss7_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss7_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss7_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss7_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss7_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss7_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss7_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss7_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss7_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss7_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss7_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss7_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss7_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   ddrss7_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss7_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss7_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss7_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss7_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss8_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   ddrss8_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   ddrss8_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   ddrss8_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   ddrss8_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   ddrss8_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] ddrss8_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   ddrss8_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   ddrss8_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  ddrss8_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   ddrss8_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   ddrss8_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  ddrss8_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   ddrss8_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   ddrss8_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  ddrss8_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   ddrss8_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   ddrss8_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   ddrss8_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   ddrss8_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  ddrss8_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   ddrss8_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  ddrss8_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   ddrss8_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   ddrss8_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  ddrss8_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   ddrss8_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   ddrss8_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   ddrss8_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   ddrss8_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  ddrss8_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   ddrss8_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  ddrss8_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  ddrss8_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss8_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  ddrss8_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss8_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss8_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss8_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss8_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss8_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss8_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss8_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss8_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss8_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss8_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss8_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss8_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   ddrss8_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss8_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss8_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss8_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss8_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   ddrss9_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   ddrss9_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   ddrss9_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   ddrss9_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   ddrss9_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   ddrss9_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] ddrss9_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   ddrss9_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   ddrss9_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  ddrss9_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   ddrss9_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   ddrss9_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  ddrss9_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   ddrss9_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   ddrss9_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  ddrss9_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   ddrss9_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   ddrss9_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   ddrss9_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   ddrss9_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  ddrss9_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   ddrss9_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  ddrss9_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   ddrss9_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   ddrss9_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  ddrss9_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   ddrss9_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   ddrss9_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   ddrss9_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   ddrss9_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  ddrss9_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   ddrss9_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  ddrss9_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  ddrss9_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  ddrss9_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  ddrss9_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   ddrss9_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   ddrss9_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  ddrss9_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss9_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss9_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss9_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  ddrss9_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  ddrss9_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  ddrss9_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss9_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss9_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  ddrss9_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   ddrss9_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss9_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss9_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss9_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   ddrss9_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   debug_ss_tniu_top_side_clk_src_porting_clk_src                                          ,  // clock input
+    input  logic [0:0]   debug_ss_tniu_top_side_clk_dst_porting_clk_dst                                          ,  // clock input
+    input  logic [0:0]   debug_ss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                              ,  // clock input
+    input  logic [0:0]   debug_ss_tniu_top_side_rstn_src_porting_rstn_src                                        ,  // active-low reset
+    input  logic [0:0]   debug_ss_tniu_top_side_rstn_dst_porting_rstn_dst                                        ,  // active-low reset
+    input  logic [0:0]   debug_ss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                            ,  // active-low reset
+    input  logic [119:0] debug_ss_tniu_top_side_req_porting_in_req_pld                                           ,
+    output logic [0:0]   debug_ss_tniu_top_side_req_porting_in_req_rdy                                           ,
+    input  logic [0:0]   debug_ss_tniu_top_side_req_porting_in_req_vld                                           ,
+    output logic [65:0]  debug_ss_tniu_top_side_rsp_porting_out_rsp_pld                                          ,
+    input  logic [0:0]   debug_ss_tniu_top_side_rsp_porting_out_rsp_rdy                                          ,
+    output logic [0:0]   debug_ss_tniu_top_side_rsp_porting_out_rsp_vld                                          ,
+    output logic [31:0]  debug_ss_tniu_top_side_top_apb_porting_top_paddr                                        ,  // APB address
+    output logic [0:0]   debug_ss_tniu_top_side_top_apb_porting_top_penable                                      ,  // APB enable
+    output logic [2:0]   debug_ss_tniu_top_side_top_apb_porting_top_pprot                                        ,  // APB protection
+    input  logic [31:0]  debug_ss_tniu_top_side_top_apb_porting_top_prdata                                       ,  // APB read data
+    input  logic [0:0]   debug_ss_tniu_top_side_top_apb_porting_top_pready                                       ,  // APB ready
+    output logic [0:0]   debug_ss_tniu_top_side_top_apb_porting_top_psel                                         ,  // APB select
+    input  logic [0:0]   debug_ss_tniu_top_side_top_apb_porting_top_pslverr                                      ,  // APB slave error
+    output logic [3:0]   debug_ss_tniu_top_side_top_apb_porting_top_pstrb                                        ,  // APB write strobe
+    output logic [31:0]  debug_ss_tniu_top_side_top_apb_porting_top_pwdata                                       ,  // APB write data
+    output logic [0:0]   debug_ss_tniu_top_side_top_apb_porting_top_pwrite                                       ,  // APB write control
+    output logic [31:0]  debug_ss_tniu_top_side_sys_apb_porting_m_paddr                                          ,  // APB address
+    output logic [0:0]   debug_ss_tniu_top_side_sys_apb_porting_m_penable                                        ,  // APB enable
+    output logic [2:0]   debug_ss_tniu_top_side_sys_apb_porting_m_pprot                                          ,  // APB protection
+    input  logic [31:0]  debug_ss_tniu_top_side_sys_apb_porting_m_prdata                                         ,  // APB read data
+    input  logic [0:0]   debug_ss_tniu_top_side_sys_apb_porting_m_pready                                         ,  // APB ready
+    output logic [0:0]   debug_ss_tniu_top_side_sys_apb_porting_m_psel                                           ,  // APB select
+    input  logic [0:0]   debug_ss_tniu_top_side_sys_apb_porting_m_pslverr                                        ,  // APB slave error
+    output logic [3:0]   debug_ss_tniu_top_side_sys_apb_porting_m_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  debug_ss_tniu_top_side_sys_apb_porting_m_pwdata                                         ,  // APB write data
+    output logic [0:0]   debug_ss_tniu_top_side_sys_apb_porting_m_pwrite                                         ,  // APB write control
+    input  logic [31:0]  debug_ss_tniu_top_side_dbg_data_porting_dbg_data_in                                     ,  // debug/timestamp signal
+    output logic [31:0]  debug_ss_tniu_top_side_dbg_data_porting_dbg_data_out                                    ,  // debug/timestamp signal
+    input  logic [63:0]  debug_ss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                           ,  // debug/timestamp signal
+    output logic [63:0]  debug_ss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                          ,  // debug/timestamp signal
+    input  logic [7:0]   debug_ss_tniu_top_side_cti_event_porting_cti_trig_in                                    ,  // cross-trigger/debug channel
+    output logic [7:0]   debug_ss_tniu_top_side_cti_event_porting_cti_trig_out                                   ,  // cross-trigger/debug channel
+    input  logic [31:0]  debug_ss_tniu_top_side_ctm_event_porting_ctm_trig_in                                    ,  // cross-trigger/debug channel
+    output logic [31:0]  debug_ss_tniu_top_side_ctm_event_porting_ctm_trig_out                                   ,  // cross-trigger/debug channel
+    input  logic [71:0]  debug_ss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                           ,  // cross-trigger/debug channel
+    output logic [71:0]  debug_ss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                          ,  // cross-trigger/debug channel
+    input  logic [71:0]  debug_ss_tniu_top_side_ctm_channel_porting_ctm_channel_in                               ,  // cross-trigger/debug channel
+    output logic [71:0]  debug_ss_tniu_top_side_ctm_channel_porting_ctm_channel_out                              ,  // cross-trigger/debug channel
+    output logic [31:0]  debug_ss_tniu_top_side_timing_bus1_porting_timing_bus1                                  ,  // debug/timestamp signal
+    output logic [31:0]  debug_ss_tniu_top_side_timing_bus2_porting_timing_bus2                                  ,  // debug/timestamp signal
+    output logic [31:0]  debug_ss_tniu_top_side_timing_bus3_porting_timing_bus3                                  ,  // debug/timestamp signal
+    output logic [31:0]  debug_ss_tniu_top_side_dbg_en_porting_dbg_en                                            ,  // debug/timestamp signal
+    output logic [0:0]   debug_ss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err          ,  // FUSA/ECC error flag
+    output logic [0:0]   debug_ss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                             ,  // FUSA/ECC error flag
+    output logic [0:0]   debug_ss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                             ,  // FUSA/ECC error flag
+    output logic [0:0]   debug_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                             ,  // FUSA/ECC error flag
+    output logic [0:0]   debug_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                             ,  // FUSA/ECC error flag
+    input  logic [0:0]   display_ss_tniu_top_side_clk_src_porting_clk_src                                        ,  // clock input
+    input  logic [0:0]   display_ss_tniu_top_side_clk_dst_porting_clk_dst                                        ,  // clock input
+    input  logic [0:0]   display_ss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                            ,  // clock input
+    input  logic [0:0]   display_ss_tniu_top_side_rstn_src_porting_rstn_src                                      ,  // active-low reset
+    input  logic [0:0]   display_ss_tniu_top_side_rstn_dst_porting_rstn_dst                                      ,  // active-low reset
+    input  logic [0:0]   display_ss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                          ,  // active-low reset
+    input  logic [119:0] display_ss_tniu_top_side_req_porting_in_req_pld                                         ,
+    output logic [0:0]   display_ss_tniu_top_side_req_porting_in_req_rdy                                         ,
+    input  logic [0:0]   display_ss_tniu_top_side_req_porting_in_req_vld                                         ,
+    output logic [65:0]  display_ss_tniu_top_side_rsp_porting_out_rsp_pld                                        ,
+    input  logic [0:0]   display_ss_tniu_top_side_rsp_porting_out_rsp_rdy                                        ,
+    output logic [0:0]   display_ss_tniu_top_side_rsp_porting_out_rsp_vld                                        ,
+    output logic [31:0]  display_ss_tniu_top_side_top_apb_porting_top_paddr                                      ,  // APB address
+    output logic [0:0]   display_ss_tniu_top_side_top_apb_porting_top_penable                                    ,  // APB enable
+    output logic [2:0]   display_ss_tniu_top_side_top_apb_porting_top_pprot                                      ,  // APB protection
+    input  logic [31:0]  display_ss_tniu_top_side_top_apb_porting_top_prdata                                     ,  // APB read data
+    input  logic [0:0]   display_ss_tniu_top_side_top_apb_porting_top_pready                                     ,  // APB ready
+    output logic [0:0]   display_ss_tniu_top_side_top_apb_porting_top_psel                                       ,  // APB select
+    input  logic [0:0]   display_ss_tniu_top_side_top_apb_porting_top_pslverr                                    ,  // APB slave error
+    output logic [3:0]   display_ss_tniu_top_side_top_apb_porting_top_pstrb                                      ,  // APB write strobe
+    output logic [31:0]  display_ss_tniu_top_side_top_apb_porting_top_pwdata                                     ,  // APB write data
+    output logic [0:0]   display_ss_tniu_top_side_top_apb_porting_top_pwrite                                     ,  // APB write control
+    output logic [31:0]  display_ss_tniu_top_side_sys_apb_porting_m_paddr                                        ,  // APB address
+    output logic [0:0]   display_ss_tniu_top_side_sys_apb_porting_m_penable                                      ,  // APB enable
+    output logic [2:0]   display_ss_tniu_top_side_sys_apb_porting_m_pprot                                        ,  // APB protection
+    input  logic [31:0]  display_ss_tniu_top_side_sys_apb_porting_m_prdata                                       ,  // APB read data
+    input  logic [0:0]   display_ss_tniu_top_side_sys_apb_porting_m_pready                                       ,  // APB ready
+    output logic [0:0]   display_ss_tniu_top_side_sys_apb_porting_m_psel                                         ,  // APB select
+    input  logic [0:0]   display_ss_tniu_top_side_sys_apb_porting_m_pslverr                                      ,  // APB slave error
+    output logic [3:0]   display_ss_tniu_top_side_sys_apb_porting_m_pstrb                                        ,  // APB write strobe
+    output logic [31:0]  display_ss_tniu_top_side_sys_apb_porting_m_pwdata                                       ,  // APB write data
+    output logic [0:0]   display_ss_tniu_top_side_sys_apb_porting_m_pwrite                                       ,  // APB write control
+    input  logic [31:0]  display_ss_tniu_top_side_dbg_data_porting_dbg_data_in                                   ,  // debug/timestamp signal
+    output logic [31:0]  display_ss_tniu_top_side_dbg_data_porting_dbg_data_out                                  ,  // debug/timestamp signal
+    input  logic [63:0]  display_ss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                         ,  // debug/timestamp signal
+    output logic [63:0]  display_ss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                        ,  // debug/timestamp signal
+    input  logic [7:0]   display_ss_tniu_top_side_cti_event_porting_cti_trig_in                                  ,  // cross-trigger/debug channel
+    output logic [7:0]   display_ss_tniu_top_side_cti_event_porting_cti_trig_out                                 ,  // cross-trigger/debug channel
+    input  logic [31:0]  display_ss_tniu_top_side_ctm_event_porting_ctm_trig_in                                  ,  // cross-trigger/debug channel
+    output logic [31:0]  display_ss_tniu_top_side_ctm_event_porting_ctm_trig_out                                 ,  // cross-trigger/debug channel
+    input  logic [71:0]  display_ss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                         ,  // cross-trigger/debug channel
+    output logic [71:0]  display_ss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                        ,  // cross-trigger/debug channel
+    input  logic [71:0]  display_ss_tniu_top_side_ctm_channel_porting_ctm_channel_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  display_ss_tniu_top_side_ctm_channel_porting_ctm_channel_out                            ,  // cross-trigger/debug channel
+    output logic [31:0]  display_ss_tniu_top_side_timing_bus1_porting_timing_bus1                                ,  // debug/timestamp signal
+    output logic [31:0]  display_ss_tniu_top_side_timing_bus2_porting_timing_bus2                                ,  // debug/timestamp signal
+    output logic [31:0]  display_ss_tniu_top_side_timing_bus3_porting_timing_bus3                                ,  // debug/timestamp signal
+    output logic [31:0]  display_ss_tniu_top_side_dbg_en_porting_dbg_en                                          ,  // debug/timestamp signal
+    output logic [0:0]   display_ss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err        ,  // FUSA/ECC error flag
+    output logic [0:0]   display_ss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                           ,  // FUSA/ECC error flag
+    output logic [0:0]   display_ss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                           ,  // FUSA/ECC error flag
+    output logic [0:0]   display_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                           ,  // FUSA/ECC error flag
+    output logic [0:0]   display_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                           ,  // FUSA/ECC error flag
+    input  logic [0:0]   gpuss0_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   gpuss0_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   gpuss0_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   gpuss0_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   gpuss0_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   gpuss0_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] gpuss0_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   gpuss0_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   gpuss0_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  gpuss0_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   gpuss0_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   gpuss0_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  gpuss0_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   gpuss0_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   gpuss0_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  gpuss0_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   gpuss0_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   gpuss0_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   gpuss0_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   gpuss0_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  gpuss0_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   gpuss0_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  gpuss0_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   gpuss0_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   gpuss0_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  gpuss0_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   gpuss0_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   gpuss0_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   gpuss0_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   gpuss0_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  gpuss0_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   gpuss0_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  gpuss0_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  gpuss0_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  gpuss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  gpuss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   gpuss0_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   gpuss0_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  gpuss0_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  gpuss0_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  gpuss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  gpuss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  gpuss0_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  gpuss0_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  gpuss0_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  gpuss0_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  gpuss0_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  gpuss0_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   gpuss0_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   gpuss0_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   gpuss0_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   gpuss0_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   gpuss0_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   gpuss1_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   gpuss1_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   gpuss1_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   gpuss1_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   gpuss1_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   gpuss1_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] gpuss1_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   gpuss1_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   gpuss1_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  gpuss1_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   gpuss1_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   gpuss1_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  gpuss1_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   gpuss1_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   gpuss1_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  gpuss1_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   gpuss1_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   gpuss1_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   gpuss1_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   gpuss1_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  gpuss1_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   gpuss1_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  gpuss1_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   gpuss1_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   gpuss1_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  gpuss1_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   gpuss1_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   gpuss1_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   gpuss1_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   gpuss1_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  gpuss1_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   gpuss1_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  gpuss1_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  gpuss1_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  gpuss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  gpuss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   gpuss1_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   gpuss1_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  gpuss1_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  gpuss1_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  gpuss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  gpuss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  gpuss1_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  gpuss1_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  gpuss1_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  gpuss1_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  gpuss1_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  gpuss1_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   gpuss1_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   gpuss1_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   gpuss1_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   gpuss1_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   gpuss1_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   mcuss_tniu_top_side_clk_src_porting_clk_src                                             ,  // clock input
+    input  logic [0:0]   mcuss_tniu_top_side_clk_dst_porting_clk_dst                                             ,  // clock input
+    input  logic [0:0]   mcuss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                 ,  // clock input
+    input  logic [0:0]   mcuss_tniu_top_side_rstn_src_porting_rstn_src                                           ,  // active-low reset
+    input  logic [0:0]   mcuss_tniu_top_side_rstn_dst_porting_rstn_dst                                           ,  // active-low reset
+    input  logic [0:0]   mcuss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                               ,  // active-low reset
+    input  logic [119:0] mcuss_tniu_top_side_req_porting_in_req_pld                                              ,
+    output logic [0:0]   mcuss_tniu_top_side_req_porting_in_req_rdy                                              ,
+    input  logic [0:0]   mcuss_tniu_top_side_req_porting_in_req_vld                                              ,
+    output logic [65:0]  mcuss_tniu_top_side_rsp_porting_out_rsp_pld                                             ,
+    input  logic [0:0]   mcuss_tniu_top_side_rsp_porting_out_rsp_rdy                                             ,
+    output logic [0:0]   mcuss_tniu_top_side_rsp_porting_out_rsp_vld                                             ,
+    output logic [31:0]  mcuss_tniu_top_side_top_apb_porting_top_paddr                                           ,  // APB address
+    output logic [0:0]   mcuss_tniu_top_side_top_apb_porting_top_penable                                         ,  // APB enable
+    output logic [2:0]   mcuss_tniu_top_side_top_apb_porting_top_pprot                                           ,  // APB protection
+    input  logic [31:0]  mcuss_tniu_top_side_top_apb_porting_top_prdata                                          ,  // APB read data
+    input  logic [0:0]   mcuss_tniu_top_side_top_apb_porting_top_pready                                          ,  // APB ready
+    output logic [0:0]   mcuss_tniu_top_side_top_apb_porting_top_psel                                            ,  // APB select
+    input  logic [0:0]   mcuss_tniu_top_side_top_apb_porting_top_pslverr                                         ,  // APB slave error
+    output logic [3:0]   mcuss_tniu_top_side_top_apb_porting_top_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  mcuss_tniu_top_side_top_apb_porting_top_pwdata                                          ,  // APB write data
+    output logic [0:0]   mcuss_tniu_top_side_top_apb_porting_top_pwrite                                          ,  // APB write control
+    output logic [31:0]  mcuss_tniu_top_side_sys_apb_porting_m_paddr                                             ,  // APB address
+    output logic [0:0]   mcuss_tniu_top_side_sys_apb_porting_m_penable                                           ,  // APB enable
+    output logic [2:0]   mcuss_tniu_top_side_sys_apb_porting_m_pprot                                             ,  // APB protection
+    input  logic [31:0]  mcuss_tniu_top_side_sys_apb_porting_m_prdata                                            ,  // APB read data
+    input  logic [0:0]   mcuss_tniu_top_side_sys_apb_porting_m_pready                                            ,  // APB ready
+    output logic [0:0]   mcuss_tniu_top_side_sys_apb_porting_m_psel                                              ,  // APB select
+    input  logic [0:0]   mcuss_tniu_top_side_sys_apb_porting_m_pslverr                                           ,  // APB slave error
+    output logic [3:0]   mcuss_tniu_top_side_sys_apb_porting_m_pstrb                                             ,  // APB write strobe
+    output logic [31:0]  mcuss_tniu_top_side_sys_apb_porting_m_pwdata                                            ,  // APB write data
+    output logic [0:0]   mcuss_tniu_top_side_sys_apb_porting_m_pwrite                                            ,  // APB write control
+    input  logic [31:0]  mcuss_tniu_top_side_dbg_data_porting_dbg_data_in                                        ,  // debug/timestamp signal
+    output logic [31:0]  mcuss_tniu_top_side_dbg_data_porting_dbg_data_out                                       ,  // debug/timestamp signal
+    input  logic [63:0]  mcuss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                              ,  // debug/timestamp signal
+    output logic [63:0]  mcuss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                             ,  // debug/timestamp signal
+    input  logic [7:0]   mcuss_tniu_top_side_cti_event_porting_cti_trig_in                                       ,  // cross-trigger/debug channel
+    output logic [7:0]   mcuss_tniu_top_side_cti_event_porting_cti_trig_out                                      ,  // cross-trigger/debug channel
+    input  logic [31:0]  mcuss_tniu_top_side_ctm_event_porting_ctm_trig_in                                       ,  // cross-trigger/debug channel
+    output logic [31:0]  mcuss_tniu_top_side_ctm_event_porting_ctm_trig_out                                      ,  // cross-trigger/debug channel
+    input  logic [71:0]  mcuss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                              ,  // cross-trigger/debug channel
+    output logic [71:0]  mcuss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                             ,  // cross-trigger/debug channel
+    input  logic [71:0]  mcuss_tniu_top_side_ctm_channel_porting_ctm_channel_in                                  ,  // cross-trigger/debug channel
+    output logic [71:0]  mcuss_tniu_top_side_ctm_channel_porting_ctm_channel_out                                 ,  // cross-trigger/debug channel
+    output logic [31:0]  mcuss_tniu_top_side_timing_bus1_porting_timing_bus1                                     ,  // debug/timestamp signal
+    output logic [31:0]  mcuss_tniu_top_side_timing_bus2_porting_timing_bus2                                     ,  // debug/timestamp signal
+    output logic [31:0]  mcuss_tniu_top_side_timing_bus3_porting_timing_bus3                                     ,  // debug/timestamp signal
+    output logic [31:0]  mcuss_tniu_top_side_dbg_en_porting_dbg_en                                               ,  // debug/timestamp signal
+    output logic [0:0]   mcuss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err             ,  // FUSA/ECC error flag
+    output logic [0:0]   mcuss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   mcuss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   mcuss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   mcuss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                                ,  // FUSA/ECC error flag
+    input  logic [0:0]   mipiss_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   mipiss_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   mipiss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   mipiss_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   mipiss_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   mipiss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] mipiss_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   mipiss_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   mipiss_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  mipiss_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   mipiss_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   mipiss_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  mipiss_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   mipiss_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   mipiss_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  mipiss_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   mipiss_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   mipiss_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   mipiss_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   mipiss_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  mipiss_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   mipiss_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  mipiss_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   mipiss_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   mipiss_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  mipiss_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   mipiss_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   mipiss_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   mipiss_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   mipiss_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  mipiss_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   mipiss_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  mipiss_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  mipiss_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  mipiss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  mipiss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   mipiss_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   mipiss_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  mipiss_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  mipiss_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  mipiss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  mipiss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  mipiss_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  mipiss_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  mipiss_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  mipiss_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  mipiss_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  mipiss_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   mipiss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   mipiss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   mipiss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   mipiss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   mipiss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   nocss_tniu_top_side_clk_src_porting_clk_src                                             ,  // clock input
+    input  logic [0:0]   nocss_tniu_top_side_clk_dst_porting_clk_dst                                             ,  // clock input
+    input  logic [0:0]   nocss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                 ,  // clock input
+    input  logic [0:0]   nocss_tniu_top_side_rstn_src_porting_rstn_src                                           ,  // active-low reset
+    input  logic [0:0]   nocss_tniu_top_side_rstn_dst_porting_rstn_dst                                           ,  // active-low reset
+    input  logic [0:0]   nocss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                               ,  // active-low reset
+    input  logic [119:0] nocss_tniu_top_side_req_porting_in_req_pld                                              ,
+    output logic [0:0]   nocss_tniu_top_side_req_porting_in_req_rdy                                              ,
+    input  logic [0:0]   nocss_tniu_top_side_req_porting_in_req_vld                                              ,
+    output logic [65:0]  nocss_tniu_top_side_rsp_porting_out_rsp_pld                                             ,
+    input  logic [0:0]   nocss_tniu_top_side_rsp_porting_out_rsp_rdy                                             ,
+    output logic [0:0]   nocss_tniu_top_side_rsp_porting_out_rsp_vld                                             ,
+    output logic [31:0]  nocss_tniu_top_side_top_apb_porting_top_paddr                                           ,  // APB address
+    output logic [0:0]   nocss_tniu_top_side_top_apb_porting_top_penable                                         ,  // APB enable
+    output logic [2:0]   nocss_tniu_top_side_top_apb_porting_top_pprot                                           ,  // APB protection
+    input  logic [31:0]  nocss_tniu_top_side_top_apb_porting_top_prdata                                          ,  // APB read data
+    input  logic [0:0]   nocss_tniu_top_side_top_apb_porting_top_pready                                          ,  // APB ready
+    output logic [0:0]   nocss_tniu_top_side_top_apb_porting_top_psel                                            ,  // APB select
+    input  logic [0:0]   nocss_tniu_top_side_top_apb_porting_top_pslverr                                         ,  // APB slave error
+    output logic [3:0]   nocss_tniu_top_side_top_apb_porting_top_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  nocss_tniu_top_side_top_apb_porting_top_pwdata                                          ,  // APB write data
+    output logic [0:0]   nocss_tniu_top_side_top_apb_porting_top_pwrite                                          ,  // APB write control
+    output logic [31:0]  nocss_tniu_top_side_sys_apb_porting_m_paddr                                             ,  // APB address
+    output logic [0:0]   nocss_tniu_top_side_sys_apb_porting_m_penable                                           ,  // APB enable
+    output logic [2:0]   nocss_tniu_top_side_sys_apb_porting_m_pprot                                             ,  // APB protection
+    input  logic [31:0]  nocss_tniu_top_side_sys_apb_porting_m_prdata                                            ,  // APB read data
+    input  logic [0:0]   nocss_tniu_top_side_sys_apb_porting_m_pready                                            ,  // APB ready
+    output logic [0:0]   nocss_tniu_top_side_sys_apb_porting_m_psel                                              ,  // APB select
+    input  logic [0:0]   nocss_tniu_top_side_sys_apb_porting_m_pslverr                                           ,  // APB slave error
+    output logic [3:0]   nocss_tniu_top_side_sys_apb_porting_m_pstrb                                             ,  // APB write strobe
+    output logic [31:0]  nocss_tniu_top_side_sys_apb_porting_m_pwdata                                            ,  // APB write data
+    output logic [0:0]   nocss_tniu_top_side_sys_apb_porting_m_pwrite                                            ,  // APB write control
+    input  logic [31:0]  nocss_tniu_top_side_dbg_data_porting_dbg_data_in                                        ,  // debug/timestamp signal
+    output logic [31:0]  nocss_tniu_top_side_dbg_data_porting_dbg_data_out                                       ,  // debug/timestamp signal
+    input  logic [63:0]  nocss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                              ,  // debug/timestamp signal
+    output logic [63:0]  nocss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                             ,  // debug/timestamp signal
+    input  logic [7:0]   nocss_tniu_top_side_cti_event_porting_cti_trig_in                                       ,  // cross-trigger/debug channel
+    output logic [7:0]   nocss_tniu_top_side_cti_event_porting_cti_trig_out                                      ,  // cross-trigger/debug channel
+    input  logic [31:0]  nocss_tniu_top_side_ctm_event_porting_ctm_trig_in                                       ,  // cross-trigger/debug channel
+    output logic [31:0]  nocss_tniu_top_side_ctm_event_porting_ctm_trig_out                                      ,  // cross-trigger/debug channel
+    input  logic [71:0]  nocss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                              ,  // cross-trigger/debug channel
+    output logic [71:0]  nocss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                             ,  // cross-trigger/debug channel
+    input  logic [71:0]  nocss_tniu_top_side_ctm_channel_porting_ctm_channel_in                                  ,  // cross-trigger/debug channel
+    output logic [71:0]  nocss_tniu_top_side_ctm_channel_porting_ctm_channel_out                                 ,  // cross-trigger/debug channel
+    output logic [31:0]  nocss_tniu_top_side_timing_bus1_porting_timing_bus1                                     ,  // debug/timestamp signal
+    output logic [31:0]  nocss_tniu_top_side_timing_bus2_porting_timing_bus2                                     ,  // debug/timestamp signal
+    output logic [31:0]  nocss_tniu_top_side_timing_bus3_porting_timing_bus3                                     ,  // debug/timestamp signal
+    output logic [31:0]  nocss_tniu_top_side_dbg_en_porting_dbg_en                                               ,  // debug/timestamp signal
+    output logic [0:0]   nocss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err             ,  // FUSA/ECC error flag
+    output logic [0:0]   nocss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   nocss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   nocss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   nocss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                                ,  // FUSA/ECC error flag
+    input  logic [0:0]   npuss0_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   npuss0_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   npuss0_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   npuss0_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   npuss0_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   npuss0_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] npuss0_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   npuss0_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   npuss0_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  npuss0_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   npuss0_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   npuss0_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  npuss0_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   npuss0_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   npuss0_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  npuss0_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   npuss0_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   npuss0_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   npuss0_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   npuss0_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  npuss0_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   npuss0_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  npuss0_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   npuss0_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   npuss0_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  npuss0_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   npuss0_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   npuss0_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   npuss0_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   npuss0_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  npuss0_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   npuss0_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  npuss0_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  npuss0_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  npuss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  npuss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   npuss0_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   npuss0_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  npuss0_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  npuss0_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  npuss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  npuss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  npuss0_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  npuss0_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  npuss0_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss0_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss0_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss0_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   npuss0_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss0_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss0_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss0_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss0_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   npuss1_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   npuss1_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   npuss1_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   npuss1_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   npuss1_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   npuss1_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] npuss1_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   npuss1_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   npuss1_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  npuss1_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   npuss1_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   npuss1_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  npuss1_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   npuss1_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   npuss1_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  npuss1_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   npuss1_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   npuss1_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   npuss1_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   npuss1_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  npuss1_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   npuss1_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  npuss1_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   npuss1_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   npuss1_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  npuss1_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   npuss1_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   npuss1_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   npuss1_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   npuss1_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  npuss1_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   npuss1_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  npuss1_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  npuss1_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  npuss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  npuss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   npuss1_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   npuss1_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  npuss1_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  npuss1_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  npuss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  npuss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  npuss1_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  npuss1_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  npuss1_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss1_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss1_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss1_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   npuss1_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss1_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss1_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss1_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss1_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   npuss2_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   npuss2_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   npuss2_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   npuss2_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   npuss2_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   npuss2_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] npuss2_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   npuss2_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   npuss2_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  npuss2_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   npuss2_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   npuss2_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  npuss2_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   npuss2_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   npuss2_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  npuss2_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   npuss2_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   npuss2_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   npuss2_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   npuss2_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  npuss2_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   npuss2_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  npuss2_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   npuss2_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   npuss2_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  npuss2_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   npuss2_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   npuss2_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   npuss2_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   npuss2_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  npuss2_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   npuss2_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  npuss2_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  npuss2_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  npuss2_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  npuss2_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   npuss2_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   npuss2_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  npuss2_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  npuss2_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  npuss2_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  npuss2_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  npuss2_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  npuss2_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  npuss2_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss2_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss2_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss2_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   npuss2_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss2_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss2_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss2_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss2_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   npuss3_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   npuss3_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   npuss3_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   npuss3_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   npuss3_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   npuss3_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] npuss3_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   npuss3_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   npuss3_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  npuss3_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   npuss3_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   npuss3_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  npuss3_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   npuss3_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   npuss3_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  npuss3_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   npuss3_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   npuss3_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   npuss3_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   npuss3_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  npuss3_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   npuss3_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  npuss3_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   npuss3_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   npuss3_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  npuss3_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   npuss3_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   npuss3_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   npuss3_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   npuss3_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  npuss3_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   npuss3_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  npuss3_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  npuss3_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  npuss3_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  npuss3_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   npuss3_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   npuss3_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  npuss3_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  npuss3_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  npuss3_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  npuss3_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  npuss3_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  npuss3_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  npuss3_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss3_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss3_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss3_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   npuss3_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss3_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss3_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss3_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss3_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   npuss4_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   npuss4_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   npuss4_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   npuss4_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   npuss4_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   npuss4_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] npuss4_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   npuss4_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   npuss4_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  npuss4_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   npuss4_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   npuss4_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  npuss4_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   npuss4_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   npuss4_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  npuss4_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   npuss4_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   npuss4_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   npuss4_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   npuss4_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  npuss4_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   npuss4_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  npuss4_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   npuss4_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   npuss4_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  npuss4_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   npuss4_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   npuss4_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   npuss4_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   npuss4_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  npuss4_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   npuss4_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  npuss4_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  npuss4_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  npuss4_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  npuss4_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   npuss4_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   npuss4_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  npuss4_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  npuss4_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  npuss4_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  npuss4_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  npuss4_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  npuss4_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  npuss4_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss4_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss4_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  npuss4_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   npuss4_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss4_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss4_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss4_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   npuss4_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   pcie_ethss_tniu_top_side_clk_src_porting_clk_src                                        ,  // clock input
+    input  logic [0:0]   pcie_ethss_tniu_top_side_clk_dst_porting_clk_dst                                        ,  // clock input
+    input  logic [0:0]   pcie_ethss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                            ,  // clock input
+    input  logic [0:0]   pcie_ethss_tniu_top_side_rstn_src_porting_rstn_src                                      ,  // active-low reset
+    input  logic [0:0]   pcie_ethss_tniu_top_side_rstn_dst_porting_rstn_dst                                      ,  // active-low reset
+    input  logic [0:0]   pcie_ethss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                          ,  // active-low reset
+    input  logic [119:0] pcie_ethss_tniu_top_side_req_porting_in_req_pld                                         ,
+    output logic [0:0]   pcie_ethss_tniu_top_side_req_porting_in_req_rdy                                         ,
+    input  logic [0:0]   pcie_ethss_tniu_top_side_req_porting_in_req_vld                                         ,
+    output logic [65:0]  pcie_ethss_tniu_top_side_rsp_porting_out_rsp_pld                                        ,
+    input  logic [0:0]   pcie_ethss_tniu_top_side_rsp_porting_out_rsp_rdy                                        ,
+    output logic [0:0]   pcie_ethss_tniu_top_side_rsp_porting_out_rsp_vld                                        ,
+    output logic [31:0]  pcie_ethss_tniu_top_side_top_apb_porting_top_paddr                                      ,  // APB address
+    output logic [0:0]   pcie_ethss_tniu_top_side_top_apb_porting_top_penable                                    ,  // APB enable
+    output logic [2:0]   pcie_ethss_tniu_top_side_top_apb_porting_top_pprot                                      ,  // APB protection
+    input  logic [31:0]  pcie_ethss_tniu_top_side_top_apb_porting_top_prdata                                     ,  // APB read data
+    input  logic [0:0]   pcie_ethss_tniu_top_side_top_apb_porting_top_pready                                     ,  // APB ready
+    output logic [0:0]   pcie_ethss_tniu_top_side_top_apb_porting_top_psel                                       ,  // APB select
+    input  logic [0:0]   pcie_ethss_tniu_top_side_top_apb_porting_top_pslverr                                    ,  // APB slave error
+    output logic [3:0]   pcie_ethss_tniu_top_side_top_apb_porting_top_pstrb                                      ,  // APB write strobe
+    output logic [31:0]  pcie_ethss_tniu_top_side_top_apb_porting_top_pwdata                                     ,  // APB write data
+    output logic [0:0]   pcie_ethss_tniu_top_side_top_apb_porting_top_pwrite                                     ,  // APB write control
+    output logic [31:0]  pcie_ethss_tniu_top_side_sys_apb_porting_m_paddr                                        ,  // APB address
+    output logic [0:0]   pcie_ethss_tniu_top_side_sys_apb_porting_m_penable                                      ,  // APB enable
+    output logic [2:0]   pcie_ethss_tniu_top_side_sys_apb_porting_m_pprot                                        ,  // APB protection
+    input  logic [31:0]  pcie_ethss_tniu_top_side_sys_apb_porting_m_prdata                                       ,  // APB read data
+    input  logic [0:0]   pcie_ethss_tniu_top_side_sys_apb_porting_m_pready                                       ,  // APB ready
+    output logic [0:0]   pcie_ethss_tniu_top_side_sys_apb_porting_m_psel                                         ,  // APB select
+    input  logic [0:0]   pcie_ethss_tniu_top_side_sys_apb_porting_m_pslverr                                      ,  // APB slave error
+    output logic [3:0]   pcie_ethss_tniu_top_side_sys_apb_porting_m_pstrb                                        ,  // APB write strobe
+    output logic [31:0]  pcie_ethss_tniu_top_side_sys_apb_porting_m_pwdata                                       ,  // APB write data
+    output logic [0:0]   pcie_ethss_tniu_top_side_sys_apb_porting_m_pwrite                                       ,  // APB write control
+    input  logic [31:0]  pcie_ethss_tniu_top_side_dbg_data_porting_dbg_data_in                                   ,  // debug/timestamp signal
+    output logic [31:0]  pcie_ethss_tniu_top_side_dbg_data_porting_dbg_data_out                                  ,  // debug/timestamp signal
+    input  logic [63:0]  pcie_ethss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                         ,  // debug/timestamp signal
+    output logic [63:0]  pcie_ethss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                        ,  // debug/timestamp signal
+    input  logic [7:0]   pcie_ethss_tniu_top_side_cti_event_porting_cti_trig_in                                  ,  // cross-trigger/debug channel
+    output logic [7:0]   pcie_ethss_tniu_top_side_cti_event_porting_cti_trig_out                                 ,  // cross-trigger/debug channel
+    input  logic [31:0]  pcie_ethss_tniu_top_side_ctm_event_porting_ctm_trig_in                                  ,  // cross-trigger/debug channel
+    output logic [31:0]  pcie_ethss_tniu_top_side_ctm_event_porting_ctm_trig_out                                 ,  // cross-trigger/debug channel
+    input  logic [71:0]  pcie_ethss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                         ,  // cross-trigger/debug channel
+    output logic [71:0]  pcie_ethss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                        ,  // cross-trigger/debug channel
+    input  logic [71:0]  pcie_ethss_tniu_top_side_ctm_channel_porting_ctm_channel_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  pcie_ethss_tniu_top_side_ctm_channel_porting_ctm_channel_out                            ,  // cross-trigger/debug channel
+    output logic [31:0]  pcie_ethss_tniu_top_side_timing_bus1_porting_timing_bus1                                ,  // debug/timestamp signal
+    output logic [31:0]  pcie_ethss_tniu_top_side_timing_bus2_porting_timing_bus2                                ,  // debug/timestamp signal
+    output logic [31:0]  pcie_ethss_tniu_top_side_timing_bus3_porting_timing_bus3                                ,  // debug/timestamp signal
+    output logic [31:0]  pcie_ethss_tniu_top_side_dbg_en_porting_dbg_en                                          ,  // debug/timestamp signal
+    output logic [0:0]   pcie_ethss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err        ,  // FUSA/ECC error flag
+    output logic [0:0]   pcie_ethss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                           ,  // FUSA/ECC error flag
+    output logic [0:0]   pcie_ethss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                           ,  // FUSA/ECC error flag
+    output logic [0:0]   pcie_ethss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                           ,  // FUSA/ECC error flag
+    output logic [0:0]   pcie_ethss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                           ,  // FUSA/ECC error flag
+    input  logic [0:0]   periss_tniu_top_side_clk_src_porting_clk_src                                            ,  // clock input
+    input  logic [0:0]   periss_tniu_top_side_clk_dst_porting_clk_dst                                            ,  // clock input
+    input  logic [0:0]   periss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                ,  // clock input
+    input  logic [0:0]   periss_tniu_top_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
+    input  logic [0:0]   periss_tniu_top_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
+    input  logic [0:0]   periss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
+    input  logic [119:0] periss_tniu_top_side_req_porting_in_req_pld                                             ,
+    output logic [0:0]   periss_tniu_top_side_req_porting_in_req_rdy                                             ,
+    input  logic [0:0]   periss_tniu_top_side_req_porting_in_req_vld                                             ,
+    output logic [65:0]  periss_tniu_top_side_rsp_porting_out_rsp_pld                                            ,
+    input  logic [0:0]   periss_tniu_top_side_rsp_porting_out_rsp_rdy                                            ,
+    output logic [0:0]   periss_tniu_top_side_rsp_porting_out_rsp_vld                                            ,
+    output logic [31:0]  periss_tniu_top_side_top_apb_porting_top_paddr                                          ,  // APB address
+    output logic [0:0]   periss_tniu_top_side_top_apb_porting_top_penable                                        ,  // APB enable
+    output logic [2:0]   periss_tniu_top_side_top_apb_porting_top_pprot                                          ,  // APB protection
+    input  logic [31:0]  periss_tniu_top_side_top_apb_porting_top_prdata                                         ,  // APB read data
+    input  logic [0:0]   periss_tniu_top_side_top_apb_porting_top_pready                                         ,  // APB ready
+    output logic [0:0]   periss_tniu_top_side_top_apb_porting_top_psel                                           ,  // APB select
+    input  logic [0:0]   periss_tniu_top_side_top_apb_porting_top_pslverr                                        ,  // APB slave error
+    output logic [3:0]   periss_tniu_top_side_top_apb_porting_top_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  periss_tniu_top_side_top_apb_porting_top_pwdata                                         ,  // APB write data
+    output logic [0:0]   periss_tniu_top_side_top_apb_porting_top_pwrite                                         ,  // APB write control
+    output logic [31:0]  periss_tniu_top_side_sys_apb_porting_m_paddr                                            ,  // APB address
+    output logic [0:0]   periss_tniu_top_side_sys_apb_porting_m_penable                                          ,  // APB enable
+    output logic [2:0]   periss_tniu_top_side_sys_apb_porting_m_pprot                                            ,  // APB protection
+    input  logic [31:0]  periss_tniu_top_side_sys_apb_porting_m_prdata                                           ,  // APB read data
+    input  logic [0:0]   periss_tniu_top_side_sys_apb_porting_m_pready                                           ,  // APB ready
+    output logic [0:0]   periss_tniu_top_side_sys_apb_porting_m_psel                                             ,  // APB select
+    input  logic [0:0]   periss_tniu_top_side_sys_apb_porting_m_pslverr                                          ,  // APB slave error
+    output logic [3:0]   periss_tniu_top_side_sys_apb_porting_m_pstrb                                            ,  // APB write strobe
+    output logic [31:0]  periss_tniu_top_side_sys_apb_porting_m_pwdata                                           ,  // APB write data
+    output logic [0:0]   periss_tniu_top_side_sys_apb_porting_m_pwrite                                           ,  // APB write control
+    input  logic [31:0]  periss_tniu_top_side_dbg_data_porting_dbg_data_in                                       ,  // debug/timestamp signal
+    output logic [31:0]  periss_tniu_top_side_dbg_data_porting_dbg_data_out                                      ,  // debug/timestamp signal
+    input  logic [63:0]  periss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                             ,  // debug/timestamp signal
+    output logic [63:0]  periss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                            ,  // debug/timestamp signal
+    input  logic [7:0]   periss_tniu_top_side_cti_event_porting_cti_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [7:0]   periss_tniu_top_side_cti_event_porting_cti_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [31:0]  periss_tniu_top_side_ctm_event_porting_ctm_trig_in                                      ,  // cross-trigger/debug channel
+    output logic [31:0]  periss_tniu_top_side_ctm_event_porting_ctm_trig_out                                     ,  // cross-trigger/debug channel
+    input  logic [71:0]  periss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                             ,  // cross-trigger/debug channel
+    output logic [71:0]  periss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                            ,  // cross-trigger/debug channel
+    input  logic [71:0]  periss_tniu_top_side_ctm_channel_porting_ctm_channel_in                                 ,  // cross-trigger/debug channel
+    output logic [71:0]  periss_tniu_top_side_ctm_channel_porting_ctm_channel_out                                ,  // cross-trigger/debug channel
+    output logic [31:0]  periss_tniu_top_side_timing_bus1_porting_timing_bus1                                    ,  // debug/timestamp signal
+    output logic [31:0]  periss_tniu_top_side_timing_bus2_porting_timing_bus2                                    ,  // debug/timestamp signal
+    output logic [31:0]  periss_tniu_top_side_timing_bus3_porting_timing_bus3                                    ,  // debug/timestamp signal
+    output logic [31:0]  periss_tniu_top_side_dbg_en_porting_dbg_en                                              ,  // debug/timestamp signal
+    output logic [0:0]   periss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err            ,  // FUSA/ECC error flag
+    output logic [0:0]   periss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   periss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   periss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                               ,  // FUSA/ECC error flag
+    output logic [0:0]   periss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                               ,  // FUSA/ECC error flag
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_clk_src_porting_clk_src                                ,  // clock input
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_clk_dst_porting_clk_dst                                ,  // clock input
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                    ,  // clock input
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_rstn_src_porting_rstn_src                              ,  // active-low reset
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_rstn_dst_porting_rstn_dst                              ,  // active-low reset
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                  ,  // active-low reset
+    input  logic [119:0] safetyss_aon_local_tniu_top_side_req_porting_in_req_pld                                 ,  // safety status signal
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_req_porting_in_req_rdy                                 ,  // safety status signal
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_req_porting_in_req_vld                                 ,  // safety status signal
+    output logic [65:0]  safetyss_aon_local_tniu_top_side_rsp_porting_out_rsp_pld                                ,  // safety status signal
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_rsp_porting_out_rsp_rdy                                ,  // safety status signal
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_rsp_porting_out_rsp_vld                                ,  // safety status signal
+    output logic [31:0]  safetyss_aon_local_tniu_top_side_top_apb_porting_top_paddr                              ,  // APB address
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_top_apb_porting_top_penable                            ,  // APB enable
+    output logic [2:0]   safetyss_aon_local_tniu_top_side_top_apb_porting_top_pprot                              ,  // APB protection
+    input  logic [31:0]  safetyss_aon_local_tniu_top_side_top_apb_porting_top_prdata                             ,  // APB read data
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_top_apb_porting_top_pready                             ,  // APB ready
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_top_apb_porting_top_psel                               ,  // APB select
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_top_apb_porting_top_pslverr                            ,  // APB slave error
+    output logic [3:0]   safetyss_aon_local_tniu_top_side_top_apb_porting_top_pstrb                              ,  // APB write strobe
+    output logic [31:0]  safetyss_aon_local_tniu_top_side_top_apb_porting_top_pwdata                             ,  // APB write data
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_top_apb_porting_top_pwrite                             ,  // APB write control
+    output logic [31:0]  safetyss_aon_local_tniu_top_side_sys_apb_porting_m_paddr                                ,  // APB address
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_sys_apb_porting_m_penable                              ,  // APB enable
+    output logic [2:0]   safetyss_aon_local_tniu_top_side_sys_apb_porting_m_pprot                                ,  // APB protection
+    input  logic [31:0]  safetyss_aon_local_tniu_top_side_sys_apb_porting_m_prdata                               ,  // APB read data
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_sys_apb_porting_m_pready                               ,  // APB ready
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_sys_apb_porting_m_psel                                 ,  // APB select
+    input  logic [0:0]   safetyss_aon_local_tniu_top_side_sys_apb_porting_m_pslverr                              ,  // APB slave error
+    output logic [3:0]   safetyss_aon_local_tniu_top_side_sys_apb_porting_m_pstrb                                ,  // APB write strobe
+    output logic [31:0]  safetyss_aon_local_tniu_top_side_sys_apb_porting_m_pwdata                               ,  // APB write data
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_sys_apb_porting_m_pwrite                               ,  // APB write control
+    input  logic [31:0]  safetyss_aon_local_tniu_top_side_dbg_data_porting_dbg_data_in                           ,  // debug/timestamp signal
+    output logic [31:0]  safetyss_aon_local_tniu_top_side_dbg_data_porting_dbg_data_out                          ,  // debug/timestamp signal
+    input  logic [63:0]  safetyss_aon_local_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                 ,  // debug/timestamp signal
+    output logic [63:0]  safetyss_aon_local_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                ,  // debug/timestamp signal
+    input  logic [7:0]   safetyss_aon_local_tniu_top_side_cti_event_porting_cti_trig_in                          ,  // cross-trigger/debug channel
+    output logic [7:0]   safetyss_aon_local_tniu_top_side_cti_event_porting_cti_trig_out                         ,  // cross-trigger/debug channel
+    input  logic [31:0]  safetyss_aon_local_tniu_top_side_ctm_event_porting_ctm_trig_in                          ,  // cross-trigger/debug channel
+    output logic [31:0]  safetyss_aon_local_tniu_top_side_ctm_event_porting_ctm_trig_out                         ,  // cross-trigger/debug channel
+    input  logic [71:0]  safetyss_aon_local_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                 ,  // cross-trigger/debug channel
+    output logic [71:0]  safetyss_aon_local_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                ,  // cross-trigger/debug channel
+    input  logic [71:0]  safetyss_aon_local_tniu_top_side_ctm_channel_porting_ctm_channel_in                     ,  // cross-trigger/debug channel
+    output logic [71:0]  safetyss_aon_local_tniu_top_side_ctm_channel_porting_ctm_channel_out                    ,  // cross-trigger/debug channel
+    output logic [31:0]  safetyss_aon_local_tniu_top_side_timing_bus1_porting_timing_bus1                        ,  // debug/timestamp signal
+    output logic [31:0]  safetyss_aon_local_tniu_top_side_timing_bus2_porting_timing_bus2                        ,  // debug/timestamp signal
+    output logic [31:0]  safetyss_aon_local_tniu_top_side_timing_bus3_porting_timing_bus3                        ,  // debug/timestamp signal
+    output logic [31:0]  safetyss_aon_local_tniu_top_side_dbg_en_porting_dbg_en                                  ,  // debug/timestamp signal
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err,  // FUSA/ECC error flag
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_safety_porting_tniu_req_afifo_db_err                   ,  // FUSA/ECC error flag
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                   ,  // FUSA/ECC error flag
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                   ,  // FUSA/ECC error flag
+    output logic [0:0]   safetyss_aon_local_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                   ,  // FUSA/ECC error flag
+    input  logic [0:0]   ufsss_tniu_top_side_clk_src_porting_clk_src                                             ,  // clock input
+    input  logic [0:0]   ufsss_tniu_top_side_clk_dst_porting_clk_dst                                             ,  // clock input
+    input  logic [0:0]   ufsss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                 ,  // clock input
+    input  logic [0:0]   ufsss_tniu_top_side_rstn_src_porting_rstn_src                                           ,  // active-low reset
+    input  logic [0:0]   ufsss_tniu_top_side_rstn_dst_porting_rstn_dst                                           ,  // active-low reset
+    input  logic [0:0]   ufsss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                               ,  // active-low reset
+    input  logic [119:0] ufsss_tniu_top_side_req_porting_in_req_pld                                              ,
+    output logic [0:0]   ufsss_tniu_top_side_req_porting_in_req_rdy                                              ,
+    input  logic [0:0]   ufsss_tniu_top_side_req_porting_in_req_vld                                              ,
+    output logic [65:0]  ufsss_tniu_top_side_rsp_porting_out_rsp_pld                                             ,
+    input  logic [0:0]   ufsss_tniu_top_side_rsp_porting_out_rsp_rdy                                             ,
+    output logic [0:0]   ufsss_tniu_top_side_rsp_porting_out_rsp_vld                                             ,
+    output logic [31:0]  ufsss_tniu_top_side_top_apb_porting_top_paddr                                           ,  // APB address
+    output logic [0:0]   ufsss_tniu_top_side_top_apb_porting_top_penable                                         ,  // APB enable
+    output logic [2:0]   ufsss_tniu_top_side_top_apb_porting_top_pprot                                           ,  // APB protection
+    input  logic [31:0]  ufsss_tniu_top_side_top_apb_porting_top_prdata                                          ,  // APB read data
+    input  logic [0:0]   ufsss_tniu_top_side_top_apb_porting_top_pready                                          ,  // APB ready
+    output logic [0:0]   ufsss_tniu_top_side_top_apb_porting_top_psel                                            ,  // APB select
+    input  logic [0:0]   ufsss_tniu_top_side_top_apb_porting_top_pslverr                                         ,  // APB slave error
+    output logic [3:0]   ufsss_tniu_top_side_top_apb_porting_top_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  ufsss_tniu_top_side_top_apb_porting_top_pwdata                                          ,  // APB write data
+    output logic [0:0]   ufsss_tniu_top_side_top_apb_porting_top_pwrite                                          ,  // APB write control
+    output logic [31:0]  ufsss_tniu_top_side_sys_apb_porting_m_paddr                                             ,  // APB address
+    output logic [0:0]   ufsss_tniu_top_side_sys_apb_porting_m_penable                                           ,  // APB enable
+    output logic [2:0]   ufsss_tniu_top_side_sys_apb_porting_m_pprot                                             ,  // APB protection
+    input  logic [31:0]  ufsss_tniu_top_side_sys_apb_porting_m_prdata                                            ,  // APB read data
+    input  logic [0:0]   ufsss_tniu_top_side_sys_apb_porting_m_pready                                            ,  // APB ready
+    output logic [0:0]   ufsss_tniu_top_side_sys_apb_porting_m_psel                                              ,  // APB select
+    input  logic [0:0]   ufsss_tniu_top_side_sys_apb_porting_m_pslverr                                           ,  // APB slave error
+    output logic [3:0]   ufsss_tniu_top_side_sys_apb_porting_m_pstrb                                             ,  // APB write strobe
+    output logic [31:0]  ufsss_tniu_top_side_sys_apb_porting_m_pwdata                                            ,  // APB write data
+    output logic [0:0]   ufsss_tniu_top_side_sys_apb_porting_m_pwrite                                            ,  // APB write control
+    input  logic [31:0]  ufsss_tniu_top_side_dbg_data_porting_dbg_data_in                                        ,  // debug/timestamp signal
+    output logic [31:0]  ufsss_tniu_top_side_dbg_data_porting_dbg_data_out                                       ,  // debug/timestamp signal
+    input  logic [63:0]  ufsss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                              ,  // debug/timestamp signal
+    output logic [63:0]  ufsss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                             ,  // debug/timestamp signal
+    input  logic [7:0]   ufsss_tniu_top_side_cti_event_porting_cti_trig_in                                       ,  // cross-trigger/debug channel
+    output logic [7:0]   ufsss_tniu_top_side_cti_event_porting_cti_trig_out                                      ,  // cross-trigger/debug channel
+    input  logic [31:0]  ufsss_tniu_top_side_ctm_event_porting_ctm_trig_in                                       ,  // cross-trigger/debug channel
+    output logic [31:0]  ufsss_tniu_top_side_ctm_event_porting_ctm_trig_out                                      ,  // cross-trigger/debug channel
+    input  logic [71:0]  ufsss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                              ,  // cross-trigger/debug channel
+    output logic [71:0]  ufsss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                             ,  // cross-trigger/debug channel
+    input  logic [71:0]  ufsss_tniu_top_side_ctm_channel_porting_ctm_channel_in                                  ,  // cross-trigger/debug channel
+    output logic [71:0]  ufsss_tniu_top_side_ctm_channel_porting_ctm_channel_out                                 ,  // cross-trigger/debug channel
+    output logic [31:0]  ufsss_tniu_top_side_timing_bus1_porting_timing_bus1                                     ,  // debug/timestamp signal
+    output logic [31:0]  ufsss_tniu_top_side_timing_bus2_porting_timing_bus2                                     ,  // debug/timestamp signal
+    output logic [31:0]  ufsss_tniu_top_side_timing_bus3_porting_timing_bus3                                     ,  // debug/timestamp signal
+    output logic [31:0]  ufsss_tniu_top_side_dbg_en_porting_dbg_en                                               ,  // debug/timestamp signal
+    output logic [0:0]   ufsss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err             ,  // FUSA/ECC error flag
+    output logic [0:0]   ufsss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   ufsss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   ufsss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   ufsss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                                ,  // FUSA/ECC error flag
+    input  logic [0:0]   usb_dpss_tniu_top_side_clk_src_porting_clk_src                                          ,  // clock input
+    input  logic [0:0]   usb_dpss_tniu_top_side_clk_dst_porting_clk_dst                                          ,  // clock input
+    input  logic [0:0]   usb_dpss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                              ,  // clock input
+    input  logic [0:0]   usb_dpss_tniu_top_side_rstn_src_porting_rstn_src                                        ,  // active-low reset
+    input  logic [0:0]   usb_dpss_tniu_top_side_rstn_dst_porting_rstn_dst                                        ,  // active-low reset
+    input  logic [0:0]   usb_dpss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                            ,  // active-low reset
+    input  logic [119:0] usb_dpss_tniu_top_side_req_porting_in_req_pld                                           ,
+    output logic [0:0]   usb_dpss_tniu_top_side_req_porting_in_req_rdy                                           ,
+    input  logic [0:0]   usb_dpss_tniu_top_side_req_porting_in_req_vld                                           ,
+    output logic [65:0]  usb_dpss_tniu_top_side_rsp_porting_out_rsp_pld                                          ,
+    input  logic [0:0]   usb_dpss_tniu_top_side_rsp_porting_out_rsp_rdy                                          ,
+    output logic [0:0]   usb_dpss_tniu_top_side_rsp_porting_out_rsp_vld                                          ,
+    output logic [31:0]  usb_dpss_tniu_top_side_top_apb_porting_top_paddr                                        ,  // APB address
+    output logic [0:0]   usb_dpss_tniu_top_side_top_apb_porting_top_penable                                      ,  // APB enable
+    output logic [2:0]   usb_dpss_tniu_top_side_top_apb_porting_top_pprot                                        ,  // APB protection
+    input  logic [31:0]  usb_dpss_tniu_top_side_top_apb_porting_top_prdata                                       ,  // APB read data
+    input  logic [0:0]   usb_dpss_tniu_top_side_top_apb_porting_top_pready                                       ,  // APB ready
+    output logic [0:0]   usb_dpss_tniu_top_side_top_apb_porting_top_psel                                         ,  // APB select
+    input  logic [0:0]   usb_dpss_tniu_top_side_top_apb_porting_top_pslverr                                      ,  // APB slave error
+    output logic [3:0]   usb_dpss_tniu_top_side_top_apb_porting_top_pstrb                                        ,  // APB write strobe
+    output logic [31:0]  usb_dpss_tniu_top_side_top_apb_porting_top_pwdata                                       ,  // APB write data
+    output logic [0:0]   usb_dpss_tniu_top_side_top_apb_porting_top_pwrite                                       ,  // APB write control
+    output logic [31:0]  usb_dpss_tniu_top_side_sys_apb_porting_m_paddr                                          ,  // APB address
+    output logic [0:0]   usb_dpss_tniu_top_side_sys_apb_porting_m_penable                                        ,  // APB enable
+    output logic [2:0]   usb_dpss_tniu_top_side_sys_apb_porting_m_pprot                                          ,  // APB protection
+    input  logic [31:0]  usb_dpss_tniu_top_side_sys_apb_porting_m_prdata                                         ,  // APB read data
+    input  logic [0:0]   usb_dpss_tniu_top_side_sys_apb_porting_m_pready                                         ,  // APB ready
+    output logic [0:0]   usb_dpss_tniu_top_side_sys_apb_porting_m_psel                                           ,  // APB select
+    input  logic [0:0]   usb_dpss_tniu_top_side_sys_apb_porting_m_pslverr                                        ,  // APB slave error
+    output logic [3:0]   usb_dpss_tniu_top_side_sys_apb_porting_m_pstrb                                          ,  // APB write strobe
+    output logic [31:0]  usb_dpss_tniu_top_side_sys_apb_porting_m_pwdata                                         ,  // APB write data
+    output logic [0:0]   usb_dpss_tniu_top_side_sys_apb_porting_m_pwrite                                         ,  // APB write control
+    input  logic [31:0]  usb_dpss_tniu_top_side_dbg_data_porting_dbg_data_in                                     ,  // debug/timestamp signal
+    output logic [31:0]  usb_dpss_tniu_top_side_dbg_data_porting_dbg_data_out                                    ,  // debug/timestamp signal
+    input  logic [63:0]  usb_dpss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                           ,  // debug/timestamp signal
+    output logic [63:0]  usb_dpss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                          ,  // debug/timestamp signal
+    input  logic [7:0]   usb_dpss_tniu_top_side_cti_event_porting_cti_trig_in                                    ,  // cross-trigger/debug channel
+    output logic [7:0]   usb_dpss_tniu_top_side_cti_event_porting_cti_trig_out                                   ,  // cross-trigger/debug channel
+    input  logic [31:0]  usb_dpss_tniu_top_side_ctm_event_porting_ctm_trig_in                                    ,  // cross-trigger/debug channel
+    output logic [31:0]  usb_dpss_tniu_top_side_ctm_event_porting_ctm_trig_out                                   ,  // cross-trigger/debug channel
+    input  logic [71:0]  usb_dpss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                           ,  // cross-trigger/debug channel
+    output logic [71:0]  usb_dpss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                          ,  // cross-trigger/debug channel
+    input  logic [71:0]  usb_dpss_tniu_top_side_ctm_channel_porting_ctm_channel_in                               ,  // cross-trigger/debug channel
+    output logic [71:0]  usb_dpss_tniu_top_side_ctm_channel_porting_ctm_channel_out                              ,  // cross-trigger/debug channel
+    output logic [31:0]  usb_dpss_tniu_top_side_timing_bus1_porting_timing_bus1                                  ,  // debug/timestamp signal
+    output logic [31:0]  usb_dpss_tniu_top_side_timing_bus2_porting_timing_bus2                                  ,  // debug/timestamp signal
+    output logic [31:0]  usb_dpss_tniu_top_side_timing_bus3_porting_timing_bus3                                  ,  // debug/timestamp signal
+    output logic [31:0]  usb_dpss_tniu_top_side_dbg_en_porting_dbg_en                                            ,  // debug/timestamp signal
+    output logic [0:0]   usb_dpss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err          ,  // FUSA/ECC error flag
+    output logic [0:0]   usb_dpss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                             ,  // FUSA/ECC error flag
+    output logic [0:0]   usb_dpss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                             ,  // FUSA/ECC error flag
+    output logic [0:0]   usb_dpss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                             ,  // FUSA/ECC error flag
+    output logic [0:0]   usb_dpss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                             ,  // FUSA/ECC error flag
+    input  logic [0:0]   vdspss0_tniu_top_side_clk_src_porting_clk_src                                           ,  // clock input
+    input  logic [0:0]   vdspss0_tniu_top_side_clk_dst_porting_clk_dst                                           ,  // clock input
+    input  logic [0:0]   vdspss0_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                               ,  // clock input
+    input  logic [0:0]   vdspss0_tniu_top_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
+    input  logic [0:0]   vdspss0_tniu_top_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
+    input  logic [0:0]   vdspss0_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
+    input  logic [119:0] vdspss0_tniu_top_side_req_porting_in_req_pld                                            ,
+    output logic [0:0]   vdspss0_tniu_top_side_req_porting_in_req_rdy                                            ,
+    input  logic [0:0]   vdspss0_tniu_top_side_req_porting_in_req_vld                                            ,
+    output logic [65:0]  vdspss0_tniu_top_side_rsp_porting_out_rsp_pld                                           ,
+    input  logic [0:0]   vdspss0_tniu_top_side_rsp_porting_out_rsp_rdy                                           ,
+    output logic [0:0]   vdspss0_tniu_top_side_rsp_porting_out_rsp_vld                                           ,
+    output logic [31:0]  vdspss0_tniu_top_side_top_apb_porting_top_paddr                                         ,  // APB address
+    output logic [0:0]   vdspss0_tniu_top_side_top_apb_porting_top_penable                                       ,  // APB enable
+    output logic [2:0]   vdspss0_tniu_top_side_top_apb_porting_top_pprot                                         ,  // APB protection
+    input  logic [31:0]  vdspss0_tniu_top_side_top_apb_porting_top_prdata                                        ,  // APB read data
+    input  logic [0:0]   vdspss0_tniu_top_side_top_apb_porting_top_pready                                        ,  // APB ready
+    output logic [0:0]   vdspss0_tniu_top_side_top_apb_porting_top_psel                                          ,  // APB select
+    input  logic [0:0]   vdspss0_tniu_top_side_top_apb_porting_top_pslverr                                       ,  // APB slave error
+    output logic [3:0]   vdspss0_tniu_top_side_top_apb_porting_top_pstrb                                         ,  // APB write strobe
+    output logic [31:0]  vdspss0_tniu_top_side_top_apb_porting_top_pwdata                                        ,  // APB write data
+    output logic [0:0]   vdspss0_tniu_top_side_top_apb_porting_top_pwrite                                        ,  // APB write control
+    output logic [31:0]  vdspss0_tniu_top_side_sys_apb_porting_m_paddr                                           ,  // APB address
+    output logic [0:0]   vdspss0_tniu_top_side_sys_apb_porting_m_penable                                         ,  // APB enable
+    output logic [2:0]   vdspss0_tniu_top_side_sys_apb_porting_m_pprot                                           ,  // APB protection
+    input  logic [31:0]  vdspss0_tniu_top_side_sys_apb_porting_m_prdata                                          ,  // APB read data
+    input  logic [0:0]   vdspss0_tniu_top_side_sys_apb_porting_m_pready                                          ,  // APB ready
+    output logic [0:0]   vdspss0_tniu_top_side_sys_apb_porting_m_psel                                            ,  // APB select
+    input  logic [0:0]   vdspss0_tniu_top_side_sys_apb_porting_m_pslverr                                         ,  // APB slave error
+    output logic [3:0]   vdspss0_tniu_top_side_sys_apb_porting_m_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  vdspss0_tniu_top_side_sys_apb_porting_m_pwdata                                          ,  // APB write data
+    output logic [0:0]   vdspss0_tniu_top_side_sys_apb_porting_m_pwrite                                          ,  // APB write control
+    input  logic [31:0]  vdspss0_tniu_top_side_dbg_data_porting_dbg_data_in                                      ,  // debug/timestamp signal
+    output logic [31:0]  vdspss0_tniu_top_side_dbg_data_porting_dbg_data_out                                     ,  // debug/timestamp signal
+    input  logic [63:0]  vdspss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                            ,  // debug/timestamp signal
+    output logic [63:0]  vdspss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                           ,  // debug/timestamp signal
+    input  logic [7:0]   vdspss0_tniu_top_side_cti_event_porting_cti_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [7:0]   vdspss0_tniu_top_side_cti_event_porting_cti_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [31:0]  vdspss0_tniu_top_side_ctm_event_porting_ctm_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss0_tniu_top_side_ctm_event_porting_ctm_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                            ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                           ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss0_tniu_top_side_ctm_channel_porting_ctm_channel_in                                ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss0_tniu_top_side_ctm_channel_porting_ctm_channel_out                               ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss0_tniu_top_side_timing_bus1_porting_timing_bus1                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss0_tniu_top_side_timing_bus2_porting_timing_bus2                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss0_tniu_top_side_timing_bus3_porting_timing_bus3                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss0_tniu_top_side_dbg_en_porting_dbg_en                                             ,  // debug/timestamp signal
+    output logic [0:0]   vdspss0_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err           ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss0_tniu_top_side_safety_porting_tniu_req_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss0_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss0_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss0_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                              ,  // FUSA/ECC error flag
+    input  logic [0:0]   vdspss1_tniu_top_side_clk_src_porting_clk_src                                           ,  // clock input
+    input  logic [0:0]   vdspss1_tniu_top_side_clk_dst_porting_clk_dst                                           ,  // clock input
+    input  logic [0:0]   vdspss1_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                               ,  // clock input
+    input  logic [0:0]   vdspss1_tniu_top_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
+    input  logic [0:0]   vdspss1_tniu_top_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
+    input  logic [0:0]   vdspss1_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
+    input  logic [119:0] vdspss1_tniu_top_side_req_porting_in_req_pld                                            ,
+    output logic [0:0]   vdspss1_tniu_top_side_req_porting_in_req_rdy                                            ,
+    input  logic [0:0]   vdspss1_tniu_top_side_req_porting_in_req_vld                                            ,
+    output logic [65:0]  vdspss1_tniu_top_side_rsp_porting_out_rsp_pld                                           ,
+    input  logic [0:0]   vdspss1_tniu_top_side_rsp_porting_out_rsp_rdy                                           ,
+    output logic [0:0]   vdspss1_tniu_top_side_rsp_porting_out_rsp_vld                                           ,
+    output logic [31:0]  vdspss1_tniu_top_side_top_apb_porting_top_paddr                                         ,  // APB address
+    output logic [0:0]   vdspss1_tniu_top_side_top_apb_porting_top_penable                                       ,  // APB enable
+    output logic [2:0]   vdspss1_tniu_top_side_top_apb_porting_top_pprot                                         ,  // APB protection
+    input  logic [31:0]  vdspss1_tniu_top_side_top_apb_porting_top_prdata                                        ,  // APB read data
+    input  logic [0:0]   vdspss1_tniu_top_side_top_apb_porting_top_pready                                        ,  // APB ready
+    output logic [0:0]   vdspss1_tniu_top_side_top_apb_porting_top_psel                                          ,  // APB select
+    input  logic [0:0]   vdspss1_tniu_top_side_top_apb_porting_top_pslverr                                       ,  // APB slave error
+    output logic [3:0]   vdspss1_tniu_top_side_top_apb_porting_top_pstrb                                         ,  // APB write strobe
+    output logic [31:0]  vdspss1_tniu_top_side_top_apb_porting_top_pwdata                                        ,  // APB write data
+    output logic [0:0]   vdspss1_tniu_top_side_top_apb_porting_top_pwrite                                        ,  // APB write control
+    output logic [31:0]  vdspss1_tniu_top_side_sys_apb_porting_m_paddr                                           ,  // APB address
+    output logic [0:0]   vdspss1_tniu_top_side_sys_apb_porting_m_penable                                         ,  // APB enable
+    output logic [2:0]   vdspss1_tniu_top_side_sys_apb_porting_m_pprot                                           ,  // APB protection
+    input  logic [31:0]  vdspss1_tniu_top_side_sys_apb_porting_m_prdata                                          ,  // APB read data
+    input  logic [0:0]   vdspss1_tniu_top_side_sys_apb_porting_m_pready                                          ,  // APB ready
+    output logic [0:0]   vdspss1_tniu_top_side_sys_apb_porting_m_psel                                            ,  // APB select
+    input  logic [0:0]   vdspss1_tniu_top_side_sys_apb_porting_m_pslverr                                         ,  // APB slave error
+    output logic [3:0]   vdspss1_tniu_top_side_sys_apb_porting_m_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  vdspss1_tniu_top_side_sys_apb_porting_m_pwdata                                          ,  // APB write data
+    output logic [0:0]   vdspss1_tniu_top_side_sys_apb_porting_m_pwrite                                          ,  // APB write control
+    input  logic [31:0]  vdspss1_tniu_top_side_dbg_data_porting_dbg_data_in                                      ,  // debug/timestamp signal
+    output logic [31:0]  vdspss1_tniu_top_side_dbg_data_porting_dbg_data_out                                     ,  // debug/timestamp signal
+    input  logic [63:0]  vdspss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                            ,  // debug/timestamp signal
+    output logic [63:0]  vdspss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                           ,  // debug/timestamp signal
+    input  logic [7:0]   vdspss1_tniu_top_side_cti_event_porting_cti_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [7:0]   vdspss1_tniu_top_side_cti_event_porting_cti_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [31:0]  vdspss1_tniu_top_side_ctm_event_porting_ctm_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss1_tniu_top_side_ctm_event_porting_ctm_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                            ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                           ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss1_tniu_top_side_ctm_channel_porting_ctm_channel_in                                ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss1_tniu_top_side_ctm_channel_porting_ctm_channel_out                               ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss1_tniu_top_side_timing_bus1_porting_timing_bus1                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss1_tniu_top_side_timing_bus2_porting_timing_bus2                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss1_tniu_top_side_timing_bus3_porting_timing_bus3                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss1_tniu_top_side_dbg_en_porting_dbg_en                                             ,  // debug/timestamp signal
+    output logic [0:0]   vdspss1_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err           ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss1_tniu_top_side_safety_porting_tniu_req_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss1_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss1_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss1_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                              ,  // FUSA/ECC error flag
+    input  logic [0:0]   vdspss2_tniu_top_side_clk_src_porting_clk_src                                           ,  // clock input
+    input  logic [0:0]   vdspss2_tniu_top_side_clk_dst_porting_clk_dst                                           ,  // clock input
+    input  logic [0:0]   vdspss2_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                               ,  // clock input
+    input  logic [0:0]   vdspss2_tniu_top_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
+    input  logic [0:0]   vdspss2_tniu_top_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
+    input  logic [0:0]   vdspss2_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
+    input  logic [119:0] vdspss2_tniu_top_side_req_porting_in_req_pld                                            ,
+    output logic [0:0]   vdspss2_tniu_top_side_req_porting_in_req_rdy                                            ,
+    input  logic [0:0]   vdspss2_tniu_top_side_req_porting_in_req_vld                                            ,
+    output logic [65:0]  vdspss2_tniu_top_side_rsp_porting_out_rsp_pld                                           ,
+    input  logic [0:0]   vdspss2_tniu_top_side_rsp_porting_out_rsp_rdy                                           ,
+    output logic [0:0]   vdspss2_tniu_top_side_rsp_porting_out_rsp_vld                                           ,
+    output logic [31:0]  vdspss2_tniu_top_side_top_apb_porting_top_paddr                                         ,  // APB address
+    output logic [0:0]   vdspss2_tniu_top_side_top_apb_porting_top_penable                                       ,  // APB enable
+    output logic [2:0]   vdspss2_tniu_top_side_top_apb_porting_top_pprot                                         ,  // APB protection
+    input  logic [31:0]  vdspss2_tniu_top_side_top_apb_porting_top_prdata                                        ,  // APB read data
+    input  logic [0:0]   vdspss2_tniu_top_side_top_apb_porting_top_pready                                        ,  // APB ready
+    output logic [0:0]   vdspss2_tniu_top_side_top_apb_porting_top_psel                                          ,  // APB select
+    input  logic [0:0]   vdspss2_tniu_top_side_top_apb_porting_top_pslverr                                       ,  // APB slave error
+    output logic [3:0]   vdspss2_tniu_top_side_top_apb_porting_top_pstrb                                         ,  // APB write strobe
+    output logic [31:0]  vdspss2_tniu_top_side_top_apb_porting_top_pwdata                                        ,  // APB write data
+    output logic [0:0]   vdspss2_tniu_top_side_top_apb_porting_top_pwrite                                        ,  // APB write control
+    output logic [31:0]  vdspss2_tniu_top_side_sys_apb_porting_m_paddr                                           ,  // APB address
+    output logic [0:0]   vdspss2_tniu_top_side_sys_apb_porting_m_penable                                         ,  // APB enable
+    output logic [2:0]   vdspss2_tniu_top_side_sys_apb_porting_m_pprot                                           ,  // APB protection
+    input  logic [31:0]  vdspss2_tniu_top_side_sys_apb_porting_m_prdata                                          ,  // APB read data
+    input  logic [0:0]   vdspss2_tniu_top_side_sys_apb_porting_m_pready                                          ,  // APB ready
+    output logic [0:0]   vdspss2_tniu_top_side_sys_apb_porting_m_psel                                            ,  // APB select
+    input  logic [0:0]   vdspss2_tniu_top_side_sys_apb_porting_m_pslverr                                         ,  // APB slave error
+    output logic [3:0]   vdspss2_tniu_top_side_sys_apb_porting_m_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  vdspss2_tniu_top_side_sys_apb_porting_m_pwdata                                          ,  // APB write data
+    output logic [0:0]   vdspss2_tniu_top_side_sys_apb_porting_m_pwrite                                          ,  // APB write control
+    input  logic [31:0]  vdspss2_tniu_top_side_dbg_data_porting_dbg_data_in                                      ,  // debug/timestamp signal
+    output logic [31:0]  vdspss2_tniu_top_side_dbg_data_porting_dbg_data_out                                     ,  // debug/timestamp signal
+    input  logic [63:0]  vdspss2_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                            ,  // debug/timestamp signal
+    output logic [63:0]  vdspss2_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                           ,  // debug/timestamp signal
+    input  logic [7:0]   vdspss2_tniu_top_side_cti_event_porting_cti_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [7:0]   vdspss2_tniu_top_side_cti_event_porting_cti_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [31:0]  vdspss2_tniu_top_side_ctm_event_porting_ctm_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss2_tniu_top_side_ctm_event_porting_ctm_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss2_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                            ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss2_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                           ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss2_tniu_top_side_ctm_channel_porting_ctm_channel_in                                ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss2_tniu_top_side_ctm_channel_porting_ctm_channel_out                               ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss2_tniu_top_side_timing_bus1_porting_timing_bus1                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss2_tniu_top_side_timing_bus2_porting_timing_bus2                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss2_tniu_top_side_timing_bus3_porting_timing_bus3                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss2_tniu_top_side_dbg_en_porting_dbg_en                                             ,  // debug/timestamp signal
+    output logic [0:0]   vdspss2_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err           ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss2_tniu_top_side_safety_porting_tniu_req_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss2_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss2_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss2_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                              ,  // FUSA/ECC error flag
+    input  logic [0:0]   vdspss3_tniu_top_side_clk_src_porting_clk_src                                           ,  // clock input
+    input  logic [0:0]   vdspss3_tniu_top_side_clk_dst_porting_clk_dst                                           ,  // clock input
+    input  logic [0:0]   vdspss3_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                               ,  // clock input
+    input  logic [0:0]   vdspss3_tniu_top_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
+    input  logic [0:0]   vdspss3_tniu_top_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
+    input  logic [0:0]   vdspss3_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
+    input  logic [119:0] vdspss3_tniu_top_side_req_porting_in_req_pld                                            ,
+    output logic [0:0]   vdspss3_tniu_top_side_req_porting_in_req_rdy                                            ,
+    input  logic [0:0]   vdspss3_tniu_top_side_req_porting_in_req_vld                                            ,
+    output logic [65:0]  vdspss3_tniu_top_side_rsp_porting_out_rsp_pld                                           ,
+    input  logic [0:0]   vdspss3_tniu_top_side_rsp_porting_out_rsp_rdy                                           ,
+    output logic [0:0]   vdspss3_tniu_top_side_rsp_porting_out_rsp_vld                                           ,
+    output logic [31:0]  vdspss3_tniu_top_side_top_apb_porting_top_paddr                                         ,  // APB address
+    output logic [0:0]   vdspss3_tniu_top_side_top_apb_porting_top_penable                                       ,  // APB enable
+    output logic [2:0]   vdspss3_tniu_top_side_top_apb_porting_top_pprot                                         ,  // APB protection
+    input  logic [31:0]  vdspss3_tniu_top_side_top_apb_porting_top_prdata                                        ,  // APB read data
+    input  logic [0:0]   vdspss3_tniu_top_side_top_apb_porting_top_pready                                        ,  // APB ready
+    output logic [0:0]   vdspss3_tniu_top_side_top_apb_porting_top_psel                                          ,  // APB select
+    input  logic [0:0]   vdspss3_tniu_top_side_top_apb_porting_top_pslverr                                       ,  // APB slave error
+    output logic [3:0]   vdspss3_tniu_top_side_top_apb_porting_top_pstrb                                         ,  // APB write strobe
+    output logic [31:0]  vdspss3_tniu_top_side_top_apb_porting_top_pwdata                                        ,  // APB write data
+    output logic [0:0]   vdspss3_tniu_top_side_top_apb_porting_top_pwrite                                        ,  // APB write control
+    output logic [31:0]  vdspss3_tniu_top_side_sys_apb_porting_m_paddr                                           ,  // APB address
+    output logic [0:0]   vdspss3_tniu_top_side_sys_apb_porting_m_penable                                         ,  // APB enable
+    output logic [2:0]   vdspss3_tniu_top_side_sys_apb_porting_m_pprot                                           ,  // APB protection
+    input  logic [31:0]  vdspss3_tniu_top_side_sys_apb_porting_m_prdata                                          ,  // APB read data
+    input  logic [0:0]   vdspss3_tniu_top_side_sys_apb_porting_m_pready                                          ,  // APB ready
+    output logic [0:0]   vdspss3_tniu_top_side_sys_apb_porting_m_psel                                            ,  // APB select
+    input  logic [0:0]   vdspss3_tniu_top_side_sys_apb_porting_m_pslverr                                         ,  // APB slave error
+    output logic [3:0]   vdspss3_tniu_top_side_sys_apb_porting_m_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  vdspss3_tniu_top_side_sys_apb_porting_m_pwdata                                          ,  // APB write data
+    output logic [0:0]   vdspss3_tniu_top_side_sys_apb_porting_m_pwrite                                          ,  // APB write control
+    input  logic [31:0]  vdspss3_tniu_top_side_dbg_data_porting_dbg_data_in                                      ,  // debug/timestamp signal
+    output logic [31:0]  vdspss3_tniu_top_side_dbg_data_porting_dbg_data_out                                     ,  // debug/timestamp signal
+    input  logic [63:0]  vdspss3_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                            ,  // debug/timestamp signal
+    output logic [63:0]  vdspss3_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                           ,  // debug/timestamp signal
+    input  logic [7:0]   vdspss3_tniu_top_side_cti_event_porting_cti_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [7:0]   vdspss3_tniu_top_side_cti_event_porting_cti_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [31:0]  vdspss3_tniu_top_side_ctm_event_porting_ctm_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss3_tniu_top_side_ctm_event_porting_ctm_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss3_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                            ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss3_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                           ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss3_tniu_top_side_ctm_channel_porting_ctm_channel_in                                ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss3_tniu_top_side_ctm_channel_porting_ctm_channel_out                               ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss3_tniu_top_side_timing_bus1_porting_timing_bus1                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss3_tniu_top_side_timing_bus2_porting_timing_bus2                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss3_tniu_top_side_timing_bus3_porting_timing_bus3                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss3_tniu_top_side_dbg_en_porting_dbg_en                                             ,  // debug/timestamp signal
+    output logic [0:0]   vdspss3_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err           ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss3_tniu_top_side_safety_porting_tniu_req_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss3_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss3_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss3_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                              ,  // FUSA/ECC error flag
+    input  logic [0:0]   vdspss4_tniu_top_side_clk_src_porting_clk_src                                           ,  // clock input
+    input  logic [0:0]   vdspss4_tniu_top_side_clk_dst_porting_clk_dst                                           ,  // clock input
+    input  logic [0:0]   vdspss4_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                               ,  // clock input
+    input  logic [0:0]   vdspss4_tniu_top_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
+    input  logic [0:0]   vdspss4_tniu_top_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
+    input  logic [0:0]   vdspss4_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
+    input  logic [119:0] vdspss4_tniu_top_side_req_porting_in_req_pld                                            ,
+    output logic [0:0]   vdspss4_tniu_top_side_req_porting_in_req_rdy                                            ,
+    input  logic [0:0]   vdspss4_tniu_top_side_req_porting_in_req_vld                                            ,
+    output logic [65:0]  vdspss4_tniu_top_side_rsp_porting_out_rsp_pld                                           ,
+    input  logic [0:0]   vdspss4_tniu_top_side_rsp_porting_out_rsp_rdy                                           ,
+    output logic [0:0]   vdspss4_tniu_top_side_rsp_porting_out_rsp_vld                                           ,
+    output logic [31:0]  vdspss4_tniu_top_side_top_apb_porting_top_paddr                                         ,  // APB address
+    output logic [0:0]   vdspss4_tniu_top_side_top_apb_porting_top_penable                                       ,  // APB enable
+    output logic [2:0]   vdspss4_tniu_top_side_top_apb_porting_top_pprot                                         ,  // APB protection
+    input  logic [31:0]  vdspss4_tniu_top_side_top_apb_porting_top_prdata                                        ,  // APB read data
+    input  logic [0:0]   vdspss4_tniu_top_side_top_apb_porting_top_pready                                        ,  // APB ready
+    output logic [0:0]   vdspss4_tniu_top_side_top_apb_porting_top_psel                                          ,  // APB select
+    input  logic [0:0]   vdspss4_tniu_top_side_top_apb_porting_top_pslverr                                       ,  // APB slave error
+    output logic [3:0]   vdspss4_tniu_top_side_top_apb_porting_top_pstrb                                         ,  // APB write strobe
+    output logic [31:0]  vdspss4_tniu_top_side_top_apb_porting_top_pwdata                                        ,  // APB write data
+    output logic [0:0]   vdspss4_tniu_top_side_top_apb_porting_top_pwrite                                        ,  // APB write control
+    output logic [31:0]  vdspss4_tniu_top_side_sys_apb_porting_m_paddr                                           ,  // APB address
+    output logic [0:0]   vdspss4_tniu_top_side_sys_apb_porting_m_penable                                         ,  // APB enable
+    output logic [2:0]   vdspss4_tniu_top_side_sys_apb_porting_m_pprot                                           ,  // APB protection
+    input  logic [31:0]  vdspss4_tniu_top_side_sys_apb_porting_m_prdata                                          ,  // APB read data
+    input  logic [0:0]   vdspss4_tniu_top_side_sys_apb_porting_m_pready                                          ,  // APB ready
+    output logic [0:0]   vdspss4_tniu_top_side_sys_apb_porting_m_psel                                            ,  // APB select
+    input  logic [0:0]   vdspss4_tniu_top_side_sys_apb_porting_m_pslverr                                         ,  // APB slave error
+    output logic [3:0]   vdspss4_tniu_top_side_sys_apb_porting_m_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  vdspss4_tniu_top_side_sys_apb_porting_m_pwdata                                          ,  // APB write data
+    output logic [0:0]   vdspss4_tniu_top_side_sys_apb_porting_m_pwrite                                          ,  // APB write control
+    input  logic [31:0]  vdspss4_tniu_top_side_dbg_data_porting_dbg_data_in                                      ,  // debug/timestamp signal
+    output logic [31:0]  vdspss4_tniu_top_side_dbg_data_porting_dbg_data_out                                     ,  // debug/timestamp signal
+    input  logic [63:0]  vdspss4_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                            ,  // debug/timestamp signal
+    output logic [63:0]  vdspss4_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                           ,  // debug/timestamp signal
+    input  logic [7:0]   vdspss4_tniu_top_side_cti_event_porting_cti_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [7:0]   vdspss4_tniu_top_side_cti_event_porting_cti_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [31:0]  vdspss4_tniu_top_side_ctm_event_porting_ctm_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss4_tniu_top_side_ctm_event_porting_ctm_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss4_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                            ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss4_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                           ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss4_tniu_top_side_ctm_channel_porting_ctm_channel_in                                ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss4_tniu_top_side_ctm_channel_porting_ctm_channel_out                               ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss4_tniu_top_side_timing_bus1_porting_timing_bus1                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss4_tniu_top_side_timing_bus2_porting_timing_bus2                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss4_tniu_top_side_timing_bus3_porting_timing_bus3                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss4_tniu_top_side_dbg_en_porting_dbg_en                                             ,  // debug/timestamp signal
+    output logic [0:0]   vdspss4_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err           ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss4_tniu_top_side_safety_porting_tniu_req_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss4_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss4_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss4_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                              ,  // FUSA/ECC error flag
+    input  logic [0:0]   vdspss5_tniu_top_side_clk_src_porting_clk_src                                           ,  // clock input
+    input  logic [0:0]   vdspss5_tniu_top_side_clk_dst_porting_clk_dst                                           ,  // clock input
+    input  logic [0:0]   vdspss5_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                               ,  // clock input
+    input  logic [0:0]   vdspss5_tniu_top_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
+    input  logic [0:0]   vdspss5_tniu_top_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
+    input  logic [0:0]   vdspss5_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
+    input  logic [119:0] vdspss5_tniu_top_side_req_porting_in_req_pld                                            ,
+    output logic [0:0]   vdspss5_tniu_top_side_req_porting_in_req_rdy                                            ,
+    input  logic [0:0]   vdspss5_tniu_top_side_req_porting_in_req_vld                                            ,
+    output logic [65:0]  vdspss5_tniu_top_side_rsp_porting_out_rsp_pld                                           ,
+    input  logic [0:0]   vdspss5_tniu_top_side_rsp_porting_out_rsp_rdy                                           ,
+    output logic [0:0]   vdspss5_tniu_top_side_rsp_porting_out_rsp_vld                                           ,
+    output logic [31:0]  vdspss5_tniu_top_side_top_apb_porting_top_paddr                                         ,  // APB address
+    output logic [0:0]   vdspss5_tniu_top_side_top_apb_porting_top_penable                                       ,  // APB enable
+    output logic [2:0]   vdspss5_tniu_top_side_top_apb_porting_top_pprot                                         ,  // APB protection
+    input  logic [31:0]  vdspss5_tniu_top_side_top_apb_porting_top_prdata                                        ,  // APB read data
+    input  logic [0:0]   vdspss5_tniu_top_side_top_apb_porting_top_pready                                        ,  // APB ready
+    output logic [0:0]   vdspss5_tniu_top_side_top_apb_porting_top_psel                                          ,  // APB select
+    input  logic [0:0]   vdspss5_tniu_top_side_top_apb_porting_top_pslverr                                       ,  // APB slave error
+    output logic [3:0]   vdspss5_tniu_top_side_top_apb_porting_top_pstrb                                         ,  // APB write strobe
+    output logic [31:0]  vdspss5_tniu_top_side_top_apb_porting_top_pwdata                                        ,  // APB write data
+    output logic [0:0]   vdspss5_tniu_top_side_top_apb_porting_top_pwrite                                        ,  // APB write control
+    output logic [31:0]  vdspss5_tniu_top_side_sys_apb_porting_m_paddr                                           ,  // APB address
+    output logic [0:0]   vdspss5_tniu_top_side_sys_apb_porting_m_penable                                         ,  // APB enable
+    output logic [2:0]   vdspss5_tniu_top_side_sys_apb_porting_m_pprot                                           ,  // APB protection
+    input  logic [31:0]  vdspss5_tniu_top_side_sys_apb_porting_m_prdata                                          ,  // APB read data
+    input  logic [0:0]   vdspss5_tniu_top_side_sys_apb_porting_m_pready                                          ,  // APB ready
+    output logic [0:0]   vdspss5_tniu_top_side_sys_apb_porting_m_psel                                            ,  // APB select
+    input  logic [0:0]   vdspss5_tniu_top_side_sys_apb_porting_m_pslverr                                         ,  // APB slave error
+    output logic [3:0]   vdspss5_tniu_top_side_sys_apb_porting_m_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  vdspss5_tniu_top_side_sys_apb_porting_m_pwdata                                          ,  // APB write data
+    output logic [0:0]   vdspss5_tniu_top_side_sys_apb_porting_m_pwrite                                          ,  // APB write control
+    input  logic [31:0]  vdspss5_tniu_top_side_dbg_data_porting_dbg_data_in                                      ,  // debug/timestamp signal
+    output logic [31:0]  vdspss5_tniu_top_side_dbg_data_porting_dbg_data_out                                     ,  // debug/timestamp signal
+    input  logic [63:0]  vdspss5_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                            ,  // debug/timestamp signal
+    output logic [63:0]  vdspss5_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                           ,  // debug/timestamp signal
+    input  logic [7:0]   vdspss5_tniu_top_side_cti_event_porting_cti_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [7:0]   vdspss5_tniu_top_side_cti_event_porting_cti_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [31:0]  vdspss5_tniu_top_side_ctm_event_porting_ctm_trig_in                                     ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss5_tniu_top_side_ctm_event_porting_ctm_trig_out                                    ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss5_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                            ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss5_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                           ,  // cross-trigger/debug channel
+    input  logic [71:0]  vdspss5_tniu_top_side_ctm_channel_porting_ctm_channel_in                                ,  // cross-trigger/debug channel
+    output logic [71:0]  vdspss5_tniu_top_side_ctm_channel_porting_ctm_channel_out                               ,  // cross-trigger/debug channel
+    output logic [31:0]  vdspss5_tniu_top_side_timing_bus1_porting_timing_bus1                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss5_tniu_top_side_timing_bus2_porting_timing_bus2                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss5_tniu_top_side_timing_bus3_porting_timing_bus3                                   ,  // debug/timestamp signal
+    output logic [31:0]  vdspss5_tniu_top_side_dbg_en_porting_dbg_en                                             ,  // debug/timestamp signal
+    output logic [0:0]   vdspss5_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err           ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss5_tniu_top_side_safety_porting_tniu_req_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss5_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss5_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                              ,  // FUSA/ECC error flag
+    output logic [0:0]   vdspss5_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                              ,  // FUSA/ECC error flag
+    input  logic [0:0]   vpuss_tniu_top_side_clk_src_porting_clk_src                                             ,  // clock input
+    input  logic [0:0]   vpuss_tniu_top_side_clk_dst_porting_clk_dst                                             ,  // clock input
+    input  logic [0:0]   vpuss_tniu_top_side_clk_dbg_timer_porting_clk_dbg_timer                                 ,  // clock input
+    input  logic [0:0]   vpuss_tniu_top_side_rstn_src_porting_rstn_src                                           ,  // active-low reset
+    input  logic [0:0]   vpuss_tniu_top_side_rstn_dst_porting_rstn_dst                                           ,  // active-low reset
+    input  logic [0:0]   vpuss_tniu_top_side_rstn_dbg_timer_porting_rstn_dbg_timer                               ,  // active-low reset
+    input  logic [119:0] vpuss_tniu_top_side_req_porting_in_req_pld                                              ,
+    output logic [0:0]   vpuss_tniu_top_side_req_porting_in_req_rdy                                              ,
+    input  logic [0:0]   vpuss_tniu_top_side_req_porting_in_req_vld                                              ,
+    output logic [65:0]  vpuss_tniu_top_side_rsp_porting_out_rsp_pld                                             ,
+    input  logic [0:0]   vpuss_tniu_top_side_rsp_porting_out_rsp_rdy                                             ,
+    output logic [0:0]   vpuss_tniu_top_side_rsp_porting_out_rsp_vld                                             ,
+    output logic [31:0]  vpuss_tniu_top_side_top_apb_porting_top_paddr                                           ,  // APB address
+    output logic [0:0]   vpuss_tniu_top_side_top_apb_porting_top_penable                                         ,  // APB enable
+    output logic [2:0]   vpuss_tniu_top_side_top_apb_porting_top_pprot                                           ,  // APB protection
+    input  logic [31:0]  vpuss_tniu_top_side_top_apb_porting_top_prdata                                          ,  // APB read data
+    input  logic [0:0]   vpuss_tniu_top_side_top_apb_porting_top_pready                                          ,  // APB ready
+    output logic [0:0]   vpuss_tniu_top_side_top_apb_porting_top_psel                                            ,  // APB select
+    input  logic [0:0]   vpuss_tniu_top_side_top_apb_porting_top_pslverr                                         ,  // APB slave error
+    output logic [3:0]   vpuss_tniu_top_side_top_apb_porting_top_pstrb                                           ,  // APB write strobe
+    output logic [31:0]  vpuss_tniu_top_side_top_apb_porting_top_pwdata                                          ,  // APB write data
+    output logic [0:0]   vpuss_tniu_top_side_top_apb_porting_top_pwrite                                          ,  // APB write control
+    output logic [31:0]  vpuss_tniu_top_side_sys_apb_porting_m_paddr                                             ,  // APB address
+    output logic [0:0]   vpuss_tniu_top_side_sys_apb_porting_m_penable                                           ,  // APB enable
+    output logic [2:0]   vpuss_tniu_top_side_sys_apb_porting_m_pprot                                             ,  // APB protection
+    input  logic [31:0]  vpuss_tniu_top_side_sys_apb_porting_m_prdata                                            ,  // APB read data
+    input  logic [0:0]   vpuss_tniu_top_side_sys_apb_porting_m_pready                                            ,  // APB ready
+    output logic [0:0]   vpuss_tniu_top_side_sys_apb_porting_m_psel                                              ,  // APB select
+    input  logic [0:0]   vpuss_tniu_top_side_sys_apb_porting_m_pslverr                                           ,  // APB slave error
+    output logic [3:0]   vpuss_tniu_top_side_sys_apb_porting_m_pstrb                                             ,  // APB write strobe
+    output logic [31:0]  vpuss_tniu_top_side_sys_apb_porting_m_pwdata                                            ,  // APB write data
+    output logic [0:0]   vpuss_tniu_top_side_sys_apb_porting_m_pwrite                                            ,  // APB write control
+    input  logic [31:0]  vpuss_tniu_top_side_dbg_data_porting_dbg_data_in                                        ,  // debug/timestamp signal
+    output logic [31:0]  vpuss_tniu_top_side_dbg_data_porting_dbg_data_out                                       ,  // debug/timestamp signal
+    input  logic [63:0]  vpuss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_in                              ,  // debug/timestamp signal
+    output logic [63:0]  vpuss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out                             ,  // debug/timestamp signal
+    input  logic [7:0]   vpuss_tniu_top_side_cti_event_porting_cti_trig_in                                       ,  // cross-trigger/debug channel
+    output logic [7:0]   vpuss_tniu_top_side_cti_event_porting_cti_trig_out                                      ,  // cross-trigger/debug channel
+    input  logic [31:0]  vpuss_tniu_top_side_ctm_event_porting_ctm_trig_in                                       ,  // cross-trigger/debug channel
+    output logic [31:0]  vpuss_tniu_top_side_ctm_event_porting_ctm_trig_out                                      ,  // cross-trigger/debug channel
+    input  logic [71:0]  vpuss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_in                              ,  // cross-trigger/debug channel
+    output logic [71:0]  vpuss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out                             ,  // cross-trigger/debug channel
+    input  logic [71:0]  vpuss_tniu_top_side_ctm_channel_porting_ctm_channel_in                                  ,  // cross-trigger/debug channel
+    output logic [71:0]  vpuss_tniu_top_side_ctm_channel_porting_ctm_channel_out                                 ,  // cross-trigger/debug channel
+    output logic [31:0]  vpuss_tniu_top_side_timing_bus1_porting_timing_bus1                                     ,  // debug/timestamp signal
+    output logic [31:0]  vpuss_tniu_top_side_timing_bus2_porting_timing_bus2                                     ,  // debug/timestamp signal
+    output logic [31:0]  vpuss_tniu_top_side_timing_bus3_porting_timing_bus3                                     ,  // debug/timestamp signal
+    output logic [31:0]  vpuss_tniu_top_side_dbg_en_porting_dbg_en                                               ,  // debug/timestamp signal
+    output logic [0:0]   vpuss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err             ,  // FUSA/ECC error flag
+    output logic [0:0]   vpuss_tniu_top_side_safety_porting_tniu_req_afifo_db_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   vpuss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   vpuss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err                                ,  // FUSA/ECC error flag
+    output logic [0:0]   vpuss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err                                  // FUSA/ECC error flag
+);
+
+    // Review-only stub behavior: tie every output low.
+    assign aon_ss_iniu_noc_async_fifo_porting_req_rptr_async = '0;
+    assign aon_ss_iniu_noc_async_fifo_porting_req_rptr_sync = '0;
+    assign aon_ss_iniu_noc_async_fifo_porting_rsp_pld_sync = '0;
+    assign aon_ss_iniu_noc_async_fifo_porting_rsp_wptr_async = '0;
+    assign aon_ss_iniu_noc_req_porting_req_s_pld = '0;
+    assign aon_ss_iniu_noc_req_porting_req_s_vld = '0;
+    assign aon_ss_iniu_noc_rsp_porting_rsp_m_rdy = '0;
+    assign aon_ss_iniu_noc_cti_channel_out_porting_ctm_channel_out = '0;
+    assign aon_ss_iniu_noc_dbg_timestamp_out_porting_dbg_timestamp_out = '0;
+    assign aon_ss_iniu_noc_dbg_data_out_porting_dbg_data_out = '0;
+    assign aon_ss_iniu_noc_cti_apb_porting_cti_apb_prdata = '0;
+    assign aon_ss_iniu_noc_cti_apb_porting_cti_apb_pready = '0;
+    assign aon_ss_iniu_noc_cti_apb_porting_cti_apb_pslverr = '0;
+    assign aon_ss_iniu_noc_req_afifo_sb_err_porting_req_afifo_sb_err = '0;
+    assign aon_ss_iniu_noc_req_afifo_db_err_porting_req_afifo_db_err = '0;
+    assign camera_ss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign camera_ss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign camera_ss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign camera_ss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign camera_ss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign camera_ss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign camera_ss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign camera_ss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign camera_ss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign camera_ss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign camera_ss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign camera_ss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign camera_ss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign camera_ss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign camera_ss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign camera_ss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign camera_ss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign camera_ss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign camera_ss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign camera_ss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign camera_ss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign camera_ss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign camera_ss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign camera_ss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign camera_ss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign camera_ss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign camera_ss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign camera_ss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign camera_ss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign camera_ss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign camera_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign camera_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign cpuss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign cpuss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign cpuss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign cpuss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign cpuss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign cpuss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign cpuss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign cpuss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign cpuss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign cpuss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign cpuss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign cpuss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign cpuss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign cpuss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign cpuss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign cpuss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign cpuss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign cpuss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign cpuss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign cpuss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign cpuss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign cpuss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign cpuss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign cpuss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign cpuss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign cpuss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign cpuss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign cpuss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign cpuss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign cpuss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign cpuss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign cpuss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss0_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss0_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss0_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss0_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss0_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss0_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss0_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss0_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss0_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss0_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss0_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss0_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss0_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss0_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss0_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss0_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss0_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss0_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss0_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss0_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss0_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss0_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss0_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss0_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss0_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss0_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss0_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss0_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss0_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss0_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss1_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss1_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss1_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss1_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss1_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss1_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss1_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss1_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss1_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss1_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss1_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss1_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss1_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss1_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss1_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss1_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss1_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss1_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss1_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss1_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss1_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss1_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss1_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss1_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss1_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss1_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss1_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss1_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss1_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss1_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss10_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss10_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss10_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss10_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss10_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss10_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss10_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss10_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss10_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss10_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss10_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss10_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss10_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss10_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss10_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss10_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss10_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss10_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss10_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss10_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss10_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss10_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss10_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss10_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss10_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss10_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss10_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss10_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss10_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss10_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss10_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss10_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss11_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss11_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss11_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss11_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss11_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss11_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss11_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss11_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss11_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss11_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss11_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss11_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss11_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss11_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss11_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss11_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss11_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss11_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss11_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss11_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss11_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss11_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss11_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss11_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss11_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss11_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss11_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss11_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss11_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss11_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss11_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss11_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss2_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss2_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss2_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss2_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss2_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss2_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss2_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss2_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss2_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss2_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss2_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss2_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss2_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss2_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss2_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss2_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss2_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss2_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss2_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss2_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss2_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss2_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss2_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss2_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss2_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss2_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss2_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss2_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss2_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss2_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss2_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss2_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss3_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss3_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss3_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss3_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss3_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss3_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss3_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss3_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss3_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss3_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss3_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss3_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss3_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss3_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss3_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss3_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss3_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss3_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss3_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss3_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss3_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss3_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss3_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss3_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss3_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss3_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss3_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss3_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss3_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss3_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss3_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss3_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss4_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss4_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss4_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss4_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss4_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss4_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss4_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss4_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss4_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss4_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss4_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss4_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss4_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss4_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss4_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss4_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss4_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss4_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss4_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss4_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss4_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss4_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss4_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss4_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss4_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss4_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss4_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss4_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss4_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss4_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss4_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss4_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss5_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss5_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss5_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss5_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss5_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss5_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss5_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss5_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss5_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss5_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss5_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss5_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss5_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss5_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss5_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss5_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss5_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss5_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss5_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss5_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss5_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss5_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss5_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss5_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss5_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss5_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss5_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss5_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss5_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss5_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss5_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss5_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss6_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss6_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss6_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss6_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss6_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss6_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss6_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss6_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss6_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss6_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss6_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss6_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss6_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss6_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss6_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss6_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss6_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss6_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss6_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss6_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss6_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss6_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss6_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss6_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss6_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss6_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss6_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss6_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss6_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss6_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss6_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss6_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss7_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss7_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss7_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss7_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss7_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss7_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss7_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss7_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss7_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss7_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss7_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss7_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss7_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss7_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss7_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss7_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss7_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss7_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss7_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss7_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss7_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss7_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss7_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss7_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss7_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss7_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss7_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss7_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss7_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss7_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss7_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss7_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss8_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss8_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss8_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss8_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss8_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss8_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss8_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss8_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss8_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss8_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss8_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss8_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss8_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss8_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss8_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss8_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss8_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss8_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss8_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss8_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss8_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss8_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss8_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss8_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss8_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss8_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss8_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss8_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss8_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss8_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss8_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss8_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ddrss9_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ddrss9_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ddrss9_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ddrss9_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ddrss9_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ddrss9_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ddrss9_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ddrss9_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ddrss9_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ddrss9_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ddrss9_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ddrss9_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ddrss9_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ddrss9_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ddrss9_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ddrss9_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ddrss9_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ddrss9_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ddrss9_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ddrss9_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ddrss9_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ddrss9_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ddrss9_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ddrss9_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ddrss9_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ddrss9_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ddrss9_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ddrss9_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ddrss9_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ddrss9_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ddrss9_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ddrss9_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign debug_ss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign debug_ss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign debug_ss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign debug_ss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign debug_ss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign debug_ss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign debug_ss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign debug_ss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign debug_ss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign debug_ss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign debug_ss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign debug_ss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign debug_ss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign debug_ss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign debug_ss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign debug_ss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign debug_ss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign debug_ss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign debug_ss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign debug_ss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign debug_ss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign debug_ss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign debug_ss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign debug_ss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign debug_ss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign debug_ss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign debug_ss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign debug_ss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign debug_ss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign debug_ss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign debug_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign debug_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign display_ss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign display_ss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign display_ss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign display_ss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign display_ss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign display_ss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign display_ss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign display_ss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign display_ss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign display_ss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign display_ss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign display_ss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign display_ss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign display_ss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign display_ss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign display_ss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign display_ss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign display_ss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign display_ss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign display_ss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign display_ss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign display_ss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign display_ss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign display_ss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign display_ss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign display_ss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign display_ss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign display_ss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign display_ss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign display_ss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign display_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign display_ss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign gpuss0_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign gpuss0_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign gpuss0_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign gpuss0_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign gpuss0_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign gpuss0_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign gpuss0_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign gpuss0_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign gpuss0_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign gpuss0_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign gpuss0_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign gpuss0_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign gpuss0_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign gpuss0_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign gpuss0_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign gpuss0_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign gpuss0_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign gpuss0_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign gpuss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign gpuss0_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign gpuss0_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign gpuss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign gpuss0_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign gpuss0_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign gpuss0_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign gpuss0_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign gpuss0_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign gpuss0_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign gpuss0_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign gpuss0_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign gpuss0_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign gpuss0_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign gpuss1_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign gpuss1_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign gpuss1_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign gpuss1_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign gpuss1_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign gpuss1_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign gpuss1_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign gpuss1_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign gpuss1_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign gpuss1_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign gpuss1_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign gpuss1_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign gpuss1_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign gpuss1_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign gpuss1_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign gpuss1_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign gpuss1_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign gpuss1_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign gpuss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign gpuss1_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign gpuss1_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign gpuss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign gpuss1_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign gpuss1_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign gpuss1_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign gpuss1_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign gpuss1_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign gpuss1_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign gpuss1_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign gpuss1_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign gpuss1_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign gpuss1_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign mcuss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign mcuss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign mcuss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign mcuss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign mcuss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign mcuss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign mcuss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign mcuss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign mcuss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign mcuss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign mcuss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign mcuss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign mcuss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign mcuss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign mcuss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign mcuss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign mcuss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign mcuss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign mcuss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign mcuss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign mcuss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign mcuss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign mcuss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign mcuss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign mcuss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign mcuss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign mcuss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign mcuss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign mcuss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign mcuss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign mcuss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign mcuss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign mipiss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign mipiss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign mipiss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign mipiss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign mipiss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign mipiss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign mipiss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign mipiss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign mipiss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign mipiss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign mipiss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign mipiss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign mipiss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign mipiss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign mipiss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign mipiss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign mipiss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign mipiss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign mipiss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign mipiss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign mipiss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign mipiss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign mipiss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign mipiss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign mipiss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign mipiss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign mipiss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign mipiss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign mipiss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign mipiss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign mipiss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign mipiss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign nocss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign nocss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign nocss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign nocss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign nocss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign nocss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign nocss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign nocss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign nocss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign nocss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign nocss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign nocss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign nocss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign nocss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign nocss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign nocss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign nocss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign nocss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign nocss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign nocss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign nocss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign nocss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign nocss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign nocss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign nocss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign nocss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign nocss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign nocss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign nocss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign nocss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign nocss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign nocss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign npuss0_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign npuss0_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign npuss0_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign npuss0_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign npuss0_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign npuss0_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign npuss0_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign npuss0_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign npuss0_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign npuss0_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign npuss0_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign npuss0_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign npuss0_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign npuss0_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign npuss0_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign npuss0_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign npuss0_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign npuss0_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign npuss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign npuss0_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign npuss0_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign npuss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign npuss0_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign npuss0_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign npuss0_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign npuss0_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign npuss0_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign npuss0_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign npuss0_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign npuss0_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign npuss0_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign npuss0_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign npuss1_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign npuss1_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign npuss1_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign npuss1_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign npuss1_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign npuss1_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign npuss1_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign npuss1_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign npuss1_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign npuss1_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign npuss1_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign npuss1_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign npuss1_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign npuss1_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign npuss1_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign npuss1_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign npuss1_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign npuss1_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign npuss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign npuss1_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign npuss1_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign npuss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign npuss1_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign npuss1_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign npuss1_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign npuss1_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign npuss1_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign npuss1_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign npuss1_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign npuss1_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign npuss1_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign npuss1_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign npuss2_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign npuss2_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign npuss2_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign npuss2_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign npuss2_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign npuss2_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign npuss2_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign npuss2_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign npuss2_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign npuss2_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign npuss2_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign npuss2_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign npuss2_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign npuss2_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign npuss2_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign npuss2_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign npuss2_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign npuss2_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign npuss2_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign npuss2_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign npuss2_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign npuss2_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign npuss2_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign npuss2_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign npuss2_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign npuss2_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign npuss2_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign npuss2_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign npuss2_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign npuss2_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign npuss2_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign npuss2_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign npuss3_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign npuss3_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign npuss3_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign npuss3_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign npuss3_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign npuss3_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign npuss3_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign npuss3_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign npuss3_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign npuss3_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign npuss3_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign npuss3_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign npuss3_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign npuss3_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign npuss3_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign npuss3_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign npuss3_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign npuss3_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign npuss3_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign npuss3_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign npuss3_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign npuss3_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign npuss3_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign npuss3_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign npuss3_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign npuss3_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign npuss3_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign npuss3_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign npuss3_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign npuss3_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign npuss3_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign npuss3_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign npuss4_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign npuss4_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign npuss4_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign npuss4_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign npuss4_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign npuss4_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign npuss4_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign npuss4_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign npuss4_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign npuss4_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign npuss4_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign npuss4_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign npuss4_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign npuss4_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign npuss4_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign npuss4_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign npuss4_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign npuss4_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign npuss4_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign npuss4_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign npuss4_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign npuss4_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign npuss4_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign npuss4_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign npuss4_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign npuss4_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign npuss4_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign npuss4_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign npuss4_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign npuss4_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign npuss4_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign npuss4_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign pcie_ethss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign pcie_ethss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign pcie_ethss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign pcie_ethss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign pcie_ethss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign pcie_ethss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign pcie_ethss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign pcie_ethss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign pcie_ethss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign pcie_ethss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign pcie_ethss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign pcie_ethss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign pcie_ethss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign pcie_ethss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign pcie_ethss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign pcie_ethss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign pcie_ethss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign pcie_ethss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign pcie_ethss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign pcie_ethss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign pcie_ethss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign pcie_ethss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign pcie_ethss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign pcie_ethss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign pcie_ethss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign pcie_ethss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign pcie_ethss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign pcie_ethss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign pcie_ethss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign pcie_ethss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign pcie_ethss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign pcie_ethss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign periss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign periss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign periss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign periss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign periss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign periss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign periss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign periss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign periss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign periss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign periss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign periss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign periss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign periss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign periss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign periss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign periss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign periss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign periss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign periss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign periss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign periss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign periss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign periss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign periss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign periss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign periss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign periss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign periss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign periss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign periss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign periss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign safetyss_aon_local_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign safetyss_aon_local_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign safetyss_aon_local_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign safetyss_aon_local_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign safetyss_aon_local_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign safetyss_aon_local_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign safetyss_aon_local_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign safetyss_aon_local_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign safetyss_aon_local_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign safetyss_aon_local_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign safetyss_aon_local_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign safetyss_aon_local_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign safetyss_aon_local_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign safetyss_aon_local_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign safetyss_aon_local_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign safetyss_aon_local_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign safetyss_aon_local_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign safetyss_aon_local_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign safetyss_aon_local_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign safetyss_aon_local_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign safetyss_aon_local_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign safetyss_aon_local_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign safetyss_aon_local_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign safetyss_aon_local_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign safetyss_aon_local_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign safetyss_aon_local_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign safetyss_aon_local_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign safetyss_aon_local_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign safetyss_aon_local_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign safetyss_aon_local_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign safetyss_aon_local_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign safetyss_aon_local_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign ufsss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign ufsss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign ufsss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign ufsss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign ufsss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign ufsss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign ufsss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign ufsss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign ufsss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign ufsss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign ufsss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign ufsss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign ufsss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign ufsss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign ufsss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign ufsss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign ufsss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign ufsss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign ufsss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign ufsss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign ufsss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign ufsss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign ufsss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign ufsss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign ufsss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign ufsss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign ufsss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign ufsss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign ufsss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign ufsss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign ufsss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign ufsss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign usb_dpss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign usb_dpss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign usb_dpss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign usb_dpss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign usb_dpss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign usb_dpss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign usb_dpss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign usb_dpss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign usb_dpss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign usb_dpss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign usb_dpss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign usb_dpss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign usb_dpss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign usb_dpss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign usb_dpss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign usb_dpss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign usb_dpss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign usb_dpss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign usb_dpss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign usb_dpss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign usb_dpss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign usb_dpss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign usb_dpss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign usb_dpss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign usb_dpss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign usb_dpss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign usb_dpss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign usb_dpss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign usb_dpss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign usb_dpss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign usb_dpss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign usb_dpss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign vdspss0_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign vdspss0_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign vdspss0_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign vdspss0_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign vdspss0_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign vdspss0_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign vdspss0_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign vdspss0_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign vdspss0_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign vdspss0_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign vdspss0_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign vdspss0_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign vdspss0_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign vdspss0_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign vdspss0_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign vdspss0_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign vdspss0_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign vdspss0_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign vdspss0_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign vdspss0_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign vdspss0_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign vdspss0_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign vdspss0_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign vdspss0_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign vdspss0_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign vdspss0_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign vdspss0_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign vdspss0_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign vdspss0_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign vdspss0_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign vdspss0_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign vdspss0_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign vdspss1_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign vdspss1_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign vdspss1_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign vdspss1_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign vdspss1_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign vdspss1_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign vdspss1_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign vdspss1_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign vdspss1_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign vdspss1_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign vdspss1_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign vdspss1_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign vdspss1_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign vdspss1_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign vdspss1_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign vdspss1_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign vdspss1_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign vdspss1_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign vdspss1_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign vdspss1_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign vdspss1_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign vdspss1_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign vdspss1_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign vdspss1_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign vdspss1_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign vdspss1_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign vdspss1_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign vdspss1_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign vdspss1_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign vdspss1_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign vdspss1_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign vdspss1_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign vdspss2_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign vdspss2_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign vdspss2_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign vdspss2_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign vdspss2_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign vdspss2_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign vdspss2_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign vdspss2_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign vdspss2_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign vdspss2_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign vdspss2_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign vdspss2_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign vdspss2_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign vdspss2_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign vdspss2_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign vdspss2_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign vdspss2_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign vdspss2_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign vdspss2_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign vdspss2_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign vdspss2_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign vdspss2_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign vdspss2_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign vdspss2_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign vdspss2_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign vdspss2_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign vdspss2_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign vdspss2_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign vdspss2_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign vdspss2_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign vdspss2_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign vdspss2_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign vdspss3_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign vdspss3_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign vdspss3_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign vdspss3_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign vdspss3_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign vdspss3_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign vdspss3_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign vdspss3_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign vdspss3_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign vdspss3_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign vdspss3_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign vdspss3_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign vdspss3_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign vdspss3_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign vdspss3_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign vdspss3_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign vdspss3_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign vdspss3_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign vdspss3_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign vdspss3_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign vdspss3_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign vdspss3_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign vdspss3_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign vdspss3_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign vdspss3_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign vdspss3_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign vdspss3_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign vdspss3_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign vdspss3_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign vdspss3_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign vdspss3_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign vdspss3_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign vdspss4_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign vdspss4_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign vdspss4_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign vdspss4_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign vdspss4_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign vdspss4_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign vdspss4_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign vdspss4_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign vdspss4_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign vdspss4_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign vdspss4_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign vdspss4_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign vdspss4_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign vdspss4_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign vdspss4_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign vdspss4_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign vdspss4_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign vdspss4_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign vdspss4_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign vdspss4_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign vdspss4_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign vdspss4_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign vdspss4_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign vdspss4_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign vdspss4_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign vdspss4_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign vdspss4_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign vdspss4_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign vdspss4_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign vdspss4_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign vdspss4_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign vdspss4_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign vdspss5_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign vdspss5_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign vdspss5_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign vdspss5_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign vdspss5_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign vdspss5_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign vdspss5_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign vdspss5_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign vdspss5_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign vdspss5_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign vdspss5_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign vdspss5_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign vdspss5_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign vdspss5_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign vdspss5_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign vdspss5_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign vdspss5_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign vdspss5_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign vdspss5_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign vdspss5_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign vdspss5_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign vdspss5_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign vdspss5_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign vdspss5_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign vdspss5_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign vdspss5_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign vdspss5_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign vdspss5_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign vdspss5_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign vdspss5_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign vdspss5_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign vdspss5_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+    assign vpuss_tniu_top_side_req_porting_in_req_rdy = '0;
+    assign vpuss_tniu_top_side_rsp_porting_out_rsp_pld = '0;
+    assign vpuss_tniu_top_side_rsp_porting_out_rsp_vld = '0;
+    assign vpuss_tniu_top_side_top_apb_porting_top_paddr = '0;
+    assign vpuss_tniu_top_side_top_apb_porting_top_penable = '0;
+    assign vpuss_tniu_top_side_top_apb_porting_top_pprot = '0;
+    assign vpuss_tniu_top_side_top_apb_porting_top_psel = '0;
+    assign vpuss_tniu_top_side_top_apb_porting_top_pstrb = '0;
+    assign vpuss_tniu_top_side_top_apb_porting_top_pwdata = '0;
+    assign vpuss_tniu_top_side_top_apb_porting_top_pwrite = '0;
+    assign vpuss_tniu_top_side_sys_apb_porting_m_paddr = '0;
+    assign vpuss_tniu_top_side_sys_apb_porting_m_penable = '0;
+    assign vpuss_tniu_top_side_sys_apb_porting_m_pprot = '0;
+    assign vpuss_tniu_top_side_sys_apb_porting_m_psel = '0;
+    assign vpuss_tniu_top_side_sys_apb_porting_m_pstrb = '0;
+    assign vpuss_tniu_top_side_sys_apb_porting_m_pwdata = '0;
+    assign vpuss_tniu_top_side_sys_apb_porting_m_pwrite = '0;
+    assign vpuss_tniu_top_side_dbg_data_porting_dbg_data_out = '0;
+    assign vpuss_tniu_top_side_dbg_timestamp_porting_dbg_timestamp_out = '0;
+    assign vpuss_tniu_top_side_cti_event_porting_cti_trig_out = '0;
+    assign vpuss_tniu_top_side_ctm_event_porting_ctm_trig_out = '0;
+    assign vpuss_tniu_top_side_ctm_channel_porting_ctm_channel_dec_out = '0;
+    assign vpuss_tniu_top_side_ctm_channel_porting_ctm_channel_out = '0;
+    assign vpuss_tniu_top_side_timing_bus1_porting_timing_bus1 = '0;
+    assign vpuss_tniu_top_side_timing_bus2_porting_timing_bus2 = '0;
+    assign vpuss_tniu_top_side_timing_bus3_porting_timing_bus3 = '0;
+    assign vpuss_tniu_top_side_dbg_en_porting_dbg_en = '0;
+    assign vpuss_tniu_top_side_tniu_regbank_parity_err_porting_tniu_regbank_parity_err = '0;
+    assign vpuss_tniu_top_side_safety_porting_tniu_req_afifo_db_err = '0;
+    assign vpuss_tniu_top_side_safety_porting_tniu_req_afifo_sb_err = '0;
+    assign vpuss_tniu_top_side_safety_porting_tniu_rsp_afifo_db_err = '0;
+    assign vpuss_tniu_top_side_safety_porting_tniu_rsp_afifo_sb_err = '0;
+
+endmodule

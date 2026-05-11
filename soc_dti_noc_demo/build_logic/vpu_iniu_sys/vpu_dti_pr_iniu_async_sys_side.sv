@@ -13,49 +13,52 @@ module vpu_dti_pr_iniu_async_sys_side
         localparam integer unsigned ECC_OVERHEAD        = 8,
         localparam integer unsigned ECC_PLD_WIDTH       = ORG_PLD_WIDTH + ECC_OVERHEAD,
         parameter integer unsigned  ERR_INT_CNT_WIDTH   = `vpu_INIU_ERR_INT_CNT_WIDTH,
-    localparam integer unsigned AFIFO_DATA_WIDTH    = ECC_PLD_WIDTH
+    localparam integer unsigned AFIFO_DATA_WIDTH    = ECC_PLD_WIDTH,
+    localparam int PCH_WIDTH  = $bits(lwnoc_pchannel_state_t),
+    localparam int PCA_WIDTH  = $bits(lwnoc_pchannel_active_t),
+    localparam int LP_SIG_WIDTH = $bits(lwnoc_lp_req_signal_t)
     )(
     input   logic                                       clk                          ,
     input   logic                                       rst_n                        ,
     // REQ_data channel
-    input   logic                                       req_tvalid                   ,
-    input   logic   [AXIS_DATA_WIDTH-1:0]               req_tdata                    ,
-    input   logic   [AXIS_KEEP_WIDTH-1:0]               req_tkeep                    ,
-    input   logic                                       req_tlast                    ,
-    input   logic   [TBU_NUM_WIDTH-1  :0]               req_ttid                     ,
-    output  logic                                       req_tready                   , //custom rdy
+    input   logic                                       req_tvalid                   , // from TBU (AXI5-Stream master)
+    input   logic   [AXIS_DATA_WIDTH-1:0]               req_tdata                    , // from TBU
+    input   logic   [AXIS_KEEP_WIDTH-1:0]               req_tkeep                    , // from TBU
+    input   logic                                       req_tlast                    , // from TBU
+    input   logic   [TBU_NUM_WIDTH-1  :0]               req_ttid                     , // from TBU (local TID)
+    output  logic                                       req_tready                   , //custom rdy // to TBU (backpressure)
     // RSP_data channel
-    output  logic                                       rsp_tvalid                   ,
-    output  logic   [CUSTOM_DATA_WIDTH-1:0]             rsp_tdata                    ,
-    output  logic   [CUSTOM_KEEP_WIDTH-1:0]             rsp_tkeep                    ,
-    output  logic                                       rsp_tlast                    ,
+    output  logic                                       rsp_tvalid                   , // to TBU (AXI5-Stream master)
+    output  logic   [CUSTOM_DATA_WIDTH-1:0]             rsp_tdata                    , // to TBU
+    output  logic   [CUSTOM_KEEP_WIDTH-1:0]             rsp_tkeep                    , // to TBU
+    output  logic                                       rsp_tlast                    , // to TBU
     output  logic   [TBU_NUM_WIDTH-1    :0]             rsp_ttid                     ,
-    input   logic                                       rsp_tready                   , //dti rdy
+    input   logic                                       rsp_tready                   , //dti rdy // from TBU (backpressure)
     // TWAKEUP (AXI5-Stream spec IHI0051B §2.3)
-    input   logic                                       req_twakeup                  , // TBU→INIU, received only
-    output  logic                                       rsp_twakeup                  , // INIU→TBU, driven from rsp FIFO not-empty
+    input   logic                                       req_twakeup                  , // TBU→INIU, received only // from TBU (AXI5-Stream wakeup)
+    output  logic                                       rsp_twakeup                  , // INIU→TBU, driven from rsp FIFO not-empty // to TBU (AXI5-Stream wakeup)
     // async fifo req
-    output logic    [ASYNC_FIFO_DEPTH-1 :0]             req_wptr_async               ,
-    input  logic    [ASYNC_FIFO_DEPTH-1 :0]             req_rptr_async               ,
-    input  logic    [ASYNC_FIFO_DEPTH-1 :0]             req_rptr_sync                ,
-    output logic    [AFIFO_DATA_WIDTH   :0]             req_pld_sync                 ,
+    output logic    [ASYNC_FIFO_DEPTH-1 :0]             req_wptr_async               , // -> dti_pr_iniu_async_top_side (AFIFO write ptr)
+    input  logic    [ASYNC_FIFO_DEPTH-1 :0]             req_rptr_async               , // <- dti_pr_iniu_async_top_side (AFIFO read ptr)
+    input  logic    [ASYNC_FIFO_DEPTH-1 :0]             req_rptr_sync                , // <- dti_pr_iniu_async_top_side (synced read ptr)
+    output logic    [AFIFO_DATA_WIDTH   :0]             req_pld_sync                 , // -> dti_pr_iniu_async_top_side (AFIFO payload)
     // async fifo rsp
-    input  logic    [ASYNC_FIFO_DEPTH-1 :0]             rsp_wptr_async               ,
-    output logic    [ASYNC_FIFO_DEPTH-1 :0]             rsp_rptr_async               ,
-    output logic    [ASYNC_FIFO_DEPTH-1 :0]             rsp_rptr_sync                ,
-    input  logic    [AFIFO_DATA_WIDTH   :0]             rsp_pld_sync                 ,
+    input  logic    [ASYNC_FIFO_DEPTH-1 :0]             rsp_wptr_async               , // <- dti_pr_iniu_async_top_side (AFIFO write ptr)
+    output logic    [ASYNC_FIFO_DEPTH-1 :0]             rsp_rptr_async               , // -> dti_pr_iniu_async_top_side (AFIFO read ptr)
+    output logic    [ASYNC_FIFO_DEPTH-1 :0]             rsp_rptr_sync                , // -> dti_pr_iniu_async_top_side (synced read ptr)
+    input  logic    [AFIFO_DATA_WIDTH   :0]             rsp_pld_sync                 , // <- dti_pr_iniu_async_top_side (AFIFO payload)
     // FUSA ECC error outputs (RSP AFIFO mst-side decode, clk_sys domain)
-    output logic                                        rsp_afifo_sb_err             ,
-    output logic                                        rsp_afifo_db_err             ,
+    output logic                                        rsp_afifo_sb_err             , // to safety logic (single-bit ECC, clk_sys)
+    output logic                                        rsp_afifo_db_err             , // to safety logic (double-bit ECC, clk_sys)
     // LP
     input  logic    [TIME_OUT_WIDTH-1   :0]             timeout_val                  ,
     input  logic                                        preq                         ,
-    input  lwnoc_pchannel_state_t                       pstate                       ,
-    output lwnoc_pchannel_active_t                      pactive                      ,
+    input  logic [PCH_WIDTH-1:0]                        pstate                       ,
+    output logic [PCA_WIDTH-1:0]                        pactive                      ,
     output logic                                        paccept                      ,
     output logic                                        pdeny                        ,
-    input  lwnoc_lp_req_signal_t                        lp_hub_rx_req                ,
-    output lwnoc_lp_req_signal_t                        lp_hub_tx_req
+    input  logic [LP_SIG_WIDTH-1:0]                     lp_hub_rx_req                , // from LP hub (sys-side level-2 hub)
+    output logic [LP_SIG_WIDTH-1:0]                     lp_hub_tx_req  // to LP hub
     );
     // conv
     logic                                               conv_req_valid               ;
@@ -110,6 +113,7 @@ module vpu_dti_pr_iniu_async_sys_side
     logic                                               niu_idle                     ;
     // TWAKEUP
     logic                                               rsp_twakeup_r                ;
+    lwnoc_pchannel_active_t                             pactive_typed               ; // internal cast from flat port
     lwnoc_lp_req_signal_t                               v_stage_1_hub_rx_req    [2:0];
     lwnoc_lp_req_signal_t                               v_stage_1_hub_tx_req    [2:0];
     lwnoc_lp_req_signal_t                               v_stage_2_hub_rx_req    [3:0];
@@ -131,6 +135,9 @@ module vpu_dti_pr_iniu_async_sys_side
     // LP
     //=================================================
 
+    // Pchannel type casts (ports are flat vectors)
+    assign pactive = pactive_typed;
+
     assign v_stage_1_hub_rx_req[0]   = lp_iniu_rx_req;
     assign v_stage_1_hub_rx_req[1]   = niu_lp_hub_rx_req;
     assign v_stage_1_hub_rx_req[2]   = barrier_lp_hub_rx_req;
@@ -142,7 +149,7 @@ module vpu_dti_pr_iniu_async_sys_side
     assign v_stage_2_hub_rx_req[0]   = barrier_lp_sub_hub_rx_req;
     assign v_stage_2_hub_rx_req[1]   = async_slave_hub_rx_req;
     assign v_stage_2_hub_rx_req[2]   = async_master_hub_rx_req;
-    assign v_stage_2_hub_rx_req[3]   = lp_hub_rx_req;
+    assign v_stage_2_hub_rx_req[3]   = lwnoc_lp_req_signal_t'(lp_hub_rx_req);
 
     assign barrier_lp_sub_hub_tx_req = v_stage_2_hub_tx_req[0];
     assign async_slave_hub_tx_req    = v_stage_2_hub_tx_req[1];
@@ -155,8 +162,8 @@ module vpu_dti_pr_iniu_async_sys_side
         .rx_req       (lp_iniu_tx_req     ),
         .tx_req       (lp_iniu_rx_req     ),
         .preq         (preq               ),
-        .pstate       (pstate             ),
-        .pactive      (pactive            ),
+        .pstate       (lwnoc_pchannel_state_t'(pstate) ),
+        .pactive      (pactive_typed                   ),
         .paccept      (paccept            ),
         .pdeny        (pdeny              )
     );

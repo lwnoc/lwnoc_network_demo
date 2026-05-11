@@ -39,7 +39,7 @@ module mcu_ss_iniu_interrupt_iniu_event_recorder
     //===========================================================================
     assign idle = ~event_vld;
 
-    assign event_pld.toggle_flag = toggle_flag;
+    assign event_pld.toggle_flag = intr_type ? 1'b1 : toggle_flag;
     assign event_pld.overflow    = overflow;
     assign event_pld.intr_addr   = INTERRUPT_MAXNUM_WIDTH'(INTERRUPT_ID);
 
@@ -103,7 +103,10 @@ module mcu_ss_iniu_interrupt_iniu_event_recorder
             event_count <= 0;
         end
         else if(overflow)begin
-            if(toggle_flag == interrupt) begin
+            if(intr_type) begin
+                event_count <= 0;
+            end
+            else if(toggle_flag == interrupt) begin
                 event_count <= 2;
             end
             else begin

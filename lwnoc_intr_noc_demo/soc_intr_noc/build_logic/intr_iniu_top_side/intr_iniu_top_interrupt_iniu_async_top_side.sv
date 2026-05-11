@@ -11,7 +11,8 @@ module intr_iniu_top_interrupt_iniu_async_top_side
     localparam integer unsigned ECC_CODE_WIDTH    = ($clog2(PLD_ORG_WIDTH)+PLD_ORG_WIDTH+1 <= 2**$clog2(PLD_ORG_WIDTH))? $clog2(PLD_ORG_WIDTH) : $clog2(PLD_ORG_WIDTH)+1,
     localparam integer unsigned ECC_OVERHEAD      = ECC_CODE_WIDTH + 1,
     localparam integer unsigned PLD_ECC_WIDTH     = PLD_ORG_WIDTH + ECC_OVERHEAD,
-    localparam integer unsigned FIFO_DATA_WIDTH   = PLD_ECC_WIDTH
+    localparam integer unsigned FIFO_DATA_WIDTH   = PLD_ECC_WIDTH,
+    localparam int LP_SIG_WIDTH = $bits(lwnoc_lp_req_signal_t)
 
 )(
     input  logic                                    clk                             ,
@@ -25,8 +26,8 @@ module intr_iniu_top_interrupt_iniu_async_top_side
     output logic                                    afifo_db_err                     ,
     //lp interface
 
-    output lwnoc_lp_req_signal_t                    m_async_master_hub_rx_req       ,
-    input  lwnoc_lp_req_signal_t                    m_async_master_hub_tx_req       ,
+    output logic [LP_SIG_WIDTH-1:0]                 m_async_master_hub_rx_req       ,
+    input  logic [LP_SIG_WIDTH-1:0]                 m_async_master_hub_tx_req       ,
 
     output logic                                    req_valid                       ,
     input  logic                                    req_ready                       ,
@@ -52,6 +53,7 @@ module intr_iniu_top_interrupt_iniu_async_top_side
     logic                                    async_idle;
     logic                                    async_full_zero;
     logic                                    async_almost_empty;
+    lwnoc_lp_req_signal_t                   m_async_master_hub_rx_req_typed;
 //===========================================================================
 // package
 //===========================================================================
@@ -63,6 +65,8 @@ module intr_iniu_top_interrupt_iniu_async_top_side
     assign req_tgtid            = resp_pld_vector[12:5];
     assign req_srcid            = resp_pld_vector[20:13];
     assign req_payload          = resp_pld_vector[60:21];
+    // LP type casts (ports are flat vectors)
+    assign m_async_master_hub_rx_req = m_async_master_hub_rx_req_typed;
 //===========================================================================
 // lp
 //===========================================================================
@@ -70,8 +74,8 @@ module intr_iniu_top_interrupt_iniu_async_top_side
         .clk                (clk                        ),
         .rst_n              (rst_n                      ),
 
-        .rx_req             (m_async_master_hub_tx_req  ),
-        .tx_req             (m_async_master_hub_rx_req  ),
+        .rx_req             (lwnoc_lp_req_signal_t'(m_async_master_hub_tx_req)  ),
+        .tx_req             (m_async_master_hub_rx_req_typed                    ),
 
         .stall_ptr          (async_stall                ),
         .clear_ptr          (async_clear                ),
