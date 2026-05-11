@@ -1,11 +1,7 @@
 import sys
 from pathlib import Path
 
-
-THIS_DIR = Path(__file__).resolve().parent
-LWNOC_TOPO_ROOT = THIS_DIR.parent / "lwnoc_topo"
-if str(LWNOC_TOPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(LWNOC_TOPO_ROOT))
+from _project_env import LWNOC_TOPO_ROOT, THIS_DIR
 
 from topo_core.node.uhdlComponentNode import UhdlComponentNode
 from topo_core.node.uhdlWrapperNode import UhdlWrapperNode

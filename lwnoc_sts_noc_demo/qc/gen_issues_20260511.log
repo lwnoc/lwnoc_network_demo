@@ -1,0 +1,38 @@
+# STS generation issue log - 2026-05-11
+
+## Resolved upstream: sts_tniu_sys request decode signals undriven
+
+- Repo: /home/lgzhu/dev/noc_fusa/lwnoc_sts_noc
+- Observed HEAD: 52973be9a3d56def76840e8f9e475fef0efc3044
+- File: rtl/tniu/sts_tniu_sys.sv
+- Evidence: req_is_sys_reg and req_is_sys_apb are declared but have no assignment in the file.
+- Impact: request-level decode/miss responder cannot reliably select sys-reg vs external-APB vs miss path; downstream generation/compile closure is blocked per user instruction to stop on STS repo issues.
+- Required upstream fix: assign req_is_sys_reg/req_is_sys_apb from tgt_id endpoint type or route macros before rerunning soc STS generation and compile.
+- Resolution observed at HEAD `18df2911b0c0d48eb55d867f94602f55b3f8561d`: `req_is_sys_reg` and `req_is_sys_apb` are assigned from the high `tgt_id` endpoint-type bits.
+
+## Resolved upstream: STS publish filelists missed modules required by top-side wrappers
+
+- Repo: /home/lgzhu/dev/noc_fusa/lwnoc_sts_noc
+- Observed failing HEAD: 18df2911b0c0d48eb55d867f94602f55b3f8561d
+- Compile ingress: `lwnoc_sts_noc_demo/build/temp/sts_soc_compile.flat.f`, produced from `fcip/vc/fcip.f` plus `lwnoc_sts_noc_demo/filelists/filelist_soc.f`.
+- Fexpand status: 81-line flat filelist, no unresolved include/path diagnostics, no nested `-f` directives left.
+- VCS evidence: `lwnoc_sts_noc_demo/build/temp/sts_soc_vcs/compile.log` fails during binding with `Error-[CFCILFBI] Cannot find cell in liblist`.
+- Missing cells:
+	- `sts_cti`, instantiated by generated `aon_ss_iniu_top_side/sts_iniu_noc.sv` and `ddrss_tniu_top_side/sts_tniu_noc.sv`.
+	- `sts_tniu_apb_dec`, instantiated by generated `ddrss_tniu_top_side/sts_tniu_noc.sv`.
+- Filelist root cause:
+	- `/home/lgzhu/dev/noc_fusa/lwnoc_sts_noc/vc/tniu_top_pub.f` includes `sts_tniu_noc.sv` and `sts_tniu_top.sv`, but does not include `$RTL_PATH/rtl/common/sts_tniu_apb_dec.sv` or `$RTL_PATH/rtl/common/sts_cti.sv`.
+	- `/home/lgzhu/dev/noc_fusa/lwnoc_sts_noc/vc/iniu_noc_pub.f` includes `sts_iniu_noc.sv`, but does not include `$RTL_PATH/rtl/common/sts_cti.sv`.
+	- The missing modules do exist in the STS repo and are listed in broader/internal filelists such as `vc/cmn_filelist.f`; they are not reachable from the publish filelists consumed by the demo top wrapper compile.
+- Required upstream fix: make the STS publish filelists self-contained for the modules they publish, at minimum by adding the missing common modules to the affected `vc/*_pub.f` ingress files.
+- Resolution observed at HEAD `54869c54dd236b092f7235ec867caf4a69619719`: `vc/tniu_top_pub.f` includes `$RTL_PATH/rtl/common/sts_cti.sv` and `$RTL_PATH/rtl/common/sts_tniu_apb_dec.sv`; `vc/iniu_noc_pub.f` includes `$RTL_PATH/rtl/common/sts_cti.sv`.
+
+## Compile closure after STS update
+
+- Observed HEAD: 54869c54dd236b092f7235ec867caf4a69619719
+- Regeneration status: completed against the updated STS repo; generated RTL/filelist count is 521.
+- Fexpand status: `fcip/vc/fcip.f` plus `lwnoc_sts_noc_demo/filelists/filelist_soc.f` expands to an 83-line flat filelist with no unresolved diagnostics and no nested `-f` directives.
+- Former missing-module evidence: flat filelist now includes generated `ddrss_tniu_top_side/sts_cti.sv` and `ddrss_tniu_top_side/sts_tniu_apb_dec.sv`.
+- VCS command uses `+define+SYNTHESIS +define+FPGA_SIM`; `FPGA_SIM` selects the existing FCIP marker simulation bypass and avoids requiring a technology cell library for `fcip_clk_marker`/`fcip_marker` wrappers.
+- VCS result: `VCS_RC=0`, `build/temp/sts_soc_vcs/simv` exists.
+- Remaining warnings: one VCS unsupported-kernel warning on WSL2 and twelve `Warning-[SIOB]` select-index warnings in generated `ddrss_tniu_top_side/sts_cti.sv` where `prdata`/`pwdata` are 32-bit but selected with `CHANNEL_NUM-1`.

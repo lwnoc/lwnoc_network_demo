@@ -5,14 +5,9 @@ Layered publication uses one full logic topology plus a derived wrapper view:
     2. Aggregation top release    -> build_logic/sts_soc_top_wrap/
 """
 import shutil
-import sys
 from pathlib import Path
 
-THIS_DIR = Path(__file__).resolve().parent
-LWNOC_TOPO_ROOT = THIS_DIR.parent / "lwnoc_topo"
-if str(LWNOC_TOPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(LWNOC_TOPO_ROOT))
-sys.path.insert(0, str(THIS_DIR))
+from _project_env import LWNOC_TOPO_ROOT, THIS_DIR
 
 from StsSocTopo import StsSocLogicTopo
 from StsNode import StsTniuTopSideNode
@@ -73,7 +68,7 @@ def main():
     ]
     sh_lines = [
         "#!/usr/bin/env bash",
-        "DEMO_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")/..\" && pwd)\"",
+        "DEMO_DIR=\"$(builtin cd \"$(dirname \"${BASH_SOURCE[0]}\")/..\" && pwd)\"",
         "STS_SOC_BUILD_LOGIC_DIR=\"$DEMO_DIR/build_logic\"",
     ]
     for env_var, rel_dir in sorted(STS_SOC_PUBLISH_ENV_DIRS.items()):
