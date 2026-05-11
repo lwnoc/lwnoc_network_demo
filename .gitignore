@@ -67,3 +67,4 @@ run_logs/
 # .vdb directories
 *.vdb/
 build_logic/
+*.log
