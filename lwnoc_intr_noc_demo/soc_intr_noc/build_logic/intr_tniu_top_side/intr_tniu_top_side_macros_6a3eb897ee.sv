@@ -1,2 +1,0 @@
-`define intr_tniu_top_INTR_TNIU_SYS_ASYNC_FIFO_DEPTH 16
-`define intr_tniu_top_INTR_TNIU_TOP_ASYNC_FIFO_DEPTH 16

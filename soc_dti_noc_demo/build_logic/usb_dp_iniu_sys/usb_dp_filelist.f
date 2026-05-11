@@ -1,8 +1,0 @@
-$USB_DP_INIU_SYS_DIR/usb_dp_iniu_sys_macros_a0b3757ede.sv
-$USB_DP_INIU_SYS_DIR/usb_dp_dti_pr_iniu_define.sv
-$USB_DP_INIU_SYS_DIR/usb_dp_dti_iniu_pack.sv
-$USB_DP_INIU_SYS_DIR/usb_dp_dti_pr_rob_state_entry.sv
-$USB_DP_INIU_SYS_DIR/usb_dp_dti_pr.sv
-$USB_DP_INIU_SYS_DIR/usb_dp_dti_to_gnpd_conv.sv
-$USB_DP_INIU_SYS_DIR/usb_dp_dti_pr_iniu_async_sys_side.sv
-$USB_DP_INIU_SYS_DIR/usb_dp_dti_pr_iniu_undef.sv

@@ -1,5 +1,0 @@
-$VDSPSS2_TNIU_NOC_SIDE_OUT_DIR/vdspss2_tniu_noc_side_macros_244f138559.sv
-$VDSPSS2_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
-$VDSPSS2_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
-$VDSPSS2_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
-$VDSPSS2_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

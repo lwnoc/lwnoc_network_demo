@@ -1,7 +1,0 @@
-`define cam_ATB_DATA_WIDTH 128
-`define cam_ATB_ID_WIDTH 7
-`define cam_ATB_INIU_AUTO_CLEAR_EN 0
-`define cam_ATB_INIU_ERR_INT_CNT_WIDTH 16
-`define cam_ATB_INIU_FIFO_DEPTH 16
-`define cam_ATB_INIU_SYNC_BUF_DEPTH 2
-`define cam_ATB_INIU_SYNC_STAGE 2

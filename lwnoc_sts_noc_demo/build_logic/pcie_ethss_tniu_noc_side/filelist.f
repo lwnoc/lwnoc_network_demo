@@ -1,5 +1,0 @@
-$PCIE_ETHSS_TNIU_NOC_SIDE_OUT_DIR/pcie_ethss_tniu_noc_side_macros_63bd0c57f7.sv
-$PCIE_ETHSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
-$PCIE_ETHSS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
-$PCIE_ETHSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
-$PCIE_ETHSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

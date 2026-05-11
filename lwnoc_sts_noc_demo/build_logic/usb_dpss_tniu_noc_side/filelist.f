@@ -1,5 +1,0 @@
-$USB_DPSS_TNIU_NOC_SIDE_OUT_DIR/usb_dpss_tniu_noc_side_macros_db1f060b46.sv
-$USB_DPSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
-$USB_DPSS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
-$USB_DPSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
-$USB_DPSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

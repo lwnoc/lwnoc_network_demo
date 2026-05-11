@@ -1,9 +1,0 @@
-$AON_SS_INIU_SYS_OUT_DIR/aon_ss_iniu_sys_macros_0a78d1af0a.sv
-$AON_SS_INIU_SYS_OUT_DIR/sts_iniu_define.sv
-$AON_SS_INIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
-$AON_SS_INIU_SYS_OUT_DIR/sts_iniu_axi_bundle.sv
-$AON_SS_INIU_SYS_OUT_DIR/sts_iniu_wr_channel.sv
-$AON_SS_INIU_SYS_OUT_DIR/sts_iniu_rd_channel.sv
-$AON_SS_INIU_SYS_OUT_DIR/sts_iniu_axi_iniu.sv
-$AON_SS_INIU_SYS_OUT_DIR/sts_iniu_sys.sv
-$AON_SS_INIU_SYS_OUT_DIR/sts_iniu_undefine.sv

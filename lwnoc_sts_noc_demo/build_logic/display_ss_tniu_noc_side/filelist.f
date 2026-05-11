@@ -1,5 +1,0 @@
-$DISPLAYSS_TNIU_NOC_SIDE_OUT_DIR/display_ss_tniu_noc_side_macros_07d96a782f.sv
-$DISPLAYSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
-$DISPLAYSS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
-$DISPLAYSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
-$DISPLAYSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

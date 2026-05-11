@@ -1,5 +1,0 @@
-$PERISS_TNIU_NOC_SIDE_OUT_DIR/periss_tniu_noc_side_macros_035e2aae17.sv
-$PERISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
-$PERISS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
-$PERISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
-$PERISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

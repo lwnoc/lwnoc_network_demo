@@ -1,5 +1,0 @@
-$DTI_INIU_TOP_DSPSS3_DIR/dti_iniu_top_side_dspss3_macros_f743294396.sv
-$DTI_INIU_TOP_DSPSS3_DIR/dti_iniu_top_dspss3_dti_pr_iniu_define.sv
-$DTI_INIU_TOP_DSPSS3_DIR/dti_iniu_top_dspss3_dti_iniu_pack.sv
-$DTI_INIU_TOP_DSPSS3_DIR/dti_iniu_top_dspss3_dti_pr_iniu_async_top_side.sv
-$DTI_INIU_TOP_DSPSS3_DIR/dti_iniu_top_dspss3_dti_pr_iniu_undef.sv

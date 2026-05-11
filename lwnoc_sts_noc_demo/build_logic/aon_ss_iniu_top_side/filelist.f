@@ -1,5 +1,0 @@
-$AON_SS_INIU_TOP_SIDE_OUT_DIR/aon_ss_iniu_top_side_macros_0a78d1af0a.sv
-$AON_SS_INIU_TOP_SIDE_OUT_DIR/sts_iniu_define.sv
-$AON_SS_INIU_TOP_SIDE_OUT_DIR/lwnoc_sts_pack.sv
-$AON_SS_INIU_TOP_SIDE_OUT_DIR/sts_iniu_noc.sv
-$AON_SS_INIU_TOP_SIDE_OUT_DIR/sts_iniu_undefine.sv

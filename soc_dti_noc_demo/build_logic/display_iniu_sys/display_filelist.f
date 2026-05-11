@@ -1,8 +1,0 @@
-$DISPLAY_INIU_SYS_DIR/display_iniu_sys_macros_a0b3757ede.sv
-$DISPLAY_INIU_SYS_DIR/display_dti_pr_iniu_define.sv
-$DISPLAY_INIU_SYS_DIR/display_dti_iniu_pack.sv
-$DISPLAY_INIU_SYS_DIR/display_dti_pr_rob_state_entry.sv
-$DISPLAY_INIU_SYS_DIR/display_dti_pr.sv
-$DISPLAY_INIU_SYS_DIR/display_dti_to_gnpd_conv.sv
-$DISPLAY_INIU_SYS_DIR/display_dti_pr_iniu_async_sys_side.sv
-$DISPLAY_INIU_SYS_DIR/display_dti_pr_iniu_undef.sv

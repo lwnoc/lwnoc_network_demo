@@ -1,8 +1,0 @@
-$GPU_INIU_SYS_DIR/gpu_iniu_sys_macros_a0b3757ede.sv
-$GPU_INIU_SYS_DIR/gpu_dti_pr_iniu_define.sv
-$GPU_INIU_SYS_DIR/gpu_dti_iniu_pack.sv
-$GPU_INIU_SYS_DIR/gpu_dti_pr_rob_state_entry.sv
-$GPU_INIU_SYS_DIR/gpu_dti_pr.sv
-$GPU_INIU_SYS_DIR/gpu_dti_to_gnpd_conv.sv
-$GPU_INIU_SYS_DIR/gpu_dti_pr_iniu_async_sys_side.sv
-$GPU_INIU_SYS_DIR/gpu_dti_pr_iniu_undef.sv

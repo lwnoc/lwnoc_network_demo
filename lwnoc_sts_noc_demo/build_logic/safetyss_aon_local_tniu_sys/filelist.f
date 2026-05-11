@@ -1,8 +1,0 @@
-$AON_LOCAL_TNIU_SYS_OUT_DIR/safetyss_aon_local_tniu_sys_macros_be18861587.sv
-$AON_LOCAL_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
-$AON_LOCAL_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
-$AON_LOCAL_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
-$AON_LOCAL_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
-$AON_LOCAL_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
-$AON_LOCAL_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
-$AON_LOCAL_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv

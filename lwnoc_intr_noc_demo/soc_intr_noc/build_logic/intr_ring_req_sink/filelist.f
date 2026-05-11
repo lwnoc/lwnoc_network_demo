@@ -1,2 +1,0 @@
-$INTR_RING_REQ_SINK_OUT_DIR/intr_ring_req_sink_macros_5258e493ce.sv
-$INTR_RING_REQ_SINK_OUT_DIR/lwnoc_intr_default_tgtid_sink.sv

@@ -1,5 +1,0 @@
-$MIPISS_TNIU_NOC_SIDE_OUT_DIR/mipiss_tniu_noc_side_macros_e0650b5831.sv
-$MIPISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
-$MIPISS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
-$MIPISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
-$MIPISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

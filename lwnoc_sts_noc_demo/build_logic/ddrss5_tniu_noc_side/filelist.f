@@ -1,5 +1,0 @@
-$DDRSS5_TNIU_NOC_SIDE_OUT_DIR/ddrss5_tniu_noc_side_macros_9d904a90d0.sv
-$DDRSS5_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
-$DDRSS5_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
-$DDRSS5_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
-$DDRSS5_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

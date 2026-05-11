@@ -1,8 +1,0 @@
-$VPU_INIU_SYS_DIR/vpu_iniu_sys_macros_23cdd84ee1.sv
-$VPU_INIU_SYS_DIR/vpu_dti_pr_iniu_define.sv
-$VPU_INIU_SYS_DIR/vpu_dti_iniu_pack.sv
-$VPU_INIU_SYS_DIR/vpu_dti_pr_rob_state_entry.sv
-$VPU_INIU_SYS_DIR/vpu_dti_pr.sv
-$VPU_INIU_SYS_DIR/vpu_dti_to_gnpd_conv.sv
-$VPU_INIU_SYS_DIR/vpu_dti_pr_iniu_async_sys_side.sv
-$VPU_INIU_SYS_DIR/vpu_dti_pr_iniu_undef.sv

@@ -1,5 +1,0 @@
-$NPUSS2_TNIU_NOC_SIDE_OUT_DIR/npuss2_tniu_noc_side_macros_4e06572034.sv
-$NPUSS2_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
-$NPUSS2_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
-$NPUSS2_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
-$NPUSS2_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv
