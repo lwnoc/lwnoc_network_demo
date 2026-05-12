@@ -8,7 +8,7 @@ Current source and RTL state:
 
 - STS submodule used for regeneration: `subs/lwnoc_sts_noc` at `f86d72d2d58c032be0eb0347ca298d013a0a33d9`.
 - INIU address-map macro surface: `START_TABLE`, `END_TABLE`, `TGT_ID_TABLE`, `DEFAULT_TGT_ID`.
-- Entry count: 191.
+- Entry count: 212.
 - NIU CFG address space: `0x5700_0000..0x573F_FFFF`.
 - Debug address space: `0x4800_0000..0x4FFF_FFFF`.
 - Default/reserved target ID: `9'h1FF`.
@@ -48,13 +48,41 @@ These macros are emitted for both `aon_ss_iniu_sys_config` and `aon_ss_iniu_top_
 
 | Macro | Value |
 | --- | --- |
-| `STS_INIU_ADDR_MAP_ENTRY_NUM` | `191` |
-| `STS_INIU_ADDR_MAP_START_TABLE` | packed 191 x 32-bit start addresses |
-| `STS_INIU_ADDR_MAP_END_TABLE` | packed 191 x 32-bit end addresses |
-| `STS_INIU_ADDR_MAP_TGT_ID_TABLE` | packed 191 x 9-bit target IDs |
+| `STS_INIU_ADDR_MAP_ENTRY_NUM` | `212` |
+| `STS_INIU_ADDR_MAP_START_TABLE` | packed 212 x 32-bit start addresses |
+| `STS_INIU_ADDR_MAP_END_TABLE` | packed 212 x 32-bit end addresses |
+| `STS_INIU_ADDR_MAP_TGT_ID_TABLE` | packed 212 x 9-bit target IDs |
 | `STS_INIU_ADDR_MAP_DEFAULT_TGT_ID` | `9'h1FF` |
 
 Generated macro evidence is in `build_logic/aon_ss_iniu_sys/aon_ss_iniu_sys_macros_b35083806a.sv` and `build_logic/aon_ss_iniu_top_side/aon_ss_iniu_top_side_macros_b35083806a.sv`.
+
+## Debug Offset Overlay Table (Base + Offset)
+
+The following debug components use additive offsets relative to `STS_SOC_DEBUG_BASE` (`0x4800_0000`) and map to the corresponding TNIU target IDs:
+
+| Component | Resource key | Offset range | Absolute range | Target class | Target ID source |
+| --- | --- | --- | --- | --- | --- |
+| camera funnel | `camera_ss` | `0x0740_0000..0x0740_0FFF` | `0x4F400000..0x4F400FFF` | SYS APB | `sys_apb_route_base` |
+| camera cti | `camera_ss` | `0x0740_1000..0x0740_1FFF` | `0x4F401000..0x4F401FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| mipi cti | `mipiss` | `0x0740_2000..0x0740_2FFF` | `0x4F402000..0x4F402FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr0 cti | `ddrss0` | `0x0740_3000..0x0740_3FFF` | `0x4F403000..0x4F403FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr1 cti | `ddrss1` | `0x0740_4000..0x0740_4FFF` | `0x4F404000..0x4F404FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr2 cti | `ddrss2` | `0x0740_5000..0x0740_5FFF` | `0x4F405000..0x4F405FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr3 cti | `ddrss3` | `0x0740_6000..0x0740_6FFF` | `0x4F406000..0x4F406FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr4 cti | `ddrss4` | `0x0740_7000..0x0740_7FFF` | `0x4F407000..0x4F407FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr5 cti | `ddrss5` | `0x0740_8000..0x0740_8FFF` | `0x4F408000..0x4F408FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr6 cti | `ddrss6` | `0x0740_9000..0x0740_9FFF` | `0x4F409000..0x4F409FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr7 cti | `ddrss7` | `0x0740_A000..0x0740_AFFF` | `0x4F40A000..0x4F40AFFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr8 cti | `ddrss8` | `0x0740_B000..0x0740_BFFF` | `0x4F40B000..0x4F40BFFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr9 cti | `ddrss9` | `0x0740_C000..0x0740_CFFF` | `0x4F40C000..0x4F40CFFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr10 cti | `ddrss10` | `0x0740_D000..0x0740_DFFF` | `0x4F40D000..0x4F40DFFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ddr11 cti | `ddrss11` | `0x0740_E000..0x0740_EFFF` | `0x4F40E000..0x4F40EFFF` | LOCAL CTI | `local_cti_tgt_id` |
+| npu0 cti | `npuss0` | `0x0740_F000..0x0740_FFFF` | `0x4F40F000..0x4F40FFFF` | LOCAL CTI | `local_cti_tgt_id` |
+| npu1 cti | `npuss1` | `0x0741_0000..0x0741_0FFF` | `0x4F410000..0x4F410FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| npu2 cti | `npuss2` | `0x0741_1000..0x0741_1FFF` | `0x4F411000..0x4F411FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| npu3 cti | `npuss3` | `0x0741_2000..0x0741_2FFF` | `0x4F412000..0x4F412FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| npu4 cti | `npuss4` | `0x0741_3000..0x0741_3FFF` | `0x4F413000..0x4F413FFF` | LOCAL CTI | `local_cti_tgt_id` |
+| ufs cti | `ufsss` | `0x0741_4000..0x0741_4FFF` | `0x4F414000..0x4F414FFF` | LOCAL CTI | `local_cti_tgt_id` |
 
 ## TNIU Address And Target Table
 
@@ -102,7 +130,7 @@ Generated macro evidence is in `build_logic/aon_ss_iniu_sys/aon_ss_iniu_sys_macr
 ## Validation Status
 
 - `python3 -m py_compile` passes for the STS demo Python sources.
-- `StsTemplate.py` imports successfully and validates 191 generated address-map entries.
+- `StsTemplate.py` imports successfully and validates 212 generated address-map entries.
 - Regeneration completed and produced 521 RTL/filelist files under `build_logic/`.
 - Generated INIU macro files contain `STS_INIU_ADDR_MAP_START_TABLE`, `STS_INIU_ADDR_MAP_END_TABLE`, `STS_INIU_ADDR_MAP_TGT_ID_TABLE`, and no old `BASE_TABLE` / `MASK_TABLE` macros.
 - `make -C lwnoc_sts_noc_demo/sim run_aon_addr_map run_aon_axi_access` passes: 192 addr-map checks and 382 AXI transactions.

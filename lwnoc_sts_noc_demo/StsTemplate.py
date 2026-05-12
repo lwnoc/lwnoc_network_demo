@@ -120,6 +120,14 @@ class StsSocTniuResource(TypedDict):
     has_iniu_cti_apb: bool
 
 
+class StsSocExtraDebugOffsetRow(TypedDict):
+    name: str
+    resource_key: str
+    start_offset: int
+    end_offset: int
+    target_kind: str
+
+
 _STS_SOC_TNIU_ROWS = [
     ("safetyss_aon_local", "AON_LOCAL", "SafetySS(Aon)", 0, 34, True),
     ("cpuss", "CPUSS", "CPUSS", 1, 1, False),
@@ -183,6 +191,184 @@ for key, env_token, canonical, addr_idx, tniu_id, has_iniu_cti_apb in _STS_SOC_T
     )
 
 STS_SOC_TNIU_RESOURCE_BY_NAME = {entry["key"]: entry for entry in STS_SOC_TNIU_RESOURCES}
+
+STS_SOC_EXTRA_DEBUG_OFFSET_ROWS: tuple[StsSocExtraDebugOffsetRow, ...] = (
+    {
+        "name": "camera_funnel",
+        "resource_key": "camera_ss",
+        "start_offset": 0x0740_0000,
+        "end_offset": 0x0740_0FFF,
+        "target_kind": "sys_apb",
+    },
+    {
+        "name": "camera_cti",
+        "resource_key": "camera_ss",
+        "start_offset": 0x0740_1000,
+        "end_offset": 0x0740_1FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "mipi_cti",
+        "resource_key": "mipiss",
+        "start_offset": 0x0740_2000,
+        "end_offset": 0x0740_2FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr0_cti",
+        "resource_key": "ddrss0",
+        "start_offset": 0x0740_3000,
+        "end_offset": 0x0740_3FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr1_cti",
+        "resource_key": "ddrss1",
+        "start_offset": 0x0740_4000,
+        "end_offset": 0x0740_4FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr2_cti",
+        "resource_key": "ddrss2",
+        "start_offset": 0x0740_5000,
+        "end_offset": 0x0740_5FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr3_cti",
+        "resource_key": "ddrss3",
+        "start_offset": 0x0740_6000,
+        "end_offset": 0x0740_6FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr4_cti",
+        "resource_key": "ddrss4",
+        "start_offset": 0x0740_7000,
+        "end_offset": 0x0740_7FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr5_cti",
+        "resource_key": "ddrss5",
+        "start_offset": 0x0740_8000,
+        "end_offset": 0x0740_8FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr6_cti",
+        "resource_key": "ddrss6",
+        "start_offset": 0x0740_9000,
+        "end_offset": 0x0740_9FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr7_cti",
+        "resource_key": "ddrss7",
+        "start_offset": 0x0740_A000,
+        "end_offset": 0x0740_AFFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr8_cti",
+        "resource_key": "ddrss8",
+        "start_offset": 0x0740_B000,
+        "end_offset": 0x0740_BFFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr9_cti",
+        "resource_key": "ddrss9",
+        "start_offset": 0x0740_C000,
+        "end_offset": 0x0740_CFFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr10_cti",
+        "resource_key": "ddrss10",
+        "start_offset": 0x0740_D000,
+        "end_offset": 0x0740_DFFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ddr11_cti",
+        "resource_key": "ddrss11",
+        "start_offset": 0x0740_E000,
+        "end_offset": 0x0740_EFFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "npu0_cti",
+        "resource_key": "npuss0",
+        "start_offset": 0x0740_F000,
+        "end_offset": 0x0740_FFFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "npu1_cti",
+        "resource_key": "npuss1",
+        "start_offset": 0x0741_0000,
+        "end_offset": 0x0741_0FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "npu2_cti",
+        "resource_key": "npuss2",
+        "start_offset": 0x0741_1000,
+        "end_offset": 0x0741_1FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "npu3_cti",
+        "resource_key": "npuss3",
+        "start_offset": 0x0741_2000,
+        "end_offset": 0x0741_2FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "npu4_cti",
+        "resource_key": "npuss4",
+        "start_offset": 0x0741_3000,
+        "end_offset": 0x0741_3FFF,
+        "target_kind": "local_cti",
+    },
+    {
+        "name": "ufs_cti",
+        "resource_key": "ufsss",
+        "start_offset": 0x0741_4000,
+        "end_offset": 0x0741_4FFF,
+        "target_kind": "local_cti",
+    },
+)
+
+
+def _extra_debug_target_id(resource: StsSocTniuResource, target_kind: str) -> int:
+    if target_kind == "sys_apb":
+        return resource["sys_apb_route_base"]
+    if target_kind == "local_cti":
+        return resource["local_cti_tgt_id"]
+    raise ValueError(f"unsupported extra debug target kind {target_kind}")
+
+
+def _build_extra_debug_offset_entries() -> list[tuple[int, int, int]]:
+    entries: list[tuple[int, int, int]] = []
+    for row in STS_SOC_EXTRA_DEBUG_OFFSET_ROWS:
+        resource = STS_SOC_TNIU_RESOURCE_BY_NAME.get(row["resource_key"])
+        if resource is None:
+            raise ValueError(f"unknown extra debug resource key {row['resource_key']}")
+        start_addr = STS_SOC_DEBUG_BASE + row["start_offset"]
+        end_addr = STS_SOC_DEBUG_BASE + row["end_offset"]
+        if row["start_offset"] > row["end_offset"]:
+            raise ValueError(f"invalid extra debug range for {row['name']}: start after end")
+        if not (STS_SOC_DEBUG_BASE <= start_addr <= end_addr <= STS_SOC_DEBUG_END):
+            raise ValueError(
+                f"extra debug range {row['name']} 0x{start_addr:08X}..0x{end_addr:08X} exceeds debug space"
+            )
+        entries.append((start_addr, end_addr, _extra_debug_target_id(resource, row["target_kind"])))
+    return entries
+
+
 for entry in STS_SOC_TNIU_RESOURCES:
     func_end = entry["func_base"] | (~STS_SOC_FUNC_WINDOW_MASK & 0xFFFF_FFFF)
     debug_end = entry["debug_base"] | (~STS_SOC_DEBUG_WINDOW_MASK & 0xFFFF_FFFF)
@@ -263,12 +449,13 @@ def _build_full_addr_map_entries() -> list[tuple[int, int, int]]:
         entries.append((func_base, func_end, sys_apb_tgt_id))
         entries.append((func_base + 0x1000, func_base + 0x1FFF, sys_reg_tgt_id))
         entries.append((func_base, func_base + 0x0FFF, local_regbank_tgt_id))
+    entries.extend(_build_extra_debug_offset_entries())
     return entries
 
 
 STS_SOC_ADDR_MAP_ENTRIES = _build_full_addr_map_entries()
-if len(STS_SOC_ADDR_MAP_ENTRIES) != 191:
-    raise ValueError(f"expected 191 full-topo address-map entries, got {len(STS_SOC_ADDR_MAP_ENTRIES)}")
+if len(STS_SOC_ADDR_MAP_ENTRIES) != 212:
+    raise ValueError(f"expected 212 full-topo address-map entries, got {len(STS_SOC_ADDR_MAP_ENTRIES)}")
 
 STS_SOC_ADDR_MAP_START_TABLE_INT = _pack_int(AXI_ADDR_WIDTH, [entry[0] for entry in STS_SOC_ADDR_MAP_ENTRIES])
 STS_SOC_ADDR_MAP_END_TABLE_INT = _pack_int(AXI_ADDR_WIDTH, [entry[1] for entry in STS_SOC_ADDR_MAP_ENTRIES])

@@ -56,10 +56,17 @@ AON_AXI_ACCESS_BUILD_DIR := $(BUILD_DIR)/aon_axi_access
 AON_AXI_ACCESS_SIMV := $(AON_AXI_ACCESS_BUILD_DIR)/simv
 AON_AXI_ACCESS_COMPILE_LOG := $(AON_AXI_ACCESS_BUILD_DIR)/compile.log
 AON_AXI_ACCESS_RUN_LOG := $(AON_AXI_ACCESS_BUILD_DIR)/run.log
+DECODER_LUT_TB_SV := $(SIM_DIR)/tb_sts_decoder_lut_min.sv
+DECODER_LUT_BUILD_DIR := $(BUILD_DIR)/decoder_lut_min
+DECODER_LUT_SIMV := $(DECODER_LUT_BUILD_DIR)/simv
+DECODER_LUT_COMPILE_LOG := $(DECODER_LUT_BUILD_DIR)/compile.log
+DECODER_LUT_RUN_LOG := $(DECODER_LUT_BUILD_DIR)/run.log
 COMMON_DEPS_F := $(DEMO_DIR)/filelists/sts_common_dep.f
 CHECK_COMPILE_LOG := $(SIM_DIR)/check_compile_log.py
 # Top-level DUT filelist published under filelists/
 DUT_FILELIST := $(DEMO_DIR)/filelists/filelist.f
+DEC_L0_ROOT_MACROS := $(firstword $(wildcard $(DEMO_DIR)/build_logic/sts_dec_l0_root/sts_dec_l0_root_macros_*.sv))
+DEC_L1_UPPER_CTRL_MACROS := $(firstword $(wildcard $(DEMO_DIR)/build_logic/sts_dec_l1_upper_ctrl/sts_dec_l1_upper_ctrl_macros_*.sv))
 
 TESTCASES := tc_reset tc_regbank_rw tc_all_windows_rw tc_decode_err tc_slverr tc_strobe_walk tc_apb_stall
 SIM_ARGS ?=
@@ -74,7 +81,7 @@ VCS_FLAGS := -full64 \
              +define+ASIC_SIM \
              -P $(VERDI_PLI_TAB) $(VERDI_PLI_LIB)
 
-.PHONY: all compile run_test regression compile_aon_addr_map run_aon_addr_map compile_aon_axi_access run_aon_axi_access sim_wave wave clean
+.PHONY: all compile run_test regression compile_aon_addr_map run_aon_addr_map compile_aon_axi_access run_aon_axi_access compile_decoder_lut_min run_decoder_lut_min sim_wave wave clean
 
 all: compile regression
 
@@ -156,6 +163,35 @@ compile_aon_axi_access:
 
 run_aon_axi_access: compile_aon_axi_access
 	cd $(AON_AXI_ACCESS_BUILD_DIR) && $(AON_AXI_ACCESS_SIMV) -l $(AON_AXI_ACCESS_RUN_LOG)
+
+compile_decoder_lut_min:
+	@if [ -z "$(DEC_L0_ROOT_MACROS)" ]; then \
+	    echo "Root decoder macro file is missing. Run python3 $(DEMO_DIR)/gen_sts_soc_topo.py first."; \
+	    exit 1; \
+	fi
+	@if [ -z "$(DEC_L1_UPPER_CTRL_MACROS)" ]; then \
+	    echo "L1 upper decoder macro file is missing. Run python3 $(DEMO_DIR)/gen_sts_soc_topo.py first."; \
+	    exit 1; \
+	fi
+	mkdir -p $(DECODER_LUT_BUILD_DIR)
+	cd $(SIM_DIR) && $(VCS) $(VCS_FLAGS) \
+	    $(DEC_L0_ROOT_MACROS) \
+	    $(DEC_L1_UPPER_CTRL_MACROS) \
+	    $(STS_NOC_DIR)/rtl/network/sts_network_define.sv \
+	    $(DEMO_DIR)/build_logic/sts_dec_l0_root/lwnoc_sts_pack.sv \
+	    $(DEMO_DIR)/build_logic/sts_dec_l0_root/sts_ctm.sv \
+	    -f $(FCIP_DIR)/vc/basic.f \
+	    -f $(FCIP_DIR)/vc/arbiter.f \
+	    $(DEMO_DIR)/build_logic/sts_dec_l0_root/sts_noc_dec_node.sv \
+	    $(DECODER_LUT_TB_SV) \
+	    -top tb_sts_decoder_lut_min \
+	    -Mdir=$(DECODER_LUT_BUILD_DIR)/csrc \
+	    -o $(DECODER_LUT_SIMV) \
+	    -l $(DECODER_LUT_COMPILE_LOG)
+	python3 $(CHECK_COMPILE_LOG) $(DECODER_LUT_COMPILE_LOG)
+
+run_decoder_lut_min: compile_decoder_lut_min
+	cd $(DECODER_LUT_BUILD_DIR) && $(DECODER_LUT_SIMV) -l $(DECODER_LUT_RUN_LOG)
 
 regression: $(SIMV)
 	mkdir -p $(BUILD_DIR)/logs
