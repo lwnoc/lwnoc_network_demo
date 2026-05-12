@@ -18,20 +18,6 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 BUILD_DIR = REPO_ROOT / "build" / "niu_stub_views"
 TEMP_RESOLVED_FILELIST_DIR = REPO_ROOT / "build" / "temp" / "niu_stub_views_filelists"
 
-KNOWN_PORT_WIDTH_SUFFIXES: tuple[tuple[str, int], ...] = (
-    ("pstate", 3),
-    ("pactive", 2),
-    ("lp_req", 7),
-    ("lp_hub_rx_req", 7),
-    ("lp_hub_tx_req", 7),
-    ("lwnoc_rx_req", 13),
-    ("lwnoc_tx_req", 13),
-    ("afifo_slv_rx_req", 13),
-    ("afifo_slv_tx_req", 13),
-    ("afifo_mst_rx_req", 13),
-    ("afifo_mst_tx_req", 13),
-)
-
 
 @dataclass(frozen=True)
 class StubSpec:
@@ -58,6 +44,16 @@ class ParsedPort:
     name: str
     direction: str
     width: int
+
+
+@dataclass(frozen=True)
+class ParsedType:
+    name: str
+    kind: str
+    expr: str | None = None
+    msb: str | None = None
+    lsb: str | None = None
+    fields: tuple[tuple[str, str | None, str | None], ...] = ()
 
 
 SPECS: tuple[StubSpec, ...] = (
@@ -355,13 +351,6 @@ def _parse_width_term(raw: str) -> int | None:
     return int(raw, 10)
 
 
-def fallback_width_for_name(name: str) -> int | None:
-    for suffix, fallback_width in KNOWN_PORT_WIDTH_SUFFIXES:
-        if name == suffix or name.endswith(f"_{suffix}"):
-            return fallback_width
-    return None
-
-
 def clog2(value: int) -> int:
     if value <= 1:
         return 0
@@ -405,7 +394,7 @@ def _split_ternary(expr: str) -> tuple[str, str, str] | None:
 
 def transform_sv_expr(expr: str) -> str | None:
     expr = expr.strip().rstrip(",;")
-    if not expr or "$bits" in expr:
+    if not expr:
         return None
 
     ternary = _split_ternary(expr)
@@ -424,7 +413,27 @@ def transform_sv_expr(expr: str) -> str | None:
     return expr
 
 
-def eval_sv_expr(expr: str, symbols: dict[str, int]) -> int | None:
+def replace_bits_calls(expr: str, type_widths: dict[str, int]) -> str | None:
+    pattern = re.compile(r"\$bits\(\s*([A-Za-z_][A-Za-z0-9_$]*)\s*\)")
+
+    def _replace(match: re.Match[str]) -> str:
+        type_name = match.group(1)
+        width = type_widths.get(type_name)
+        if width is None:
+            raise KeyError(type_name)
+        return str(width)
+
+    try:
+        return pattern.sub(_replace, expr)
+    except KeyError:
+        return None
+
+
+def eval_sv_expr(expr: str, symbols: dict[str, int], type_widths: dict[str, int]) -> int | None:
+    expr = replace_bits_calls(expr, type_widths)
+    if expr is None:
+        return None
+
     expr_py = transform_sv_expr(expr)
     if expr_py is None:
         return None
@@ -441,19 +450,200 @@ def eval_sv_expr(expr: str, symbols: dict[str, int]) -> int | None:
     return None
 
 
+def parse_imported_package_names(source_file: Path) -> list[str]:
+    import_re = re.compile(r"^\s*import\s+([A-Za-z_][A-Za-z0-9_$]*)::\*\s*;")
+    packages: list[str] = []
+    for line in source_file.read_text(encoding="utf-8").splitlines():
+        match = import_re.match(line)
+        if match is not None:
+            packages.append(match.group(1))
+    return packages
+
+
+def find_package_file(package_name: str, anchor_dir: Path) -> Path | None:
+    search_roots = [
+        anchor_dir,
+        anchor_dir.parent,
+        REPO_ROOT / "subs",
+        REPO_ROOT,
+    ]
+
+    seen_roots: set[Path] = set()
+    for root in search_roots:
+        if root in seen_roots or not root.exists():
+            continue
+        seen_roots.add(root)
+        for suffix in (".sv", ".v"):
+            direct = root / f"{package_name}{suffix}"
+            if direct.exists():
+                return direct
+
+    for root in search_roots:
+        if not root.exists():
+            continue
+        for suffix in (".sv", ".v"):
+            matches = list(root.rglob(f"{package_name}{suffix}"))
+            if matches:
+                return matches[0]
+    return None
+
+
+def collect_related_source_files(source_file: Path) -> list[Path]:
+    ordered: list[Path] = []
+    queue = [source_file]
+    seen: set[Path] = set()
+
+    while queue:
+        current = queue.pop(0)
+        current = current.resolve()
+        if current in seen or not current.exists():
+            continue
+        seen.add(current)
+        ordered.append(current)
+        for package_name in parse_imported_package_names(current):
+            package_file = find_package_file(package_name, current.parent)
+            if package_file is not None:
+                queue.append(package_file)
+
+    return ordered
+
+
+def extract_type_specs(source_file: Path) -> list[ParsedType]:
+    lines = source_file.read_text(encoding="utf-8").splitlines()
+    enum_start_re = re.compile(r"^\s*typedef\s+enum\s+logic\s+\[(?P<msb>[^:\]]+)\s*:\s*(?P<lsb>[^\]]+)\]\s*\{")
+    struct_start_re = re.compile(r"^\s*typedef\s+struct\s+packed\s*\{")
+    type_end_re = re.compile(r"^\s*}\s*(?P<name>[A-Za-z_][A-Za-z0-9_$]*)\s*;\s*$")
+    logic_typedef_re = re.compile(
+        r"^\s*typedef\s+(?:logic|bit|reg)\s+(?:\[(?P<msb>[^:\]]+)\s*:\s*(?P<lsb>[^\]]+)\]\s+)?(?P<name>[A-Za-z_][A-Za-z0-9_$]*)\s*;\s*$"
+    )
+    field_re = re.compile(
+        r"^\s*(?P<type>[A-Za-z_][A-Za-z0-9_$]*|logic|bit|reg)\s*(?:\[(?P<msb>[^:\]]+)\s*:\s*(?P<lsb>[^\]]+)\])?\s+(?P<name>[A-Za-z_][A-Za-z0-9_$]*)\s*;\s*$"
+    )
+
+    specs: list[ParsedType] = []
+    index = 0
+    while index < len(lines):
+        line = lines[index]
+        enum_match = enum_start_re.match(line)
+        if enum_match is not None:
+            while index < len(lines) and type_end_re.match(lines[index]) is None:
+                index += 1
+            if index < len(lines):
+                end_match = type_end_re.match(lines[index])
+                assert end_match is not None
+                specs.append(
+                    ParsedType(
+                        name=end_match.group("name"),
+                        kind="enum",
+                        msb=enum_match.group("msb"),
+                        lsb=enum_match.group("lsb"),
+                    )
+                )
+            index += 1
+            continue
+
+        if struct_start_re.match(line) is not None:
+            fields: list[tuple[str, str | None, str | None]] = []
+            index += 1
+            while index < len(lines):
+                end_match = type_end_re.match(lines[index])
+                if end_match is not None:
+                    specs.append(
+                        ParsedType(
+                            name=end_match.group("name"),
+                            kind="struct",
+                            fields=tuple(fields),
+                        )
+                    )
+                    break
+                field_match = field_re.match(lines[index])
+                if field_match is not None:
+                    fields.append(
+                        (
+                            field_match.group("type"),
+                            field_match.group("msb"),
+                            field_match.group("lsb"),
+                        )
+                    )
+                index += 1
+            index += 1
+            continue
+
+        logic_match = logic_typedef_re.match(line)
+        if logic_match is not None:
+            specs.append(
+                ParsedType(
+                    name=logic_match.group("name"),
+                    kind="logic",
+                    msb=logic_match.group("msb"),
+                    lsb=logic_match.group("lsb"),
+                )
+            )
+        index += 1
+
+    return specs
+
+
+def eval_type_width(spec: ParsedType, symbols: dict[str, int], type_widths: dict[str, int]) -> int | None:
+    if spec.kind in {"enum", "logic"}:
+        if spec.msb is None or spec.lsb is None:
+            return 1
+        msb_value = _parse_width_term(spec.msb)
+        lsb_value = _parse_width_term(spec.lsb)
+        if msb_value is None:
+            msb_value = eval_sv_expr(spec.msb, symbols, type_widths)
+        if lsb_value is None:
+            lsb_value = eval_sv_expr(spec.lsb, symbols, type_widths)
+        if msb_value is None or lsb_value is None:
+            return None
+        return abs(msb_value - lsb_value) + 1
+
+    if spec.kind == "struct":
+        total_width = 0
+        for field_type, msb, lsb in spec.fields:
+            if field_type in {"logic", "bit", "reg"}:
+                if msb is None or lsb is None:
+                    field_width = 1
+                else:
+                    msb_value = _parse_width_term(msb)
+                    lsb_value = _parse_width_term(lsb)
+                    if msb_value is None:
+                        msb_value = eval_sv_expr(msb, symbols, type_widths)
+                    if lsb_value is None:
+                        lsb_value = eval_sv_expr(lsb, symbols, type_widths)
+                    if msb_value is None or lsb_value is None:
+                        return None
+                    field_width = abs(msb_value - lsb_value) + 1
+            else:
+                field_width = type_widths.get(field_type)
+                if field_width is None:
+                    return None
+            total_width += field_width
+        return total_width
+
+    return None
+
+
 def collect_source_symbols(source_file: Path) -> dict[str, int]:
-    symbol_files = sorted(source_file.parent.glob("*_macros_*.sv"))
-    symbol_files += sorted(source_file.parent.glob("*_pack_define.sv"))
-    symbol_files += sorted(source_file.parent.glob("*_pack.sv"))
-    symbol_files.append(source_file)
+    symbol_files = collect_related_source_files(source_file)
+    local_files = sorted(source_file.parent.glob("*_macros_*.sv"))
+    local_files += sorted(source_file.parent.glob("*_pack_define.sv"))
+    local_files += sorted(source_file.parent.glob("*_pack.sv"))
+    local_files += sorted(source_file.parent.glob("*_define.sv"))
+    for path in local_files:
+        resolved = path.resolve()
+        if resolved not in symbol_files:
+            symbol_files.append(resolved)
 
     define_re = re.compile(r"^\s*`define\s+(?P<name>\w+)\s+(?P<expr>.+?)\s*$")
     param_re = re.compile(
-        r"^\s*(?:localparam|parameter)(?:\s+\w+)*\s+(?P<name>\w+)\s*=\s*(?P<expr>.+?)\s*[,;]\s*$"
+        r"^\s*(?:localparam|parameter)(?:\s+\w+)*\s+(?P<name>\w+)\s*=\s*(?P<expr>.+?)\s*(?:[,;])?\s*$"
     )
 
+    type_specs: list[ParsedType] = []
     pending: list[tuple[str, str]] = []
     for path in symbol_files:
+        type_specs.extend(extract_type_specs(path))
         for line in path.read_text(encoding="utf-8").splitlines():
             match = define_re.match(line)
             if match is None:
@@ -462,21 +652,33 @@ def collect_source_symbols(source_file: Path) -> dict[str, int]:
                 pending.append((match.group("name"), match.group("expr")))
 
     symbols: dict[str, int] = {}
+    type_widths: dict[str, int] = {}
     unresolved = pending
-    for _ in range(8):
-        next_unresolved: list[tuple[str, str]] = []
+    unresolved_types = type_specs
+    for _ in range(12):
+        next_unresolved_types: list[ParsedType] = []
         progress = False
+        for spec in unresolved_types:
+            value = eval_type_width(spec, symbols, type_widths)
+            if value is None:
+                next_unresolved_types.append(spec)
+                continue
+            type_widths[spec.name] = value
+            progress = True
+
+        next_unresolved: list[tuple[str, str]] = []
         for name, expr in unresolved:
-            value = eval_sv_expr(expr, symbols)
+            value = eval_sv_expr(expr, symbols, type_widths)
             if value is None:
                 next_unresolved.append((name, expr))
                 continue
             symbols[name] = value
             progress = True
+        unresolved_types = next_unresolved_types
         unresolved = next_unresolved
-        if not unresolved or not progress:
+        if (not unresolved and not unresolved_types) or not progress:
             break
-    return symbols
+    return {**type_widths, **symbols}
 
 
 def parse_source_ports(source_file: Path, top_module: str) -> list[ParsedPort]:
@@ -522,16 +724,11 @@ def parse_source_ports(source_file: Path, top_module: str) -> list[ParsedPort]:
             msb_value = _parse_width_term(msb)
             lsb_value = _parse_width_term(lsb)
             if msb_value is None:
-                msb_value = eval_sv_expr(msb, symbols)
+                msb_value = eval_sv_expr(msb, symbols, symbols)
             if lsb_value is None:
-                lsb_value = eval_sv_expr(lsb, symbols)
+                lsb_value = eval_sv_expr(lsb, symbols, symbols)
             if msb_value is not None and lsb_value is not None:
                 width = abs(msb_value - lsb_value) + 1
-
-        if width == 1:
-            fallback_width = fallback_width_for_name(match.group("name"))
-            if fallback_width is not None:
-                width = fallback_width
 
         ports.append(
             ParsedPort(
@@ -707,11 +904,6 @@ def io_direction(io: Any) -> str:
 
 def port_width(io: Any) -> int:
     width = int(getattr(io, "width", 0) or 0)
-    if width < 1:
-        name = str(getattr(io, "name", "") or "")
-        fallback_width = fallback_width_for_name(name)
-        if fallback_width is not None:
-            width = fallback_width
     if width < 1:
         width = 1  # unresolved width fallback, stub output still reviewable
     return width

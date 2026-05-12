@@ -24,11 +24,11 @@ module sts_iniu_sys_side_stub (
     input  logic [0:0]  s_wvalid                ,  // AXI write data valid/ready
     output logic [0:0]  s_wready                ,  // AXI write data valid/ready
     input  logic [31:0] s_wdata                 ,  // AXI write data
-    input  logic [0:0]  s_wstrb                 ,  // AXI write strobe
+    input  logic [3:0]  s_wstrb                 ,  // AXI write strobe
     input  logic [0:0]  s_wlast                 ,  // AXI write last
     output logic [0:0]  s_bvalid                ,  // AXI write response valid/ready
     input  logic [0:0]  s_bready                ,  // AXI write response valid/ready
-    output logic [0:0]  s_bid                   ,  // AXI write response ID
+    output logic [7:0]  s_bid                   ,  // AXI write response ID
     output logic [1:0]  s_bresp                 ,  // AXI write response
     input  logic [0:0]  s_arvalid               ,  // AXI read address valid/ready
     output logic [0:0]  s_arready               ,  // AXI read address valid/ready
@@ -44,18 +44,18 @@ module sts_iniu_sys_side_stub (
     input  logic [7:0]  s_aruser                ,  // AXI read user
     output logic [0:0]  s_rvalid                ,  // AXI read data valid/ready
     input  logic [0:0]  s_rready                ,  // AXI read data valid/ready
-    output logic [0:0]  s_rid                   ,  // AXI read data ID
+    output logic [7:0]  s_rid                   ,  // AXI read data ID
     output logic [31:0] s_rdata                 ,  // AXI read data
     output logic [1:0]  s_rresp                 ,  // AXI read response
     output logic [0:0]  s_rlast                 ,  // AXI read last
-    output logic [15:0] req_wptr_async          ,  // async FIFO write pointer
-    input  logic [15:0] req_rptr_async          ,  // async FIFO read pointer (async)
-    input  logic [15:0] req_rptr_sync           ,  // async FIFO read pointer (sync)
-    output logic [0:0]  req_pld_sync            ,  // async FIFO payload sync
-    input  logic [15:0] rsp_wptr_async          ,  // async FIFO write pointer
-    output logic [15:0] rsp_rptr_async          ,  // async FIFO read pointer (async)
-    output logic [15:0] rsp_rptr_sync           ,  // async FIFO read pointer (sync)
-    input  logic [0:0]  rsp_pld_sync            ,  // async FIFO payload sync
+    output logic [3:0]  req_wptr_async          ,  // async FIFO write pointer
+    input  logic [3:0]  req_rptr_async          ,  // async FIFO read pointer (async)
+    input  logic [3:0]  req_rptr_sync           ,  // async FIFO read pointer (sync)
+    output logic [83:0] req_pld_sync            ,  // async FIFO payload sync
+    input  logic [3:0]  rsp_wptr_async          ,  // async FIFO write pointer
+    output logic [3:0]  rsp_rptr_async          ,  // async FIFO read pointer (async)
+    output logic [3:0]  rsp_rptr_sync           ,  // async FIFO read pointer (sync)
+    input  logic [74:0] rsp_pld_sync            ,  // async FIFO payload sync
     input  logic [7:0]  sys_cti_trigin          ,
     output logic [7:0]  sys_cti_trigin_ack      ,
     output logic [7:0]  noc_cti_trigin          ,

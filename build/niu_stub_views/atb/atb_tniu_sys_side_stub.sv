@@ -18,7 +18,7 @@ module atb_tniu_sys_side_stub (
     input  logic [0:0]   m_syncreq            ,  // ATB sync request
     output logic [0:0]   m_atwakeup           ,  // ATB wakeup
     input  logic [0:0]   preq                 ,
-    input  logic [2:0]   pstate               ,
+    input  logic [1:0]   pstate               ,
     output logic [1:0]   pactive              ,
     output logic [0:0]   paccept              ,
     output logic [0:0]   pdeny                ,
@@ -26,8 +26,8 @@ module atb_tniu_sys_side_stub (
     output logic [0:0]   flush_req_level      ,
     output logic [0:0]   atb_tniu_afifo_sb_err,  // ECC error flag (single/double bit)
     output logic [0:0]   atb_tniu_afifo_db_err,  // ECC error flag (single/double bit)
-    input  logic [0:0]   lw_rx_req            ,
-    output logic [0:0]   lw_tx_req            ,
+    input  logic [12:0]  lw_rx_req            ,
+    output logic [12:0]  lw_tx_req            ,
     input  logic [12:0]  afifo_slv_rx_req     ,
     output logic [12:0]  afifo_slv_tx_req     ,
     input  logic [15:0]  wptr_async           ,  // async FIFO write pointer

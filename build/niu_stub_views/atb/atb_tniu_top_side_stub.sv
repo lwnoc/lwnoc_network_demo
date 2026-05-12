@@ -24,8 +24,8 @@ module atb_tniu_top_side_stub (
     input  logic [15:0]  rptr_sync         ,  // async FIFO read pointer (sync)
     output logic [152:0] pld_sync          ,  // async FIFO payload sync
     input  logic [0:0]   syncreq_level     ,
-    input  logic [0:0]   lw_rx_req         ,
-    output logic [0:0]   lw_tx_req         ,
+    input  logic [12:0]  lw_rx_req         ,
+    output logic [12:0]  lw_tx_req         ,
     input  logic [12:0]  afifo_slv_rx_req  ,
     output logic [12:0]  afifo_slv_tx_req  ,
     input  logic [9:0]   timeout_val         // timeout value

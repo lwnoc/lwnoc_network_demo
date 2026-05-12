@@ -8,28 +8,28 @@
 module sts_iniu_top_side_stub (
     input  logic [0:0]  clk_dst                 ,  // clock input
     input  logic [0:0]  rst_n_dst               ,  // active-low reset
-    input  logic [15:0] req_wptr_async          ,  // async FIFO write pointer
-    output logic [15:0] req_rptr_async          ,  // async FIFO read pointer (async)
-    output logic [15:0] req_rptr_sync           ,  // async FIFO read pointer (sync)
-    input  logic [0:0]  req_pld_sync            ,  // async FIFO payload sync
-    output logic [15:0] rsp_wptr_async          ,  // async FIFO write pointer
-    input  logic [15:0] rsp_rptr_async          ,  // async FIFO read pointer (async)
-    input  logic [15:0] rsp_rptr_sync           ,  // async FIFO read pointer (sync)
-    output logic [0:0]  rsp_pld_sync            ,  // async FIFO payload sync
+    input  logic [3:0]  req_wptr_async          ,  // async FIFO write pointer
+    output logic [3:0]  req_rptr_async          ,  // async FIFO read pointer (async)
+    output logic [3:0]  req_rptr_sync           ,  // async FIFO read pointer (sync)
+    input  logic [83:0] req_pld_sync            ,  // async FIFO payload sync
+    output logic [3:0]  rsp_wptr_async          ,  // async FIFO write pointer
+    input  logic [3:0]  rsp_rptr_async          ,  // async FIFO read pointer (async)
+    input  logic [3:0]  rsp_rptr_sync           ,  // async FIFO read pointer (sync)
+    output logic [74:0] rsp_pld_sync            ,  // async FIFO payload sync
     output logic [0:0]  req_s_vld               ,
     input  logic [0:0]  req_s_rdy               ,
-    output logic [0:0]  req_s_pld               ,
+    output logic [73:0] req_s_pld               ,
     input  logic [0:0]  rsp_m_vld               ,
     output logic [0:0]  rsp_m_rdy               ,
-    input  logic [65:0] rsp_m_pld               ,
+    input  logic [64:0] rsp_m_pld               ,
     input  logic [31:0] dbg_data_in             ,  // debug interface
     output logic [31:0] dbg_data_out            ,  // debug interface
     input  logic [7:0]  sys_side_cti_trigin     ,
     output logic [7:0]  sys_side_cti_trigin_ack ,
     output logic [7:0]  sys_side_cti_trigout    ,
     input  logic [7:0]  sys_side_cti_trigout_ack,
-    input  logic [71:0] ctm_channel_in          ,
-    output logic [71:0] ctm_channel_out         ,
+    input  logic [39:0] ctm_channel_in          ,
+    output logic [39:0] ctm_channel_out         ,
     input  logic [31:0] sys_side_ctm_trigin     ,
     output logic [31:0] sys_side_ctm_trigin_ack ,
     output logic [31:0] sys_side_ctm_trigout    ,
