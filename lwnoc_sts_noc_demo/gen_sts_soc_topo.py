@@ -41,13 +41,13 @@ def main():
     comp.generate_filelist(abs_path=False, prefix=FILELIST_PREFIX)
 
     top_wrap = UhdlWrapperNode(TOP_WRAP_ID)
-    setattr(top_wrap, "u_aon_ss_iniu_top", logic_wrapper.aon_ss_iniu.top_side)
+    setattr(top_wrap, "u_aon_ss_iniu_noc_side", logic_wrapper.aon_ss_iniu.top_side)
     for leaf_name in sorted(logic_wrapper.tniu_nodes.keys()):
         setattr(
             top_wrap,
-            f"u_{leaf_name}_top",
+            f"u_{leaf_name}_noc_side",
             StsTniuTopSideNode(
-                id=f"{leaf_name}_tniu_top_side",
+                id=f"{leaf_name}_tniu_noc_side",
                 cfg=STS_SOC_TNIU_TOP_CONFIGS[leaf_name],
             ),
         )

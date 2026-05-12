@@ -285,6 +285,7 @@ STS_COMMON_ID_MACROS = {
     "STS_SRC_ID_WIDTH": SRC_ID_WIDTH,
     "STS_TGT_ID_WIDTH": TGT_ID_WIDTH,
     "STS_TXN_ID_WIDTH": 8,
+    "STS_RESERVE_WIDTH": 8,
 }
 
 STS_COMMON_CTI_MACROS = {
@@ -531,14 +532,14 @@ aon_ss_iniu_sys_config = _apply_iniu_macros(
     )
 )
 
-aon_ss_iniu_top_side_config = _apply_iniu_macros(
+aon_ss_iniu_noc_side_config = _apply_iniu_macros(
     _new_template_cfg(
-        name="aon_ss_iniu_top_side",
+        name="aon_ss_iniu_noc_side",
         filelist=str(STS_INIU_NOC_PUB_F),
-        env_var="AON_SS_INIU_TOP_SIDE_OUT_DIR",
+        env_var="AON_SS_INIU_NOC_SIDE_OUT_DIR",
     )
 )
-aon_ss_iniu_top_side_config.top_wrap = "sts_iniu_noc"
+aon_ss_iniu_noc_side_config.top_wrap = "sts_iniu_noc"
 
 
 sts_dec_l0_root_config = _apply_dec_config(
@@ -608,11 +609,11 @@ STS_SOC_DECODER_CONFIGS = {
 STS_SOC_TNIU_SYS_CONFIGS: dict[str, TemplateIPConfig] = {}
 STS_SOC_TNIU_NOC_CONFIGS: dict[str, TemplateIPConfig] = {}
 STS_SOC_TNIU_TOP_CONFIGS: dict[str, TemplateIPConfig] = {}
-STS_SOC_TNIU_TOP_SIDE_CONFIG = _apply_tniu_macros(
+STS_SOC_TNIU_TOP_NOC_SIDE_CONFIG = _apply_tniu_macros(
     _new_template_cfg(
-        name="ddrss_tniu_top_side",
+        name="sts_soc_tniu_noc_side",
         filelist=str(STS_TNIU_TOP_PUB_F),
-        env_var="DDRSS_TNIU_TOP_SIDE_OUT_DIR",
+        env_var="STS_SOC_TNIU_NOC_SIDE_OUT_DIR",
     ),
     "ddrss0",
 )
@@ -644,11 +645,10 @@ for entry in STS_SOC_TNIU_RESOURCES:
     else:
         sys_cfg = STS_SOC_TNIU_SYS_CONFIGS[cfg_key]
         noc_cfg = STS_SOC_TNIU_NOC_CONFIGS[cfg_key]
-    top_cfg = STS_SOC_TNIU_TOP_SIDE_CONFIG
+    top_cfg = STS_SOC_TNIU_TOP_NOC_SIDE_CONFIG
 
     _alias_template_env(f"{env_token}_TNIU_SYS_OUT_DIR", sys_cfg)
     _alias_template_env(f"{env_token}_TNIU_NOC_SIDE_OUT_DIR", noc_cfg)
-    _alias_template_env(f"{env_token}_TNIU_TOP_SIDE_OUT_DIR", top_cfg)
     STS_SOC_TNIU_SYS_CONFIGS[key] = sys_cfg
     STS_SOC_TNIU_NOC_CONFIGS[key] = noc_cfg
     STS_SOC_TNIU_TOP_CONFIGS[key] = top_cfg

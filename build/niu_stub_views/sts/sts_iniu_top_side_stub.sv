@@ -4,48 +4,50 @@
 // Future extension: FUSA error related ports will be added on this boundary in a later revision.
 // Requested source top module: sts_iniu_noc
 // Resolved source top module: sts_iniu_noc
-// Representative config: aon_ss_iniu_top_side_config (TemplateIPConfig name=aon_ss_iniu_top_side)
+// Representative config: aon_ss_iniu_noc_side_config (TemplateIPConfig name=aon_ss_iniu_noc_side)
 module sts_iniu_top_side_stub (
-    input  logic [0:0]   clk_dst                 ,  // clock input
-    input  logic [0:0]   rst_n_dst               ,  // active-low reset
-    input  logic [15:0]  req_wptr_async          ,  // async FIFO write pointer
-    output logic [15:0]  req_rptr_async          ,  // async FIFO read pointer (async)
-    output logic [15:0]  req_rptr_sync           ,  // async FIFO read pointer (sync)
-    input  logic [129:0] req_pld_sync            ,  // async FIFO payload sync
-    output logic [15:0]  rsp_wptr_async          ,  // async FIFO write pointer
-    input  logic [15:0]  rsp_rptr_async          ,  // async FIFO read pointer (async)
-    input  logic [15:0]  rsp_rptr_sync           ,  // async FIFO read pointer (sync)
-    output logic [75:0]  rsp_pld_sync            ,  // async FIFO payload sync
-    output logic [0:0]   req_s_vld               ,
-    input  logic [0:0]   req_s_rdy               ,
-    output logic [119:0] req_s_pld               ,
-    input  logic [0:0]   rsp_m_vld               ,
-    output logic [0:0]   rsp_m_rdy               ,
-    input  logic [65:0]  rsp_m_pld               ,
-    input  logic [31:0]  dbg_data_in             ,  // debug interface
-    output logic [31:0]  dbg_data_out            ,  // debug interface
-    input  logic [7:0]   sys_side_cti_trigin     ,
-    output logic [7:0]   sys_side_cti_trigin_ack ,
-    output logic [7:0]   sys_side_cti_trigout    ,
-    input  logic [7:0]   sys_side_cti_trigout_ack,
-    input  logic [71:0]  ctm_channel_in          ,
-    output logic [71:0]  ctm_channel_out         ,
-    input  logic [31:0]  sys_side_ctm_trigin     ,
-    output logic [31:0]  sys_side_ctm_trigin_ack ,
-    output logic [31:0]  sys_side_ctm_trigout    ,
-    input  logic [31:0]  sys_side_ctm_trigout_ack,
-    input  logic [0:0]   cti_apb_psel            ,  // APB select
-    input  logic [0:0]   cti_apb_penable         ,  // APB enable
-    input  logic [11:0]  cti_apb_paddr           ,  // APB address
-    input  logic [0:0]   cti_apb_pwrite          ,  // APB write enable
-    input  logic [31:0]  cti_apb_pwdata          ,  // APB write data
-    output logic [31:0]  cti_apb_prdata          ,  // APB read data
-    output logic [0:0]   cti_apb_pready          ,  // APB ready
-    output logic [0:0]   cti_apb_pslverr         ,  // APB slave error
-    input  logic [63:0]  dbg_timestamp_in        ,  // debug interface
-    output logic [63:0]  dbg_timestamp_out       ,  // debug interface
-    output logic [0:0]   req_afifo_sb_err        ,  // ECC error flag (single/double bit)
-    output logic [0:0]   req_afifo_db_err          // ECC error flag (single/double bit)
+    input  logic [0:0]  clk_dst                 ,  // clock input
+    input  logic [0:0]  rst_n_dst               ,  // active-low reset
+    input  logic [15:0] req_wptr_async          ,  // async FIFO write pointer
+    output logic [15:0] req_rptr_async          ,  // async FIFO read pointer (async)
+    output logic [15:0] req_rptr_sync           ,  // async FIFO read pointer (sync)
+    input  logic [0:0]  req_pld_sync            ,  // async FIFO payload sync
+    output logic [15:0] rsp_wptr_async          ,  // async FIFO write pointer
+    input  logic [15:0] rsp_rptr_async          ,  // async FIFO read pointer (async)
+    input  logic [15:0] rsp_rptr_sync           ,  // async FIFO read pointer (sync)
+    output logic [0:0]  rsp_pld_sync            ,  // async FIFO payload sync
+    output logic [0:0]  req_s_vld               ,
+    input  logic [0:0]  req_s_rdy               ,
+    output logic [0:0]  req_s_pld               ,
+    input  logic [0:0]  rsp_m_vld               ,
+    output logic [0:0]  rsp_m_rdy               ,
+    input  logic [65:0] rsp_m_pld               ,
+    input  logic [31:0] dbg_data_in             ,  // debug interface
+    output logic [31:0] dbg_data_out            ,  // debug interface
+    input  logic [7:0]  sys_side_cti_trigin     ,
+    output logic [7:0]  sys_side_cti_trigin_ack ,
+    output logic [7:0]  sys_side_cti_trigout    ,
+    input  logic [7:0]  sys_side_cti_trigout_ack,
+    input  logic [71:0] ctm_channel_in          ,
+    output logic [71:0] ctm_channel_out         ,
+    input  logic [31:0] sys_side_ctm_trigin     ,
+    output logic [31:0] sys_side_ctm_trigin_ack ,
+    output logic [31:0] sys_side_ctm_trigout    ,
+    input  logic [31:0] sys_side_ctm_trigout_ack,
+    input  logic [0:0]  cti_apb_psel            ,  // APB select
+    input  logic [0:0]  cti_apb_penable         ,  // APB enable
+    input  logic [11:0] cti_apb_paddr           ,  // APB address
+    input  logic [0:0]  cti_apb_pwrite          ,  // APB write enable
+    input  logic [31:0] cti_apb_pwdata          ,  // APB write data
+    output logic [31:0] cti_apb_prdata          ,  // APB read data
+    output logic [0:0]  cti_apb_pready          ,  // APB ready
+    output logic [0:0]  cti_apb_pslverr         ,  // APB slave error
+    input  logic [63:0] dbg_timestamp_in        ,  // debug interface
+    output logic [63:0] dbg_timestamp_out       ,  // debug interface
+    input  logic [7:0]  reserved_bits_in        ,
+    output logic [7:0]  reserved_bits_out       ,
+    output logic [0:0]  req_afifo_sb_err        ,  // ECC error flag (single/double bit)
+    output logic [0:0]  req_afifo_db_err          // ECC error flag (single/double bit)
 );
 
     // Future boundary note:
@@ -70,6 +72,7 @@ module sts_iniu_top_side_stub (
     assign cti_apb_pready = '0;
     assign cti_apb_pslverr = '0;
     assign dbg_timestamp_out = '0;
+    assign reserved_bits_out = '0;
     assign req_afifo_sb_err = '0;
     assign req_afifo_db_err = '0;
 

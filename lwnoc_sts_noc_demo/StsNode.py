@@ -202,6 +202,7 @@ class StsIniuSysNode(UhdlComponentNode):
         self.add_interface("ctm_event_out_ack_o", r"^ctm_trig_out_ack_o$")
         self.add_interface("dbg_timestamp", r"^dbg_timestamp_.*$")
         self.add_interface("dbg_data", r"^dbg_data_.*$")
+        self.add_interface("reserved_bits", r"^reserved_bits_.*$")
         self.add_interface("safety", r"^safety_.*$")  # all safety_* error outputs
 
 
@@ -226,6 +227,7 @@ class StsIniuNocNode(UhdlComponentNode):
         self.add_interface("dbg_timestamp_out", r"^dbg_timestamp_out$")
         self.add_interface("dbg_data_in", r"^dbg_data_in$")
         self.add_interface("dbg_data_out", r"^dbg_data_out$")
+        self.add_interface("reserved_bits", r"^reserved_bits_.*$")
         self.add_interface("cti_apb", r"^cti_apb_.*$")
         self.add_interface("req_afifo_sb_err", r"^req_afifo_sb_err$")
         self.add_interface("req_afifo_db_err", r"^req_afifo_db_err$")
@@ -275,6 +277,7 @@ class StsIniuNode(UhdlWrapperNode):
         self.add_interface("noc_dbg_timestamp_out")
         self.add_interface("noc_dbg_data_in")
         self.add_interface("noc_dbg_data_out")
+        self.add_interface("reserved_bits")
         self.add_interface("safety")
 
         connect(self.sys_side.clk_src, self.clk_src)
@@ -360,6 +363,7 @@ class StsTniuSysNode(UhdlComponentNode):
         self.add_interface("ctm_event_out_ack_o", r"^ctm_trig_out_ack_o$")
         self.add_interface("dbg_data", r"^dbg_data_.*$")
         self.add_interface("dbg_timestamp", r"^dbg_timestamp_.*$")
+        self.add_interface("reserved_bits", r"^reserved_bits_.*$")
         self.add_interface("safety", r"^sts_tniu_req_afifo_.*$")  # sb_err/db_err
 
 
@@ -387,6 +391,7 @@ class StsTniuNocNode(UhdlComponentNode):
         self.add_interface("dbg_data_out", r"^dbg_data_out$")
         self.add_interface("dbg_timestamp_in", r"^dbg_timestamp_in$")
         self.add_interface("dbg_timestamp_out", r"^dbg_timestamp_out$")
+        self.add_interface("reserved_bits", r"^reserved_bits_.*$")
         self.add_interface("cti_event", r"^cti_trig_.*$")
         self.add_interface("ctm_channel_in", r"^ctm_channel_in$")
         self.add_interface("ctm_channel_out", r"^ctm_channel_out$")
@@ -421,6 +426,7 @@ class StsTniuTopSideNode(UhdlComponentNode):
         self.add_interface("sys_apb", r"^m_.*$")
         self.add_interface("dbg_data", r"^dbg_data_.*$")
         self.add_interface("dbg_timestamp", r"^dbg_timestamp_.*$")
+        self.add_interface("reserved_bits", r"^reserved_bits_.*$")
         self.add_interface("cti_event", r"^cti_trig_.*$")
         self.add_interface("ctm_event", r"^ctm_trig_.*$")
         self.add_interface("ctm_channel", r"^ctm_channel.*$")
@@ -476,6 +482,7 @@ class StsTniuNode(UhdlWrapperNode):
         self.add_interface("noc_dbg_data_out")
         self.add_interface("noc_dbg_timestamp_in")
         self.add_interface("noc_dbg_timestamp_out")
+        self.add_interface("reserved_bits")
         self.add_interface("safety")
         self.add_interface("apb")
         self.add_interface("timing_bus1")

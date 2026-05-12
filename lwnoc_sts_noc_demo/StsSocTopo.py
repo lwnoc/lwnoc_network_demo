@@ -11,7 +11,7 @@ from StsTemplate import (
     STS_SOC_TNIU_CONFIGS,
     SRC_ID_WIDTH,
     aon_ss_iniu_sys_config,
-    aon_ss_iniu_top_side_config,
+    aon_ss_iniu_noc_side_config,
 )
 
 
@@ -132,7 +132,7 @@ class StsSocLogicTopo(UhdlWrapperNode):
         self.aon_ss_iniu = StsIniuNode(
             id="aon_ss_iniu",
             sys_cfg=aon_ss_iniu_sys_config,
-            noc_cfg=aon_ss_iniu_top_side_config,
+            noc_cfg=aon_ss_iniu_noc_side_config,
         )
         self.aon_ss_iniu_node_id = StsNodeIdConstNode(
             id="aon_ss_iniu_node_id",

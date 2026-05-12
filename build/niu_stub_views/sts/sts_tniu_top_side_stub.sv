@@ -4,7 +4,7 @@
 // Future extension: FUSA error related ports will be added on this boundary in a later revision.
 // Requested source top module: sts_tniu_noc
 // Resolved source top module: sts_tniu_noc
-// Representative config: STS_SOC_TNIU_TOP_CONFIGS.ddrss0 (TemplateIPConfig name=ddrss_tniu_top_side)
+// Representative config: STS_SOC_TNIU_TOP_CONFIGS.ddrss0 (TemplateIPConfig name=sts_soc_tniu_noc_side)
 module sts_tniu_top_side_stub (
     input  logic [0:0]   clk_src                 ,  // clock input
     input  logic [0:0]   rstn_src                ,  // active-low reset
@@ -36,6 +36,8 @@ module sts_tniu_top_side_stub (
     output logic [31:0]  dbg_data_out            ,  // debug interface
     input  logic [63:0]  dbg_timestamp_in        ,  // debug interface
     output logic [63:0]  dbg_timestamp_out       ,  // debug interface
+    input  logic [7:0]   reserved_bits_in        ,
+    output logic [7:0]   reserved_bits_out       ,
     input  logic [7:0]   sys_side_cti_trigin     ,
     output logic [7:0]   sys_side_cti_trigin_ack ,
     output logic [7:0]   sys_side_cti_trigout    ,
@@ -77,6 +79,7 @@ module sts_tniu_top_side_stub (
     assign pprot = '0;
     assign dbg_data_out = '0;
     assign dbg_timestamp_out = '0;
+    assign reserved_bits_out = '0;
     assign sys_side_cti_trigin_ack = '0;
     assign sys_side_cti_trigout = '0;
     assign ctm_channel_out = '0;

@@ -49,6 +49,8 @@ module sts_tniu_sys_side_stub (
     output logic [31:0]  dbg_data_out               ,  // debug interface
     input  logic [63:0]  dbg_timestamp_in           ,  // debug interface
     output logic [63:0]  dbg_timestamp_out          ,  // debug interface
+    input  logic [7:0]   reserved_bits_in           ,
+    output logic [7:0]   reserved_bits_out          ,
     output logic [0:0]   tniu_sys_regbank_parity_err,  // register bank parity error
     output logic [0:0]   sts_tniu_req_afifo_sb_err  ,  // ECC error flag (single/double bit)
     output logic [0:0]   sts_tniu_req_afifo_db_err  ,  // ECC error flag (single/double bit)
@@ -83,6 +85,7 @@ module sts_tniu_sys_side_stub (
     assign sys_ctm_trigout = '0;
     assign dbg_data_out = '0;
     assign dbg_timestamp_out = '0;
+    assign reserved_bits_out = '0;
     assign tniu_sys_regbank_parity_err = '0;
     assign sts_tniu_req_afifo_sb_err = '0;
     assign sts_tniu_req_afifo_db_err = '0;

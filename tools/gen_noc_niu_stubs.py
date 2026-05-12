@@ -5,6 +5,8 @@ from __future__ import annotations
 import argparse
 import importlib
 import json
+import math
+import os
 import re
 import sys
 from dataclasses import dataclass
@@ -22,6 +24,12 @@ KNOWN_PORT_WIDTH_SUFFIXES: tuple[tuple[str, int], ...] = (
     ("lp_req", 7),
     ("lp_hub_rx_req", 7),
     ("lp_hub_tx_req", 7),
+    ("lwnoc_rx_req", 13),
+    ("lwnoc_tx_req", 13),
+    ("afifo_slv_rx_req", 13),
+    ("afifo_slv_tx_req", 13),
+    ("afifo_mst_rx_req", 13),
+    ("afifo_mst_tx_req", 13),
 )
 
 
@@ -45,6 +53,13 @@ class StubSpec:
         return f"{self.stub_module_name}.sv"
 
 
+@dataclass(frozen=True)
+class ParsedPort:
+    name: str
+    direction: str
+    width: int
+
+
 SPECS: tuple[StubSpec, ...] = (
     StubSpec(
         noc="sts",
@@ -60,10 +75,10 @@ SPECS: tuple[StubSpec, ...] = (
         noc="sts",
         category="iniu_top_side",
         template_module="StsTemplate",
-        config_attr="aon_ss_iniu_top_side_config",
+        config_attr="aon_ss_iniu_noc_side_config",
         top_module="sts_iniu_noc",
         extra_sys_paths=(REPO_ROOT / "lwnoc_sts_noc_demo",),
-        fallback_build_dir=REPO_ROOT / "lwnoc_sts_noc_demo" / "build_logic" / "aon_ss_iniu_top_side",
+        fallback_build_dir=REPO_ROOT / "lwnoc_sts_noc_demo" / "build_logic" / "aon_ss_iniu_noc_side",
         fallback_top_module="sts_iniu_noc",
     ),
     StubSpec(
@@ -171,40 +186,40 @@ SPECS: tuple[StubSpec, ...] = (
         category="iniu_sys_side",
         template_module="AtbTemplate",
         config_attr="aon_iniu_cfg",
-        top_module="atb_iniu_sys",
+        top_module="aon_atb_iniu_sys",
         extra_sys_paths=(REPO_ROOT / "soc_atb_noc",),
-        fallback_build_dir=None,
-        fallback_top_module=None,
+        fallback_build_dir=REPO_ROOT / "soc_atb_noc" / "build_logic" / "aon_iniu_sys",
+        fallback_top_module="aon_atb_iniu_sys",
     ),
     StubSpec(
         noc="atb",
         category="iniu_top_side",
         template_module="AtbTemplate",
         config_attr="aon_iniu_noc_cfg",
-        top_module="atb_iniu_noc",
+        top_module="aon_noc_atb_iniu_noc",
         extra_sys_paths=(REPO_ROOT / "soc_atb_noc",),
-        fallback_build_dir=None,
-        fallback_top_module="atb_iniu_noc",
+        fallback_build_dir=REPO_ROOT / "soc_atb_noc" / "build_logic" / "aon_iniu_noc",
+        fallback_top_module="aon_noc_atb_iniu_noc",
     ),
     StubSpec(
         noc="atb",
         category="tniu_sys_side",
         template_module="AtbTemplate",
-        config_attr="debug_tniu_cfg",
-        top_module="atb_tniu_sys",
+        config_attr="peri_tniu_cfg",
+        top_module="peri_atb_tniu_sys",
         extra_sys_paths=(REPO_ROOT / "soc_atb_noc",),
-        fallback_build_dir=None,
-        fallback_top_module=None,
+        fallback_build_dir=REPO_ROOT / "soc_atb_noc" / "build_logic" / "peri_tniu_sys",
+        fallback_top_module="peri_atb_tniu_sys",
     ),
     StubSpec(
         noc="atb",
         category="tniu_top_side",
         template_module="AtbTemplate",
-        config_attr="debug_tniu_noc_cfg",
-        top_module="atb_tniu_noc",
+        config_attr="peri_tniu_noc_cfg",
+        top_module="peri_noc_atb_tniu_noc",
         extra_sys_paths=(REPO_ROOT / "soc_atb_noc",),
-        fallback_build_dir=None,
-        fallback_top_module="atb_tniu_noc",
+        fallback_build_dir=REPO_ROOT / "soc_atb_noc" / "build_logic" / "peri_tniu_noc",
+        fallback_top_module="peri_noc_atb_tniu_noc",
     ),
     # ── Top-level aggregation wrapper stubs ────────────────────────────
     StubSpec(
@@ -250,6 +265,17 @@ def parse_args() -> argparse.Namespace:
         default=BUILD_DIR,
         help=f"Output directory for generated stub views (default: {BUILD_DIR}).",
     )
+    parser.add_argument(
+        "--spec",
+        action="append",
+        default=[],
+        help="Generate only the selected stub spec(s), formatted as noc/category. Repeatable.",
+    )
+    parser.add_argument(
+        "--skip-manifest",
+        action="store_true",
+        help="Do not rewrite manifest.json. Use for safe targeted regeneration.",
+    )
     return parser.parse_args()
 
 
@@ -280,6 +306,246 @@ def _resolve_attr(obj, part: str):
     if isinstance(obj, dict):
         return obj[part]
     return getattr(obj, part)
+
+
+def normalize_env_token(name: str) -> str:
+    return re.sub(r"(_out)?_dir$", "", name.lower())
+
+
+def parse_selected_specs(raw_specs: list[str]) -> set[tuple[str, str]]:
+    selected: set[tuple[str, str]] = set()
+    for raw_spec in raw_specs:
+        parts = raw_spec.split("/", 1)
+        if len(parts) != 2 or not parts[0] or not parts[1]:
+            raise ValueError(f"Invalid --spec '{raw_spec}'. Expected noc/category.")
+        selected.add((parts[0], parts[1]))
+    return selected
+
+
+def filter_specs(specs: tuple[StubSpec, ...], raw_specs: list[str]) -> list[StubSpec]:
+    if not raw_specs:
+        return list(specs)
+
+    selected = parse_selected_specs(raw_specs)
+    filtered = [spec for spec in specs if (spec.noc, spec.category) in selected]
+    missing = selected.difference((spec.noc, spec.category) for spec in filtered)
+    if missing:
+        missing_text = ", ".join(f"{noc}/{category}" for noc, category in sorted(missing))
+        raise ValueError(f"Unknown --spec value(s): {missing_text}")
+    return filtered
+
+
+def resolve_source_top_file(spec: StubSpec) -> Path | None:
+    if spec.fallback_build_dir is None:
+        return None
+
+    candidate_names = [name for name in (spec.fallback_top_module, spec.top_module) if name]
+    for module_name in candidate_names:
+        for suffix in (".sv", ".v"):
+            source_file = spec.fallback_build_dir / f"{module_name}{suffix}"
+            if source_file.exists():
+                return source_file
+    return None
+
+
+def _parse_width_term(raw: str) -> int | None:
+    raw = raw.strip()
+    if not re.fullmatch(r"0|[1-9][0-9]*", raw):
+        return None
+    return int(raw, 10)
+
+
+def fallback_width_for_name(name: str) -> int | None:
+    for suffix, fallback_width in KNOWN_PORT_WIDTH_SUFFIXES:
+        if name == suffix or name.endswith(f"_{suffix}"):
+            return fallback_width
+    return None
+
+
+def clog2(value: int) -> int:
+    if value <= 1:
+        return 0
+    return math.ceil(math.log2(value))
+
+
+def _split_ternary(expr: str) -> tuple[str, str, str] | None:
+    depth = 0
+    question_index = -1
+    for index, char in enumerate(expr):
+        if char == "(":
+            depth += 1
+        elif char == ")":
+            depth -= 1
+        elif char == "?" and depth == 0:
+            question_index = index
+            break
+    if question_index < 0:
+        return None
+
+    depth = 0
+    colon_index = -1
+    for index in range(question_index + 1, len(expr)):
+        char = expr[index]
+        if char == "(":
+            depth += 1
+        elif char == ")":
+            depth -= 1
+        elif char == ":" and depth == 0:
+            colon_index = index
+            break
+    if colon_index < 0:
+        return None
+
+    return (
+        expr[:question_index].strip(),
+        expr[question_index + 1:colon_index].strip(),
+        expr[colon_index + 1:].strip(),
+    )
+
+
+def transform_sv_expr(expr: str) -> str | None:
+    expr = expr.strip().rstrip(",;")
+    if not expr or "$bits" in expr:
+        return None
+
+    ternary = _split_ternary(expr)
+    if ternary is not None:
+        cond, true_expr, false_expr = ternary
+        cond_py = transform_sv_expr(cond)
+        true_py = transform_sv_expr(true_expr)
+        false_py = transform_sv_expr(false_expr)
+        if cond_py is None or true_py is None or false_py is None:
+            return None
+        return f"({true_py} if {cond_py} else {false_py})"
+
+    expr = expr.replace("`", "")
+    expr = expr.replace("$clog2", "clog2")
+    expr = expr.replace("/", "//")
+    return expr
+
+
+def eval_sv_expr(expr: str, symbols: dict[str, int]) -> int | None:
+    expr_py = transform_sv_expr(expr)
+    if expr_py is None:
+        return None
+
+    try:
+        value = eval(expr_py, {"__builtins__": {}}, {"clog2": clog2, **symbols})
+    except Exception:  # noqa: BLE001
+        return None
+
+    if isinstance(value, bool):
+        return int(value)
+    if isinstance(value, int):
+        return value
+    return None
+
+
+def collect_source_symbols(source_file: Path) -> dict[str, int]:
+    symbol_files = sorted(source_file.parent.glob("*_macros_*.sv"))
+    symbol_files += sorted(source_file.parent.glob("*_pack_define.sv"))
+    symbol_files += sorted(source_file.parent.glob("*_pack.sv"))
+    symbol_files.append(source_file)
+
+    define_re = re.compile(r"^\s*`define\s+(?P<name>\w+)\s+(?P<expr>.+?)\s*$")
+    param_re = re.compile(
+        r"^\s*(?:localparam|parameter)(?:\s+\w+)*\s+(?P<name>\w+)\s*=\s*(?P<expr>.+?)\s*[,;]\s*$"
+    )
+
+    pending: list[tuple[str, str]] = []
+    for path in symbol_files:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            match = define_re.match(line)
+            if match is None:
+                match = param_re.match(line)
+            if match is not None:
+                pending.append((match.group("name"), match.group("expr")))
+
+    symbols: dict[str, int] = {}
+    unresolved = pending
+    for _ in range(8):
+        next_unresolved: list[tuple[str, str]] = []
+        progress = False
+        for name, expr in unresolved:
+            value = eval_sv_expr(expr, symbols)
+            if value is None:
+                next_unresolved.append((name, expr))
+                continue
+            symbols[name] = value
+            progress = True
+        unresolved = next_unresolved
+        if not unresolved or not progress:
+            break
+    return symbols
+
+
+def parse_source_ports(source_file: Path, top_module: str) -> list[ParsedPort]:
+    lines = source_file.read_text(encoding="utf-8").splitlines()
+    symbols = collect_source_symbols(source_file)
+    module_re = re.compile(rf"^\s*module\s+{re.escape(top_module)}\b")
+    port_re = re.compile(
+        r"^\s*(input|output|inout)\s+"
+        r"(?:(?:logic|wire|reg)\s+)?"
+        r"(?:\[(?P<msb>[^:\]]+)\s*:\s*(?P<lsb>[^\]]+)\]\s+)?"
+        r"(?P<name>[A-Za-z_][A-Za-z0-9_$]*)"
+    )
+
+    saw_module = False
+    inside_ports = False
+    ports: list[ParsedPort] = []
+
+    for line in lines:
+        stripped = line.strip()
+        if not saw_module:
+            if module_re.search(line):
+                saw_module = True
+                if stripped.endswith("(") and "#(" not in stripped:
+                    inside_ports = True
+            continue
+
+        if not inside_ports:
+            if stripped.startswith(")") and stripped.endswith("("):
+                inside_ports = True
+            continue
+
+        if stripped.startswith(");"):
+            break
+
+        match = port_re.match(line.rstrip(","))
+        if not match:
+            continue
+
+        width = 1
+        msb = match.group("msb")
+        lsb = match.group("lsb")
+        if msb is not None and lsb is not None:
+            msb_value = _parse_width_term(msb)
+            lsb_value = _parse_width_term(lsb)
+            if msb_value is None:
+                msb_value = eval_sv_expr(msb, symbols)
+            if lsb_value is None:
+                lsb_value = eval_sv_expr(lsb, symbols)
+            if msb_value is not None and lsb_value is not None:
+                width = abs(msb_value - lsb_value) + 1
+
+        if width == 1:
+            fallback_width = fallback_width_for_name(match.group("name"))
+            if fallback_width is not None:
+                width = fallback_width
+
+        ports.append(
+            ParsedPort(
+                name=match.group("name"),
+                direction=match.group(1),
+                width=width,
+            )
+        )
+
+    if not saw_module:
+        raise ValueError(f"Module '{top_module}' not found in {source_file}")
+    if not ports:
+        raise ValueError(f"No ANSI ports parsed for module '{top_module}' in {source_file}")
+    return ports
 
 
 def load_config(spec: StubSpec) -> Any:
@@ -331,18 +597,24 @@ def resolve_build_filelist(spec: StubSpec) -> Path:
         if not m:
             return raw
         var, rest = m.groups()
-        var_lower = var.lower()
+        token_candidates = [var.lower(), normalize_env_token(var)]
         # Direct name match
-        if var_lower in dir_index:
-            candidate = dir_index[var_lower] / rest
-            if candidate.exists():
-                return str(candidate)
-        # Partial name match
-        for name, path in dir_index.items():
-            if var_lower in name:
-                candidate = path / rest
+        for token in token_candidates:
+            if token in dir_index:
+                candidate = dir_index[token] / rest
                 if candidate.exists():
                     return str(candidate)
+        # Wrapper aggregates often point at the build root itself.
+        candidate = build_root / rest
+        if candidate.exists():
+            return str(candidate)
+        # Partial name match
+        for token in token_candidates:
+            for name, path in dir_index.items():
+                if token and token in name:
+                    candidate = path / rest
+                    if candidate.exists():
+                        return str(candidate)
         return raw
 
     resolved_lines: list[str] = []
@@ -379,6 +651,15 @@ def instantiate_component(spec: StubSpec):
     top_candidates = [spec.top_module]
 
     last_error: Exception | None = None
+    source_file = resolve_source_top_file(spec)
+    if source_file is not None:
+        resolved_top_name = spec.fallback_top_module or spec.top_module
+        try:
+            ports = parse_source_ports(source_file, resolved_top_name)
+            return config, ports, resolved_top_name
+        except Exception as exc:  # noqa: BLE001
+            last_error = exc
+
     for top_name in top_candidates:
         try:
             component = TemplateComponent(
@@ -428,10 +709,9 @@ def port_width(io: Any) -> int:
     width = int(getattr(io, "width", 0) or 0)
     if width < 1:
         name = str(getattr(io, "name", "") or "")
-        for suffix, fallback_width in KNOWN_PORT_WIDTH_SUFFIXES:
-            if name == suffix or name.endswith(f"_{suffix}"):
-                width = fallback_width
-                break
+        fallback_width = fallback_width_for_name(name)
+        if fallback_width is not None:
+            width = fallback_width
     if width < 1:
         width = 1  # unresolved width fallback, stub output still reviewable
     return width
@@ -552,12 +832,27 @@ def port_comment(name: str) -> str:
     return ""
 
 
-def render_stub(spec: StubSpec, config: Any, component: Any, resolved_top_name: str) -> str:
+def collect_ports(component_or_ports: Any) -> list[dict[str, Any]]:
+    if isinstance(component_or_ports, list):
+        return [
+            {"name": port.name, "direction": port.direction, "width": port.width}
+            for port in component_or_ports
+        ]
+
     ports: list[dict[str, Any]] = []
-    for io in component.io_list:
-        direction = io_direction(io)
-        width = port_width(io)
-        ports.append({"name": io.name, "direction": direction, "width": width})
+    for io in component_or_ports.io_list:
+        ports.append(
+            {
+                "name": io.name,
+                "direction": io_direction(io),
+                "width": port_width(io),
+            }
+        )
+    return ports
+
+
+def render_stub(spec: StubSpec, config: Any, component: Any, resolved_top_name: str) -> str:
+    ports = collect_ports(component)
 
     dir_width = max(len(port["direction"]) for port in ports)
     vec_width = max(len(f"logic [{port['width'] - 1}:0]") for port in ports)
@@ -631,8 +926,9 @@ def main() -> int:
     bootstrap_paths()
     patch_port_widths()
 
+    specs = filter_specs(SPECS, args.spec)
     manifest_entries: list[dict[str, Any]] = []
-    for spec in SPECS:
+    for spec in specs:
         try:
             config, component, resolved_top_name = instantiate_component(spec)
         except Exception as exc:
@@ -640,6 +936,7 @@ def main() -> int:
             continue
         content = render_stub(spec, config, component, resolved_top_name)
         stub_path = write_stub(args.output_dir, spec, content)
+        ports = collect_ports(component)
         manifest_entries.append(
             {
                 "noc": spec.noc,
@@ -650,13 +947,14 @@ def main() -> int:
                 "config_name": getattr(config, "name", None),
                 "stub_module": spec.stub_module_name,
                 "path": str(stub_path),
-                "port_count": len(component.io_list),
+                "port_count": len(ports),
             }
         )
 
-    manifest_path = write_manifest(args.output_dir, manifest_entries)
     print(f"output_dir: {args.output_dir}")
-    print(f"manifest: {manifest_path}")
+    if not args.skip_manifest:
+        manifest_path = write_manifest(args.output_dir, manifest_entries)
+        print(f"manifest: {manifest_path}")
     for entry in manifest_entries:
         print(f"stub: {entry['path']}")
     return 0
