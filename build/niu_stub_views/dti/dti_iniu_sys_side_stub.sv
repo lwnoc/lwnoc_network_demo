@@ -3,7 +3,7 @@
 // All outputs are tied to '0 so reviewers can focus on interface shape and bit width.
 // Future extension: FUSA error related ports will be added on this boundary in a later revision.
 // Requested source top module: dti_pr_iniu_async_sys_side
-// Resolved source top module: dti_pr_iniu_async_sys_side
+// Resolved source top module: pcie_eth_dti_pr_iniu_async_sys_side
 // Representative config: gpu_iniu_sys_config (TemplateIPConfig name=gpu_iniu_sys)
 module dti_iniu_sys_side_stub (
     input  logic [0:0]   clk             ,  // clock input

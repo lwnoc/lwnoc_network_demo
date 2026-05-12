@@ -24,7 +24,7 @@ module atb_iniu_sys_side_stub (
     output logic [152:0] pld_sync        ,  // async FIFO payload sync
     input  logic [0:0]   syncreq_level   ,
     input  logic [0:0]   preq            ,
-    input  logic [2:0]   pstate          ,
+    input  logic [1:0]   pstate          ,
     output logic [1:0]   pactive         ,
     output logic [0:0]   paccept         ,
     output logic [0:0]   pdeny           ,
