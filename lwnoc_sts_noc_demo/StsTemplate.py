@@ -67,8 +67,7 @@ MacroValue = int | str
 
 
 def _sv_hex(width: int, value: int) -> str:
-    digits = max(1, (width + 3) // 4)
-    return f"{width}'h{value:0{digits}X}"
+    return f"{width}'h{value:X}"
 
 
 def _pack_int(width: int, values: list[int]) -> int:
@@ -80,8 +79,7 @@ def _pack_int(width: int, values: list[int]) -> int:
 
 
 def _sv_param(total_bits: int, value: int) -> str:
-    digits = max(1, (total_bits + 3) // 4)
-    return f"{total_bits}'h{value:0{digits}X}"
+    return f"{total_bits}'h{value:X}"
 
 
 def _apply_macro_sets(cfg: TemplateIPConfig, *macro_sets: Mapping[str, MacroValue]) -> TemplateIPConfig:
@@ -438,6 +436,31 @@ def _zero_route_literal(slave_num: int) -> str:
     return _sv_param(slave_num * TGT_ID_WIDTH, 0)
 
 
+def _route_dst_width(slave_num: int) -> int:
+    return max(1, (slave_num - 1).bit_length())
+
+
+def _build_dec_route_lut(route_groups: tuple[tuple[str, ...], ...]) -> tuple[int, int, tuple[int, ...], tuple[int, ...]]:
+    entry_num = 1 << TGT_ID_WIDTH
+    route_vld_bits = [0] * entry_num
+    route_dst_by_tgt_id = [0] * entry_num
+    route_dst_width = _route_dst_width(len(route_groups))
+    route_vld_int = 0
+    route_dst_int = 0
+
+    for slot_idx, route_group in enumerate(route_groups):
+        for leaf_name in route_group:
+            tgt_id = STS_SOC_TNIU_RESOURCE_BY_NAME[leaf_name]["tniu_id"]
+            if route_vld_bits[tgt_id]:
+                raise ValueError(f"duplicate tgt_id {tgt_id} in decoder route groups")
+            route_vld_bits[tgt_id] = 1
+            route_dst_by_tgt_id[tgt_id] = slot_idx
+            route_vld_int |= 1 << tgt_id
+            route_dst_int |= slot_idx << (tgt_id * route_dst_width)
+
+    return route_vld_int, route_dst_int, tuple(route_vld_bits), tuple(route_dst_by_tgt_id)
+
+
 def _apply_iniu_macros(cfg: TemplateIPConfig) -> TemplateIPConfig:
     return _apply_macro_sets(
         cfg,
@@ -491,6 +514,8 @@ def _apply_tniu_macros(cfg: TemplateIPConfig, tniu_name: str) -> TemplateIPConfi
 def _apply_dec_config(cfg: TemplateIPConfig, dec_name: str) -> TemplateIPConfig:
     route_groups = STS_SOC_DECODER_ROUTE_GROUPS[dec_name]
     slave_num = len(route_groups)
+    route_dst_width = _route_dst_width(slave_num)
+    route_vld_int, route_dst_int, route_vld_bits, route_dst_by_tgt_id = _build_dec_route_lut(route_groups)
     cfg.top_wrap = f"sts_noc_dec_node_1to{slave_num}_wrap"
     _apply_macro_sets(
         cfg,
@@ -500,6 +525,8 @@ def _apply_dec_config(cfg: TemplateIPConfig, dec_name: str) -> TemplateIPConfig:
         STS_DEC_DEBUG_MACROS,
         {
             "STS_NETWORK_DEC_SLAVE_NUM": slave_num,
+            "STS_NETWORK_DEC_ROUTE_VLD_TABLE": _sv_param(1 << TGT_ID_WIDTH, route_vld_int),
+            "STS_NETWORK_DEC_ROUTE_DST_TABLE": _sv_param((1 << TGT_ID_WIDTH) * route_dst_width, route_dst_int),
             "STS_NETWORK_DEC_ROUTE_BASE": _zero_route_literal(slave_num),
             "STS_NETWORK_DEC_ROUTE_MASK": _zero_route_literal(slave_num),
         },
@@ -508,17 +535,20 @@ def _apply_dec_config(cfg: TemplateIPConfig, dec_name: str) -> TemplateIPConfig:
     _apply_macro_sets(
         cfg,
         {
+            f"{wrap_macro_prefix}_ROUTE_VLD_TABLE": _sv_param(1 << TGT_ID_WIDTH, route_vld_int),
+            f"{wrap_macro_prefix}_ROUTE_DST_TABLE": _sv_param((1 << TGT_ID_WIDTH) * route_dst_width, route_dst_int),
             f"{wrap_macro_prefix}_ROUTE_BASE": _zero_route_literal(slave_num),
             f"{wrap_macro_prefix}_ROUTE_MASK": _zero_route_literal(slave_num),
         },
     )
     cfg._slave_num = slave_num
-    cfg._route_vld_table = tuple(1 for _ in route_groups)
-    cfg._route_dst_table = tuple(
+    cfg._route_vld_table = route_vld_bits
+    cfg._route_dst_table = route_dst_by_tgt_id
+    cfg._route_group_names = route_groups
+    cfg._route_group_tgt_ids = tuple(
         tuple(STS_SOC_TNIU_RESOURCE_BY_NAME[leaf_name]["tniu_id"] for leaf_name in route_group)
         for route_group in route_groups
     )
-    cfg._route_group_names = route_groups
     cfg._route_base_table = tuple(0 for _ in route_groups)
     cfg._route_mask_table = tuple(0 for _ in route_groups)
     return cfg
