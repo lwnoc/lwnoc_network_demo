@@ -327,6 +327,39 @@ class SocIntrTniuTopNode(UhdlComponentNode):
         self.add_interface("ring_req", r"^req_(valid|ready|payload|srcid|tgtid|qos|last)$")
 
 
+class SocIntrReqRsWrapNode(UhdlComponentNode):
+    def __init__(self, id: str, cfg):
+        params = getattr(cfg, 'param_overrides', {})
+        _p = {
+            "PLD_WIDTH": params.get("PLD_WIDTH", 40),
+            "ID_WIDTH": params.get("ID_WIDTH", 8),
+            "QOS_WIDTH": params.get("QOS_WIDTH", 4),
+        }
+        comp = ParamInstTemplateComponent(config=cfg, top="lwnoc_intr_req_rs_wrap", **_p)
+        super().__init__(id=id, impl=comp)
+
+        self.add_interface("clk", "clk")
+        self.add_interface("rst_n", "rst_n")
+        self.add_interface("req", r"^req_(valid|ready|payload|srcid|tgtid|qos|last)$")
+        self.add_interface("req_d", r"^req_d_(valid|ready|payload|srcid|tgtid|qos|last)$")
+
+
+def _validate_regslice_stage(regslice_stage: int, node_name: str):
+    if not isinstance(regslice_stage, int) or regslice_stage < 0:
+        raise ValueError(f"regslice_stage for '{node_name}' must be a non-negative integer")
+
+
+def _connect_req_rs_chain(src_req, dst_req, rs_nodes):
+    if not rs_nodes:
+        connect(src_req, dst_req)
+        return
+
+    connect(src_req, rs_nodes[0].req)
+    for index in range(len(rs_nodes) - 1):
+        connect(rs_nodes[index].req_d, rs_nodes[index + 1].req)
+    connect(rs_nodes[-1].req_d, dst_req)
+
+
 @register_data_topology([
     ('pring_in_if', 'pring_out_if', 1),
     ('nring_in_if', 'nring_out_if', 1),
@@ -569,8 +602,9 @@ class SocIntrRingSinkStationNode(UhdlWrapperNode):
 
 class SocIntrIniuTopWrapNode(UhdlWrapperNode):
     """Top-side wrapper for INIU (memnoc-style, prevents _porting_ IO names)."""
-    def __init__(self, id: str, top_cfg, ring_cfg, node_id: int, node_count: int):
+    def __init__(self, id: str, top_cfg, ring_cfg, req_rs_cfg, node_id: int, node_count: int, regslice_stage: int = 0):
         super().__init__(id=id)
+        _validate_regslice_stage(regslice_stage, id)
         node_id_width = int(getattr(ring_cfg, 'param_overrides', {}).get("ID_WIDTH", 8))
         self.add_interface("clk", is_global=True)
         self.add_interface("rst_n", is_global=True)
@@ -595,11 +629,19 @@ class SocIntrIniuTopWrapNode(UhdlWrapperNode):
             id=f"{id}_endpoint", cfg=ring_cfg,
             node_id=node_id, node_count=node_count,
         )
+        self.req_rs_nodes = []
+        for index in range(regslice_stage):
+            req_rs = SocIntrReqRsWrapNode(id=f"{id}_req_rs{index}", cfg=req_rs_cfg)
+            setattr(self, f"req_rs{index}", req_rs)
+            self.req_rs_nodes.append(req_rs)
 
         connect(self.iniu_top.clk, self.clk)
         connect(self.iniu_top.rst_n, self.rst_n)
         connect(self.endpoint_wrap.clk, self.clk)
         connect(self.endpoint_wrap.rst_n, self.rst_n)
+        for req_rs in self.req_rs_nodes:
+            connect(req_rs.clk, self.clk)
+            connect(req_rs.rst_n, self.rst_n)
         connect(self.node_id_gen_top.node_id, self.node_id)
         connect(self.xbar_routing_lut.src_id, self.node_id)
         connect(self.endpoint_wrap.xbar_req_tgt_id, self.xbar_routing_lut.xbar_ch0_tgt_id)
@@ -608,7 +650,7 @@ class SocIntrIniuTopWrapNode(UhdlWrapperNode):
         connect(self.iniu_top.lp_async, self.lp_async)
         connect(self.iniu_top.afifo_sb_err, self.afifo_sb_err)
         connect(self.iniu_top.afifo_db_err, self.afifo_db_err)
-        connect(self.iniu_top.ring_req, self.endpoint_wrap.local_tx)
+        _connect_req_rs_chain(self.iniu_top.ring_req, self.endpoint_wrap.local_tx, self.req_rs_nodes)
         # local_rx intentionally left open — INIU does not consume ring responses
         connect(self.endpoint_wrap.pring_in_if, self.pring_in_if)
         connect(self.endpoint_wrap.pring_out_if, self.pring_out_if)
@@ -619,8 +661,9 @@ class SocIntrIniuTopWrapNode(UhdlWrapperNode):
 
 class SocIntrTniuTopWrapNode(UhdlWrapperNode):
     """Top-side wrapper for TNIU (memnoc-style)."""
-    def __init__(self, id: str, top_cfg, ring_cfg, node_id: int, node_count: int):
+    def __init__(self, id: str, top_cfg, ring_cfg, req_rs_cfg, node_id: int, node_count: int, regslice_stage: int = 0):
         super().__init__(id=id)
+        _validate_regslice_stage(regslice_stage, id)
         node_id_width = int(getattr(ring_cfg, 'param_overrides', {}).get("ID_WIDTH", 8))
         self.add_interface("clk", is_global=True)
         self.add_interface("rst_n", is_global=True)
@@ -639,16 +682,24 @@ class SocIntrTniuTopWrapNode(UhdlWrapperNode):
             id=f"{id}_endpoint", cfg=ring_cfg,
             node_id=node_id, node_count=node_count,
         )
+        self.req_rs_nodes = []
+        for index in range(regslice_stage):
+            req_rs = SocIntrReqRsWrapNode(id=f"{id}_req_rs{index}", cfg=req_rs_cfg)
+            setattr(self, f"req_rs{index}", req_rs)
+            self.req_rs_nodes.append(req_rs)
 
         connect(self.tniu_top.clk, self.clk)
         connect(self.tniu_top.rst_n, self.rst_n)
         connect(self.endpoint_wrap.clk, self.clk)
         connect(self.endpoint_wrap.rst_n, self.rst_n)
+        for req_rs in self.req_rs_nodes:
+            connect(req_rs.clk, self.clk)
+            connect(req_rs.rst_n, self.rst_n)
         connect(self.node_id_gen_top.node_id, self.node_id)
         connect(self.tniu_top.async_fifo, self.async_fifo)
         connect(self.tniu_top.lp_async, self.lp_async)
         connect(self.tniu_top.lp_niu_hub, self.lp_niu_hub)
-        connect(self.tniu_top.ring_req, self.endpoint_wrap.local_rx)
+        _connect_req_rs_chain(self.endpoint_wrap.local_rx, self.tniu_top.ring_req, self.req_rs_nodes)
         connect(self.endpoint_wrap.pring_in_if, self.pring_in_if)
         connect(self.endpoint_wrap.pring_out_if, self.pring_out_if)
         connect(self.endpoint_wrap.nring_in_if, self.nring_in_if)
@@ -661,7 +712,7 @@ class SocIntrTniuTopWrapNode(UhdlWrapperNode):
     ('nring_in_if', 'nring_out_if', 1),
 ])
 class SocIntrIniuNode(UhdlWrapperNode):
-    def __init__(self, id: str, sys_cfg, top_cfg, ring_cfg, node_id: int, node_count: int):
+    def __init__(self, id: str, sys_cfg, top_cfg, ring_cfg, req_rs_cfg, node_id: int, node_count: int, top_regslice_stage: int = 0):
         super().__init__(id=id)
 
         self.add_interface("clk_sys")
@@ -683,7 +734,9 @@ class SocIntrIniuNode(UhdlWrapperNode):
         self.iniu_top_wrap = SocIntrIniuTopWrapNode(
             id=f"{id}_top_wrap",
             top_cfg=top_cfg, ring_cfg=ring_cfg,
+            req_rs_cfg=req_rs_cfg,
             node_id=node_id, node_count=node_count,
+            regslice_stage=top_regslice_stage,
         )
 
         connect(self.iniu_sys.clk, self.clk_sys)
@@ -716,7 +769,7 @@ class SocIntrIniuNode(UhdlWrapperNode):
     ('nring_in_if', 'nring_out_if', 1),
 ])
 class SocIntrTniuNode(UhdlWrapperNode):
-    def __init__(self, id: str, sys_cfg, top_cfg, ring_cfg, node_id: int, node_count: int):
+    def __init__(self, id: str, sys_cfg, top_cfg, ring_cfg, req_rs_cfg, node_id: int, node_count: int, top_regslice_stage: int = 0):
         super().__init__(id=id)
 
         self.add_interface("clk_sys")
@@ -738,7 +791,9 @@ class SocIntrTniuNode(UhdlWrapperNode):
         self.tniu_top_wrap = SocIntrTniuTopWrapNode(
             id=f"{id}_top_wrap",
             top_cfg=top_cfg, ring_cfg=ring_cfg,
+            req_rs_cfg=req_rs_cfg,
             node_id=node_id, node_count=node_count,
+            regslice_stage=top_regslice_stage,
         )
 
         connect(self.tniu_sys.clk, self.clk_sys)
@@ -768,8 +823,9 @@ class SocIntrTniuNode(UhdlWrapperNode):
 
 
 class SocIntrIniuTopLayerNode(UhdlWrapperNode):
-    def __init__(self, id: str, top_cfg, ring_cfg, node_id: int, node_count: int):
+    def __init__(self, id: str, top_cfg, ring_cfg, req_rs_cfg, node_id: int, node_count: int, regslice_stage: int = 0):
         super().__init__(id=id)
+        _validate_regslice_stage(regslice_stage, id)
         node_id_width = int(getattr(ring_cfg, 'param_overrides', {}).get("ID_WIDTH", 8))
 
         self.add_interface(TOP_FUNC_CLK, is_global=True)
@@ -795,15 +851,23 @@ class SocIntrIniuTopLayerNode(UhdlWrapperNode):
             node_id=node_id,
             node_count=node_count,
         )
+        self.req_rs_nodes = []
+        for index in range(regslice_stage):
+            req_rs = SocIntrReqRsWrapNode(id=f"{id}_req_rs{index}", cfg=req_rs_cfg)
+            setattr(self, f"req_rs{index}", req_rs)
+            self.req_rs_nodes.append(req_rs)
 
         connect(self.iniu_top.clk, self.clk_top_func)
         connect(self.iniu_top.rst_n, self.rst_top_func_n)
         connect(self.endpoint_wrap.clk, self.clk_top_func)
         connect(self.endpoint_wrap.rst_n, self.rst_top_func_n)
+        for req_rs in self.req_rs_nodes:
+            connect(req_rs.clk, self.clk_top_func)
+            connect(req_rs.rst_n, self.rst_top_func_n)
 
         connect(self.iniu_top.async_fifo, self.async_fifo)
         connect(self.iniu_top.lp_async, self.lp_async)
-        connect(self.iniu_top.ring_req, self.endpoint_wrap.local_tx)
+        _connect_req_rs_chain(self.iniu_top.ring_req, self.endpoint_wrap.local_tx, self.req_rs_nodes)
         # local_rx intentionally left open — INIU does not consume ring responses
 
         connect(self.endpoint_wrap.pring_in_if, self.pring_in_if)
@@ -817,8 +881,9 @@ class SocIntrIniuTopLayerNode(UhdlWrapperNode):
 
 
 class SocIntrTniuTopLayerNode(UhdlWrapperNode):
-    def __init__(self, id: str, top_cfg, ring_cfg, node_id: int, node_count: int):
+    def __init__(self, id: str, top_cfg, ring_cfg, req_rs_cfg, node_id: int, node_count: int, regslice_stage: int = 0):
         super().__init__(id=id)
+        _validate_regslice_stage(regslice_stage, id)
 
         self.add_interface(TOP_FUNC_CLK, is_global=True)
         self.add_interface(TOP_FUNC_RST_N, is_global=True)
@@ -840,18 +905,26 @@ class SocIntrTniuTopLayerNode(UhdlWrapperNode):
             node_id=node_id,
             node_count=node_count,
         )
+        self.req_rs_nodes = []
+        for index in range(regslice_stage):
+            req_rs = SocIntrReqRsWrapNode(id=f"{id}_req_rs{index}", cfg=req_rs_cfg)
+            setattr(self, f"req_rs{index}", req_rs)
+            self.req_rs_nodes.append(req_rs)
 
         connect(self.tniu_top.clk, self.clk_top_func)
         connect(self.tniu_top.rst_n, self.rst_top_func_n)
         connect(self.endpoint_wrap.clk, self.clk_top_func)
         connect(self.endpoint_wrap.rst_n, self.rst_top_func_n)
+        for req_rs in self.req_rs_nodes:
+            connect(req_rs.clk, self.clk_top_func)
+            connect(req_rs.rst_n, self.rst_top_func_n)
 
         connect(self.tniu_top.async_fifo, self.async_fifo)
         connect(self.tniu_top.timeout_val, self.timeout_val)
         connect(self.tniu_top.lp_hub, self.lp_hub)
         connect(self.tniu_top.lp_niu_hub, self.lp_niu_hub)
         connect(self.tniu_top.lp_async, self.lp_async)
-        connect(self.tniu_top.ring_req, self.endpoint_wrap.local_rx)
+        _connect_req_rs_chain(self.endpoint_wrap.local_rx, self.tniu_top.ring_req, self.req_rs_nodes)
 
         connect(self.endpoint_wrap.pring_in_if, self.pring_in_if)
         connect(self.endpoint_wrap.pring_out_if, self.pring_out_if)

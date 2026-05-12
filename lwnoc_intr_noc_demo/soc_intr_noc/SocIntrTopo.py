@@ -21,6 +21,7 @@ from SocIntrTemplate import (
     INIU_SYS_CONFIGS, TNIU_SYS_CONFIGS,
     soc_intr_iniu_top_config, soc_intr_tniu_top_config,
     soc_intr_iniu_endpoint_config, soc_intr_tniu_endpoint_config,
+    soc_intr_req_rs_config,
     soc_intr_ring_network_config, soc_intr_ring_buf_config,
     soc_intr_ring_station_config, soc_intr_ring_link_config,
     soc_intr_ring_req_sink_config,
@@ -39,6 +40,10 @@ INIU_NODE_NAMES = list(INIU_SYS_CONFIGS.keys())
 TNIU_NODE_NAMES = list(TNIU_SYS_CONFIGS.keys())
 INIU_COUNT = len(INIU_NODE_NAMES)
 TNIU_COUNT = len(TNIU_NODE_NAMES)
+
+DEFAULT_REQ_REGSLICE_STAGE = 0
+INIU_REGSLICE_STAGES = {name: DEFAULT_REQ_REGSLICE_STAGE for name in INIU_NODE_NAMES}
+TNIU_REGSLICE_STAGES = {name: DEFAULT_REQ_REGSLICE_STAGE for name in TNIU_NODE_NAMES}
 
 # Ring plan: (node_id, ss_name, role, harden_side)
 # harden: "a"=up (clk_up_func), "b"=dn (clk_dn_func)
@@ -124,8 +129,10 @@ class SocIntrLogicTopo(UhdlWrapperNode):
                     sys_cfg=node_cfg,
                     top_cfg=soc_intr_iniu_top_config,
                     ring_cfg=soc_intr_iniu_endpoint_config,
+                    req_rs_cfg=soc_intr_req_rs_config,
                     node_id=node_id,
                     node_count=SOC_INTR_RING_NODE_NUM,
+                    top_regslice_stage=INIU_REGSLICE_STAGES.get(sys_name, DEFAULT_REQ_REGSLICE_STAGE),
                 )
             else:
                 node_cfg = TNIU_SYS_CONFIGS.get(sys_name)
@@ -134,8 +141,10 @@ class SocIntrLogicTopo(UhdlWrapperNode):
                     sys_cfg=node_cfg,
                     top_cfg=soc_intr_tniu_top_config,
                     ring_cfg=soc_intr_tniu_endpoint_config,
+                    req_rs_cfg=soc_intr_req_rs_config,
                     node_id=node_id,
                     node_count=SOC_INTR_RING_NODE_NUM,
+                    top_regslice_stage=TNIU_REGSLICE_STAGES.get(sys_name, DEFAULT_REQ_REGSLICE_STAGE),
                 )
             setattr(self, _node_attr_name(ss_name, role), n)
             connect(n.clk_noc, self.clk_noc)

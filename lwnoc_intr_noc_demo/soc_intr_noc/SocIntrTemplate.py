@@ -74,6 +74,7 @@ _VC_FILELIST_MAP: dict[str, str] = {
     "intr_tniu_endpoint_wrap.f":"network_wrappers_pub.f",
     "intr_ring_network_wrap.f":"network_wrappers_pub.f",
     "intr_ring_buf_wrap.f":    "network_wrappers_pub.f",
+    "intr_req_rs_wrap.f":      "network_wrappers_pub.f",
     "intr_ring_station.f":     "network_wrappers_pub.f",
     "intr_ring_link.f":        "network_wrappers_pub.f",
     "intr_ring_req_sink.f":    "network_req_sink_pub.f",
@@ -326,6 +327,13 @@ soc_intr_tniu_endpoint_config = _new_cfg(
     env_var="INTR_TNIU_ENDPOINT_OUT_DIR",
 )
 
+soc_intr_req_rs_config = _new_cfg(
+    name="intr_req_rs_wrap",
+    prefix="",
+    filelist_name="intr_req_rs_wrap.f",
+    env_var="INTR_REQ_RS_OUT_DIR",
+)
+
 soc_intr_ring_station_config = _new_cfg(
     name="intr_ring_station",
     prefix="intr_ring_station_",
@@ -367,6 +375,7 @@ _apply_cfg_params(soc_intr_tniu_top_config, macros=_SOC_INTR_TNIU_ASYNC_MACROS)
 for _cfg in (
     soc_intr_ring_network_config,
     soc_intr_ring_buf_config,
+    soc_intr_req_rs_config,
     soc_intr_iniu_endpoint_config,
     soc_intr_tniu_endpoint_config,
     soc_intr_ring_station_config,
