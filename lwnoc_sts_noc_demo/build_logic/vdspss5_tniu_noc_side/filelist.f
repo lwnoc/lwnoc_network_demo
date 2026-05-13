@@ -1,0 +1,12 @@
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/vdspss5_tniu_noc_side_macros_33b666a942.sv
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/pulse_async_bridge_receiver_qactive.sv
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/pulse_async_bridge_transmitter_qactive.sv
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/sts_cti.sv
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_apb_dec.sv
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/RegSpaceBase_cfg_reg_bank_table.v
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_apb.sv
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc_dec2.sv
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
+$VDSPSS5_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

@@ -837,35 +837,24 @@ STS_SOC_TNIU_TOP_NOC_SIDE_CONFIG = _apply_tniu_macros(
 for entry in STS_SOC_TNIU_RESOURCES:
     key = str(entry["key"])
     env_token = str(entry["env_token"])
-    cfg_key = _tniu_cfg_representative(key)
-    if cfg_key not in STS_SOC_TNIU_SYS_CONFIGS:
-        display = _tniu_cfg_display_name(cfg_key)
-        display_env = display.upper()
-        sys_cfg = _apply_tniu_macros(
-            _new_template_cfg(
-                name=f"{display}_tniu_sys",
-                filelist=str(STS_TNIU_SYS_PUB_F),
-                env_var=f"{display_env}_TNIU_SYS_OUT_DIR",
-            ),
-            cfg_key,
-        )
-        noc_cfg = _apply_tniu_macros(
-            _new_template_cfg(
-                name=f"{display}_tniu_noc_side",
-                filelist=str(STS_TNIU_NOC_PUB_F),
-                env_var=f"{display_env}_TNIU_NOC_SIDE_OUT_DIR",
-            ),
-            cfg_key,
-        )
-        STS_SOC_TNIU_SYS_CONFIGS[cfg_key] = sys_cfg
-        STS_SOC_TNIU_NOC_CONFIGS[cfg_key] = noc_cfg
-    else:
-        sys_cfg = STS_SOC_TNIU_SYS_CONFIGS[cfg_key]
-        noc_cfg = STS_SOC_TNIU_NOC_CONFIGS[cfg_key]
+    sys_cfg = _apply_tniu_macros(
+        _new_template_cfg(
+            name=f"{key}_tniu_sys",
+            filelist=str(STS_TNIU_SYS_PUB_F),
+            env_var=f"{env_token}_TNIU_SYS_OUT_DIR",
+        ),
+        key,
+    )
+    noc_cfg = _apply_tniu_macros(
+        _new_template_cfg(
+            name=f"{key}_tniu_noc_side",
+            filelist=str(STS_TNIU_NOC_PUB_F),
+            env_var=f"{env_token}_TNIU_NOC_SIDE_OUT_DIR",
+        ),
+        key,
+    )
     top_cfg = STS_SOC_TNIU_TOP_NOC_SIDE_CONFIG
 
-    _alias_template_env(f"{env_token}_TNIU_SYS_OUT_DIR", sys_cfg)
-    _alias_template_env(f"{env_token}_TNIU_NOC_SIDE_OUT_DIR", noc_cfg)
     STS_SOC_TNIU_SYS_CONFIGS[key] = sys_cfg
     STS_SOC_TNIU_NOC_CONFIGS[key] = noc_cfg
     STS_SOC_TNIU_TOP_CONFIGS[key] = top_cfg

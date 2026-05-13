@@ -4,7 +4,7 @@ module tb_sts_aon_addr_map;
     import Base_lwnoc_sts_pack::*;
 
     localparam int unsigned TNIU_NUM             = 38;
-    localparam int unsigned EXPECTED_ENTRY_NUM   = 191;
+    localparam int unsigned EXPECTED_ENTRY_NUM   = 212;
     localparam logic [31:0] FUNC_BASE_START      = 32'h5700_0000;
     localparam logic [31:0] FUNC_STRIDE          = 32'h0001_0000;
     localparam logic [31:0] DEBUG_BASE_START     = 32'h4800_0000;

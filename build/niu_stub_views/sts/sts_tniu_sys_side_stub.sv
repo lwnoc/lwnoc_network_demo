@@ -4,7 +4,7 @@
 // Future extension: FUSA error related ports will be added on this boundary in a later revision.
 // Requested source top module: sts_tniu_sys
 // Resolved source top module: sts_tniu_sys
-// Representative config: STS_SOC_TNIU_SYS_CONFIGS[ddrss0] (TemplateIPConfig name=ddrss_tniu_sys)
+// Representative config: STS_SOC_TNIU_SYS_CONFIGS[ddrss0] (TemplateIPConfig name=ddrss0_tniu_sys)
 module sts_tniu_sys_side_stub (
     input  logic [0:0]   clk_dst                    ,
     input  logic [0:0]   clk_dbg_timer              ,

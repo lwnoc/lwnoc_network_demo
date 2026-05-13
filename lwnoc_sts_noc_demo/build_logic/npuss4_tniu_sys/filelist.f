@@ -1,0 +1,8 @@
+$NPUSS4_TNIU_SYS_OUT_DIR/npuss4_tniu_sys_macros_8b73302b69.sv
+$NPUSS4_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
+$NPUSS4_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
+$NPUSS4_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
+$NPUSS4_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
+$NPUSS4_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
+$NPUSS4_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
+$NPUSS4_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv

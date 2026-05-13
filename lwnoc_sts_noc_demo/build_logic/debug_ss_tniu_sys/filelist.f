@@ -1,8 +1,8 @@
-$DEBUG_SS_TNIU_SYS_OUT_DIR/debug_ss_tniu_sys_macros_ff528cdbc0.sv
-$DEBUG_SS_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
-$DEBUG_SS_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
-$DEBUG_SS_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
-$DEBUG_SS_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
-$DEBUG_SS_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
-$DEBUG_SS_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
-$DEBUG_SS_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv
+$DEBUGSS_TNIU_SYS_OUT_DIR/debug_ss_tniu_sys_macros_ff528cdbc0.sv
+$DEBUGSS_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
+$DEBUGSS_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
+$DEBUGSS_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
+$DEBUGSS_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
+$DEBUGSS_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
+$DEBUGSS_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
+$DEBUGSS_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv

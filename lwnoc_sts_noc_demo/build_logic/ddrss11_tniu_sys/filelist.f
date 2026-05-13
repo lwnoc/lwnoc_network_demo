@@ -1,0 +1,8 @@
+$DDRSS11_TNIU_SYS_OUT_DIR/ddrss11_tniu_sys_macros_6232ba2c23.sv
+$DDRSS11_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
+$DDRSS11_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
+$DDRSS11_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
+$DDRSS11_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
+$DDRSS11_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
+$DDRSS11_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
+$DDRSS11_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv

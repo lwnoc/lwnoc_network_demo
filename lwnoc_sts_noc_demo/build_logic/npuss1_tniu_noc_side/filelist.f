@@ -1,0 +1,12 @@
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/npuss1_tniu_noc_side_macros_eff64db88f.sv
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/pulse_async_bridge_receiver_qactive.sv
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/pulse_async_bridge_transmitter_qactive.sv
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/sts_cti.sv
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_apb_dec.sv
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/RegSpaceBase_cfg_reg_bank_table.v
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_apb.sv
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc_dec2.sv
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
+$NPUSS1_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv
