@@ -4,29 +4,29 @@
 // Future extension: FUSA error related ports will be added on this boundary in a later revision.
 // Requested source top module: sts_tniu_sys
 // Resolved source top module: sts_tniu_sys
-// Representative config: STS_SOC_TNIU_SYS_CONFIGS.ddrss0 (TemplateIPConfig name=ddrss_tniu_sys)
+// Representative config: STS_SOC_TNIU_SYS_CONFIGS[ddrss0] (TemplateIPConfig name=ddrss_tniu_sys)
 module sts_tniu_sys_side_stub (
-    input  logic [0:0]   clk_dst                    ,  // clock input
-    input  logic [0:0]   clk_dbg_timer              ,  // clock input
-    input  logic [0:0]   rstn_dst                   ,  // active-low reset
-    input  logic [0:0]   rstn_dbg_timer             ,  // active-low reset
-    input  logic [3:0]   req_wptr_async             ,  // async FIFO write pointer
-    output logic [3:0]   req_rptr_async             ,  // async FIFO read pointer (async)
-    output logic [3:0]   req_rptr_sync              ,  // async FIFO read pointer (sync)
-    input  logic [129:0] req_pld_sync               ,  // async FIFO payload sync
-    output logic [3:0]   rsp_wptr_async             ,  // async FIFO write pointer
-    input  logic [3:0]   rsp_rptr_async             ,  // async FIFO read pointer (async)
-    input  logic [3:0]   rsp_rptr_sync              ,  // async FIFO read pointer (sync)
-    output logic [75:0]  rsp_pld_sync               ,  // async FIFO payload sync
-    output logic [0:0]   m_psel                     ,  // APB select
-    output logic [31:0]  m_paddr                    ,  // APB address
-    input  logic [0:0]   m_pready                   ,  // APB ready
-    input  logic [31:0]  m_prdata                   ,  // APB read data
-    input  logic [0:0]   m_pslverr                  ,  // APB slave error
+    input  logic [0:0]   clk_dst                    ,
+    input  logic [0:0]   clk_dbg_timer              ,
+    input  logic [0:0]   rstn_dst                   ,
+    input  logic [0:0]   rstn_dbg_timer             ,
+    input  logic [15:0]  req_wptr_async             ,
+    output logic [15:0]  req_rptr_async             ,
+    output logic [15:0]  req_rptr_sync              ,
+    input  logic [130:0] req_pld_sync               ,
+    output logic [15:0]  rsp_wptr_async             ,
+    input  logic [15:0]  rsp_rptr_async             ,
+    input  logic [15:0]  rsp_rptr_sync              ,
+    output logic [75:0]  rsp_pld_sync               ,
+    output logic [0:0]   m_psel                     ,
+    output logic [31:0]  m_paddr                    ,
+    input  logic [0:0]   m_pready                   ,
+    input  logic [31:0]  m_prdata                   ,
+    input  logic [0:0]   m_pslverr                  ,
     output logic [2:0]   m_pprot                    ,
-    output logic [0:0]   m_penable                  ,  // APB enable
-    output logic [0:0]   m_pwrite                   ,  // APB write enable
-    output logic [31:0]  m_pwdata                   ,  // APB write data
+    output logic [0:0]   m_penable                  ,
+    output logic [0:0]   m_pwrite                   ,
+    output logic [31:0]  m_pwdata                   ,
     output logic [3:0]   m_pstrb                    ,
     output logic [319:0] v_tniu_sys_reg             ,
     input  logic [7:0]   sys_cti_trigin             ,
@@ -45,17 +45,17 @@ module sts_tniu_sys_side_stub (
     output logic [31:0]  noc_ctm_trigout_ack        ,
     output logic [31:0]  sys_ctm_trigout            ,
     input  logic [31:0]  sys_ctm_trigout_ack        ,
-    input  logic [31:0]  dbg_data_in                ,  // debug interface
-    output logic [31:0]  dbg_data_out               ,  // debug interface
-    input  logic [63:0]  dbg_timestamp_in           ,  // debug interface
-    output logic [63:0]  dbg_timestamp_out          ,  // debug interface
+    input  logic [31:0]  dbg_data_in                ,
+    output logic [31:0]  dbg_data_out               ,
+    input  logic [63:0]  dbg_timestamp_in           ,
+    output logic [63:0]  dbg_timestamp_out          ,
     input  logic [7:0]   reserved_bits_in           ,
     output logic [7:0]   reserved_bits_out          ,
-    output logic [0:0]   tniu_sys_regbank_parity_err,  // register bank parity error
-    output logic [0:0]   sts_tniu_req_afifo_sb_err  ,  // ECC error flag (single/double bit)
-    output logic [0:0]   sts_tniu_req_afifo_db_err  ,  // ECC error flag (single/double bit)
-    input  logic [9:0]   hw_dbg_sel_in              ,  // debug interface
-    output logic [9:0]   hw_dbg_sel_out               // debug interface
+    output logic [0:0]   tniu_sys_regbank_parity_err,
+    output logic [0:0]   sts_tniu_req_afifo_sb_err  ,
+    output logic [0:0]   sts_tniu_req_afifo_db_err  ,
+    input  logic [9:0]   hw_dbg_sel_in              ,
+    output logic [9:0]   hw_dbg_sel_out             
 );
 
     // Future boundary note:

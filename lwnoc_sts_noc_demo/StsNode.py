@@ -372,10 +372,11 @@ class StsTniuNocNode(UhdlComponentNode):
     def __init__(self, id: str, cfg: TemplateIPConfig):
         params = {}
         # Override localparam REQ_PLD_WIDTH/RSP_PLD_WIDTH that UHDL/slang can't resolve.
-        # STS_REQ_WIDTH = STS_CMN(31) + STS_REQ_EXT(89) = 120
-        # STS_RSP_WIDTH = STS_CMN(31) + STS_RSP_EXT(35) = 66
-        params["REQ_PLD_WIDTH"] = 120
-        params["RSP_PLD_WIDTH"] = 66
+        # With SRC_ID_WIDTH/TGT_ID_WIDTH both at 9, STS_CMN_WIDTH becomes 32.
+        # STS_REQ_WIDTH = STS_CMN(32) + STS_REQ_EXT(89) = 121
+        # STS_RSP_WIDTH = STS_CMN(32) + STS_RSP_EXT(35) = 67
+        params["REQ_PLD_WIDTH"] = 121
+        params["RSP_PLD_WIDTH"] = 67
         comp = TemplateComponent(config=cfg, top="sts_tniu_noc", **params)
         super().__init__(id=id, impl=comp)
 
@@ -409,8 +410,8 @@ class StsTniuTopSideNode(UhdlComponentNode):
     """Publication-side full TNIU top — wraps upstream sts_tniu_top."""
     def __init__(self, id: str, cfg: TemplateIPConfig):
         params = {}
-        params["REQ_PLD_WIDTH"] = 120
-        params["RSP_PLD_WIDTH"] = 66
+        params["REQ_PLD_WIDTH"] = 121
+        params["RSP_PLD_WIDTH"] = 67
         comp = TemplateComponent(config=cfg, top="sts_tniu_top", **params)
         super().__init__(id=id, impl=comp)
 

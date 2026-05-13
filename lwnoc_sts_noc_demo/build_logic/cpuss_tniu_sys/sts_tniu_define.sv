@@ -1,0 +1,108 @@
+`ifndef _PREFIX_
+    `define _PREFIX_(x)  Base_``x
+`endif
+
+`ifndef STS_SRC_ID_WIDTH
+    `define STS_SRC_ID_WIDTH 9
+`endif
+`ifndef STS_TGT_ID_WIDTH
+    `define STS_TGT_ID_WIDTH 9
+`endif
+`ifndef STS_TXN_ID_WIDTH
+    `define STS_TXN_ID_WIDTH 8
+`endif
+
+`ifndef STS_CTI_EVENT_WIDTH
+    `define STS_CTI_EVENT_WIDTH 8
+`endif
+`ifndef STS_CTI_CHANNEL_WIDTH
+    `define STS_CTI_CHANNEL_WIDTH 8
+`endif
+
+`ifndef STS_CTM_TRIG_WIDTH
+    `define STS_CTM_TRIG_WIDTH 32
+`endif
+
+`ifndef STS_INIU_REQ_FIFO_DEPTH
+    `define STS_INIU_REQ_FIFO_DEPTH 16
+`endif
+`ifndef STS_INIU_RSP_FIFO_DEPTH
+    `define STS_INIU_RSP_FIFO_DEPTH 16
+`endif
+`ifndef STS_TNIU_REQ_FIFO_DEPTH
+    `define STS_TNIU_REQ_FIFO_DEPTH 16
+`endif
+`ifndef STS_TNIU_RSP_FIFO_DEPTH
+    `define STS_TNIU_RSP_FIFO_DEPTH 16
+`endif
+
+`ifndef STS_INIU_SINGLE_OT
+    `define STS_INIU_SINGLE_OT 8
+`endif
+`ifndef STS_INIU_NUM
+    `define STS_INIU_NUM 16
+`endif
+`ifndef STS_INIU_OT_TOTAL
+    `define STS_INIU_OT_TOTAL (`STS_INIU_SINGLE_OT*`STS_INIU_NUM)
+`endif
+
+`ifndef STS_TNIU_DBG_TIMESTAMP_WIDTH
+    `define STS_TNIU_DBG_TIMESTAMP_WIDTH 64
+`endif
+`ifndef STS_TNIU_DBG_DATA_WIDTH
+    `define STS_TNIU_DBG_DATA_WIDTH 32
+`endif
+`ifndef STS_TNIU_APB_ADDR_WIDTH
+    `define STS_TNIU_APB_ADDR_WIDTH 32
+`endif
+`ifndef STS_TNIU_SYNC_STAGE
+    `define STS_TNIU_SYNC_STAGE 2
+`endif
+`ifndef STS_TNIU_ASYNC_FIFO_DEPTH
+    `define STS_TNIU_ASYNC_FIFO_DEPTH 4
+`endif
+`ifndef STS_TNIU_FIFO_DEPTH
+    `define STS_TNIU_FIFO_DEPTH 16
+`endif
+`ifndef STS_TNIU_TGT_TYPE_WIDTH
+    `define STS_TNIU_TGT_TYPE_WIDTH 2
+`endif
+`ifndef STS_TNIU_LOCAL_APB_TGT_TYPE
+    `define STS_TNIU_LOCAL_APB_TGT_TYPE 2'b01
+`endif
+`ifndef STS_TNIU_LOCAL_INIU_CTI_TGT_ID
+    `define STS_TNIU_LOCAL_INIU_CTI_TGT_ID '0
+`endif
+`ifndef STS_TNIU_LOCAL_INIU_CTI_TGT_MASK
+    `define STS_TNIU_LOCAL_INIU_CTI_TGT_MASK '1
+`endif
+`ifndef STS_TNIU_LOCAL_REGBANK_TGT_ID
+    `define STS_TNIU_LOCAL_REGBANK_TGT_ID 'd1
+`endif
+`ifndef STS_TNIU_LOCAL_REGBANK_TGT_MASK
+    `define STS_TNIU_LOCAL_REGBANK_TGT_MASK '1
+`endif
+`ifndef STS_TNIU_LOCAL_CTI_TGT_ID
+    `define STS_TNIU_LOCAL_CTI_TGT_ID 'd2
+`endif
+`ifndef STS_TNIU_LOCAL_CTI_TGT_MASK
+    `define STS_TNIU_LOCAL_CTI_TGT_MASK '1
+`endif
+`ifndef STS_TNIU_HAS_INIU_CTI_APB
+    `define STS_TNIU_HAS_INIU_CTI_APB 0
+`endif
+`ifndef STS_TNIU_SYS_REG_ROUTE_BASE
+    `define STS_TNIU_SYS_REG_ROUTE_BASE 9'h040
+`endif
+`ifndef STS_TNIU_SYS_REG_ROUTE_MASK
+    `define STS_TNIU_SYS_REG_ROUTE_MASK 9'h1C0
+`endif
+`ifndef STS_TNIU_SYS_APB_ROUTE_BASE
+    `define STS_TNIU_SYS_APB_ROUTE_BASE 9'h000
+`endif
+`ifndef STS_TNIU_SYS_APB_ROUTE_MASK
+    `define STS_TNIU_SYS_APB_ROUTE_MASK 9'h1C0
+`endif
+`ifndef STS_TNIU_ERR_INT_CNT_WIDTH
+    `define STS_TNIU_ERR_INT_CNT_WIDTH 16
+`endif

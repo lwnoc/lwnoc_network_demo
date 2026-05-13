@@ -4,24 +4,24 @@
 // Future extension: FUSA error related ports will be added on this boundary in a later revision.
 // Requested source top module: sts_tniu_noc
 // Resolved source top module: sts_tniu_noc
-// Representative config: STS_SOC_TNIU_TOP_CONFIGS.ddrss0 (TemplateIPConfig name=sts_soc_tniu_noc_side)
+// Representative config: STS_SOC_TNIU_TOP_CONFIGS[ddrss0] (TemplateIPConfig name=sts_soc_tniu_noc_side)
 module sts_tniu_top_side_stub (
-    input  logic [0:0]   clk_src                 ,  // clock input
-    input  logic [0:0]   rstn_src                ,  // active-low reset
+    input  logic [0:0]   clk_src                 ,
+    input  logic [0:0]   rstn_src                ,
     input  logic [0:0]   in_req_vld              ,
     output logic [0:0]   in_req_rdy              ,
-    input  logic [119:0] in_req_pld              ,
+    input  logic [120:0] in_req_pld              ,
     output logic [0:0]   out_rsp_vld             ,
     input  logic [0:0]   out_rsp_rdy             ,
-    output logic [65:0]  out_rsp_pld             ,
-    output logic [3:0]   req_wptr_async          ,  // async FIFO write pointer
-    input  logic [3:0]   req_rptr_async          ,  // async FIFO read pointer (async)
-    input  logic [3:0]   req_rptr_sync           ,  // async FIFO read pointer (sync)
-    output logic [129:0] req_pld_sync            ,  // async FIFO payload sync
-    input  logic [3:0]   rsp_wptr_async          ,  // async FIFO write pointer
-    output logic [3:0]   rsp_rptr_async          ,  // async FIFO read pointer (async)
-    output logic [3:0]   rsp_rptr_sync           ,  // async FIFO read pointer (sync)
-    input  logic [75:0]  rsp_pld_sync            ,  // async FIFO payload sync
+    output logic [66:0]  out_rsp_pld             ,
+    output logic [15:0]  req_wptr_async          ,
+    input  logic [15:0]  req_rptr_async          ,
+    input  logic [15:0]  req_rptr_sync           ,
+    output logic [130:0] req_pld_sync            ,
+    input  logic [15:0]  rsp_wptr_async          ,
+    output logic [15:0]  rsp_rptr_async          ,
+    output logic [15:0]  rsp_rptr_sync           ,
+    input  logic [75:0]  rsp_pld_sync            ,
     output logic [0:0]   psel                    ,
     output logic [0:0]   penable                 ,
     output logic [31:0]  paddr                   ,
@@ -32,18 +32,18 @@ module sts_tniu_top_side_stub (
     output logic [3:0]   pstrb                   ,
     output logic [2:0]   pprot                   ,
     input  logic [0:0]   pslverr                 ,
-    input  logic [31:0]  dbg_data_in             ,  // debug interface
-    output logic [31:0]  dbg_data_out            ,  // debug interface
-    input  logic [63:0]  dbg_timestamp_in        ,  // debug interface
-    output logic [63:0]  dbg_timestamp_out       ,  // debug interface
+    input  logic [31:0]  dbg_data_in             ,
+    output logic [31:0]  dbg_data_out            ,
+    input  logic [63:0]  dbg_timestamp_in        ,
+    output logic [63:0]  dbg_timestamp_out       ,
     input  logic [7:0]   reserved_bits_in        ,
     output logic [7:0]   reserved_bits_out       ,
     input  logic [7:0]   sys_side_cti_trigin     ,
     output logic [7:0]   sys_side_cti_trigin_ack ,
     output logic [7:0]   sys_side_cti_trigout    ,
     input  logic [7:0]   sys_side_cti_trigout_ack,
-    input  logic [71:0]  ctm_channel_in          ,
-    output logic [71:0]  ctm_channel_out         ,
+    input  logic [47:0]  ctm_channel_in          ,
+    output logic [47:0]  ctm_channel_out         ,
     input  logic [31:0]  sys_side_ctm_trigin     ,
     output logic [31:0]  sys_side_ctm_trigin_ack ,
     output logic [31:0]  sys_side_ctm_trigout    ,
@@ -51,11 +51,11 @@ module sts_tniu_top_side_stub (
     output logic [31:0]  timing_bus1             ,
     output logic [31:0]  timing_bus2             ,
     output logic [31:0]  timing_bus3             ,
-    output logic [31:0]  dbg_en                  ,  // debug interface
-    output logic [9:0]   hw_dbg_sel              ,  // debug interface
-    output logic [0:0]   tniu_regbank_parity_err ,  // register bank parity error
-    output logic [0:0]   rsp_afifo_sb_err        ,  // ECC error flag (single/double bit)
-    output logic [0:0]   rsp_afifo_db_err          // ECC error flag (single/double bit)
+    output logic [31:0]  dbg_en                  ,
+    output logic [9:0]   hw_dbg_sel              ,
+    output logic [0:0]   tniu_regbank_parity_err ,
+    output logic [0:0]   rsp_afifo_sb_err        ,
+    output logic [0:0]   rsp_afifo_db_err        
 );
 
     // Future boundary note:

@@ -16,14 +16,14 @@ module sts_soc_top_wrap_stub (
     input  logic [15:0]  aon_ss_iniu_noc_async_fifo_porting_rsp_rptr_async                                       ,  // async FIFO read pointer (async)
     input  logic [15:0]  aon_ss_iniu_noc_async_fifo_porting_rsp_rptr_sync                                        ,  // async FIFO read pointer (sync)
     output logic [15:0]  aon_ss_iniu_noc_async_fifo_porting_rsp_wptr_async                                       ,  // async FIFO write pointer
-    output logic [119:0] aon_ss_iniu_noc_req_porting_req_s_pld                                                   ,
+    output logic [120:0] aon_ss_iniu_noc_req_porting_req_s_pld                                                   ,
     input  logic [0:0]   aon_ss_iniu_noc_req_porting_req_s_rdy                                                   ,
     output logic [0:0]   aon_ss_iniu_noc_req_porting_req_s_vld                                                   ,
-    input  logic [65:0]  aon_ss_iniu_noc_rsp_porting_rsp_m_pld                                                   ,
+    input  logic [66:0]  aon_ss_iniu_noc_rsp_porting_rsp_m_pld                                                   ,
     output logic [0:0]   aon_ss_iniu_noc_rsp_porting_rsp_m_rdy                                                   ,
     input  logic [0:0]   aon_ss_iniu_noc_rsp_porting_rsp_m_vld                                                   ,
-    input  logic [71:0]  aon_ss_iniu_noc_cti_channel_in_porting_ctm_channel_in                                   ,
-    output logic [71:0]  aon_ss_iniu_noc_cti_channel_out_porting_ctm_channel_out                                 ,
+    input  logic [47:0] aon_ss_iniu_noc_cti_channel_in_porting_ctm_channel_in                                   ,
+    output logic [47:0] aon_ss_iniu_noc_cti_channel_out_porting_ctm_channel_out                                 ,
     input  logic [63:0]  aon_ss_iniu_noc_dbg_timestamp_in_porting_dbg_timestamp_in                               ,  // debug interface
     output logic [63:0]  aon_ss_iniu_noc_dbg_timestamp_out_porting_dbg_timestamp_out                             ,  // debug interface
     input  logic [31:0]  aon_ss_iniu_noc_dbg_data_in_porting_dbg_data_in                                         ,  // debug interface
@@ -46,10 +46,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   camera_ss_tniu_noc_side_rstn_src_porting_rstn_src                                       ,  // active-low reset
     input  logic [0:0]   camera_ss_tniu_noc_side_rstn_dst_porting_rstn_dst                                       ,  // active-low reset
     input  logic [0:0]   camera_ss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                           ,  // active-low reset
-    input  logic [119:0] camera_ss_tniu_noc_side_req_porting_in_req_pld                                          ,
+    input  logic [120:0] camera_ss_tniu_noc_side_req_porting_in_req_pld                                          ,
     output logic [0:0]   camera_ss_tniu_noc_side_req_porting_in_req_rdy                                          ,
     input  logic [0:0]   camera_ss_tniu_noc_side_req_porting_in_req_vld                                          ,
-    output logic [65:0]  camera_ss_tniu_noc_side_rsp_porting_out_rsp_pld                                         ,
+    output logic [66:0] camera_ss_tniu_noc_side_rsp_porting_out_rsp_pld                                         ,
     input  logic [0:0]   camera_ss_tniu_noc_side_rsp_porting_out_rsp_rdy                                         ,
     output logic [0:0]   camera_ss_tniu_noc_side_rsp_porting_out_rsp_vld                                         ,
     output logic [31:0]  camera_ss_tniu_noc_side_top_apb_porting_top_paddr                                       ,  // APB address
@@ -82,10 +82,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   camera_ss_tniu_noc_side_cti_event_porting_cti_trig_out                                  ,
     input  logic [31:0]  camera_ss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                   ,
     output logic [31:0]  camera_ss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                  ,
-    input  logic [71:0]  camera_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                          ,
-    output logic [71:0]  camera_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                         ,
-    input  logic [71:0]  camera_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                              ,
-    output logic [71:0]  camera_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                             ,
+    input  logic [47:0] camera_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                          ,
+    output logic [47:0] camera_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                         ,
+    input  logic [47:0] camera_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                              ,
+    output logic [47:0] camera_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                             ,
     output logic [31:0]  camera_ss_tniu_noc_side_timing_bus1_porting_timing_bus1                                 ,
     output logic [31:0]  camera_ss_tniu_noc_side_timing_bus2_porting_timing_bus2                                 ,
     output logic [31:0]  camera_ss_tniu_noc_side_timing_bus3_porting_timing_bus3                                 ,
@@ -101,10 +101,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   cpuss_tniu_noc_side_rstn_src_porting_rstn_src                                           ,  // active-low reset
     input  logic [0:0]   cpuss_tniu_noc_side_rstn_dst_porting_rstn_dst                                           ,  // active-low reset
     input  logic [0:0]   cpuss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                               ,  // active-low reset
-    input  logic [119:0] cpuss_tniu_noc_side_req_porting_in_req_pld                                              ,
+    input  logic [120:0] cpuss_tniu_noc_side_req_porting_in_req_pld                                              ,
     output logic [0:0]   cpuss_tniu_noc_side_req_porting_in_req_rdy                                              ,
     input  logic [0:0]   cpuss_tniu_noc_side_req_porting_in_req_vld                                              ,
-    output logic [65:0]  cpuss_tniu_noc_side_rsp_porting_out_rsp_pld                                             ,
+    output logic [66:0] cpuss_tniu_noc_side_rsp_porting_out_rsp_pld                                             ,
     input  logic [0:0]   cpuss_tniu_noc_side_rsp_porting_out_rsp_rdy                                             ,
     output logic [0:0]   cpuss_tniu_noc_side_rsp_porting_out_rsp_vld                                             ,
     output logic [31:0]  cpuss_tniu_noc_side_top_apb_porting_top_paddr                                           ,  // APB address
@@ -137,10 +137,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   cpuss_tniu_noc_side_cti_event_porting_cti_trig_out                                      ,
     input  logic [31:0]  cpuss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                       ,
     output logic [31:0]  cpuss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                      ,
-    input  logic [71:0]  cpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                              ,
-    output logic [71:0]  cpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                             ,
-    input  logic [71:0]  cpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                  ,
-    output logic [71:0]  cpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                 ,
+    input  logic [47:0] cpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                              ,
+    output logic [47:0] cpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                             ,
+    input  logic [47:0] cpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                  ,
+    output logic [47:0] cpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                 ,
     output logic [31:0]  cpuss_tniu_noc_side_timing_bus1_porting_timing_bus1                                     ,
     output logic [31:0]  cpuss_tniu_noc_side_timing_bus2_porting_timing_bus2                                     ,
     output logic [31:0]  cpuss_tniu_noc_side_timing_bus3_porting_timing_bus3                                     ,
@@ -156,10 +156,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss0_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   ddrss0_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   ddrss0_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] ddrss0_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] ddrss0_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   ddrss0_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   ddrss0_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  ddrss0_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] ddrss0_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   ddrss0_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   ddrss0_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  ddrss0_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -192,10 +192,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss0_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  ddrss0_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  ddrss0_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  ddrss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  ddrss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  ddrss0_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  ddrss0_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] ddrss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] ddrss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] ddrss0_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] ddrss0_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  ddrss0_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  ddrss0_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  ddrss0_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -211,10 +211,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss1_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   ddrss1_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   ddrss1_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] ddrss1_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] ddrss1_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   ddrss1_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   ddrss1_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  ddrss1_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] ddrss1_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   ddrss1_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   ddrss1_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  ddrss1_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -247,10 +247,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss1_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  ddrss1_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  ddrss1_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  ddrss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  ddrss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  ddrss1_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  ddrss1_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] ddrss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] ddrss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] ddrss1_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] ddrss1_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  ddrss1_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  ddrss1_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  ddrss1_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -266,10 +266,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss10_tniu_noc_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
     input  logic [0:0]   ddrss10_tniu_noc_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
     input  logic [0:0]   ddrss10_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
-    input  logic [119:0] ddrss10_tniu_noc_side_req_porting_in_req_pld                                            ,
+    input  logic [120:0] ddrss10_tniu_noc_side_req_porting_in_req_pld                                            ,
     output logic [0:0]   ddrss10_tniu_noc_side_req_porting_in_req_rdy                                            ,
     input  logic [0:0]   ddrss10_tniu_noc_side_req_porting_in_req_vld                                            ,
-    output logic [65:0]  ddrss10_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
+    output logic [66:0] ddrss10_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
     input  logic [0:0]   ddrss10_tniu_noc_side_rsp_porting_out_rsp_rdy                                           ,
     output logic [0:0]   ddrss10_tniu_noc_side_rsp_porting_out_rsp_vld                                           ,
     output logic [31:0]  ddrss10_tniu_noc_side_top_apb_porting_top_paddr                                         ,  // APB address
@@ -302,10 +302,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss10_tniu_noc_side_cti_event_porting_cti_trig_out                                    ,
     input  logic [31:0]  ddrss10_tniu_noc_side_ctm_event_porting_ctm_trig_in                                     ,
     output logic [31:0]  ddrss10_tniu_noc_side_ctm_event_porting_ctm_trig_out                                    ,
-    input  logic [71:0]  ddrss10_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
-    output logic [71:0]  ddrss10_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
-    input  logic [71:0]  ddrss10_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
-    output logic [71:0]  ddrss10_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
+    input  logic [47:0] ddrss10_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
+    output logic [47:0] ddrss10_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
+    input  logic [47:0] ddrss10_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
+    output logic [47:0] ddrss10_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
     output logic [31:0]  ddrss10_tniu_noc_side_timing_bus1_porting_timing_bus1                                   ,
     output logic [31:0]  ddrss10_tniu_noc_side_timing_bus2_porting_timing_bus2                                   ,
     output logic [31:0]  ddrss10_tniu_noc_side_timing_bus3_porting_timing_bus3                                   ,
@@ -321,10 +321,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss11_tniu_noc_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
     input  logic [0:0]   ddrss11_tniu_noc_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
     input  logic [0:0]   ddrss11_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
-    input  logic [119:0] ddrss11_tniu_noc_side_req_porting_in_req_pld                                            ,
+    input  logic [120:0] ddrss11_tniu_noc_side_req_porting_in_req_pld                                            ,
     output logic [0:0]   ddrss11_tniu_noc_side_req_porting_in_req_rdy                                            ,
     input  logic [0:0]   ddrss11_tniu_noc_side_req_porting_in_req_vld                                            ,
-    output logic [65:0]  ddrss11_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
+    output logic [66:0] ddrss11_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
     input  logic [0:0]   ddrss11_tniu_noc_side_rsp_porting_out_rsp_rdy                                           ,
     output logic [0:0]   ddrss11_tniu_noc_side_rsp_porting_out_rsp_vld                                           ,
     output logic [31:0]  ddrss11_tniu_noc_side_top_apb_porting_top_paddr                                         ,  // APB address
@@ -357,10 +357,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss11_tniu_noc_side_cti_event_porting_cti_trig_out                                    ,
     input  logic [31:0]  ddrss11_tniu_noc_side_ctm_event_porting_ctm_trig_in                                     ,
     output logic [31:0]  ddrss11_tniu_noc_side_ctm_event_porting_ctm_trig_out                                    ,
-    input  logic [71:0]  ddrss11_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
-    output logic [71:0]  ddrss11_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
-    input  logic [71:0]  ddrss11_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
-    output logic [71:0]  ddrss11_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
+    input  logic [47:0] ddrss11_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
+    output logic [47:0] ddrss11_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
+    input  logic [47:0] ddrss11_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
+    output logic [47:0] ddrss11_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
     output logic [31:0]  ddrss11_tniu_noc_side_timing_bus1_porting_timing_bus1                                   ,
     output logic [31:0]  ddrss11_tniu_noc_side_timing_bus2_porting_timing_bus2                                   ,
     output logic [31:0]  ddrss11_tniu_noc_side_timing_bus3_porting_timing_bus3                                   ,
@@ -376,10 +376,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss2_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   ddrss2_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   ddrss2_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] ddrss2_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] ddrss2_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   ddrss2_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   ddrss2_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  ddrss2_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] ddrss2_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   ddrss2_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   ddrss2_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  ddrss2_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -412,10 +412,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss2_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  ddrss2_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  ddrss2_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  ddrss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  ddrss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  ddrss2_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  ddrss2_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] ddrss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] ddrss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] ddrss2_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] ddrss2_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  ddrss2_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  ddrss2_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  ddrss2_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -431,10 +431,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss3_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   ddrss3_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   ddrss3_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] ddrss3_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] ddrss3_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   ddrss3_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   ddrss3_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  ddrss3_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] ddrss3_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   ddrss3_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   ddrss3_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  ddrss3_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -467,10 +467,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss3_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  ddrss3_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  ddrss3_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  ddrss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  ddrss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  ddrss3_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  ddrss3_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] ddrss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] ddrss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] ddrss3_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] ddrss3_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  ddrss3_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  ddrss3_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  ddrss3_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -486,10 +486,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss4_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   ddrss4_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   ddrss4_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] ddrss4_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] ddrss4_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   ddrss4_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   ddrss4_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  ddrss4_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] ddrss4_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   ddrss4_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   ddrss4_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  ddrss4_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -522,10 +522,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss4_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  ddrss4_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  ddrss4_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  ddrss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  ddrss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  ddrss4_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  ddrss4_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] ddrss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] ddrss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] ddrss4_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] ddrss4_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  ddrss4_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  ddrss4_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  ddrss4_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -541,10 +541,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss5_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   ddrss5_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   ddrss5_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] ddrss5_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] ddrss5_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   ddrss5_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   ddrss5_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  ddrss5_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] ddrss5_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   ddrss5_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   ddrss5_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  ddrss5_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -577,10 +577,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss5_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  ddrss5_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  ddrss5_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  ddrss5_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  ddrss5_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  ddrss5_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  ddrss5_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] ddrss5_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] ddrss5_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] ddrss5_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] ddrss5_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  ddrss5_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  ddrss5_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  ddrss5_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -596,10 +596,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss6_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   ddrss6_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   ddrss6_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] ddrss6_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] ddrss6_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   ddrss6_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   ddrss6_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  ddrss6_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] ddrss6_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   ddrss6_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   ddrss6_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  ddrss6_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -632,10 +632,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss6_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  ddrss6_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  ddrss6_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  ddrss6_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  ddrss6_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  ddrss6_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  ddrss6_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] ddrss6_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] ddrss6_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] ddrss6_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] ddrss6_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  ddrss6_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  ddrss6_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  ddrss6_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -651,10 +651,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss7_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   ddrss7_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   ddrss7_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] ddrss7_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] ddrss7_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   ddrss7_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   ddrss7_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  ddrss7_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] ddrss7_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   ddrss7_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   ddrss7_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  ddrss7_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -687,10 +687,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss7_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  ddrss7_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  ddrss7_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  ddrss7_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  ddrss7_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  ddrss7_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  ddrss7_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] ddrss7_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] ddrss7_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] ddrss7_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] ddrss7_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  ddrss7_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  ddrss7_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  ddrss7_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -706,10 +706,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss8_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   ddrss8_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   ddrss8_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] ddrss8_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] ddrss8_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   ddrss8_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   ddrss8_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  ddrss8_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] ddrss8_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   ddrss8_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   ddrss8_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  ddrss8_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -742,10 +742,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss8_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  ddrss8_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  ddrss8_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  ddrss8_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  ddrss8_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  ddrss8_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  ddrss8_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] ddrss8_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] ddrss8_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] ddrss8_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] ddrss8_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  ddrss8_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  ddrss8_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  ddrss8_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -761,10 +761,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ddrss9_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   ddrss9_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   ddrss9_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] ddrss9_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] ddrss9_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   ddrss9_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   ddrss9_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  ddrss9_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] ddrss9_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   ddrss9_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   ddrss9_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  ddrss9_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -797,10 +797,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ddrss9_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  ddrss9_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  ddrss9_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  ddrss9_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  ddrss9_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  ddrss9_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  ddrss9_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] ddrss9_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] ddrss9_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] ddrss9_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] ddrss9_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  ddrss9_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  ddrss9_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  ddrss9_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -816,10 +816,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   debug_ss_tniu_noc_side_rstn_src_porting_rstn_src                                        ,  // active-low reset
     input  logic [0:0]   debug_ss_tniu_noc_side_rstn_dst_porting_rstn_dst                                        ,  // active-low reset
     input  logic [0:0]   debug_ss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                            ,  // active-low reset
-    input  logic [119:0] debug_ss_tniu_noc_side_req_porting_in_req_pld                                           ,
+    input  logic [120:0] debug_ss_tniu_noc_side_req_porting_in_req_pld                                           ,
     output logic [0:0]   debug_ss_tniu_noc_side_req_porting_in_req_rdy                                           ,
     input  logic [0:0]   debug_ss_tniu_noc_side_req_porting_in_req_vld                                           ,
-    output logic [65:0]  debug_ss_tniu_noc_side_rsp_porting_out_rsp_pld                                          ,
+    output logic [66:0] debug_ss_tniu_noc_side_rsp_porting_out_rsp_pld                                          ,
     input  logic [0:0]   debug_ss_tniu_noc_side_rsp_porting_out_rsp_rdy                                          ,
     output logic [0:0]   debug_ss_tniu_noc_side_rsp_porting_out_rsp_vld                                          ,
     output logic [31:0]  debug_ss_tniu_noc_side_top_apb_porting_top_paddr                                        ,  // APB address
@@ -852,10 +852,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   debug_ss_tniu_noc_side_cti_event_porting_cti_trig_out                                   ,
     input  logic [31:0]  debug_ss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                    ,
     output logic [31:0]  debug_ss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                   ,
-    input  logic [71:0]  debug_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                           ,
-    output logic [71:0]  debug_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                          ,
-    input  logic [71:0]  debug_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                               ,
-    output logic [71:0]  debug_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                              ,
+    input  logic [47:0] debug_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                           ,
+    output logic [47:0] debug_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                          ,
+    input  logic [47:0] debug_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                               ,
+    output logic [47:0] debug_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                              ,
     output logic [31:0]  debug_ss_tniu_noc_side_timing_bus1_porting_timing_bus1                                  ,
     output logic [31:0]  debug_ss_tniu_noc_side_timing_bus2_porting_timing_bus2                                  ,
     output logic [31:0]  debug_ss_tniu_noc_side_timing_bus3_porting_timing_bus3                                  ,
@@ -871,10 +871,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   display_ss_tniu_noc_side_rstn_src_porting_rstn_src                                      ,  // active-low reset
     input  logic [0:0]   display_ss_tniu_noc_side_rstn_dst_porting_rstn_dst                                      ,  // active-low reset
     input  logic [0:0]   display_ss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                          ,  // active-low reset
-    input  logic [119:0] display_ss_tniu_noc_side_req_porting_in_req_pld                                         ,
+    input  logic [120:0] display_ss_tniu_noc_side_req_porting_in_req_pld                                         ,
     output logic [0:0]   display_ss_tniu_noc_side_req_porting_in_req_rdy                                         ,
     input  logic [0:0]   display_ss_tniu_noc_side_req_porting_in_req_vld                                         ,
-    output logic [65:0]  display_ss_tniu_noc_side_rsp_porting_out_rsp_pld                                        ,
+    output logic [66:0] display_ss_tniu_noc_side_rsp_porting_out_rsp_pld                                        ,
     input  logic [0:0]   display_ss_tniu_noc_side_rsp_porting_out_rsp_rdy                                        ,
     output logic [0:0]   display_ss_tniu_noc_side_rsp_porting_out_rsp_vld                                        ,
     output logic [31:0]  display_ss_tniu_noc_side_top_apb_porting_top_paddr                                      ,  // APB address
@@ -907,10 +907,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   display_ss_tniu_noc_side_cti_event_porting_cti_trig_out                                 ,
     input  logic [31:0]  display_ss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                  ,
     output logic [31:0]  display_ss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                 ,
-    input  logic [71:0]  display_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                         ,
-    output logic [71:0]  display_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                        ,
-    input  logic [71:0]  display_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                             ,
-    output logic [71:0]  display_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                            ,
+    input  logic [47:0] display_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                         ,
+    output logic [47:0] display_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                        ,
+    input  logic [47:0] display_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                             ,
+    output logic [47:0] display_ss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                            ,
     output logic [31:0]  display_ss_tniu_noc_side_timing_bus1_porting_timing_bus1                                ,
     output logic [31:0]  display_ss_tniu_noc_side_timing_bus2_porting_timing_bus2                                ,
     output logic [31:0]  display_ss_tniu_noc_side_timing_bus3_porting_timing_bus3                                ,
@@ -926,10 +926,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   gpuss0_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   gpuss0_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   gpuss0_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] gpuss0_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] gpuss0_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   gpuss0_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   gpuss0_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  gpuss0_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] gpuss0_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   gpuss0_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   gpuss0_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  gpuss0_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -962,10 +962,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   gpuss0_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  gpuss0_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  gpuss0_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  gpuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  gpuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  gpuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  gpuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] gpuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] gpuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] gpuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] gpuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  gpuss0_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  gpuss0_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  gpuss0_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -981,10 +981,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   gpuss1_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   gpuss1_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   gpuss1_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] gpuss1_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] gpuss1_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   gpuss1_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   gpuss1_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  gpuss1_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] gpuss1_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   gpuss1_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   gpuss1_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  gpuss1_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -1017,10 +1017,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   gpuss1_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  gpuss1_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  gpuss1_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  gpuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  gpuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  gpuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  gpuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] gpuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] gpuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] gpuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] gpuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  gpuss1_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  gpuss1_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  gpuss1_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -1036,10 +1036,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   mcuss_tniu_noc_side_rstn_src_porting_rstn_src                                           ,  // active-low reset
     input  logic [0:0]   mcuss_tniu_noc_side_rstn_dst_porting_rstn_dst                                           ,  // active-low reset
     input  logic [0:0]   mcuss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                               ,  // active-low reset
-    input  logic [119:0] mcuss_tniu_noc_side_req_porting_in_req_pld                                              ,
+    input  logic [120:0] mcuss_tniu_noc_side_req_porting_in_req_pld                                              ,
     output logic [0:0]   mcuss_tniu_noc_side_req_porting_in_req_rdy                                              ,
     input  logic [0:0]   mcuss_tniu_noc_side_req_porting_in_req_vld                                              ,
-    output logic [65:0]  mcuss_tniu_noc_side_rsp_porting_out_rsp_pld                                             ,
+    output logic [66:0] mcuss_tniu_noc_side_rsp_porting_out_rsp_pld                                             ,
     input  logic [0:0]   mcuss_tniu_noc_side_rsp_porting_out_rsp_rdy                                             ,
     output logic [0:0]   mcuss_tniu_noc_side_rsp_porting_out_rsp_vld                                             ,
     output logic [31:0]  mcuss_tniu_noc_side_top_apb_porting_top_paddr                                           ,  // APB address
@@ -1072,10 +1072,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   mcuss_tniu_noc_side_cti_event_porting_cti_trig_out                                      ,
     input  logic [31:0]  mcuss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                       ,
     output logic [31:0]  mcuss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                      ,
-    input  logic [71:0]  mcuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                              ,
-    output logic [71:0]  mcuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                             ,
-    input  logic [71:0]  mcuss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                  ,
-    output logic [71:0]  mcuss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                 ,
+    input  logic [47:0] mcuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                              ,
+    output logic [47:0] mcuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                             ,
+    input  logic [47:0] mcuss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                  ,
+    output logic [47:0] mcuss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                 ,
     output logic [31:0]  mcuss_tniu_noc_side_timing_bus1_porting_timing_bus1                                     ,
     output logic [31:0]  mcuss_tniu_noc_side_timing_bus2_porting_timing_bus2                                     ,
     output logic [31:0]  mcuss_tniu_noc_side_timing_bus3_porting_timing_bus3                                     ,
@@ -1091,10 +1091,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   mipiss_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   mipiss_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   mipiss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] mipiss_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] mipiss_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   mipiss_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   mipiss_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  mipiss_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] mipiss_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   mipiss_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   mipiss_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  mipiss_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -1127,10 +1127,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   mipiss_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  mipiss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  mipiss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  mipiss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  mipiss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  mipiss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  mipiss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] mipiss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] mipiss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] mipiss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] mipiss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  mipiss_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  mipiss_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  mipiss_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -1146,10 +1146,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   nocss_tniu_noc_side_rstn_src_porting_rstn_src                                           ,  // active-low reset
     input  logic [0:0]   nocss_tniu_noc_side_rstn_dst_porting_rstn_dst                                           ,  // active-low reset
     input  logic [0:0]   nocss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                               ,  // active-low reset
-    input  logic [119:0] nocss_tniu_noc_side_req_porting_in_req_pld                                              ,
+    input  logic [120:0] nocss_tniu_noc_side_req_porting_in_req_pld                                              ,
     output logic [0:0]   nocss_tniu_noc_side_req_porting_in_req_rdy                                              ,
     input  logic [0:0]   nocss_tniu_noc_side_req_porting_in_req_vld                                              ,
-    output logic [65:0]  nocss_tniu_noc_side_rsp_porting_out_rsp_pld                                             ,
+    output logic [66:0] nocss_tniu_noc_side_rsp_porting_out_rsp_pld                                             ,
     input  logic [0:0]   nocss_tniu_noc_side_rsp_porting_out_rsp_rdy                                             ,
     output logic [0:0]   nocss_tniu_noc_side_rsp_porting_out_rsp_vld                                             ,
     output logic [31:0]  nocss_tniu_noc_side_top_apb_porting_top_paddr                                           ,  // APB address
@@ -1182,10 +1182,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   nocss_tniu_noc_side_cti_event_porting_cti_trig_out                                      ,
     input  logic [31:0]  nocss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                       ,
     output logic [31:0]  nocss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                      ,
-    input  logic [71:0]  nocss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                              ,
-    output logic [71:0]  nocss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                             ,
-    input  logic [71:0]  nocss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                  ,
-    output logic [71:0]  nocss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                 ,
+    input  logic [47:0] nocss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                              ,
+    output logic [47:0] nocss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                             ,
+    input  logic [47:0] nocss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                  ,
+    output logic [47:0] nocss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                 ,
     output logic [31:0]  nocss_tniu_noc_side_timing_bus1_porting_timing_bus1                                     ,
     output logic [31:0]  nocss_tniu_noc_side_timing_bus2_porting_timing_bus2                                     ,
     output logic [31:0]  nocss_tniu_noc_side_timing_bus3_porting_timing_bus3                                     ,
@@ -1201,10 +1201,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   npuss0_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   npuss0_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   npuss0_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] npuss0_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] npuss0_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   npuss0_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   npuss0_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  npuss0_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] npuss0_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   npuss0_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   npuss0_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  npuss0_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -1237,10 +1237,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   npuss0_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  npuss0_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  npuss0_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  npuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  npuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  npuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  npuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] npuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] npuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] npuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] npuss0_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  npuss0_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  npuss0_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  npuss0_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -1256,10 +1256,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   npuss1_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   npuss1_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   npuss1_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] npuss1_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] npuss1_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   npuss1_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   npuss1_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  npuss1_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] npuss1_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   npuss1_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   npuss1_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  npuss1_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -1292,10 +1292,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   npuss1_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  npuss1_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  npuss1_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  npuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  npuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  npuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  npuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] npuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] npuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] npuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] npuss1_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  npuss1_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  npuss1_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  npuss1_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -1311,10 +1311,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   npuss2_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   npuss2_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   npuss2_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] npuss2_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] npuss2_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   npuss2_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   npuss2_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  npuss2_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] npuss2_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   npuss2_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   npuss2_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  npuss2_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -1347,10 +1347,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   npuss2_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  npuss2_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  npuss2_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  npuss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  npuss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  npuss2_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  npuss2_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] npuss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] npuss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] npuss2_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] npuss2_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  npuss2_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  npuss2_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  npuss2_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -1366,10 +1366,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   npuss3_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   npuss3_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   npuss3_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] npuss3_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] npuss3_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   npuss3_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   npuss3_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  npuss3_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] npuss3_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   npuss3_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   npuss3_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  npuss3_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -1402,10 +1402,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   npuss3_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  npuss3_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  npuss3_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  npuss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  npuss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  npuss3_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  npuss3_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] npuss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] npuss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] npuss3_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] npuss3_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  npuss3_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  npuss3_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  npuss3_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -1421,10 +1421,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   npuss4_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   npuss4_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   npuss4_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] npuss4_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] npuss4_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   npuss4_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   npuss4_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  npuss4_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] npuss4_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   npuss4_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   npuss4_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  npuss4_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -1457,10 +1457,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   npuss4_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  npuss4_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  npuss4_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  npuss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  npuss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  npuss4_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  npuss4_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] npuss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] npuss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] npuss4_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] npuss4_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  npuss4_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  npuss4_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  npuss4_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -1476,10 +1476,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   pcie_ethss_tniu_noc_side_rstn_src_porting_rstn_src                                      ,  // active-low reset
     input  logic [0:0]   pcie_ethss_tniu_noc_side_rstn_dst_porting_rstn_dst                                      ,  // active-low reset
     input  logic [0:0]   pcie_ethss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                          ,  // active-low reset
-    input  logic [119:0] pcie_ethss_tniu_noc_side_req_porting_in_req_pld                                         ,
+    input  logic [120:0] pcie_ethss_tniu_noc_side_req_porting_in_req_pld                                         ,
     output logic [0:0]   pcie_ethss_tniu_noc_side_req_porting_in_req_rdy                                         ,
     input  logic [0:0]   pcie_ethss_tniu_noc_side_req_porting_in_req_vld                                         ,
-    output logic [65:0]  pcie_ethss_tniu_noc_side_rsp_porting_out_rsp_pld                                        ,
+    output logic [66:0] pcie_ethss_tniu_noc_side_rsp_porting_out_rsp_pld                                        ,
     input  logic [0:0]   pcie_ethss_tniu_noc_side_rsp_porting_out_rsp_rdy                                        ,
     output logic [0:0]   pcie_ethss_tniu_noc_side_rsp_porting_out_rsp_vld                                        ,
     output logic [31:0]  pcie_ethss_tniu_noc_side_top_apb_porting_top_paddr                                      ,  // APB address
@@ -1512,10 +1512,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   pcie_ethss_tniu_noc_side_cti_event_porting_cti_trig_out                                 ,
     input  logic [31:0]  pcie_ethss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                  ,
     output logic [31:0]  pcie_ethss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                 ,
-    input  logic [71:0]  pcie_ethss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                         ,
-    output logic [71:0]  pcie_ethss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                        ,
-    input  logic [71:0]  pcie_ethss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                             ,
-    output logic [71:0]  pcie_ethss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                            ,
+    input  logic [47:0] pcie_ethss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                         ,
+    output logic [47:0] pcie_ethss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                        ,
+    input  logic [47:0] pcie_ethss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                             ,
+    output logic [47:0] pcie_ethss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                            ,
     output logic [31:0]  pcie_ethss_tniu_noc_side_timing_bus1_porting_timing_bus1                                ,
     output logic [31:0]  pcie_ethss_tniu_noc_side_timing_bus2_porting_timing_bus2                                ,
     output logic [31:0]  pcie_ethss_tniu_noc_side_timing_bus3_porting_timing_bus3                                ,
@@ -1531,10 +1531,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   periss_tniu_noc_side_rstn_src_porting_rstn_src                                          ,  // active-low reset
     input  logic [0:0]   periss_tniu_noc_side_rstn_dst_porting_rstn_dst                                          ,  // active-low reset
     input  logic [0:0]   periss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                              ,  // active-low reset
-    input  logic [119:0] periss_tniu_noc_side_req_porting_in_req_pld                                             ,
+    input  logic [120:0] periss_tniu_noc_side_req_porting_in_req_pld                                             ,
     output logic [0:0]   periss_tniu_noc_side_req_porting_in_req_rdy                                             ,
     input  logic [0:0]   periss_tniu_noc_side_req_porting_in_req_vld                                             ,
-    output logic [65:0]  periss_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
+    output logic [66:0] periss_tniu_noc_side_rsp_porting_out_rsp_pld                                            ,
     input  logic [0:0]   periss_tniu_noc_side_rsp_porting_out_rsp_rdy                                            ,
     output logic [0:0]   periss_tniu_noc_side_rsp_porting_out_rsp_vld                                            ,
     output logic [31:0]  periss_tniu_noc_side_top_apb_porting_top_paddr                                          ,  // APB address
@@ -1567,10 +1567,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   periss_tniu_noc_side_cti_event_porting_cti_trig_out                                     ,
     input  logic [31:0]  periss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                      ,
     output logic [31:0]  periss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                     ,
-    input  logic [71:0]  periss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
-    output logic [71:0]  periss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
-    input  logic [71:0]  periss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
-    output logic [71:0]  periss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
+    input  logic [47:0] periss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                             ,
+    output logic [47:0] periss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                            ,
+    input  logic [47:0] periss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                 ,
+    output logic [47:0] periss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                ,
     output logic [31:0]  periss_tniu_noc_side_timing_bus1_porting_timing_bus1                                    ,
     output logic [31:0]  periss_tniu_noc_side_timing_bus2_porting_timing_bus2                                    ,
     output logic [31:0]  periss_tniu_noc_side_timing_bus3_porting_timing_bus3                                    ,
@@ -1586,10 +1586,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   safetyss_aon_local_tniu_noc_side_rstn_src_porting_rstn_src                              ,  // active-low reset
     input  logic [0:0]   safetyss_aon_local_tniu_noc_side_rstn_dst_porting_rstn_dst                              ,  // active-low reset
     input  logic [0:0]   safetyss_aon_local_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                  ,  // active-low reset
-    input  logic [119:0] safetyss_aon_local_tniu_noc_side_req_porting_in_req_pld                                 ,  // safety/fault output
+    input  logic [120:0] safetyss_aon_local_tniu_noc_side_req_porting_in_req_pld                                 ,  // safety/fault output
     output logic [0:0]   safetyss_aon_local_tniu_noc_side_req_porting_in_req_rdy                                 ,  // safety/fault output
     input  logic [0:0]   safetyss_aon_local_tniu_noc_side_req_porting_in_req_vld                                 ,  // safety/fault output
-    output logic [65:0]  safetyss_aon_local_tniu_noc_side_rsp_porting_out_rsp_pld                                ,  // safety/fault output
+    output logic [66:0] safetyss_aon_local_tniu_noc_side_rsp_porting_out_rsp_pld                                ,  // safety/fault output
     input  logic [0:0]   safetyss_aon_local_tniu_noc_side_rsp_porting_out_rsp_rdy                                ,  // safety/fault output
     output logic [0:0]   safetyss_aon_local_tniu_noc_side_rsp_porting_out_rsp_vld                                ,  // safety/fault output
     output logic [31:0]  safetyss_aon_local_tniu_noc_side_top_apb_porting_top_paddr                              ,  // APB address
@@ -1622,10 +1622,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   safetyss_aon_local_tniu_noc_side_cti_event_porting_cti_trig_out                         ,  // safety/fault output
     input  logic [31:0]  safetyss_aon_local_tniu_noc_side_ctm_event_porting_ctm_trig_in                          ,  // safety/fault output
     output logic [31:0]  safetyss_aon_local_tniu_noc_side_ctm_event_porting_ctm_trig_out                         ,  // safety/fault output
-    input  logic [71:0]  safetyss_aon_local_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                 ,  // safety/fault output
-    output logic [71:0]  safetyss_aon_local_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                ,  // safety/fault output
-    input  logic [71:0]  safetyss_aon_local_tniu_noc_side_ctm_channel_porting_ctm_channel_in                     ,  // safety/fault output
-    output logic [71:0]  safetyss_aon_local_tniu_noc_side_ctm_channel_porting_ctm_channel_out                    ,  // safety/fault output
+    input  logic [47:0] safetyss_aon_local_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                 ,  // safety/fault output
+    output logic [47:0] safetyss_aon_local_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                ,  // safety/fault output
+    input  logic [47:0] safetyss_aon_local_tniu_noc_side_ctm_channel_porting_ctm_channel_in                     ,  // safety/fault output
+    output logic [47:0] safetyss_aon_local_tniu_noc_side_ctm_channel_porting_ctm_channel_out                    ,  // safety/fault output
     output logic [31:0]  safetyss_aon_local_tniu_noc_side_timing_bus1_porting_timing_bus1                        ,  // safety/fault output
     output logic [31:0]  safetyss_aon_local_tniu_noc_side_timing_bus2_porting_timing_bus2                        ,  // safety/fault output
     output logic [31:0]  safetyss_aon_local_tniu_noc_side_timing_bus3_porting_timing_bus3                        ,  // safety/fault output
@@ -1641,10 +1641,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   ufsss_tniu_noc_side_rstn_src_porting_rstn_src                                           ,  // active-low reset
     input  logic [0:0]   ufsss_tniu_noc_side_rstn_dst_porting_rstn_dst                                           ,  // active-low reset
     input  logic [0:0]   ufsss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                               ,  // active-low reset
-    input  logic [119:0] ufsss_tniu_noc_side_req_porting_in_req_pld                                              ,
+    input  logic [120:0] ufsss_tniu_noc_side_req_porting_in_req_pld                                              ,
     output logic [0:0]   ufsss_tniu_noc_side_req_porting_in_req_rdy                                              ,
     input  logic [0:0]   ufsss_tniu_noc_side_req_porting_in_req_vld                                              ,
-    output logic [65:0]  ufsss_tniu_noc_side_rsp_porting_out_rsp_pld                                             ,
+    output logic [66:0] ufsss_tniu_noc_side_rsp_porting_out_rsp_pld                                             ,
     input  logic [0:0]   ufsss_tniu_noc_side_rsp_porting_out_rsp_rdy                                             ,
     output logic [0:0]   ufsss_tniu_noc_side_rsp_porting_out_rsp_vld                                             ,
     output logic [31:0]  ufsss_tniu_noc_side_top_apb_porting_top_paddr                                           ,  // APB address
@@ -1677,10 +1677,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   ufsss_tniu_noc_side_cti_event_porting_cti_trig_out                                      ,
     input  logic [31:0]  ufsss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                       ,
     output logic [31:0]  ufsss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                      ,
-    input  logic [71:0]  ufsss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                              ,
-    output logic [71:0]  ufsss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                             ,
-    input  logic [71:0]  ufsss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                  ,
-    output logic [71:0]  ufsss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                 ,
+    input  logic [47:0] ufsss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                              ,
+    output logic [47:0] ufsss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                             ,
+    input  logic [47:0] ufsss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                  ,
+    output logic [47:0] ufsss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                 ,
     output logic [31:0]  ufsss_tniu_noc_side_timing_bus1_porting_timing_bus1                                     ,
     output logic [31:0]  ufsss_tniu_noc_side_timing_bus2_porting_timing_bus2                                     ,
     output logic [31:0]  ufsss_tniu_noc_side_timing_bus3_porting_timing_bus3                                     ,
@@ -1696,10 +1696,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   usb_dpss_tniu_noc_side_rstn_src_porting_rstn_src                                        ,  // active-low reset
     input  logic [0:0]   usb_dpss_tniu_noc_side_rstn_dst_porting_rstn_dst                                        ,  // active-low reset
     input  logic [0:0]   usb_dpss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                            ,  // active-low reset
-    input  logic [119:0] usb_dpss_tniu_noc_side_req_porting_in_req_pld                                           ,
+    input  logic [120:0] usb_dpss_tniu_noc_side_req_porting_in_req_pld                                           ,
     output logic [0:0]   usb_dpss_tniu_noc_side_req_porting_in_req_rdy                                           ,
     input  logic [0:0]   usb_dpss_tniu_noc_side_req_porting_in_req_vld                                           ,
-    output logic [65:0]  usb_dpss_tniu_noc_side_rsp_porting_out_rsp_pld                                          ,
+    output logic [66:0] usb_dpss_tniu_noc_side_rsp_porting_out_rsp_pld                                          ,
     input  logic [0:0]   usb_dpss_tniu_noc_side_rsp_porting_out_rsp_rdy                                          ,
     output logic [0:0]   usb_dpss_tniu_noc_side_rsp_porting_out_rsp_vld                                          ,
     output logic [31:0]  usb_dpss_tniu_noc_side_top_apb_porting_top_paddr                                        ,  // APB address
@@ -1732,10 +1732,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   usb_dpss_tniu_noc_side_cti_event_porting_cti_trig_out                                   ,
     input  logic [31:0]  usb_dpss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                    ,
     output logic [31:0]  usb_dpss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                   ,
-    input  logic [71:0]  usb_dpss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                           ,
-    output logic [71:0]  usb_dpss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                          ,
-    input  logic [71:0]  usb_dpss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                               ,
-    output logic [71:0]  usb_dpss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                              ,
+    input  logic [47:0] usb_dpss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                           ,
+    output logic [47:0] usb_dpss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                          ,
+    input  logic [47:0] usb_dpss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                               ,
+    output logic [47:0] usb_dpss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                              ,
     output logic [31:0]  usb_dpss_tniu_noc_side_timing_bus1_porting_timing_bus1                                  ,
     output logic [31:0]  usb_dpss_tniu_noc_side_timing_bus2_porting_timing_bus2                                  ,
     output logic [31:0]  usb_dpss_tniu_noc_side_timing_bus3_porting_timing_bus3                                  ,
@@ -1751,10 +1751,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   vdspss0_tniu_noc_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
     input  logic [0:0]   vdspss0_tniu_noc_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
     input  logic [0:0]   vdspss0_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
-    input  logic [119:0] vdspss0_tniu_noc_side_req_porting_in_req_pld                                            ,
+    input  logic [120:0] vdspss0_tniu_noc_side_req_porting_in_req_pld                                            ,
     output logic [0:0]   vdspss0_tniu_noc_side_req_porting_in_req_rdy                                            ,
     input  logic [0:0]   vdspss0_tniu_noc_side_req_porting_in_req_vld                                            ,
-    output logic [65:0]  vdspss0_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
+    output logic [66:0] vdspss0_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
     input  logic [0:0]   vdspss0_tniu_noc_side_rsp_porting_out_rsp_rdy                                           ,
     output logic [0:0]   vdspss0_tniu_noc_side_rsp_porting_out_rsp_vld                                           ,
     output logic [31:0]  vdspss0_tniu_noc_side_top_apb_porting_top_paddr                                         ,  // APB address
@@ -1787,10 +1787,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   vdspss0_tniu_noc_side_cti_event_porting_cti_trig_out                                    ,
     input  logic [31:0]  vdspss0_tniu_noc_side_ctm_event_porting_ctm_trig_in                                     ,
     output logic [31:0]  vdspss0_tniu_noc_side_ctm_event_porting_ctm_trig_out                                    ,
-    input  logic [71:0]  vdspss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
-    output logic [71:0]  vdspss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
-    input  logic [71:0]  vdspss0_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
-    output logic [71:0]  vdspss0_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
+    input  logic [47:0] vdspss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
+    output logic [47:0] vdspss0_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
+    input  logic [47:0] vdspss0_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
+    output logic [47:0] vdspss0_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
     output logic [31:0]  vdspss0_tniu_noc_side_timing_bus1_porting_timing_bus1                                   ,
     output logic [31:0]  vdspss0_tniu_noc_side_timing_bus2_porting_timing_bus2                                   ,
     output logic [31:0]  vdspss0_tniu_noc_side_timing_bus3_porting_timing_bus3                                   ,
@@ -1806,10 +1806,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   vdspss1_tniu_noc_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
     input  logic [0:0]   vdspss1_tniu_noc_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
     input  logic [0:0]   vdspss1_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
-    input  logic [119:0] vdspss1_tniu_noc_side_req_porting_in_req_pld                                            ,
+    input  logic [120:0] vdspss1_tniu_noc_side_req_porting_in_req_pld                                            ,
     output logic [0:0]   vdspss1_tniu_noc_side_req_porting_in_req_rdy                                            ,
     input  logic [0:0]   vdspss1_tniu_noc_side_req_porting_in_req_vld                                            ,
-    output logic [65:0]  vdspss1_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
+    output logic [66:0] vdspss1_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
     input  logic [0:0]   vdspss1_tniu_noc_side_rsp_porting_out_rsp_rdy                                           ,
     output logic [0:0]   vdspss1_tniu_noc_side_rsp_porting_out_rsp_vld                                           ,
     output logic [31:0]  vdspss1_tniu_noc_side_top_apb_porting_top_paddr                                         ,  // APB address
@@ -1842,10 +1842,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   vdspss1_tniu_noc_side_cti_event_porting_cti_trig_out                                    ,
     input  logic [31:0]  vdspss1_tniu_noc_side_ctm_event_porting_ctm_trig_in                                     ,
     output logic [31:0]  vdspss1_tniu_noc_side_ctm_event_porting_ctm_trig_out                                    ,
-    input  logic [71:0]  vdspss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
-    output logic [71:0]  vdspss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
-    input  logic [71:0]  vdspss1_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
-    output logic [71:0]  vdspss1_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
+    input  logic [47:0] vdspss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
+    output logic [47:0] vdspss1_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
+    input  logic [47:0] vdspss1_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
+    output logic [47:0] vdspss1_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
     output logic [31:0]  vdspss1_tniu_noc_side_timing_bus1_porting_timing_bus1                                   ,
     output logic [31:0]  vdspss1_tniu_noc_side_timing_bus2_porting_timing_bus2                                   ,
     output logic [31:0]  vdspss1_tniu_noc_side_timing_bus3_porting_timing_bus3                                   ,
@@ -1861,10 +1861,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   vdspss2_tniu_noc_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
     input  logic [0:0]   vdspss2_tniu_noc_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
     input  logic [0:0]   vdspss2_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
-    input  logic [119:0] vdspss2_tniu_noc_side_req_porting_in_req_pld                                            ,
+    input  logic [120:0] vdspss2_tniu_noc_side_req_porting_in_req_pld                                            ,
     output logic [0:0]   vdspss2_tniu_noc_side_req_porting_in_req_rdy                                            ,
     input  logic [0:0]   vdspss2_tniu_noc_side_req_porting_in_req_vld                                            ,
-    output logic [65:0]  vdspss2_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
+    output logic [66:0] vdspss2_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
     input  logic [0:0]   vdspss2_tniu_noc_side_rsp_porting_out_rsp_rdy                                           ,
     output logic [0:0]   vdspss2_tniu_noc_side_rsp_porting_out_rsp_vld                                           ,
     output logic [31:0]  vdspss2_tniu_noc_side_top_apb_porting_top_paddr                                         ,  // APB address
@@ -1897,10 +1897,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   vdspss2_tniu_noc_side_cti_event_porting_cti_trig_out                                    ,
     input  logic [31:0]  vdspss2_tniu_noc_side_ctm_event_porting_ctm_trig_in                                     ,
     output logic [31:0]  vdspss2_tniu_noc_side_ctm_event_porting_ctm_trig_out                                    ,
-    input  logic [71:0]  vdspss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
-    output logic [71:0]  vdspss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
-    input  logic [71:0]  vdspss2_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
-    output logic [71:0]  vdspss2_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
+    input  logic [47:0] vdspss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
+    output logic [47:0] vdspss2_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
+    input  logic [47:0] vdspss2_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
+    output logic [47:0] vdspss2_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
     output logic [31:0]  vdspss2_tniu_noc_side_timing_bus1_porting_timing_bus1                                   ,
     output logic [31:0]  vdspss2_tniu_noc_side_timing_bus2_porting_timing_bus2                                   ,
     output logic [31:0]  vdspss2_tniu_noc_side_timing_bus3_porting_timing_bus3                                   ,
@@ -1916,10 +1916,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   vdspss3_tniu_noc_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
     input  logic [0:0]   vdspss3_tniu_noc_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
     input  logic [0:0]   vdspss3_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
-    input  logic [119:0] vdspss3_tniu_noc_side_req_porting_in_req_pld                                            ,
+    input  logic [120:0] vdspss3_tniu_noc_side_req_porting_in_req_pld                                            ,
     output logic [0:0]   vdspss3_tniu_noc_side_req_porting_in_req_rdy                                            ,
     input  logic [0:0]   vdspss3_tniu_noc_side_req_porting_in_req_vld                                            ,
-    output logic [65:0]  vdspss3_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
+    output logic [66:0] vdspss3_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
     input  logic [0:0]   vdspss3_tniu_noc_side_rsp_porting_out_rsp_rdy                                           ,
     output logic [0:0]   vdspss3_tniu_noc_side_rsp_porting_out_rsp_vld                                           ,
     output logic [31:0]  vdspss3_tniu_noc_side_top_apb_porting_top_paddr                                         ,  // APB address
@@ -1952,10 +1952,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   vdspss3_tniu_noc_side_cti_event_porting_cti_trig_out                                    ,
     input  logic [31:0]  vdspss3_tniu_noc_side_ctm_event_porting_ctm_trig_in                                     ,
     output logic [31:0]  vdspss3_tniu_noc_side_ctm_event_porting_ctm_trig_out                                    ,
-    input  logic [71:0]  vdspss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
-    output logic [71:0]  vdspss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
-    input  logic [71:0]  vdspss3_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
-    output logic [71:0]  vdspss3_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
+    input  logic [47:0] vdspss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
+    output logic [47:0] vdspss3_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
+    input  logic [47:0] vdspss3_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
+    output logic [47:0] vdspss3_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
     output logic [31:0]  vdspss3_tniu_noc_side_timing_bus1_porting_timing_bus1                                   ,
     output logic [31:0]  vdspss3_tniu_noc_side_timing_bus2_porting_timing_bus2                                   ,
     output logic [31:0]  vdspss3_tniu_noc_side_timing_bus3_porting_timing_bus3                                   ,
@@ -1971,10 +1971,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   vdspss4_tniu_noc_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
     input  logic [0:0]   vdspss4_tniu_noc_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
     input  logic [0:0]   vdspss4_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
-    input  logic [119:0] vdspss4_tniu_noc_side_req_porting_in_req_pld                                            ,
+    input  logic [120:0] vdspss4_tniu_noc_side_req_porting_in_req_pld                                            ,
     output logic [0:0]   vdspss4_tniu_noc_side_req_porting_in_req_rdy                                            ,
     input  logic [0:0]   vdspss4_tniu_noc_side_req_porting_in_req_vld                                            ,
-    output logic [65:0]  vdspss4_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
+    output logic [66:0] vdspss4_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
     input  logic [0:0]   vdspss4_tniu_noc_side_rsp_porting_out_rsp_rdy                                           ,
     output logic [0:0]   vdspss4_tniu_noc_side_rsp_porting_out_rsp_vld                                           ,
     output logic [31:0]  vdspss4_tniu_noc_side_top_apb_porting_top_paddr                                         ,  // APB address
@@ -2007,10 +2007,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   vdspss4_tniu_noc_side_cti_event_porting_cti_trig_out                                    ,
     input  logic [31:0]  vdspss4_tniu_noc_side_ctm_event_porting_ctm_trig_in                                     ,
     output logic [31:0]  vdspss4_tniu_noc_side_ctm_event_porting_ctm_trig_out                                    ,
-    input  logic [71:0]  vdspss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
-    output logic [71:0]  vdspss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
-    input  logic [71:0]  vdspss4_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
-    output logic [71:0]  vdspss4_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
+    input  logic [47:0] vdspss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
+    output logic [47:0] vdspss4_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
+    input  logic [47:0] vdspss4_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
+    output logic [47:0] vdspss4_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
     output logic [31:0]  vdspss4_tniu_noc_side_timing_bus1_porting_timing_bus1                                   ,
     output logic [31:0]  vdspss4_tniu_noc_side_timing_bus2_porting_timing_bus2                                   ,
     output logic [31:0]  vdspss4_tniu_noc_side_timing_bus3_porting_timing_bus3                                   ,
@@ -2026,10 +2026,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   vdspss5_tniu_noc_side_rstn_src_porting_rstn_src                                         ,  // active-low reset
     input  logic [0:0]   vdspss5_tniu_noc_side_rstn_dst_porting_rstn_dst                                         ,  // active-low reset
     input  logic [0:0]   vdspss5_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                             ,  // active-low reset
-    input  logic [119:0] vdspss5_tniu_noc_side_req_porting_in_req_pld                                            ,
+    input  logic [120:0] vdspss5_tniu_noc_side_req_porting_in_req_pld                                            ,
     output logic [0:0]   vdspss5_tniu_noc_side_req_porting_in_req_rdy                                            ,
     input  logic [0:0]   vdspss5_tniu_noc_side_req_porting_in_req_vld                                            ,
-    output logic [65:0]  vdspss5_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
+    output logic [66:0] vdspss5_tniu_noc_side_rsp_porting_out_rsp_pld                                           ,
     input  logic [0:0]   vdspss5_tniu_noc_side_rsp_porting_out_rsp_rdy                                           ,
     output logic [0:0]   vdspss5_tniu_noc_side_rsp_porting_out_rsp_vld                                           ,
     output logic [31:0]  vdspss5_tniu_noc_side_top_apb_porting_top_paddr                                         ,  // APB address
@@ -2062,10 +2062,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   vdspss5_tniu_noc_side_cti_event_porting_cti_trig_out                                    ,
     input  logic [31:0]  vdspss5_tniu_noc_side_ctm_event_porting_ctm_trig_in                                     ,
     output logic [31:0]  vdspss5_tniu_noc_side_ctm_event_porting_ctm_trig_out                                    ,
-    input  logic [71:0]  vdspss5_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
-    output logic [71:0]  vdspss5_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
-    input  logic [71:0]  vdspss5_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
-    output logic [71:0]  vdspss5_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
+    input  logic [47:0] vdspss5_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                            ,
+    output logic [47:0] vdspss5_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                           ,
+    input  logic [47:0] vdspss5_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                ,
+    output logic [47:0] vdspss5_tniu_noc_side_ctm_channel_porting_ctm_channel_out                               ,
     output logic [31:0]  vdspss5_tniu_noc_side_timing_bus1_porting_timing_bus1                                   ,
     output logic [31:0]  vdspss5_tniu_noc_side_timing_bus2_porting_timing_bus2                                   ,
     output logic [31:0]  vdspss5_tniu_noc_side_timing_bus3_porting_timing_bus3                                   ,
@@ -2081,10 +2081,10 @@ module sts_soc_top_wrap_stub (
     input  logic [0:0]   vpuss_tniu_noc_side_rstn_src_porting_rstn_src                                           ,  // active-low reset
     input  logic [0:0]   vpuss_tniu_noc_side_rstn_dst_porting_rstn_dst                                           ,  // active-low reset
     input  logic [0:0]   vpuss_tniu_noc_side_rstn_dbg_timer_porting_rstn_dbg_timer                               ,  // active-low reset
-    input  logic [119:0] vpuss_tniu_noc_side_req_porting_in_req_pld                                              ,
+    input  logic [120:0] vpuss_tniu_noc_side_req_porting_in_req_pld                                              ,
     output logic [0:0]   vpuss_tniu_noc_side_req_porting_in_req_rdy                                              ,
     input  logic [0:0]   vpuss_tniu_noc_side_req_porting_in_req_vld                                              ,
-    output logic [65:0]  vpuss_tniu_noc_side_rsp_porting_out_rsp_pld                                             ,
+    output logic [66:0] vpuss_tniu_noc_side_rsp_porting_out_rsp_pld                                             ,
     input  logic [0:0]   vpuss_tniu_noc_side_rsp_porting_out_rsp_rdy                                             ,
     output logic [0:0]   vpuss_tniu_noc_side_rsp_porting_out_rsp_vld                                             ,
     output logic [31:0]  vpuss_tniu_noc_side_top_apb_porting_top_paddr                                           ,  // APB address
@@ -2117,10 +2117,10 @@ module sts_soc_top_wrap_stub (
     output logic [7:0]   vpuss_tniu_noc_side_cti_event_porting_cti_trig_out                                      ,
     input  logic [31:0]  vpuss_tniu_noc_side_ctm_event_porting_ctm_trig_in                                       ,
     output logic [31:0]  vpuss_tniu_noc_side_ctm_event_porting_ctm_trig_out                                      ,
-    input  logic [71:0]  vpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                              ,
-    output logic [71:0]  vpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                             ,
-    input  logic [71:0]  vpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                  ,
-    output logic [71:0]  vpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                 ,
+    input  logic [47:0] vpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_in                              ,
+    output logic [47:0] vpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_dec_out                             ,
+    input  logic [47:0] vpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_in                                  ,
+    output logic [47:0] vpuss_tniu_noc_side_ctm_channel_porting_ctm_channel_out                                 ,
     output logic [31:0]  vpuss_tniu_noc_side_timing_bus1_porting_timing_bus1                                     ,
     output logic [31:0]  vpuss_tniu_noc_side_timing_bus2_porting_timing_bus2                                     ,
     output logic [31:0]  vpuss_tniu_noc_side_timing_bus3_porting_timing_bus3                                     ,

@@ -1,0 +1,12 @@
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/ddrss_tniu_noc_side_macros_0dcee98670.sv
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/pulse_async_bridge_receiver_qactive.sv
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/pulse_async_bridge_transmitter_qactive.sv
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/sts_cti.sv
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_apb_dec.sv
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/RegSpaceBase_cfg_reg_bank_table.v
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_apb.sv
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc_dec2.sv
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
+$DDRSS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv

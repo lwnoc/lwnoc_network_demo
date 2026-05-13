@@ -1,0 +1,8 @@
+$CAMERA_SS_TNIU_SYS_OUT_DIR/camera_ss_tniu_sys_macros_9b1847c810.sv
+$CAMERA_SS_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
+$CAMERA_SS_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
+$CAMERA_SS_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
+$CAMERA_SS_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
+$CAMERA_SS_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
+$CAMERA_SS_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
+$CAMERA_SS_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv

@@ -1,0 +1,8 @@
+$AON_SS_INIU_NOC_SIDE_OUT_DIR/aon_ss_iniu_noc_side_macros_c599969ec6.sv
+$AON_SS_INIU_NOC_SIDE_OUT_DIR/sts_iniu_define.sv
+$AON_SS_INIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$AON_SS_INIU_NOC_SIDE_OUT_DIR/pulse_async_bridge_receiver_qactive.sv
+$AON_SS_INIU_NOC_SIDE_OUT_DIR/pulse_async_bridge_transmitter_qactive.sv
+$AON_SS_INIU_NOC_SIDE_OUT_DIR/sts_cti.sv
+$AON_SS_INIU_NOC_SIDE_OUT_DIR/sts_iniu_noc.sv
+$AON_SS_INIU_NOC_SIDE_OUT_DIR/sts_iniu_undefine.sv

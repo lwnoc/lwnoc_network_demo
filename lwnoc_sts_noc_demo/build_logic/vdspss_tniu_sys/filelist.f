@@ -1,0 +1,8 @@
+$VDSPSS_TNIU_SYS_OUT_DIR/vdspss_tniu_sys_macros_02b5976f30.sv
+$VDSPSS_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
+$VDSPSS_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
+$VDSPSS_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
+$VDSPSS_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
+$VDSPSS_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
+$VDSPSS_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
+$VDSPSS_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv

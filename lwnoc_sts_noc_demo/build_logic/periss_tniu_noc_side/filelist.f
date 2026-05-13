@@ -1,0 +1,12 @@
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/periss_tniu_noc_side_macros_9462419bf8.sv
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_define.sv
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/lwnoc_sts_pack.sv
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/pulse_async_bridge_receiver_qactive.sv
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/pulse_async_bridge_transmitter_qactive.sv
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/sts_cti.sv
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_apb_dec.sv
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/RegSpaceBase_cfg_reg_bank_table.v
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_apb.sv
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc_dec2.sv
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_noc.sv
+$PERISS_TNIU_NOC_SIDE_OUT_DIR/sts_tniu_undefine.sv
