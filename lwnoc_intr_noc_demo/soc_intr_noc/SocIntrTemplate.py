@@ -143,7 +143,9 @@ cpu_ss_iniu_cfg = _new_cfg(name="cpu_ss_iniu_sys", prefix="cpu_ss_iniu_", fileli
 
 npu_ss_iniu_cfg = _new_cfg(name="npu_ss_iniu_sys", prefix="npu_ss_iniu_", filelist_name="intr_iniu_sys.f", env_var="SOC_INTR_NPU_SS_INIU_SYS_OUT_DIR")
 
-gpu_ss_iniu_cfg = _new_cfg(name="gpu_ss_iniu_sys", prefix="gpu_ss_iniu_", filelist_name="intr_iniu_sys.f", env_var="SOC_INTR_GPU_SS_INIU_SYS_OUT_DIR")
+gpu_ss0_iniu_cfg = _new_cfg(name="gpu_ss0_iniu_sys", prefix="gpu_ss0_iniu_", filelist_name="intr_iniu_sys.f", env_var="SOC_INTR_GPU_SS0_INIU_SYS_OUT_DIR")
+
+gpu_ss1_iniu_cfg = _new_cfg(name="gpu_ss1_iniu_sys", prefix="gpu_ss1_iniu_", filelist_name="intr_iniu_sys.f", env_var="SOC_INTR_GPU_SS1_INIU_SYS_OUT_DIR")
 
 mipi_ss_iniu_cfg = _new_cfg(name="mipi_ss_iniu_sys", prefix="mipi_ss_iniu_", filelist_name="intr_iniu_sys.f", env_var="SOC_INTR_MIPI_SS_INIU_SYS_OUT_DIR")
 
@@ -182,6 +184,8 @@ dsp_ss_tniu_cfg = _new_cfg(name="dsp_ss_tniu_sys", prefix="dsp_ss_tniu_", fileli
 
 mcu_ss_tniu_cfg = _new_cfg(name="mcu_ss_tniu_sys", prefix="mcu_ss_tniu_", filelist_name="intr_tniu_sys.f", env_var="SOC_INTR_MCU_SS_TNIU_SYS_OUT_DIR")
 
+audio_ss_tniu_cfg = _new_cfg(name="audio_ss_tniu_sys", prefix="audio_ss_tniu_", filelist_name="intr_tniu_sys.f", env_var="SOC_INTR_AUDIO_SS_TNIU_SYS_OUT_DIR")
+
 # Explicit node_name -> config mapping
 INIU_SYS_CONFIGS: dict[str, TemplateIPConfig] = {
     "cpu_ss_iniu": cpu_ss_iniu_cfg,
@@ -190,8 +194,8 @@ INIU_SYS_CONFIGS: dict[str, TemplateIPConfig] = {
     "npu_ss2_iniu": npu_ss_iniu_cfg,
     "npu_ss3_iniu": npu_ss_iniu_cfg,
     "npu_ss4_iniu": npu_ss_iniu_cfg,
-    "gpu_ss0_iniu": gpu_ss_iniu_cfg,
-    "gpu_ss1_iniu": gpu_ss_iniu_cfg,
+    "gpu_ss0_iniu": gpu_ss0_iniu_cfg,
+    "gpu_ss1_iniu": gpu_ss1_iniu_cfg,
     "mipi_ss_iniu": mipi_ss_iniu_cfg,
     "dp_ss_iniu": dp_ss_iniu_cfg,
     "display_ss_iniu": display_ss_iniu_cfg,
@@ -238,6 +242,7 @@ TNIU_SYS_CONFIGS: dict[str, TemplateIPConfig] = {
     "dsp_ss4_tniu": dsp_ss_tniu_cfg,
     "dsp_ss5_tniu": dsp_ss_tniu_cfg,
     "mcu_ss_tniu": mcu_ss_tniu_cfg,
+    "audio_ss_tniu": audio_ss_tniu_cfg,
 }
 
 SOC_INTR_RING_NODE_NUM = len(INIU_SYS_CONFIGS) + len(TNIU_SYS_CONFIGS)
@@ -365,6 +370,10 @@ soc_intr_ring_req_zero_source_config = _new_cfg(
 
 for _cfg in _unique_cfgs(INIU_SYS_CONFIGS.values()):
     _apply_cfg_params(_cfg, macros=_SOC_INTR_INIU_ASYNC_MACROS)
+
+# GPU SS0/1 — separate param_overrides for independent tuning
+_apply_cfg_params(gpu_ss0_iniu_cfg, param_overrides={})
+_apply_cfg_params(gpu_ss1_iniu_cfg, param_overrides={})
 
 for _cfg in _unique_cfgs(TNIU_SYS_CONFIGS.values()):
     _apply_cfg_params(_cfg, macros=_SOC_INTR_TNIU_ASYNC_MACROS)

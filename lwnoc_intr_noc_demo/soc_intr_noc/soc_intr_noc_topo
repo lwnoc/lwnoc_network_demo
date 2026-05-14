@@ -14,40 +14,38 @@
 
 ```text
 async bridge mst up
--> CPUSS iniu (20)
--> CPUSS tniu (0)
 -> NPUSS0 iniu (23)
 -> NPUSS0 tniu (1)
--> NPUSS1 iniu (24)
--> NPUSS1 tniu (2)
--> NPUSS2 iniu (25)
--> NPUSS2 tniu (3)
+-> CPUSS tniu (0)
+-> CPUSS iniu (20)
+-> CameraSS iniu (30)
 -> GPUSS1 iniu (22)
 -> MIPISS iniu (29)
 -> USB_DPSS iniu (52)
 -> DisplaySS iniu (44)
 -> VPUSS iniu (43)
+-> NOCSS iniu (57)
+-> NPUSS1 iniu (24)
 -> SafetySS(Aon) iniu (54)
 -> SafetySS(Aon) tniu (12)
--> VDSPSS5 iniu (51)
--> VDSPSS5 tniu (11)
--> VDSPSS4 iniu (50)
--> VDSPSS4 tniu (10)
--> VDSPSS3 iniu (49)
--> VDSPSS3 tniu (9)
--> VDSPSS2 iniu (48)
--> VDSPSS2 tniu (8)
--> VDSPSS1 iniu (47)
--> VDSPSS1 tniu (7)
 -> VDSPSS0 iniu (46)
 -> VDSPSS0 tniu (6)
+-> VDSPSS1 iniu (47)
+-> VDSPSS1 tniu (7)
+-> VDSPSS2 iniu (48)
+-> VDSPSS2 tniu (8)
+-> VDSPSS3 iniu (49)
+-> VDSPSS3 tniu (9)
+-> VDSPSS4 iniu (50)
+-> VDSPSS4 tniu (10)
+-> VDSPSS5 iniu (51)
+-> VDSPSS5 tniu (11)
 -> DDRSS6 iniu (37)
 -> DDRSS7 iniu (38)
 -> DDRSS8 iniu (39)
 -> DDRSS9 iniu (40)
 -> DDRSS10 iniu (41)
 -> DDRSS11 iniu (42)
--> NOCSS iniu (57)
 -> async bridge slv down
 ```
 
@@ -55,25 +53,26 @@ async bridge mst up
 
 ```text
 async bridge mst down
--> NPUSS3 iniu (26)
--> NPUSS3 tniu (4)
--> PERISS iniu (55)
--> GPUSS0 iniu (21)
--> CameraSS iniu (30)
--> UFSSS iniu (53)
--> PCIE_ETHSS iniu (45)
--> MCUSS iniu (56)
--> MCUSS tniu (13)
--> err_tgtid_sink
--> ring_sp
 -> NPUSS4 iniu (27)
 -> NPUSS4 tniu (5)
+-> ring_sp
+-> NPUSS2 tniu (3)
+-> NPUSS2 iniu (25)
+-> GPUSS0 iniu (21)
+-> PCIE_ETHSS iniu (45)
+-> UFSSS iniu (53)
+-> NPUSS3 iniu (26)
+-> NPUSS3 tniu (4)
 -> DDRSS0 iniu (31)
 -> DDRSS1 iniu (32)
 -> DDRSS2 iniu (33)
 -> DDRSS3 iniu (34)
 -> DDRSS4 iniu (35)
 -> DDRSS5 iniu (36)
+-> PERISS iniu (55)
+-> MCUSS iniu (56)
+-> MCUSS tniu (14)
+-> AudioSS tniu (13)
 -> async bridge slv up
 ```
 
@@ -87,8 +86,8 @@ async bridge mst down
 | 标准名 | 旧名 | Domain |
 |---|---|---|
 | CPUSS | cpu_ss | up |
-| NPUSS0-2 | (新增) | up |
-| NPUSS3-4 | (新增) | dn |
+| NPUSS0-1 | (新增) | up |
+| NPUSS2-4 | (新增) | dn |
 | GPUSS0 | gpu_ss0 | dn |
 | GPUSS1 | gpu_ss1 | up |
 | PERISS | peri_ss | dn |
@@ -101,6 +100,7 @@ async bridge mst down
 | PCIE_ETHSS | pcie_eth_ss | dn |
 | SafetySS(Aon) | aon_ss | up |
 | MCUSS | (新增) | dn |
+| AudioSS | (新增) | dn |
 | VDSPSS0-5 | dsp_ss0-5 | up |
 | DDRSS0-5 | ddr0-5 | dn |
 | DDRSS6-11 | ddr6-11 | up |
