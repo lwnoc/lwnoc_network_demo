@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:16ed7b3082b2988f8fcf5fd7f2c6b541]
+//[UHDL]Content Start [md5:ad9ad6a10662ed95d84e1768c82f0123]
 module ddrss8_tniu (
 	input          clk_src                                        ,
 	input          rstn_src                                       ,
@@ -71,7 +71,7 @@ module ddrss8_tniu (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	sts_tniu_sys sys_side (
+	ddr_ss_tniu_sts_tniu_sys sys_side (
 		.clk_dst(clk_dst),
 		.clk_dbg_timer(clk_dbg_timer),
 		.rstn_dst(rstn_dst),
@@ -122,7 +122,7 @@ module ddrss8_tniu (
 		.sts_tniu_req_afifo_db_err(safety_sts_tniu_req_afifo_db_err),
 		.hw_dbg_sel_in(),
 		.hw_dbg_sel_out());
-	sts_tniu_noc noc_side (
+	ddr_ss8_tniu_sts_tniu_noc noc_side (
 		.clk_src(clk_src),
 		.rstn_src(rstn_src),
 		.in_req_vld(top_req_in_req_vld),
@@ -175,5 +175,5 @@ module ddrss8_tniu (
 		.rsp_afifo_db_err(rsp_afifo_db_err_rsp_afifo_db_err));
 
 endmodule
-//[UHDL]Content End [md5:16ed7b3082b2988f8fcf5fd7f2c6b541]
+//[UHDL]Content End [md5:ad9ad6a10662ed95d84e1768c82f0123]
 

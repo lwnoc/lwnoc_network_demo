@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:9fac7ffda67d58c25ad55d8018002c23]
+//[UHDL]Content Start [md5:2cee06134e1dfcc0361a3c5331613c79]
 module mipiss_tniu (
 	input          clk_src                                        ,
 	input          rstn_src                                       ,
@@ -71,7 +71,7 @@ module mipiss_tniu (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	sts_tniu_sys sys_side (
+	mipi_ss_tniu_sts_tniu_sys sys_side (
 		.clk_dst(clk_dst),
 		.clk_dbg_timer(clk_dbg_timer),
 		.rstn_dst(rstn_dst),
@@ -122,7 +122,7 @@ module mipiss_tniu (
 		.sts_tniu_req_afifo_db_err(safety_sts_tniu_req_afifo_db_err),
 		.hw_dbg_sel_in(),
 		.hw_dbg_sel_out());
-	sts_tniu_noc noc_side (
+	mipi_ss_tniu_sts_tniu_noc noc_side (
 		.clk_src(clk_src),
 		.rstn_src(rstn_src),
 		.in_req_vld(top_req_in_req_vld),
@@ -175,5 +175,5 @@ module mipiss_tniu (
 		.rsp_afifo_db_err(rsp_afifo_db_err_rsp_afifo_db_err));
 
 endmodule
-//[UHDL]Content End [md5:9fac7ffda67d58c25ad55d8018002c23]
+//[UHDL]Content End [md5:2cee06134e1dfcc0361a3c5331613c79]
 

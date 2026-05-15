@@ -1,8 +1,0 @@
-$PERISS_TNIU_SYS_OUT_DIR/periss_tniu_sys_macros_9462419bf8.sv
-$PERISS_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
-$PERISS_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
-$PERISS_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
-$PERISS_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
-$PERISS_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
-$PERISS_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
-$PERISS_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv

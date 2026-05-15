@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:0c13769acd8e26f17e4504815c35d02f]
+//[UHDL]Content Start [md5:b0e3772d9ef8c904a459f864d522a8a3]
 module npuss3_tniu (
 	input          clk_src                                        ,
 	input          rstn_src                                       ,
@@ -71,7 +71,7 @@ module npuss3_tniu (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	sts_tniu_sys sys_side (
+	npu_ss_tniu_sts_tniu_sys sys_side (
 		.clk_dst(clk_dst),
 		.clk_dbg_timer(clk_dbg_timer),
 		.rstn_dst(rstn_dst),
@@ -122,7 +122,7 @@ module npuss3_tniu (
 		.sts_tniu_req_afifo_db_err(safety_sts_tniu_req_afifo_db_err),
 		.hw_dbg_sel_in(),
 		.hw_dbg_sel_out());
-	sts_tniu_noc noc_side (
+	npu_ss3_tniu_sts_tniu_noc noc_side (
 		.clk_src(clk_src),
 		.rstn_src(rstn_src),
 		.in_req_vld(top_req_in_req_vld),
@@ -175,5 +175,5 @@ module npuss3_tniu (
 		.rsp_afifo_db_err(rsp_afifo_db_err_rsp_afifo_db_err));
 
 endmodule
-//[UHDL]Content End [md5:0c13769acd8e26f17e4504815c35d02f]
+//[UHDL]Content End [md5:b0e3772d9ef8c904a459f864d522a8a3]
 

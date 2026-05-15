@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:c410e3d8f8677431c2cd9b3d8f337d04]
+//[UHDL]Content Start [md5:4a22dfdd981560122e80b601d31f6a8f]
 module aon_ss_iniu (
 	input          clk_src                                ,
 	input          rstn_src                               ,
@@ -90,7 +90,7 @@ module aon_ss_iniu (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	sts_iniu_sys sys_side (
+	aon_ss_iniu_sts_iniu_sys sys_side (
 		.clk_src(clk_src),
 		.rstn_src(rstn_src),
 		.node_id(node_id_node_id),
@@ -173,7 +173,7 @@ module aon_ss_iniu (
 		.safety_aw_timeout_err(safety_safety_aw_timeout_err),
 		.safety_afifo_rsp_sb_err(safety_safety_afifo_rsp_sb_err),
 		.safety_afifo_rsp_db_err(safety_safety_afifo_rsp_db_err));
-	sts_iniu_noc noc_side (
+	aon_ss_iniu_sts_iniu_noc noc_side (
 		.clk_dst(clk_dst),
 		.rst_n_dst(rstn_dst),
 		.req_wptr_async(sys_side_TO_noc_side_SIG_req_wptr_async),
@@ -218,5 +218,5 @@ module aon_ss_iniu (
 		.req_afifo_db_err());
 
 endmodule
-//[UHDL]Content End [md5:c410e3d8f8677431c2cd9b3d8f337d04]
+//[UHDL]Content End [md5:4a22dfdd981560122e80b601d31f6a8f]
 

@@ -377,8 +377,7 @@ for entry in STS_SOC_TNIU_RESOURCES:
     if not (STS_SOC_DEBUG_BASE <= entry["debug_base"] <= debug_end <= STS_SOC_DEBUG_END):
         raise ValueError(f"{entry['key']} debug window 0x{entry['debug_base']:08X}..0x{debug_end:08X} exceeds debug space")
 
-_STS_SOC_TNIU_SHARED_CFG_GROUPS = (
-    ("gpuss0", ("gpuss0", "gpuss1")),
+_STS_SOC_TNIU_SYS_SHARED_CFG_GROUPS = (
     ("npuss0", ("npuss0", "npuss1", "npuss2", "npuss3", "npuss4")),
     (
         "ddrss0",
@@ -401,10 +400,10 @@ _STS_SOC_TNIU_SHARED_CFG_GROUPS = (
 )
 STS_SOC_TNIU_CFG_REPRESENTATIVE = {
     key: representative
-    for representative, keys in _STS_SOC_TNIU_SHARED_CFG_GROUPS
+    for representative, keys in _STS_SOC_TNIU_SYS_SHARED_CFG_GROUPS
     for key in keys
 }
-for representative, keys in _STS_SOC_TNIU_SHARED_CFG_GROUPS:
+for representative, keys in _STS_SOC_TNIU_SYS_SHARED_CFG_GROUPS:
     if representative not in keys:
         raise ValueError(f"TNIU cfg representative {representative} must be listed in its group")
     for key in keys:
@@ -417,16 +416,53 @@ def _tniu_cfg_representative(key: str) -> str:
 
 
 _STS_SOC_TNIU_FAMILY_NAMES = {
-    "gpuss0": "gpuss",
-    "npuss0": "npuss",
-    "ddrss0": "ddrss",
-    "vdspss0": "vdspss",
+    "gpuss0": "gpu_ss0",
+    "gpuss1": "gpu_ss1",
+    "npuss0": "npu_ss",
+    "ddrss0": "ddr_ss",
+    "vdspss0": "vdsp_ss",
+    "cpuss": "cpu_ss",
+    "mipiss": "mipi_ss",
+    "vpuss": "vpu_ss",
+    "periss": "peri_ss",
+    "ufsss": "ufs_ss",
+    "mcuss": "mcu_ss",
+    "nocss": "noc_ss",
+    "pcie_ethss": "pcie_eth_ss",
+}
+
+_STS_SOC_TNIU_LEAF_NAMES = {
+    "gpuss0": "gpu_ss0",
+    "gpuss1": "gpu_ss1",
+    **{f"npuss{idx}": f"npu_ss{idx}" for idx in range(5)},
+    **{f"ddrss{idx}": f"ddr_ss{idx}" for idx in range(12)},
+    **{f"vdspss{idx}": f"vdsp_ss{idx}" for idx in range(6)},
+    "cpuss": "cpu_ss",
+    "mipiss": "mipi_ss",
+    "vpuss": "vpu_ss",
+    "periss": "peri_ss",
+    "ufsss": "ufs_ss",
+    "mcuss": "mcu_ss",
+    "nocss": "noc_ss",
+    "pcie_ethss": "pcie_eth_ss",
 }
 
 
 def _tniu_cfg_display_name(key: str) -> str:
     """Return the family display name for a shared-group representative, or the key itself."""
     return _STS_SOC_TNIU_FAMILY_NAMES.get(key, key)
+
+
+def _tniu_shared_dir_stem(key: str) -> str:
+    return _tniu_cfg_display_name(key)
+
+
+def _tniu_leaf_dir_stem(key: str) -> str:
+    return _STS_SOC_TNIU_LEAF_NAMES.get(key, key)
+
+
+def _cfg_prefix(name: str) -> str:
+    return f"{name}_"
 
 
 def _build_full_addr_map_entries() -> list[tuple[int, int, int]]:
@@ -698,6 +734,19 @@ def _apply_tniu_macros(cfg: TemplateIPConfig, tniu_name: str) -> TemplateIPConfi
     return cfg
 
 
+def _apply_tniu_sys_macros(cfg: TemplateIPConfig) -> TemplateIPConfig:
+    return _apply_macro_sets(
+        cfg,
+        STS_COMMON_ID_MACROS,
+        STS_COMMON_AXI_BASE_MACROS,
+        STS_COMMON_AXI_BURST_MACROS,
+        STS_TNIU_AXI_ID_MACROS,
+        STS_COMMON_CTI_MACROS,
+        STS_TNIU_DEBUG_MACROS,
+        STS_TNIU_STATIC_MACROS,
+    )
+
+
 def _apply_dec_config(cfg: TemplateIPConfig, dec_name: str) -> TemplateIPConfig:
     route_groups = STS_SOC_DECODER_ROUTE_GROUPS[dec_name]
     slave_num = len(route_groups)
@@ -746,6 +795,7 @@ aon_ss_iniu_sys_config = _apply_iniu_macros(
         name="aon_ss_iniu_sys",
         filelist=str(STS_INIU_SYS_PUB_F),
         env_var="AON_SS_INIU_SYS_OUT_DIR",
+        prefix=_cfg_prefix("aon_ss_iniu"),
     )
 )
 
@@ -754,6 +804,7 @@ aon_ss_iniu_noc_side_config = _apply_iniu_macros(
         name="aon_ss_iniu_noc_side",
         filelist=str(STS_INIU_NOC_PUB_F),
         env_var="AON_SS_INIU_NOC_SIDE_OUT_DIR",
+        prefix=_cfg_prefix("aon_ss_iniu"),
     )
 )
 aon_ss_iniu_noc_side_config.top_wrap = "sts_iniu_noc"
@@ -837,19 +888,28 @@ STS_SOC_TNIU_TOP_NOC_SIDE_CONFIG = _apply_tniu_macros(
 for entry in STS_SOC_TNIU_RESOURCES:
     key = str(entry["key"])
     env_token = str(entry["env_token"])
-    sys_cfg = _apply_tniu_macros(
-        _new_template_cfg(
-            name=f"{key}_tniu_sys",
-            filelist=str(STS_TNIU_SYS_PUB_F),
-            env_var=f"{env_token}_TNIU_SYS_OUT_DIR",
-        ),
-        key,
-    )
+    shared_sys_key = _tniu_cfg_representative(key)
+    sys_cfg = STS_SOC_TNIU_SYS_CONFIGS.get(key)
+    if sys_cfg is None:
+        sys_cfg = STS_SOC_TNIU_SYS_CONFIGS.get(shared_sys_key)
+    if sys_cfg is None:
+        sys_cfg = _apply_tniu_sys_macros(
+            _new_template_cfg(
+                name=f"{_tniu_shared_dir_stem(shared_sys_key)}_tniu_sys",
+                filelist=str(STS_TNIU_SYS_PUB_F),
+                env_var=f"{env_token}_TNIU_SYS_OUT_DIR",
+                prefix=_cfg_prefix(f"{_tniu_shared_dir_stem(shared_sys_key)}_tniu"),
+            )
+        )
+        STS_SOC_TNIU_SYS_CONFIGS[shared_sys_key] = sys_cfg
+    else:
+        _alias_template_env(f"{env_token}_TNIU_SYS_OUT_DIR", sys_cfg)
     noc_cfg = _apply_tniu_macros(
         _new_template_cfg(
-            name=f"{key}_tniu_noc_side",
+            name=f"{_tniu_leaf_dir_stem(key)}_tniu_noc_side",
             filelist=str(STS_TNIU_NOC_PUB_F),
             env_var=f"{env_token}_TNIU_NOC_SIDE_OUT_DIR",
+            prefix=_cfg_prefix(f"{_tniu_leaf_dir_stem(key)}_tniu"),
         ),
         key,
     )

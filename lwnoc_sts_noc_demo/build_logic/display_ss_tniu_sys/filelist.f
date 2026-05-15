@@ -1,8 +1,0 @@
-$DISPLAYSS_TNIU_SYS_OUT_DIR/display_ss_tniu_sys_macros_547203fa0a.sv
-$DISPLAYSS_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
-$DISPLAYSS_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
-$DISPLAYSS_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
-$DISPLAYSS_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
-$DISPLAYSS_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
-$DISPLAYSS_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
-$DISPLAYSS_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv

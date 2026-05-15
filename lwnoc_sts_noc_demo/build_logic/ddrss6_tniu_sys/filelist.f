@@ -1,8 +1,0 @@
-$DDRSS6_TNIU_SYS_OUT_DIR/ddrss6_tniu_sys_macros_085af58253.sv
-$DDRSS6_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
-$DDRSS6_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
-$DDRSS6_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
-$DDRSS6_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
-$DDRSS6_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
-$DDRSS6_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
-$DDRSS6_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv

@@ -1,8 +1,0 @@
-$CAMERASS_TNIU_SYS_OUT_DIR/camera_ss_tniu_sys_macros_9b1847c810.sv
-$CAMERASS_TNIU_SYS_OUT_DIR/sts_tniu_define.sv
-$CAMERASS_TNIU_SYS_OUT_DIR/lwnoc_sts_pack.sv
-$CAMERASS_TNIU_SYS_OUT_DIR/RegSpaceBase_cfg_reg_bank_table_sys.v
-$CAMERASS_TNIU_SYS_OUT_DIR/sts_tniu_apb_dec.sv
-$CAMERASS_TNIU_SYS_OUT_DIR/sts_tniu_apb.sv
-$CAMERASS_TNIU_SYS_OUT_DIR/sts_tniu_sys.sv
-$CAMERASS_TNIU_SYS_OUT_DIR/sts_tniu_undefine.sv

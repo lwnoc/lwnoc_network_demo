@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:a11d7ef9cabc8ac57e39ac6002ba6073]
+//[UHDL]Content Start [md5:8bb6b08f73e09b2182e13e1bc05890be]
 module sts_soc_top_wrap (
 	input          aon_ss_iniu_noc_clk_dst_porting_clk_dst                                                 ,
 	input          aon_ss_iniu_noc_rst_n_dst_porting_rst_n_dst                                             ,
@@ -2136,7 +2136,7 @@ module sts_soc_top_wrap (
 	//Wire this module connect to sub module.
 
 	//module inst.
-	sts_iniu_noc u_aon_ss_iniu_noc_side (
+	aon_ss_iniu_sts_iniu_noc u_aon_ss_iniu_noc_side (
 		.clk_dst(aon_ss_iniu_noc_clk_dst_porting_clk_dst),
 		.rst_n_dst(aon_ss_iniu_noc_rst_n_dst_porting_rst_n_dst),
 		.req_wptr_async(aon_ss_iniu_noc_async_fifo_porting_req_wptr_async),
@@ -4385,5 +4385,5 @@ module sts_soc_top_wrap (
 		.tniu_rsp_afifo_db_err(vpuss_tniu_noc_side_safety_porting_tniu_rsp_afifo_db_err));
 
 endmodule
-//[UHDL]Content End [md5:a11d7ef9cabc8ac57e39ac6002ba6073]
+//[UHDL]Content End [md5:8bb6b08f73e09b2182e13e1bc05890be]
 
