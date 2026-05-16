@@ -3,12 +3,21 @@ from _project_env import LWNOC_TOPO_ROOT, THIS_DIR
 from topo_core.node.uhdlWrapperNode import UhdlWrapperNode
 from topo_core.utils.networkHierOpt import connect
 
-from StsNode import StsDecNode, StsIniuNode, StsNodeIdConstNode, StsTniuNode
+from StsNode import (
+    StsApb32ToCtiApb12Node,
+    StsDecNode,
+    StsIniuNocTopWrapNode,
+    StsIniuNode,
+    StsNodeIdConstNode,
+    StsTniuNocTopWrapNode,
+    StsTniuNode,
+)
 from StsTemplate import (
     STS_SOC_DECODER_CONFIGS,
     STS_SOC_DECODER_ROUTE_GROUPS,
     STS_SOC_INIU_NODE_IDS,
     STS_SOC_TNIU_CONFIGS,
+    STS_SOC_TNIU_NOC_CONFIGS,
     SRC_ID_WIDTH,
     aon_ss_iniu_sys_config,
     aon_ss_iniu_noc_side_config,
@@ -17,6 +26,7 @@ from StsTemplate import (
 
 BLUE_CHAIN_LEAF_OWNERSHIP = {}
 SOC_STS_NOC_TOP_ID = "soc_sts_noc"
+STS_SOC_TOP_WRAP_ID = "sts_soc_top_wrap"
 
 
 STS_SOC_DECODER_CHILDREN = {
@@ -100,6 +110,7 @@ class StsSocLogicTopo(UhdlWrapperNode):
         connect(target.mst_cti_channel_out, source.noc_cti_channel_in)
         connect(source.noc_dbg_timestamp_out, target.mst_dbg_timestamp)
         connect(target.mst_dbg_data, source.noc_dbg_data_in)
+        connect(source.noc_reserved_bits_out, target.mst_reserved_bits)
 
     @staticmethod
     def _connect_dec_to_dec(parent: StsDecNode, slot: int, child: StsDecNode) -> None:
@@ -109,6 +120,7 @@ class StsSocLogicTopo(UhdlWrapperNode):
         connect(getattr(parent, f"s{slot}_cti_channel_out"), child.mst_cti_channel_in)
         connect(getattr(parent, f"s{slot}_dbg_timestamp"), child.mst_dbg_timestamp)
         connect(child.mst_dbg_data, getattr(parent, f"s{slot}_dbg_data"))
+        connect(getattr(parent, f"s{slot}_reserved_bits"), child.mst_reserved_bits)
 
     @staticmethod
     def _connect_dec_to_leaf(parent: StsDecNode, slot: int, child: StsTniuNode) -> None:
@@ -118,6 +130,7 @@ class StsSocLogicTopo(UhdlWrapperNode):
         connect(getattr(parent, f"s{slot}_cti_channel_out"), child.noc_ctm_channel_in)
         connect(getattr(parent, f"s{slot}_dbg_timestamp"), child.noc_dbg_timestamp_in)
         connect(child.noc_dbg_data_out, getattr(parent, f"s{slot}_dbg_data"))
+        connect(getattr(parent, f"s{slot}_reserved_bits"), child.noc_reserved_bits_in)
 
     def __init__(self):
         super().__init__(id=SOC_STS_NOC_TOP_ID)
@@ -163,6 +176,7 @@ class StsSocLogicTopo(UhdlWrapperNode):
                 id=f"{leaf_name}_tniu",
                 sys_cfg=sys_cfg,
                 noc_cfg=noc_cfg,
+                expose_noc_apb=(leaf_name == "safetyss_aon_local"),
             )
             setattr(self, f"{leaf_name}_tniu", node)
             self.tniu_nodes[leaf_name] = node
@@ -179,11 +193,116 @@ class StsSocLogicTopo(UhdlWrapperNode):
 
         self._connect_iniu_to_dec(self.aon_ss_iniu, self.decoder_nodes["sts_dec_l0_root"])
 
+        self.aon_ss_tniu_to_iniu_cti_apb = StsApb32ToCtiApb12Node(
+            id="pub_aon_ss_tniu_to_iniu_cti_apb"
+        )
+        connect(self.tniu_nodes["safetyss_aon_local"].apb, self.aon_ss_tniu_to_iniu_cti_apb.tniu_apb)
+        connect(self.aon_ss_tniu_to_iniu_cti_apb.cti_apb, self.aon_ss_iniu.noc_cti_apb)
+
         for dec_name, children in STS_SOC_DECODER_CHILDREN.items():
             parent = self.decoder_nodes[dec_name]
             for slot, (child_kind, child_name) in enumerate(children):
                 if child_kind == "leaf":
                     self._connect_dec_to_leaf(parent, slot, self.tniu_nodes[child_name])
+                else:
+                    self._connect_dec_to_dec(parent, slot, self.decoder_nodes[child_name])
+
+        self.expose_unconnected_interfaces(recursive=True)
+
+
+class StsSocTopWrapTopo(UhdlWrapperNode):
+    """Publication view for the STS SoC NoC-side wrapper tree."""
+
+    @staticmethod
+    def _connect_iniu_to_dec(source: StsIniuNocTopWrapNode, target: StsDecNode) -> None:
+        connect(source.req, target.mst_req)
+        connect(target.mst_rsp, source.rsp)
+        connect(source.cti_channel_out, target.mst_cti_channel_in)
+        connect(target.mst_cti_channel_out, source.cti_channel_in)
+        connect(source.dbg_timestamp_out, target.mst_dbg_timestamp)
+        connect(target.mst_dbg_data, source.dbg_data_in)
+        connect(source.reserved_bits_out, target.mst_reserved_bits)
+
+    @staticmethod
+    def _connect_dec_to_dec(parent: StsDecNode, slot: int, child: StsDecNode) -> None:
+        StsSocLogicTopo._connect_dec_to_dec(parent, slot, child)
+
+    @staticmethod
+    def _connect_dec_to_leaf(parent: StsDecNode, slot: int, child: StsTniuNocTopWrapNode) -> None:
+        connect(getattr(parent, f"s{slot}_req"), child.req)
+        connect(child.rsp, getattr(parent, f"s{slot}_rsp"))
+        connect(child.ctm_channel_out, getattr(parent, f"s{slot}_cti_channel_in"))
+        connect(getattr(parent, f"s{slot}_cti_channel_out"), child.ctm_channel_in)
+        connect(getattr(parent, f"s{slot}_dbg_timestamp"), child.dbg_timestamp_in)
+        connect(child.dbg_data_out, getattr(parent, f"s{slot}_dbg_data"))
+        connect(getattr(parent, f"s{slot}_reserved_bits"), child.reserved_bits_in)
+
+    @staticmethod
+    def _tniu_top_wrap_module_name(leaf_name: str) -> str:
+        noc_cfg_name = STS_SOC_TNIU_NOC_CONFIGS[leaf_name].name
+        if noc_cfg_name.endswith("_noc_side"):
+            return f"{noc_cfg_name[:-len('_noc_side')]}_top_wrap"
+        return f"sts_noc_{leaf_name}_tniu_top_wrap"
+
+    def __init__(self):
+        super().__init__(id=STS_SOC_TOP_WRAP_ID)
+
+        self.add_interface("clk_sys", is_global=True)
+        self.add_interface("rst_sys_n", is_global=True)
+        self.add_interface("clk_noc", is_global=True)
+        self.add_interface("rst_noc_n", is_global=True)
+
+        self.aon_ss_iniu_top_wrap = StsIniuNocTopWrapNode(
+            id="sts_noc_aon_ss_iniu_top_wrap",
+            cfg=aon_ss_iniu_noc_side_config,
+            module_name="sts_noc_aon_ss_iniu_top_wrap",
+        )
+        connect(self.aon_ss_iniu_top_wrap.clk_src, self.clk_sys)
+        connect(self.aon_ss_iniu_top_wrap.rst_n_src, self.rst_sys_n)
+        connect(self.aon_ss_iniu_top_wrap.clk_dst, self.clk_noc)
+        connect(self.aon_ss_iniu_top_wrap.rst_n_dst, self.rst_noc_n)
+
+        self.decoder_nodes = {}
+        for dec_name, cfg in STS_SOC_DECODER_CONFIGS.items():
+            node = StsDecNode(
+                id=f"pub_{dec_name}",
+                slave_num=len(STS_SOC_DECODER_ROUTE_GROUPS[dec_name]),
+                cfg=cfg,
+            )
+            setattr(self, dec_name, node)
+            self.decoder_nodes[dec_name] = node
+            connect(node.clk, self.clk_noc)
+            connect(node.rst_n, self.rst_noc_n)
+
+        self.tniu_top_wrap_nodes = {}
+        for leaf_name, noc_cfg in sorted(STS_SOC_TNIU_NOC_CONFIGS.items()):
+            module_name = self._tniu_top_wrap_module_name(leaf_name)
+            node = StsTniuNocTopWrapNode(
+                id=module_name,
+                cfg=noc_cfg,
+                module_name=module_name,
+                expose_apb=(leaf_name == "safetyss_aon_local"),
+            )
+            setattr(self, module_name, node)
+            self.tniu_top_wrap_nodes[leaf_name] = node
+            connect(node.clk_src, self.clk_sys)
+            connect(node.rstn_src, self.rst_sys_n)
+            connect(node.clk_dst, self.clk_noc)
+            connect(node.rstn_dst, self.rst_noc_n)
+
+        self._connect_iniu_to_dec(self.aon_ss_iniu_top_wrap, self.decoder_nodes["sts_dec_l0_root"])
+
+        self.aon_ss_tniu_to_iniu_cti_apb = StsApb32ToCtiApb12Node(
+            id="aon_ss_tniu_to_iniu_cti_apb"
+        )
+        connect(self.tniu_top_wrap_nodes["safetyss_aon_local"].apb, self.aon_ss_tniu_to_iniu_cti_apb.tniu_apb)
+        connect(self.aon_ss_tniu_to_iniu_cti_apb.cti_apb, self.aon_ss_iniu_top_wrap.cti_apb)
+
+        for dec_name, children in STS_SOC_DECODER_CHILDREN.items():
+            parent = self.decoder_nodes[dec_name]
+            for slot, (child_kind, child_name) in enumerate(children):
+                if child_kind == "leaf":
+                    self._connect_dec_to_leaf(parent, slot, self.tniu_top_wrap_nodes[child_name])
                 else:
                     self._connect_dec_to_dec(parent, slot, self.decoder_nodes[child_name])
 
