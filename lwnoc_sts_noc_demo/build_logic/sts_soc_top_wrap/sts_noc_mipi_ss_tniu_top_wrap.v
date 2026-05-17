@@ -1,12 +1,12 @@
-//[UHDL]Content Start [md5:67abaaf0a54105270416838a06cfa65f]
+//[UHDL]Content Start [md5:9a4b7777611d8ec1c99fb2c4d174e487]
 module sts_noc_mipi_ss_tniu_top_wrap (
 	input          clk_src_clk_src                                  ,
 	input          rstn_src_rstn_src                                ,
-	output [130:0] async_fifo_req_pld_sync                          ,
+	output [131:0] async_fifo_req_pld_sync                          ,
 	input  [15:0]  async_fifo_req_rptr_async                        ,
 	input  [15:0]  async_fifo_req_rptr_sync                         ,
 	output [15:0]  async_fifo_req_wptr_async                        ,
-	input  [75:0]  async_fifo_rsp_pld_sync                          ,
+	input  [76:0]  async_fifo_rsp_pld_sync                          ,
 	output [15:0]  async_fifo_rsp_rptr_async                        ,
 	output [15:0]  async_fifo_rsp_rptr_sync                         ,
 	input  [15:0]  async_fifo_rsp_wptr_async                        ,
@@ -126,4 +126,5 @@ module sts_noc_mipi_ss_tniu_top_wrap (
 		.apb_pwrite(noc_side_TO_apb_idle_target_SIG_pwrite));
 
 endmodule
-//[UHDL]Content End [md5:67abaaf0a54105270416838a06cfa65f]
+//[UHDL]Content End [md5:9a4b7777611d8ec1c99fb2c4d174e487]
+

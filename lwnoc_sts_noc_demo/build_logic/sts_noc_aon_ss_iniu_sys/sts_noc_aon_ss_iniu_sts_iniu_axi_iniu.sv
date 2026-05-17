@@ -74,7 +74,6 @@ import sts_noc_aon_ss_iniu_lwnoc_sts_pack::*;
 
     logic [1:0]     v_req_vld;
     logic [1:0]     v_req_rdy;
-    logic [1:0]     v_req_rdy_shadow;
     sts_req_typ     v_req_pld[1:0];
 
     logic           arb_vld;
@@ -118,7 +117,7 @@ import sts_noc_aon_ss_iniu_lwnoc_sts_pack::*;
     fcip_arb_vrp#(
         .MODE     (2), .HSK_MODE (0), .WIDTH (2), .PRIORITY (0), .PLD_WIDTH(REQ_PLD_WIDTH)
     ) u_req_arb_shadow (
-        .clk(clk), .rst_n(rst_n), .v_vld_s(v_req_vld), .v_rdy_s(v_req_rdy_shadow), .v_pld_s(v_req_pld),
+        .clk(clk), .rst_n(rst_n), .v_vld_s(v_req_vld), .v_rdy_s(), .v_pld_s(v_req_pld),
         .vld_m(arb_shd_vld), .rdy_m(arb_rdy), .pld_m(arb_shd_pld)
     );
     // Lock-step comparator (cycle-level, flop-compare on posedge)

@@ -13,14 +13,13 @@ import sts_noc_aon_ss_iniu_lwnoc_sts_pack::*;
     parameter logic [ADDR_MAP_ENTRY_NUM*TGT_ID_WIDTH-1:0]   ADDR_MAP_TGT_ID_TABLE = `sts_noc_aon_ss_iniu_STS_INIU_ADDR_MAP_TGT_ID_TABLE,
     parameter logic [TGT_ID_WIDTH-1:0]                      ADDR_MAP_DEFAULT_TGT_ID = `sts_noc_aon_ss_iniu_STS_INIU_ADDR_MAP_DEFAULT_TGT_ID,
     parameter integer unsigned ADDR_MASK_BITS  = 0,
-    // ECC: REQ_WIDTH=119 → CODE_WIDTH=7+1=8 overhead → 127, RSP_WIDTH=65 → 73
     localparam int REQ_PLD_AFIFO_WIDTH = STS_REQ_WIDTH,
     localparam int RSP_PLD_AFIFO_WIDTH = STS_RSP_WIDTH,
     parameter integer unsigned  ERR_INT_CNT_WIDTH = `sts_noc_aon_ss_iniu_STS_INIU_ERR_INT_CNT_WIDTH,
-    localparam int REQ_ECC_OH = ($clog2(STS_REQ_WIDTH)+STS_REQ_WIDTH+1 <= 2**$clog2(STS_REQ_WIDTH))? $clog2(STS_REQ_WIDTH) : $clog2(STS_REQ_WIDTH)+1,
-    localparam int RSP_ECC_OH = ($clog2(STS_RSP_WIDTH)+STS_RSP_WIDTH+1 <= 2**$clog2(STS_RSP_WIDTH))? $clog2(STS_RSP_WIDTH) : $clog2(STS_RSP_WIDTH)+1,
-    localparam int REQ_AFIFO_W = STS_REQ_WIDTH + REQ_ECC_OH,
-    localparam int RSP_AFIFO_W = STS_RSP_WIDTH + RSP_ECC_OH
+    localparam int REQ_ECC_CODE_WIDTH = (($clog2(STS_REQ_WIDTH)+STS_REQ_WIDTH+1 <= 2**$clog2(STS_REQ_WIDTH)) ? $clog2(STS_REQ_WIDTH) : $clog2(STS_REQ_WIDTH)+1),
+    localparam int RSP_ECC_CODE_WIDTH = (($clog2(STS_RSP_WIDTH)+STS_RSP_WIDTH+1 <= 2**$clog2(STS_RSP_WIDTH)) ? $clog2(STS_RSP_WIDTH) : $clog2(STS_RSP_WIDTH)+1),
+    localparam int REQ_AFIFO_W = STS_REQ_WIDTH + REQ_ECC_CODE_WIDTH + 1,
+    localparam int RSP_AFIFO_W = STS_RSP_WIDTH + RSP_ECC_CODE_WIDTH + 1
 ) (
     input logic clk_src ,
     // input logic clk_dbg_timer,

@@ -113,7 +113,7 @@ always_ff @(posedge clk or negedge rst_n) begin
                                             (req_active_pld.cmn.opcode == cfgOpcode_WrReq) ? cfgOpcode_WrRsp : 2'b00;
                     rsp_pld_r.cmn.qos    <= req_active_pld.cmn.qos;
                     rsp_pld_r.rsp.resp   <= pslverr ? 2'b10 : 2'b00;
-                    rsp_pld_r.rsp.data   <= prdata;
+                    rsp_pld_r.rsp.data   <= (req_active_pld.cmn.opcode == cfgOpcode_RdReq) ? prdata : 32'b0;
                     rsp_pld_r.rsp.last   <= req_active_pld.req.last;
                     rsp_pending          <= 1'b1;
                 end

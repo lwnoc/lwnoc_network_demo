@@ -10,10 +10,10 @@ import sts_noc_camera_ss_tniu_lwnoc_sts_pack::*;
     localparam int SYS_REG_WORD_NUM = 10,
     localparam int REQ_PLD_WIDTH = STS_REQ_WIDTH,
     localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH,
-    localparam int REQ_ECC_OH = ($clog2(STS_REQ_WIDTH)+STS_REQ_WIDTH+1 <= 2**$clog2(STS_REQ_WIDTH))? $clog2(STS_REQ_WIDTH) : $clog2(STS_REQ_WIDTH)+1,
-    localparam int RSP_ECC_OH = ($clog2(STS_RSP_WIDTH)+STS_RSP_WIDTH+1 <= 2**$clog2(STS_RSP_WIDTH))? $clog2(STS_RSP_WIDTH) : $clog2(STS_RSP_WIDTH)+1,
-    localparam int REQ_AFIFO_W = STS_REQ_WIDTH + REQ_ECC_OH,
-    localparam int RSP_AFIFO_W = STS_RSP_WIDTH + RSP_ECC_OH
+    localparam int REQ_ECC_CODE_WIDTH = (($clog2(STS_REQ_WIDTH)+STS_REQ_WIDTH+1 <= 2**$clog2(STS_REQ_WIDTH)) ? $clog2(STS_REQ_WIDTH) : $clog2(STS_REQ_WIDTH)+1),
+    localparam int RSP_ECC_CODE_WIDTH = (($clog2(STS_RSP_WIDTH)+STS_RSP_WIDTH+1 <= 2**$clog2(STS_RSP_WIDTH)) ? $clog2(STS_RSP_WIDTH) : $clog2(STS_RSP_WIDTH)+1),
+    localparam int REQ_AFIFO_W = STS_REQ_WIDTH + REQ_ECC_CODE_WIDTH + 1,
+    localparam int RSP_AFIFO_W = STS_RSP_WIDTH + RSP_ECC_CODE_WIDTH + 1
 ) (
     input   logic   clk_dst ,
     input   logic   clk_dbg_timer,

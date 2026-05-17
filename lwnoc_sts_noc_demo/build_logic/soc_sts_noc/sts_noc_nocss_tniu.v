@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:e82689f423ee1aaa12bdcc5a4b824d35]
+//[UHDL]Content Start [md5:6a8c3e589f7f174f37b9f70ad7762e46]
 module sts_noc_nocss_tniu (
 	input          clk_src                                                ,
 	input          rstn_src                                               ,
@@ -55,7 +55,7 @@ module sts_noc_nocss_tniu (
 
 	//Wire define for sub module.
 	wire [15:0]  noc_side_TO_sys_side_SIG_req_wptr_async         ;
-	wire [130:0] noc_side_TO_sys_side_SIG_req_pld_sync           ;
+	wire [131:0] noc_side_TO_sys_side_SIG_req_pld_sync           ;
 	wire [15:0]  noc_side_TO_sys_side_SIG_rsp_rptr_async         ;
 	wire [15:0]  noc_side_TO_sys_side_SIG_rsp_rptr_sync          ;
 	wire [7:0]   noc_side_TO_sys_side_SIG_sys_side_cti_trigin_ack;
@@ -68,7 +68,7 @@ module sts_noc_nocss_tniu (
 	wire [15:0]  sys_side_TO_noc_side_SIG_req_rptr_async         ;
 	wire [15:0]  sys_side_TO_noc_side_SIG_req_rptr_sync          ;
 	wire [15:0]  sys_side_TO_noc_side_SIG_rsp_wptr_async         ;
-	wire [75:0]  sys_side_TO_noc_side_SIG_rsp_pld_sync           ;
+	wire [76:0]  sys_side_TO_noc_side_SIG_rsp_pld_sync           ;
 	wire [31:0]  apb_idle_target_TO_noc_side_SIG_apb_prdata      ;
 	wire         apb_idle_target_TO_noc_side_SIG_apb_pready      ;
 	wire         apb_idle_target_TO_noc_side_SIG_apb_pslverr     ;
@@ -207,4 +207,5 @@ module sts_noc_nocss_tniu (
 		.apb_pwrite(noc_side_TO_apb_idle_target_SIG_pwrite));
 
 endmodule
-//[UHDL]Content End [md5:e82689f423ee1aaa12bdcc5a4b824d35]
+//[UHDL]Content End [md5:6a8c3e589f7f174f37b9f70ad7762e46]
+

@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:85427302bd4a5e838dd87f7519877d0e]
+//[UHDL]Content Start [md5:03ea45ba01b6162aeb832dbf94e90577]
 module soc_sts_noc (
 	input          clk_sys                                                                                                            ,
 	input          rst_sys_n                                                                                                          ,
@@ -1926,7 +1926,7 @@ module soc_sts_noc (
 		.aon_ss_iniu_noc_req_afifo_db_err_porting_req_afifo_db_err(aon_ss_iniu_aon_ss_iniu_noc_req_afifo_db_err_porting_aon_ss_iniu_noc_req_afifo_db_err_porting_req_afifo_db_err));
 	sts_noc_node_id_const_node_id_value_0_node_id_width_9 aon_ss_iniu_node_id (
 		.node_id(aon_ss_iniu_node_id_TO_aon_ss_iniu_SIG_node_id));
-	sts_noc_dec_node_1to10_wrap sts_dec_l0_root (
+	sts_noc_sts_dec_l0_root_sts_noc_dec_node_1to10_wrap sts_dec_l0_root (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.mst_req_vld(aon_ss_iniu_TO_sts_dec_l0_root_SIG_top_req_req_s_vld),
@@ -2050,7 +2050,7 @@ module soc_sts_noc (
 		.mst_dbg_timestamp(aon_ss_iniu_TO_sts_dec_l0_root_SIG_noc_dbg_timestamp_out_dbg_timestamp_out),
 		.mst_dbg_data(sts_dec_l0_root_TO_aon_ss_iniu_SIG_mst_dbg_data),
 		.mst_reserved_bits(aon_ss_iniu_TO_sts_dec_l0_root_SIG_noc_reserved_bits_out_reserved_bits_out));
-	sts_noc_dec_node_1to7_wrap sts_dec_l1_upper_ctrl (
+	sts_noc_sts_dec_l1_upper_ctrl_sts_noc_dec_node_1to7_wrap sts_dec_l1_upper_ctrl (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.mst_req_vld(sts_dec_l0_root_TO_sts_dec_l1_upper_ctrl_SIG_s8_req_vld),
@@ -2141,7 +2141,7 @@ module soc_sts_noc (
 		.mst_dbg_timestamp(sts_dec_l0_root_TO_sts_dec_l1_upper_ctrl_SIG_s8_dbg_timestamp),
 		.mst_dbg_data(sts_dec_l1_upper_ctrl_TO_sts_dec_l0_root_SIG_mst_dbg_data),
 		.mst_reserved_bits(sts_dec_l0_root_TO_sts_dec_l1_upper_ctrl_SIG_s8_reserved_bits));
-	sts_noc_dec_node_1to6_wrap sts_dec_l2_left_ddr (
+	sts_noc_sts_dec_l2_left_ddr_sts_noc_dec_node_1to6_wrap sts_dec_l2_left_ddr (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.mst_req_vld(sts_dec_l1_upper_ctrl_TO_sts_dec_l2_left_ddr_SIG_s6_req_vld),
@@ -2221,7 +2221,7 @@ module soc_sts_noc (
 		.mst_dbg_timestamp(sts_dec_l1_upper_ctrl_TO_sts_dec_l2_left_ddr_SIG_s6_dbg_timestamp),
 		.mst_dbg_data(sts_dec_l2_left_ddr_TO_sts_dec_l1_upper_ctrl_SIG_mst_dbg_data),
 		.mst_reserved_bits(sts_dec_l1_upper_ctrl_TO_sts_dec_l2_left_ddr_SIG_s6_reserved_bits));
-	sts_noc_dec_node_1to7_wrap sts_dec_l1_right_upper (
+	sts_noc_sts_dec_l1_right_upper_sts_noc_dec_node_1to7_wrap sts_dec_l1_right_upper (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.mst_req_vld(sts_dec_l0_root_TO_sts_dec_l1_right_upper_SIG_s9_req_vld),
@@ -2312,7 +2312,7 @@ module soc_sts_noc (
 		.mst_dbg_timestamp(sts_dec_l0_root_TO_sts_dec_l1_right_upper_SIG_s9_dbg_timestamp),
 		.mst_dbg_data(sts_dec_l1_right_upper_TO_sts_dec_l0_root_SIG_mst_dbg_data),
 		.mst_reserved_bits(sts_dec_l0_root_TO_sts_dec_l1_right_upper_SIG_s9_reserved_bits));
-	sts_noc_dec_node_1to7_wrap sts_dec_l2_right_lower (
+	sts_noc_sts_dec_l2_right_lower_sts_noc_dec_node_1to7_wrap sts_dec_l2_right_lower (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.mst_req_vld(sts_dec_l1_right_upper_TO_sts_dec_l2_right_lower_SIG_s6_req_vld),
@@ -2403,7 +2403,7 @@ module soc_sts_noc (
 		.mst_dbg_timestamp(sts_dec_l1_right_upper_TO_sts_dec_l2_right_lower_SIG_s6_dbg_timestamp),
 		.mst_dbg_data(sts_dec_l2_right_lower_TO_sts_dec_l1_right_upper_SIG_mst_dbg_data),
 		.mst_reserved_bits(sts_dec_l1_right_upper_TO_sts_dec_l2_right_lower_SIG_s6_reserved_bits));
-	sts_noc_dec_node_1to6_wrap sts_dec_l3_lower_mid (
+	sts_noc_sts_dec_l3_lower_mid_sts_noc_dec_node_1to6_wrap sts_dec_l3_lower_mid (
 		.clk(clk_noc),
 		.rst_n(rst_noc_n),
 		.mst_req_vld(sts_dec_l2_right_lower_TO_sts_dec_l3_lower_mid_SIG_s6_req_vld),
@@ -4452,5 +4452,5 @@ module soc_sts_noc (
 		.cti_apb_pwrite(aon_ss_tniu_to_iniu_cti_apb_TO_aon_ss_iniu_SIG_cti_apb_pwrite));
 
 endmodule
-//[UHDL]Content End [md5:85427302bd4a5e838dd87f7519877d0e]
+//[UHDL]Content End [md5:03ea45ba01b6162aeb832dbf94e90577]
 

@@ -1,12 +1,12 @@
-//[UHDL]Content Start [md5:6ca908d39bf179d4f1a52a1cb4b1fb1f]
+//[UHDL]Content Start [md5:6e02d9fc7270606cb458ab13b7fc47de]
 module sts_noc_aon_ss_iniu_top_wrap (
 	input          clk_dst_clk_dst                                  ,
 	input          rst_n_dst_rst_n_dst                              ,
-	input  [130:0] async_fifo_req_pld_sync                          ,
+	input  [131:0] async_fifo_req_pld_sync                          ,
 	output [15:0]  async_fifo_req_rptr_async                        ,
 	output [15:0]  async_fifo_req_rptr_sync                         ,
 	input  [15:0]  async_fifo_req_wptr_async                        ,
-	output [75:0]  async_fifo_rsp_pld_sync                          ,
+	output [76:0]  async_fifo_rsp_pld_sync                          ,
 	input  [15:0]  async_fifo_rsp_rptr_async                        ,
 	input  [15:0]  async_fifo_rsp_rptr_sync                         ,
 	output [15:0]  async_fifo_rsp_wptr_async                        ,
@@ -99,4 +99,5 @@ module sts_noc_aon_ss_iniu_top_wrap (
 		.req_afifo_db_err(req_afifo_db_err_req_afifo_db_err));
 
 endmodule
-//[UHDL]Content End [md5:6ca908d39bf179d4f1a52a1cb4b1fb1f]
+//[UHDL]Content End [md5:6e02d9fc7270606cb458ab13b7fc47de]
+

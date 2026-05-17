@@ -19,10 +19,10 @@ import sts_noc_vdsp_ss4_tniu_lwnoc_sts_pack::*;
     parameter integer unsigned  ERR_INT_CNT_WIDTH = `sts_noc_vdsp_ss4_tniu_STS_TNIU_ERR_INT_CNT_WIDTH,
     localparam int REQ_PLD_WIDTH = STS_REQ_WIDTH,
     localparam int RSP_PLD_WIDTH = STS_RSP_WIDTH,
-    localparam int REQ_ECC_OH = ($clog2(STS_REQ_WIDTH)+STS_REQ_WIDTH+1 <= 2**$clog2(STS_REQ_WIDTH))? $clog2(STS_REQ_WIDTH) : $clog2(STS_REQ_WIDTH)+1,
-    localparam int RSP_ECC_OH = ($clog2(STS_RSP_WIDTH)+STS_RSP_WIDTH+1 <= 2**$clog2(STS_RSP_WIDTH))? $clog2(STS_RSP_WIDTH) : $clog2(STS_RSP_WIDTH)+1,
-    localparam int REQ_AFIFO_W = STS_REQ_WIDTH + REQ_ECC_OH,
-    localparam int RSP_AFIFO_W = STS_RSP_WIDTH + RSP_ECC_OH
+    localparam int REQ_ECC_CODE_WIDTH = (($clog2(STS_REQ_WIDTH)+STS_REQ_WIDTH+1 <= 2**$clog2(STS_REQ_WIDTH)) ? $clog2(STS_REQ_WIDTH) : $clog2(STS_REQ_WIDTH)+1),
+    localparam int RSP_ECC_CODE_WIDTH = (($clog2(STS_RSP_WIDTH)+STS_RSP_WIDTH+1 <= 2**$clog2(STS_RSP_WIDTH)) ? $clog2(STS_RSP_WIDTH) : $clog2(STS_RSP_WIDTH)+1),
+    localparam int REQ_AFIFO_W = STS_REQ_WIDTH + REQ_ECC_CODE_WIDTH + 1,
+    localparam int RSP_AFIFO_W = STS_RSP_WIDTH + RSP_ECC_CODE_WIDTH + 1
 ) (
     input   logic   clk_src ,
     input   logic   rstn_src,

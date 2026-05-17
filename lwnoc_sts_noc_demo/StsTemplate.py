@@ -472,6 +472,10 @@ def _cfg_prefix(name: str) -> str:
     return f"{_sts_noc_name(name)}_"
 
 
+def _sts_env_var(name: str) -> str:
+    return name if name.startswith("STS_") else f"STS_{name}"
+
+
 def _build_full_addr_map_entries() -> list[tuple[int, int, int]]:
     entries: list[tuple[int, int, int]] = []
     for entry in reversed(STS_SOC_TNIU_RESOURCES):
@@ -535,7 +539,11 @@ STS_COMMON_AXI_BURST_MACROS = {
 
 STS_INIU_AXI_ID_MACROS = {
     "STS_AXI_AWID_WIDTH": 8,
+    "STS_AXI_BID_WIDTH": 8,
     "STS_AXI_ARID_WIDTH": 8,
+    "STS_AXI_RID_WIDTH": 8,
+    "STS_AXI_STRB_WIDTH": 4,
+    "STS_AXI_SIZE_WIDTH": 2,
 }
 
 STS_TNIU_AXI_ID_MACROS = {
@@ -801,7 +809,7 @@ aon_ss_iniu_sys_config = _apply_iniu_macros(
     _new_template_cfg(
         name=_sts_noc_name("aon_ss_iniu_sys"),
         filelist=str(STS_INIU_SYS_PUB_F),
-        env_var="AON_SS_INIU_SYS_OUT_DIR",
+        env_var=_sts_env_var("AON_SS_INIU_SYS_OUT_DIR"),
         prefix=_cfg_prefix("aon_ss_iniu"),
     )
 )
@@ -810,7 +818,7 @@ aon_ss_iniu_noc_side_config = _apply_iniu_macros(
     _new_template_cfg(
         name=_sts_noc_name("aon_ss_iniu_noc_side"),
         filelist=str(STS_INIU_NOC_PUB_F),
-        env_var="AON_SS_INIU_NOC_SIDE_OUT_DIR",
+        env_var=_sts_env_var("AON_SS_INIU_NOC_SIDE_OUT_DIR"),
         prefix=_cfg_prefix("aon_ss_iniu"),
     )
 )
@@ -820,7 +828,7 @@ aon_ss_iniu_top_config = _apply_iniu_macros(
     _new_template_cfg(
         name=_sts_noc_name("aon_ss_iniu_top"),
         filelist=str(STS_INIU_TOP_PUB_F),
-        env_var="AON_SS_INIU_TOP_OUT_DIR",
+        env_var=_sts_env_var("AON_SS_INIU_TOP_OUT_DIR"),
         prefix=_cfg_prefix("aon_ss_iniu"),
     )
 )
@@ -831,6 +839,7 @@ sts_dec_l0_root_config = _apply_dec_config(
         name=_sts_noc_name("sts_dec_l0_root"),
         filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
         env_var="STS_DEC_L0_ROOT_OUT_DIR",
+        prefix=_cfg_prefix("sts_dec_l0_root"),
     ),
     "sts_dec_l0_root",
 )
@@ -840,6 +849,7 @@ sts_dec_l1_upper_ctrl_config = _apply_dec_config(
         name=_sts_noc_name("sts_dec_l1_upper_ctrl"),
         filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
         env_var="STS_DEC_L1_UPPER_CTRL_OUT_DIR",
+        prefix=_cfg_prefix("sts_dec_l1_upper_ctrl"),
     ),
     "sts_dec_l1_upper_ctrl",
 )
@@ -849,6 +859,7 @@ sts_dec_l2_left_ddr_config = _apply_dec_config(
         name=_sts_noc_name("sts_dec_l2_left_ddr"),
         filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
         env_var="STS_DEC_L2_LEFT_DDR_OUT_DIR",
+        prefix=_cfg_prefix("sts_dec_l2_left_ddr"),
     ),
     "sts_dec_l2_left_ddr",
 )
@@ -858,6 +869,7 @@ sts_dec_l1_right_upper_config = _apply_dec_config(
         name=_sts_noc_name("sts_dec_l1_right_upper"),
         filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
         env_var="STS_DEC_L1_RIGHT_UPPER_OUT_DIR",
+        prefix=_cfg_prefix("sts_dec_l1_right_upper"),
     ),
     "sts_dec_l1_right_upper",
 )
@@ -867,6 +879,7 @@ sts_dec_l2_right_lower_config = _apply_dec_config(
         name=_sts_noc_name("sts_dec_l2_right_lower"),
         filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
         env_var="STS_DEC_L2_RIGHT_LOWER_OUT_DIR",
+        prefix=_cfg_prefix("sts_dec_l2_right_lower"),
     ),
     "sts_dec_l2_right_lower",
 )
@@ -876,6 +889,7 @@ sts_dec_l3_lower_mid_config = _apply_dec_config(
         name=_sts_noc_name("sts_dec_l3_lower_mid"),
         filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
         env_var="STS_DEC_L3_LOWER_MID_OUT_DIR",
+        prefix=_cfg_prefix("sts_dec_l3_lower_mid"),
     ),
     "sts_dec_l3_lower_mid",
 )
@@ -905,18 +919,18 @@ for entry in STS_SOC_TNIU_RESOURCES:
             _new_template_cfg(
                 name=_sts_noc_name(f"{_tniu_shared_dir_stem(shared_sys_key)}_tniu_sys"),
                 filelist=str(STS_TNIU_SYS_PUB_F),
-                env_var=f"{env_token}_TNIU_SYS_OUT_DIR",
+                env_var=_sts_env_var(f"{env_token}_TNIU_SYS_OUT_DIR"),
                 prefix=_cfg_prefix(f"{_tniu_shared_dir_stem(shared_sys_key)}_tniu"),
             )
         )
         STS_SOC_TNIU_SYS_CONFIGS[shared_sys_key] = sys_cfg
     else:
-        _alias_template_env(f"{env_token}_TNIU_SYS_OUT_DIR", sys_cfg)
+        _alias_template_env(_sts_env_var(f"{env_token}_TNIU_SYS_OUT_DIR"), sys_cfg)
     noc_cfg = _apply_tniu_macros(
         _new_template_cfg(
             name=_sts_noc_name(f"{_tniu_leaf_dir_stem(key)}_tniu_noc_side"),
             filelist=str(STS_TNIU_NOC_PUB_F),
-            env_var=f"{env_token}_TNIU_NOC_SIDE_OUT_DIR",
+            env_var=_sts_env_var(f"{env_token}_TNIU_NOC_SIDE_OUT_DIR"),
             prefix=_cfg_prefix(f"{_tniu_leaf_dir_stem(key)}_tniu"),
         ),
         key,
@@ -925,7 +939,7 @@ for entry in STS_SOC_TNIU_RESOURCES:
         _new_template_cfg(
             name=_sts_noc_name(f"{_tniu_leaf_dir_stem(key)}_tniu_top"),
             filelist=str(STS_TNIU_TOP_PUB_F),
-            env_var=f"{env_token}_TNIU_TOP_OUT_DIR",
+            env_var=_sts_env_var(f"{env_token}_TNIU_TOP_OUT_DIR"),
             prefix=_cfg_prefix(f"{_tniu_leaf_dir_stem(key)}_tniu"),
         ),
         key,
@@ -950,18 +964,18 @@ soc_sts_req_rsp_async_config = _new_template_cfg(
 soc_sts_link_pipe_config = _new_template_cfg(
     name=_sts_noc_name("soc_sts_link_pipe"),
     filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
-    env_var="SOC_STS_LINK_PIPE_OUT_DIR",
+    env_var="STS_LINK_PIPE_OUT_DIR",
 )
 
 soc_sts_link_buf_config = _new_template_cfg(
     name=_sts_noc_name("soc_sts_link_buf"),
     filelist=str(STS_NOC_ROOT / "vc" / "network_filelist.f"),
-    env_var="SOC_STS_LINK_BUF_OUT_DIR",
+    env_var="STS_LINK_BUF_OUT_DIR",
 )
 
 soc_sts_req_rsp_async_raw_config = _new_template_cfg(
     name=_sts_noc_name("soc_sts_req_rsp_async_raw"),
     filelist=soc_sts_req_rsp_async_config.filelist,
-    env_var="SOC_STS_REQ_RSP_ASYNC_RAW_OUT_DIR",
+    env_var="STS_REQ_RSP_ASYNC_RAW_OUT_DIR",
 )
 _apply_macro_sets(soc_sts_req_rsp_async_raw_config, STS_ASYNC_RAW_MACROS)

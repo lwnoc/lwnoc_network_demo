@@ -128,18 +128,17 @@ import sts_noc_cpu_ss_tniu_lwnoc_sts_pack::*;
     // OUTEN[trig_out_idx][channel]: RW, reset 0
     logic [CHANNEL_NUM-1:0]    outen [TRIG_OUT_NUM-1:0];
 
-    // CTIGATE[channel]: RW, reset 0 → gate open when =1
+        // CTIGATE[channel]: RW, reset 1 → gate open when =1
     logic [CHANNEL_NUM-1:0]    gate_en;
 
     // ASICCTRL[7:0]: RW, reset 0
     logic [7:0]                asicctrl_q;
 
-    // Application channel write-pulse width extender
-    // APPSET/APPPULSE: write injects a single-cycle pulse into channel
-    // APPCLEAR: no effect on pulse-mode channels, only level-mode
-    // We use a 1-cycle strobe for each write type
+    // Application channel state and software pulse injection
+    // APPSET sets a sticky software channel until APPCLEAR clears it.
+    // APPPULSE injects a one-cycle software pulse without touching the sticky state.
+    logic [CHANNEL_NUM-1:0]    app_channel_q;
     logic [CHANNEL_NUM-1:0]    app_set_strobe;
-    logic [CHANNEL_NUM-1:0]    app_clear_strobe;
 
     // Level-mode trigger output sticky state
     logic [TRIG_OUT_NUM-1:0]   trig_out_level;
@@ -193,10 +192,10 @@ import sts_noc_cpu_ss_tniu_lwnoc_sts_pack::*;
     assign trig_pulse_gated = trig_pulse & {TRIG_IN_NUM{cti_en}};
 
     // =================================================================
-    // Channel pulse aggregation
+    // Channel activity aggregation
     // =================================================================
     // channel[k] = OR of all (trig_pulse_gated[i] & inen[i][k])
-    //              | app_set_strobe[k] | channel_in[k]
+    //              | app_channel_q[k] | app_set_strobe[k] | channel_in[k]
     always_comb begin
         ch_pulse_from_trig = '0;
         for (int i = 0; i < TRIG_IN_NUM; i = i + 1) begin
@@ -209,16 +208,17 @@ import sts_noc_cpu_ss_tniu_lwnoc_sts_pack::*;
         end
     end
 
-    // Internal channel pulse = from triggers | from app set | from CTM input
+    // Internal channel activity = triggers | sticky app channel | app pulse | CTM input
     assign ch_pulse_internal = ch_pulse_from_trig
+                             | app_channel_q
                              | app_set_strobe
                              | channel_in;
 
     // Gate: when gate_en[k]=1, channel output enabled; =0 blocked
     assign ch_gated = ch_pulse_internal & gate_en;
 
-    // Integration test override: ITCHOUT bits force channel output high
-    assign channel_out = ch_gated | it_chout_q;
+    // Integration test override is only active in integration mode.
+    assign channel_out = ch_gated | (itctrl_q ? it_chout_q : '0);
 
     // =================================================================
     // Trigger output generation
@@ -252,11 +252,11 @@ import sts_noc_cpu_ss_tniu_lwnoc_sts_pack::*;
         end
     end
 
-    // Final trigger output: SW_HANDSHAKE selects pulse/level;
-    // ITTRIGOUT forces output high for integration test
+    // Final trigger output: SW_HANDSHAKE selects pulse/level.
+    // ITTRIGOUT forces output high only in integration mode.
     generate
         for (gi = 0; gi < TRIG_OUT_NUM; gi = gi + 1) begin : g_trig_out
-            assign trig_out[gi] = it_trigout_q[gi]
+            assign trig_out[gi] = (itctrl_q && it_trigout_q[gi])
                 ? 1'b1
                 : (SW_HANDSHAKE[gi]
                     ? trig_out_level[gi]
@@ -291,22 +291,25 @@ import sts_noc_cpu_ss_tniu_lwnoc_sts_pack::*;
         if (psel) begin
             // read mux converted from case to if-else for VCS 2016 compat
             if      (a == ADDR_CTICONTROL)  prdata[0] = cti_en;
+            else if (a == ADDR_CTIAPPSET)  prdata[CHANNEL_NUM-1:0] = app_channel_q;
             else if (a == ADDR_CTITRIGINSTATUS)  prdata[TRIG_IN_NUM-1:0]  = trig_in;
             else if (a == ADDR_CTITRIGOUTSTATUS)  prdata[TRIG_OUT_NUM-1:0] = trig_out;
             else if (a == ADDR_CTICHINSTATUS)  prdata[CHANNEL_NUM-1:0]  = channel_in;
             else if (a == ADDR_CTICHOUTSTATUS)  prdata[CHANNEL_NUM-1:0]  = channel_out;
             else if (a == ADDR_CTIGATE)  prdata[CHANNEL_NUM-1:0]  = gate_en;
             else if (a == ADDR_ASICCTRL)  prdata[7:0]               = asicctrl_q;
+            else if (a == ADDR_ITTRIGOUT)  prdata[TRIG_OUT_NUM-1:0] = it_trigout_q;
             else if (a == ADDR_ITTRIGIN)  prdata[TRIG_IN_NUM-1:0]  = trig_in;
+            else if (a == ADDR_ITCHOUT)  prdata[CHANNEL_NUM-1:0]  = it_chout_q;
             else if (a == ADDR_ITCHIN)  prdata[CHANNEL_NUM-1:0]  = channel_in;
             else if (a == ADDR_ITCTRL)  prdata[0]                = itctrl_q;
             else if (a == ADDR_CLAIMSET)  prdata[3:0]              = claim_q;
             else if (a == ADDR_CLAIMCLR)  prdata[3:0]              = claim_q;
-            // ADDR_DEVAFF0: /* device-specific */
-            // ADDR_DEVAFF1: /* device-specific */
-            else if (a == ADDR_LSR)  prdata = 32'h00000002;
+            else if (a == ADDR_DEVAFF0)  prdata = 32'h00000000;
+            else if (a == ADDR_DEVAFF1)  prdata = 32'h00000000;
+            else if (a == ADDR_LSR)  prdata[2:0] = {1'b0, locked, 1'b1};
             else if (a == ADDR_AUTHSTATUS)  prdata = 32'h11000000; // full non-invasive+invasive debug
-            else if (a == ADDR_DEVARCH)  prdata = 32'h47707A14;  // ARM ECT
+            else if (a == ADDR_DEVARCH)  prdata = 32'h47701A14;  // ARM ECT
             else if (a == ADDR_DEVID)  prdata[3:0] = (CHANNEL_NUM == 16) ? 4'd1 : 4'd0;
             else if (a == ADDR_DEVTYPE)  prdata = 32'h00000014;  // CoreSight ECT
             else if (a == ADDR_PIDR0)  prdata = 32'h000000ED;
@@ -346,8 +349,8 @@ import sts_noc_cpu_ss_tniu_lwnoc_sts_pack::*;
             cti_en           <= 1'b0;
             gate_en          <= {CHANNEL_NUM{1'b1}}; // TRM: reset all-1s (all gates open)
             asicctrl_q       <= '0;
+            app_channel_q    <= '0;
             app_set_strobe   <= '0;
-            app_clear_strobe <= '0;
             intack_pulse     <= '0;
             it_trigout_q     <= '0;
             it_chout_q       <= '0;
@@ -361,7 +364,6 @@ import sts_noc_cpu_ss_tniu_lwnoc_sts_pack::*;
         end else begin
             // Default: strobes self-clear (1 cycle)
             app_set_strobe   <= '0;
-            app_clear_strobe <= '0;
             intack_pulse     <= '0;
 
             if (apb_write) begin
@@ -375,9 +377,9 @@ import sts_noc_cpu_ss_tniu_lwnoc_sts_pack::*;
                 if (!locked || a == ADDR_LOCKAR || a == ADDR_LSR) begin
                     if      (a == ADDR_CTICONTROL)   cti_en <= pwdata[0];
                     else if (a == ADDR_CTIINTACK)    intack_pulse <= pwdata[TRIG_OUT_NUM-1:0];
-                    else if (a == ADDR_CTIAPPSET)    app_set_strobe <= pwdata[CHANNEL_NUM-1:0];
+                    else if (a == ADDR_CTIAPPSET)    app_channel_q <= app_channel_q | pwdata[CHANNEL_NUM-1:0];
                     else if (a == ADDR_CTIAPPPULSE)  app_set_strobe <= pwdata[CHANNEL_NUM-1:0];
-                    else if (a == ADDR_CTIAPPCLEAR)  /* no effect */ ;
+                    else if (a == ADDR_CTIAPPCLEAR)  app_channel_q <= app_channel_q & ~pwdata[CHANNEL_NUM-1:0];
                     else if (a == ADDR_CTIGATE)      gate_en <= pwdata[CHANNEL_NUM-1:0];
                     else if (a == ADDR_ASICCTRL)     asicctrl_q <= pwdata[7:0];
                     else if (a == ADDR_ITCHOUT)      it_chout_q   <= pwdata[CHANNEL_NUM-1:0];
@@ -385,7 +387,6 @@ import sts_noc_cpu_ss_tniu_lwnoc_sts_pack::*;
                     else if (a == ADDR_ITCTRL)       itctrl_q     <= pwdata[0];
                     else if (a == ADDR_CLAIMSET)     claim_q      <= claim_q | pwdata[3:0];
                     else if (a == ADDR_CLAIMCLR)     claim_q      <= claim_q & ~pwdata[3:0];
-                end
 
                     // INEN write window
                     if (a >= ADDR_CTIINEN_BASE &&
@@ -402,6 +403,7 @@ import sts_noc_cpu_ss_tniu_lwnoc_sts_pack::*;
                         if (idx < TRIG_OUT_NUM)
                             outen[idx] <= pwdata[CHANNEL_NUM-1:0];
                     end
+                end
             end
         end
     end

@@ -1,4 +1,4 @@
-//[UHDL]Content Start [md5:de5fe67955c2bb0024a3ea748e1f30b4]
+//[UHDL]Content Start [md5:81f91af595c70bcfab98432b59c2a22c]
 module sts_noc_aon_ss_iniu (
 	input          clk_src                                                  ,
 	input          rstn_src                                                 ,
@@ -93,14 +93,14 @@ module sts_noc_aon_ss_iniu (
 	wire [15:0]  noc_side_TO_sys_side_SIG_req_rptr_async         ;
 	wire [15:0]  noc_side_TO_sys_side_SIG_req_rptr_sync          ;
 	wire [15:0]  noc_side_TO_sys_side_SIG_rsp_wptr_async         ;
-	wire [75:0]  noc_side_TO_sys_side_SIG_rsp_pld_sync           ;
+	wire [76:0]  noc_side_TO_sys_side_SIG_rsp_pld_sync           ;
 	wire [7:0]   noc_side_TO_sys_side_SIG_sys_side_cti_trigin_ack;
 	wire [7:0]   noc_side_TO_sys_side_SIG_sys_side_cti_trigout   ;
 	wire [31:0]  noc_side_TO_sys_side_SIG_sys_side_ctm_trigin_ack;
 	wire [31:0]  noc_side_TO_sys_side_SIG_sys_side_ctm_trigout   ;
 	wire [31:0]  noc_side_TO_sys_side_SIG_dbg_data_out           ;
 	wire [15:0]  sys_side_TO_noc_side_SIG_req_wptr_async         ;
-	wire [130:0] sys_side_TO_noc_side_SIG_req_pld_sync           ;
+	wire [131:0] sys_side_TO_noc_side_SIG_req_pld_sync           ;
 	wire [15:0]  sys_side_TO_noc_side_SIG_rsp_rptr_async         ;
 	wire [15:0]  sys_side_TO_noc_side_SIG_rsp_rptr_sync          ;
 	wire [7:0]   sys_side_TO_noc_side_SIG_noc_cti_trigin         ;
@@ -245,4 +245,5 @@ module sts_noc_aon_ss_iniu (
 		.req_afifo_db_err(aon_ss_iniu_noc_req_afifo_db_err_porting_req_afifo_db_err));
 
 endmodule
-//[UHDL]Content End [md5:de5fe67955c2bb0024a3ea748e1f30b4]
+//[UHDL]Content End [md5:81f91af595c70bcfab98432b59c2a22c]
+
