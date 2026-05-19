@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import importlib
 import json
+import os
 import re
 import sys
 from dataclasses import dataclass
@@ -15,6 +16,11 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parent.parent
 BUILD_DIR = REPO_ROOT / "build" / "niu_stub_views"
 TEMP_RESOLVED_FILELIST_DIR = REPO_ROOT / "build" / "temp" / "niu_stub_views_filelists"
+
+# Optional absolute path override for the lwnoc_topo checkout.
+# Fill this in when you want the script to use a fixed local path instead of
+# relying on LWNOC_TOPO_ROOT/UHDL_ROOT from the shell environment.
+LWNOC_TOPO_ROOT_OVERRIDE = ""
 
 KNOWN_PORT_WIDTH_SUFFIXES: tuple[tuple[str, int], ...] = (
     ("pstate", 3),
@@ -34,6 +40,7 @@ KNOWN_STRUCT_WIDTHS: dict[str, int] = {
 }
 
 HDL_SUFFIXES: tuple[str, ...] = (".sv", ".v")
+ENV_VAR_PATTERN = re.compile(r"\$\{?([A-Z0-9_]+)\}?")
 
 
 def parse_macros_file(build_dir: Path) -> dict[str, str]:
@@ -86,7 +93,29 @@ def parse_macros_file(build_dir: Path) -> dict[str, str]:
                         changed = True
             if not changed:
                 break
+    _backfill_atb_width_macros(macros)
     return macros
+
+
+def _backfill_atb_width_macros(macros: dict[str, str]) -> None:
+    if "ATB_PLD_WIDTH" not in macros:
+        for key, raw_val in sorted(macros.items()):
+            if not key.endswith("_ATB_PLD_WIDTH"):
+                continue
+            resolved = _eval_width_expr(raw_val, macros, {})
+            if resolved is not None:
+                macros["ATB_PLD_WIDTH"] = str(resolved)
+                break
+
+    if "ATB_ECC_OH" not in macros and "ATB_PLD_WIDTH" in macros:
+        pld_width = int(macros["ATB_PLD_WIDTH"])
+        ecc_oh = max(1, (pld_width - 1).bit_length())
+        if ecc_oh + pld_width + 1 > 2 ** ecc_oh:
+            ecc_oh += 1
+        macros["ATB_ECC_OH"] = str(ecc_oh)
+
+    if "ATB_AFIFO_W" not in macros and "ATB_PLD_WIDTH" in macros and "ATB_ECC_OH" in macros:
+        macros["ATB_AFIFO_W"] = str(int(macros["ATB_PLD_WIDTH"]) + int(macros["ATB_ECC_OH"]) + 1)
 
 
 def _eval_width_expr(expr: str, macros: dict[str, str], localparams: dict[str, str]) -> int | None:
@@ -617,15 +646,37 @@ def resolve_requested_dirs(args: argparse.Namespace) -> tuple[Path | None, Path 
     return None, target_dir
 
 
+def _resolve_env_topo_root() -> Path | None:
+    if LWNOC_TOPO_ROOT_OVERRIDE.strip():
+        root = Path(LWNOC_TOPO_ROOT_OVERRIDE).expanduser().resolve()
+        if root.name == "uhdl" and (root / "uhdl").is_dir() and (root.parent / "setup_env.sh").exists():
+            return root.parent
+        return root
+
+    raw_root = os.environ.get("LWNOC_TOPO_ROOT") or os.environ.get("UHDL_ROOT")
+    if not raw_root:
+        return None
+
+    root = Path(raw_root).expanduser().resolve()
+    if root.name == "uhdl" and (root / "uhdl").is_dir() and (root.parent / "setup_env.sh").exists():
+        return root.parent
+    return root
+
+
 def bootstrap_paths() -> None:
-    base_paths = [
+    base_paths: list[Path] = []
+    env_topo_root = _resolve_env_topo_root()
+    if env_topo_root is not None:
+        base_paths.append(env_topo_root)
+
+    base_paths.extend([
         REPO_ROOT,
         REPO_ROOT / "lwnoc_topo",
         REPO_ROOT / "lwnoc_sts_noc_demo",
         REPO_ROOT / "lwnoc_intr_noc_demo",
         REPO_ROOT / "soc_dti_noc_demo",
         REPO_ROOT / "soc_atb_noc",
-    ]
+    ])
     for path in base_paths:
         path_str = str(path)
         if path_str not in sys.path:
@@ -657,17 +708,176 @@ def load_config(spec: StubSpec) -> Any:
     return obj
 
 
+def _resolve_existing_build_dir(build_dir: Path, fallback_top_module: str | None) -> Path:
+    if build_dir.exists():
+        return build_dir
+
+    build_root = build_dir.parent
+    if fallback_top_module is None or not build_root.is_dir():
+        return build_dir
+
+    suffix_matches: list[Path] = []
+    for child in sorted(build_root.iterdir()):
+        if not child.is_dir():
+            continue
+        for suffix in HDL_SUFFIXES:
+            if (child / f"{fallback_top_module}{suffix}").exists():
+                return child
+            if any(child.glob(f"*_{fallback_top_module}{suffix}")):
+                suffix_matches.append(child)
+                break
+
+    if len(suffix_matches) == 1:
+        return suffix_matches[0]
+
+    suffix_dir_matches = [child for child in sorted(build_root.iterdir()) if child.is_dir() and child.name.endswith(build_dir.name)]
+    if len(suffix_dir_matches) == 1:
+        return suffix_dir_matches[0]
+
+    return build_dir
+
+
 def resolve_build_filelist(spec: StubSpec) -> Path:
     assert spec.fallback_build_dir is not None
 
-    build_dir = spec.fallback_build_dir
+    build_dir = _resolve_existing_build_dir(spec.fallback_build_dir, spec.fallback_top_module)
+    return _resolve_filelist_for_build_dir(build_dir, spec.stub_module_name)
+
+
+def _source_filelist_for_build_dir(build_dir: Path) -> Path:
     preferred = sorted(path for path in build_dir.glob("*.f") if path.name != "expanded_filelist.f")
-    source_filelist = preferred[0] if preferred else build_dir / "expanded_filelist.f"
-    if not source_filelist.exists():
-        raise FileNotFoundError(f"No build filelist found under {build_dir}")
+    if preferred:
+        return preferred[0]
+
+    expanded = build_dir / "expanded_filelist.f"
+    if expanded.exists():
+        return expanded
+
+    raise FileNotFoundError(f"No build filelist found under {build_dir}")
+
+
+def _normalize_filelist_token(line: str) -> str:
+    token = line.strip()
+    if token.startswith("-f"):
+        return token[2:].strip()
+    if token.startswith("+incdir+"):
+        return token[len("+incdir+"):].strip()
+    return token
+
+
+def _infer_filelist_search_root(build_dir: Path) -> Path:
+    for candidate in (build_dir, *build_dir.parents):
+        if candidate.name == "build_logic":
+            return candidate
+    return build_dir.parent
+
+
+def _env_var_dir_stem(env_var: str) -> str:
+    stem = env_var
+    for prefix in ("SOC_ATB_", "SOC_INTR_"):
+        if stem.startswith(prefix):
+            stem = stem[len(prefix):]
+            break
+    for suffix in ("_OUT_DIR", "_DIR"):
+        if stem.endswith(suffix):
+            stem = stem[: -len(suffix)]
+            break
+    return stem.lower()
+
+
+def _named_dir_candidates(env_var: str, child_dirs: list[Path]) -> list[Path]:
+    if not (env_var.endswith("_DIR") or env_var.endswith("_OUT_DIR")):
+        return []
+
+    stem = _env_var_dir_stem(env_var)
+    exact = [child for child in child_dirs if child.name.lower() == stem]
+    if exact:
+        return exact
+
+    suffix_matches = [child for child in child_dirs if child.name.lower().endswith(stem)]
+    if suffix_matches:
+        return suffix_matches
+
+    stem_tokens = tuple(token for token in stem.split("_") if token)
+    token_matches = [
+        child
+        for child in child_dirs
+        if all(token in child.name.lower().split("_") for token in stem_tokens)
+    ]
+    return token_matches
+
+
+def _infer_env_var_paths(build_dir: Path, source_filelist: Path) -> dict[str, Path]:
+    search_root = _infer_filelist_search_root(build_dir)
+    child_dirs = [child for child in sorted(search_root.iterdir()) if child.is_dir()]
+    resolved: dict[str, Path] = {}
+
+    for raw_line in source_filelist.read_text(encoding="utf-8").splitlines():
+        token = _normalize_filelist_token(raw_line)
+        if not token or token.startswith("/"):
+            continue
+
+        for match in ENV_VAR_PATTERN.finditer(token):
+            env_var = match.group(1)
+            if env_var in resolved:
+                continue
+
+            suffix = token[match.end():].lstrip("/")
+            if not suffix:
+                continue
+
+            candidates: list[Path] = []
+            named_candidates = _named_dir_candidates(env_var, child_dirs)
+            if len(named_candidates) == 1 and (named_candidates[0] / suffix).exists():
+                resolved[env_var] = named_candidates[0]
+                continue
+
+            root_candidate = search_root / suffix
+            if root_candidate.exists():
+                candidates.append(search_root)
+
+            for child in child_dirs:
+                if (child / suffix).exists():
+                    candidates.append(child)
+
+            unique_candidates: list[Path] = []
+            seen: set[Path] = set()
+            for candidate in candidates:
+                if candidate not in seen:
+                    unique_candidates.append(candidate)
+                    seen.add(candidate)
+
+            if len(unique_candidates) == 1:
+                resolved[env_var] = unique_candidates[0]
+
+    return resolved
+
+
+def _resolve_filelist_line(line: str, build_dir: Path, env_var_paths: dict[str, Path]) -> str:
+    resolved_line = line
+
+    def _replace_env_var(match: re.Match[str]) -> str:
+        env_var = match.group(1)
+        return str(env_var_paths.get(env_var, build_dir))
+
+    resolved_line = ENV_VAR_PATTERN.sub(_replace_env_var, resolved_line)
+    if not resolved_line.startswith("/") and not resolved_line.startswith("+") and not resolved_line.startswith("-"):
+        resolved_line = str((build_dir / resolved_line).resolve())
+    return resolved_line
+
+
+def _apply_env_var_paths(env_var_paths: dict[str, Path]) -> None:
+    for env_var, resolved_path in env_var_paths.items():
+        os.environ[env_var] = str(resolved_path)
+
+
+def _resolve_filelist_for_build_dir(build_dir: Path, tag: str) -> Path:
+    source_filelist = _source_filelist_for_build_dir(build_dir)
 
     TEMP_RESOLVED_FILELIST_DIR.mkdir(parents=True, exist_ok=True)
-    resolved_filelist = TEMP_RESOLVED_FILELIST_DIR / f"{spec.stub_module_name}.f"
+    safe_tag = re.sub(r"[^A-Za-z0-9_.-]", "_", tag)
+    resolved_filelist = TEMP_RESOLVED_FILELIST_DIR / f"{safe_tag}.f"
+    env_var_paths = _infer_env_var_paths(build_dir, source_filelist)
 
     resolved_lines: list[str] = []
     for raw_line in source_filelist.read_text(encoding="utf-8").splitlines():
@@ -675,13 +885,31 @@ def resolve_build_filelist(spec: StubSpec) -> Path:
         if not line:
             continue
 
-        line = re.sub(r"\$\{?[A-Z0-9_]+\}?", str(build_dir), line)
-        if not line.startswith("/") and not line.startswith("+") and not line.startswith("-"):
-            line = str((build_dir / line).resolve())
-        resolved_lines.append(line)
+        resolved_lines.append(_resolve_filelist_line(line, build_dir, env_var_paths))
 
     resolved_filelist.write_text("\n".join(resolved_lines) + "\n", encoding="utf-8")
     return resolved_filelist
+
+
+def _instantiate_component_from_build_dir(build_dir: Path, top_module: str, stub_name: str):
+    from uhdl.uhdl.core.TemplateIP import TemplateComponent
+    from uhdl.uhdl.core.TemplateIP import TemplateIPConfig
+
+    source_filelist = _source_filelist_for_build_dir(build_dir)
+    _apply_env_var_paths(_infer_env_var_paths(build_dir, source_filelist))
+    filelist = _resolve_filelist_for_build_dir(build_dir, stub_name)
+    build_cfg = TemplateIPConfig(
+        name=f"{stub_name}_build_fallback",
+        prefix="",
+        filelist=str(filelist),
+        env_var=f"{stub_name.upper()}_BUILD_FALLBACK",
+    )
+    component = TemplateComponent(
+        config=build_cfg,
+        top=top_module,
+        struct_mode="packed",
+    )
+    return build_cfg, component
 
 
 def _candidate_filelists(build_dir: Path) -> list[Path]:
@@ -783,7 +1011,7 @@ def _find_top_sv(build_dir: Path) -> list[Path]:
 
 
 def ad_hoc_stub(build_dir: Path, top_module: str | None = None, stub_name: str | None = None) -> list[tuple[str, str, list[dict[str, Any]]]]:
-    """Generate stubs from a build directory using text-based macro/port parsing.
+    """Generate stubs from a build directory, preferring UHDL elaboration.
 
     Returns list of (top_module_name, stub_name, ports_list).
     """
@@ -795,16 +1023,28 @@ def ad_hoc_stub(build_dir: Path, top_module: str | None = None, stub_name: str |
     for sv_path in top_svs:
         if sv_path is None or not sv_path.exists():
             continue
-        ports = _extract_top_module_ports(sv_path, macros)
-        if not ports:
-            continue
+        resolved_top = sv_path.stem
+        resolved_stub = stub_name or f"{resolved_top}_stub"
+        try:
+            _, component = _instantiate_component_from_build_dir(build_dir, resolved_top, resolved_stub)
+            ports = [
+                {
+                    "name": io.name,
+                    "direction": io_direction(io),
+                    "width": port_width(io),
+                }
+                for io in component.io_list
+            ]
+        except Exception:
+            ports = _extract_top_module_ports(sv_path, macros)
+            if not ports:
+                continue
+
         unresolved = [port["name"] for port in ports if int(port.get("width", 0) or 0) < 1]
         if unresolved:
             raise ValueError(
                 f"{sv_path.name}: unresolved port widths for {', '.join(unresolved[:8])}"
             )
-        resolved_top = sv_path.stem
-        resolved_stub = stub_name or f"{resolved_top}_stub"
         results.append((resolved_top, resolved_stub, ports))
 
     return results
